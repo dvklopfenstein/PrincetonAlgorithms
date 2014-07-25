@@ -8,12 +8,14 @@ from Princeton's Java implementations retreived on July 2014 from:
 
 At some point, I plan to add C++ implementations little-by-little as well...
 
+Key:
+* J: Java file copied from Princeton Algorithm's "Java Algorithms and Clients"
+* P: Python implementation is present
+* C: C++ implementaion is present
 
-J: Java file copied from Princeton Algorithm's "Java Algorithms and Clients"
-P: Python implementation is present
 
-|    |1   |FUNDAMENTALS           |Description                      |DATA
-|    |---:|:----------------------|:-----------------------------   |:-------------
+|JPC |1   |FUNDAMENTALS           |Description                      |DATA
+|:-- |---:|:----------------------|:-----------------------------   |:-------------
 |    |  – |BinarySearch.py        |binary search                    |tinyW.txt tinyT.txt largeW.txt largeT.txt  
 |    |  – |RandomSeq.py           |random numbers in a given range  |–
 |    |  – |Average.py             |average of a sequence of numbers |–
