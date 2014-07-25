@@ -1,4 +1,4 @@
-Princeton University's Algorithms and Clients
+Princeton University's "Algorithms and Clients"
 ===========================================
 by Kevin Wayne, Robert Sedgewick
 --------------------------------
@@ -6,6 +6,9 @@ by Kevin Wayne, Robert Sedgewick
 Implemented in Python 2.7 by D Klopfenstein is selected code from:
 
   http://algs4.cs.princeton.edu/code/
+
+PREREQUISITES: python, numpy, pylab, matplotlib, 
+               math, sys, os
 
 At some point, I plan to add C++ implementations little-by-little when needed as well...
 
