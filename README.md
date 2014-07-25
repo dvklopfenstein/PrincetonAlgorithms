@@ -1,5 +1,5 @@
-PrincetonAlgorithms
-===================
+Princeton Algorithms
+====================
 
 Coursera Princeton Algorithms: Python implementations of selected Algorithms and Clients
 from Princeton's Java implementations retreived on July 2014 from: 
@@ -12,41 +12,41 @@ At some point, I plan to add C++ implementations little-by-little as well...
 
     1 FUNDAMENTALS                                            DATA
     - ------------------------------------------------------  --------------
-      – BinarySearch.py     binary search                     tinyW.txt tinyT.txt largeW.txt largeT.txt  
-      – RandomSeq.py        random numbers in a given range   –
-      – Average.py          average of a sequence of numbers  –
-      – Cat.py              concatenate files                 in1.txt in2.txt  
-J     – Knuth.py            Knuth shuffle                     cards.txt  
-      – Counter.py          counter                           –
-      – StaticSETofInts.py  set of integers                   –
-      – Whitelist.py        whitelist client                  tinyW.txt tinyT.txt largeW.txt largeT.txt  
-      – Vector.py           Euclidean vector                  –
-J     – Date.py             date                              –
-      – Transaction.py      transaction                       –
-      – Point2D.py          point                             –
-      – Interval1D.py       1d interval                       –
-      – Interval2D.py       2d interval                       –
-J   1.1 ResizingArrayStack.py LIFO stack (resizing array)     tobe.txt  
-    1.2 LinkedStack.py      LIFO stack (linked list)          tobe.txt  
-J     – Stack.py            LIFO stack                        tobe.txt
-J     – ResizingArrayQueue.py FIFO queue (resizing array)     tobe.txt  
-    1.3 LinkedQueue.py      FIFO queue (linked list)          tobe.txt  
-J     – Queue.py            FIFO queue                        tobe.txt
-J     – ResizingArrayBag.py multiset (resizing array)         –
-    1.4 LinkedBag.py        multiset (linked list)            –
-J     – Bag.py              multiset                          –
-      – Stopwatch.py        timer (wall time)                 –
-      – StopwatchCPU.py     timer (CPU time)                  –
-      – LinearRegression.py simple linear regression          –
-      – PolynomialRegression.py polynomial regression         –
-      – ThreeSum.py         brute-force three sum             1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt
-      – ThreeSumFast.py     faster three sum                  1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt  
-      – DoublingTest.py     doubling test                     –
-      – DoublingRatio.py    doubling ratio                    –
-J     – QuickFindUF.py      quick find                        tinyUF.txt mediumUF.txt largeUF.txt
-      – QuickUnionUF.py     quick union                       tinyUF.txt mediumUF.txt largeUF.txt
-J   1.5 WeightedQuickUnionUF.py weighted quick union        tinyUF.txt mediumUF.txt largeUF.txt
-      – UF.py               union-by-rank with path halving   tinyUF.txt mediumUF.txt largeUF.txt
+  –     BinarySearch.py     binary search                     tinyW.txt tinyT.txt largeW.txt largeT.txt  
+  –     RandomSeq.py        random numbers in a given range   –
+  –     Average.py          average of a sequence of numbers  –
+  –     Cat.py              concatenate files                 in1.txt in2.txt  
+  – J   Knuth.py            Knuth shuffle                     cards.txt  
+  –     Counter.py          counter                           –
+  –     StaticSETofInts.py  set of integers                   –
+  –     Whitelist.py        whitelist client                  tinyW.txt tinyT.txt largeW.txt largeT.txt  
+  –     Vector.py           Euclidean vector                  –
+  – J   Date.py             date                              –
+  –     Transaction.py      transaction                       –
+  –     Point2D.py          point                             –
+  –     Interval1D.py       1d interval                       –
+  –     Interval2D.py       2d interval                       –
+1.1 J   ResizingArrayStack.py LIFO stack (resizing array)     tobe.txt  
+1.2     LinkedStack.py      LIFO stack (linked list)          tobe.txt  
+  – J   Stack.py            LIFO stack                        tobe.txt
+  – J   ResizingArrayQueue.py FIFO queue (resizing array)     tobe.txt  
+1.3     LinkedQueue.py      FIFO queue (linked list)          tobe.txt  
+  – J   Queue.py            FIFO queue                        tobe.txt
+  – J   ResizingArrayBag.py multiset (resizing array)         –
+1.4     LinkedBag.py        multiset (linked list)            –
+  – J   Bag.py              multiset                          –
+  –     Stopwatch.py        timer (wall time)                 –
+  –     StopwatchCPU.py     timer (CPU time)                  –
+  –     LinearRegression.py simple linear regression          –
+  –     PolynomialRegression.py polynomial regression         –
+  –     ThreeSum.py         brute-force three sum             1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt
+  –     ThreeSumFast.py     faster three sum                  1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt  
+  –     DoublingTest.py     doubling test                     –
+  –     DoublingRatio.py    doubling ratio                    –
+  – J   QuickFindUF.py      quick find                        tinyUF.txt mediumUF.txt largeUF.txt
+  –     QuickUnionUF.py     quick union                       tinyUF.txt mediumUF.txt largeUF.txt
+1.5 J   WeightedQuickUnionUF.py weighted quick union        tinyUF.txt mediumUF.txt largeUF.txt
+  –     UF.py               union-by-rank with path halving   tinyUF.txt mediumUF.txt largeUF.txt
 
     2 SORTING                                               DATA
     - ----------------------------------------------------  --------------
