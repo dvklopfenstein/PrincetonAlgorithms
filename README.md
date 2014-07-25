@@ -1,78 +1,79 @@
-Princeton Algorithms
-====================
+Princeton University Algorithms and Clients
+===========================================
+by Kevin Wayne, Robert Sedgewick
+--------------------------------
 
-Coursera Princeton Algorithms: Python implementations of selected Algorithms and Clients
-from Princeton's Java implementations retreived on July 2014 from: 
+Implemented in Python 2.7 by D Klopfenstein are selected code from this link:
 
   http://algs4.cs.princeton.edu/code/
 
-At some point, I plan to add C++ implementations little-by-little as well...
+At some point, I plan to add C++ implementations little-by-little when needed as well...
 
-Key:
-* J: Java file copied from Princeton Algorithm's "Java Algorithms and Clients"
+**Key:**
+* J: Java file downloaded from Princeton Algorithm's "Java Algorithms and Clients"
 * P: Python implementation is present
 * C: C++ implementaion is present
 
 
 ```
-JPC   1 FUNDAMENTALS            Description                      DATA
-:-- ---::---------------------- :-----------------------------   :-------------
-      – BinarySearch.py         binary search                    tinyW.txt tinyT.txt largeW.txt largeT.txt  
-      – RandomSeq.py            random numbers in a given range  –
-      – Average.py              average of a sequence of numbers –
-      – Cat.py                  concatenate files                in1.txt in2.txt  
-J     – Knuth.py                Knuth shuffle                    cards.txt  
-      – Counter.py              counter                          –
-      – StaticSETofInts.py      set of integers                  –
-      – Whitelist.py            whitelist client                 tinyW.txt tinyT.txt largeW.txt largeT.txt  
-      – Vector.py               Euclidean vector                 –
-J     – Date.py                 date                             –
-      – Transaction.py          transaction                      –
-      – Point2D.py              point                            –
-      – Interval1D.py           1d interval                      –
-      – Interval2D.py           2d interval                      –
-J   1.1 ResizingArrayStack.py   LIFO stack (resizing array)      tobe.txt  
-    1.2 LinkedStack.py          LIFO stack (linked list)         tobe.txt  
-J     – Stack.py                LIFO stack                       tobe.txt
-J     – ResizingArrayQueue.py   FIFO queue (resizing array)      tobe.txt  
-    1.3 LinkedQueue.py          FIFO queue (linked list)         tobe.txt  
-J     – Queue.py                FIFO queue                       tobe.txt
-J     – ResizingArrayBag.py     multiset (resizing array)        –
-    1.4 LinkedBag.py            multiset (linked list)           –
-J     – Bag.py                  multiset                         –
-      – Stopwatch.py            timer (wall time)                –
-      – StopwatchCPU.py         timer (CPU time)                 –
-      – LinearRegression.py     simple linear regression         –
-      – PolynomialRegression.py polynomial regression            –
-      – ThreeSum.py             brute-force three sum            1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt
-      – ThreeSumFast.py         faster three sum                 1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt  
-      – DoublingTest.py         doubling test                    –
-      – DoublingRatio.py        doubling ratio                   –
-J     – QuickFindUF.py          quick find                       tinyUF.txt mediumUF.txt largeUF.txt
-      – QuickUnionUF.py         quick union                      tinyUF.txt mediumUF.txt largeUF.txt
-J   1.5 WeightedQuickUnionUF.py weighted quick union             tinyUF.txt mediumUF.txt largeUF.txt
-     –  UF.py                   union-by-rank with path halving  tinyUF.txt mediumUF.txt largeUF.txt
+Key   1 FUNDAMENTALS         Description                      DATA
+:-- ---::------------------- :-----------------------------   :-------------
+      – BinarySearch         binary search                    tinyW.txt tinyT.txt largeW.txt largeT.txt  
+      – RandomSeq            random numbers in a given range  –
+      – Average              average of a sequence of numbers –
+      – Cat                  concatenate files                in1.txt in2.txt  
+J     – Knuth                Knuth shuffle                    cards.txt  
+      – Counter              counter                          –
+      – StaticSETofInts      set of integers                  –
+      – Whitelist            whitelist client                 tinyW.txt tinyT.txt largeW.txt largeT.txt  
+      – Vector               Euclidean vector                 –
+J     – Date                 date                             –
+      – Transaction          transaction                      –
+      – Point2D              point                            –
+      – Interval1D           1d interval                      –
+      – Interval2D           2d interval                      –
+J   1.1 ResizingArrayStack   LIFO stack (resizing array)      tobe.txt  
+    1.2 LinkedStack          LIFO stack (linked list)         tobe.txt  
+J     – Stack                LIFO stack                       tobe.txt
+J     – ResizingArrayQueue   FIFO queue (resizing array)      tobe.txt  
+    1.3 LinkedQueue          FIFO queue (linked list)         tobe.txt  
+J     – Queue                FIFO queue                       tobe.txt
+J     – ResizingArrayBag     multiset (resizing array)        –
+    1.4 LinkedBag            multiset (linked list)           –
+J     – Bag                  multiset                         –
+      – Stopwatch            timer (wall time)                –
+      – StopwatchCPU         timer (CPU time)                 –
+      – LinearRegression     simple linear regression         –
+      – PolynomialRegression polynomial regression            –
+      – ThreeSum             brute-force three sum            1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt
+      – ThreeSumFast         faster three sum                 1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt  
+      – DoublingTest         doubling test                    –
+      – DoublingRatio        doubling ratio                   –
+J     – QuickFindUF          quick find                       tinyUF.txt mediumUF.txt largeUF.txt
+      – QuickUnionUF         quick union                      tinyUF.txt mediumUF.txt largeUF.txt
+J   1.5 WeightedQuickUnionUF weighted quick union             tinyUF.txt mediumUF.txt largeUF.txt
+     –  UF                   union-by-rank with path halving  tinyUF.txt mediumUF.txt largeUF.txt
 
 
-    2 SORTING                                               DATA
-    - ----------------------------------------------------  --------------
-J   2.1 Insertion.py      insertion sort tiny.txt           words3.txt  
-      – InsertionX.py     optimized insertion               sort tiny.txt words3.txt  
-J   2.2 Selection.py      selection sort                    –
-J   2.3 Shell.py          shellsort                         –
-    2.4 Merge.py          top-down mergesort                –
-      – MergeBU.py        bottom-up mergesort               –
-      – MergeX.py         optimized mergesort               –
-    2.5 Quick.py          quicksort                         –
-      – Quick3way.py      quicksort with 3-way partitioning –
-      – QuickX.py         optimized quicksort               –
-      – TopM.py           priority queue client i           tinyBatch.txt
-J   2.6 MaxPQ.py          max heap priority queue           tinyPQ.txt
-      – MinPQ.py          min heap priority queue           tinyPQ.txt
-      – IndexMinPQ.py     index min heap priority queue     –
-      – IndexMaxPQ.py     index max heap priority queue     –
-      – Multiway.py       multiway merge                    m1.txt m2.txt m3.txt
-J   2.7 Heap.py           heapsort                          tiny.txt words3.txt
+Key   2 SORTING     Description                       DATA
+:-- ---::---------- :-----------------------------    :-------------
+J   2.1 Insertion   insertion sort tiny.txt           words3.txt  
+      – InsertionX  optimized insertion               sort tiny.txt words3.txt  
+J   2.2 Selection   selection sort                    –
+J   2.3 Shell       shellsort                         –
+    2.4 Merge       top-down mergesort                –
+      – MergeBU     bottom-up mergesort               –
+      – MergeX      optimized mergesort               –
+    2.5 Quick       quicksort                         –
+      – Quick3way   quicksort with 3-way partitioning –
+      – QuickX      optimized quicksort               –
+      – TopM        priority queue client i           tinyBatch.txt
+J   2.6 MaxPQ       max heap priority queue           tinyPQ.txt
+      – MinPQ       min heap priority queue           tinyPQ.txt
+      – IndexMinPQ  index min heap priority queue     –
+      – IndexMaxPQ  index max heap priority queue     –
+      – Multiway    multiway merge                    m1.txt m2.txt m3.txt
+J   2.7 Heap        heapsort                          tiny.txt words3.txt
 
     3 SEARCHING DATA
     - ----------------------------------------------------  --------------
@@ -183,23 +184,24 @@ J   – ST.py ordered symbol table –
     
     Standard input and output libraries. We use these standard input and output libraries from Introduction to Programming: An Interdisciplinary Approach. You can download them all together as stdlib.jar.
     
-    § PROGRAM DESCRIPTION / JAVADOC
-J   1.5 StdIn.py read numbers and text from standard input
-J   1.5 StdOut.py write numbers and text to standard output
-J   1.5 StdDraw.py draw geometric shapes in a window
-    1.5 StdAudio.py create, play, and manipulate sound
-J   2.2 StdRandom.py generate random numbers
-J   2.2 StdStats.py compute statistics
-J   2.2 StdArrayIO.py read and write 1D and 2D arrays
-    3.1 In.py read numbers and text from files and URLs
-    3.1 Out.py write numbers and text to files
-    3.1 Draw.py draw geometric shapes
-    3.1 Picture.py process digital images
-J   3.2 Stopwatch.py measure running time
-    – BinaryStdIn.py read bits from standard input
-    – BinaryStdOut.py write bits to standard output
-    – BinaryIn.py read bits from files and URLs
-    – BinaryOut.py write bits to files
+Key § PROGRAM DESCRIPTION / JAVADOC
+:-- ---::---------------------- :-----------------------------   :-------------
+J   1.5 StdIn        read numbers and text from standard input
+J   1.5 StdOut       write numbers and text to standard output
+J   1.5 StdDraw      draw geometric shapes in a window
+    1.5 StdAudio     create, play, and manipulate sound
+J   2.2 StdRandom    generate random numbers
+J   2.2 StdStats     compute statistics
+J   2.2 StdArrayIO   read and write 1D and 2D arrays
+    3.1 In           read numbers and text from files and URLs
+    3.1 Out          write numbers and text to files
+    3.1 Draw         draw geometric shapes
+    3.1 Picture      process digital images
+J   3.2 Stopwatch    measure running time
+      – BinaryStdIn  read bits from standard input
+      – BinaryStdOut write bits to standard output
+      – BinaryIn     read bits from files and URLs
+      – BinaryOut    write bits to files
 ```
 
 Bonus Java Files:
