@@ -1,12 +1,7 @@
 #!/usr/bin/env python
 
 import unittest
-import sys
-import os
-#sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-#from .. import Queue
 import Queue
-
 
 class Queue_Tests(unittest.TestCase):
   import Queue
@@ -55,8 +50,6 @@ class Queue_Tests(unittest.TestCase):
     #self.failUnless( self.chk(r, "0 1 2 3 4 5 6 7 8 9") )
 
 if __name__ == '__main__':
-  print 'PATH', sys.path
-  print 'PATH', os.path.dirname(__file__)
   unittest.main()
 
 
