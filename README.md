@@ -1,9 +1,9 @@
-Princeton University Algorithms and Clients
+Princeton University's Algorithms and Clients
 ===========================================
 by Kevin Wayne, Robert Sedgewick
 --------------------------------
 
-Implemented in Python 2.7 by D Klopfenstein are selected code from this link:
+Implemented in Python 2.7 by D Klopfenstein is selected code from:
 
   http://algs4.cs.princeton.edu/code/
 
@@ -18,62 +18,62 @@ At some point, I plan to add C++ implementations little-by-little when needed as
 ```
 Key   1 FUNDAMENTALS         Description                      DATA
 :-- ---::------------------- :-----------------------------   :-------------
-      – BinarySearch         binary search                    tinyW.txt tinyT.txt largeW.txt largeT.txt  
-      – RandomSeq            random numbers in a given range  –
-      – Average              average of a sequence of numbers –
-      – Cat                  concatenate files                in1.txt in2.txt  
-J     – Knuth                Knuth shuffle                    cards.txt  
-      – Counter              counter                          –
-      – StaticSETofInts      set of integers                  –
-      – Whitelist            whitelist client                 tinyW.txt tinyT.txt largeW.txt largeT.txt  
-      – Vector               Euclidean vector                 –
-J     – Date                 date                             –
-      – Transaction          transaction                      –
-      – Point2D              point                            –
-      – Interval1D           1d interval                      –
-      – Interval2D           2d interval                      –
-J   1.1 ResizingArrayStack   LIFO stack (resizing array)      tobe.txt  
-    1.2 LinkedStack          LIFO stack (linked list)         tobe.txt  
-J     – Stack                LIFO stack                       tobe.txt
-J     – ResizingArrayQueue   FIFO queue (resizing array)      tobe.txt  
-    1.3 LinkedQueue          FIFO queue (linked list)         tobe.txt  
-J     – Queue                FIFO queue                       tobe.txt
-J     – ResizingArrayBag     multiset (resizing array)        –
-    1.4 LinkedBag            multiset (linked list)           –
-J     – Bag                  multiset                         –
-      – Stopwatch            timer (wall time)                –
-      – StopwatchCPU         timer (CPU time)                 –
-      – LinearRegression     simple linear regression         –
-      – PolynomialRegression polynomial regression            –
-      – ThreeSum             brute-force three sum            1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt
-      – ThreeSumFast         faster three sum                 1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt  
-      – DoublingTest         doubling test                    –
-      – DoublingRatio        doubling ratio                   –
-J     – QuickFindUF          quick find                       tinyUF.txt mediumUF.txt largeUF.txt
-      – QuickUnionUF         quick union                      tinyUF.txt mediumUF.txt largeUF.txt
-J   1.5 WeightedQuickUnionUF weighted quick union             tinyUF.txt mediumUF.txt largeUF.txt
-     –  UF                   union-by-rank with path halving  tinyUF.txt mediumUF.txt largeUF.txt
+...   – BinarySearch         binary search                    tinyW.txt tinyT.txt largeW.txt largeT.txt  
+...   – RandomSeq            random numbers in a given range  –
+...   – Average              average of a sequence of numbers –
+...   – Cat                  concatenate files                in1.txt in2.txt  
+J..   – Knuth                Knuth shuffle                    cards.txt  
+...   – Counter              counter                          –
+...   – StaticSETofInts      set of integers                  –
+...   – Whitelist            whitelist client                 tinyW.txt tinyT.txt largeW.txt largeT.txt  
+...   – Vector               Euclidean vector                 –
+J..   – Date                 date                             –
+...   – Transaction          transaction                      –
+...   – Point2D              point                            –
+...   – Interval1D           1d interval                      –
+...   – Interval2D           2d interval                      –
+J.. 1.1 ResizingArrayStack   LIFO stack (resizing array)      tobe.txt  
+... 1.2 LinkedStack          LIFO stack (linked list)         tobe.txt  
+JP.   – Stack                LIFO stack                       tobe.txt
+J..   – ResizingArrayQueue   FIFO queue (resizing array)      tobe.txt  
+... 1.3 LinkedQueue          FIFO queue (linked list)         tobe.txt  
+JP.   – Queue                FIFO queue                       tobe.txt
+J..   – ResizingArrayBag     multiset (resizing array)        –
+... 1.4 LinkedBag            multiset (linked list)           –
+J..   – Bag                  multiset                         –
+...   – Stopwatch            timer (wall time)                –
+...   – StopwatchCPU         timer (CPU time)                 –
+...   – LinearRegression     simple linear regression         –
+...   – PolynomialRegression polynomial regression            –
+...   – ThreeSum             brute-force three sum            1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt
+...   – ThreeSumFast         faster three sum                 1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt  
+...   – DoublingTest         doubling test                    –
+...   – DoublingRatio        doubling ratio                   –
+JP.   – QuickFindUF          quick find                       tinyUF.txt mediumUF.txt largeUF.txt
+.P.   – QuickUnionUF         quick union                      tinyUF.txt mediumUF.txt largeUF.txt
+JP. 1.5 WeightedQuickUnionUF weighted quick union             tinyUF.txt mediumUF.txt largeUF.txt
+...  –  UF                   union-by-rank with path halving  tinyUF.txt mediumUF.txt largeUF.txt
 
 
 Key   2 SORTING     Description                       DATA
 :-- ---::---------- :-----------------------------    :-------------
-J   2.1 Insertion   insertion sort tiny.txt           words3.txt  
-      – InsertionX  optimized insertion               sort tiny.txt words3.txt  
-J   2.2 Selection   selection sort                    –
-J   2.3 Shell       shellsort                         –
-    2.4 Merge       top-down mergesort                –
-      – MergeBU     bottom-up mergesort               –
-      – MergeX      optimized mergesort               –
-    2.5 Quick       quicksort                         –
-      – Quick3way   quicksort with 3-way partitioning –
-      – QuickX      optimized quicksort               –
-      – TopM        priority queue client i           tinyBatch.txt
-J   2.6 MaxPQ       max heap priority queue           tinyPQ.txt
-      – MinPQ       min heap priority queue           tinyPQ.txt
-      – IndexMinPQ  index min heap priority queue     –
-      – IndexMaxPQ  index max heap priority queue     –
-      – Multiway    multiway merge                    m1.txt m2.txt m3.txt
-J   2.7 Heap        heapsort                          tiny.txt words3.txt
+J.. 2.1 Insertion   insertion sort tiny.txt           words3.txt  
+...   – InsertionX  optimized insertion               sort tiny.txt words3.txt  
+J.. 2.2 Selection   selection sort                    –
+J.. 2.3 Shell       shellsort                         –
+... 2.4 Merge       top-down mergesort                –
+...   – MergeBU     bottom-up mergesort               –
+...   – MergeX      optimized mergesort               –
+... 2.5 Quick       quicksort                         –
+...   – Quick3way   quicksort with 3-way partitioning –
+...   – QuickX      optimized quicksort               –
+...   – TopM        priority queue client i           tinyBatch.txt
+JP. 2.6 MaxPQ       max heap priority queue           tinyPQ.txt
+...   – MinPQ       min heap priority queue           tinyPQ.txt
+...   – IndexMinPQ  index min heap priority queue     –
+...   – IndexMaxPQ  index max heap priority queue     –
+...   – Multiway    multiway merge                    m1.txt m2.txt m3.txt
+J.. 2.7 Heap        heapsort                          tiny.txt words3.txt
 
     3 SEARCHING DATA
     - ----------------------------------------------------  --------------
@@ -184,24 +184,24 @@ J   – ST.py ordered symbol table –
     
     Standard input and output libraries. We use these standard input and output libraries from Introduction to Programming: An Interdisciplinary Approach. You can download them all together as stdlib.jar.
     
-Key § PROGRAM DESCRIPTION / JAVADOC
-:-- ---::---------------------- :-----------------------------   :-------------
-J   1.5 StdIn        read numbers and text from standard input
-J   1.5 StdOut       write numbers and text to standard output
-J   1.5 StdDraw      draw geometric shapes in a window
-    1.5 StdAudio     create, play, and manipulate sound
-J   2.2 StdRandom    generate random numbers
-J   2.2 StdStats     compute statistics
-J   2.2 StdArrayIO   read and write 1D and 2D arrays
-    3.1 In           read numbers and text from files and URLs
-    3.1 Out          write numbers and text to files
-    3.1 Draw         draw geometric shapes
-    3.1 Picture      process digital images
-J   3.2 Stopwatch    measure running time
-      – BinaryStdIn  read bits from standard input
-      – BinaryStdOut write bits to standard output
-      – BinaryIn     read bits from files and URLs
-      – BinaryOut    write bits to files
+Key   § PROGRAM      DESCRIPTION / JAVADOC
+:-- --: :----------- :----------------------------------------
+J.. 1.5 StdIn        read numbers and text from standard input
+J.. 1.5 StdOut       write numbers and text to standard output
+J.. 1.5 StdDraw      draw geometric shapes in a window
+... 1.5 StdAudio     create, play, and manipulate sound
+J.. 2.2 StdRandom    generate random numbers
+J.. 2.2 StdStats     compute statistics
+J.. 2.2 StdArrayIO   read and write 1D and 2D arrays
+... 3.1 In           read numbers and text from files and URLs
+... 3.1 Out          write numbers and text to files
+... 3.1 Draw         draw geometric shapes
+... 3.1 Picture      process digital images
+J.. 3.2 Stopwatch    measure running time
+...   – BinaryStdIn  read bits from standard input
+...   – BinaryStdOut write bits to standard output
+...   – BinaryIn     read bits from files and URLs
+...   – BinaryOut    write bits to files
 ```
 
 Bonus Java Files:
