@@ -3,10 +3,13 @@
 import unittest
 import sys
 import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+#sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+#from .. import Queue
 import Queue
 
+
 class Queue_Tests(unittest.TestCase):
+  import Queue
   """ Tests Queue."""
 
   def chk(self, a, txt):
