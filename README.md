@@ -12,7 +12,7 @@ At some point, I plan to add C++ implementations little-by-little when needed as
 **Key:**
 * J: Java file downloaded from Princeton Algorithm's "Java Algorithms and Clients"
 * P: Python implementation is present
-* C: C++ implementaion is present
+* C: C++ implementation is present
 
 
 ```
@@ -50,7 +50,7 @@ J..   – Bag                  multiset                         –
 ...   – DoublingTest         doubling test                    –
 ...   – DoublingRatio        doubling ratio                   –
 JP.   – QuickFindUF          quick find                       tinyUF.txt mediumUF.txt largeUF.txt
-.P.   – QuickUnionUF         quick union                      tinyUF.txt mediumUF.txt largeUF.txt
+JP.   – QuickUnionUF         quick union                      tinyUF.txt mediumUF.txt largeUF.txt
 JP. 1.5 WeightedQuickUnionUF weighted quick union             tinyUF.txt mediumUF.txt largeUF.txt
 ...  –  UF                   union-by-rank with path halving  tinyUF.txt mediumUF.txt largeUF.txt
 
@@ -182,7 +182,10 @@ J   – ST.py ordered symbol table –
     – ClosestPair.py 2d closest pair rs1423.txt  kw1260.txt  
     
     
-    Standard input and output libraries. We use these standard input and output libraries from Introduction to Programming: An Interdisciplinary Approach. You can download them all together as stdlib.jar.
+Standard input and output libraries. We use these standard
+input and output libraries from Introduction to Programming:
+An Interdisciplinary Approach. You can download them all
+together as stdlib.jar.
     
 Key   § PROGRAM      DESCRIPTION / JAVADOC
 :-- --: :----------- :----------------------------------------
@@ -204,9 +207,9 @@ J.. 3.2 Stopwatch    measure running time
 ...   – BinaryOut    write bits to files
 ```
 
-Bonus Java Files:
-BouncingBalls.java
-EvaluatePostfix.java
-UnorderedMaxPQ.java
+Additional Java Files:
+* BouncingBalls.java
+* EvaluatePostfix.java
+* UnorderedMaxPQ.java
 
 Bonus Python Files:
