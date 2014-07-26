@@ -7,10 +7,12 @@ Implemented in Python 2.7 by D Klopfenstein is selected code from:
 
   http://algs4.cs.princeton.edu/code/
 
-PREREQUISITES: python, numpy, pylab, matplotlib, 
-               math, sys, os
+PREREQUISITES: python, numpy, pylab, matplotlib, math, sys, os
+* pylab matplotlib are only used by a few Python modules. Most Python modules do not use them.
 
-At some point, I plan to add C++ implementations little-by-little when needed as well...
+FUTURE PLANS: Add C++ implementations little-by-little when more speed is needed as well...
+
+PYTHONPATH: Add the directory <your_directory>/PrincetonAlgorithms/py/
 
 **Key:**
 * J: Java file downloaded from Princeton Algorithm's "Java Algorithms and Clients"
