@@ -8,7 +8,7 @@ Implemented in Python 2.7 by D Klopfenstein is selected code from:
   http://algs4.cs.princeton.edu/code/
 
 PREREQUISITES: python, numpy, pylab, matplotlib, math, sys, os
-* pylab matplotlib are only used by a few Python modules. Most Python modules do not use them.
+pylab matplotlib are only used by a few Python modules. Most Python modules do not use them.
 
 FUTURE PLANS: Add C++ implementations little-by-little when more speed is needed as well...
 
