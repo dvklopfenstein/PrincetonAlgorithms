@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import unittest
-from WeightedQuickUnionUF import *
+from AlgsSedgewickWayne.WeightedQuickUnionUF import *
 
 class WeightedQuickUnionUF_Tests(unittest.TestCase):
 

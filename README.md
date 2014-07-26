@@ -32,7 +32,7 @@ J..   – Knuth                Knuth shuffle                    cards.txt
 ...   – Vector               Euclidean vector                 –
 J..   – Date                 date                             –
 ...   – Transaction          transaction                      –
-...   – Point2D              point                            –
+J..   – Point2D              point                            –
 ...   – Interval1D           1d interval                      –
 ...   – Interval2D           2d interval                      –
 J.. 1.1 ResizingArrayStack   LIFO stack (resizing array)      tobe.txt  
@@ -97,92 +97,96 @@ J   – ST.py ordered symbol table –
     – FileIndex.py file indexing ex1.txt  ex2.txt  ex3.txt  ex4.txt  
     – SparseVector.py sparse vector –
 
-    4 GRAPHS DATA
-    - ----------------------------------------------------  --------------
-    – Graph.py undirected graph tinyG.txt  mediumG.txt  
-    – GraphGenerator.py generate random graphs –
-    – DepthFirstSearch.py depth-first search in a graph tinyG.txt  mediumG.txt  
-    4.1 DepthFirstPaths.py paths in a graph (DFS) tinyCG.txt  mediumG.txt  largeG.txt  
-    4.2 BreadthFirstPaths.py paths in a graph (BFS) tinyCG.txt  mediumG.txt  largeG.txt  
-    4.3 CC.py connected components of a graph tinyG.txt  mediumG.txt  largeG.txt  
-    – Bipartite.py bipartite or odd cycle –
-    – Cycle.py cycle in a graph tinyG.txt  mediumG.txt  largeG.txt  
-    – SymbolGraph.py symbol graph routes.txt  movies.txt  
-    – DegreesOfSeparation.py degrees of separation routes.txt  movies.txt  
-    – Digraph.py directed graph tinyDG.txt  
-    – DigraphGenerator.py generate random digraphs –
-    4.4 DirectedDFS.py depth-first search in a digraph tinyDG.txt  
-    – DepthFirstDirectedPaths.py paths in a digraph (DFS) tinyDG.txt  mediumDG.txt  
-    – DirectedCycle.py cycle in a digraph tinyDG.txt  tinyDAG.txt  
-    – DepthFirstOrder.py depth-first order in a digraph tinyDG.txt  tinyDAG.txt  
-    4.5 Topological.py topological order in a DAG jobs.txt  
-    – BreadthFirstDirectedPaths.py paths in a digraph (BFS) tinyDG.txt  mediumDG.txt  
-    – TransitiveClosure.py transitive closure tinyDG.txt  
-    – SymbolDigraph.py symbol digraph –
-    4.6 KosarajuSharirSCC.py strong components (Kosaraju-Sharir) tinyDG.txt  mediumDG.txt  largeDG.txt  
-    – TarjanSCC.py strong components (Tarjan) tinyDG.txt  mediumDG.txt  largeDG.txt  
-    – GabowSCC.py strong components (Gabow) tinyDG.txt  mediumDG.txt  largeDG.txt  
-    – EdgeWeightedGraph.py edge-weighted graph –
-    – Edge.py weighted edge –
-    – LazyPrimMST.py MST (lazy Prim) tinyEWG.txt  mediumEWG.txt  largeEWG.txt  
-    4.7 PrimMST.py MST (Prim) tinyEWG.txt  mediumEWG.txt  largeEWG.txt  
-    4.8 KruskalMST.py MST (Kruskal) tinyEWG.txt  mediumEWG.txt  largeEWG.txt  
-    – BoruvkaMST.py MST (Boruvka) tinyEWG.txt  mediumEWG.txt  largeEWG.txt  
-    – EdgeWeightedDigraph.py edge-weighted digraph tinyEWD.txt  
-    – DirectedEdge.py weighted, directed edge –
-    4.9 DijkstraSP.py shortest paths (Dijkstra) tinyEWD.txt  mediumEWD.txt  largeEWD.txt  
-    – DijkstraAllPairsSP.py all-pairs shortest paths tinyEWD.txt  mediumEWD.txt  
-    4.10 AcyclicSP.py shortest paths in a DAG tinyEWDAG.txt  
-    – AcyclicLP.py longest paths in a DAG tinyEWDAG.txt  
-    – CPM.py critical path method jobsPC.txt  
-    4.11 BellmanFordSP.py shortest paths (Bellman-Ford) tinyEWDn.txt  tinyEWDnc.txt  
-    – EdgeWeightedDirectedCycle.py cycle in an edge-weighted digraph –
-    – Arbitrage.py arbitrage detection rates.txt  
-    – FloydWarshall.py all-pairs shortest paths (dense) tinyEWD.txt  mediumEWD.txt  
-    – AdjMatrixEdgeWeightedDigraph.py edge-weighted graph (dense) tinyEWD.txt  
-    5 STRINGS DATA
-    – Alphabet.py alphabet –
-    – Count.py alphabet client abra.txt  pi.txt  
-    5.1 LSD.py LSD radix sort words3.txt  
-    5.2 MSD.py MSD radix sort shells.txt  
-    5.3 Quick3string.py 3-way string quicksort shells.txt  
-    5.4 TrieST.py multiway trie symbol table shellsST.txt  
-    – TrieSET.py multiway trie set shellsST.txt  
-    5.5 TST.py ternary search trie shellsST.txt  
-    5.6 KMP.py Knuth-Morris-Pratt substring search –
-    5.7 BoyerMoore.py Boyer-Moore substring search –
-    5.8 RabinKarp.py Rabin-Karp substring search –
-    5.9 NFA.py NFA for regular expressions –
-    – GREP.py grep –
-    – BinaryDump.py binary dump abra.txt  
-    – HexDump.py hex dump abra.txt  
-    – PictureDump.py picture dump abra.txt  
-    – Genome.py genomic code genomeTiny.txt  genomeVirus.txt  
-    – RunLength.py run-length coding 4runs.bin  q32x48.bin  q64x96.bin  
-    5.10 Huffman.py Huffman coding tinytinyTale.txt  medTale.txt  tale.txt  
-    5.11 LZW.py Lempel-Ziv-Welch coding abraLZW.txt  ababLZW.txt  
-    6 CONTEXT DATA
-    6.1 CollisionSystem.py collision system brownian.txt  diffusion.txt  
-    – Particle.py particle –
-    6.2 BTree.py B-tree –
-    6.3 SuffixArray.py suffix array abra.txt  
-    – SuffixArrayX.py suffix array abra.txt  
-    – LRS.py longest repeated substring tinyTale.txt  mobydick.txt  
-    – KWIK.py keyword in context tale.txt  
-    – LongestCommonSubstring.py longest common substring tale.txt  mobydick.txt  
-    6.4 FordFulkerson.py max flow / min cut tinyFN.txt  
-    – FlowNetwork.py capacitated network –
-    – FlowEdge.py capacitated edge with flow –
-    – BipartiteMatching.py bipartite matching –
-    – AssignmentProblem.py weighted bipartite matching –
-    – Simplex.py simplex method –
-    9 BEYOND DATA
-    – GaussianElimination.py Gaussian elimination –
-    – FFT.py Fast Fourier transform –
-    – Complex.py complex number –
-    – GrahamScan.py 2d convex hull rs1423.txt  kw1260.txt  
-    – FarthestPair.py 2d farthest pair rs1423.txt  kw1260.txt  
-    – ClosestPair.py 2d closest pair rs1423.txt  kw1260.txt  
+... 4 GRAPHS DATA
+... - ----------------------------------------------------  --------------
+... – Graph.py undirected graph tinyG.txt  mediumG.txt  
+... – GraphGenerator.py generate random graphs –
+... – DepthFirstSearch.py depth-first search in a graph tinyG.txt  mediumG.txt  
+... 4.1 DepthFirstPaths.py paths in a graph (DFS) tinyCG.txt  mediumG.txt  largeG.txt  
+... 4.2 BreadthFirstPaths.py paths in a graph (BFS) tinyCG.txt  mediumG.txt  largeG.txt  
+... 4.3 CC.py connected components of a graph tinyG.txt  mediumG.txt  largeG.txt  
+... – Bipartite.py bipartite or odd cycle –
+... – Cycle.py cycle in a graph tinyG.txt  mediumG.txt  largeG.txt  
+... – SymbolGraph.py symbol graph routes.txt  movies.txt  
+... – DegreesOfSeparation.py degrees of separation routes.txt  movies.txt  
+... – Digraph.py directed graph tinyDG.txt  
+... – DigraphGenerator.py generate random digraphs –
+... 4.4 DirectedDFS.py depth-first search in a digraph tinyDG.txt  
+... – DepthFirstDirectedPaths.py paths in a digraph (DFS) tinyDG.txt  mediumDG.txt  
+... – DirectedCycle.py cycle in a digraph tinyDG.txt  tinyDAG.txt  
+... – DepthFirstOrder.py depth-first order in a digraph tinyDG.txt  tinyDAG.txt  
+... 4.5 Topological.py topological order in a DAG jobs.txt  
+... – BreadthFirstDirectedPaths.py paths in a digraph (BFS) tinyDG.txt  mediumDG.txt  
+... – TransitiveClosure.py transitive closure tinyDG.txt  
+... – SymbolDigraph.py symbol digraph –
+... 4.6 KosarajuSharirSCC.py strong components (Kosaraju-Sharir) tinyDG.txt  mediumDG.txt  largeDG.txt  
+... – TarjanSCC.py strong components (Tarjan) tinyDG.txt  mediumDG.txt  largeDG.txt  
+... – GabowSCC.py strong components (Gabow) tinyDG.txt  mediumDG.txt  largeDG.txt  
+... – EdgeWeightedGraph.py edge-weighted graph –
+... – Edge.py weighted edge –
+... – LazyPrimMST.py MST (lazy Prim) tinyEWG.txt  mediumEWG.txt  largeEWG.txt  
+... 4.7 PrimMST.py MST (Prim) tinyEWG.txt  mediumEWG.txt  largeEWG.txt  
+... 4.8 KruskalMST.py MST (Kruskal) tinyEWG.txt  mediumEWG.txt  largeEWG.txt  
+... – BoruvkaMST.py MST (Boruvka) tinyEWG.txt  mediumEWG.txt  largeEWG.txt  
+... – EdgeWeightedDigraph.py edge-weighted digraph tinyEWD.txt  
+... – DirectedEdge.py weighted, directed edge –
+... 4.9 DijkstraSP.py shortest paths (Dijkstra) tinyEWD.txt  mediumEWD.txt  largeEWD.txt  
+... – DijkstraAllPairsSP.py all-pairs shortest paths tinyEWD.txt  mediumEWD.txt  
+... 4.10 AcyclicSP.py shortest paths in a DAG tinyEWDAG.txt  
+... – AcyclicLP.py longest paths in a DAG tinyEWDAG.txt  
+... – CPM.py critical path method jobsPC.txt  
+... 4.11 BellmanFordSP.py shortest paths (Bellman-Ford) tinyEWDn.txt  tinyEWDnc.txt  
+... – EdgeWeightedDirectedCycle.py cycle in an edge-weighted digraph –
+... – Arbitrage.py arbitrage detection rates.txt  
+... – FloydWarshall.py all-pairs shortest paths (dense) tinyEWD.txt  mediumEWD.txt  
+... – AdjMatrixEdgeWeightedDigraph.py edge-weighted graph (dense) tinyEWD.txt  
+
+Key 5 STRINGS DATA
+... – Alphabet.py alphabet –
+... – Count.py alphabet client abra.txt  pi.txt  
+... 5.1 LSD.py LSD radix sort words3.txt  
+... 5.2 MSD.py MSD radix sort shells.txt  
+... 5.3 Quick3string.py 3-way string quicksort shells.txt  
+... 5.4 TrieST.py multiway trie symbol table shellsST.txt  
+... – TrieSET.py multiway trie set shellsST.txt  
+... 5.5 TST.py ternary search trie shellsST.txt  
+... 5.6 KMP.py Knuth-Morris-Pratt substring search –
+... 5.7 BoyerMoore.py Boyer-Moore substring search –
+... 5.8 RabinKarp.py Rabin-Karp substring search –
+... 5.9 NFA.py NFA for regular expressions –
+... – GREP.py grep –
+... – BinaryDump.py binary dump abra.txt  
+... – HexDump.py hex dump abra.txt  
+... – PictureDump.py picture dump abra.txt  
+... – Genome.py genomic code genomeTiny.txt  genomeVirus.txt  
+... – RunLength.py run-length coding 4runs.bin  q32x48.bin  q64x96.bin  
+... 5.10 Huffman.py Huffman coding tinytinyTale.txt  medTale.txt  tale.txt  
+... 5.11 LZW.py Lempel-Ziv-Welch coding abraLZW.txt  ababLZW.txt  
+
+Key 6 CONTEXT DATA
+... 6.1 CollisionSystem.py collision system brownian.txt  diffusion.txt  
+... – Particle.py particle –
+... 6.2 BTree.py B-tree –
+... 6.3 SuffixArray.py suffix array abra.txt  
+... – SuffixArrayX.py suffix array abra.txt  
+... – LRS.py longest repeated substring tinyTale.txt  mobydick.txt  
+... – KWIK.py keyword in context tale.txt  
+... – LongestCommonSubstring.py longest common substring tale.txt  mobydick.txt  
+... 6.4 FordFulkerson.py max flow / min cut tinyFN.txt  
+... – FlowNetwork.py capacitated network –
+... – FlowEdge.py capacitated edge with flow –
+... – BipartiteMatching.py bipartite matching –
+... – AssignmentProblem.py weighted bipartite matching –
+... – Simplex.py simplex method –
+
+Key   9 BEYOND              Description            DATA
+:-- --: :------------------ :--------------------- :---------------------
+...   – GaussianElimination Gaussian elimination   –
+...   – FFT                 Fast Fourier transform –
+...   – Complex             complex number         –
+J..   – GrahamScan          2d convex hull         rs1423.txt  kw1260.txt  
+...   – FarthestPair        2d farthest pair       rs1423.txt  kw1260.txt  
+...   – ClosestPair         2d closest pair        rs1423.txt  kw1260.txt  
     
     
 Standard input and output libraries. We use these standard

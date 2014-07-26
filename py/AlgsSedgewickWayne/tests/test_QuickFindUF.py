@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import unittest
-from QuickFindUF import *
+from AlgsSedgewickWayne.QuickFindUF import *
 
 class QuickFindUF_Tests(unittest.TestCase):
 

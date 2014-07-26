@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import unittest
-from QuickUnionUF import *
+from AlgsSedgewickWayne.QuickUnionUF import *
 
 
 class QuickUnionUF_Tests(unittest.TestCase):

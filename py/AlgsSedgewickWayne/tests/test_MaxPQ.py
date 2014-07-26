@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import unittest
-from MaxPQ import *
+from AlgsSedgewickWayne.MaxPQ import *
 
 class MaxPQ_Tests(unittest.TestCase):
 

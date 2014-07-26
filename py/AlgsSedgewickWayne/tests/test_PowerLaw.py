@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import unittest
-from PowerLaw import *
+from AlgsSedgewickWayne.PowerLaw import *
 
 class PowerLaw_Tests(unittest.TestCase):
 
