@@ -78,12 +78,15 @@ class Point2D: # implements Comparable<Point2D> {
         return Math.atan2(dy, dx);
 
     # Are 3 Point2Ds(a,b,c) a->b->c a counterclockwise turn?
+    # Solution is based on the idea of calculating the slopes iand comparing of a-b and a-c.
+    # See slide at 12:00 in the Convex Hull Lecture
     # @return { -1, 0, +1 } if a->b->c is a { clockwise, collinear; counterclocwise } turn.
     def ccw(a, b, c) {
+        # Be alert to the danger of floating-point roundoff error...
         area2 = (b.self._x-a.self._x)*(c.self._y-a.self._y) - (b.self._y-a.self._y)*(c.self._x-a.self._x)
-        if      area2 < 0: return -1 
-        else if area2 > 0: return +1 
-        else               return  0 
+        if      area2 < 0: return -1 # clockwise
+        else if area2 > 0: return +1 # counter-clockwise
+        else               return  0 # collinear
 
     # Returns twice the signed area of the triangle a-b-c.
     # @param a first point

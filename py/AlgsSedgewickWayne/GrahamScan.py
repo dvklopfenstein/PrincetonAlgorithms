@@ -1,16 +1,20 @@
 #!/usr/bin/env python
 
-Alg1, Week 2 Lecture "Convex Hull"
-CONVEX HULL: Application of sorting fro the field of computational geometry
+##########################################
+# Alg1, Week 2 Lecture "Convex Hull
+#   https://class.coursera.org/algs4partI-005/lecture/29
+##########################################
 
-CONVEX HULL is the smallest polygon which encloses all the points for 
-a set of points on a plane
-
-01:40 CONVEX HULL OUTPUT: Sequence of vertics in counterclockwise order.
-(Do not include point on the boundry which are not vertices)
-
-02:11 CONVEX HULL: MECHANICAL ALGORITHM
-Hammer nails perpendicular to the plane; stretch elastic rubber band around points.
+# CONVEX HULL: Application of sorting fro the field of computational geometry
+# 
+# CONVEX HULL is the smallest polygon which encloses all the points for 
+# a set of points on a plane
+# 
+# 01:40 CONVEX HULL OUTPUT: Sequence of vertics in counterclockwise order.
+# (Do not include point on the boundry which are not vertices)
+# 
+# 02:11 CONVEX HULL: MECHANICAL ALGORITHM
+# Hammer nails perpendicular to the plane; stretch elastic rubber band around points.
 
 ##########################################
 # CONVEX HULL APPLICATION EXAMPLES
@@ -27,17 +31,81 @@ Hammer nails perpendicular to the plane; stretch elastic rubber band around poin
 # Euclidean distance between them. (They will be on the convex hull)
 
 
-##########################################
+#-----------------------------------------
 # 03:43 CONVEX HULL: GEOMETRIC PROPERTIES
 # FACT: Can travers the convex hull by making only clockwise turns.
 # FACT: The vertices of convex hull appear in increasing order of
 #       polar angle with respect to point p with lowest y-coordinate.
 # The Graham Scan algorithm uses these two facts.
 
-05:03 GRAHAM SCAN DEMO
-* Choose point p with smallest y-coordinate.
-* Sort points by polar angle with p.
-* Consider point in order; discard unless it creates a ccw turn.
+# GRAHAM SCAN DEMO 05:03-07:52
+# * Choose point p with smallest y-coordinate.
+# * Sort points by polar angle with p.
+# * Consider point in order; discard unless it creates a ccw turn.
+
+#-----------------------------------------
+# 8:00 GRAHAM SCAN: IMPLMENTATION CHALLENGES
+# Q: How to find point p with smallest y-coordinate?
+# A: Define a total order, comparing by y-coordinate. [next lecture]
+# 
+# Q: How to sort points by polar angle with respect to p? 08:48
+# A: Define a total order *for each* point p. [next lecture]
+#    Example of wanting to be able to sort the same thing in different ways
+# 
+# Q: How to determine whether p1->p2->p3 is a counterclockwise turn? 09:15
+# A: Computational geometery. [briefly on the next two slides]
+# 
+# Q: How to sort efficiently? 09:35 (Convex sorting:  Where the most work is)
+# A: Mergesort sorts in N*log(N) time. [next lecture]
+# 
+# Q: How to handle degeneracies (3+ points on a line)? 10:19
+# A: Requires some care, but not hard [see booksite]
+
+#-----------------------------------------
+# 10:37 IMPLEMENTING CCW 
+# CCW: Given 3 points a, b, and c, is a->b->c a counterclockwise turn?
+#   i.e. is c to the left of the ray a->b?
+# TRICKY BECAUSE:
+# * Infinite slope
+# * collinear points
+# 
+# LESSON: Geometric primitives are tricky to implement.
+#   * Dealing with degenerate cases.
+#   * Coping with floating-point precision.
+# 
+# 12:04 THE IDEA FOR CALCULATING IF 3 POINTS ARE CCW:
+# Computing slopes between a-b and a-c and comparing the slopes to see if you 
+# are turning counter-clockwise or clockwise
+# 
+#-----------------------------------------
+# 12:50 GRAHAM SCAN: IMPLEMENTATION
+# SIMPLIFYING ASSUMPTIONS: No 3 points on a line; at least 3 points.
+# 
+# Stack<Point2D> hull = new Stack<Point>();
+# 
+# # Two different ways to sort the stack:
+# Arrays.sort(p, Point2D.Y_ORDER); # p[0] is not point w/lowest y-coord
+# Arrays.sort(p, p[0].BY_POLAR_ORDER); # sort by polar angle w/respect to p[0]
+# 
+# hull.push(p[0]); # definitely on hull
+# hull.push(p[1]);
+# 
+# for (int i = 2; i < N; i++) {
+#   Point2D top = hull.pop();
+#   # Do two top points plus new point make a ccw?
+#   while (Point2D.ccw(hull.peek(), top, p[i] <= 0)
+#     top.hull.pop();
+#   hull.push(top);
+#   hull.push(p[i]); # add p[i] to putative hull
+# }
+# 
+# RUNNING TIME: N*log(N) for sorting and linear for rest.
+# PROOF: N*log(N) for sorting; each point pushed and popped at most once.
+
+#-----------------------------------------
+# 13:44 QUESTION: What is the maximum number of vertices that can be on the convex hull
+# of a set of N points:
+# ANSWER: linear
 
 
  #************************************************************************
