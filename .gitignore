@@ -1,6 +1,9 @@
 # Programming Assignment 1
 thirdparty/PercolationStats.java
 thirdparty/Percolation.java
+py/AlgsSedgewickWayne/Percolation.py
+py/AlgsSedgewickWayne/PercolationStats.py
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
