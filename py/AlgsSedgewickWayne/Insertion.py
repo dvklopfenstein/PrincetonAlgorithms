@@ -87,7 +87,8 @@ def Sort(ARR, array_history=None):
         j = i
         # Exchange the curr Elem with every element to the left that is > 01:21
         while j > 0 and _less(ARR[j], ARR[j-1]): 
-            if array_history is not None: 
+            #if array_history is not None: 
+            if isinstance(array_history, list):
               add_history(array_history, ARR, {j:'*', j-1:'*'} )
             _exch(ARR, j, j-1)
             j -= 1
@@ -126,7 +127,7 @@ def indexSort(ARR, array_history=None):
         while j > 0 and _less(ARR[index[j]], ARR[index[j-1]]):
           _exch(index, j, j-1)
           if array_history is not None: 
-            add_history(array_history, ARR, [{'*':[j, j-1]}] )
+            add_history(array_history, ARR, {j:'*', j-1:'*'} )
           j -= 1
     return index
 
@@ -169,9 +170,8 @@ def _isSorted(a, lo=None, hi=None):
 #     return True
 
 def add_history(ret, ARR, anno):
-  import copy
-  if isinstance(ret, list):
-    ret.append([copy.deepcopy(ARR), anno])
+  import ArrayHistory
+  ArrayHistory.add_history(ret, ARR, anno)
 
 #*
 # Reads in a sequence of strings from standard input; insertion sorts them;

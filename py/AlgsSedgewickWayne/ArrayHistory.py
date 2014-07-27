@@ -23,7 +23,39 @@ import sys
 def prt_array_history(array_history):
   """ Prints array history with spaces between elements."""
   for idx,A in enumerate(array_history):
-    sys.stdout.write('{:2d}: {}\n'.format(idx, ' '.join(map(str,A))))
+    sys.stdout.write('{:2d}: {}\n'.format(idx, ' '.join(map(str,A[0]))))
+
+
+def show_array_history(desc, array_history):
+  if isinstance(array_history,list) and len(array_history) != 0:
+    """ Print array history plus histogram bars (viewed horizontally) to help visualize sort."""
+    elem2num = get_elem2num(array_history)
+    for incr,A in enumerate(array_history):
+      sys.stdout.write('{:2d} {}: {}\n'.format(
+        incr, desc, ' '.join(map(str,A[0]))))
+      for idx, elem in enumerate(A[0]):
+        anno = get_anno(idx, A[1])
+        sys.stdout.write('{:2d} {}({:2d}): {}{} {}\n'.format(
+          incr, desc, idx, anno, elem, ''.join(['*']*elem2num[elem])))
+      sys.stdout.write('\n')
+
+
+def arrays_equal( A, B ):
+  L = len(A)
+  if L != len(B):
+    return False
+  for idx in range(L):
+    if A[idx] != B[idx]:
+      return False
+  return True
+
+
+def history_contains( array_history, potential_midpoint ):
+  """ Tests if a midpoint could have occured sometime during a sort."""
+  for idx,A in enumerate(array_history):
+    if arrays_equal( A[0], potential_midpoint ):
+      return True
+  return False
 
 
 def get_elem2num(array_history):
@@ -49,15 +81,3 @@ def add_history(ret, ARR, anno):
     ret.append([copy.deepcopy(ARR), anno])
   
 
-def show_array_history(desc, array_history):
-  if isinstance(array_history,list) and len(array_history) != 0:
-    """ Print array history plus histogram bars (viewed horizontally) to help visualize sort."""
-    elem2num = get_elem2num(array_history)
-    for incr,A in enumerate(array_history):
-      sys.stdout.write('{:2d} {}: {}\n'.format(
-        incr, desc, ' '.join(map(str,A[0]))))
-      for idx, elem in enumerate(A[0]):
-        anno = get_anno(idx, A[1])
-        sys.stdout.write('{:2d} {}({:2d}): {}{} {}\n'.format(
-          incr, desc, idx, anno, elem, ''.join(['*']*elem2num[elem])))
-      sys.stdout.write('\n')
