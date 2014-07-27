@@ -10,9 +10,11 @@ Implemented in Python 2.7 by D Klopfenstein is selected code from:
 PREREQUISITES: python, numpy, pylab, matplotlib, math, sys, os.
 NOTE: Most Python modules in this repository do not use matplotlib or pylab.
 
-FUTURE PLANS: Add C++ implementations little-by-little when more speed is needed as well...
+FUTURE PLANS: Add C++ implementations little-by-little when more speed is needed.
 
-PYTHONPATH: Add the directory <your_directory>/PrincetonAlgorithms/py/
+PYTHONPATH: Add the directory: \<your_directory\>/PrincetonAlgorithms/py/
+
+MOTIVATION: Some of these algorithms are useful to have in my daily work analyzing biological data.
 
 **Key:**
 * J: Java file downloaded from Princeton Algorithm's "Java Algorithms and Clients"
