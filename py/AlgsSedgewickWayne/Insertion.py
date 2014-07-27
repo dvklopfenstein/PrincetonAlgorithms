@@ -78,32 +78,33 @@
 
  # Rearranges the array in ascending order, using the natural order.
  # @param a the array to be sorted
-def sort(a):
-    N = len(a)
+def Sort(ARR, array_history=None):
+    N = len(ARR)
     # 00:57 Everything to the left is in acending order
     #       Everything to the right, we have not seen at all
     for i in range(N):
         #for (int j = i; j > 0 && less(a[j], a[j-1]); j--):
         j = i
         # Exchange the curr Elem with every element to the left that is > 01:21
-        while j > 0 and _less(a[j], a[j-1]): 
-            _exch(a, j, j-1)
+        while j > 0 and _less(ARR[j], ARR[j-1]): 
+            _exch(ARR, j, j-1)
+            if array_history is not None: add_history(array_history, ARR)
             j -= 1
-        assert _isSorted(a, 0, i);
-    assert _isSorted(a);
+        assert _isSorted(ARR, 0, i)
+    assert _isSorted(ARR);
 
- #*
- # Rearranges the array in ascending order, using a comparator.
- # @param a the array
- # @param c the comparator specifying the order
- #/
-def sort(a, c):
-    int N = a.length;
-    for (int i = 0; i < N; i++):
-        for (int j = i; j > 0 && less(c, a[j], a[j-1]); j--):
-            _exch(a, j, j-1);
-        assert _isSorted(a, c, 0, i)
-    assert _isSorted(a, c)
+#  #*
+#  # Rearranges the array in ascending order, using a comparator.
+#  # @param a the array
+#  # @param c the comparator specifying the order
+#  #/
+# def Sort(a, c):
+#     int N = len(a)
+#     for (int i = 0; i < N; i++):
+#         for (int j = i; j > 0 && less(c, a[j], a[j-1]); j--):
+#             _exch(a, j, j-1);
+#         assert _isSorted(a, c, 0, i)
+#     assert _isSorted(a, c)
 
 # return a permutation that gives the elements in a[] in ascending order
 # do not change the original array a[]
@@ -113,17 +114,19 @@ def sort(a, c):
  # @return a permutation <tt>p[]</tt> such that <tt>a[p[0]]</tt>, <tt>a[p[1]]</tt>,
  #    ..., <tt>a[p[N-1]]</tt> are in ascending order
  #/
-def indexSort(Comparable[] a):
-    N = len(a)
+def indexSort(ARR, array_history=None):
+    N = len(ARR)
     index = [None]*N
     for i in range(N):
         index[i] = i
 
-    for i in range(N)
-        for (int j = i; j > 0 && less(a[index[j]], a[index[j-1]]); j--)
-            _exch(index, j, j-1)
+    for i in range(N):
+        j = i
+        while j > 0 and _less(ARR[index[j]], ARR[index[j-1]]):
+          _exch(index, j, j-1)
+          if array_history is not None: add_history(array_history, ARR)
+          j -= 1
     return index
-}
 
 #**********************************************************************
 #  Helper sorting functions
@@ -132,17 +135,11 @@ def indexSort(Comparable[] a):
 # is v < w ?
 def _less(v, w): return v < w
 
-# is v < w ?
-def _less(c, v, w):
-    return (c.compare(v, w) < 0);
+# # is v < w ?
+# def _less(c, v, w):
+#     return (c.compare(v, w) < 0);
     
 # exchange a[i] and a[j]
-def _exch(a, i, j):
-    swap = a[i]
-    a[i] = a[j]
-    a[j] = swap
-
-# exchange a[i] and a[j]  (for indirect sort)
 def _exch(a, i, j):
     swap = a[i]
     a[i] = a[j]
@@ -151,39 +148,38 @@ def _exch(a, i, j):
 #**********************************************************************
 #  Check if array is sorted - useful for debugging
 #**********************************************************************/
-def _isSorted(a):
-    return _isSorted(a, 0, a.length - 1);
-
-# is the array sorted from a[lo] to a[hi]
-def _isSorted(a, lo, hi):
+def _isSorted(a, lo=None, hi=None):
+    if lo is None and hi is None:
+      lo = 0
+      hi = len(a) - 1
+    # is the array sorted from a[lo] to a[hi]
     for i in range(lo+1, hi+1):
         if _less(a[i], a[i-1]): return False
     return True
 
-def _isSorted(a, c):
-    return _isSorted(a, c, 0, a.length - 1)
+# def _isSorted(a, c):
+#     return _isSorted(a, c, 0, a.length - 1)
+# 
+# # is the array sorted from a[lo] to a[hi]
+# def _isSorted(a, c, lo, hi):
+#     for i in range(lo+1,hi+1):
+#         if less(c, a[i], a[i-1]): return False
+#     return True
 
-# is the array sorted from a[lo] to a[hi]
-def _isSorted(a, c, lo, hi):
-    for (int i = lo + 1; i <= hi; i++)
-    for i in range(lo+1,hi+1):
-        if less(c, a[i], a[i-1]): return False
-    return True
-}
+def add_history(ret, ARR):
+  import copy
+  if isinstance(ret, list):
+    ret.append(copy.deepcopy(ARR))
 
- print array to standard output
-def _show(a):
-    for i in range(len(a)): print a[i],
-    print
-
- #*
- # Reads in a sequence of strings from standard input; insertion sorts them;
- # and prints them to standard output in ascending order.
- #/
+#*
+# Reads in a sequence of strings from standard input; insertion sorts them;
+# and prints them to standard output in ascending order.
+#/
 def main():
-    String[] a = StdIn.readAllStrings();
+    import InputArgs
+    a = InputArgs.getStrArray();
     sort(a)
-    show(a)
+    print ' '.join(a)
 
 if __name__ == '__main__':
   main()

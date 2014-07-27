@@ -51,20 +51,20 @@
 
 # Rearranges the array in ascending order, using the natural order.
 # @param a the array to be Sorted
-def Sort(a, prt=False):
-  N = len(a)
+def Sort(ARR, array_history=None):
+  N = len(ARR)
   # Items from i to j-1 are Sorted
   # IN the ith iteration, find the smallest remaining Item above i
   for i in range(N): 
     Min = i
     # Identify index of min Item right of j
     for j in range(i+1,N):
-      if _less(a[j], a[Min]):  # COMPARE is counted toward cost
+      if _less(ARR[j], ARR[Min]):  # COMPARE is counted toward cost
         Min = j
-    _exch(a, i, Min)           # EXCHANGE is counted toward cost
-    if prt: print i, ' '.join(map(str, a))
-    assert _isSorted(a, 0, i)
-  assert _isSorted(a)
+    _exch(ARR, i, Min)           # EXCHANGE is counted toward cost
+    if array_history is not None: add_history(array_history, ARR)
+    assert _isSorted(ARR, 0, i)
+  assert _isSorted(ARR)
 
 ## Rearranges the array, a, in ascending order, using a comparator.
 ## @param a the array
@@ -116,6 +116,11 @@ def _isSorted(a, lo=None, hi=None):
 #     for i in rane(lo+1, hi+1):
 #         if _less(c, a[i], a[i-1]): return False
 #     return True
+
+def add_history(ret, ARR):
+  import copy
+  if isinstance(ret, list):
+    ret.append(copy.deepcopy(ARR))
 
 # Reads in a sequence of strings from standard input selection Sorts them; 
 # and prints them to standard output in ascending order. 
