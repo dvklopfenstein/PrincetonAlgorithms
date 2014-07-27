@@ -67,7 +67,7 @@ Key   2 SORTING     Description                       DATA
 JP. 2.1 Insertion   insertion sort tiny.txt          words3.txt
 ...   – InsertionX  optimized insertion               sort tiny.txt words3.txt
 JP. 2.2 Selection   selection sort                    –
-J.. 2.3 Shell       shellsort                         –
+JP. 2.3 Shell       shellsort                         –
 ... 2.4 Merge       top-down mergesort                –
 ...   – MergeBU     bottom-up mergesort               –
 ...   – MergeX      optimized mergesort               –
