@@ -30,17 +30,26 @@ def get_elem2num(array_history):
   # In array_history, last array should be the sorted arrayA
   elem2num = {}
   num = 1
-  for elem in array_history[-1]:
+  for elem in array_history[-1][0]:
     elem2num[elem] = num
     num += 1
   return elem2num
 
-def animate(desc, array_history):
+def get_anno( idx, idx2sym ):
+  if idx not in idx2sym:
+    return ' '
+  return idx2sym[idx]
+  
+
+def show_array_history(desc, array_history):
   if isinstance(array_history,list) and len(array_history) != 0:
     """ Print array history plus histogram bars (viewed horizontally) to help visualize sort."""
     elem2num = get_elem2num(array_history)
-    for idx,A in enumerate(array_history):
-      sys.stdout.write('{:2d} {}: {}\n'.format(idx, desc, ' '.join(map(str,A))))
-      for elem in A:
-        sys.stdout.write('{:2d} {}: {} {}\n'.format(idx, desc, elem, ''.join(['*']*elem2num[elem])))
+    for incr,A in enumerate(array_history):
+      sys.stdout.write('{:2d} {}: {}\n'.format(
+        incr, desc, ' '.join(map(str,A[0]))))
+      for idx, elem in enumerate(A[0]):
+        anno = get_anno(idx, A[1])
+        sys.stdout.write('{:2d} {}({:2d}): {}{} {}\n'.format(
+          incr, desc, idx, anno, elem, ''.join(['*']*elem2num[elem])))
       sys.stdout.write('\n')

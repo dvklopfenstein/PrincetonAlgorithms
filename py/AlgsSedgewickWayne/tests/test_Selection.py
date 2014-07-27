@@ -15,7 +15,7 @@ class Selection_Tests(unittest.TestCase):
     Sort(a, array_history)
     print "SELECTION SORT RESULT", a
     prt_array_history(array_history)
-    animate('SELECTION SORT', array_history)
+    show_array_history('SELECTION SORT', array_history)
     print
 
 if __name__ == '__main__':

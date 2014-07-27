@@ -15,7 +15,7 @@ class Insertion_Tests(unittest.TestCase):
     Sort(a, array_history)
     print "INSERTION SORT RESULT", a
     prt_array_history(array_history)
-    animate('INSERTION SORT', array_history)
+    show_array_history('INSERTION SORT', array_history)
     print
 
 if __name__ == '__main__':

@@ -61,8 +61,9 @@ def Sort(ARR, array_history=None):
     for j in range(i+1,N):
       if _less(ARR[j], ARR[Min]):  # COMPARE is counted toward cost
         Min = j
+    if array_history is not None: 
+      add_history(array_history, ARR, {i:'*', Min:'*'} )
     _exch(ARR, i, Min)           # EXCHANGE is counted toward cost
-    if array_history is not None: add_history(array_history, ARR)
     assert _isSorted(ARR, 0, i)
   assert _isSorted(ARR)
 
@@ -117,10 +118,10 @@ def _isSorted(a, lo=None, hi=None):
 #         if _less(c, a[i], a[i-1]): return False
 #     return True
 
-def add_history(ret, ARR):
+def add_history(ret, ARR, anno):
   import copy
   if isinstance(ret, list):
-    ret.append(copy.deepcopy(ARR))
+    ret.append([copy.deepcopy(ARR), anno])
 
 # Reads in a sequence of strings from standard input selection Sorts them; 
 # and prints them to standard output in ascending order. 
