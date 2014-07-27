@@ -25,6 +25,7 @@ def prt_array_history(array_history):
   for idx,A in enumerate(array_history):
     sys.stdout.write('{:2d}: {}\n'.format(idx, ' '.join(map(str,A))))
 
+
 def get_elem2num(array_history):
   """ 1 is assigned to smallest element.  len(arr)+1 is assigned to largest element."""
   # In array_history, last array should be the sorted arrayA
@@ -35,10 +36,17 @@ def get_elem2num(array_history):
     num += 1
   return elem2num
 
+
 def get_anno( idx, idx2sym ):
   if idx not in idx2sym:
     return ' '
   return idx2sym[idx]
+
+
+def add_history(ret, ARR, anno):
+  import copy
+  if isinstance(ret, list):
+    ret.append([copy.deepcopy(ARR), anno])
   
 
 def show_array_history(desc, array_history):

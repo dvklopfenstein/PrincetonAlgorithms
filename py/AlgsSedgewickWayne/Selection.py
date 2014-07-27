@@ -119,9 +119,8 @@ def _isSorted(a, lo=None, hi=None):
 #     return True
 
 def add_history(ret, ARR, anno):
-  import copy
-  if isinstance(ret, list):
-    ret.append([copy.deepcopy(ARR), anno])
+  import ArrayHistory
+  ArrayHistory.add_history(ret, ARR, anno)
 
 # Reads in a sequence of strings from standard input selection Sorts them; 
 # and prints them to standard output in ascending order. 

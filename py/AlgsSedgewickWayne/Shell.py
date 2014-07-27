@@ -118,8 +118,8 @@
 # Rearranges the array in ascending order, using the natural order.
 # @param a the array to be sorted
 #/
-def sort(a):
-    N = len(a)
+def Sort(ARR, array_history=None):
+    N = len(ARR)
 
     # 3x+1 increment sequence:  1, 4, 13, 40, 121, 364, 1093, ... 
     h = 1
@@ -128,13 +128,15 @@ def sort(a):
     while (h >= 1):
         # h-sort the array
         for i in range(h,N):
-            j = i:
-            while j >= h && less(a[j], a[j-h]): 
-                exch(a, j, j-h)
+            j = i
+            while j >= h and _less(ARR[j], ARR[j-h]): 
+                if array_history is not None:
+                  add_history(array_history, ARR, {j:'*', j-h:'*'} )
+                _exch(ARR, j, j-h)
                 j -= h
-        assert isHsorted(a, h) 
+        assert _isHsorted(ARR, h) 
         h /= 3
-    assert isSorted(a)
+    assert _isSorted(ARR)
 
 
 #**********************************************************************
@@ -142,10 +144,10 @@ def sort(a):
 #**********************************************************************/
 
 # is v < w ?
-def less(v, w): return v<w
+def _less(v, w): return v<w
     
 # exchange a[i] and a[j]
-def exch(a, i, j):
+def _exch(a, i, j):
     swap = a[i]
     a[i] = a[j]
     a[j] = swap
@@ -153,21 +155,21 @@ def exch(a, i, j):
 #**********************************************************************
 #  Check if array is sorted - useful for debugging
 #**********************************************************************/
-def isSorted(a):
+def _isSorted(a):
     for i in range(1,len(a)):
-        if less(a[i], a[i-1]): return False
+        if _less(a[i], a[i-1]): return False
     return True
 
 # is the array h-sorted?
-def isHsorted(a, h):
+def _isHsorted(a, h):
     for i in range(h,len(a)):
-        if less(a[i], a[i-h]): return False
+        if _less(a[i], a[i-h]): return False
     return True
 
-# print array to standard output
-def show(a):
-    for i in range(1,len(a)):
-        print a[i]
+def add_history(ret, ARR, anno):
+  import ArrayHistory
+  ArrayHistory.add_history(ret, ARR, anno)
+  
 
 # Reads in a sequence of strings from standard input; Shellsorts them; 
 # and prints them to standard output in ascending order. 

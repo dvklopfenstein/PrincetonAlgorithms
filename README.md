@@ -8,13 +8,13 @@ Implemented in Python 2.7 by D Klopfenstein is selected code from:
   * http://algs4.cs.princeton.edu/code/
 
 **PREREQUISITES**: python, numpy, pylab, matplotlib, math, sys, os.
-NOTE: Most Python modules in this repository do not use matplotlib or pylab.
-
-**FUTURE PLANS**: Add C++ implementations little-by-little when more speed is needed.
+*NOTE*: Most Python modules in this repository do not use matplotlib or pylab.
 
 **PYTHONPATH**: Add the directory: \<your_directory\>/PrincetonAlgorithms/py/
 
-**MOTIVATION**: Some of these algorithms are useful to have in my daily work analyzing biological data.
+**MOTIVATION**: Some of these algorithms are useful to have in my daily work analyzing biological data using Python scripts.
+
+**FUTURE PLANS**: Add C++ implementations little-by-little when more speed is needed.
 
 **Key:**
 * J: Java file downloaded from Princeton Algorithm's "Java Algorithms and Clients"
@@ -24,26 +24,26 @@ NOTE: Most Python modules in this repository do not use matplotlib or pylab.
 
 ```
 Key   1 FUNDAMENTALS         Description                      DATA
-:-- ---::------------------- :-----------------------------   :-------------
-...   – BinarySearch         binary search                    tinyW.txt tinyT.txt largeW.txt largeT.txt  
+:-- --: :------------------- :-----------------------------   :-------------
+...   – BinarySearch         binary search                    tinyW.txt tinyT.txt largeW.txt largeT.txt
 ...   – RandomSeq            random numbers in a given range  –
 ...   – Average              average of a sequence of numbers –
-...   – Cat                  concatenate files                in1.txt in2.txt  
-J..   – Knuth                Knuth shuffle                    cards.txt  
+...   – Cat                  concatenate files                in1.txt in2.txt
+J..   – Knuth                Knuth shuffle                    cards.txt
 ...   – Counter              counter                          –
 ...   – StaticSETofInts      set of integers                  –
-...   – Whitelist            whitelist client                 tinyW.txt tinyT.txt largeW.txt largeT.txt  
+...   – Whitelist            whitelist client                 tinyW.txt tinyT.txt largeW.txt largeT.txt
 ...   – Vector               Euclidean vector                 –
 J..   – Date                 date                             –
 ...   – Transaction          transaction                      –
 J..   – Point2D              point                            –
 ...   – Interval1D           1d interval                      –
 ...   – Interval2D           2d interval                      –
-J.. 1.1 ResizingArrayStack   LIFO stack (resizing array)      tobe.txt  
-... 1.2 LinkedStack          LIFO stack (linked list)         tobe.txt  
+J.. 1.1 ResizingArrayStack   LIFO stack (resizing array)      tobe.txt
+... 1.2 LinkedStack          LIFO stack (linked list)         tobe.txt
 JP.   – Stack                LIFO stack                       tobe.txt
-J..   – ResizingArrayQueue   FIFO queue (resizing array)      tobe.txt  
-... 1.3 LinkedQueue          FIFO queue (linked list)         tobe.txt  
+J..   – ResizingArrayQueue   FIFO queue (resizing array)      tobe.txt
+... 1.3 LinkedQueue          FIFO queue (linked list)         tobe.txt
 JP.   – Queue                FIFO queue                       tobe.txt
 J..   – ResizingArrayBag     multiset (resizing array)        –
 ... 1.4 LinkedBag            multiset (linked list)           –
@@ -53,7 +53,7 @@ J..   – Bag                  multiset                         –
 ...   – LinearRegression     simple linear regression         –
 ...   – PolynomialRegression polynomial regression            –
 ...   – ThreeSum             brute-force three sum            1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt
-...   – ThreeSumFast         faster three sum                 1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt  
+...   – ThreeSumFast         faster three sum                 1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt
 ...   – DoublingTest         doubling test                    –
 ...   – DoublingRatio        doubling ratio                   –
 JP.   – QuickFindUF          quick find                       tinyUF.txt mediumUF.txt largeUF.txt
@@ -63,9 +63,9 @@ JP. 1.5 WeightedQuickUnionUF weighted quick union             tinyUF.txt mediumU
 
 
 Key   2 SORTING     Description                       DATA
-:-- ---::---------- :-----------------------------    :-------------
-JP. 2.1 Insertion   insertion sort tiny.txt           words3.txt  
-...   – InsertionX  optimized insertion               sort tiny.txt words3.txt  
+:-- --: :---------- :-----------------------------    :-------------
+JP. 2.1 Insertion   insertion sort tiny.txt          words3.txt
+...   – InsertionX  optimized insertion               sort tiny.txt words3.txt
 JP. 2.2 Selection   selection sort                    –
 J.. 2.3 Shell       shellsort                         –
 ... 2.4 Merge       top-down mergesort                –
@@ -82,122 +82,129 @@ JP. 2.6 MaxPQ       max heap priority queue           tinyPQ.txt
 ...   – Multiway    multiway merge                    m1.txt m2.txt m3.txt
 J.. 2.7 Heap        heapsort                          tiny.txt words3.txt
 
-    3 SEARCHING DATA
-    - ----------------------------------------------------  --------------
-    – FrequencyCounter.py frequency counter tinyTale.txt  tale.txt  leipzig1M.txt  
-    3.1 SequentialSearchST.py sequential search tinyST.txt  
-    3.2 BinarySearchST.py binary search tinyST.txt  
-    3.3 BST.py binary search tree tinyST.txt  
-    3.4 RedBlackBST.py red-black tree tinyST.txt  
-    3.5 SeparateChainingHashST.py separate chaining hash table –
-    3.6 LinearProbingHashST.py linear probing hash table –
-J   – ST.py ordered symbol table –
-    – SET.py ordered set –
-    – DeDup.py remove duplicates tinyTale.txt  
-    – WhiteFilter.py whitelist filter list.txt  tinyTale.txt  
-    – BlackFilter.py blacklist filter list.txt  tinyTale.txt  
-    – LookupCSV.py dictionary lookup ip.csv  DJIA.csv  amino.csv  UPC.csv  
-    – LookupIndex.py index and inverted index aminoI.csv  movies.txt  
-    – FileIndex.py file indexing ex1.txt  ex2.txt  ex3.txt  ex4.txt  
-    – SparseVector.py sparse vector –
 
-... 4 GRAPHS DATA
-... - ----------------------------------------------------  --------------
-... – Graph.py undirected graph tinyG.txt  mediumG.txt  
-... – GraphGenerator.py generate random graphs –
-... – DepthFirstSearch.py depth-first search in a graph tinyG.txt  mediumG.txt  
-... 4.1 DepthFirstPaths.py paths in a graph (DFS) tinyCG.txt  mediumG.txt  largeG.txt  
-... 4.2 BreadthFirstPaths.py paths in a graph (BFS) tinyCG.txt  mediumG.txt  largeG.txt  
-... 4.3 CC.py connected components of a graph tinyG.txt  mediumG.txt  largeG.txt  
-... – Bipartite.py bipartite or odd cycle –
-... – Cycle.py cycle in a graph tinyG.txt  mediumG.txt  largeG.txt  
-... – SymbolGraph.py symbol graph routes.txt  movies.txt  
-... – DegreesOfSeparation.py degrees of separation routes.txt  movies.txt  
-... – Digraph.py directed graph tinyDG.txt  
-... – DigraphGenerator.py generate random digraphs –
-... 4.4 DirectedDFS.py depth-first search in a digraph tinyDG.txt  
-... – DepthFirstDirectedPaths.py paths in a digraph (DFS) tinyDG.txt  mediumDG.txt  
-... – DirectedCycle.py cycle in a digraph tinyDG.txt  tinyDAG.txt  
-... – DepthFirstOrder.py depth-first order in a digraph tinyDG.txt  tinyDAG.txt  
-... 4.5 Topological.py topological order in a DAG jobs.txt  
-... – BreadthFirstDirectedPaths.py paths in a digraph (BFS) tinyDG.txt  mediumDG.txt  
-... – TransitiveClosure.py transitive closure tinyDG.txt  
-... – SymbolDigraph.py symbol digraph –
-... 4.6 KosarajuSharirSCC.py strong components (Kosaraju-Sharir) tinyDG.txt  mediumDG.txt  largeDG.txt  
-... – TarjanSCC.py strong components (Tarjan) tinyDG.txt  mediumDG.txt  largeDG.txt  
-... – GabowSCC.py strong components (Gabow) tinyDG.txt  mediumDG.txt  largeDG.txt  
-... – EdgeWeightedGraph.py edge-weighted graph –
-... – Edge.py weighted edge –
-... – LazyPrimMST.py MST (lazy Prim) tinyEWG.txt  mediumEWG.txt  largeEWG.txt  
-... 4.7 PrimMST.py MST (Prim) tinyEWG.txt  mediumEWG.txt  largeEWG.txt  
-... 4.8 KruskalMST.py MST (Kruskal) tinyEWG.txt  mediumEWG.txt  largeEWG.txt  
-... – BoruvkaMST.py MST (Boruvka) tinyEWG.txt  mediumEWG.txt  largeEWG.txt  
-... – EdgeWeightedDigraph.py edge-weighted digraph tinyEWD.txt  
-... – DirectedEdge.py weighted, directed edge –
-... 4.9 DijkstraSP.py shortest paths (Dijkstra) tinyEWD.txt  mediumEWD.txt  largeEWD.txt  
-... – DijkstraAllPairsSP.py all-pairs shortest paths tinyEWD.txt  mediumEWD.txt  
-... 4.10 AcyclicSP.py shortest paths in a DAG tinyEWDAG.txt  
-... – AcyclicLP.py longest paths in a DAG tinyEWDAG.txt  
-... – CPM.py critical path method jobsPC.txt  
-... 4.11 BellmanFordSP.py shortest paths (Bellman-Ford) tinyEWDn.txt  tinyEWDnc.txt  
-... – EdgeWeightedDirectedCycle.py cycle in an edge-weighted digraph –
-... – Arbitrage.py arbitrage detection rates.txt  
-... – FloydWarshall.py all-pairs shortest paths (dense) tinyEWD.txt  mediumEWD.txt  
-... – AdjMatrixEdgeWeightedDigraph.py edge-weighted graph (dense) tinyEWD.txt  
+Key   3 SEARCHING              Description                  DATA
+:-- --: ---------------------- :--------------------------  :-------------
+...   – FrequencyCounter       frequency counter            tinyTale.txt tale.txt leipzig1M.txt
+... 3.1 SequentialSearchST     sequential search            tinyST.txt
+... 3.2 BinarySearchST         binary search                tinyST.txt
+... 3.3 BST binary             search tree                  tinyST.txt
+... 3.4 RedBlackBST red-black  tree                         tinyST.txt
+... 3.5 SeparateChainingHashST separate chaining hash table –
+... 3.6 LinearProbingHashST    linear probing hash table    –
+J..   – ST                     ordered symbol table         –
+...   – SET                    ordered set                  –
+...   – DeDup                  remove duplicates            tinyTale.txt
+...   – WhiteFilter            whitelist filter             list.txt tinyTale.txt
+...   – BlackFilter            blacklist filter             list.txt tinyTale.txt
+...   – LookupCSV              dictionary lookup            ip.csv  DJIA.csv  amino.csv  UPC.csv
+...   – LookupIndex            index and inverted index     aminoI.csv movies.txt
+...   – FileIndex              file indexing                ex1.txt ex2.txt ex3.txt ex4.txt
+...   – SparseVector           sparse vector                –
 
-Key 5 STRINGS DATA
-... – Alphabet.py alphabet –
-... – Count.py alphabet client abra.txt  pi.txt  
-... 5.1 LSD.py LSD radix sort words3.txt  
-... 5.2 MSD.py MSD radix sort shells.txt  
-... 5.3 Quick3string.py 3-way string quicksort shells.txt  
-... 5.4 TrieST.py multiway trie symbol table shellsST.txt  
-... – TrieSET.py multiway trie set shellsST.txt  
-... 5.5 TST.py ternary search trie shellsST.txt  
-... 5.6 KMP.py Knuth-Morris-Pratt substring search –
-... 5.7 BoyerMoore.py Boyer-Moore substring search –
-... 5.8 RabinKarp.py Rabin-Karp substring search –
-... 5.9 NFA.py NFA for regular expressions –
-... – GREP.py grep –
-... – BinaryDump.py binary dump abra.txt  
-... – HexDump.py hex dump abra.txt  
-... – PictureDump.py picture dump abra.txt  
-... – Genome.py genomic code genomeTiny.txt  genomeVirus.txt  
-... – RunLength.py run-length coding 4runs.bin  q32x48.bin  q64x96.bin  
-... 5.10 Huffman.py Huffman coding tinytinyTale.txt  medTale.txt  tale.txt  
-... 5.11 LZW.py Lempel-Ziv-Welch coding abraLZW.txt  ababLZW.txt  
 
-Key 6 CONTEXT DATA
-... 6.1 CollisionSystem.py collision system brownian.txt  diffusion.txt  
-... – Particle.py particle –
-... 6.2 BTree.py B-tree –
-... 6.3 SuffixArray.py suffix array abra.txt  
-... – SuffixArrayX.py suffix array abra.txt  
-... – LRS.py longest repeated substring tinyTale.txt  mobydick.txt  
-... – KWIK.py keyword in context tale.txt  
-... – LongestCommonSubstring.py longest common substring tale.txt  mobydick.txt  
-... 6.4 FordFulkerson.py max flow / min cut tinyFN.txt  
-... – FlowNetwork.py capacitated network –
-... – FlowEdge.py capacitated edge with flow –
-... – BipartiteMatching.py bipartite matching –
-... – AssignmentProblem.py weighted bipartite matching –
-... – Simplex.py simplex method –
+Key    4 GRAPHS                    Description                         DATA
+:-- ---: :------------------------ :---------------------------------- :---------------------
+...    – Graph                     undirected graph                    tinyG.txt mediumG.txt
+...    – GraphGenerator            generate random graphs              –
+...    – DepthFirstSearch          depth-first search in a graph       tinyG.txt mediumG.txt
+...  4.1 DepthFirstPaths           paths in a graph (DFS)              tinyCG.txt mediumG.txt largeG.txt
+...  4.2 BreadthFirstPaths         paths in a graph (BFS)              tinyCG.txt mediumG.txt largeG.txt
+...  4.3 CC                        connected components of a graph     tinyG.txt mediumG.txt largeG.txt
+...    – Bipartite                 bipartite or odd cycle              –
+...    – Cycle                     cycle in a graph                    tinyG.txt mediumG.txt largeG.txt
+...    – SymbolGraph               symbol graph                        routes.txt movies.txt
+...    – DegreesOfSeparation       degrees of separation               routes.txt movies.txt
+...    – Digraph                   directed graph                      tinyDG.txt
+...    – DigraphGenerator          generate random digraphs            –
+...  4.4 DirectedDFS               depth-first search in a digraph     tinyDG.txt
+...    – DepthFirstDirectedPaths   paths in a digraph (DFS)            tinyDG.txt mediumDG.txt
+...    – DirectedCycle             cycle in a digraph                  tinyDG.txt tinyDAG.txt
+...    – DepthFirstOrder           depth-first order in a digraph      tinyDG.txt tinyDAG.txt
+...  4.5 Topological               topological order in a DAG          jobs.txt
+...    – BreadthFirstDirectedPaths paths in a digraph (BFS)            tinyDG.txt mediumDG.txt
+...    – TransitiveClosure         transitive closure                  tinyDG.txt
+...    – SymbolDigraph             symbol digraph                      –
+...  4.6 KosarajuSharirSCC         strong components (Kosaraju-Sharir) tinyDG.txt mediumDG.txt largeDG.txt
+...    – TarjanSCC                 strong components (Tarjan)          tinyDG.txt mediumDG.txt largeDG.txt
+...    – GabowSCC                  strong components (Gabow)           tinyDG.txt mediumDG.txt largeDG.txt
+...    – EdgeWeightedGraph         edge-weighted graph                 –
+...    – Edge                      weighted edge                       –
+...    – LazyPrimMST               MST (lazy Prim)                     tinyEWG.txt mediumEWG.txt largeEWG.txt
+...  4.7 PrimMST                   MST (Prim)                          tinyEWG.txt mediumEWG.txt largeEWG.txt
+...  4.8 KruskalMST                MST (Kruskal)                       tinyEWG.txt mediumEWG.txt largeEWG.txt
+...    – BoruvkaMST                MST (Boruvka)                       tinyEWG.txt mediumEWG.txt largeEWG.txt
+...    – EdgeWeightedDigraph       edge-weighted digraph               tinyEWD.txt
+...    – DirectedEdge              weighted, directed edge             –
+...  4.9 DijkstraSP                shortest paths (Dijkstra)           tinyEWD.txt mediumEWD.txt largeEWD.txt
+...    – DijkstraAllPairsSP        all-pairs shortest paths            tinyEWD.txt mediumEWD.txt
+... 4.10 AcyclicSP                 shortest paths in a DAG             tinyEWDAG.txt
+...    – AcyclicLP                 longest paths in a DAG              tinyEWDAG.txt
+...    – CPM                       critical path method                jobsPC.txt
+... 4.11 BellmanFordSP             shortest paths (Bellman-Ford)       tinyEWDn.txt tinyEWDnc.txt
+...    – EdgeWeightedDirectedCycle cycle in an edge-weighted digraph   –
+...    – Arbitrage                 arbitrage detection                 rates.txt
+...    – FloydWarshall             all-pairs shortest paths (dense)    tinyEWD.txt mediumEWD.txt
+...    – AdjMatrixEdgeWeightedDigraph edge-weighted graph (dense)      tinyEWD.txt
+
+
+Key    5 STRINGS      Description                         DATA
+:-- ---: :----------- :---------------------------------- :---------------------
+...    – Alphabet     alphabet                            –
+...    – Count        alphabet client                     abra.txt pi.txt
+...  5.1 LSD          LSD radix sort                      words3.txt
+...  5.2 MSD          MSD radix sort                      shells.txt
+...  5.3 Quick3string 3-way string quicksort              shells.txt
+...  5.4 TrieST       multiway trie symbol table          shellsST.txt
+...    – TrieSET      multiway trie set                   shellsST.txt
+...  5.5 TST          ternary search trie                 shellsST.txt
+...  5.6 KMP          Knuth-Morris-Pratt substring search –
+...  5.7 BoyerMoore   Boyer-Moore substring search        –
+...  5.8 RabinKarp    Rabin-Karp substring search         –
+...  5.9 NFA          NFA for regular expressions         –
+...    – GREP         grep                                –
+...    – BinaryDump   binary dump                         abra.txt
+...    – HexDump      hex dump                            abra.txt
+...    – PictureDump  picture dump                        abra.txt
+...    – Genome       genomic code                        genomeTiny.txt genomeVirus.txt
+...    – RunLength    run-length coding                   4runs.bin q32x48.bin q64x96.bin
+... 5.10 Huffman      Huffman coding                      tinytinyTale.txt medTale.txt tale.txt
+... 5.11 LZW          Lempel-Ziv-Welch coding             abraLZW.txt ababLZW.txt
+
+
+Key   6 CONTEXT                Description                 DATA
+:-- --: :--------------------- :-------------------------- :---------------------
+... 6.1 CollisionSystem        collision system            brownian.txt diffusion.txt
+...   – Particle               particle                    –
+... 6.2 BTree                  B-tree                      –
+... 6.3 SuffixArray            suffix array                abra.txt
+...   – SuffixArrayX           suffix array                abra.txt
+...   – LRS                    longest repeated substring  tinyTale.txt mobydick.txt
+...   – KWIK                   keyword in context          tale.txt
+...   – LongestCommonSubstring longest common substring    tale.txt mobydick.txt
+... 6.4 FordFulkerson          max flow / min cut          tinyFN.txt
+...   – FlowNetwork            capacitated network         –
+...   – FlowEdge               capacitated edge with flow  –
+...   – BipartiteMatching      bipartite matching          –
+...   – AssignmentProblem      weighted bipartite matching –
+...   – Simplex                simplex method              –
+
 
 Key   9 BEYOND              Description            DATA
 :-- --: :------------------ :--------------------- :---------------------
 ...   – GaussianElimination Gaussian elimination   –
 ...   – FFT                 Fast Fourier transform –
 ...   – Complex             complex number         –
-J..   – GrahamScan          2d convex hull         rs1423.txt  kw1260.txt  
-...   – FarthestPair        2d farthest pair       rs1423.txt  kw1260.txt  
-...   – ClosestPair         2d closest pair        rs1423.txt  kw1260.txt  
-    
-    
+J..   – GrahamScan          2d convex hull         rs1423.txt kw1260.txt
+...   – FarthestPair        2d farthest pair       rs1423.txt kw1260.txt
+...   – ClosestPair         2d closest pair        rs1423.txt kw1260.txt
+
+
 Standard input and output libraries. We use these standard
 input and output libraries from Introduction to Programming:
 An Interdisciplinary Approach. You can download them all
 together as stdlib.jar.
-    
+
 Key   § PROGRAM      DESCRIPTION / JAVADOC
 :-- --: :----------- :----------------------------------------
 J.. 1.5 StdIn        read numbers and text from standard input
@@ -223,4 +230,4 @@ Additional Java Files:
 * EvaluatePostfix.java
 * UnorderedMaxPQ.java
 
-Bonus Python Files:
+Additional Python Files:
