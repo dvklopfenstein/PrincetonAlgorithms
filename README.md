@@ -5,16 +5,16 @@ by Kevin Wayne, Robert Sedgewick
 
 Implemented in Python 2.7 by D Klopfenstein is selected code from:
 
-  http://algs4.cs.princeton.edu/code/
+  * http://algs4.cs.princeton.edu/code/
 
-PREREQUISITES: python, numpy, pylab, matplotlib, math, sys, os.
+**PREREQUISITES**: python, numpy, pylab, matplotlib, math, sys, os.
 NOTE: Most Python modules in this repository do not use matplotlib or pylab.
 
-FUTURE PLANS: Add C++ implementations little-by-little when more speed is needed.
+**FUTURE PLANS**: Add C++ implementations little-by-little when more speed is needed.
 
-PYTHONPATH: Add the directory: \<your_directory\>/PrincetonAlgorithms/py/
+**PYTHONPATH**: Add the directory: \<your_directory\>/PrincetonAlgorithms/py/
 
-MOTIVATION: Some of these algorithms are useful to have in my daily work analyzing biological data.
+**MOTIVATION**: Some of these algorithms are useful to have in my daily work analyzing biological data.
 
 **Key:**
 * J: Java file downloaded from Princeton Algorithm's "Java Algorithms and Clients"
