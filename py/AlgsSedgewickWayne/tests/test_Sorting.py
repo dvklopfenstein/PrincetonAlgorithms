@@ -79,30 +79,32 @@ class Sorting_Tests(unittest.TestCase):
     res = [0] 
     # Determine sorts for test_data 1 to N-1 
     for i,test_data in enumerate(data[1:-1]):
-      #print test_data
-      R = [H.history_contains( hSelection, test_data ), 
-           H.history_contains( hInsertion, test_data ), 
+      R = [H.history_contains( hInsertion, test_data ), 
+           H.history_contains( hSelection, test_data ), 
            H.history_contains( hShell,     test_data )]
-      # print i, R[0]
-      # print i, R[1]
-      # print i, R[2]
       if   R[0] and not R[1] and not R[2]:
-        res.append(2) # Selection sort
-      elif not R[0] and R[1] and not R[2]:
         res.append(1) # Insertion sort
+      elif not R[0] and R[1] and not R[2]:
+        res.append(2) # Selection sort
       elif not R[0] and not R[1] and R[2]:
         res.append(3) # Shell sort
       else:
         raise Exception("UNKNOWN SORT")
+      print test_data
+      print i+1, res[-1], R[0]
+      print i+1, res[-1], R[1]
+      print i+1, res[-1], R[2]
     # Append 4 for "Sorted"
     res.append(4)
     return res
 
+
   def test_week2_exercise_Q2(self): # Lecture: Quick-Union Improvements 1:22
     # (seed = 709890)
     # The column on the left contains the original input of 16 strings to be sorted;
-    # the column on the right contains the strings in sorted order; the other 6 columns contain the
-    # contents at some intermediate step during one of the elementary sorting algorithms listed below.
+    # the column on the right contains the strings in sorted order; 
+    # the other 6 columns contain the contents at some intermediate 
+    # step during one of the elementary sorting algorithms listed below.
     # 
     strData = """
     gold   aqua   drab   aqua   aqua   gold   aqua   aqua   
@@ -125,8 +127,9 @@ class Sorting_Tests(unittest.TestCase):
     #---   ----   ----   ----   ----   ----   ----   ----   
     #0      ?      ?      ?      ?      ?      ?      4     
     # 
-    # You may use an algorithm more than once. Your answer should be a sequence of 8 integers between
-    # 0 and 4 (starting with 0 and ending with 4) and with each integer separated by a whitespace.
+    # You may use an algorithm more than once. Your answer should be a 
+    # sequence of 8 integers between 0 and 4 (starting with 0 and ending with 4) 
+    # and with each integer separated by a whitespace.
 
     data = self.getData(strData) 
     list_orig   = data[0]   # Original unsorted data
@@ -143,6 +146,45 @@ class Sorting_Tests(unittest.TestCase):
     # Print results 
     print ' '.join(map(str,res))
 
+
+  def test_week2_exercise_Q2a(self): # Lecture: Quick-Union Improvements 1:22
+    # (seed = 213292)
+    #        1      2      3      4      5      6
+    strData = """
+    HOLE   BECK   HOLE   BECK   BECK   HOLE   BECK   BECK   
+    BUSH   BUSH   BUSH   BUSH   BUSH   BUSH   BUSH   BUSH   
+    MIMS   DEVO   EVE6   DEVO   DEVO   DEVO   HOLE   DEVO   
+    BECK   EVE6   BECK   EVE6   HOLE   BECK   MIMS   EVE6   
+    WHAM   HOLE   WHAM   HOLE   MIMS   SADE   NOFX   HOLE   
+    SOAD   JAYZ   SOAD   JAYZ   NOFX   KORN   SOAD   JAYZ   
+    NOFX   NOFX   NOFX   KORN   RATT   EVE6   TOTO   KORN   
+    TOTO   TOTO   TOTO   MIMS   SOAD   MIMS   WHAM   MIMS   
+    VAIN   VAIN   VAIN   VAIN   TOTO   VAIN   VAIN   NOFX   
+    RATT   RATT   RATT   RATT   VAIN   RATT   RATT   PINK   
+    DEVO   MIMS   DEVO   TOTO   WHAM   JAYZ   DEVO   RATT   
+    PINK   PINK   PINK   PINK   PINK   PINK   PINK   SADE   
+    SADE   SADE   SADE   SADE   SADE   WHAM   SADE   SOAD   
+    KORN   KORN   KORN   NOFX   KORN   SOAD   KORN   TOTO   
+    JAYZ   SOAD   JAYZ   SOAD   JAYZ   NOFX   JAYZ   VAIN   
+    EVE6   WHAM   MIMS   WHAM   EVE6   TOTO   EVE6   WHAM   
+    """
+    #---   ----   ----   ----   ----   ----   ----   ----   
+    #0      ?      ?      ?      ?      ?      ?      4     
+
+    data = self.getData(strData) 
+    list_orig   = data[0]   # Original unsorted data
+    list_sorted = data[-1]  # Data sorted
+
+    # Determine which intermediate result could have come from which sort for all data[1:-2]
+    #     0. Original input
+    #     1. Insertion sort
+    #     2. Selection sort
+    #     3. Shellsort (3x + 1 increments)
+    #     4. Sorted
+    res = self.determine_sort( list_orig, data )
+
+    # Print results 
+    print ' '.join(map(str,res))
 
 
 if __name__ == '__main__':

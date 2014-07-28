@@ -17,8 +17,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-
 import sys
+
+def chk(a, txt):
+  b = txt.split()
+  return arrays_equal( a, b )
+
 
 def prt_array_history(array_history):
   """ Prints array history with spaces between elements."""
@@ -31,23 +35,16 @@ def show_array_history(desc, array_history):
     """ Print array history plus histogram bars (viewed horizontally) to help visualize sort."""
     elem2num = get_elem2num(array_history)
     for incr,A in enumerate(array_history):
-      sys.stdout.write('{:2d} {}: {}\n'.format(
-        incr, desc, ' '.join(map(str,A[0]))))
+      sys.stdout.write('{:2d} {}: {}\n'.format(incr, desc, ' '.join(map(str,A[0]))))
       for idx, elem in enumerate(A[0]):
         anno = get_anno(idx, A[1])
-        sys.stdout.write('{:2d} {}({:2d}): {}{} {}\n'.format(
-          incr, desc, idx, anno, elem, ''.join(['*']*elem2num[elem])))
+        sys.stdout.write('{:2d} {}({:2d}): {}{:2} {}\n'.format(
+          incr, desc, idx, anno, elem, ''.join(['*']*elem2num[get_keystr(elem)])))
       sys.stdout.write('\n')
 
 
-def arrays_equal( A, B ):
-  L = len(A)
-  if L != len(B):
-    return False
-  for idx in range(L):
-    if A[idx] != B[idx]:
-      return False
-  return True
+def arrays_equal( a, b ):
+  return len(a)==len(b) and len(a)==sum([1 for i,j in zip(a,b) if i==j])
 
 
 def history_contains( array_history, potential_midpoint ):
@@ -58,19 +55,29 @@ def history_contains( array_history, potential_midpoint ):
   return False
 
 
+def get_keystr(E):
+ if isinstance(E, dict):
+   if len(E)==1:
+     return( str(E.keys()[0]) )
+   else:
+     raise Exception('TIME TO IMPLEMENT MUTIPLE KEYS')
+ else:
+   return E
+
+
 def get_elem2num(array_history):
   """ 1 is assigned to smallest element.  len(arr)+1 is assigned to largest element."""
   # In array_history, last array should be the sorted arrayA
   elem2num = {}
   num = 1
   for elem in array_history[-1][0]:
-    elem2num[elem] = num
+    elem2num[get_keystr(elem)] = num
     num += 1
   return elem2num
 
 
 def get_anno( idx, idx2sym ):
-  if idx not in idx2sym:
+  if idx2sym is None or idx not in idx2sym:
     return ' '
   return idx2sym[idx]
 

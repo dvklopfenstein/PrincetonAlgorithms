@@ -49,7 +49,7 @@
 # PROOF: 05:16 Expect each entry to move halfway back below the diagonal on the average
 # 
 # INSERTION SORT: BEST CASE AND WORST CASE: 06:10
-# BEST CASE 06:12: If the array is in ascneding order, insertion sort makes N-1 compares and 0 exchanges
+# BEST CASE 06:12: If the array is in ascending order, insertion sort makes N-1 compares and 0 exchanges
 #   A E E L , O P R S T X
 # WORST CASE 06:37: If the array is in descending order (and no duplicates),
 #   insertion sort makes ~ 1/2*N^2 compares and ~ 1/2*N^2 exchanges (Slower that Selection sort)
@@ -88,12 +88,12 @@ def Sort(ARR, array_history=None):
         # Exchange the curr Elem with every element to the left that is > 01:21
         while j > 0 and _less(ARR[j], ARR[j-1]): 
             #if array_history is not None: 
-            if isinstance(array_history, list):
-              add_history(array_history, ARR, {j:'*', j-1:'*'} )
+            if isinstance(array_history, list): add_history(array_history, ARR, {j:'*', j-1:'*'} )
             _exch(ARR, j, j-1)
             j -= 1
         assert _isSorted(ARR, 0, i)
     assert _isSorted(ARR);
+    if isinstance(array_history, list): add_history(array_history, ARR, None )
 
 #  #*
 #  # Rearranges the array in ascending order, using a comparator.

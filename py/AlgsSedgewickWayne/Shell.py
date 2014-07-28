@@ -69,8 +69,14 @@
 # sequence) make on an input array that is *already sorted*?
 # ANSWER: linearithmic (look at table above)
 # EXPLANATION: Since successive increment values of h differ by at least a 
-# a facror of 3, there are ~log_3(N) increment values. For each increment
+# a factor of 3, there are ~log_3(N) increment values. For each increment
 # value h, the array is alreasy h-sorted so it will make ~ N compares.
+
+# QUESTION: The number of compares to Shellsort (with Knuth's 3x+1 
+# increments) a sorted array of N distinct keys is ~ N log_3 N.
+# ANSWER(False): Each pass uses approximately N compares.
+# There are ~ log_3 N passes because the increments go up by
+# (roughly) a factor of 3
 
 
 #************************************************************************
@@ -137,6 +143,8 @@ def Sort(ARR, array_history=None):
         assert _isHsorted(ARR, h) 
         h /= 3
     assert _isSorted(ARR)
+    if array_history is not None:
+      add_history(array_history, ARR, None )
 
 
 #**********************************************************************

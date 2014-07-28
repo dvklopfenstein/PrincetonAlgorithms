@@ -2,14 +2,11 @@
 
 import unittest
 from AlgsSedgewickWayne.Queue import *
+import AlgsSedgewickWayne.ArrayHistory as H
 
 class Queue_Tests(unittest.TestCase):
   import Queue
   """ Tests Queue."""
-
-  def chk(self, a, txt):
-    b = txt.split()
-    return len(a)==len(b) and len(a)==sum([1 for i,j in zip(a,b) if i==j])
 
   def test_wk2_ex_Queues_608030(self):
     # Question 2
@@ -21,19 +18,19 @@ class Queue_Tests(unittest.TestCase):
     # sequence(s) could occur?
     # r = run("0 1 2 3 4 5 6 7 8 9")
     r = run("0 - 1 2 - 3 4 5 6 7 8 9")
-    #self.failUnless( self.chk(r, "0 2 1 3 7 4 9 6 8 5") )
+    #self.failUnless( H.chk(r, "0 2 1 3 7 4 9 6 8 5") )
 
     r = run("0 1 2 - - - 3 4 5 - 6 - - 7 8 9")
-    #self.failUnless( self.chk(r, "0 1 2 5 6 4 8 9 3 7") )
+    #self.failUnless( H.chk(r, "0 1 2 5 6 4 8 9 3 7") )
 
     r = run("0 1 2 3 4 5 6 7 8 9 - - - - - - - - - -")
-    self.failUnless( self.chk(r, "0 1 2 3 4 5 6 7 8 9") )
+    self.failUnless( H.chk(r, "0 1 2 3 4 5 6 7 8 9") )
 
     r = run("0 - 1 2 3 4 5 6 7 8 9")
-    #self.failUnless( self.chk(r, "0 7 4 1 8 3 6 2 9 5") )
+    #self.failUnless( H.chk(r, "0 7 4 1 8 3 6 2 9 5") )
 
     r = run("0 - 1 2 3 4 5 6 7 8 9")
-    #self.failUnless( self.chk(r, "0 4 5 1 8 6 2 3 9 7") )
+    #self.failUnless( H.chk(r, "0 4 5 1 8 6 2 3 9 7") )
 
   def test_wk2_ex_Queues_511394(self):
     # (seed = 511394)
@@ -43,11 +40,11 @@ class Queue_Tests(unittest.TestCase):
     # print out the return value. Which of the following output
     # sequence(s) could occur?
     r = run("0 1 - - 2 3 4 - 5 6 7 8 9")
-    #self.failUnless( self.chk(r, "0 1 4 9 6 8 5 2 7 3") )
-    #self.failUnless( self.chk(r, "0 1 2 3 4 5 8 9 6 7") )
-    #self.failUnless( self.chk(r, "0 1 2 4 8 6 5 9 7 3") )
-    #self.failUnless( self.chk(r, "0 1 2 3 4 7 6 8 5 9") )
-    #self.failUnless( self.chk(r, "0 1 2 3 4 5 6 7 8 9") )
+    #self.failUnless( H.chk(r, "0 1 4 9 6 8 5 2 7 3") )
+    #self.failUnless( H.chk(r, "0 1 2 3 4 5 8 9 6 7") )
+    #self.failUnless( H.chk(r, "0 1 2 4 8 6 5 9 7 3") )
+    #self.failUnless( H.chk(r, "0 1 2 3 4 7 6 8 5 9") )
+    #self.failUnless( H.chk(r, "0 1 2 3 4 5 6 7 8 9") )
 
 if __name__ == '__main__':
   unittest.main()

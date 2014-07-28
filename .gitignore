@@ -5,6 +5,14 @@ thirdparty/percolation.zip
 py/AlgsSedgewickWayne/Percolation.py
 py/AlgsSedgewickWayne/PercolationStats.py
 
+# Programming Assignment 2
+thirdparty/Deque.java
+py/AlgsSedgewickWayne/Deque.py
+thirdparty/RandomizedQueue.java
+py/AlgsSedgewickWayne/RandomizedQueue.py
+thirdparty/Subset.java
+py/AlgsSedgewickWayne/Subset.py
+thirdparty/queues.zip
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
