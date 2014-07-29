@@ -22,56 +22,85 @@
  #  
  #************************************************************************/
 
- #*
- #  The <tt>Merge</tt> class provides static methods for sorting an
- #  array using mergesort.
- #  <p>
- #  For additional documentation, see <a href="http:#algs4.cs.princeton.edu/22mergesort">Section 2.2</a> of
- #  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- #  For an optimized version, see {@link MergeX}.
- #
- #  @author Robert Sedgewick
- #  @author Kevin Wayne
- #/
+# 00:11
+# MERGESORT: ONE OF TWO CLASSIC SORTING ALGORITHMS
+# CRITICAL COMPONENTS IN THE WORLD'S COMPUTATIONAL INFRASTRUCTURE.A
+# * Full scientific understanding of their propoerties has enables us
+#   to develop them into practical system sorts.
+# * Quicksort honored as one of top 1 algorithms of 20th century
+#   in science and engineering.
+# 
+# 00:39 MERGESORT
+# * Java sort for objects.
+# * Perl, C++ stable sort, Python stable sort, Firefox JavaScript, ...
+
+# 01:27 MERGESORT
+# BASIC PLAN
+# * Divide array into two halves.
+# * **Recursively** sort each half.
+# * Merge two halves.
+# 
+# John von Neumann credited with the invention of Mergesort.
+
+# 01:49-04:24 ABSTRACT IN-PLACE MERGE DEMO
+# GOAL: Given two sorted subarrays a[lo] to a[mid] and a[mid+1] to a[hi],
+#   replace with sorted subarray a[lo] to a[hi]
+
+# 10:58 MERGESORT: TRACE
+# 11:16 MERGESORT: ANNIMATE
+
+# 11:50 MERGESORT is just as fast in reverse order as in arbitrary order
+
+
+
+#*
+#  The <tt>Merge</tt> class provides static methods for sorting an
+#  array using mergesort.
+#  <p>
+#  For additional documentation, see <a href="http:#algs4.cs.princeton.edu/22mergesort">Section 2.2</a> of
+#  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+#  For an optimized version, see {@link MergeX}.
+#
+#  @author Robert Sedgewick
+#  @author Kevin Wayne
+#/
 
 # stably merge a[lo .. mid] with a[mid+1 ..hi] using aux[lo .. hi]
- def _merge(a, aux, lo, mid, hi):
+def _merge(a, aux, lo, mid, hi): # 05:00-06:00
 
-    # precondition: a[lo .. mid] and a[mid+1 .. hi] are sorted subarrays
-    assert isSorted(a, lo, mid)
-    assert isSorted(a, mid+1, hi)
+   assert _isSorted(a, lo, mid)    # precondition: a[lo .. mid]   are sorted subarrays
+   assert _isSorted(a, mid+1, hi)  # precondition: a[mid+1 .. hi] are sorted subarrays
 
-    # copy to aux[]
-    for k in range(lo, hi+1):
-        aux[k] = a[k]
+   # copy to aux[]
+   for k in range(lo, hi+1):
+       aux[k] = a[k]
 
-    # merge back to a[]
-    int i = lo, j = mid+1;
-    for k in range (lo, hi+1):
-        if      i > mid:              a[k] = aux[j++]; j += 1  # this copying is unnecessary
-        else if j > hi:               a[k] = aux[i++]; i += 1
-        else if less(aux[j], aux[i]): a[k] = aux[j++]; j += 1
-        else                          a[k] = aux[i++]; i += 1
+   # merge back to a[] in sorted order
+   i = lo     # index of sorted a[lo .. mid]   ( left-half)
+   j = mid+1  # index of sorted a[mid+1 .. hi] (right-half)
+   for k in range(lo, hi+1): # k is current entry in the sorted result
+       if      i > mid:              a[k] = aux[j]; j += 1 # this copying is unnecessary
+       else if j > hi:               a[k] = aux[i]; i += 1 # j ptr is exhausted
+       else if less(aux[j], aux[i]): a[k] = aux[j]; j += 1
+       else                          a[k] = aux[i]; i += 1
 
-    # postcondition: a[lo .. hi] is sorted
-    assert isSorted(a, lo, hi)
+   assert _isSorted(a, lo, hi) # postcondition: a[lo .. hi] is sorted
 
 # mergesort a[lo..hi] using auxiliary array aux[lo..hi]
-def _sort(a, aux, lo, hi):
+def _sort(a, aux, lo, hi): # 09:07-
     if hi <= lo: return
     mid = lo + (hi - lo) / 2
-    _sort(a, aux, lo, mid)
-    _sort(a, aux, mid + 1, hi)
-    _merge(a, aux, lo, mid, hi)
+    _sort(a, aux, lo, mid)      # sort the 1st half (left)
+    _sort(a, aux, mid + 1, hi)  # sort the 2nd half (right)
+    _merge(a, aux, lo, mid, hi) # merge sorted halves together
 
- #*
- # Rearranges the array in ascending order, using the natural order.
- # @param a the array to be sorted
- #/
-def Sort(a):
+# Rearranges the array in ascending order, using the natural order.
+# @param a the array to be sorted
+def Sort(a): # 09:30
+    # Do not create array in recursive _sort routine to avoid extensive cost of extra array production
     aux = new Comparable[len(a)]
     _sort(a, aux, 0, a.length-1)
-    assert isSorted(a)
+    assert _isSorted(a)
 
 
 #**********************************************************************
@@ -83,9 +112,9 @@ def _less(v, w): v < w
     
 # exchange a[i] and a[j]
 def _exch(a, i, j):
-    swap = a[i]
-    a[i] = a[j]
-    a[j] = swap
+  swap = a[i]
+  a[i] = a[j]
+  a[j] = swap
 
 
 #**********************************************************************
