@@ -71,7 +71,7 @@ JP. 2.3 Shell       shellsort                         –
 JP. 2.4 Merge       top-down mergesort                –
 JP.   – MergeBU     bottom-up mergesort               –
 JP.   – MergeX      optimized mergesort               –
-J.. 2.5 Quick       quicksort                         –
+JP. 2.5 Quick       quicksort                         –
 ...   – Quick3way   quicksort with 3-way partitioning –
 ...   – QuickX      optimized quicksort               –
 ...   – TopM        priority queue client i           tinyBatch.txt

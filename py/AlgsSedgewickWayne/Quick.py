@@ -52,17 +52,18 @@
 
 # Rearranges the array in ascending order, using the natural order.
 # @param a the array to be sorted
-def Sort(a):
-  StdRandom.shuffle(a);
-  _sort(a, 0, a.length - 1);
+def Sort(a, array_history=None):
+  import random
+  random.shuffle(a)  # TBD... Really????
+  _sort(a, 0, len(a) - 1)
 
 # quicksort the subarray from a[lo] to a[hi]
 def _sort(a, lo, hi):
   if hi <= lo: return;
-  j = partition(a, lo, hi)
+  j = _partition(a, lo, hi)
   _sort(a, lo, j-1)
   _sort(a, j+1, hi)
-  assert isSorted(a, lo, hi)
+  assert _isSorted(a, lo, hi)
 
 # partition the subarray a[lo..hi] so that a[lo..j-1] <= a[j] <= a[j+1..hi]
 # and return the index j.
@@ -73,12 +74,16 @@ def _partition(a, lo, hi):
   while True:
 
       # find item on lo to swap
-      while _less(a[++i], v):
-          if (i == hi) break
+      i += 1
+      while _less(a[i], v):
+          if i == hi: break
+          i += 1
 
       # find item on hi to swap
-      while _less(v, a[--j]):
+      j -= 1
+      while _less(v, a[j]):
           if j == lo: break      # redundant since a[lo] acts as sentinel
+          j -= 1
 
       # check if pointers cross
       if i >= j: break;
@@ -107,9 +112,9 @@ def Select(a, k):
   hi = len(a) - 1
   while hi > lo:
       i = _partition(a, lo, hi)
-      if      i > k: hi = i - 1
-      else if i < k: lo = i + 1
-      else return a[i]
+      if   i > k: hi = i - 1
+      elif i < k: lo = i + 1
+      else: return a[i]
   return a[lo]
 
 
@@ -136,7 +141,7 @@ def _isSorted(a, lo=None, hi=None):
     lo = 0
     hi = len(a)
   for i in range(lo + 1, hi+1):
-      if (_less(a[i], a[i-1])) return False
+      if _less(a[i], a[i-1]): return False
   return True
 
 
@@ -161,5 +166,5 @@ def main():
   print ' '.join(ARR)
 
 
-# Copyright © 2002–2010, Robert Sedgewick and Kevin Wayne. 
+# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne. 
 # Last updated: Thu Oct 10 11:43:17 EDT 2013.G0
