@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import unittest
-from AlgsSedgewickWayne.Quick import *
+from AlgsSedgewickWayne.QuickX import *
 from AlgsSedgewickWayne.ArrayHistory import *
 
 import random
@@ -12,7 +12,7 @@ class Merge_Tests(unittest.TestCase):
     # (seed = 183182)
     # Give the array that results after the first 4 exchanges when
     # selection sorting the following array:
-    desc = 'QUICKSORT'
+    desc = 'QUICKX'
     a = map(int, "13 16 40 60 19 70 71 47 12 67".split() )
     array_history = []
     Sort(a, array_history)

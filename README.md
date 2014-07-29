@@ -72,8 +72,8 @@ JP. 2.4 Merge       top-down mergesort                –
 JP.   – MergeBU     bottom-up mergesort               –
 JP.   – MergeX      optimized mergesort               –
 JP. 2.5 Quick       quicksort                         –
-...   – Quick3way   quicksort with 3-way partitioning –
-...   – QuickX      optimized quicksort               –
+JP.   – Quick3way   quicksort with 3-way partitioning –
+JP.   – QuickX      optimized quicksort               –
 ...   – TopM        priority queue client i           tinyBatch.txt
 JP. 2.6 MaxPQ       max heap priority queue           tinyPQ.txt
 ...   – MinPQ       min heap priority queue           tinyPQ.txt
