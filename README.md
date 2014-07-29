@@ -68,9 +68,9 @@ JP. 2.1 Insertion   insertion sort tiny.txt          words3.txt
 ...   – InsertionX  optimized insertion               sort tiny.txt words3.txt
 JP. 2.2 Selection   selection sort                    –
 JP. 2.3 Shell       shellsort                         –
-J.. 2.4 Merge       top-down mergesort                –
-...   – MergeBU     bottom-up mergesort               –
-...   – MergeX      optimized mergesort               –
+JP. 2.4 Merge       top-down mergesort                –
+J..   – MergeBU     bottom-up mergesort               –
+J..   – MergeX      optimized mergesort               –
 J.. 2.5 Quick       quicksort                         –
 ...   – Quick3way   quicksort with 3-way partitioning –
 ...   – QuickX      optimized quicksort               –
