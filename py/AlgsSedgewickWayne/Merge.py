@@ -178,53 +178,52 @@
 #/
 
 # stably merge a[lo .. mid] with a[mid+1 ..hi] using aux[lo .. hi]
-def _merge(a, aux, lo, mid, hi): # 05:00-06:00
+def _merge_init(a, aux, lo, mid, hi): # 05:00-06:00
+  assert _isSorted(a, lo, mid)    # precondition: a[lo .. mid]   are sorted subarrays
+  assert _isSorted(a, mid+1, hi)  # precondition: a[mid+1 .. hi] are sorted subarrays
 
-   assert _isSorted(a, lo, mid)    # precondition: a[lo .. mid]   are sorted subarrays
-   assert _isSorted(a, mid+1, hi)  # precondition: a[mid+1 .. hi] are sorted subarrays
+  # copy to aux[]
+  for k in range(lo, hi+1):
+      aux[k] = a[k]
 
-   # copy to aux[]
-   for k in range(lo, hi+1):
-       aux[k] = a[k]
+  # merge back to a[] in sorted order
+  i = lo     # index of sorted a[lo .. mid]   ( left-half)
+  j = mid+1  # index of sorted a[mid+1 .. hi] (right-half)
+  for k in range(lo, hi+1): # k is current entry in the sorted result
+      if   i > mid:               a[k] = aux[j]; j += 1 # this copying is unnecessary
+      elif j > hi:                a[k] = aux[i]; i += 1 # j ptr is exhausted
+      elif _less(aux[j], aux[i]): a[k] = aux[j]; j += 1
+      else:                       a[k] = aux[i]; i += 1
 
-   # merge back to a[] in sorted order
-   i = lo     # index of sorted a[lo .. mid]   ( left-half)
-   j = mid+1  # index of sorted a[mid+1 .. hi] (right-half)
-   for k in range(lo, hi+1): # k is current entry in the sorted result
-       if      i > mid:              a[k] = aux[j]; j += 1 # this copying is unnecessary
-       else if j > hi:               a[k] = aux[i]; i += 1 # j ptr is exhausted
-       else if _less(aux[j], aux[i]): a[k] = aux[j]; j += 1
-       else                          a[k] = aux[i]; i += 1
-
-   assert _isSorted(a, lo, hi) # postcondition: a[lo .. hi] is sorted
+  assert _isSorted(a, lo, hi) # postcondition: a[lo .. hi] is sorted
 
 # mergesort a[lo..hi] using auxiliary array aux[lo..hi]
-def _sort(a, aux, lo, hi): # 09:07-
-    # 20:47 MERGESORT PRACTICAL IMPROVEMENTS
-    # * Mergesort is too complicated for tiny arrays)
-    # * Recursive nature of sort means that there will be lots of sub-arrays to be sorted.
-    if hi <= lo: return
-    #CUTOFF = 7
-    #if hi <= lo + CUTOFF - 1:
-    #  import Insertion
-    #  Insertion.Sort(a, lo, hi) # Simple and efficient for small sub-arrays
-    #  return
+def _sort_init(a, aux, lo, hi): # 09:07-
+  # 20:47 MERGESORT PRACTICAL IMPROVEMENTS
+  # * Mergesort is too complicated for tiny arrays)
+  # * Recursive nature of sort means that there will be lots of sub-arrays to be sorted.
+  if hi <= lo: return
+  #CUTOFF = 7
+  #if hi <= lo + CUTOFF - 1:
+  #  import Insertion
+  #  Insertion.Sort(a, lo, hi) # Simple and efficient for small sub-arrays
+  #  return
 
-    mid = lo + (hi - lo) / 2
-    _sort(a, aux, lo, mid)      # sort the 1st half (left)
-    _sort(a, aux, mid + 1, hi)  # sort the 2nd half (right)
-    # 21:51 IMPROVEMENT: Stop if already sorted
-    # if a[mid] <= a[mid+1]: return  TBD use _less
-    _merge(a, aux, lo, mid, hi) # merge sorted halves together
+  mid = lo + (hi - lo) / 2
+  _sort_init(a, aux, lo, mid)      # sort the 1st half (left)
+  _sort_init(a, aux, mid + 1, hi)  # sort the 2nd half (right)
+  # 21:51 IMPROVEMENT: Stop if already sorted
+  # if a[mid] <= a[mid+1]: return  TBD use _less
+  _merge_init(a, aux, lo, mid, hi) # merge sorted halves together
 
 # Rearranges the array in ascending order, using the natural order.
 # @param a the array to be sorted
-def Sort(a): # 09:30
-    # Do not create array in recursive _sort routine to avoid extensive 
-    # cost of extra array production
-    aux = new Comparable[len(a)]
-    _sort(a, aux, 0, a.length-1)
-    assert _isSorted(a)
+def Sort(a, array_history=None): # 09:30
+  # Do not create array in recursive _sort routine to avoid extensive 
+  # cost of extra array production
+  aux = [None for i in range(len(a))]
+  _sort_init(a, aux, 0, len(a)-1)
+  assert _isSorted(a)
 
 
 #**********************************************************************
@@ -232,7 +231,7 @@ def Sort(a): # 09:30
 #**********************************************************************/
 
 # is v < w ?
-def _less(v, w): v < w
+def _less(v, w): return v < w
     
 # exchange a[i] and a[j]
 def _exch(a, i, j):
@@ -245,12 +244,12 @@ def _exch(a, i, j):
 #  Check if array is sorted - useful for debugging
 #**********************************************************************/
 def _isSorted(a, lo=None, hi=None):
-    if lo is None and hi is None:
-      lo = 0
-      hi = len(a)
-    for i range(lo + 1, hi+1):
-        if (_less(a[i], a[i-1])) return False
-    return True
+  if lo is None and hi is None:
+    lo = 0
+    hi = len(a) - 1
+  for i in range(lo + 1, hi+1):
+    if (_less(a[i], a[i-1])): return False
+  return True
 
 
 #**********************************************************************
@@ -259,46 +258,43 @@ def _isSorted(a, lo=None, hi=None):
 # stably merge a[lo .. mid] with a[mid+1 .. hi] using aux[lo .. hi]
 def _merge(a, index, aux, lo, mid, hi):
 
-    # copy to aux[]
-    for k in range(lo, hi+1):
-        aux[k] = index[k]
+  # copy to aux[]
+  for k in range(lo, hi+1):
+    aux[k] = index[k]
 
-    # merge back to a[]
-    int i = lo, j = mid+1;
-    for k in range(lo, hi+1):
-        if      i > mid:                     index[k] = aux[j]; j += 1
-        else if j > hi:                      index[k] = aux[i]; i += 1
-        else if _less(a[aux[j]], a[aux[i]]): index[k] = aux[j]; j += 1
-        else                                 index[k] = aux[i]; i += 1
+  # merge back to a[]
+  i = lo 
+  j = mid+1
+  for k in range(lo, hi+1):
+    if   i > mid:                     index[k] = aux[j]; j += 1
+    elif j > hi:                      index[k] = aux[i]; i += 1
+    elif _less(a[aux[j]], a[aux[i]]): index[k] = aux[j]; j += 1
+    else:                             index[k] = aux[i]; i += 1
 
- #*
- # Returns a permutation that gives the elements in the array in ascending order.
- # @param a the array
- # @return a permutation <tt>p[]</tt> such that <tt>a[p[0]]</tt>, <tt>a[p[1]]</tt>,
- #    ..., <tt>a[p[N-1]]</tt> are in ascending order
- #/
+# Returns a permutation that gives the elements in the array in ascending order.
+# @param a the array
+# @return a permutation <tt>p[]</tt> such that <tt>a[p[0]]</tt>, <tt>a[p[1]]</tt>,
+#    ..., <tt>a[p[N-1]]</tt> are in ascending order
 def indexSort(a):
-    N = len(a)
-    index = [None for i in range(N)]
-    for i in range(N):
-        index[i] = i
+  N = len(a)
+  index = [None for i in range(N)]
+  for i in range(N):
+      index[i] = i
 
-    aux = [None for i in range(N)]
-    _sort(a, index, aux, 0, N-1)
-    return index;
+  aux = [None for i in range(N)]
+  _sort(a, index, aux, 0, N-1)
+  return index
 
 # mergesort a[lo..hi] using auxiliary array aux[lo..hi]
 def _sort(a, index, aux, lo, hi):
-    if (hi <= lo) return;
-    mid = lo + (hi - lo) / 2;
-    _sort(a, index, aux, lo, mid);
-    _sort(a, index, aux, mid + 1, hi)
-    merge(a, index, aux, lo, mid, hi)
+  if hi <= lo: return
+  mid = lo + (hi - lo) / 2;
+  _sort(a, index, aux, lo, mid)
+  _sort(a, index, aux, mid + 1, hi)
+  merge(a, index, aux, lo, mid, hi)
 
-#*
 # Reads in a sequence of strings from standard input; mergesorts them; 
 # and prints them to standard output in ascending order. 
-#/
 def main():
   import InputArgs
   a = InputArgs.getStrArray()
@@ -310,5 +306,5 @@ if __name__ == '__main__':
   main()
 
 
-# Copyright © 2002–2010, Robert Sedgewick and Kevin Wayne. 
-# Last updated: Fri Feb 14 17:45:37 EST 2014.
+# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne. 
+# Last updated: Fri Feb 14 17:45:37 EST 2014
