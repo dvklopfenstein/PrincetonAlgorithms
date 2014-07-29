@@ -27,33 +27,31 @@
  #
  #************************************************************************/
 
-00:11 
-MERGESORT: ONE OF TWO CLASSIC SORTING ALGORITHMS
-CRITICAL COMPONENTS IN THE WORLD'S COMPUTATIONAL INFRASTRUCTURE.A
-* Full scientific understanding of their propoerties has enables us
-  to develop them into practical system sorts.
-* Quicksort honored as one of top 1 algorithms of 20th century
-  in science and engineering.
-
-00:49 QUICKSORT
-* Java sort for primitive types.
-* C qsort, Unix, Visual C++, Python, Matlab, Chrome JavaScript, ...
-
- #*
- #  The <tt>Quick</tt> class provides static methods for sorting an
- #  array and selecting the ith smallest element in an array using quicksort.
- #  <p>
- #  For additional documentation, see <a href="http:#algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
- #  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- #
- #  @author Robert Sedgewick
- #  @author Kevin Wayne
- #/
+# 00:11 
+# MERGESORT: ONE OF TWO CLASSIC SORTING ALGORITHMS
+# CRITICAL COMPONENTS IN THE WORLD'S COMPUTATIONAL INFRASTRUCTURE.A
+# * Full scientific understanding of their propoerties has enables us
+#   to develop them into practical system sorts.
+# * Quicksort honored as one of top 1 algorithms of 20th century
+#   in science and engineering.
+# 
+# 00:49 QUICKSORT
+# * Java sort for primitive types.
+# * C qsort, Unix, Visual C++, Python, Matlab, Chrome JavaScript, ...
 
 #*
+#  The <tt>Quick</tt> class provides static methods for sorting an
+#  array and selecting the ith smallest element in an array using quicksort.
+#  <p>
+#  For additional documentation, see <a href="http:#algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
+#  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+#
+#  @author Robert Sedgewick
+#  @author Kevin Wayne
+#/
+
 # Rearranges the array in ascending order, using the natural order.
 # @param a the array to be sorted
-#/
 def Sort(a):
   StdRandom.shuffle(a);
   _sort(a, 0, a.length - 1);

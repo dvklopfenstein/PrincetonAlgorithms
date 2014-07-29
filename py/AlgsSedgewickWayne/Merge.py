@@ -206,7 +206,7 @@ def _merge_init(a, aux, lo, mid, hi): # 05:00-06:00
 
 # mergesort a[lo..hi] using auxiliary array aux[lo..hi]
 def _sort_init(a, aux, lo, hi): # 09:07-
-  # 20:47 MERGESORT PRACTICAL IMPROVEMENTS
+  # 20:47 MERGESORT PRACTICAL IMPROVEMENTS (**SEE MergeX.py for code containing improvements)
   # * Mergesort is too complicated for tiny arrays)
   # * Recursive nature of sort means that there will be lots of sub-arrays to be sorted.
   if hi <= lo: return
@@ -314,4 +314,4 @@ if __name__ == '__main__':
 
 
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne. 
-# Last updated: Fri Feb 14 17:45:37 EST 2014
+# Based on java which was Last updated: Fri Feb 14 17:45:37 EST 2014
