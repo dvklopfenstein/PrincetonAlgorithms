@@ -41,7 +41,7 @@ J..   – Point2D              point                            –
 ...   – Interval2D           2d interval                      –
 J.. 1.1 ResizingArrayStack   LIFO stack (resizing array)      tobe.txt
 ... 1.2 LinkedStack          LIFO stack (linked list)         tobe.txt
-JP.   – [Stack](https://github.com/dklopfenstein/PrincetonAlgorithms/tree/master/py/AlgsSedgewickWayne/Stack.py]                LIFO stack                       tobe.txt
+JP.   – Stack                LIFO stack                       tobe.txt
 J..   – ResizingArrayQueue   FIFO queue (resizing array)      tobe.txt
 ... 1.3 LinkedQueue          FIFO queue (linked list)         tobe.txt
 JP.   – Queue                FIFO queue                       tobe.txt
