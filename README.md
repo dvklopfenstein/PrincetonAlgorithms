@@ -76,7 +76,7 @@ JP.   – Quick3way   quicksort with 3-way partitioning –
 JP.   – QuickX      optimized quicksort               –
 ...   – TopM        priority queue client i           tinyBatch.txt
 JP. 2.6 MaxPQ       max heap priority queue           tinyPQ.txt
-...   – MinPQ       min heap priority queue           tinyPQ.txt
+J..   – MinPQ       min heap priority queue           tinyPQ.txt
 ...   – IndexMinPQ  index min heap priority queue     –
 ...   – IndexMaxPQ  index max heap priority queue     –
 ...   – Multiway    multiway merge                    m1.txt m2.txt m3.txt
