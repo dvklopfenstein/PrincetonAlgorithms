@@ -88,7 +88,7 @@ Key   3 SEARCHING              Description                  DATA
 ...   – FrequencyCounter       frequency counter            tinyTale.txt tale.txt leipzig1M.txt
 ... 3.1 SequentialSearchST     sequential search            tinyST.txt
 ... 3.2 BinarySearchST         binary search                tinyST.txt
-... 3.3 BST binary             search tree                  tinyST.txt
+J.. 3.3 BST binary             search tree                  tinyST.txt
 ... 3.4 RedBlackBST red-black  tree                         tinyST.txt
 ... 3.5 SeparateChainingHashST separate chaining hash table –
 ... 3.6 LinearProbingHashST    linear probing hash table    –
