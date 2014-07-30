@@ -41,7 +41,7 @@ J..   – Point2D              point                            –
 ...   – Interval2D           2d interval                      –
 J.. 1.1 ResizingArrayStack   LIFO stack (resizing array)      tobe.txt
 ... 1.2 LinkedStack          LIFO stack (linked list)         tobe.txt
-JP.   – Stack                LIFO stack                       tobe.txt
+JP.   – [Stack](https://github.com/dklopfenstein/PrincetonAlgorithms/tree/master/py/AlgsSedgewickWayne/Stack.py]                LIFO stack                       tobe.txt
 J..   – ResizingArrayQueue   FIFO queue (resizing array)      tobe.txt
 ... 1.3 LinkedQueue          FIFO queue (linked list)         tobe.txt
 JP.   – Queue                FIFO queue                       tobe.txt
@@ -64,7 +64,7 @@ JP. 1.5 WeightedQuickUnionUF weighted quick union             tinyUF.txt mediumU
 
 Key   2 SORTING     Description                       DATA
 :-- --: :---------- :-----------------------------    :-------------
-JP. 2.1 Insertion   insertion sort tiny.txt          words3.txt
+JP. 2.1 Insertion   insertion sort tiny.txt           words3.txt
 ...   – InsertionX  optimized insertion               sort tiny.txt words3.txt
 JP. 2.2 Selection   selection sort                    –
 JP. 2.3 Shell       shellsort                         –
