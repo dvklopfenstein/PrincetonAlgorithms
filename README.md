@@ -3,14 +3,14 @@ Princeton University's "Algorithms and Clients"
 by Kevin Wayne, Robert Sedgewick
 --------------------------------
 
-Implemented in Python 2.7 by D Klopfenstein is selected code from:
+Implemented in Python 2.7.x by D Klopfenstein is selected code from:
 
   * http://algs4.cs.princeton.edu/code/
 
 **PREREQUISITES**: python, numpy, pylab, matplotlib, math, sys, os.
 *NOTE*: Most Python modules in this repository do not use matplotlib or pylab.
 
-**PYTHONPATH**: Add the directory: \<your_directory\>/PrincetonAlgorithms/py/
+**PYTHONPATH**: Add the directory: \<your_directory\>/PrincetonAlgorithms/py/AlgsSedgewickWayne/
 
 **MOTIVATION**: Some of these algorithms are useful to have in my daily work analyzing biological data using Python scripts.
 

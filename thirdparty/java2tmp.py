@@ -8,10 +8,10 @@ def main():
   fin  = get_fin()
   fout = get_fout( fin )
   FOUT = sys.stdout if fout is None else open(fout, 'w')
+  FOUT.write("#!/usr/bin/env python")
   with open(fin) as FIN:
     for line in FIN:
       if chk_com(FOUT, r'^(\s*)\/\*(.*)$', line): continue
-      if chk_com(FOUT, r'^(\s*)\/\/(.*)$', line): continue
       if chk_com(FOUT, r'^(\s*)\*(.*)$',   line): continue
       if chk_end(FOUT, line): continue
       line = chk_if(FOUT, line)
@@ -21,10 +21,20 @@ def main():
       line = line.replace('Comparable ', '')
       line = line.replace('Object[] ', '')
       line = line.replace('Object', '')
+      line = line.replace('Key[] ', '')
+      line = line.replace('Key', '')
+      line = line.replace('Node[] ', '')
+      line = line.replace('Node', '')
+      line = line.replace(r'//', '#')
+      line = line.replace(r'&&', 'and')
+      line = line.replace(r'||', 'or')
+      line = line.replace(r'throw', 'raise')
+      line = line.replace(r'null', 'None')
       line = chk_semi(FOUT, line)
       line = chk_start(FOUT, line)
       line = chk_private(FOUT, line)
       line = chk_public(FOUT, line)
+      line = chk_else(FOUT, line)
       line = re.sub(r'([a-zA-Z0-9]+)\.length', r'len(\1)', line)
       line = line.replace(' int ',' ')
       line = line.replace('else if','elif')
@@ -37,8 +47,12 @@ def main():
     print 'WROTE', fout
   else:
     print "VIEW ", get_foutname( fin )
-  
 
+def chk_else(FOUT, line):
+ A = re.search(r'^(\s*)else(\s+)(return\s+.*)$', line)
+ if A:
+   return '{}else:{}{}\n'.format(A.group(1), A.group(2), A.group(3))
+ return line
 
 def chk_public(FOUT, line):
  A = re.search(r'^(\s*)(public .*\S\s+)([a-zA-Z0-1_]+)\s*(\(.*)$', line)

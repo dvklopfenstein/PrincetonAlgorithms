@@ -2,6 +2,26 @@
 
 # Algorithms, Part 1 from Princeton University
 # by Kevin Wayne, Robert Sedgewick
+# https://class.coursera.org/algs4partI-005/lecture/39
+# Week 4 Lecture APIs and Elementary Implementations (12:52)
+
+# 02:55 PRIORITY QUEUE APPLICATIONS
+# * Event-driven simulation: customers in a line, colliding particles
+# * Numerical computation:   reducing roundoff error
+# * Data compression:        Huffman codes
+# * Graph searching:         Dijkstra's algorithm, Prim's algorithm
+# * Number theory:           sum of powers
+# * Artificial intelligence: A* search
+# * Statistics:              maintain largest M values in a sequence
+# * Operating systems:       load balancing, interrupt handling
+# * Discrete optimization:   bin packing, scheduling
+# * Spam filtering:          Bayesian spam filter
+# 
+# GENERALIZES: stack, queue, randomized queue
+
+
+# Algorithms, Part 1 from Princeton University
+# by Kevin Wayne, Robert Sedgewick
 # https:#class.coursera.org/algs4partI-005 retreived July 2014
 # Lecture 8 - 2 Binary Heaps (23-36)
 
@@ -153,6 +173,7 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
     self.N += 1
     self.pq[self.N] = x
     self.swim(self.N)
+
   def delMax(self): # 10:03
     maxKey = self.pq[1]
     # Exchange root(maxKey) with node at end, 
@@ -163,6 +184,7 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
     # Prevent loitering by nulling out maxKey position
     self.pq[self.N+1] = None
     return maxKey
+
   def insert_array(self, ARR):
     for A in ARR:
       self.insert(A)
