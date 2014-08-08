@@ -128,5 +128,14 @@ compareTo() method unless otherwise specified.
 ANSWER: no two keys are equal (??? Need explanation)
 
 
+########################################################################
+FROM COMPARATORS LECTURE:
 
+Java's Comparable interface: Used for the most common sort of data
+Java's Comparator interface: Used for various sort orders of the same data
+See Point2D for an example.
+
+QUESTION: Which of the following is a compelling reason to implelment
+**Comparator** interface instead of the **comparable** interface in Java?
+ANSWER:  Comparator supports multiple orderings of a given data type.
 
