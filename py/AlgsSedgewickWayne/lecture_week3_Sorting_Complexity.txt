@@ -1,0 +1,132 @@
+#-----------------------------------------------------------------------
+SORTING COMPLEXITY
+
+00:18 COMPLEXITY OF SORTING
+
+COMPUTATIONAL COMPLEXITY: Framework to study efficiency of algorithms
+for solving a particular problem X.
+
+1. MODEL OF COMPUTATION: Allowable operations.
+
+2. COST MODEL: Operation count(s).
+   For sorting, count the comparisons
+
+3. UPPER BOUND: Cost guarantee provided by **some** algorithm for solving problem X
+
+4. LOWER BOUND: Proven limit on cost guarantee of all algorithms for solving problem X
+  (No algorithm can do better)
+
+5. OPTIMAL ALGORITHM: Algorithm with best possible cost guarantee for X.
+   We seek algorithm where Upper bound == Lower bound
+
+
+
+#-----------------------------------------------------------------------
+01:43 EXAMPLE: SORTING
+1 Model of computation: decision tree
+2 Cost Model: # compares
+3 Upper bound: ~N lg N from mergesort
+4 Lower bound: ?
+5 Optimal algorithm: ?
+
+#-----------------------------------------------------------------------
+02:07 DECISION TREE (for 3 distict items a, b, and c)
+
+                                 |
+                               a < b
+         
+                            code tween                    
+                             compares
+            yes                                      no                       
+            /                                        /                         
+          b < c                                    a < c                       
+                                                                               
+        code tween                               code tween                    
+         compares                                 compares                     
+    yes             no                       yes             no              
+    /                \                       /                \              
+ [a b c]           a < c                  [b a c]           b < c            
+                 code tween                               code tween                 
+                  compares                                 compares           
+                                                                            
+              yes            no                        yes          no    
+              /               \                        /             \    
+            [a c b]          [c a b]                 [b c a]        [c b a]
+
+HIEGHT OF TREE is the worst case number of compares.
+There is at least one leaf for each possible ordering
+
+
+#-----------------------------------------------------------------------
+04:43 PROPOSITION: Any compaer-based sorting algorithm must use at least
+lg(N!) ~N lg N (Stirling's formula) compares in the worst-case.
+
+PROOF:
+* Assume array consists of N distict values a1 through aN
+* Worst case dictated by HEIGHT h of decision tree.
+* Binary tree of height h has at most 2^h leaves.
+* N! different orderings => at least N! leaves.
+
+From this, We get the lower bound:
+  2^h >= # leaves >= N!
+  => h >= lg(N!) ~ N lg N (Stirling's formula)
+
+PROVED LOWER BOUND: ~ N lg N, so:
+
+    EXAMPLE: SORTING
+    1 Model of computation: decision tree
+    2 Cost Model: # compares
+    3 Upper bound: ~N lg N from mergesort
+    4 Lower bound: ~N lg N
+    5 Optimal algorithm: mergesort
+
+FIRST GOAL OF ALGORITHM DESIGN: Optimal algorithms.
+
+ 
+#-----------------------------------------------------------------------
+06:53 COMPLEXITY RESULTS IN CONTEXT
+
+COMPARES? Mergesort is     optimal with respect to # compares
+SPACE?    Mergesort IS NOT optimal with srespect to space usage.
+
+LESSONS: Use theory as a guide.
+EX: Don't try to design sorting algorithm that guarantees 1/2 N lg N compares
+EX: Design sorting algorithm that is both time and space-optimal?
+
+
+QUESTION: Is there a method that usese 1/2 N lg N compares?
+ANSWER: The lower bound says No, so don't try...
+
+Maybe there is an algorithm that uses N lg N compares and optimal space,
+so is optimal for both space and time.
+
+
+#-----------------------------------------------------------------------
+07:51 COMPLEXITY RESULTS IN CONTEXT (continued)
+
+LOWER BOUND may not hold if the algorithm has information about:
+* The initial order of the input
+* The distribution of key values.
+* The representation of the keys.
+
+PARTIALLY-ORDERED ARRAYS: Depending on the initial order of the input,
+we may not need N lg N compares.
+  * Insertion sort requires only N-1 compares if input array is sorted
+
+DUPLICATE KEYS: Depending on the input distribution of duplicates,
+we may not need N lg N compares
+  * Stay tuned for 3-way quicksort.
+
+DIGITAL PROPERTIES OF KEYS: We can use digit/character compares instead of
+whole key to get a faster sort with compares for numbers and strings.
+  * Stay tuned for radix sorts
+
+
+QUESTION: Under which of the following scenarios does the N lg N lower bound
+for sorting apply? Assume that the keys are accessed only through the 
+compareTo() method unless otherwise specified.
+ANSWER: no two keys are equal (??? Need explanation)
+
+
+
+
