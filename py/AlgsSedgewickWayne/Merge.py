@@ -117,18 +117,24 @@
 #     N lg N  compares and
 #   6 N lg N  accesses 
 # to sort any array of size N.
+#
+# * Was a problem that took us quadratic time using insertion sort and selection sort.
+#   Now N lg N
 # 
-# PROOF SKETCH: The number of compares C(N) and array accesses A(N)
+# PROOF SKETCH: The number of compares and array accesses 
+#   * C(N): COMPARES
+#   * A(N): ARRAY ACCESSES
 # to mergesort an array of size N satisy the recurrences:
 # 
 #   C(N) <= C(ceiling(N/2)) + C(floor(N/2)) +   N for N > 1, with C(1)=0.
-# 
+#               |                  |            |
 #           left-half         right-half      merge
-# 
+#               |                  |            |
 #   A(N) <= A(ceiling(N/2)) + A(floor(N/2)) + 6*N for N > 1, with A(1)=0.
 
 #------------------------------------------------------------------------------
-# 15:44 WE WILL SOLVE THR RECURRENCE WITH N IS A POWER OF 2. <- results holds for all N
+# 15:44 WE WILL SOLVE THR RECURRENCE WITH N IS A POWER OF 2. 
+# <- results holds for all N; Can proove by induction
 #
 #   D(N) <= 2*D(N/2) + N, for N>1, with D(1) = 0.
 
@@ -140,6 +146,8 @@
 # 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 # PROOF 1: PROOF BY PICTURE [assuming N is a power of 2]
+#                                                    Cost of merge: 
+#                                                    (where compares are)
 # 
 #    ^                    D(N)                       N          = N
 #    |    
@@ -154,6 +162,14 @@
 #                                                              N lg N
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 # 17:26 PROOF 2: PRROF BY EXPANSION
+# 
+# TELESCOPE NOTE: 1st term on RHS(D(N/2)(N/2))
+# is exactly the same as LHS(D(N)/N), so can apply same formula
+#  D(N)/N = 2*D(N/2)/N    + 1              divide both sides by N
+#         =   D(N/2)(N/2) + 1              algebra
+
+#  PROOF:
+#
 #  D(N)   = 2*D(N/2) + N                   given
 #  D(N)/N = 2*D(N/2)/N    + 1              divide both sides by N
 #         =   D(N/2)(N/2) + 1              algebra
@@ -177,24 +193,27 @@
 #------------------------------------------------------------------------------
 # 19:00 MERGESORT ANALYSIS: MEMORY
 # PROPOSITION: Mergesort uses extra space proportional to N.
-# PRROF: The array aux[] needs to be of size N for the last merge.
+# We need auxiliary array for the last merge
+#
+# PROOF: The array aux[] needs to be of size N for the last merge.
 # 
-# DEFINITION: A sorint algorithm is IN-PLACE if it uses <= c*log(N) extra memory.
+# DEFINITION: A sorting algorithm is IN-PLACE if it uses <= c*log(N) extra memory.
 # EXAMPLE: Insertion sort, selection sort, shellsort.
 # 
-# WAITING TO BE DISCOVERED: An in-place merge that is simple enough to be practical.
+# WAITING TO BE DISCOVERED: An IN-PLACE MERGE that is simple enough to be practical.
 
 #------------------------------------------------------------------------------
-# 20:37 MERGESORT: PRACTICAL IMPORVEMENTS
-# USE INSERTION SORT FOR SMALL SUBARRAYS:
+# 20:37 MERGESORT: PRACTICAL IMPROVEMENTS
+#
+# TECHNIQUE 1: USE INSERTION SORT FOR SMALL SUBARRAYS: (~20% faster)
 #   * Mergesort has too much overhead for tiny subarrays.
 #   * Cuttoff to insertion sort for ~ 7 items.
 # 
-# 21:51 STOP IF ALREADY SORTED
+# TECHNIQUE 2:  21:51 STOP IF ALREADY SORTED
 # * Is biggest item in first half <= smallest item in second half?
 # * Helps for partially-ordered arrays.
 # 
-# 22:31 ELEIMINATE THE COPY TO THE AUXILIARY ARRAY
+# TECHNIQUE 3: 22:31 ELIMINATE THE COPY TO THE AUXILIARY ARRAY
 # Mind-bending: ONly for experts
 # Save time (but not space) by switching the role of the input and 
 # auxiliary array in each recursive call.
@@ -202,7 +221,7 @@
 # QUESTION: How many compares does mergesort - the pure version without
 # any optimizations - make to sort an input array that is already sorted?
 # ANSWER: linearithmic
-# It makes (1/2)*N*lg(N) compares, which is the best case for mergesort.
+# It makes ~(1/2)*N*lg(N) compares, which is the best case for mergesort.
 # We note that the optimized version that checks whether a[mid] <= a[mod+1]
 # only requires ~N compares.
 
@@ -259,7 +278,7 @@ def _sort_init(a, aux, lo, hi): # 09:07-
   _sort_init(a, aux, lo, mid)      # sort the 1st half (left)
   _sort_init(a, aux, mid + 1, hi)  # sort the 2nd half (right)
   # 21:51 IMPROVEMENT: Stop if already sorted
-  # if a[mid] <= a[mid+1]: return  TBD use _less
+  # if a[mid] <= a[mid+1]: return  TBD use "less"
   _merge_init(a, aux, lo, mid, hi) # merge sorted halves together
 
 # Rearranges the array in ascending order, using the natural order.
