@@ -304,7 +304,7 @@ def _sort(a, index, aux, lo, hi):
 # and prints them to standard output in ascending order. 
 def main():
   import InputArgs
-  a = InputArgs.getStrArray()
+  a = InputArgs.getStrArray("S O R T E X A M P L E")
   Sort(a)
   print ' '.join(a)
 
