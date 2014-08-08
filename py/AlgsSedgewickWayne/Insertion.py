@@ -73,6 +73,25 @@
 # QUESTION: How many compares does insertion sort make on an imput array that is already sorted? 
 # ANSWER: linear
 
+########################################################
+### Stability (Week 3 Lecture "Stability")
+########################################################
+# 
+# #----------------------------------------------
+# 03:29 PROPOSITION INSERTION SORT IS STABLE
+# 
+# PROOF: Equal items never move past each other (in the sort code)
+# 
+# i j   0   1   2   3   4
+# -----------------------
+# 0 0 *B1  A1  A2  A3  B2
+# 1 0 *A1 *B1  A2  A3  B2
+# 2 1 *A1 *A2 *B1  A3  B2
+# 3 2 *A1 *A2 *A3 *B1  B2
+# 4 4 *A1 *A2 *A3 *B1 *B2
+#     *A1 *A2 *A3 *B1 *B2
+# 
+# 
 
 
 

@@ -129,6 +129,8 @@ ANSWER: no two keys are equal (??? Need explanation)
 
 
 ########################################################################
+### Week 3 Lecture: COMPARATORS
+########################################################################
 FROM COMPARATORS LECTURE:
 
 Java's Comparable interface: Used for the most common sort of data
@@ -138,4 +140,26 @@ See Point2D for an example.
 QUESTION: Which of the following is a compelling reason to implelment
 **Comparator** interface instead of the **comparable** interface in Java?
 ANSWER:  Comparator supports multiple orderings of a given data type.
+
+
+
+########################################################################
+### Stability
+########################################################################
+A TYPICAL APPLICATION: First, sort by name, *then* sort by section.
+
+A STABLE SORT preserves the relative order of items with equal keys
+
+#-----------------------------------------------------------------------
+QUESTION: WHICH SORTS ARE STABLE?	
+  STABLE?     
+    YES Insertion sort 
+    YES mergesort 
+     NO Selection sort 
+     NO shellsort
+
+NOTE: There are implmentations which are not stable, so carefully
+check the code to see if it is truly stable.
+("less than" vs. "less than or equal to")
+
 
