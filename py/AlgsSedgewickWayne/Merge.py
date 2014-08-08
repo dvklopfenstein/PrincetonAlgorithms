@@ -62,6 +62,41 @@
 # 11:50 MERGESORT is just as fast in reverse order as in arbitrary order
 
 #------------------------------------------------------------------------------
+# 07:15 ASSERTIONS: Statement to test assumptions about your program (assert)
+# * Helps detect logic bugs
+# * Documents code.
+
+#------------------------------------------------------------------------------
+# 10:20 MERGESORT: TRACE MERGE RESULTS FOR TOP-DOWN MERGESORT
+#
+# Start with a big problem to solve (a), then 
+#   divide it in half (h) and 
+#   divide it in half (d) and 
+#   divide it in half (b) and sort
+# First thing we actually do is (b), then (c)
+# 
+#                                    a[]
+#                                             1 1 1 1 1 1
+#                         0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
+#                         ------------------------------- 
+# a           lo      hi  M E R G E S O R T E X A M P L E
+# b merge(a,  0,  0,  1)  E M     . .                   . 
+# c merge(a,  2,  2,  3)      G R . .                   .
+# d merge(a,  0,  1,  3)  E G M R . .                   .
+# e merge(a,  4,  4,  5)          E S                   .
+# f merge(a,  6,  6,  7)              O R               .
+# g merge(a,  4,  5,  7)          E O R S               .
+# h merge(a,  0,  3,  7)  E E G M O R R S               .
+# i merge(a,  8,  8,  9)                  E T           .
+# j merge(a, 10, 10, 11)                      A X       .
+# k merge(a,  8,  9, 11)                  A E T X
+# m merge(a, 12, 12, 13)                          M P   .
+# n merge(a, 14, 14, 15)                              E L
+# o merge(a, 12, 13, 15)                          E L M P
+# p merge(a,  8, 11, 15)                  A E E L M P T X
+# q merge(a,  0,  7, 15)  A E E E E G L M M O P R R S T X
+
+#------------------------------------------------------------------------------
 # 12:09 MERGESORT: EMPIRICAL ANALYSIS
 # RUNNING TIME ESTIMATES:
 # * Laptop executes 10^8 compares/second.
@@ -186,6 +221,8 @@
 
 # stably merge a[lo .. mid] with a[mid+1 ..hi] using aux[lo .. hi]
 def _merge_init(a, aux, lo, mid, hi): # 05:00-06:00
+  # Expect that left-half is sorted.
+  # Expect that right-half is sorted.
   assert _isSorted(a, lo, mid)    # precondition: a[lo .. mid]   are sorted subarrays
   assert _isSorted(a, mid+1, hi)  # precondition: a[mid+1 .. hi] are sorted subarrays
 
@@ -202,7 +239,9 @@ def _merge_init(a, aux, lo, mid, hi): # 05:00-06:00
       elif _less(aux[j], aux[i]): a[k] = aux[j]; j += 1
       else:                       a[k] = aux[i]; i += 1
 
+  # Expect that now the entire list is sorted.
   assert _isSorted(a, lo, hi) # postcondition: a[lo .. hi] is sorted
+
 
 # mergesort a[lo..hi] using auxiliary array aux[lo..hi]
 def _sort_init(a, aux, lo, hi): # 09:07-
@@ -226,8 +265,8 @@ def _sort_init(a, aux, lo, hi): # 09:07-
 # Rearranges the array in ascending order, using the natural order.
 # @param a the array to be sorted
 def Sort(a, array_history=None): # 09:30
-  # Do not create array in recursive _sort routine to avoid extensive 
-  # cost of extra array production
+  # NOTE: Do not create array in recursive _sort routine 
+  # to avoid extensive cost of extra array production
   aux = [None for i in range(len(a))]
   _sort_init(a, aux, 0, len(a)-1)
   assert _isSorted(a)
@@ -269,12 +308,20 @@ def _merge(a, index, aux, lo, mid, hi):
   for k in range(lo, hi+1):
     aux[k] = index[k]
 
+  # Maintain 3 variables:
+  #   i: Current entry on left-half
+  #   j: Current entry on left-half
+  #   k: Current entry in the sorted result
+
   # merge back to a[]
-  i = lo 
-  j = mid+1
+  i = lo     # Start LEFT-HAND-POINTER  at left-most side of Left-sided  list
+  j = mid+1  # Start RIGHT-HAND-POINTER at left-most side of Right-sided list
   for k in range(lo, hi+1):
+    # If left-half list has been completely examined
     if   i > mid:                     index[k] = aux[j]; j += 1
+    # If right-half list has been completely examined
     elif j > hi:                      index[k] = aux[i]; i += 1
+    # If current value at right-half < current value at right-half, copy smaller val.
     elif _less(a[aux[j]], a[aux[i]]): index[k] = aux[j]; j += 1
     else:                             index[k] = aux[i]; i += 1
 
@@ -306,7 +353,7 @@ def main():
   import InputArgs
   a = InputArgs.getStrArray("S O R T E X A M P L E")
   Sort(a)
-  print ' '.join(a)
+  print ' '.join(map(str,a))
 
 
 if __name__ == '__main__':
