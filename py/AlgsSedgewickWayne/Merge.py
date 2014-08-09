@@ -226,6 +226,18 @@
 # only requires ~N compares.
 
 
+########################################################
+### Stability (Week 3 Lecture "Stability")
+########################################################
+# 
+#-------------------------------------------------------
+# 05:00 PROPOSITION: Merge operation IS STABLE.
+# 
+# PROOF: Takes from left subarray if equal keys.
+#
+
+
+########################################################
 #*
 #  The <tt>Merge</tt> class provides static methods for sorting an
 #  array using mergesort.

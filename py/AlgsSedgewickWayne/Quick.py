@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 
  #************************************************************************
  #  Compilation:  javac Quick.java
@@ -145,26 +146,35 @@ def _isSorted(a, lo=None, hi=None):
   return True
 
 
-#*
 # Reads in a sequence of strings from standard input; quicksorts them; 
 # and prints them to standard output in ascending order. 
 # Shuffles the array and then prints the strings again to
 # standard output, but this time, using the select method.
-#/
+#def main():
+#  import InputArgs
+#  import random
+#  ARR = InputArgs.getStrArray()
+#  Sort(ARR);
+#  print ' '.join(ARR)
+#
+#  # shuffle
+#  random.shuffle(ARR)
+#
+#  # display results again using select
+#  print
+#  print ' '.join(ARR)
+
+# Reads in a sequence of strings from standard input; insertion sorts them;
+# and prints them to standard output in ascending order.
 def main():
-  import InputArgs
-  import random
-  ARR = InputArgs.getStrArray()
-  Sort(ARR);
-  print ' '.join(ARR)
+    import InputArgs
+    data = InputArgs.getStrArray("6 3 7 2 0 1 9");
+    print "ORIG:", ' '.join(map(str,data))
+    Sort(data)
+    print "SORT:", ' '.join(map(str,data))
 
-  # shuffle
-  random.shuffle(ARR)
-
-  # display results again using select
-  print
-  print ' '.join(ARR)
-
+if __name__ == '__main__':
+  main()
 
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne. 
-# Last updated: Thu Oct 10 11:43:17 EDT 2013.G0
+# Java Last updated: Thu Oct 10 11:43:17 EDT 2013

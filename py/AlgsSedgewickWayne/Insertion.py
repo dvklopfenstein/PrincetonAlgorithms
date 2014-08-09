@@ -1,4 +1,4 @@
-#!/ust/bin/env python
+#!/usr/bin/env python
 
 # Alg1 Week2 Lecture Insertion Sort
 
@@ -73,22 +73,31 @@
 # QUESTION: How many compares does insertion sort make on an imput array that is already sorted? 
 # ANSWER: linear
 
+
+
 ########################################################
 ### Stability (Week 3 Lecture "Stability")
 ########################################################
 # 
 # #----------------------------------------------
-# 03:29 PROPOSITION INSERTION SORT IS STABLE
+# 03:29 PROPOSITION: INSERTION SORT IS STABLE
 # 
-# PROOF: Equal items never move past each other (in the sort code)
+# PROOF: Equal items never move past each other (in the "Sort" code)
+#
+# NOTE: Items depicted as A1 and A2 in the example below have the same
+# key, "A".  The 1 and 2 following the "A" are denote that A1 was 1st
+# and A2 was 2nd.
+#
+# NOTE: if "_less" in the "Sort" routine were "less than or equal to",
+# it would not work.
 # 
 # i j   0   1   2   3   4
 # -----------------------
-# 0 0 *B1  A1  A2  A3  B2
-# 1 0 *A1 *B1  A2  A3  B2
-# 2 1 *A1 *A2 *B1  A3  B2
-# 3 2 *A1 *A2 *A3 *B1  B2
-# 4 4 *A1 *A2 *A3 *B1 *B2
+# 0 0 >B1  A1  A2  A3  B2
+# 1 0 >A1 *B1  A2  A3  B2
+# 2 1 *A1 >A2 *B1  A3  B2
+# 3 2 *A1 *A2 >A3 *B1  B2
+# 4 4 *A1 *A2 *A3 *B1 >B2
 #     *A1 *A2 *A3 *B1 *B2
 # 
 # 
@@ -192,15 +201,15 @@ def add_history(ret, ARR, anno):
   import ArrayHistory
   ArrayHistory.add_history(ret, ARR, anno)
 
-#*
+
 # Reads in a sequence of strings from standard input; insertion sorts them;
 # and prints them to standard output in ascending order.
-#/
 def main():
     import InputArgs
-    a = InputArgs.getStrArray();
-    sort(a)
-    print ' '.join(a)
+    data = InputArgs.getStrArray("6 3 7 2 0 1 9");
+    print "ORIG:", ' '.join(map(str,data))
+    Sort(data)
+    print "SORT:", ' '.join(map(str,data))
 
 if __name__ == '__main__':
   main()

@@ -79,6 +79,34 @@
 # (roughly) a factor of 3
 
 
+
+########################################################
+### Stability (Week 3 Lecture "Stability")
+########################################################
+# 
+#-------------------------------------------------------
+# 04:41 PROPOSITION: Shellsort IS NOT stable.
+# 
+# NOTE ON TABLE BELOW: Items depicted as A1 and A2 in the example 
+# below have the same key, "A".  The 1 and 2 following the "A" 
+# are denote that A1 was 1st and A2 was 2nd.
+#
+# PROOF BY COUNTEREXAMPLE: Long distance exchange might move
+# an item past some equal item.
+#
+#
+# NOTE: if "_less" in the "Sort" routine were "less than or equal to",
+# it would not work.
+# 
+
+#  h    0   1   2   3   4
+# -----------------------
+#      B1  B2  B3  B4  A1
+#  4  >A1  B2  B3  B4 >B1
+#  1   A1  B2  B3  B4  B1
+#      A1  B2  B3  B4  B1
+# 
+
 #************************************************************************
 #  Compilation:  javac Shell.java
 #  Execution:    java Shell < input.txt

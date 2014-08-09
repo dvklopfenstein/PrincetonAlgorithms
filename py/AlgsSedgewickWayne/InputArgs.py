@@ -2,11 +2,15 @@
 
 import sys
 import os
+import inspect
 
 def getStrArray(default_seq):
   if len(sys.argv) == 1:
-    print "You may provide a list of elements on the command line."
-    print "Using default:", default_seq
+    frm = inspect.stack()[1]
+    mod = inspect.getmodule(frm[0])
+    print "You may provide a list of elements on the command line:"
+    print '  {} "{}"\n'.format(mod.__file__, default_seq)
+    print "DFLT:", default_seq
     return chk_digits(default_seq.split())
   for arg in sys.argv[1:]:
     if os.path.isfile(arg):

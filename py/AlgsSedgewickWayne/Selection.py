@@ -49,6 +49,35 @@
 # http://www.Sorting-algorithms.com/selection-Sort 06:39
 
 
+
+########################################################
+### Stability (Week 3 Lecture "Stability")
+########################################################
+# 
+#-------------------------------------------------------
+# 03:42 PROPOSITION: Selection Sort IS NOT stable.
+# 
+# NOTE ON TABLE BELOW: Items depicted as A1 and A2 in the example 
+# below have the same key, "A".  The 1 and 2 following the "A" 
+# are denote that A1 was 1st and A2 was 2nd.
+#
+# PROOF BY COUNTEREXAMPLE: Long distance exchange might move
+# an item past some equal item.
+#
+#
+# NOTE: if "_less" in the "Sort" routine were "less than or equal to",
+# it would not work.
+# 
+# i min 0  1   2 
+# ----------------
+> 0 2 *B1 *B2 >A   > Choose min(A), exch(B1,A), B1 moved past equal B2
+> 1 1  A  >B2 *B1 
+> 2 2  A   B2 >B1 
+>     *A  *A2 *A3 
+# 
+# 
+
+
 # Rearranges the array in ascending order, using the natural order.
 # @param a the array to be Sorted
 def Sort(ARR, array_history=None):
