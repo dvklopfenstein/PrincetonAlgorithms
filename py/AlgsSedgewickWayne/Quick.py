@@ -280,6 +280,15 @@
 # ANSWER: linearithmic
 
 
+########################################################
+### Duplicate Keys (Alg 1, Week 3 Lecture)
+########################################################
+# 
+# QUICKSORT WITH DUPLICATE KEYS:
+# * Algorithm goes quadratic unless partitioning stops on equal keys!
+# * 1990s C user found this defect in qsort()
+#   (Several textbook and system implementations also have this defect)
+# 
 
 
 # #************************************************************************/
