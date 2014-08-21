@@ -1,1 +1,1 @@
-# Initialize the AlgsSedgewickWayne Top-level package
+"""Initialize the AlgsSedgewickWayne Top-level package."""

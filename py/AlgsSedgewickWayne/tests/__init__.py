@@ -1,1 +1,1 @@
-Initialize the subpackage, tests.
+"""Initialize the subpackage, tests."""
