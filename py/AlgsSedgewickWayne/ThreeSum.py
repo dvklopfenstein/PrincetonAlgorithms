@@ -74,14 +74,31 @@ def count(a):
 # the computation.
 def main(): 
   a = InputArgs.getStrArray()
+  run(a)
 
+def run(a):
   tic = timeit.default_timer()
   cnt = count(a)
-  print "Elapsed HMS:", str(datetime.timedelta(seconds=(timeit.default_timer()-tic)))
-  sys.stdout.write('cnt={}\n'.format(cnt))
+  sys.stdout.write("Elapsed HMS: {}\n".format(
+    str(datetime.timedelta(seconds=(timeit.default_timer()-tic)))))
+  sys.stdout.write('lines={} ThreeSum found {} times\n'.format(len(a), cnt))
+
+def run_all(): 
+  fins = [
+    '../../thirdparty/1Kints.txt',
+    '../../thirdparty/2Kints.txt',
+    '../../thirdparty/4Kints.txt',
+    '../../thirdparty/8Kints.txt']
+  for fin in fins:
+    sys.stdout.write('\nRunning ThreeSum on data in: {}\n'.format(fin))
+    a = InputArgs.get_ints_from_file(fin)
+    run(a)
 
 if __name__ == '__main__':
-  main()
+  if len(sys.argv) > 1:
+    main()
+  else:
+    run_all()
 
 
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne. 
