@@ -73,7 +73,7 @@ def count(a):
 # counts the number of triples sum to exactly zero; prints out the time to perform
 # the computation.
 def main(): 
-  a = InputArgs.getStrArray()
+  a = InputArgs.get_ints_from_file(sys.argv[1])
   run(a)
 
 def run(a):
