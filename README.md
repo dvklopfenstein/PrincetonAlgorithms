@@ -52,7 +52,7 @@ J..   – Bag                  multiset                         –
 ...   – StopwatchCPU         timer (CPU time)                 –
 ...   – LinearRegression     simple linear regression         –
 ...   – PolynomialRegression polynomial regression            –
-...   – ThreeSum             brute-force three sum            1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt
+J..   – ThreeSum             brute-force three sum            1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt
 ...   – ThreeSumFast         faster three sum                 1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt
 ...   – DoublingTest         doubling test                    –
 ...   – DoublingRatio        doubling ratio                   –
