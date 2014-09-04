@@ -37,7 +37,8 @@ def main():
       line = chk_else(FOUT, line)
       line = re.sub(r'([a-zA-Z0-9]+)\.length', r'len(\1)', line)
       line = line.replace(' int ',' ')
-      line = line.replace('else if','elif')
+      line = line.replace('else if', 'elif')
+      line = line.replace('Last updated', 'Java last updated')
       FOUT.write(line)
 
   print 'READ ', fin
