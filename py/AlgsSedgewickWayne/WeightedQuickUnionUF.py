@@ -55,6 +55,17 @@
 # 
 # 3 Connected Components: {0} {1 4 5} {2 3 6 7}
 
+# 10:15 QUESTION: How many connected components result after performing the
+# following sequence of union operations on a set of 10 items?
+#
+#   1-2  3-4  5-6  7-8  2-8  0-5  1-9
+#
+# ANSWER: 3; { 1 2 7 8 9 }, {3 4}, AND {0 5 6}
+#
+#      0  1--2  3--4 
+#      |      \      
+#      5--6  7--8--9 
+# 
 
 # UNION-FIND APPLICATIONS: (00:27) Week 1 Lecture "Union-Find Applications" (1:22) 
 # * Percolation
