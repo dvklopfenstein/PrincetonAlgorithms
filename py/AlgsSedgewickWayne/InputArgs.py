@@ -19,6 +19,7 @@ def getStrArray(default_seq=None):
       return chk_digits(arg.split())
 
 def chk_digits(lst):
+  """Return a list of ints if string contains an int."""
   intlist = [int(a) for a in lst if a.isdigit()]
   return intlist if len(lst) == len(intlist) else lst
     

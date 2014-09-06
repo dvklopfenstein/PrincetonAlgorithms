@@ -39,66 +39,78 @@
  #
  #  @author Robert Sedgewick
  #  @author Kevin Wayne
+ #
  #/
 
 import InputArgs
 import sys
-import timeit
-import datetime
-
-# Prints to standard output the (i, j, k) with i < j < k such that a[i] + a[j] + a[k] == 0.
-# @param a the array of integers
-def printAll(a):
-  N = len(a)
-  for i in range(N):
-    for j in range(i+1, N):
-      for k in range(j+1, N):
-        if (a[i] + a[j] + a[k]) == 0:
-          sys.stdout.write('{:6d} + {:6d} + {:6d}\n'.format(a[i], a[j], a[k]))
 
 # Returns the number of triples (i, j, k) with i < j < k such that a[i] + a[j] + a[k] == 0.
 # @param a the array of integers
 # @return the number of triples (i, j, k) with i < j < k such that a[i] + a[j] + a[k] == 0
+def printAll(a):
+  """Print ThreeSum."""
+  N = len(a)
+  for i in range(N):
+    for j in range(i+1, N):
+      for k in range(j+1, N):
+        if sum([a[i], a[j], a[k]]) == 0:
+          sys.stdout.write('{:6d} + {:6d} + {:6d}\n'.format(a[i], a[j], a[k]))
+  return cnt
+
 def count(a):
+  """Do ThreeSum."""
   N = len(a)
   cnt = 0
   for i in range(N):
     for j in range(i+1, N):
       for k in range(j+1, N):
-        if (a[i] + a[j] + a[k]) == 0:
+        if sum([a[i], a[j], a[k]]) == 0:
           cnt += 1
   return cnt
+
+
 
 # Reads in a sequence of integers from a file, specified as a command-line argument;
 # counts the number of triples sum to exactly zero; prints out the time to perform
 # the computation.
-def main(): 
-  a = InputArgs.get_ints_from_file(sys.argv[1])
-  run(a)
-
 def run(a):
+  """Run ThreeSum and report the elapsed time."""
+  import timeit
+  import datetime
   tic = timeit.default_timer()
   cnt = count(a)
   sys.stdout.write("Elapsed HMS: {}\n".format(
     str(datetime.timedelta(seconds=(timeit.default_timer()-tic)))))
-  sys.stdout.write('lines={} ThreeSum found {} times\n'.format(len(a), cnt))
+  sys.stdout.write('ThreeSum found {} times when run on {} integers\n'.format(cnt, len(a)))
 
-def run_all(): 
-  fins = [
-    '../../thirdparty/1Kints.txt',
-    '../../thirdparty/2Kints.txt',
-    '../../thirdparty/4Kints.txt',
-    '../../thirdparty/8Kints.txt']
+def run_fin(fin): 
+  """Run ThreeSum using integers stored in a column in a file."""
+  sys.stdout.write('\nRunning ThreeSum on data in: {}\n'.format(fin))
+  run(InputArgs.get_ints_from_file(fin))
+
+def run_fins(fins): 
+  """Run ThreeSum on multiple files containing integers."""
   for fin in fins:
-    sys.stdout.write('\nRunning ThreeSum on data in: {}\n'.format(fin))
-    a = InputArgs.get_ints_from_file(fin)
-    run(a)
+    run_fin(fin)
 
 if __name__ == '__main__':
-  if len(sys.argv) > 1:
-    main()
-  else:
-    run_all()
+  import os
+  from random import randrange
+  # If there are no arguments, run the examples (May take a While)
+  if len(sys.argv) == 1:
+    fins = [
+      '../../thirdparty/1Kints.txt',
+      '../../thirdparty/2Kints.txt',
+      '../../thirdparty/4Kints.txt',
+      '../../thirdparty/8Kints.txt']
+    run_fins(fins)
+  elif os.path.isfile(sys.argv[1]):
+    run_fin(sys.argv[1])
+  elif sys.argv[1].isdigit():
+    a = [randrange(-999999, 999999) for i in range(int(sys.argv[1]))]
+    run(a)
+    
 
 
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne. 
