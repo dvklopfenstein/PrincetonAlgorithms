@@ -67,6 +67,7 @@
 #      5--6  7--8--9 
 # 
 
+
 # UNION-FIND APPLICATIONS: (00:27) Week 1 Lecture "Union-Find Applications" (1:22) 
 # * Percolation
 # * Games (Go, Hex)
@@ -80,12 +81,131 @@
 # * Morphological attribute openings and closings.
 # * Matlab's bwlabel() function in image processing.
 
-# Week 1 Lecture "Quick Union Improvements(13:02) at 4:03
 
-# Cost model init union  union
-# quick-find    N    N     1
-# quick-union   N    N     N   <- worst case, if tree is tall
-# weighter QU   N  lg(N) lg(N) <- includes cost of finding roots
+
+###########################################################################
+# Lecture Week 1 Quick-Union Improvements (13:02)
+###########################################################################
+# 
+# 00:22 IMPROVEMENT 1: WEIGHTING
+# 
+# WEIGHTED QUICK-UNION.
+# * Modify quick-union to avoid tall trees.
+# * Keep track of size of each tree (number of objects).
+# * Balance by linking root of smaller tree to root of larger tree.
+#   reasonable alternatives: union by height or "rank"
+
+# 01:21 WEIGHTED QUICK-UNION DEMO
+# ------------------------------
+#        i   0 1 2 3 4 5 6 7 8 9
+#  INI: id[] 0 1 2 3 4 5 6 7 8 9
+# 
+# 0  1  2  3  4  5  6  7  8  9
+# 
+# 03:21 -- union(4, 3) --------
+# WAS: id[] 0 1 2 3 4 5 6 7 8 9
+# NOW: id[] 0 1 2 4 4 5 6 7 8 9
+#           . . . X . . . . . .
+# 
+# 0  1  2     4  5  6  7  8  9
+#             |
+#             3
+# 
+# 
+# 01:45 -- union(3, 8) --------
+# WAS: id[] 0 1 2 4 4 5 6 7 8 9
+# NOW: id[] 0 1 2 4 4 5 6 7 4 9
+#           . . . . . . . . X .
+# 
+# 0  1  2     4  5  6  7     9
+#            / \
+#           3   8
+# 
+# 
+# 01:58 -- union(6, 5) --------
+# WAS: id[] 0 1 2 4 4 5 6 7 4 9
+# NOW: id[] 0 1 2 4 4 6 6 7 4 9
+#           . . . . . X . . . .
+# 
+# 0  1  2     4     6  7     9
+#            / \    |
+#           3   8   5
+# 
+# 02:04 -- union(9, 4) --------
+# WAS: id[] 0 1 2 4 4 6 6 7 4 9
+# NOW: id[] 0 1 2 4 4 6 6 7 4 4
+#           . . . . . . . . . X
+# 
+# 0  1  2     4     6  7   
+#            /|\    |
+#           3 8 9   5
+# 
+# 
+# 02:12 -- union(2, 1) --------
+# WAS: id[] 0 1 2 4 4 6 6 7 4 4
+# NOW: id[] 0 2 2 4 4 6 6 7 4 4
+#           . X . . . . . . . .
+# 
+# 0     2     4     6  7   
+#       |    /|\    |
+#       1   3 8 9   5
+# 
+# 
+# 02:17 -- union(5, 0) --------
+# WAS: id[] 0 1 2 4 4 6 6 7 4 4
+# NOW: id[] 6 2 2 4 4 6 6 7 4 4
+#           X . . . . . . . . .
+# 
+#       2     4      6  7   
+#       |    /|\    / \
+#       1   3 8 9  0   5
+# 
+# 
+# 02:29 -- union(7, 2) --------
+# WAS: id[] 6 2 2 4 4 6 6 7 4 4
+# NOW: id[] 6 2 2 4 4 6 6 2 4 4
+#           . . . . . . . X . .
+# 
+#       2     4      6      
+#      / \   /|\    / \
+#     1   7 3 8 9  0   5
+# 
+# 
+# 02:37 -- union(6, 1) --------
+# WAS: id[] 6 2 2 4 4 6 6 2 4 4
+# NOW: id[] 6 2 6 4 4 6 6 2 4 4
+#           . . X . . . . . . .
+# 
+#       2     4      6      
+#      / \   /|\    /|\
+#     1   7 3 8 9  0 2 5
+#                   / \
+#                  1   7
+# 
+# 
+# 02:37 -- union(6, 1) --------
+# WAS: id[] 6 2 2 4 4 6 6 2 4 4
+# NOW: id[] 6 2 6 4 4 6 6 2 4 4
+#           . . X . . . . . . .
+# 
+#      4      6      
+#     /|\    /|\
+#    3 8 9  0 2 5
+#            / \
+#           1   7
+# 
+# 02:50 -- union(7, 3) --------
+# WAS: id[] 6 2 6 4 4 6 6 2 4 4
+# NOW: id[] 6 2 6 4 6 6 6 2 4 4
+#           . . . . X . . . . .
+# 
+#         +----6      
+#        /    /|\
+#       4    0 2 5
+#      /|\    / \
+#     3 8 9  1   7
+
+
 #
 ## Quick-union defect: 
 ##   * Union too expensive (N array accesses)
@@ -95,12 +215,15 @@
 ##   * Trees can get tall.
 ##   * Find too expensive (could be N array accesses).
 ## 
-# Weighted Quick-union: 
-#   * Modify quick-union to avoid tall trees
-#   * Find:  takes time proportional to depth of p and q 05:38
-#   * Union: takes constant time, given roots.
+
+#--------------------------------------------------------------------------
+# 05:28 WEIGHTED QUICK-UNION ANALYSIS
 #
-# PROPOSTION: Depth of any node x is at most lg N (lglog_2(N))
+# 05:38 RUNNING TIME
+# * FIND:  takes time proportional to depth of p and q.
+# * UNION: takes constant time, given roots.
+#
+# 05:45 PROPOSTION: Depth of any node x is at most lg N (lg = log_2(N))
 # The cost scales:
 #     Ex: N =         1,000 depth is 10
 #     Ex: N =     1,000,000 depth is 20
@@ -108,12 +231,66 @@
 #     depth for   10 objects <= lg(10)   = 3.322
 #     depth for  100 objects <= lg(100)  = 6.644
 #     depth for 1001 objects <= lg(1000) = 9.966
-# PROOF: When does depth of x increase?
+#
+# 06:23 PROOF: When does depth of x increase?
+#
 # Increases by 1 when tree T1 containing x is merged into another tree T2.
 #  * The size of the tree containing x at least doubles since |T2| >= |T1|
 #  * Size of tree containing x can double at most lg(N) times. Why?
 #    When the depth of x increases, the size of its tree size at least doubles
+
+# Cost model init union  union
+# quick-find    N    N     1
+# quick-union   N    N     N   <- worst case, if tree is tall
+# weighter QU   N  lg(N) lg(N) <- includes cost of finding roots
+
+# Q: Stop at guaranteed acceptable performance?
+# A: No, easy to improve further.
+
+#--------------------------------------------------------------------------
+# 08:26 IMPROVEMENT 2: PATH COMPRESSION
 # 
+# QUICK UNION WITH PATH COMPRESSION.
+# Just after computing the root of p, set the id of each examined node to point to that root.
+# 
+
+# 10:01 WEIGHTED QUICK-UNION WITH PATH COMPRESSION: AMORTIZED ANALYSIS
+# 
+# PROPOSITION: [Hopcroft-Ulman, Tarjan] Starting from an       N  lg*N (iterate log fnc)
+# empty data structure, ny sequence of M union-find ops  -------  ----
+# on N objects makes <= c(N + M lg* N) array accesses.         1  0
+#  * Analysis can be improved to N + M alpha(M, N).            2  1
+#  * Simple algorithm with fascinating mathematics.            4  2
+#                                                             16  3
+#                                                          65536  4
+#                                                        2^65536  5
+# ITERATIVE LOG FUNCTION:
+# log*N function is the number of times you have to take the log of N to get 1.
+# REAL WORLD: Think of it as a number less than 5
+
+# 11:23 QUESTION: IS THERE A SIMPLE ALGORITHM THAT IS LINEAR (This one is so close)
+# ANSWER: No (Fredman and Sacks)
+
+#--------------------------------------------------------------------------
+# 12:31 SUMMARY
+# BOTTOM LINE. Weighted quick union (with path compression) makes it
+# possible to solve problems that could not otherwise be addressed.
+# 
+# M union-find operations on a set of N objects
+# 
+# algorithm                       worst-case time
+# ------------------------------  ---------------------
+# quick-find                      M * N
+# quick-union                     M * N
+# weighted QU                     N + M log N    
+# QU + path compression           N + M log N
+# weighted QU + path compression  N + M lg*N
+# 
+# EX. [10^9 union and finds with 10^9 objects]
+#   * WQUPC reduces time from 30 years to 6 seconds.
+#   * Supercomputer won't help much; good algorithm enables solution.
+
+
 #--------------------------------------------------------------------------
 # LECTURE QUESTION:
 # Suppose that the id[] array during the weightes quick union algorithm is
@@ -123,8 +300,69 @@
 #                                   |
 #                                   6
 # ANSWER Which id[] entry changes with union(3,6)?  ID[8]
+#
+# EXPLANATION: In weighted quick union, we make the root of the smaller tree 
+# points to the root of the larger tree. In this example, the algorithm sets id[8]=0
+#
+# Be careful not to confuse union-by-size with union-by-height = the former
+# uses the **size** of the three (number of nodes) while the latter uses
+# the **height** of the tree (number of links on longest path from the root 
+# of the tree to a leaf node). Both variants guarantee logarithmic height.
+# There is a third variant known as "union-by-rank" that is also widely used.
 
-#--------------------------------------------------------------------------
+
+
+
+###########################################################################
+# Lecture Week 1 Union-Find Applications (9:22)
+###########################################################################
+
+# UNION-FIND APPLICATIONS: (00:27) Week 1 Lecture "Union-Find Applications" (1:22) 
+#  * Percolation
+#  * Games (Go, Hex)
+#  X Dynamic connectivity
+#  * Least common ancestor
+#  * Equivalence of finite state automata
+#  * Hoshen-Kopelman algorithm in physics.
+#  * Hinley-Milner polymorphic type inference.
+#  * Kruskal's minimum spanning tree algorithm.
+#    Graph processing algorithm which uses Union-Find as a sub-routine
+#  * Compiling equivalence statements in Fortran.
+#  * Morphological attribute openings and closings.
+# ** Matlab's bwlabel() function in **image processing.
+#    How to label area in images
+
+# 02:13 A MODEL FOR MANY PHYSICAL SYSTEMS:
+#  * N-by-N grid of sites.
+#  * Each site is open with probability p (or blocked with probability 1-p).
+#  * System percolates iff top and bottom are connected by open sites.
+# 
+# model              system     vacant site occupied site percolates
+# ------------------ ---------- ----------- ------------- ----------
+# electricity        material   conductor   insulated     conducts
+# fluid flow         material   empty       blocked       porous
+# social interaction population person      empty         communicates
+#
+# Goes on to describe percolation...
+
+# 08:12 SUBTEXT OF TODAY'S LECTURE (AND THIS COURSE)
+# 
+# STEPS TO DEVELOPING A USABLE ALGORITHM.
+#  * Model the problem.
+#  * Find an algorithm to solve it.
+#  * Fast enough? Fits in memory?
+#  * If not, figure out why.
+#  * Find a way to address the problem.
+#  * Iterate until satisfied.
+
+# 09:15 QUESTION
+# When opening one new site in the percolation simulation, how many times is union() called?
+# ANSWER: 0, 1, 2, 3, or 4
+# EXPLANATION: It is called for each neighboring site that is already open.
+# There are 4 possible neighbors, but some of them may not already be open.
+
+
+###########################################################################
 # Question 3
 # Which of the followint id[] arrays(s) could be thr result of running 
 # the weightes quick union algorithm on a set of 10 items? Check all that apply
@@ -151,7 +389,6 @@
 #    >>> print set([2,7,1,3,8,1,3,7,1,0]) set([0, 1, 2, 3, 7, 8])
 #    NO:  Height of forest = 4 > lg N = lg(10)
 
-
 import numpy as np
 
 class WeightedQuickUnionUF:
@@ -171,9 +408,9 @@ class WeightedQuickUnionUF:
 
   def count(self): return self.cnt
 
-  def root(self, i):
+  def _root(self, i):
     """Chase parent pointers until reach root."""
-    d = 0
+    d = 0 # Used for informative prints for educational purposes
     while i != self.ID[i]: # depth of i array accesses
       # IMPROVEMENT #2: Path compression. Keeps tree almost completely flat. 8:08..10:21
       # Make every path on that path point to the root.         N  lg*N
@@ -182,29 +419,33 @@ class WeightedQuickUnionUF:
       # on N objects makes <= c(N + M*lg(N) array accesses.     4     2
       #   * Analysis can be improved to N + M*alpha(M,N)       16     3
       #   * Simple algorithm with fascinating mathematics.  65536     4
-      #self.ID[i] = self.ID[self.ID[i]]                  # 2^65536     5
+      #self.ID[i] = self.ID[self.ID[i]]                   2^65536     5
       i = self.ID[i] 
       d += 1
     return i, d
 
   def connected(self, p, q):
     """Check if p and q have the same root."""
-    return self.root(p)[0] == self.root(q)[0] # depth of p & q array accesses
+    return self._root(p)[0] == self._root(q)[0] # Runs depth of p & q array accesses
 
   def union(self, p, q):
-    """Link root of smaller tree to root of larger tree.
-       each union involves changing only one array entry
+    """Modified quick-union:
+         * Link root of smaller tree to root of larger tree.
+         * Update the SZ[] array.
+       Each union involves changing only one array entry
     """
-    # Depth of p and q array accesses
-    i = self.root(p)[0]
-    j = self.root(q)[0]
+    # Runs Depth of p and q array accesses
+    i = self._root(p)[0]
+    j = self._root(q)[0]
     if i ==  j:  return
     # IMPROVEMENT #1: Modification to Quick-Union to make it weights: 4:03
     # Balance trees by linking root of smaller tree to root of larger tree
     if   self.SZ[i] < self.SZ[j]: 
+      # Make id[i] a child of j
       self.ID[i] = j 
       self.SZ[j] += self.SZ[i]
     else: 
+      # Make id[j] a child of i
       self.ID[j] = i 
       self.SZ[i] += self.SZ[j]
 
@@ -212,7 +453,7 @@ class WeightedQuickUnionUF:
     """>>> print obj."""
     h  = " ".join('%3s'%str(e) for e in range(len(self.ID)))+" header" # Header
     s  = " ".join('%3s'%str(e) for e in self.SZ)+" size"     # Size
-    rv = [self.root(e)[0] for e in self.ID]     # Root Values
+    rv = [self._root(e)[0] for e in self.ID]     # Root Values
     #roots = set(rv)
     rv = " ".join(['%3s'%str(e) for e in rv])+" root"     # Root Values
     return '\n'.join([h,rv,s])

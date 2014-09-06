@@ -224,23 +224,23 @@ class QuickUnionUF:
   def __init__(self, N):
     """Set if of each object to itself."""
     self.ID = []
-    for i in range(N): self.ID.append(i) # N array accesses
+    for i in range(N): self.ID.append(i) # Runs N array accesses
 
   def _root(self, i):
     """Chase parent pointers until reach root."""
-    while i != self.ID[i]: # depth of i array accesses
+    while i != self.ID[i]: # Runs the depth of i array accesses
       i = self.ID[i] 
     return i
 
   def connected(self, p, q):
     """Check if p and q have the same root."""
-    return self._root(p) == self._root(q) # depth of p & q array accesses
+    return self._root(p) == self._root(q) # Runs the depth of p & q array accesses
 
   def union(self, p, q):
     """Change root of p to point to root of q.
        each union involves changing only one array entry
     """
-    # Depth of p and q array accesses
+    # Runs Depth of p and q array accesses
     i = self._root(p)
     j = self._root(q)
     print p, q, i, j
