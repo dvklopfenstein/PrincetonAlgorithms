@@ -69,7 +69,4 @@ class QuickUnionUF:
     #  print v, i
     return '\n'.join([k,v])
 
-  def __repr__(self):
-    """>>> obj."""
-    return __str__(self)
 

@@ -1,5 +1,30 @@
 #!/usr/bin/env python
 
+#--------------------------------------------------------------------------
+# Lecture Week 1 Union-Find: Dynamic Connectivity (10:22)
+#--------------------------------------------------------------------------
+# 00:55 STEPS TO DEVELOPING A USABLE ALGORITHM:
+# * Model the problem. 
+# * Find an algorithm to solve it.
+# * Fast enough? Fits in memory?
+# * If not, figure out why.
+# * Find a way to address the problem.
+# * Iterate until satidfied. (Find a new algorithm)
+# 
+# union(4, 3)       0  1--2  3--4 
+# union(3, 8)                |  | 
+# union(6, 5)       5--6  7  8  9 
+# union(4, 4) 
+# union(2, 1) 
+# connected(0, 7) NO
+# connected(8, 9) Yes
+# 
+# union(5, 0)       0--1--2  3--4
+# union(7, 2)       |  |  |  |  |
+# union(6, 1)       5--6  7  8  9
+# union(1, 0)
+# connected(0, 7) Yes
+
 # DYNAMIC CONNECTIVITY APPLICATIONS: (04:50) Week 1 Lecture "Dynamic Connectivity(1:22) 
 # * Pixels in a digitial photo
 # * Computers in a network.
@@ -8,6 +33,28 @@
 # * Elements in a mathematical set.
 # * Variable names in Fortran progam.
 # * Metallic sites in a composit system.
+
+# 04:51 WHEN PROGRAMMING, CONVENIENT TO NAME OBJECTS 0 TO N-1:
+# * Use integers as array index.
+# * Suppress details not relevant to union-find.
+#   Can use symbol table to translate from site names to integers: 
+#   Stay runed (Chapter 3)
+# 
+# 05:33 MODELING THE CONNECTIONS
+# We assume "is connected to" is an equivalence relation:
+# * Reflexive:  p is connected to p
+# * Symmetric:  If p is connect to q, then q is connected to p.
+# * Transitive: If p is connected to q and q is connected to r, then p is connected to r.
+
+# 06:17 CONNECTED COMPONENTS
+# Maximal set of objects that are mutually connected.
+# 
+#   0 1 2-3
+#    /  |/|
+#   4-5 6 7
+# 
+# 3 Connected Components: {0} {1 4 5} {2 3 6 7}
+
 
 # UNION-FIND APPLICATIONS: (00:27) Week 1 Lecture "Union-Find Applications" (1:22) 
 # * Percolation
@@ -159,7 +206,4 @@ class WeightedQuickUnionUF:
     rv = " ".join(['%3s'%str(e) for e in rv])+" root"     # Root Values
     return '\n'.join([h,rv,s])
 
-  def __repr__(self):
-    """>>> obj."""
-    return __str__(self)
 
