@@ -42,6 +42,24 @@
  #
  #/
 
+####################################################################
+# Lecture Week 1 Observations (10:05)
+####################################################################
+# 
+# 3-SUM: Given N distinct integers, how many triples sum to exactly zero?
+# 
+# a = [30 -40 -20 -10 40 0 10 5]
+# 
+#   a[i] a[j] a[k] sum
+#   ---  ---- ---- ---
+# 1  30   -40   10   0
+# 2  30   -20  -10   0
+# 3 -40    40    0   0
+# 4 -10     0   10   0
+# 
+# CONTEXT: Deeply related to problems in computational geometry.
+# graphics, movies, etc.
+
 import InputArgs
 import sys
 
@@ -59,7 +77,7 @@ def printAll(a):
   return cnt
 
 def count(a):
-  """Do ThreeSum."""
+  """ThreeSum: Given N distict integers, how many triples sum to exactly zero?"""
   N = len(a)
   cnt = 0
   for i in range(N):

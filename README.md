@@ -10,6 +10,10 @@ Implemented in Python 2.7.x by D Klopfenstein is selected code from:
 **TESTS**: 
  * **Python** tests are run from: [./py/AlgsSedgewickWayne/tests/](./py/AlgsSedgewickWayne/tests)
  * **Java** code is run from: [./thirdparty/](./thirdparty)
+   * Download Sedgewick-Wayne Java programming environment: 
+     [Linux](http://algs4.cs.princeton.edu/linux/)
+     [Windows](http://algs4.cs.princeton.edu/windows/)
+     [Mac OS X](http://algs4.cs.princeton.edu/mac/)
 
 **PREREQUISITES**: python, numpy, pylab, matplotlib, math, sys, os.
 *NOTE*: Most Python modules in this repository do not use matplotlib or pylab.
