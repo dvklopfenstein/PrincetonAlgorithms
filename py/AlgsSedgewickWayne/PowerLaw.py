@@ -1,20 +1,19 @@
 #!/usr/bin/env python
 
-# https://class.coursera.org/algs4partI-005
+# https://class.coursera.org/algs4partI-006
 # Algorithms, Part 1 by Kevin Wayne, Robert Sedgewick at Princeton University
-# Week 1 "Quick Union Improvements(13:02) lecture at 4:03
+# Lecture Week 1 Analysis of Algorithms Introduction (8:14)
 
-# Week 1 Analysis of Algoithms Introduction (8:14)
-# Scientific Method
-#   * Observe some feature of the natural world (Computer itself)
-#   * Hypothesize a model that is consistent with the observations
-#   * Predict events using the hypothesis
-#   * Verify the predictions by making further observations
-#   * Validate by repeating until the hypothesis and observations agree.
+# 07:19 SCIENTIFIC METHOD
+#   * OBSERVE     some feature of the natural world (Computer itself)
+#   * HYPOTHESIZE a model that is consistent with the observations
+#   * PREDICT     events using the hypothesis
+#   * VERIFY      the predictions by making further observations
+#   * VALIDATE    by repeating until the hypothesis and observations agree.
 # 
 # Principles:
-#   * Experiments must be reproducible
-#   * Hypothesis must be falsifiable
+#   * Experiments must be REPRODUCIBLE
+#   * Hypothesis  must be FALSIFIABLE
 
 #   Why is my program so slow?
 #   Why does it run out of memory?
@@ -22,11 +21,15 @@
 #   N^2 unacceptable because it does not scale
 #   N*log(N) is almost linear
 #   
-# Suppose that N =1,000,000. Approximately how much faster is an algorithm that
-# performs N*lg(N) operations versus one that performs N^2 operations? Recall that
-# lg is log_2.
-#   N^2     = (10^6)^2  =   10^12  -> .5*10^5 = (.5)*10^1)*(10^4) = 5*10000 = 50,000!!!
-#   M*lg(N) = 10^6*(20) = 2*10^7
+# QUESTION: Suppose that N == 1,000,000. Approximately how much faster is 
+# an algorithm that performs N*lg(N) operations versus one that performs 
+# N^2 operations? Recall that lg is log_2.
+#   N^2     = (10^6)^2  =   10^12  
+#   N*lg(N) = 10^6*(20) = 2*10^7
+#
+# N^2        10^12              
+# ------ = ------- =  .5(10^5) = 5(10^-1)(10^5) = 5(10^4) = 5*10000 = 50,000
+# N lg N   2*10^7
 
 # Week 1 Observations (10:05)
 # Power Law: a*N^b (06:22)
