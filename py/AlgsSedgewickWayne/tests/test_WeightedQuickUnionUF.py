@@ -57,11 +57,21 @@ class WeightedQuickUnionUF_Tests(unittest.TestCase):
     #self.failUnless( np.array_equal( o.ID, [0, 0, 1, 0, 0, 0, 0, 1, 0, 7] )) # Wrong Answer
 
 
-  def test_week1_exercise_Q2_Fall2014(self):
+  def test_week1_exercise_Q2_Fall2014_a(self):
     o = run_unions(10, "0-8 9-2 2-3 6-7 5-4 5-6 0-9 4-8 9-1", 
       "\nWeek 1 Exercise Question 2 seed = 114579")
     self.failUnless( np.array_equal( o.ID, [9, 9, 9, 9, 5, 9, 5, 6, 0, 9] ))
 
+
+  def test_week1_exercise_Q2_Fall2014_b(self):
+    o = run_unions(10, "4-5 5-9 6-8 4-3 1-2 2-6 7-4 1-7 7-0",
+      "\nWeek 1 Exercise Question 2 seed = 143149")
+
+  def test_week1_exercise_Q2_Fall2014_b(self):
+    o = run_unions(10, "7-2 8-6 5-9 3-8 3-1 5-7 1-0 2-6 4-6", "\nWk1 Ex Q3 seed = 265981")
+
+  def test_week1_exercise_Q2_Fall2014_c(self):
+    o = run_unions(10, "2-3 1-8 1-7 5-0 0-3 8-9 7-6 2-1 4-1", "\nWk1 Ex Q3 seed = 259961")
 
 if __name__ == '__main__':
   unittest.main()

@@ -27,8 +27,15 @@ class QuickFindUF_Tests(unittest.TestCase):
     o = run_unions(10, "4-7 7-8 9-7 6-5 8-6 2-0", "\ntest_week1_quiz_Q1b seed=686930")
     self.failUnless( o.ID == [0,1,0,3,5,5,5,5,5,5])
 
-  def test_week1_quiz_Q1_Fall2014(self):
+  def test_week1_quiz_Q1_Fall2014_a(self):
     run_unions(10, "0-2 3-0 5-9 5-2 7-9 7-8", "\nWeek 1 Exercise Question 1 seed = 567561")
+
+  def test_week1_quiz_Q1_Fall2014_b(self):
+    run_unions(10, "9-1 8-0 6-1 4-0 6-0 1-7", "\nWeek 1 Exercise Question 1 seed = 838874")
+
+  def test_week1_quiz_Q1_Fall2014_c(self):
+    run_unions(10, "5-2 0-2 5-9 2-1 3-9 4-6", "\nWeek 1 Exercise Question 1 seed = 533243")
+
 
 if __name__ == '__main__':
   unittest.main()

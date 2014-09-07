@@ -455,7 +455,7 @@ class WeightedQuickUnionUF:
     s  = " ".join('%3s'%str(e) for e in self.SZ)+" SZ[]"     # Size
     rv = [self._root(e)[0] for e in self.ID]     # Root Values
     #roots = set(rv)
-    rv = " ".join(['%3s'%str(e) for e in rv])+" ID[]"     # Root Values
+    rv = " ".join(['%3s'%str(e) for e in rv])+" root values" # Root Values
     return '\n'.join([h,rv,s])
 
 
