@@ -8,8 +8,8 @@ Implemented in Python 2.7.x by D Klopfenstein is selected code from:
   * http://algs4.cs.princeton.edu/code/
 
 **TESTS**: 
- * **Python** tests are run from: ./py/AlgsSedgewickWayne/tests/
- * **Java** code is run from: ./thirdparty/
+ * **Python** tests are run from: [./py/AlgsSedgewickWayne/tests/](./py/AlgsSedgewickWayne/tests)
+ * **Java** code is run from: [./thirdparty/](./thirdparty)
 
 **PREREQUISITES**: python, numpy, pylab, matplotlib, math, sys, os.
 *NOTE*: Most Python modules in this repository do not use matplotlib or pylab.
