@@ -3,31 +3,35 @@
 import unittest
 from AlgsSedgewickWayne.WeightedQuickUnionUF import *
 
+def run_unions(qty, union_txt, msg):
+  print msg
+  o = WeightedQuickUnionUF(qty); print o
+  for U_str in union_txt.split():
+    I = map(int, U_str.split('-'))
+    o.union(I[0], I[1])
+    print o, "weighted union({})".format(U_str)
+  return o
+
+
+
 class WeightedQuickUnionUF_Tests(unittest.TestCase):
 
   def test_week1_lecture(self): # Lecture: Quick-Union Improvements 1:22
-    print """test_week1_lecture quick-union.
+    msg = """
+    test_week1_lecture quick-union.
        _____6
       /    /|\ 
      4    0 2 5
     /|\    / \ 
    3 8 9  1   7
     """
-    o = WeightedQuickUnionUF(10); print o
-    o.union(4,3); print o, "weighted union(4,3)", "\n"
-    o.union(3,8); print o, "weighted union(3,8)", "\n"
-    o.union(6,5); print o, "weighted union(6,5)", "\n"
-    o.union(9,4); print o, "weighted union(9,4)", "\n"
-    o.union(2,1); print o, "weighted union(2,1)", "\n"
-    o.union(5,0); print o, "weighted union(5,0)", "\n"
-    o.union(7,2); print o, "weighted union(7,2)", "\n"
-    o.union(6,1); print o, "weighted union(6,1)", "\n"
-    o.union(7,3); print o, "weighted union(7,3)", "\n"
+    o = run_unions(10, "4-3 3-8 6-5 9-4 2-1 5-0 7-2 6-1 7-3", msg)
     self.failUnless( np.array_equal(o.ID, [6,2,6,4,6,6,6,2,4,4] ))
 
 
   def test_week1_exercise_Q2(self):
-    print """test_week1_exercise_Q2"
+    msg = """
+      test_week1_exercise_Q2"
       The correct answer is: 0 0 1 0 0 0 0 1 0 7
       
       Here is the id[] array after each union operation:
@@ -43,33 +47,23 @@ class WeightedQuickUnionUF_Tests(unittest.TestCase):
       7-0:  0 0 1 0 0 5 0 1 0 7 
       0-5:  0 0 1 0 0 0 0 1 0 7 
     """
-    o = WeightedQuickUnionUF(10); print o
-    o.union(1,2); print o, "weighted union(1,2)"
-    o.union(7,9); print o, "weighted union(7,9)"
-    o.union(0,4); print o, "weighted union(0,4)"
-    o.union(8,0); print o, "weighted union(8,0)"
-    o.union(4,6); print o, "weighted union(4,6)"
-    o.union(1,9); print o, "weighted union(1,9)"
-    o.union(3,4); print o, "weighted union(3,4)"
-    o.union(7,0); print o, "weighted union(7,0)"
-    o.union(0,5); print o, "weighted union(0,5)"
+    o = run_unions(10, "1-2 7-9 0-4 8-0 4-6 1-9 3-4 7-0 0-5", msg)
     print "ANSWER WEEK 1 Q2:", ' '.join(map(str,o.ID))
     self.failUnless( np.array_equal( o.ID, [0, 0, 1, 0, 0, 0, 0, 1, 0, 7] )) # Wrong Answer
 
+
   def test_week1_exercise_Q2b(self):
-    print """test_week1_exercise_Q2b"""
-    o = WeightedQuickUnionUF(10); print o
-    o.union(0,4); print o, "weighted union(0,4)"
-    o.union(7,3); print o, "weighted union(7,3)"
-    o.union(9,1); print o, "weighted union(9,1)"
-    o.union(5,0); print o, "weighted union(5,0)"
-    o.union(8,6); print o, "weighted union(8,6)"
-    o.union(8,3); print o, "weighted union(8,3)"
-    o.union(8,2); print o, "weighted union(8,2)"
-    o.union(9,0); print o, "weighted union(9,0)"
-    o.union(3,1); print o, "weighted union(3,1)"
+    o = run_unions(10, "0-4 7-3 9-1 5-0 8-6 8-3 8-2 9-0 3-1", "\ntest_week1_exercise_Q2b")
     print "ANSWER WEEK 1 Q2b:", ' '.join(map(str,o.ID))
     #self.failUnless( np.array_equal( o.ID, [0, 0, 1, 0, 0, 0, 0, 1, 0, 7] )) # Wrong Answer
 
+
+  def test_week1_exercise_Q2_Fall2014(self):
+    run_unions(10, "0-8 9-2 2-3 6-7 5-4 5-6 0-9 4-8 9-1", 
+      "\nWeek 1 Exercise Question 2 seed = 114579")
+
+
 if __name__ == '__main__':
   unittest.main()
+
+

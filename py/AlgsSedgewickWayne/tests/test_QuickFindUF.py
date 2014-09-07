@@ -3,44 +3,33 @@
 import unittest
 from AlgsSedgewickWayne.QuickFindUF import *
 
+def run_unions(qty, union_txt, msg):
+  print msg
+  o = QuickFindUF(qty); print o
+  for U_str in union_txt.split():
+    I = map(int, U_str.split('-'))
+    o.union(I[0], I[1])
+    print o, "union({})".format(U_str)
+  return o
+  
+
 class QuickFindUF_Tests(unittest.TestCase):
 
   def test_1(self):
-    print "\ntest_1"
-    o = QuickFindUF(10); print o
-    o.union(4,3); print o, "union(4,3)"
-    o.union(3,8); print o, "union(3,8)"
-    o.union(6,5); print o, "union(6,5)"
-    o.union(9,4); print o, "union(9,4)"
-    o.union(2,1); print o, "union(2,1)"
-    o.union(8,9); print o, "union(8,9)"
-    o.union(5,0); print o, "union(5,0)"
-    o.union(7,2); print o, "union(7,2)"
-    o.union(6,1); print o, "union(6,1)"
+    o = run_unions(10, "4-3 3-8 6-5 9-4 2-1 8-9 5-0 7-2 6-1", "\ntest_1")
     self.failUnless( o.ID == [1,1,1,8,8,1,1,1,8,8] )
 
-  def test_week1_quiz_Q1(self): # seed = 686930
-    print "\ntest_week1_quiz_Q1"
-    o = QuickFindUF(10); print o
-    o.union(6,3); print o, "union(6,3)"
-    o.union(6,5); print o, "union(6,5)"
-    o.union(9,5); print o, "union(9,5)"
-    o.union(7,0); print o, "union(7,0)"
-    o.union(3,1); print o, "union(3,1)"
-    o.union(9,4); print o, "union(9,4)"
+  def test_week1_quiz_Q1(self): 
+    o = run_unions(10, "6-3 6-5 9-5 7-0 3-1 9-4", "\ntest_week1_quiz_Q1 seed=686930")
     self.failUnless( o.ID == [0,4,2,4,4,4,4,0,8,4] )
 
-  def test_week1_quiz_Q1b(self): # seed = 686930
-    print "\ntest_week1_quiz_Q1b"
-    o = QuickFindUF(10); print o
-    o.union(4,7); print o, "union(4,7)"
-    o.union(7,6); print o, "union(7,6)"
-    o.union(9,7); print o, "union(9,7)"
-    o.union(6,5); print o, "union(6,5)"
-    o.union(8,6); print o, "union(8,6)"
-    o.union(2,0); print o, "union(2,0)"
-    print 'ANSWER Q1b', o
+  def test_week1_quiz_Q1b(self): 
+    o = run_unions(10, "4-7 7-8 9-7 6-5 8-6 2-0", "\ntest_week1_quiz_Q1b seed=686930")
     self.failUnless( o.ID == [0,1,0,3,5,5,5,5,5,5])
+
+  def test_week1_quiz_Q1_Fall2014(self):
+    run_unions(10, "0-2 3-0 5-9 5-2 7-9 7-8", "\nWeek 1 Exercise Question 1 seed = 567561")
 
 if __name__ == '__main__':
   unittest.main()
+  

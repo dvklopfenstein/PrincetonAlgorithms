@@ -452,10 +452,10 @@ class WeightedQuickUnionUF:
   def __str__(self):
     """>>> print obj."""
     h  = " ".join('%3s'%str(e) for e in range(len(self.ID)))+" header" # Header
-    s  = " ".join('%3s'%str(e) for e in self.SZ)+" size"     # Size
+    s  = " ".join('%3s'%str(e) for e in self.SZ)+" SZ[]"     # Size
     rv = [self._root(e)[0] for e in self.ID]     # Root Values
     #roots = set(rv)
-    rv = " ".join(['%3s'%str(e) for e in rv])+" root"     # Root Values
+    rv = " ".join(['%3s'%str(e) for e in rv])+" ID[]"     # Root Values
     return '\n'.join([h,rv,s])
 
 
