@@ -41,6 +41,7 @@ import re
 import sys
 import math
 import pylab as plt
+import numpy as np
 from matplotlib.lines import Line2D
 
 def getData( blktxt ):
@@ -59,13 +60,15 @@ def est_b( data ):
 
   CAVEAT: Cannot identify logarithmic factors with doubling hypothesis.
   """
+  lg_ratio = None
   prev = data[0]
   for D in data[1:]:
     if D[0] == 2*prev[0]:
       if prev[1] != 0: 
         ratio = D[1]/prev[1]
         lg_ratio = math.log(ratio,2)
-        sys.stdout.write('%10d %7.3f ratio=%7.3f lg(ratio)=%7.3f\n'%(D[0], D[1], ratio, lg_ratio))
+        sys.stdout.write('{:10d} {:7.3f} ratio={:7.3f} lg(ratio)={:7.3f}\n'.format(
+          D[0], D[1], ratio, lg_ratio))
       prev = D
     else:
       raise Exception("DATA IS NOT DOUBLED")
@@ -73,17 +76,29 @@ def est_b( data ):
  
 def solve_a(data, b):
   """Solve for a once b is known with T(N)=a*N^b (08:36)."""
+  a = []
   for D in data:
     #a = D[1]/(float(D[0])**b)
-    a = (float(D[0])**b)
-    sys.stdout.write('DATA:%10d %7.3f FORMULA: a(%e)*N(%10d)^b(%7.3f)\n'%(D[0], D[1], a, D[0], b))
+    a.append(1/(float(D[0])**b))
+    sys.stdout.write('DATA:{D:10d} {T:7.3f} FORMULA: a({a:e})*N({D:10d})^b({b:7.3f})\n'.format(
+      D=D[0], T=D[1], a=a[-1], b=b))
+  return sum(a)/len(a)
+  if len(a) > 2:
+    return sum(a[2:])/(len(a)-2)
+  return a[-1]
 
 def do_plot(data, a, b):
-  print Line2D.markers
   fig, ax = plt.subplots()
   X, Y = zip(*data)
-  plt.plot(X,Y,'b-o')
+  plt.plot(X,Y,'b-o', label="data")
+  X = np.linspace(0, data[-1][0], 1000)
+  print a, b
+  Y = a*np.power(X, b)
+  plt.plot(X,Y,'g-', label="a*X^b")
   ax.set_xlabel('Running Time')
   ax.set_ylabel('Size of Input')
   ax.set_title('Running Time Growth')
+  ax.legend()
   plt.show()
+
+

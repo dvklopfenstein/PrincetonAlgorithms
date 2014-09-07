@@ -5,6 +5,29 @@ from AlgsSedgewickWayne.PowerLaw import *
 
 class PowerLaw_Tests(unittest.TestCase):
 
+  def test_Lecture_Observations_Question(self):
+    """Question from the end of the Week 1 Lecture, Observations.
+
+       EXPLANATION: We assume T(N) = sN^b for some constants a and b.
+       As we double the size of the input N, the running time 
+       approximately quadruples, indicating a algorithm or b=2.
+       Plugging in T(54,000) = 20.5 and solving for a, we obtain
+       a = 20.5/64,000^2 ~ 5.0 x 10-9
+    """
+    strData = """
+       1000  0.0
+       2000  0.0
+       4000  0.1
+       8000  0.3
+      16000  1.3
+      32000  5.1
+      64000 20.5
+    """
+    data = getData(strData)
+    b = est_b( data )
+    a = solve_a( data, b )
+    #do_plot(data, a, b)
+
   def test_week1_exercise_Q1(self): # Lecture: Quick-Union Improvements 1:22
     # seed = 254585
     # estimate b: 7:58
