@@ -62,22 +62,14 @@
 
 import InputArgs
 import sys
+import itertools
 
 # Returns the number of triples (i, j, k) with i < j < k such that a[i] + a[j] + a[k] == 0.
 # @param a the array of integers
 # @return the number of triples (i, j, k) with i < j < k such that a[i] + a[j] + a[k] == 0
-def printAll(a):
-  """Print ThreeSum."""
-  N = len(a)
-  for i in range(N):
-    for j in range(i+1, N):
-      for k in range(j+1, N):
-        if sum([a[i], a[j], a[k]]) == 0:
-          sys.stdout.write('{:6d} + {:6d} + {:6d}\n'.format(a[i], a[j], a[k]))
-  return cnt
 
-def count(a):
-  """ThreeSum: Given N distict integers, how many triples sum to exactly zero?"""
+def count(a, prt=False):
+  """ThreeSum: Given N distinct integers, how many triples sum to exactly zero?"""
   N = len(a)
   cnt = 0
   for i in range(N):
@@ -85,7 +77,13 @@ def count(a):
       for k in range(j+1, N):
         if sum([a[i], a[j], a[k]]) == 0:
           cnt += 1
+          if prt:
+            sys.stdout.write('{:7d} + {:7d} + {:7d}\n'.format(a[i], a[j], a[k]))
   return cnt
+
+def count_python(a):
+  """ThreeSum using itertools"""
+  return sum((1 for x in itertools.combinations(a, r=3) if not sum(x)))
 
 
 
@@ -96,11 +94,18 @@ def run(a):
   """Run ThreeSum and report the elapsed time."""
   import timeit
   import datetime
+
   tic = timeit.default_timer()
   cnt = count(a)
+  sys.stdout.write('ThreeSum found {} times when run on {} integers\n'.format(cnt, len(a)))
   sys.stdout.write("Elapsed HMS: {}\n".format(
     str(datetime.timedelta(seconds=(timeit.default_timer()-tic)))))
-  sys.stdout.write('ThreeSum found {} times when run on {} integers\n'.format(cnt, len(a)))
+
+  #tic = timeit.default_timer()
+  #cnt = count_python(a)
+  #sys.stdout.write('ThreeSum found {} times when run on {} integers\n'.format(cnt, len(a)))
+  #sys.stdout.write("Elapsed HMS: {}\n".format(
+  #  str(datetime.timedelta(seconds=(timeit.default_timer()-tic)))))
 
 def run_fin(fin): 
   """Run ThreeSum using integers stored in a column in a file."""
@@ -127,6 +132,7 @@ if __name__ == '__main__':
     run_fin(sys.argv[1])
   elif sys.argv[1].isdigit():
     a = [randrange(-999999, 999999) for i in range(int(sys.argv[1]))]
+    a = range(5)
     run(a)
     
 
