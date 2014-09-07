@@ -10,6 +10,7 @@ def run_unions(qty, union_txt, msg):
     I = map(int, U_str.split('-'))
     o.union(I[0], I[1])
     print o, "weighted union({})".format(U_str)
+  print "ANSWER WEEK 1 Q2b:", ' '.join(map(str,o.ID))
   return o
 
 
@@ -48,19 +49,18 @@ class WeightedQuickUnionUF_Tests(unittest.TestCase):
       0-5:  0 0 1 0 0 0 0 1 0 7 
     """
     o = run_unions(10, "1-2 7-9 0-4 8-0 4-6 1-9 3-4 7-0 0-5", msg)
-    print "ANSWER WEEK 1 Q2:", ' '.join(map(str,o.ID))
     self.failUnless( np.array_equal( o.ID, [0, 0, 1, 0, 0, 0, 0, 1, 0, 7] )) # Wrong Answer
 
 
   def test_week1_exercise_Q2b(self):
     o = run_unions(10, "0-4 7-3 9-1 5-0 8-6 8-3 8-2 9-0 3-1", "\ntest_week1_exercise_Q2b")
-    print "ANSWER WEEK 1 Q2b:", ' '.join(map(str,o.ID))
     #self.failUnless( np.array_equal( o.ID, [0, 0, 1, 0, 0, 0, 0, 1, 0, 7] )) # Wrong Answer
 
 
   def test_week1_exercise_Q2_Fall2014(self):
-    run_unions(10, "0-8 9-2 2-3 6-7 5-4 5-6 0-9 4-8 9-1", 
+    o = run_unions(10, "0-8 9-2 2-3 6-7 5-4 5-6 0-9 4-8 9-1", 
       "\nWeek 1 Exercise Question 2 seed = 114579")
+    self.failUnless( np.array_equal( o.ID, [9, 9, 9, 9, 5, 9, 5, 6, 0, 9] ))
 
 
 if __name__ == '__main__':
