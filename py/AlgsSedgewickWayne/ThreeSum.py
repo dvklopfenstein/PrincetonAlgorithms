@@ -60,6 +60,153 @@
 # CONTEXT: Deeply related to problems in computational geometry.
 # graphics, movies, etc.
 
+
+####################################################################
+# Lecture Week 1 Mathematical Models (12:48)
+####################################################################
+# 
+# 03:10 COST OF BASIC OPERATIONS
+# variable declaration    int a               c1
+# assignment statement    a = b               c2
+# integer compare         a < b               c3
+# array element access    a[i]                c4
+# array length            a.length            c5
+# 1D array allocation     new int[N]          c6*N
+# 2D array allocation     new int[N][N]       c7*N^2
+# string length           s.length            c8
+# substring extraction    s.substring(N/2, N) c9
+# string concatenation    s + t               c10*N
+# 
+# NOVICE MISTAKE. Abusive string concatenation.
+# If you concatenate 2 strings, running time is proportional to length of string.
+
+
+# 03:56 HOW MANY INSTRUCTIONS AS A FUNCTION OF INPUT SIZE N?
+# 
+#   int count = 0;
+#   for (int i = 0; i<N; i++)
+#     if (a[i] == 0)
+#       count++;
+# 
+#   operation              freq     code
+#   ---------------------- -----    --------
+#   variable declaration     2      i, cnt
+#   assignment statement     2      i=0, cnt=0
+#   less than compare      N + 1    i<N
+#   equal to compare         N      a[i] == 0
+#   array access             N      a[i]
+#   increment             N to 2 N  i inc N times. cnt inc 0 to N times (dep. on input data)
+
+
+# 05:03 EXAMPLE 2-SUM: HOW MANY INSTRUCTIONS AS A FUNCTION OF INPUT SIZE N?
+# 
+#   int count = 0;
+#   for (int i = 0; i< N;i++)
+#     for (int j = i+1; j < N; j++)
+#       if (a[i] + a[j] == 0)
+#         count++;
+#
+# 09:12 BOTTOM LINE. Use COST MODEL and TILDE NOTATION to simplify counts.
+# ANSWER:	~N^2 array accesses.
+#
+# if (a[i] + a[j] == 0):                    (N) <- N choose 2
+#   0 + 1 + 2 + ... + (N-1) = 1/2(N)(N-1) = (2)
+# 
+#     operation                  freq             tilde      code
+#     ----------------------     -----            --------   ----------
+#   0 variable declaration       N + 2            ~N         i, cnt
+#   1 assignment statement       N + 2            ~N         i=0, cnt=0
+#  *2 less than compare      1/2(N+1)(N+2)        ~1/2N^2    i<N
+#  *3 equal to compare       1/2(N)(N-1)          ~1/2N^2    a[i] == 0
+#  *4 array access                N(N-1)          ~N^2       a[i]
+#  *5 increment        1/2(N)(N-1) to N(N-1)  1/2N^2 to ~N^2
+
+# *2-*5 are tedious to compute
+#
+# 7:08 So use the operation that is either/both:
+#   * the most expensive
+#   * the most frequent
+# 
+# SIMPLIFICATION 1: Choose array accesses as most important to count
+
+# 07:20 SIMPLIFICATION 2: TILDE NOTATION (Ignore low order terms in derived functions)
+# 
+# *  Estimate running time (or memory) as a function of input size N.
+# * Ignore lower order terms.
+#   - when N is large, terms are negliglible
+#   - when N is small, we don't care
+# 
+# EX1: 1/6N^3 +  20N       + 16    ~ 1/6N^3
+# EX2: 1/6N^3 + 100N^(4/3) + 56    ~ 1/6N^3
+# EX3: 1/6N^3 - 1/2N^2     + 1/3N  ~ 1/6N^3
+
+# 08:12 TECHNICAL DEFINITION. 
+# 
+#   f(N) ~ g(N) means    lim f(N)
+#                     N->Inf ---- = 1
+#                            g(N)
+
+# 10:00 APPROXIMATELY how many ARRAY ACCESSES as a function of input size N
+# for ThreeSum:
+#
+# if (a[i] + a[j] + a[k] == 0)
+# 
+# /N\ = N(N-1)(N-2)     1
+# \3/   -----------   ~ - N^3
+#           3!          6
+#
+# ANSWER: THREESUM has 1/3N^3 array accesses
+
+# 11:31 ESTIMATING A DISCRETE SUM: Replacing a discrete sum w/an integral:
+#
+# EX1: 1 + 2 +...+ N.           SUM(i=1:N) ~ Integral(x=1:N)[x dx]   ~ 1/2 N^2
+# EX2: 1 + 1/2 + 1/3 +...+ 1/N  SUM(i=1:N) ~ Insegral(x=1:N)[1/x dx] ~ ln N
+# EX3: 3-sum triple loop. SUM(i=1:N)SUM(y=x:N)SUM(z=y:N)dz dy dx     ~ 1/6 N^3
+
+# 11:45 MATHEMATICAL MODELS FOR RUNNING TIME
+#
+# IN PRINCIPLE. accurate mathematical models are available.
+#
+# IN PROACTICE.
+#  * Formulas can be complicated.
+#  * Advanced mathematics might be required.
+#  * Exact models best left for experts.
+#
+# T(N) = c1*A + c2*B + c3*C + c4*D + c5*E
+#   A = array access
+#   B = integer add
+#   C = integer compare
+#   D = increment
+#   E = variable assignment
+# cN depends on machine, compiler
+# A..E frequencies: depend on algorithm, input
+# 
+# BOTTOM LINE. We use APPROXIMATE models in this course: T(N) ~ cN^3
+
+# 12:42 QUESTION: How many array accesses does the following code fragment
+# make as a function of N? (Assume the compiler does not optimize away
+# accesses in the innermost loop.)
+# 
+# int sum = 0;
+# for (int i = 0; i < N; i++)
+#   for (int j = i+1; j < N; j++)
+#     for (int k = 1; k < N; k = k*2)
+#       if (a[i] + a[j] >= a[k])
+#         sum++;      
+#
+# ANSWER: ~3/2*N^2*lg(N)
+#
+# EXPLANATION: Not all tripl loops have cubic running times. for a given
+# value of i and j, the k-loop requires only 3*lg(N) array access: the 
+# body is executed lg(N) times and each time involves 3 array accesses.
+# As in the 2-SUM and 3-SUM analysis, the number of times the k-loop
+# is executed is (N choose 2) ~ 1/2 N^2
+
+
+
+
+
+
 import InputArgs
 import sys
 import itertools
@@ -84,7 +231,6 @@ def count(a, prt=False):
 def count_python(a):
   """ThreeSum using itertools"""
   return sum((1 for x in itertools.combinations(a, r=3) if not sum(x)))
-
 
 
 # Reads in a sequence of integers from a file, specified as a command-line argument;
