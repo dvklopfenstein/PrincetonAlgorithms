@@ -40,7 +40,52 @@
  #
  #************************************************************************/
 
-import java.util.Arrays
+##########################################################################
+# Lecture Week 1 "Order-of-Browrh Classifications" (14:39)
+##########################################################################
+@ 12:29 SORTING-BASED ALGORITHM.
+#  * SORT the N (distinct) numbers.
+#  * For each pair of numbers a[i] and a[h],
+#    BINARY SEARCH for -(a[i] + a[j]).
+#
+# INPUT: 30 -40 -20 -10 40 0 10 5
+# SORT:  -40 -20 -10 0 5 10 30 40    N lg N
+# BINARY SEARCH:
+#   (-40, -20)  60
+#   (-40, -10)  50
+#   (-40,   0)  40 **
+#   (-40,   5)  35
+#   (-40,  10)  30 **
+#     ...
+#   (-40,  40)   0 **
+#     ...
+#   (-10,   0)  10 **
+#     ...
+#   (-20,  10)  10 -- only count if a[i] < a[j] < a[k] to avoid double-counting
+#     ...
+#   ( 10,  30) -40 --
+#   ( 10,  40) -50 
+#   ( 30,  40) -70 
+#
+# 13:09 ANALYSIS. Order of growth is N^2 log N.
+#   * Step 1: N^2 with insertion sort.
+#   * Step 2: N^2 log N with binary search.
+
+# 14:02 COMPARING PROGRAMS
+#
+# HYPOTHESIS. The sorting-based N^2 log N algorithm for 3-SUM is significantly
+# faster in practice than the brute-force N^3 algorithm
+#
+# GUIDING PRINCIPLE. 	Typically, better order of growth => faster in practice.
+
+# QUESTION: Which of the following order-of=growth classifications represents
+# the maximum number of array accesses used to binary search a sorted array
+# of size N?
+# ANSWER:  logarithmic
+# EXPLANATION: In bainary search, the number of array accesses equal the 
+# number of compares, which we have seen is ~ 1 lg N, i.g., when the key
+# we are searching for is not in the array.
+
 
 #*
  #  The <tt>ThreeSumFast</tt> class provides static methods for counting
