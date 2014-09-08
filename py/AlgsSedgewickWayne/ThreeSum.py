@@ -202,6 +202,13 @@
 # As in the 2-SUM and 3-SUM analysis, the number of times the k-loop
 # is executed is (N choose 2) ~ 1/2 N^2
 
+# 01:45 Lecture Week 1 "Theory of Algorithms"
+# 
+# EX 1. Array accesses for brute-force 3-SUM.
+#   BEST.      ~ 1/2 N^2
+#   AVERAGE.   ~ 1/2 N^2
+#   WORST.     ~ 1/2 N^2
+
 
 
 

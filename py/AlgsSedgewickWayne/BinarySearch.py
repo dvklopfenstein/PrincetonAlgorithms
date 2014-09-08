@@ -77,6 +77,11 @@
 #      = 1 + lg N
 # 
 
+# 02:00 Lecture Week 1 "Theory of Algorithms" (11:35)
+# 
+#   BEST     ~ 1
+#   AVERAGE  ~ lg N
+#   WORST    ~ lg N
 
 #*
  #  The <tt>BinarySearch</tt> class provides a static method for binary
