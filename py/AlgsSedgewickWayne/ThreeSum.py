@@ -246,7 +246,7 @@ def count_itertools(a): # written by Ashwini Chaudhary
   return sum((1 for x in itertools.combinations(a, r=3) if not sum(x)))
 
 
-def count_itertools_faster(a):
+def count_itertools_faster(a): # written by Veedrak (fastest)
   print "RUNNING count_itertools (faster)..."
   return sum(1 for x, y, z in itertools.combinations(a, r=3) if x+y==z)
 
