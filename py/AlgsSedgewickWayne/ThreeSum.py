@@ -11,7 +11,7 @@
  #                http://algs4.cs.princeton.edu/14analysis/32Kints.txt
  #                http://algs4.cs.princeton.edu/14analysis/1Mints.txt
  #
- #  A program with cubic running time. Read in N integers
+ #  A program with cubic run_timedning time. Read in N integers
  #  and counts the number of triples that sum to exactly 0
  #  (ignoring integer overflow).
  #
@@ -78,7 +78,7 @@
 # string concatenation    s + t               c10*N
 # 
 # NOVICE MISTAKE. Abusive string concatenation.
-# If you concatenate 2 strings, running time is proportional to length of string.
+# If you concatenate 2 strings, run_timedning time is proportional to length of string.
 
 
 # 03:56 HOW MANY INSTRUCTIONS AS A FUNCTION OF INPUT SIZE N?
@@ -131,7 +131,7 @@
 
 # 07:20 SIMPLIFICATION 2: TILDE NOTATION (Ignore low order terms in derived functions)
 # 
-# *  Estimate running time (or memory) as a function of input size N.
+# *  Estimate run_timedning time (or memory) as a function of input size N.
 # * Ignore lower order terms.
 #   - when N is large, terms are negliglible
 #   - when N is small, we don't care
@@ -196,7 +196,7 @@
 #
 # ANSWER: ~3/2*N^2*lg(N)
 #
-# EXPLANATION: Not all tripl loops have cubic running times. for a given
+# EXPLANATION: Not all tripl loops have cubic run_timedning times. for a given
 # value of i and j, the k-loop requires only 3*lg(N) array access: the 
 # body is executed lg(N) times and each time involves 3 array accesses.
 # As in the 2-SUM and 3-SUM analysis, the number of times the k-loop
@@ -217,13 +217,17 @@
 import InputArgs
 import sys
 import itertools
+import timeit
+import datetime
 
 # Returns the number of triples (i, j, k) with i < j < k such that a[i] + a[j] + a[k] == 0.
 # @param a the array of integers
 # @return the number of triples (i, j, k) with i < j < k such that a[i] + a[j] + a[k] == 0
 
-def count(a, prt=False):
+# http://stackoverflow.com/questions/25712596/why-is-the-map-version-of-threesum-so-slow/25717916#25717916
+def count_slow(a, prt=False): # initial translate of Java (super slow)
   """ThreeSum: Given N distinct integers, how many triples sum to exactly zero?"""
+  print "RUNNING count_slow..."
   N = len(a)
   cnt = 0
   for i in range(N):
@@ -235,58 +239,89 @@ def count(a, prt=False):
             sys.stdout.write('{:7d} + {:7d} + {:7d}\n'.format(a[i], a[j], a[k]))
   return cnt
 
-def count_python(a):
+
+def count_itertools(a): # written by Ashwini Chaudhary
   """ThreeSum using itertools"""
+  print "RUNNING count_itertools..."
   return sum((1 for x in itertools.combinations(a, r=3) if not sum(x)))
 
 
+def count_itertools_faster(a):
+  print "RUNNING count_itertools (faster)..."
+  return sum(1 for x, y, z in itertools.combinations(xs, r=3) if x+y==z)
+
+
+def count_fixed(a): # written by roippi
+  print "RUNNING count_fixed..."
+  N = len(a)
+  cnt = 0
+  for i in range(N):
+    for j in range(i+1, N):
+      for k in range(j+1, N):
+        if a[i] + a[j] + a[k] == 0:
+          cnt += 1
+  return cnt
+
+
+def count_enumerate(a): # written by roippi
+  print "RUNNING count_enumerate..."
+  cnt = 0
+  for i, x in enumerate(a):
+    for j, y in enumerate(a[i+1:], i+1):
+      for z in a[j+1:]:
+        if x + y + z == 0:
+          cnt += 1
+  return cnt
+
+# --------------------------------------------------------------------------------------
 # Reads in a sequence of integers from a file, specified as a command-line argument;
 # counts the number of triples sum to exactly zero; prints out the time to perform
 # the computation.
-def run(a):
+def run_timed(a, cnt_fnc):
   """Run ThreeSum and report the elapsed time."""
-  import timeit
-  import datetime
-
   tic = timeit.default_timer()
-  cnt = count(a)
-  sys.stdout.write('ThreeSum found {} times when run on {} integers\n'.format(cnt, len(a)))
+  cnt = cnt_fnc(a)
+  sys.stdout.write('ThreeSum found {} times when run_timed on {} integers\n'.format(cnt, len(a)))
   sys.stdout.write("Elapsed HMS: {}\n".format(
     str(datetime.timedelta(seconds=(timeit.default_timer()-tic)))))
 
-  #tic = timeit.default_timer()
-  #cnt = count_python(a)
-  #sys.stdout.write('ThreeSum found {} times when run on {} integers\n'.format(cnt, len(a)))
-  #sys.stdout.write("Elapsed HMS: {}\n".format(
-  #  str(datetime.timedelta(seconds=(timeit.default_timer()-tic)))))
-
-def run_fin(fin): 
+def run_timed_fin(fin, cnt_fnc): 
   """Run ThreeSum using integers stored in a column in a file."""
   sys.stdout.write('\nRunning ThreeSum on data in: {}\n'.format(fin))
-  run(InputArgs.get_ints_from_file(fin))
+  run_timed(InputArgs.get_ints_from_file(fin), cnt_fnc)
 
-def run_fins(fins): 
+def run_timed_fins(fins): 
   """Run ThreeSum on multiple files containing integers."""
   for fin in fins:
-    run_fin(fin)
+    run_timed_fin(fin)
 
 if __name__ == '__main__':
   import os
   from random import randrange
-  # If there are no arguments, run the examples (May take a While)
+  # If there are no arguments, run 1 example using a few different Python algorithms
+  # to show different ways to implement the O(N^3) algorithm in Python
   if len(sys.argv) == 1:
+    run_timed_fin('../../thirdparty/1Kints.txt', count_slow)
+    run_timed_fin('../../thirdparty/1Kints.txt', count_itertools)
+    run_timed_fin('../../thirdparty/1Kints.txt', count_itertools_faster)
+    run_timed_fin('../../thirdparty/1Kints.txt', count_fixed)
+    run_timed_fin('../../thirdparty/1Kints.txt', count_enumerate)
+  # Run all the examples from the Princeton Algorithms book-site
+  elif sys.argv[1] == 'all':
     fins = [
       '../../thirdparty/1Kints.txt',
       '../../thirdparty/2Kints.txt',
       '../../thirdparty/4Kints.txt',
       '../../thirdparty/8Kints.txt']
-    run_fins(fins)
+    run_timed_fins(fins)
+  # If the argument is a file, run using the integers from that file
   elif os.path.isfile(sys.argv[1]):
-    run_fin(sys.argv[1])
+    run_timed_fin(sys.argv[1])
+  # If the argument is a digit, run using that many randomly chosen digits.
   elif sys.argv[1].isdigit():
     a = [randrange(-999999, 999999) for i in range(int(sys.argv[1]))]
-    a = range(5)
-    run(a)
+    run_timed(a, count_slow)
+    run_timed(a, count_itertools)
     
 
 
