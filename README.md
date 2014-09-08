@@ -29,7 +29,7 @@ Implemented in Python 2.7.x by D Klopfenstein is selected code from:
 ```
 Key   1 FUNDAMENTALS         Description                      DATA
 :-- --: :------------------- :-----------------------------   :-------------
-JP.   – BinarySearch         binary search                    tinyW.txt tinyT.txt largeW.txt largeT.txt
+J..   – BinarySearch         binary search                    tinyW.txt tinyT.txt largeW.txt largeT.txt
 ...   – RandomSeq            random numbers in a given range  –
 ...   – Average              average of a sequence of numbers –
 ...   – Cat                  concatenate files                in1.txt in2.txt
@@ -57,7 +57,7 @@ J..   – Bag                  multiset                         –
 ...   – LinearRegression     simple linear regression         –
 ...   – PolynomialRegression polynomial regression            –
 JP.   – ThreeSum             brute-force three sum            1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt
-...   – ThreeSumFast         faster three sum                 1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt
+J..   – ThreeSumFast         faster three sum                 1Kints.txt 2Kints.txt 4Kints.txt 8Kints.txt
 ...   – DoublingTest         doubling test                    –
 ...   – DoublingRatio        doubling ratio                   –
 JP.   – QuickFindUF          quick find                       tinyUF.txt mediumUF.txt largeUF.txt
