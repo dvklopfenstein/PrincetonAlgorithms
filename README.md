@@ -3,10 +3,12 @@ Princeton University's "Algorithms and Clients"
 by Kevin Wayne, Robert Sedgewick
 --------------------------------
 
-Implemented in Python 2.7.x by D Klopfenstein is selected code (with added comments in the Python code based on material from the [coursera class](https://class.coursera.org/algs4partI-006) or
-[book](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1410217876&sr=1-1)) from:
+Implemented in Python 2.7.x by D Klopfenstein is selected code from:
 
   * http://algs4.cs.princeton.edu/code/
+
+My Python implementations may contain additional comments based on material from the [coursera class](https://class.coursera.org/algs4partI-006) or
+[book](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1410217876&sr=1-1)
 
 **TESTS**: 
  * **Python** tests are run from: [./py/AlgsSedgewickWayne/tests/](./py/AlgsSedgewickWayne/tests)
