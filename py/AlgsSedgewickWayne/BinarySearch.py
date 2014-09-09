@@ -130,23 +130,53 @@
             if rank(key, whitelist) == -1)
                 StdOut.println(key)
 
+def run(a):
+  a = sorted(a)
+  rank
+
+# --------------------------------------------------------------------------------------
+# Reads in a sequence of integers from a file, specified as a command-line argument;
+# counts the number of triples sum to exactly zero; prints out the time to perform
+# the computation.
+def run_timed(a):
+  """Run BinarySearch and report the elapsed time."""
+  tic = timeit.default_timer()
+  val = rank(a)
+  sys.stdout.write('BinarySearch found {} times when run_timed on {} integers\n'.format(val, len(a)))
+  sys.stdout.write("Elapsed HMS: {}\n".format(
+    str(datetime.timedelta(seconds=(timeit.default_timer()-tic)))))
+
+def run_timed_fin(fin):
+  """Run BinarySearch using integers stored in a column in a file."""
+  sys.stdout.write('\nRunning BinarySearch on data in: {}\n'.format(fin))
+  run_timed(InputArgs.get_ints_from_file(fin))
+
+def run_timed_fins(fins):
+  """Run BinarySearch on multiple files containing integers."""
+  for fin in fins:
+    run_timed_fin(fin)
+
 if __name__ == '__main__':
   import os
   from random import randrange
+  # If there are no arguments, run the smallest example on the Sedgewick-Wayne web-site.
   if len(sys.argv) == 1:
-    run_fin('../../thirdparty/tinyW.txt')
-  elif os.path.isfile(sys.argv[1]):
-    run_fin(sys.argv[1])
-  elif sys.argv == 'all':
+    run_timed_fin('../../thirdparty/tinyW.txt')
+  # Run all the examples from the Princeton Algorithms book-site
+  elif sys.argv[1] == 'all':
     fins = [
       '../../thirdparty/tinyW.txt',
       '../../thirdparty/tinyT.txt',
       '../../thirdparty/largeW.txt',
-      '../../thirdparty/largeT.txt',]
-    run_fins(fins)
+      '../../thirdparty/largeT.txt']
+    run_timed_fins(fins)
+  # If the argument is a file, run using the integers from that file
+  elif os.path.isfile(sys.argv[1]):
+    run_timed_fin(sys.argv[1])
+  # If the argument is a digit, run using that many randomly chosen digits.
   elif sys.argv[1].isdigit():
     a = [randrange(-999999, 999999) for i in range(int(sys.argv[1]))]
-    a = range(int(sys.argv[1]))
+    run_timed(a)
 
 # Copyright © 2002–2010, Robert Sedgewick and Kevin Wayne. 
 # Java last updated: Sun Aug 31 21:38:23 EDT 2014.
