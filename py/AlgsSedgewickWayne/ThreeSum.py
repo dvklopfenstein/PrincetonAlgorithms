@@ -209,6 +209,120 @@
 #   AVERAGE.   ~ 1/2 N^2
 #   WORST.     ~ 1/2 N^2
 
+# 02:56 TYPES OF ANALYSES
+# 
+# BEST  CASE. Lower bound on cost.
+# WORST CASE. Upper bound on cost.
+# AVERAGE CASE. "Expected" cost.
+# 
+# ACTUAL DATA MIGHT NOT MATCH INPUT MODEL?
+# * Need to understand input to effectively process it.
+# * Approach 1: design for the worst case.
+# * Approach 2: randomize, depend on probabilistic guarantee.
+
+# 02:58 51 GOALS.
+#   * Establish "difficulty" of a problem.
+#   * Develop "optimal" algorithms.
+# 
+# APPROACH
+#   * Suppress details in analysis: analyze "to within a constant factor".
+#   * Eliminate variability in in put model by focusing on the worst case.
+# 
+# OPTIMAL ALGORITHM
+#   * Performance guarantee (to within a constant factor) for any input.
+#   * No algorithm can provide a better performance guarantee.
+
+# 04:36 COMMONLY-USED NOTATIONS IN THE THEORY OF ALGORITHMS
+# 
+# NOTATION   PROVIDES         EXAMPLE     SHORTHAND FOR            USED TO
+# ---------  ---------------  ----------  -----------------------  -------
+# Big Theta  asymptotic       theta(N^2)         1/2 N^2           classify 
+#            order of growth                      10 N^2           algorithms
+#                                         5 N^2 + 22 N log N + 3N
+# 
+# Big Oh     theta(N^2)       Oh(N^2)             10 N^2           develop
+#            and smaller                         100 N^2           upper bounds
+#                                             22 N log N + 3N
+# 
+# Big Omega  theta(N^2)       omega(N^2)         1/2 N^2           develop
+#            and larger                              N^5           lower bounds
+#                                          N^3 + 22 N log N + 3 N
+#
+# Tilde      Leading term     ~10^2               10 N^2           provide 
+# 11:14                                    10 N^2 + 22 N log N     approximate
+#                                          10 N^2 +  2 N + 37      model
+#
+# COMMON MISTAKE: Interpreting big-Oh as an approximate model.
+# THIS COURSE: Focus on approximate models: use Tilde-notation
+
+# 11:28 LECTURE QUESTION: Which of the fllowing functions is O(N^3)?
+# 
+#   11 N + 15 lg N + 100
+#   1/3 N^2
+#   25,000 N^3
+# 
+# ANSWER: ALL OF THE ABOVE
+# EXPLANATION: Recall that big-Oh notation provides only an upper bound on the
+# growth rate of a function as N gets large. In this course, we primarily
+# use tilde notation because it more accurately describes the function -- it 
+# provides both an upper and lower bound on the function as well as
+# the coefficient of the leading term.
+# 
+
+# 07:02 53 THEORY OF ALGORITHMS: EXAMPLE 1
+# 
+# EX: 1-Sum = "Is there a 0 in the array"
+# 
+# UPPER BOUND. A specific algorithm.
+#   * Ex. Brute-force algorithm for 1-Sum: Look at every array entry.
+#   * Running time of the optimal algorithm for 1-Sum is )(N)
+# 
+# LOWER BOUND. Proof that no algorithm can do better.
+#   * Ex. Have to examine all N entries (any unexamined one might be 0).
+#   * Running time of the optimal algorithm for 1-Sum is omega(N)
+# 
+# OPTIMAL ALGORITHM.
+#   * Lower bound equals upper bound (to within a constant factor).
+#   * Ex. **Brute-fore algorithm for 1-Sum is optimal: its running time is theta(N).
+
+
+# 07:38 55 THEORY OF ALGORITHMS: EXAMPLE 2
+# 
+# EX: 3-Sum 
+# 
+# UPPER BOUND. A specific algorithm.
+#   * Ex. Improved algorithm for 3-Sum
+#   * Running time of the optimal algorithm for 3-Sum is O(N^2 log N)
+# 
+# LOWER BOUND. Proof that no algorithm can do better.
+#   * Ex. Have to examine all N entries to solve 3-Sum.
+#   * Running time of the optimal algorithm for 3-SUm is omega(N)
+# 
+# OPTIMAL ALGORITHM.
+#   * Optimal algorithm for 3-Sum?
+#   * Subquadratic algorithm of Quadratic lower bound for 3-Sum?
+#     Do not know.
+#     DO not know if alg is < O(N^2)
+
+# 08:42 56 ALGORITHM DESIGN APPROACH
+# 
+# START
+#  * Develop an algorithm
+#  * Prove a lower bound
+# 
+# GAP?
+#  * Lower the upper bound (discover a new algorithm)
+#  * Raise the lower bound (more difficult)
+#  
+# GOLDEN AGE OF ALGORITHM DESIGN
+#  * 1970s-.
+#  * Steadily decreasing upper bounds for many imporant problems.
+#  * Many known optimal algorithms.
+#
+# CAVEATS.
+#  * Overly pessimistic to focus on worst case?
+#  * Need closer analysis than "to within a constant factor" to predict performance.
+# 
 
 import InputArgs
 import sys
