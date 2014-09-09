@@ -202,7 +202,9 @@
 # As in the 2-SUM and 3-SUM analysis, the number of times the k-loop
 # is executed is (N choose 2) ~ 1/2 N^2
 
+####################################################################
 # 01:45 Lecture Week 1 "Theory of Algorithms"
+####################################################################
 # 
 # EX 1. Array accesses for brute-force 3-SUM.
 #   BEST.      ~ 1/2 N^2
@@ -323,6 +325,91 @@
 #  * Overly pessimistic to focus on worst case?
 #  * Need closer analysis than "to within a constant factor" to predict performance.
 # 
+
+####################################################################
+# Lecture Week 1 "Memory" (08:11)
+####################################################################
+# BASICS
+#   BIT.   0 or 1
+#   BYTE.  8 bits
+#   MEGABYTE (MB). 1 million or 2^20 bytes
+#   GIGABYTE (GB). 1 billion or 2^30 bytes
+
+# TYPICAL MEMORY USAGE FOR PRIMITIVE TYPES 
+# type     bytes
+# -------  -----
+# boolean     1
+# byte        1
+# char        2
+# int         4
+# float       4
+# long        8
+# double      8
+
+# 02:42 TYPICAL MEMORY USAGE FOR ARRAYS
+# type       bytes
+# ---------  --------
+# char[]     2N + 24
+# int[]      4N + 24
+# double[]   8N + 24
+
+# 03:00 FOR TWO DIMENSIONAL ARRAYS
+# type       bytes
+# ---------  --------
+# char[][]   ~ 2 M N 
+# int[][]    ~ 4 M N 
+# double[][] ~ 8 M N 
+
+# 03:42 TYPICAL USAGE FOR OBJECTS IN JAVA
+#   OBJECT OVERHEAD. 16 bytes
+#   OBJECT REFERENCE. 8 bytes
+#   OBJECT. 16 bytes + memory for each instance variable 
+#     +8 if inner class (for pointer to enclosing class).
+#   PADDING.  Each object uses a multiple of 8 bytes.
+
+# 05:28 
+# SHALLOW MEMORY USAGE: Don't count referenced objects.
+# DEEP    MOMORY USAGE: If array entry or instance is a refence,
+#   add memory (recursively) for referenced object.
+
+# 04:00 EX 1 DATE OBJECT
+# 
+# public class Date       // 16 bytes (object overhead)
+# {
+#   private int day;      //  4 bytes (int)
+#   private int month;    //  4 bytes (int)
+#   private int year;     //  4 bytes (int)
+# ...                     //----------------
+# }                       //  4 bytes (padding)
+#                         //----------------
+#                         // 32 bytes
+
+# 04:29 EX 2 A VIRGIN STRING OF LENGTH N USES ~2N BYTES OF MEMORY
+# 
+# public class String     // 16 bytes (object overhead)
+# {
+#   private char[] value; //  8 bytes (reference to array)
+#                         //  2N + 24 bytes (char[] array)
+#   private int offset;   //  4 bytes (int)
+#   private int count;    //  4 bytes (int)
+#   private int hash;     //  4 bytes (int)
+# ...                     //----------------
+# }                       //  4 bytes (padding)
+#                         //----------------
+#                         // 2N + 64 bytes
+
+# 06:00 public class WeightedQuickUnionUF { // 16 bytes (object overhead)
+#           private int[] id;          // 4N + 24 bytes (int[] array)
+#                                      //       8 bytes (reference to array)
+#           private int[] sz;          // 4N + 24 bytes (int[] array)
+#                                      //       8 bytes (reference to array)
+#           private int count;         //       4 bytes (int)
+#                                      -----------
+#                                      // 8N + 84
+#                                      //    +  4 bytes padding
+
+
+
 
 import InputArgs
 import sys
