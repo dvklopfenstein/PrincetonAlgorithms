@@ -242,17 +242,17 @@ def count_slow(a, prt=False): # initial translate of Java (super slow)
 
 def count_itertools(a): # written by Ashwini Chaudhary
   """ThreeSum using itertools"""
-  print "RUNNING count_itertools..."
+  print "RUNNING count_itertools, written by Ashwini Chaudhary..."
   return sum((1 for x in itertools.combinations(a, r=3) if not sum(x)))
 
 
 def count_itertools_faster(a): # written by Veedrak (fastest)
-  print "RUNNING count_itertools (faster)..."
+  print "RUNNING count_itertools (faster), written by Veedrak..."
   return sum(1 for x, y, z in itertools.combinations(a, r=3) if x+y==z)
 
 
 def count_fixed(a): # written by roippi
-  print "RUNNING count_fixed..."
+  print "RUNNING count_fixed, written by roippi..."
   N = len(a)
   cnt = 0
   for i in range(N):
@@ -264,7 +264,7 @@ def count_fixed(a): # written by roippi
 
 
 def count_enumerate(a): # written by roippi
-  print "RUNNING count_enumerate..."
+  print "RUNNING count_enumerate, written by roippi..."
   cnt = 0
   for i, x in enumerate(a):
     for j, y in enumerate(a[i+1:], i+1):
