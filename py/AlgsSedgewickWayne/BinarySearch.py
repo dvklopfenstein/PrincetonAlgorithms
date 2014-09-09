@@ -96,43 +96,42 @@
  #  @author Kevin Wayne
  #/
 
-    # Searches for the integer key in the sorted array a[].
-    # @param key the search key
-    # @param a the array of integers, must be sorted in ascending order
-    # @return index of key in array a[] if present; -1 if not present
-    def rank(key, a):
-        lo = 0
-        hi = len(a) - 1
-        while lo <= hi:
-            #  is in a[lo..hi] or not present.
-            mid = lo + (hi - lo) / 2
-            # One 3-way compare:
-            if   key < a[mid]: hi = mid - 1
-            elif key > a[mid]: lo = mid + 1
-            else: return mid
-        return -1
+import random 
+import sys
+import InputArgs
+import timeit
+import datetime
+import os
 
-    # Reads in a sequence of integers from the whitelist file, specified as
-    # a command-line argument. Reads in integers from standard input and
-    # prints to standard output those integers that do *not* appear in the file.
-    def main():
-        import InputArgs
-        # read the integers from a file
-        data = InputArgs.getStrArray("0 1 2 3 4 5 7 9")
-        int[] whitelist = in.readAllInts()
+# Searches for the integer key in the sorted array a[].
+# @param key the search key
+# @param a the array of integers, must be sorted in ascending order
+# @return index of key in array a[] if present; -1 if not present
+def rank(key, a):
+    lo = 0
+    hi = len(a) - 1
+    while lo <= hi:
+        #  is in a[lo..hi] or not present.
+        mid = lo + (hi - lo) / 2
+        # One 3-way compare:
+        if   key < a[mid]: hi = mid - 1
+        elif key > a[mid]: lo = mid + 1
+        else: return mid
+    return -1
 
-        # sort the array
-        Arrays.sort(whitelist)
-
-        # read integer key from standard input; print if not in whitelist
-        while (!StdIn.isEmpty()):
-            key = StdIn.readInt()
-            if rank(key, whitelist) == -1)
-                StdOut.println(key)
-
+# Reads in a sequence of integers from the whitelist file, specified as
+# a command-line argument. Reads in integers from standard input and
+# prints to standard output those integers that do *not* appear in the file.
 def run(a):
-  a = sorted(a)
-  rank
+  a   = sorted(a)
+  # Randomly pick a key
+  key = random.randrange(a[0], a[-1])
+  idx = rank(key, a)
+  if idx == -1:
+    sys.stdout.write('Key({}) not found in array(L={})\n'.format(key, len(a)))
+    if len(a)<20: print a
+  else:
+    sys.stdout.write('Key({}) found in array(L={}) at idx({})\n'.format(key, len(a), idx))
 
 # --------------------------------------------------------------------------------------
 # Reads in a sequence of integers from a file, specified as a command-line argument;
@@ -141,8 +140,7 @@ def run(a):
 def run_timed(a):
   """Run BinarySearch and report the elapsed time."""
   tic = timeit.default_timer()
-  val = rank(a)
-  sys.stdout.write('BinarySearch found {} times when run_timed on {} integers\n'.format(val, len(a)))
+  val = run(a)
   sys.stdout.write("Elapsed HMS: {}\n".format(
     str(datetime.timedelta(seconds=(timeit.default_timer()-tic)))))
 
@@ -157,8 +155,13 @@ def run_timed_fins(fins):
     run_timed_fin(fin)
 
 if __name__ == '__main__':
-  import os
-  from random import randrange
+  """Ways to run this script:
+
+  BinarySearch.py       => Runs data in tinyW.txt
+  BinarySearch.py all   => Runs all: tinyW.txt, tinyT.txt, largeW.txt, largeW.txt
+  BinarySearch.py tinyW.txt => Runs data in tinyW.txt
+  BinarySearch.py 10    => Runs on 10 random numbers from -20 to 20
+  """
   # If there are no arguments, run the smallest example on the Sedgewick-Wayne web-site.
   if len(sys.argv) == 1:
     run_timed_fin('../../thirdparty/tinyW.txt')
@@ -175,8 +178,9 @@ if __name__ == '__main__':
     run_timed_fin(sys.argv[1])
   # If the argument is a digit, run using that many randomly chosen digits.
   elif sys.argv[1].isdigit():
-    a = [randrange(-999999, 999999) for i in range(int(sys.argv[1]))]
+    dig = int(sys.argv[1])
+    a = [random.randrange(-2*dig, 2*dig) for i in range(dig)]
     run_timed(a)
 
-# Copyright © 2002–2010, Robert Sedgewick and Kevin Wayne. 
+# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne. 
 # Java last updated: Sun Aug 31 21:38:23 EDT 2014.
