@@ -167,7 +167,7 @@
 #
 # IN PRINCIPLE. accurate mathematical models are available.
 #
-# IN PROACTICE.
+# IN PRACTICE.
 #  * Formulas can be complicated.
 #  * Advanced mathematics might be required.
 #  * Exact models best left for experts.
@@ -210,10 +210,6 @@
 #   WORST.     ~ 1/2 N^2
 
 
-
-
-
-
 import InputArgs
 import sys
 import itertools
@@ -246,9 +242,9 @@ def count_itertools(a): # written by Ashwini Chaudhary
   return sum((1 for x in itertools.combinations(a, r=3) if not sum(x)))
 
 
-def count_itertools_faster(a): # written by Veedrak (fastest)
-  print "RUNNING count_itertools (faster), written by Veedrak..."
-  return sum(1 for x, y, z in itertools.combinations(a, r=3) if x+y==z)
+def count_itertools_faster(a): # written by Veedrak/modified (fastest)
+  print "RUNNING count_itertools (faster), written by Veedrak(modified)..."
+  return sum(1 for x, y, z in itertools.combinations(a, r=3) if x+y==-z)
 
 
 def count_fixed(a): # written by roippi
@@ -277,7 +273,7 @@ def count_enumerate(a): # written by roippi
 # Reads in a sequence of integers from a file, specified as a command-line argument;
 # counts the number of triples sum to exactly zero; prints out the time to perform
 # the computation.
-def run_timed(a, cnt_fnc):
+def run_timed(a, cnt_fnc=count_enumerate):
   """Run ThreeSum and report the elapsed time."""
   tic = timeit.default_timer()
   cnt = cnt_fnc(a)
@@ -285,7 +281,7 @@ def run_timed(a, cnt_fnc):
   sys.stdout.write("Elapsed HMS: {}\n".format(
     str(datetime.timedelta(seconds=(timeit.default_timer()-tic)))))
 
-def run_timed_fin(fin, cnt_fnc): 
+def run_timed_fin(fin, cnt_fnc=count_enumerate): 
   """Run ThreeSum using integers stored in a column in a file."""
   sys.stdout.write('\nRunning ThreeSum on data in: {}\n'.format(fin))
   run_timed(InputArgs.get_ints_from_file(fin), cnt_fnc)
@@ -319,9 +315,9 @@ if __name__ == '__main__':
     run_timed_fin(sys.argv[1])
   # If the argument is a digit, run using that many randomly chosen digits.
   elif sys.argv[1].isdigit():
-    a = [randrange(-999999, 999999) for i in range(int(sys.argv[1]))]
-    run_timed(a, count_slow)
-    run_timed(a, count_itertools)
+    dig = int(sys.argv[1])
+    a = [randrange(-2*dig, 2*dig) for i in range(dig)]
+    run_timed(a)
     
 
 

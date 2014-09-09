@@ -34,7 +34,7 @@ Python implementations contain:
 ```
 Key   1 FUNDAMENTALS         Description                      DATA
 :-- --: :------------------- :-----------------------------   :-------------
-J..   – BinarySearch         binary search                    tinyW.txt tinyT.txt largeW.txt largeT.txt
+JP.   – BinarySearch         binary search                    tinyW.txt tinyT.txt largeW.txt largeT.txt
 ...   – RandomSeq            random numbers in a given range  –
 ...   – Average              average of a sequence of numbers –
 ...   – Cat                  concatenate files                in1.txt in2.txt
