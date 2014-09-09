@@ -123,5 +123,46 @@ class PowerLaw_Tests(unittest.TestCase):
     b = est_b( data )
     a = solve_a( data, b )
 
+
+  def test_week1_exerciseA_Q1(self): 
+    print "\ntest_week1_exerciseA_Q1"
+    # (seed = 331534)
+    #         N   seconds
+    # -------------------
+    strData = """
+      64     0.001
+      128     0.008
+      256     0.062
+      512     0.564
+     1024     5.092
+     2048    48.765
+     4096   439.291
+     8192  3998.962
+    """
+    data = getData(strData) 
+    b = est_b( data )
+    a = solve_a( data, b )
+
+  def test_week1_exerciseA_Q2(self): 
+    print "\ntest_week1_exerciseA_Q2"
+    # (seed = 331534)
+    #         N   seconds
+    # -------------------
+    strData = """
+       2     7.000 
+       4    31.000 
+       8   127.000 
+      16   511.000 
+      32  2047.000 
+      64  8191.000 
+     128 32767.000 
+    """
+    data = getData(strData) 
+    b = est_b( data )
+    a = solve_a( data, b )
+
+
+
+
 if __name__ == '__main__':
   unittest.main()
