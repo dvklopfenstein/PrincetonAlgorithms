@@ -49,13 +49,13 @@ J..   – Point2D              point                            –
 ...   – Interval1D           1d interval                      –
 ...   – Interval2D           2d interval                      –
 J.. 1.1 ResizingArrayStack   LIFO stack (resizing array)      tobe.txt
-... 1.2 LinkedStack          LIFO stack (linked list)         tobe.txt
+J.. 1.2 LinkedStack          LIFO stack (linked list)         tobe.txt
 JP.   – Stack                LIFO stack                       tobe.txt
 J..   – ResizingArrayQueue   FIFO queue (resizing array)      tobe.txt
-... 1.3 LinkedQueue          FIFO queue (linked list)         tobe.txt
+J.. 1.3 LinkedQueue          FIFO queue (linked list)         tobe.txt
 JP.   – Queue                FIFO queue                       tobe.txt
 J..   – ResizingArrayBag     multiset (resizing array)        –
-... 1.4 LinkedBag            multiset (linked list)           –
+J.. 1.4 LinkedBag            multiset (linked list)           –
 J..   – Bag                  multiset                         –
 ...   – Stopwatch            timer (wall time)                –
 ...   – StopwatchCPU         timer (CPU time)                 –

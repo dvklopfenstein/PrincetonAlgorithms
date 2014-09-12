@@ -191,5 +191,6 @@ public class Stack<Item> implements Iterable<Item> {
 //   StdOut.println(s);
 // }
   
-
+// Copyright (C) 2002–2010, Robert Sedgewick and Kevin Wayne. 
+// Last updated: Tue Sep 24 10:43:42 EDT 2013.
 

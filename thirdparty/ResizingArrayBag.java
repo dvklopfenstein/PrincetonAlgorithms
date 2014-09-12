@@ -110,3 +110,5 @@ public class ResizingArrayBag<Item> implements Iterable<Item> {
 
 }
 
+// Copyright (C) 2002–2010, Robert Sedgewick and Kevin Wayne. 
+// Last updated: Tue Oct 8 21:23:24 EDT 2013.

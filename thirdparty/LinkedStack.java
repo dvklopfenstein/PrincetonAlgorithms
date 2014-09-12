@@ -1,20 +1,14 @@
-
-
 /*************************************************************************
- *  Compilation:  javac Stack.java
- *  Execution:    java Stack < input.txt
+ *  Compilation:  javac LinkedStack.java
+ *  Execution:    java LinkedStack < input.txt
  *
- *  A generic stack, implemented using a singly-linked list.
- *  Each stack element is of type Item.
- *
- *  This version uses a static nested class Node (to save 8 bytes per
- *  Node), whereas the version in the textbook uses a non-static nested
- *  class (for simplicity).
+ *  A generic stack, implemented using a linked list. Each stack
+ *  element is of type Item.
  *  
  *  % more tobe.txt 
  *  to be or not to - be - - that - - - is
  *
- *  % java Stack < tobe.txt
+ *  % java LinkedStack < tobe.txt
  *  to be not that or be (2 left on stack)
  *
  *************************************************************************/
@@ -24,14 +18,14 @@ import java.util.NoSuchElementException;
 
 
 /**
- *  The <tt>Stack</tt> class represents a last-in-first-out (LIFO) stack of generic items.
+ *  The <tt>LinkedStack</tt> class represents a last-in-first-out (LIFO) stack of
+ *  generic items.
  *  It supports the usual <em>push</em> and <em>pop</em> operations, along with methods
  *  for peeking at the top item, testing if the stack is empty, and iterating through
  *  the items in LIFO order.
  *  <p>
- *  This implementation uses a singly-linked list with a static nested class for
- *  linked-list nodes. See {@link LinkedStack} for the version from the
- *  textbook that uses a non-static nested class.
+ *  This implementation uses a singly-linked list with a non-static nested class for 
+ *  linked-list nodes. See {@link Stack} for a version that uses a static nested class.
  *  The <em>push</em>, <em>pop</em>, <em>peek</em>, <em>size</em>, and <em>is-empty</em>
  *  operations all take constant time in the worst case.
  *  <p>
@@ -41,22 +35,23 @@ import java.util.NoSuchElementException;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
-public class Stack<Item> implements Iterable<Item> {
-    private int N;                // size of the stack
-    private Node<Item> first;     // top of stack
+public class LinkedStack<Item> implements Iterable<Item> {
+    private int N;          // size of the stack
+    private Node first;     // top of stack
 
     // helper linked list class
-    private static class Node<Item> {
+    private class Node {
         private Item item;
-        private Node<Item> next;
+        private Node next;
     }
 
     /**
      * Initializes an empty stack.
      */
-    public Stack() {
+    public LinkedStack() {
         first = null;
         N = 0;
+        assert check();
     }
 
     /**
@@ -80,11 +75,12 @@ public class Stack<Item> implements Iterable<Item> {
      * @param item the item to add
      */
     public void push(Item item) {
-        Node<Item> oldfirst = first;
-        first = new Node<Item>();
+        Node oldfirst = first;
+        first = new Node();
         first.item = item;
         first.next = oldfirst;
         N++;
+        assert check();
     }
 
     /**
@@ -97,6 +93,7 @@ public class Stack<Item> implements Iterable<Item> {
         Item item = first.item;        // save item to return
         first = first.next;            // delete first node
         N--;
+        assert check();
         return item;                   // return the saved item
     }
 
@@ -122,22 +119,15 @@ public class Stack<Item> implements Iterable<Item> {
         return s.toString();
     }
        
-
     /**
      * Returns an iterator to this stack that iterates through the items in LIFO order.
      * @return an iterator to this stack that iterates through the items in LIFO order.
      */
-    public Iterator<Item> iterator() {
-        return new ListIterator<Item>(first);
-    }
+    public Iterator<Item> iterator()  { return new ListIterator();  }
 
     // an iterator, doesn't implement remove() since it's optional
-    private class ListIterator<Item> implements Iterator<Item> {
-        private Node<Item> current;
-
-        public ListIterator(Node<Item> first) {
-            current = first;
-        }
+    private class ListIterator implements Iterator<Item> {
+        private Node current = first;
         public boolean hasNext()  { return current != null;                     }
         public void remove()      { throw new UnsupportedOperationException();  }
 
@@ -150,11 +140,34 @@ public class Stack<Item> implements Iterable<Item> {
     }
 
 
+    // check internal invariants
+    private boolean check() {
+        if (N == 0) {
+            if (first != null) return false;
+        }
+        else if (N == 1) {
+            if (first == null)      return false;
+            if (first.next != null) return false;
+        }
+        else {
+            if (first.next == null) return false;
+        }
+
+        // check internal consistency of instance variable N
+        int numberOfNodes = 0;
+        for (Node x = first; x != null; x = x.next) {
+            numberOfNodes++;
+        }
+        if (numberOfNodes != N) return false;
+
+        return true;
+    }
+
     /**
-     * Unit tests the <tt>Stack</tt> data type.
+     * Unit tests the <tt>LinkedStack</tt> data type.
      */
     public static void main(String[] args) {
-        Stack<String> s = new Stack<String>();
+        LinkedStack<String> s = new LinkedStack<String>();
         while (!StdIn.isEmpty()) {
             String item = StdIn.readString();
             if (!item.equals("-")) s.push(item);
@@ -164,5 +177,7 @@ public class Stack<Item> implements Iterable<Item> {
     }
 }
 
+
+
 // Copyright (C) 2002–2010, Robert Sedgewick and Kevin Wayne. 
-// Last updated: Tue Sep 24 09:59:27 EDT 2013.
+// Last updated: Tue Sep 24 10:45:31 EDT 2013.

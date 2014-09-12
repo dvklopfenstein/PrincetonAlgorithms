@@ -1,6 +1,6 @@
 /*************************************************************************
- *  Compilation:  javac Bag.java
- *  Execution:    java Bag < input.txt
+ *  Compilation:  javac LinkedBag.java
+ *  Execution:    java LinkedBag < input.txt
  *
  *  A generic bag or multiset, implemented using a singly-linked list.
  *
@@ -30,13 +30,12 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- *  The <tt>Bag</tt> class represents a bag (or multiset) of 
+ *  The <tt>LinkedBag</tt> class represents a bag (or multiset) of 
  *  generic items. It supports insertion and iterating over the 
  *  items in arbitrary order.
  *  <p>
- *  This implementation uses a singly-linked list with a static nested class Node.
- *  See {@link LinkedBag} for the version from the
- *  textbook that uses a non-static nested class.
+ *  This implementation uses a singly-linked list with a non-static nested class Node.
+ *  See {@link Bag} for a version that uses a static nested class.
  *  The <em>add</em>, <em>isEmpty</em>, and <em>size</em> operations
  *  take constant time. Iteration takes time proportional to the number of items.
  *  <p>
@@ -46,20 +45,20 @@ import java.util.NoSuchElementException;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
-public class Bag<Item> implements Iterable<Item> {
-    private int N;               // number of elements in bag
-    private Node<Item> first;    // beginning of bag
+public class LinkedBag<Item> implements Iterable<Item> {
+    private int N;         // number of elements in bag
+    private Node first;    // beginning of bag
 
     // helper linked list class
-    private static class Node<Item> {
+    private class Node {
         private Item item;
-        private Node<Item> next;
+        private Node next;
     }
 
     /**
      * Initializes an empty bag.
      */
-    public Bag() {
+    public LinkedBag() {
         first = null;
         N = 0;
     }
@@ -85,8 +84,8 @@ public class Bag<Item> implements Iterable<Item> {
      * @param item the item to add to this bag
      */
     public void add(Item item) {
-        Node<Item> oldfirst = first;
-        first = new Node<Item>();
+        Node oldfirst = first;
+        first = new Node();
         first.item = item;
         first.next = oldfirst;
         N++;
@@ -94,20 +93,15 @@ public class Bag<Item> implements Iterable<Item> {
 
 
     /**
-     * Returns an iterator that iterates over the items in the bag in arbitrary order.
-     * @return an iterator that iterates over the items in the bag in arbitrary order
+     * Returns an iterator that iterates over the items in the bag.
      */
     public Iterator<Item> iterator()  {
-        return new ListIterator<Item>(first);  
+        return new ListIterator();  
     }
 
     // an iterator, doesn't implement remove() since it's optional
-    private class ListIterator<Item> implements Iterator<Item> {
-        private Node<Item> current;
-
-        public ListIterator(Node<Item> first) {
-            current = first;
-        }
+    private class ListIterator implements Iterator<Item> {
+        private Node current = first;
 
         public boolean hasNext()  { return current != null;                     }
         public void remove()      { throw new UnsupportedOperationException();  }
@@ -121,10 +115,10 @@ public class Bag<Item> implements Iterable<Item> {
     }
 
     /**
-     * Unit tests the <tt>Bag</tt> data type.
+     * Unit tests the <tt>LinkedBag</tt> data type.
      */
     public static void main(String[] args) {
-        Bag<String> bag = new Bag<String>();
+        LinkedBag<String> bag = new LinkedBag<String>();
         while (!StdIn.isEmpty()) {
             String item = StdIn.readString();
             bag.add(item);
@@ -139,6 +133,6 @@ public class Bag<Item> implements Iterable<Item> {
 
 }
 
-// Copyright (C) 2002–2010, Robert Sedgewick and Kevin Wayne. 
-// Last updated: Tue Mar 25 04:52:35 EDT 2014.
 
+// Copyright (C) 2002–2010, Robert Sedgewick and Kevin Wayne. 
+// Last updated: Tue Sep 24 10:45:31 EDT 2013.

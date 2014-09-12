@@ -182,3 +182,5 @@ public class ResizingArrayQueue<Item> implements Iterable<Item> {
 // QUESTION: What is a type safe way to declare and initialize a Stack of integers?
 // ANSWER:   Stack<Integer> stack = Stack<Integer>();
 
+// Copyright (C) 2002–2010, Robert Sedgewick and Kevin Wayne. 
+// Last updated: Mon Oct 7 11:58:25 EDT 2013.

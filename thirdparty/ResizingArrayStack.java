@@ -155,3 +155,5 @@ public class ResizingArrayStack<Item> implements Iterable<Item> {
     }
 }
 
+// Copyright (C) 2002–2010, Robert Sedgewick and Kevin Wayne. 
+// Last updated: Mon Oct 7 11:58:25 EDT 2013.
