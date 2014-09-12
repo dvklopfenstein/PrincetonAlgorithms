@@ -58,23 +58,24 @@
  #/
 
 # 09:40/16:24 Stack: linked-list implementation performance
-# TIME  PROPOSITION: Every operation takes constant time in the worst case. (No loops)
-# SPACE PROPOSITION: A stack with N items useds ~40 N bytes:
-#   16 bytes (object overhead)
+# 09:40 TIME  PROPOSITION: Every operation takes constant time in the worst case. (No loops)
+# 11:00 SPACE PROPOSITION: A stack with N items useds ~40 N bytes:
+#   16 bytes (_Node object overhead)
 #    8 bytes (inner class _Node extra overhead)
-#    8 bytes (reference to String)
-#    8 bytes (reference to Node)
+#    8 bytes (reference to _Node.Item; String)
+#    8 bytes (reference to _Node.next; Node)
 #  --- -------------------------
 #   40 bytes per stack Node
-#  *** REMARK: Analysis included memory for the stack
-#              (but not the strings themselves, which the client owns). 
+# 
+# 09:48 *** REMARK: Analysis included memory for the stack
+#   (but not the strings themselves, which the client owns). 
 
 import sys
 
 class Stack:
 
   class _Node: # helper linked list class
-    Item = None # Type Item
+    Item = None # Type String Item
     Next = None # Type Node<Item>
 
   def __init__(self):
@@ -85,19 +86,20 @@ class Stack:
 
   def size(self): return self.N # Number of items in the stack
 
-  def push(self, item):
-      oldfirst = self.first
-      self.first = self._Node()
+  def push(self, item): # 05:27 Lecture Week 2 "Stacks" (16:24)
+      oldfirst   = self.first    # Save a link to the list
+      self.first = self._Node()  # Create a new node for the beginning
+      # Set the instance variables in the new node
       self.first.Item = item;
       self.first.Next = oldfirst;
       self.N += 1
 
-  def pop(self):
+  def pop(self): # 06:30 Lecture Week 2 "Stacks" (16:24)
       if self.isEmpty(): raise Exception("Stack underflow")
       item = self.first.Item        # save item to return
-      self.first = self.first.Next            # delete first node
+      self.first = self.first.Next  # delete first node
       self.N -= 1
-      return item;                   # return the saved item
+      return item;                  # return the saved item
 
 #     #*
 #     # Returns (but does not remove) the item most recently added to this stack.
@@ -154,6 +156,7 @@ class Stack:
 #   2) the items won't typically be stored in the array as entries 0 to N-1.
 
 def run(line):
+  sys.stdout.write("\nINPUT: {}\n".format(line))
   s = Stack()
   res = []
   for word in line.split():
@@ -168,7 +171,6 @@ def ex_stdin():
   res = ""
   while True:
     item = raw_input('TYPE WORDS OR -')
-    #sys.stdout.write('"%s"\n'%(item))
     if not item: break
     if item != "-": s.push(item)
     elif not s.isEmpty(): res = ' '.join([res,s.pop()])
@@ -176,5 +178,6 @@ def ex_stdin():
 
 if __name__ == '__main__':
   run("to be or not to be - - - - - -")
+  run("to be or not to - be - - that - - - is") # Slide 6 Week 2 Lecture 4-1-Stacks(16-24)
 
 

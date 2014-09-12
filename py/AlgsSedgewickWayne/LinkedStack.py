@@ -18,7 +18,7 @@ import java.util.NoSuchElementException
 
 
 #*
- #  The <tt>LinkedStack</tt> class represents a last-in-first-out (LIFO) stack of
+ #  The <tt>LinkedStack</tt> class represents a last-in-self._first-out (LIFO) stack of
  #  generic items.
  #  It supports the usual <em>push</em> and <em>pop</em> operations, along with methods
  #  for peeking at the top item, testing if the stack is empty, and iterating through
@@ -34,61 +34,46 @@ import java.util.NoSuchElementException
  #
  #  @author Robert Sedgewick
  #  @author Kevin Wayne
+ #  @edited DV Klopfenstein
  #/
-public class LinkedStack<Item> implements Iterable<Item>:
-    private N;          # size of the stack
-    private  first;     # top of stack
+class LinkedStack: # <Item> implements Iterable<Item>:
 
-    # helper linked list class
-    private class:
-        private Item item
-        private  next
+    class _Node: # helper linked list class
+        Item = None 
+        Next = None
 
-    #*
-     # Initializes an empty stack.
-     #/
-    public LinkedStack():
-        first = None
-        N = 0
-        assert check()
+    def __init__(self):    # Initializes an empty stack.
+        self._first = None # top of stack
+        self._N = 0        # size of the stack
+        assert _check()
 
-    #*
-     # Is this stack empty?
-     # @return true if this stack is empty; false otherwise
-     #/
-    def isEmpty():
-        return first == None
+    # Is this stack empty?
+    # @return true if this stack is empty; false otherwise
+    def isEmpty(self): return self._first is None
 
-    #*
-     # Returns the number of items in the stack.
-     # @return the number of items in the stack
-     #/
-    def size():
-        return N
+    # Returns the number of items in the stack.
+    # @return the number of items in the stack
+    def size(self): return self._N
 
-    #*
-     # Adds the item to this stack.
-     # @param item the item to add
-     #/
-    def push(Item item):
-         oldfirst = first
-        first = new ()
-        first.item = item
-        first.next = oldfirst
-        N++
-        assert check()
+    # Adds the item to this stack.
+    # @param item the item to add
+    def push(item):
+        old_first = self._first
+        self._first = self._Node()
+        self._first.Item = item
+        self._first.Next = oldself._first
+        N += 1
+        assert _check()
 
-    #*
-     # Removes and returns the item most recently added to this stack.
-     # @return the item most recently added
-     # @throws java.util.NoSuchElementException if this stack is empty
-     #/
-    def pop():
-        if isEmpty()) raise new NoSuchElementException("Stack underflow")
-        Item item = first.item;        # save item to return
-        first = first.next;            # delete first node
-        N--
-        assert check()
+    # Removes and returns the item most recently added to this stack.
+    # @return the item most recently added
+    # @throws java.util.NoSuchElementException if this stack is empty
+    def pop(self.):
+        if isEmpty(): raise Exception("Stack underflow")
+        Item item = self._first.item;        # save item to return
+        self._first = self._first.Next;            # delete self._first node
+        N -= 1
+        assert _check()
         return item;                   # return the saved item
 
 
@@ -98,18 +83,18 @@ public class LinkedStack<Item> implements Iterable<Item>:
      # @throws java.util.NoSuchElementException if this stack is empty
      #/
     def peek():
-        if isEmpty()) raise new NoSuchElementException("Stack underflow")
-        return first.item
+        if isEmpty()) raise Exception("Stack underflow")
+        return self._first.item
 
     #*
      # Returns a string representation of this stack.
      # @return the sequence of items in the stack in LIFO order, separated by spaces
      #/
-    def toString():
+    def __str__():
         StringBuilder s = new StringBuilder()
         for (Item item : this)
             s.append(item + " ")
-        return s.toString()
+        return s.__str__()
        
     #*
      # Returns an iterator to this stack that iterates through the items in LIFO order.
@@ -119,30 +104,30 @@ public class LinkedStack<Item> implements Iterable<Item>:
 
     # an iterator, doesn't implement remove() since it's optional
     private class ListIterator implements Iterator<Item>:
-        private  current = first
+        private  current = self._first
         def hasNext(): return current != None;                     }
         def UnsupportedOperationException();  }
 
-        def next():
+        def Next():
             if !hasNext()) raise new NoSuchElementException()
             Item item = current.item
-            current = current.next
+            current = current.Next
             return item
 
 
     # check internal invariants
     def _check():
         if N == 0):
-            if first != None) return False
+            if self._first != None) return False
         elif (N == 1):
-            if first == None)      return False
-            if first.next != None) return False
+            if self._first == None)      return False
+            if self._first.Next != None) return False
         else:
-            if first.next == None) return False
+            if self._first.Next == None) return False
 
         # check internal consistency of instance variable N
         numberOfs = 0
-        for ( x = first; x != None; x = x.next):
+        for ( x = self._first; x != None; x = x.Next):
             numberOfs++
         if numberOfs != N) return False
 

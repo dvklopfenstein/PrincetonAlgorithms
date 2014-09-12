@@ -39,6 +39,8 @@ def main():
       line = line.replace(' int ',' ')
       line = line.replace('else if', 'elif')
       line = line.replace('Last updated', 'Java last updated')
+      line = line.replace('++', ' += 1')
+      line = line.replace('--', ' -= 1')
       FOUT.write(line)
 
   print 'READ ', fin

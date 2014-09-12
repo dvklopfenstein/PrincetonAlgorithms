@@ -14,9 +14,6 @@
  #
  #************************************************************************/
 
-import java.util.Iterator
-import java.util.NoSuchElementException
-
 #*
  #  The <tt>ResizingArrayStack</tt> class represents a last-in-first-out (LIFO) stack
  #  of generic items.
@@ -36,100 +33,74 @@ import java.util.NoSuchElementException
  #  @author Robert Sedgewick
  #  @author Kevin Wayne
  #/
-public class ResizingArrayStack<Item> implements Iterable<Item>:
-    private Item[] a;         # array of items
-    private N;            # number of elements on stack
+class ResizingArrayStack: #<Item> implements Iterable<Item>:
 
+    def __init__(self): # Initializes an empty stack.
+        self._a = [None for i in range(2)]  # array of items
+        self._N = 0 # number of elements on stack
 
-    #*
-     # Initializes an empty stack.
-     #/
-    public ResizingArrayStack():
-        a = (Item[]) new [2]
+    # Is this stack empty?
+    # @return true if this stack is empty; false otherwise
+    def isEmpty(self): return self._N == 0
 
-    #*
-     # Is this stack empty?
-     # @return true if this stack is empty; false otherwise
-     #/
-    def isEmpty():
-        return N == 0
-
-    #*
-     # Returns the number of items in the stack.
-     # @return the number of items in the stack
-     #/
-    def size():
-        return N
-
+    # Returns the number of items in the stack.
+    # @return the number of items in the stack
+    def size(self): return self._N
 
     # resize the underlying array holding the elements
-    def _resize(int capacity):
-        assert capacity >= N
-        Item[] temp = (Item[]) new [capacity]
-        for (int i = 0; i < N; i++):
-            temp[i] = a[i]
-        a = temp
+    def _resize(capacity):
+        assert capacity >= self._N
+        temp = [None for in range(capacity)] # type: Item[]
+        for i in range(self._N):
+            temp[i] = self._a[i]
+        self._a = temp
 
-    #*
-     # Adds the item to this stack.
-     # @param item the item to add
-     #/
-    def push(Item item):
-        if N == len(a)) resize(2*len(a));    # double size of array if necessary
-        a[N++] = item;                            # add item
+    # Adds the item to this stack.
+    # @param item the item to add
+    def push(self, item):
+        # double size of array if necessary
+        if self._N == len(self._a): 
+          self._resize(2*len(self._a)) 
+        a[self._N] = item                            # add item
+        self._N += 1
 
-    #*
-     # Removes and returns the item most recently added to this stack.
-     # @return the item most recently added
-     # @throws java.util.NoSuchElementException if this stack is empty
-     #/
-    def pop():
-        if isEmpty()) raise new NoSuchElementException("Stack underflow")
-        Item item = a[N-1]
-        a[N-1] = None;                              # to avoid loitering
-        N--
+    # Removes and returns the item most recently added to this stack.
+    # @return the item most recently added
+    # @throws java.util.NoSuchElementException if this stack is empty
+    def pop(self):
+        if self.isEmpty(): 
+          raise new Exception("FatalResizingArrayStack.py: Stack underflow")
+        item = a[self._N-1]
+        a[self._N-1] = None;                              # to avoid loitering
+        self._N -= 1
         # shrink size of array if necessary
-        if N > 0 and N == len(a)/4) resize(len(a)/2)
+        if self._N > 0 and self._N == len(self._a)/4) self._resize(len(self._a)/2)
         return item
 
 
-    #*
-     # Returns (but does not remove) the item most recently added to this stack.
-     # @return the item most recently added to this stack
-     # @throws java.util.NoSuchElementException if this stack is empty
-     #/
-    def peek():
-        if isEmpty()) raise new NoSuchElementException("Stack underflow")
-        return a[N-1]
+    # Returns (but does not remove) the item most recently added to this stack.
+    # @return the item most recently added to this stack
+    # @throws java.util.NoSuchElementException if this stack is empty
+    # def peek():
+    #     if isEmpty()) raise new NoSuchElementException("Stack underflow")
+    #     return a[N-1]
 
-    #*
-     # Returns an iterator to this stack that iterates through the items in LIFO order.
-     # @return an iterator to this stack that iterates through the items in LIFO order.
-     #/
-    def iterator():
-        return new ReverseArrayIterator()
+    # Returns an iterator to this stack that iterates through the items in LIFO order.
+    # @return an iterator to this stack that iterates through the items in LIFO order.
+    # def iterator():
+    #     return new ReverseArrayIterator()
 
     # an iterator, doesn't implement remove() since it's optional
-    private class ReverseArrayIterator implements Iterator<Item>:
-        private i
+    # class _ReverseArrayIterator: # implements Iterator<Item>:
+    #     def __init__(self): self._i = self._N
+    #     def hasNext(): return self_i > 0
+    #     def remove(): raise Exception("ResizingArrayStack.py: UnsupportedOperation(remove)"))
+    #     def next():
+    #         if !self.hasNext()) raise Exception("ResizingArrayStack.py: NoSuchElement")
+    #         self._i -= 1
+    #         return a[self._i]
 
-        public ReverseArrayIterator():
-            i = N
-
-        def hasNext():
-            return i > 0
-
-        def remove():
-            raise new UnsupportedOperationException()
-
-        def next():
-            if !hasNext()) raise new NoSuchElementException()
-            return a[--i]
-
-
-    #*
-     # Unit tests the <tt>Stack</tt> data type.
-     #/
+    # Unit tests the <tt>Stack</tt> data type.
     def main(String[] args):
         ResizingArrayStack<String> s = new ResizingArrayStack<String>()
         while (!StdIn.isEmpty()):
