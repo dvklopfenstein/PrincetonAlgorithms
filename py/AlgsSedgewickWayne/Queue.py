@@ -36,7 +36,8 @@
  #  @author Kevin Wayne
  #/
 
-# https://class.coursera.org/algs4partI-005/lecture/20
+
+
 # QUESTION: Suppose that you implement a queue using a
 # null-terminated singly-linked list, maintaining a
 # reference to the item least recently added ( the front of
