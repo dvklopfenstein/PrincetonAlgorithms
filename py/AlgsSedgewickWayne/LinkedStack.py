@@ -1,4 +1,6 @@
-#!/usr/bin/env python#************************************************************************
+#!/usr/bin/env python
+
+#************************************************************************
  #  Compilation:  javac LinkedStack.java
  #  Execution:    java LinkedStack < input.txt
  #
@@ -12,10 +14,6 @@
  #  to be not that or be (2 left on stack)
  #
  #************************************************************************/
-
-import java.util.Iterator
-import java.util.NoSuchElementException
-
 
 #*
  #  The <tt>LinkedStack</tt> class represents a last-in-self._first-out (LIFO) stack of
@@ -39,17 +37,17 @@ import java.util.NoSuchElementException
 class LinkedStack: # <Item> implements Iterable<Item>:
 
     class _Node: # helper linked list class
-        Item = None 
-        Next = None
+        self.Item = None 
+        self.Next = None
 
     def __init__(self):    # Initializes an empty stack.
         self._first = None # top of stack
-        self._N = 0        # size of the stack
-        assert _check()
+        self._N     = 0    # size of the stack
+        assert self._check()
 
     # Is this stack empty?
     # @return true if this stack is empty; false otherwise
-    def isEmpty(self): return self._first is None
+    def isEmpty(self): return (self._first is None)
 
     # Returns the number of items in the stack.
     # @return the number of items in the stack
@@ -58,91 +56,86 @@ class LinkedStack: # <Item> implements Iterable<Item>:
     # Adds the item to this stack.
     # @param item the item to add
     def push(item):
-        old_first = self._first
-        self._first = self._Node()
+        old_first   = self._first  # Save pointer to the beginning of the list
+        self._first = self._Node() # Create a new Node.  Put it at the beginning ot the list
         self._first.Item = item
-        self._first.Next = oldself._first
+        self._first.Next = old_first
         N += 1
-        assert _check()
+        assert self._check()
 
     # Removes and returns the item most recently added to this stack.
     # @return the item most recently added
     # @throws java.util.NoSuchElementException if this stack is empty
-    def pop(self.):
-        if isEmpty(): raise Exception("Stack underflow")
-        Item item = self._first.item;        # save item to return
-        self._first = self._first.Next;            # delete self._first node
-        N -= 1
-        assert _check()
-        return item;                   # return the saved item
+    def pop(self):
+        if self.isEmpty(): raise Exception("Stack underflow")
+        item = self._first.item        # save item to return
+        self._first = self._first.Next # delete self._first node
+        self._N -= 1
+        assert self._check()
+        return item                    # return the saved item
 
 
-    #*
-     # Returns (but does not remove) the item most recently added to this stack.
-     # @return the item most recently added to this stack
-     # @throws java.util.NoSuchElementException if this stack is empty
-     #/
-    def peek():
-        if isEmpty()) raise Exception("Stack underflow")
-        return self._first.item
+#    # Returns (but does not remove) the item most recently added to this stack.
+#    # @return the item most recently added to this stack
+#    # @throws java.util.NoSuchElementException if this stack is empty
+#    def peek():
+#        if self.isEmpty()) raise Exception("Stack underflow")
+#        return self._first.item
 
-    #*
-     # Returns a string representation of this stack.
-     # @return the sequence of items in the stack in LIFO order, separated by spaces
-     #/
+    # Returns a string representation of this stack.
+    # @return the sequence of items in the stack in LIFO order, separated by spaces
     def __str__():
-        StringBuilder s = new StringBuilder()
+        s = []
         for (Item item : this)
-            s.append(item + " ")
+            s.append(item)
         return s.__str__()
        
-    #*
-     # Returns an iterator to this stack that iterates through the items in LIFO order.
-     # @return an iterator to this stack that iterates through the items in LIFO order.
-     #/
-    def ListIterator();  }
-
-    # an iterator, doesn't implement remove() since it's optional
-    private class ListIterator implements Iterator<Item>:
-        private  current = self._first
-        def hasNext(): return current != None;                     }
-        def UnsupportedOperationException();  }
-
-        def Next():
-            if !hasNext()) raise new NoSuchElementException()
-            Item item = current.item
-            current = current.Next
-            return item
+#    # Returns an iterator to this stack that iterates through the items in LIFO order.
+#    # @return an iterator to this stack that iterates through the items in LIFO order.
+#    def ListIterator();  }
+#
+#    # an iterator, doesn't implement remove() since it's optional
+#    private class ListIterator implements Iterator<Item>:
+#        private  current = self._first
+#        def hasNext(): return current != None;                     }
+#        def UnsupportedOperationException();  }
+#
+#        def Next():
+#            if !hasNext()) raise new NoSuchElementException()
+#            Item item = current.item
+#            current = current.Next
+#            return item
 
 
     # check internal invariants
     def _check():
-        if N == 0):
-            if self._first != None) return False
-        elif (N == 1):
-            if self._first == None)      return False
-            if self._first.Next != None) return False
+        if N == 0:
+            if self._first is not None: return False
+        elif N == 1:
+            if self._first is None:          return False
+            if self._first.Next is not None: return False
         else:
-            if self._first.Next == None) return False
+            if self._first.Next is None: return False
 
         # check internal consistency of instance variable N
         numberOfs = 0
         for ( x = self._first; x != None; x = x.Next):
-            numberOfs++
-        if numberOfs != N) return False
+            numberOfs += 1:
+        if numberOfs != N: return False
 
         return True
 
-    #*
-     # Unit tests the <tt>LinkedStack</tt> data type.
-     #/
-    def main(String[] args):
-        LinkedStack<String> s = new LinkedStack<String>()
-        while (!StdIn.isEmpty()):
-            String item = StdIn.readString()
-            if !item.equals("-")) s.push(item)
-            elif (!s.isEmpty()) StdOut.print(s.pop() + " ")
-        StdOut.println("(" + s.size() + " left on stack)")
+# Unit tests the <tt>LinkedStack</tt> data type.
+def main(String[] args):
+  s = LinkedStack()
+  print s
+  #while not StdIn.isEmpty():
+  #  String item = StdIn.readString()
+  #  if !item.equals("-")) s.push(item)
+  #  elif (!s.isEmpty()) StdOut.print(s.pop() + " ")
+  #StdOut.println("(" + s.size() + " left on stack)")
+
+
 
 
 
