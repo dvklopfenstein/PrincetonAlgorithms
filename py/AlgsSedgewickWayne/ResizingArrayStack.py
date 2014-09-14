@@ -119,8 +119,11 @@ import sys
 class ResizingArrayStack: #<Item> implements Iterable<Item>:
 
     def __init__(self): # Initializes an empty stack.
-        self._a = [None for i in range(2)]  # array of items
-        self._N = 0 # number of elements on stack
+        # array of items
+        self._a = [None for i in range(2)]  
+        # number of elements on stack
+        # Also the next location in the array to get filled upon push
+        self._N = 0 
 
     # Is this stack empty?
     # @return true if this stack is empty; false otherwise
@@ -154,22 +157,39 @@ class ResizingArrayStack: #<Item> implements Iterable<Item>:
         if self.isEmpty(): 
           raise Exception("FatalResizingArrayStack.py: Stack underflow")
         item = self._a[self._N-1]
-        self._a[self._N-1] = None  # to avoid loitering
         self._N -= 1
+        self._a[self._N] = None  # to avoid loitering
         # shrink size of array if necessary
         if self._N > 0 and self._N == len(self._a)/4: self._resize(len(self._a)/2)
         return item
 
     # 15:49 14 STACK CONSIDERATIONS: ...
     # LOITERING. Holding a reference to an object when it is no longer needed.
+    # When we decrement the value N, there is still a pointer to the thing
+    # that we took off the stack in that array even though we know are not using it,
+    # The Java system does not know that we are no longer using it.
     #
+    # LOITERING             AVOID LOITERING
+    # -------------------   -------------------------
     # public String pop()   public String pop() {
     # { return s[--N]; }      String item = s[--N];
     #                         s[N] = null;
-    # LOITERING               return item;
+    #                         return item;
     #                       }
-    #                       AVOID LOITERING
     #                       Garbage collector can reclaim memory only if no outstanding refs.
+
+    # 16:18 QUESTION: Given a reference "first" to the first node of a null-terminated linked
+    # list with at least two nodes, what does the code frag,emt below do?
+    # 
+    #   Node x = first;
+    #   while (x.next.next != null) {
+    #     x = x.next;
+    #   }
+    #   x.next = null; 
+    # 
+    # ANSWER: Deletes the last node in the list
+    # EXPLANATION: Upon termination of the loop, x is a reference to the second to last node.
+    # The final statement deletes the last node from the list.
 
 
     # Returns (but does not remove) the item most recently added to this stack.
