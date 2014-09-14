@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 #************************************************************************
  #  Compilation:  javac ResizingArrayStack.java
  #  Execution:    java ResizingArrayStack < input.txt
@@ -14,7 +15,6 @@
  #
  #************************************************************************/
 
-#*
  #  The <tt>ResizingArrayStack</tt> class represents a last-in-first-out (LIFO) stack
  #  of generic items.
  #  It supports the usual <em>push</em> and <em>pop</em> operations, along with methods
@@ -32,7 +32,7 @@
  #
  #  @author Robert Sedgewick
  #  @author Kevin Wayne
- #/
+ #  @edited D Klopfenstein
 
 # Lecture Week 2 Resizing Arrays (09:56)
 # 00:51 17 PROBLEM. Requiring client to provide capacity does not implement API!
@@ -114,6 +114,7 @@
 #  * Every operation takes constant AMORTIZED time.
 #  * Less wasted space.
 
+import sys
 
 class ResizingArrayStack: #<Item> implements Iterable<Item>:
 
@@ -130,9 +131,9 @@ class ResizingArrayStack: #<Item> implements Iterable<Item>:
     def size(self): return self._N
 
     # resize the underlying array holding the elements
-    def _resize(capacity):
+    def _resize(self, capacity):
         assert capacity >= self._N
-        temp = [None for in range(capacity)] # type: Item[]
+        temp = [None for i in range(capacity)] # type: Item[]
         for i in range(self._N):
             temp[i] = self._a[i]
         self._a = temp
@@ -143,7 +144,7 @@ class ResizingArrayStack: #<Item> implements Iterable<Item>:
         # double size of array if necessary
         if self._N == len(self._a): 
           self._resize(2*len(self._a)) 
-        a[self._N] = item                            # add item
+        self._a[self._N] = item               # add item
         self._N += 1
 
     # Removes and returns the item most recently added to this stack.
@@ -151,7 +152,7 @@ class ResizingArrayStack: #<Item> implements Iterable<Item>:
     # @throws java.util.NoSuchElementException if this stack is empty
     def pop(self):
         if self.isEmpty(): 
-          raise new Exception("FatalResizingArrayStack.py: Stack underflow")
+          raise Exception("FatalResizingArrayStack.py: Stack underflow")
         item = a[self._N-1]
         a[self._N-1] = None  # to avoid loitering
         self._N -= 1
@@ -193,14 +194,22 @@ class ResizingArrayStack: #<Item> implements Iterable<Item>:
     #         self._i -= 1
     #         return a[self._i]
 
-    # Unit tests the <tt>Stack</tt> data type.
-    def main(String[] args):
-        ResizingArrayStack<String> s = new ResizingArrayStack<String>()
-        while (!StdIn.isEmpty()):
-            String item = StdIn.readString()
-            if !item.equals("-")) s.push(item)
-            elif (!s.isEmpty()) StdOut.print(s.pop() + " ")
-        StdOut.println("(" + s.size() + " left on stack)")
+# Unit tests the <tt>Stack</tt> data type.
+def main():
+  import InputArgs
+  a = InputArgs.getStrArray("to be or not to be")
+  print a
+  s = ResizingArrayStack()
+  while a:
+    item = a.pop()
+    print item
+    if item != "-": s.push(item)
+    elif not s.isEmpty(): print s.pop(), " "
+  sys.stdout.write("({}) left on stack)".format(s.size()))
 
-# Copyright (C) 2002–2010, Robert Sedgewick and Kevin Wayne. 
+if __name__ == '__main__':
+  main()
+
+
+# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne. 
 # Java last updated: Mon Oct 7 11:58:25 EDT 2013.

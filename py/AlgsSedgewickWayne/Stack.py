@@ -20,7 +20,6 @@
  #************************************************************************/
 
 # Week 2 Lecture
-# https://class.coursera.org/algs4partI-005/lecture/23
 # 05:13 STACK APPLICATIONS
 #   * Parsing in a compiler
 #   * Java virtual machine
@@ -29,7 +28,7 @@
 #   * PostScript language for printer
 #   * Implementing function calls in a compiler.
 
-# 06:15 RECURSINVE FUNCTION
+# 06:15 RECURSIVE FUNCTION
 # NOTE: Can always use an expilicit stack to remove recursion.
 #     
 #     static int gcd(int p, int q) {
@@ -58,7 +57,9 @@
  #/
 
 # 09:40/16:24 Stack: linked-list implementation performance
-# 09:40 TIME  PROPOSITION: Every operation takes constant time in the worst case. (No loops)
+# 09:40 TIME  PROPOSITION: Every operation takes constant time in the worst case: 
+#   * There are only a few operations for each function
+#   * No loops
 # 11:00 SPACE PROPOSITION: A stack with N items useds ~40 N bytes:
 #   16 bytes (_Node object overhead)
 #    8 bytes (inner class _Node extra overhead)
@@ -101,27 +102,20 @@ class Stack:
       self.N -= 1
       return item;                  # return the saved item
 
-#     #*
-#     # Returns (but does not remove) the item most recently added to this stack.
-#     # @return the item most recently added to this stack
-#     # @throws java.util.NoSuchElementException if this stack is empty
-#     #/
-#    public Item peek() {
+#    # Returns (but does not remove) the item most recently added to this stack.
+#    # @return the item most recently added to this stack
+#    # @throws java.util.NoSuchElementException if this stack is empty
+#    def peek():
 #        if (isEmpty()) throw new NoSuchElementException("Stack underflow");
 #        return first.item;
-#    }
 #
-#     #*
-#     # Returns a string representation of this stack.
-#     # @return the sequence of items in the stack in LIFO order, separated by spaces
-#     #/
+#    # Returns a string representation of this stack.
+#    # @return the sequence of items in the stack in LIFO order, separated by spaces
 #    public String toString() {
 #        StringBuilder s = new StringBuilder();
 #        for (Item item : this)
 #            s.append(item + " ");
 #        return s.toString();
-#    }
-#       
 #
    #*
    # Returns an iterator to this stack that iterates through the items in LIFO order.
