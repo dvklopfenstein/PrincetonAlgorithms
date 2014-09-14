@@ -153,8 +153,8 @@ class ResizingArrayStack: #<Item> implements Iterable<Item>:
     def pop(self):
         if self.isEmpty(): 
           raise Exception("FatalResizingArrayStack.py: Stack underflow")
-        item = a[self._N-1]
-        a[self._N-1] = None  # to avoid loitering
+        item = self._a[self._N-1]
+        self._a[self._N-1] = None  # to avoid loitering
         self._N -= 1
         # shrink size of array if necessary
         if self._N > 0 and self._N == len(self._a)/4: self._resize(len(self._a)/2)
