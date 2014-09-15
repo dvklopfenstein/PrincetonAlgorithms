@@ -61,11 +61,14 @@ class Queue:
     def isEmpty(self): return self.first == None
     def size(self): return self.N
 
-    def enqueue(self, item):
-        oldlast = self.last
-        self.last = self._Node()
-        self.last.Item = item;
+    def enqueue(self, item):  # Week 2, "Queues" 02:32
+        # Save a link to the last node
+        oldlast   = self.last     # Save a link to last Node
+        # Create a new node for the end
+        self.last = self._Node()  # Create a new Node at end of list
+        self.last.Item = item;    #   Populate Node data...
         self.last.Next = None;
+        # Link the new node to the end of the list
         if self.isEmpty(): self.first = self.last
         else:            oldlast.Next = self.last
         self.N += 1
