@@ -1,119 +1,96 @@
 #!/usr/bin/env python
 #************************************************************************
- #  Compilation:  javac ResizingArrayQueue.java
- #  Execution:    java ResizingArrayQueue < input.txt
- #  Data files:   http://algs4.cs.princeton.edu/13stacks/tobe.txt  
- #  
- #  Queue implementation with a resizing array.
- #
- #  % java ResizingArrayQueue < tobe.txt 
- #  to be or not to be (2 left on queue)
- #
- #************************************************************************/
+#  Compilation:  javac ResizingArrayQueue.java
+#  Execution:    java ResizingArrayQueue < input.txt
+#  Data files:   http://algs4.cs.princeton.edu/13stacks/tobe.txt  
+#  
+#  Queue implementation with a resizing array.
+#
+#  % java ResizingArrayQueue < tobe.txt 
+#  to be or not to be (2 left on queue)
+#
+#************************************************************************/
 
-import java.util.Iterator
-import java.util.NoSuchElementException
+#  The <tt>ResizingArrayQueue</tt> class represents a first-in-first-out (FIFO)
+#  queue of generic items.
+#  It supports the usual <em>enqueue</em> and <em>dequeue</em>
+#  operations, along with methods for peeking at the first item,
+#  testing if the queue is empty, and iterating through
+#  the items in FIFO order.
+#  <p>
+#  This implementation uses a resizing array, which double the underlying array
+#  when it is full and halves the underlying array when it is one-quarter full.
+#  The <em>enqueue</em> and <em>dequeue</em> operations take constant amortized time.
+#  The <em>size</em>, <em>peek</em>, and <em>is-empty</em> operations takes
+#  constant time in the worst case. 
+#  <p>
+#  For additional documentation, see <a href="http://algs4.cs.princeton.edu/13stacks">Section 1.3</a> of
+#  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+#
+#  @author Robert Sedgewick
+#  @author Kevin Wayne
+#  @edited D Klopfenstein
+class ResizingArrayQueue: # <Item> implements Iterable<Item>:
 
-#*
- #  The <tt>ResizingArrayQueue</tt> class represents a first-in-first-out (FIFO)
- #  queue of generic items.
- #  It supports the usual <em>enqueue</em> and <em>dequeue</em>
- #  operations, along with methods for peeking at the first item,
- #  testing if the queue is empty, and iterating through
- #  the items in FIFO order.
- #  <p>
- #  This implementation uses a resizing array, which double the underlying array
- #  when it is full and halves the underlying array when it is one-quarter full.
- #  The <em>enqueue</em> and <em>dequeue</em> operations take constant amortized time.
- #  The <em>size</em>, <em>peek</em>, and <em>is-empty</em> operations takes
- #  constant time in the worst case. 
- #  <p>
- #  For additional documentation, see <a href="http://algs4.cs.princeton.edu/13stacks">Section 1.3</a> of
- #  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- #
- #  @author Robert Sedgewick
- #  @author Kevin Wayne
- #/
-public class ResizingArrayQueue<Item> implements Iterable<Item>:
-    private Item[] q;            # queue elements
-    private N = 0;           # number of elements on queue
-    private first = 0;       # index of first element of queue
-    private last  = 0;       # index of next available slot
+    def __init__(self):
+      self._q = [None for i in range(2)]    # queue elements
+      self._N = 0     # number of elements on queue
+      self._first = 0 # index of first element of queue
+      self._last  = 0 # index of next available slot
 
+    # @return true if this queue is empty; false otherwise
+    def isEmpty(self): return N == 0
 
-    #*
-     # Initializes an empty queue.
-     #/
-    public ResizingArrayQueue():
-        # cast needed since no generic array creation in Java
-        q = (Item[]) new [2]
-
-    #*
-     # Is this queue empty?
-     # @return true if this queue is empty; false otherwise
-     #/
-    def isEmpty():
-        return N == 0
-
-    #*
-     # Returns the number of items in this queue.
-     # @return the number of items in this queue
-     #/
-    def size():
-        return N
+    # Returns the number of items in this queue.
+    def size(self): return self._N
 
     # resize the underlying array
-    def _resize(int max):
-        assert max >= N
-        Item[] temp = (Item[]) new [max]
-        for (int i = 0; i < N; i++):
+    def _resize(self, maxval):
+        assert maxval >= self._N
+        temp = (Item[]) new [maxval] # Item[]
+        for i in range(self._N):
             temp[i] = q[(first + i) % len(q)]
         q = temp
         first = 0
-        last  = N
+        last  = self._N
 
-    #*
-     # Adds the item to this queue.
-     # @param item the item to add
-     #/
-    def enqueue(Item item):
+    # Adds the item to this queue.
+    # @param item the item to add
+    def enqueue(self, item):
         # double size of array if necessary and recopy to front of array
-        if N == len(q)) resize(2*len(q));   # double size of array if necessary
-        q[last++] = item;                        # add item
-        if last == len(q)) last = 0;          # wrap-around
-        N++
+        if self._N == len(self._q): 
+          self._resize(2*len(self._q)) # double size of array if necessary
+        self._q[self._last] = item                        # add item
+        self._last += 1
+        if self._last == len(self._q): 
+          self._last = 0          # wrap-around
+        self._N += 1
 
-    #*
-     # Removes and returns the item on this queue that was least recently added.
-     # @return the item on this queue that was least recently added
-     # @throws java.util.NoSuchElementException if this queue is empty
-     #/
-    def dequeue():
-        if isEmpty()) raise new NoSuchElementException("Queue underflow")
-        Item item = q[first]
-        q[first] = None;                            # to avoid loitering
-        N--
-        first++
-        if first == len(q)) first = 0;           # wrap-around
+    # Removes and returns the item on this queue that was least recently added.
+    # @return the item on this queue that was least recently added
+    # @throws java.util.NoSuchElementException if this queue is empty
+    def dequeue(self):
+        if self.isEmpty(): raise Exception("Queue underflow")
+        item = self._q[self._first]
+        self._q[first] = None             # to avoid loitering
+        self._N     -= 1
+        self._first += 1
+        if self._first == len(self._q): self._first = 0  # wrap-around
         # shrink size of array if necessary
-        if N > 0 and N == len(q)/4) resize(len(q)/2)
+        if self._N > 0 and self._N == len(self._q)/4: 
+          self._resize(len(self._q)/2)
         return item
 
-    #*
-     # Returns the item least recently added to this queue.
-     # @return the item least recently added to this queue
-     # @throws java.util.NoSuchElementException if this queue is empty
-     #/
-    def peek():
-        if isEmpty()) raise new NoSuchElementException("Queue underflow")
-        return q[first]
+    # Returns the item least recently added to this queue.
+    # @return the item least recently added to this queue
+    # @throws java.util.NoSuchElementException if this queue is empty
+    def peek(self):
+        if self.isEmpty(): raise Exception("Queue underflow")
+        return self._q[self._first]
 
-
-    #*
-     # Returns an iterator that iterates over the items in this queue in FIFO order.
-     # @return an iterator that iterates over the items in this queue in FIFO order
-     #/
-    def iterator():
+    # Returns an iterator that iterates over the items in this queue in FIFO order.
+    # @return an iterator that iterates over the items in this queue in FIFO order
+    def iterator(self):
         return new ArrayIterator()
 
     # an iterator, doesn't implement remove() since it's optional
