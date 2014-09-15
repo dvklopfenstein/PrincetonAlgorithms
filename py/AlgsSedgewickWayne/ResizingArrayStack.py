@@ -114,6 +114,15 @@
 #  * Every operation takes constant AMORTIZED time.
 #  * Less wasted space.
 
+# 09:50 "Resizing Arrays" QUESTION: Suppose that, starting from an empty data structure,
+# we perform N push operations in our resizing array implementation of a stack. 
+# How many times is the "resize()" method called?
+# 
+# ANSWER: logarithmic
+# EXPLANATION: The "resize()" method is called only when the size of the stack 
+# is a power of two.
+
+
 import sys
 
 class ResizingArrayStack: #<Item> implements Iterable<Item>:

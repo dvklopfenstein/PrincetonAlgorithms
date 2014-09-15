@@ -71,6 +71,12 @@
 # 09:48 *** REMARK: Analysis included memory for the stack
 #   (but not the strings themselves, which the client owns). 
 
+# Lecture Week 2 "Resizing Arrays" (9:56)
+# 
+# 08:33 LINKED-LIST IMPLEMENTATION.
+#   * Every operation takes constant time in the WORST CASE
+#   * Uses extra time and space to deal with the links.
+
 import sys
 
 class Stack:
