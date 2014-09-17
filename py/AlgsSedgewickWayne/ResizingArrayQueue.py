@@ -101,6 +101,10 @@ class ResizingArrayQueue: # <Item> implements Iterable<Item>:
           self._resize(len(self._q)/2)
         return item
 
+
+    def __str__(self):
+        return ' '.join(item for item in self._q[self._first:self._last])
+
 #    # Returns the item least recently added to this queue.
 #    # @return the item least recently added to this queue
 #    # @throws java.util.NoSuchElementException if this queue is empty
@@ -126,18 +130,27 @@ class ResizingArrayQueue: # <Item> implements Iterable<Item>:
 #            return item
 
     # Unit tests the <tt>ResizingArrayQueue</tt> data type.
-def main():
-  import InputArgs
-  items = InputArgs.getStrArray()
-  #ResizingArrayQueue<String> q = new ResizingArrayQueue<String>()
-  #while (!StdIn.isEmpty()):
-  #  String item = StdIn.readString()
-  #  if !item.equals("-")) q.enqueue(item)
-  #  elif (!q.isEmpty()) StdOut.print(q.dequeue() + " ")
-  #StdOut.println("(" + q.size() + " left on queue)")
+def run(item_list):
+  import sys
+  sys.stdout.write("\nRUNNING: {}\n".format(' '.join(item_list)))
+  q = ResizingArrayQueue()
+  for item in item_list:
+    if item != "-": q.enqueue(item)
+    else: sys.stdout.write("  DEQUEUE: {}\n".format(q.dequeue()))
+  sys.stdout.write("({} left on queue): {}\n".format(q.size(), q))
+
 
 if __name__ == '__main__':
-  main()
+  import InputArgs as IA
+  import sys
+  # If user did not provide a sequence.
+  if len(sys.argv) == 1:
+    run( IA.get_seq__int_or_str("a b c d - - e f - - g h i -") )
+    run( IA.get_seq__int_or_str("a - b - c d - - e f - - g h i -") )
+  # If user provided a sequence in the runtime arguments.
+  else:
+    run( IA.get_list_from_args() )
+
 
 
 # ResizingArrayQueue.java
