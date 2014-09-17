@@ -62,6 +62,7 @@ class Queue:
     def size(self): return self.N
 
     def enqueue(self, item):  # Week 2, "Queues" 02:32
+        """Add new items to the back of the queue."""
         # Save a link to the last node
         oldlast   = self.last     # Save a link to last Node
         # Create a new node for the end
@@ -74,6 +75,7 @@ class Queue:
         self.N += 1
 
     def dequeue(self):
+        """Remove old items from the front of the list."""
         if self.isEmpty(): raise Exception("Queue underflow")
         item       = self.first.Item
         self.first = self.first.Next
@@ -146,6 +148,7 @@ class Queue:
 
 def run(line):
   import sys
+  sys.stdout.write("Running: {}\n".format(line))
   O = Queue()
   res = []
   for word in line.split():
