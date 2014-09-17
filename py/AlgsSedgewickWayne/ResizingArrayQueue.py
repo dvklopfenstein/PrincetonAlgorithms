@@ -29,7 +29,26 @@
 #
 #  @author Robert Sedgewick
 #  @author Kevin Wayne
-#  @edited D Klopfenstein
+#  @edited D Klopfenstein: Converted t Python
+
+
+# Lecture Part 1 Week 2 Queues (4:33)
+# 
+# 04:28 QUESTION: Suppose that you implement a queue using a null-terminated
+# usingly-linked list, maintaining a reference to the item least recently 
+# added (the front of the list) but not maintiaining a reference to the 
+# item most recently added (the end o the lsit). What are the worst case
+# running times for enqueue and dequeue?
+# 
+#   No:  constant time for both enqueue and dequeue
+#   No:  constant time for enqueue and linear time for dequeue
+#   Yes: linear time for enqueue and constant time for dequeue
+#   No:  linear time for both enqueue and dequeue
+# 
+# EXPLANATION: Removing a node from the fromt of a linked list takes constant time.
+# However, it takes linear time to find the last node of a linked list
+# (unless we are careful to maintain a reference to it).
+
 class ResizingArrayQueue: # <Item> implements Iterable<Item>:
 
     def __init__(self):
