@@ -58,7 +58,7 @@ class ResizingArrayQueue: # <Item> implements Iterable<Item>:
       self._last  = 0 # index of next available slot
 
     # @return true if this queue is empty; false otherwise
-    def isEmpty(self): return N == 0
+    def isEmpty(self): return self._N == 0
 
     # Returns the number of items in this queue.
     def size(self): return self._N
@@ -66,12 +66,13 @@ class ResizingArrayQueue: # <Item> implements Iterable<Item>:
     # resize the underlying array
     def _resize(self, maxval):
         assert maxval >= self._N
-        temp = (Item[]) new [maxval] # Item[]
+        temp = [None for i in range(maxval)] # (Item[]) new [maxval] # Item[]
+        q_len = len(self._q)
         for i in range(self._N):
-            temp[i] = q[(first + i) % len(q)]
-        q = temp
-        first = 0
-        last  = self._N
+            temp[i] = self._q[(self._first + i) % q_len]
+        self._q = temp
+        self._first = 0
+        self._last  = self._N
 
     # Adds the item to this queue.
     # @param item the item to add
@@ -91,7 +92,7 @@ class ResizingArrayQueue: # <Item> implements Iterable<Item>:
     def dequeue(self):
         if self.isEmpty(): raise Exception("Queue underflow")
         item = self._q[self._first]
-        self._q[first] = None             # to avoid loitering
+        self._q[self._first] = None     # to avoid loitering
         self._N     -= 1
         self._first += 1
         if self._first == len(self._q): self._first = 0  # wrap-around
@@ -100,40 +101,43 @@ class ResizingArrayQueue: # <Item> implements Iterable<Item>:
           self._resize(len(self._q)/2)
         return item
 
-    # Returns the item least recently added to this queue.
-    # @return the item least recently added to this queue
-    # @throws java.util.NoSuchElementException if this queue is empty
-    def peek(self):
-        if self.isEmpty(): raise Exception("Queue underflow")
-        return self._q[self._first]
+#    # Returns the item least recently added to this queue.
+#    # @return the item least recently added to this queue
+#    # @throws java.util.NoSuchElementException if this queue is empty
+#    def peek(self):
+#        if self.isEmpty(): raise Exception("Queue underflow")
+#        return self._q[self._first]
+#
+#    # Returns an iterator that iterates over the items in this queue in FIFO order.
+#    # @return an iterator that iterates over the items in this queue in FIFO order
+#    def iterator(self):
+#        return new ArrayIterator()
+#
+#    # an iterator, doesn't implement remove() since it's optional
+#    private class ArrayIterator implements Iterator<Item>:
+#        private i = 0
+#        def hasNext(): return i < N;                               }
+#        def UnsupportedOperationException();  }
+#
+#        def next():
+#            if !hasNext()) raise new NoSuchElementException()
+#            Item item = q[(i + first) % len(q)]
+#            i++
+#            return item
 
-    # Returns an iterator that iterates over the items in this queue in FIFO order.
-    # @return an iterator that iterates over the items in this queue in FIFO order
-    def iterator(self):
-        return new ArrayIterator()
+    # Unit tests the <tt>ResizingArrayQueue</tt> data type.
+def main():
+  import InputArgs
+  items = InputArgs.getStrArray()
+  #ResizingArrayQueue<String> q = new ResizingArrayQueue<String>()
+  #while (!StdIn.isEmpty()):
+  #  String item = StdIn.readString()
+  #  if !item.equals("-")) q.enqueue(item)
+  #  elif (!q.isEmpty()) StdOut.print(q.dequeue() + " ")
+  #StdOut.println("(" + q.size() + " left on queue)")
 
-    # an iterator, doesn't implement remove() since it's optional
-    private class ArrayIterator implements Iterator<Item>:
-        private i = 0
-        def hasNext(): return i < N;                               }
-        def UnsupportedOperationException();  }
-
-        def next():
-            if !hasNext()) raise new NoSuchElementException()
-            Item item = q[(i + first) % len(q)]
-            i++
-            return item
-
-   #*
-     # Unit tests the <tt>ResizingArrayQueue</tt> data type.
-     #/
-    def main(String[] args):
-        ResizingArrayQueue<String> q = new ResizingArrayQueue<String>()
-        while (!StdIn.isEmpty()):
-            String item = StdIn.readString()
-            if !item.equals("-")) q.enqueue(item)
-            elif (!q.isEmpty()) StdOut.print(q.dequeue() + " ")
-        StdOut.println("(" + q.size() + " left on queue)")
+if __name__ == '__main__':
+  main()
 
 
 # ResizingArrayQueue.java
@@ -164,5 +168,5 @@ class ResizingArrayQueue: # <Item> implements Iterable<Item>:
 # QUESTION: What is a type safe way to declare and initialize a Stack of integers?
 # ANSWER:   Stack<Integer> stack = Stack<Integer>()
 
-# Copyright (C) 2002–2010, Robert Sedgewick and Kevin Wayne. 
+# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne. 
 # Java last updated: Mon Oct 7 11:58:25 EDT 2013.
