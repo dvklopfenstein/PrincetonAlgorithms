@@ -151,35 +151,82 @@ if __name__ == '__main__':
   else:
     run( IA.get_list_from_args() )
 
+###########################################################################
+# Lecture Week 2 Generics (9:26)
+###########################################################################
+# -------------------------------------------------------------------------
+# BAD: Before Java 1.5 (2004-09-29) 
+# GRRRR JAVA(<1.5 2004), NO GENERIC SUPPORT = Separate container class for every type.
 
+# 02:00 BAD: Casting in client code:
+# 
+#    StackOfObjects s = new StackOfObjects();
+#    Apple   a = new Apple();
+#    Orange  b = new Orange();
+#    s.push(a);
+#    s.push(b);
+#    a = (Apple)(s.pop()); # FATAL: RUNTIME ERROR!!!
 
-# ResizingArrayQueue.java
-# 05:57 Lecture Generics
+# 03:00 BETTER: JAVA GENERICS
 #
-# private Itemp[] s
-# public FixedCapacityStack(int capacity)
-# WANT:: s = new Item[capacity]; }  # GRRRR Java does not allow this
-# CUR:: s = (Item[]) new [capacity]; }  # GRRRR Java does not allow this
-#   warning: [unchecked] unchecked cast
+#    Stack<Apple> s = new Stack<Apple>();
+#    Apple   a = new Apple();
+#    Orange  b = new Orange();
+#    s.push(a);
+#    s.push(b);   # COMPILE-TIME ERROR
+#    a = s.pop(); 
+# 
+# GUIDING PRINCIPLES. Welcome compile-time errors; avoid run-time errors.
+
+# 05:56 GENERIC STACK: ARRAY IMPLEMENTATION
+# 
+# BAD JAVA: Generic array creation not allowed in Java:
+# 
+#     public class FixedCapacityStack<Item> {
+#       ...
+#       public FixedCapacityStack(int capacity)
+#       { s = new Item[capacity]; }  # <- GRRRR JAVA
+#       ...
+#
+# BAD JAVA: KLUDGE:
+# 
+#       public FixedCapacityStack(int capacity)
+#       { s = (Item[]) new Onject[capacity]; }  # <- GRRRR JAVA: USE UGLY CAST
+#       ...
+#
+# 07:27 GRRRR JAVA: Good code has zero casts.  Ignore these warnings:
+#   % javac FixedCapacityStack
+#   Note: FixedCapacityStack.java uses unchecked or unsafe operations.
+#   Note: Recompile with -Xlint:unchecked for details.
+#   
+#   % javac -Xlint:unchecked FixedCapacityStack.java
+#   FixedCapacityStack.java:26 warning: [unchecked] unchecked cast found: java.lang.Object[]
+#   required: Item[]
+#     a = (Item[]) new Object[capacity];
 
 # 08:59 GENERIC DATA TYPES: autoboxing
 # QUESTION: What to do about primitive types?
 # 
 # WRAPPER TYPE: 
 #   * Each primitive type has a wrapper object type.
-#   * Ex: Interger is wrapper type for int.
+#   * Ex: Integer is wrapper type for int.
 # 
-# AUTOBOXING: Automatic cast between a primitive type and its wrapper.
+# AUTOBOXING: Automatic cast between a primitive type and its wrapper. GRRRR JAVA
 # 
 # SYNTACTIC SUGAR: Behind-the-scenes casting.
-#   Stack<Integer> s = new Stack<Integer>()
-#   s.push(17)
-#   a = s.pop()
+#   Stack<Integer> s = new Stack<Integer>();
+#   s.push(17);      // s.push(new Integer(17));
+#   int a = s.pop(); // int a = s.pop().intValue();
 # 
 # BOTTOM LINE: Client code can use generic stack for any type of data.
 
 # QUESTION: What is a type safe way to declare and initialize a Stack of integers?
 # ANSWER:   Stack<Integer> stack = Stack<Integer>()
+# EXPLANATION: In Java 6(2006_1211), you must specify the concrete type
+# both when you declare and when you construct the stack.
+# Starting in Java 7(2011_0728), you can use the diamond operator instead;
+#   Stack<Integer> stack = new Stack<>();
+# However, we use a Java 6 compiler to assess your programming assignments.
 
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne. 
 # Java last updated: Mon Oct 7 11:58:25 EDT 2013.
