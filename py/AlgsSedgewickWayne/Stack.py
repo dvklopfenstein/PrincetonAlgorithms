@@ -106,44 +106,36 @@ class Stack:
       item = self.first.Item        # save item to return
       self.first = self.first.Next  # delete first node
       self.N -= 1
-      return item;                  # return the saved item
+      return item                   # return the saved item
 
-#    # Returns (but does not remove) the item most recently added to this stack.
-#    # @return the item most recently added to this stack
-#    # @throws java.util.NoSuchElementException if this stack is empty
-#    def peek():
-#        if (isEmpty()) throw new NoSuchElementException("Stack underflow");
-#        return first.item;
-#
-#    # Returns a string representation of this stack.
-#    # @return the sequence of items in the stack in LIFO order, separated by spaces
-#    public String toString() {
-#        StringBuilder s = new StringBuilder();
-#        for (Item item : this)
-#            s.append(item + " ");
-#        return s.toString();
-#
-   #*
-   # Returns an iterator to this stack that iterates through the items in LIFO order.
-   # @return an iterator to this stack that iterates through the items in LIFO order.
-   #/
-  def iterator(self): return ListIterator(self.first)
+  # Returns (but does not remove) the item most recently added to this stack.
+  # @return the item most recently added to this stack
+  # @raises Exception if this stack is empty
+  def peek(self):
+      if isEmpty(): raise Exception("Stack underflow")
+      return first.item
 
-  # an iterator, doesn't implement remove() since it's optional
+  # Returns a string representation of this stack.
+  # @return the sequence of items in the stack in LIFO order, separated by spaces
+  def __str__(self): return ' '.join([str(item) for item in self])
+
+  # Returns an iterator to this stack that iterates through the items in LIFO order.
+  # @return an iterator to this stack that iterates through the items in LIFO order.
+  def __iter__(self): 
+    return self.ListIterator(self.first)
+
   class ListIterator:
-
       # Iterator Starts at the first item
-      def ListIterator(self, first):
-          self.current = first; # Node<Item>
+      def __init__(self, first):
+          self.current = first # Node<Item>
       
-      def hasNext(self): return self.current is not None
-      def remove(self):  raise Exception("UNSUPPORTED: remove")
-
       def next(self):
-          if not self.hasNext(): raise Exception("NoSuchElementException");
-          item = self.current.Item;
-          self.current = self.current.Next; 
-          return item;
+          if self.current is None:
+            raise StopIteration
+          item = self.current.Item
+          self.current = self.current.Next 
+          return item
+
 
 # QUESTION: Suppose that we copy the iterator code from our linked list and resizing array
 # implrmentations of a stack to the corresponging implementations of a queue.
@@ -155,16 +147,19 @@ class Stack:
 #   1) The items should be iterated over in the opposite order
 #   2) the items won't typically be stored in the array as entries 0 to N-1.
 
-def run(line):
-  sys.stdout.write("\nINPUT: {}\n".format(line))
+def run(item_list):
+  sys.stdout.write("\nINPUT: {}\n".format(' '.join(item_list)))
   s = Stack()
-  res = []
-  for word in line.split():
-    if not word: break
-    if word != "-": s.push(word)
-    elif not s.isEmpty(): res.append(s.pop())
-  sys.stdout.write('(%d left on stack) OUTPUT: %s\n'%(s.size(),' '.join(res)))
-  return res
+  for item in item_list:
+    if not item: break
+    if item != "-": 
+      s.push(item)
+      sys.stdout.write("{:10}   PUSH {:10} +STACK: {}\n".format("", item, s))
+    elif not s.isEmpty(): 
+      popped = s.pop()
+      sys.stdout.write("{:>10} <-POP  {:10} -STACK: {}\n".format(popped, item, s))
+  sys.stdout.write('({} left on stack)\n'.format(s.size()))
+  return s
 
 def ex_stdin():
   s = Stack()
@@ -176,8 +171,18 @@ def ex_stdin():
     elif not s.isEmpty(): res = ' '.join([res,s.pop()])
   sys.stdout.write('(%d left on stack) OUTPUT: %s\n'%(s.size(),res))
 
+def default_examples():
+  stk = run( IA.get_seq__int_or_str("to be or not to be - - - - - -") )
+  # Slide 6 Week 2 Lecture 4-1-Stacks(16-24)
+  stk = run( IA.get_seq__int_or_str("to be or not to - be - - that - - - is") )
+  sys.stdout.write("\nDEMOSTRATE ITERATION:\n"); 
+  for S in stk: print S
+  sys.stdout.write("\nDEMONSTRATE 'toString()': {}\n".format(stk.__str__()))
+
+
 if __name__ == '__main__':
-  run("to be or not to be - - - - - -")
-  run("to be or not to - be - - that - - - is") # Slide 6 Week 2 Lecture 4-1-Stacks(16-24)
+  import InputArgs as IA
+  if len(sys.argv) == 1: default_examples()
+  else: run( IA.get_list_from_args() )
 
 
