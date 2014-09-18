@@ -121,6 +121,46 @@ class Stack:
 
   # Returns an iterator to this stack that iterates through the items in LIFO order.
   # @return an iterator to this stack that iterates through the items in LIFO order.
+  # https://mail.python.org/pipermail/tutor/2006-January/044455.html
+  # https://www.inkling.com/read/learning-python-mark-lutz-4th/chapter-29/iterator-objects---iter---and--
+
+################################################################################
+# Lecture Alg 1 Week 2 "Iterators" (7:16)
+################################################################################
+# 
+# Q. What is an "Iterable"?
+# A. Has a method that returns an "Iterator."
+# 
+#   JAVA ITERABLE INTERFACE
+# 
+#       public interface Iterable<Item>
+#       {
+#         Iterator<Item> iterator();
+#       }
+# 
+# Q. What is an "Iterator"?
+# A. Has methods "hasNext()" and "next()".
+# 
+#   JAVA ITERATOR INTERFACE:
+# 
+#       public interface Iterator<Item>
+#       {
+#         boolean hasNext();
+#         Item next();
+#         void remove(); # <- WARNING: USER AT YOUR OWN RISK
+#       {
+# 
+# Q. Why make data structures "Iterable"?
+# A. Java supports elegant client code.
+# 
+#   SHORTHAND "foreach" statement    LONGHAND equivalent code 
+#                                                                                  
+#   for (String s: stack)            Iterator<String> i = stack.iterator();
+#     StdOut.println(s);             while (i.hasNext())
+#                                    {
+#                                      String s = i.next();
+#                                      Stdout.println(s);
+#                                    }    
   def __iter__(self): 
     return self.ListIterator(self.first)
 

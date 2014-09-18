@@ -56,7 +56,7 @@ J.. 1.3 LinkedQueue          FIFO queue (linked list)         tobe.txt
 JP.   – Queue                FIFO queue                       tobe.txt
 J..   – ResizingArrayBag     multiset (resizing array)        –
 J.. 1.4 LinkedBag            multiset (linked list)           –
-J..   – Bag                  multiset                         –
+JP.   – Bag                  multiset                         –
 ...   – Stopwatch            timer (wall time)                –
 ...   – StopwatchCPU         timer (CPU time)                 –
 ...   – LinearRegression     simple linear regression         –

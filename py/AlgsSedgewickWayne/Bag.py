@@ -1,4 +1,6 @@
-#!/usr/bin/env python#************************************************************************
+#!/usr/bin/env python
+
+#************************************************************************
  #  Compilation:  javac Bag.java
  #  Execution:    java Bag < input.txt
  #
@@ -26,10 +28,7 @@
  #
  #************************************************************************/
 
-import java.util.Iterator
-import java.util.NoSuchElementException
 
-#*
  #  The <tt>Bag</tt> class represents a bag (or multiset) of 
  #  generic items. It supports insertion and iterating over the 
  #  items in arbitrary order.
@@ -45,87 +44,76 @@ import java.util.NoSuchElementException
  #
  #  @author Robert Sedgewick
  #  @author Kevin Wayne
- #/
-public class Bag<Item> implements Iterable<Item>:
-    private N;               # number of elements in bag
-    private <Item> first;    # beginning of bag
+ #  @edited DV Klopfenstein
+class Bag: # <Item> implements Iterable<Item>:
 
     # helper linked list class
-    private static class <Item>:
-        private Item item
-        private <Item> next
+    class _Node: # private static class <Item>:
+        def __init__(self, Item, Next):
+          self._item = Item
+          self._next = Next
 
-    #*
-     # Initializes an empty bag.
-     #/
-    public Bag():
-        first = None
-        N = 0
+    # Initializes an empty bag.
+    def __init__(self):
+        self._first = None # number of elements in bag
+        self._N = 0        # beginning of bag
 
-    #*
-     # Is this bag empty?
-     # @return true if this bag is empty; false otherwise
-     #/
-    def isEmpty():
-        return first == None
+    # Is this bag empty?
+    # @return true if this bag is empty; false otherwise
+    def isEmpty(self): return self._first == None
 
-    #*
-     # Returns the number of items in this bag.
-     # @return the number of items in this bag
-     #/
-    def size():
-        return N
+    # Returns the number of items in this bag.
+    # @return the number of items in this bag
+    def size(self): return self._N
 
-    #*
-     # Adds the item to this bag.
-     # @param item the item to add to this bag
-     #/
-    def add(Item item):
-        <Item> oldfirst = first
-        first = new <Item>()
-        first.item = item
-        first.next = oldfirst
-        N++
+    # Adds the item to this bag.
+    # @param item the item to add to this bag
+    def add(self, item):
+        self._first = self._Node(item, self._first)
+        self._N += 1
 
-
-    #*
-     # Returns an iterator that iterates over the items in the bag in arbitrary order.
-     # @return an iterator that iterates over the items in the bag in arbitrary order
-     #/
-    def iterator():
-        return new ListIterator<Item>(first)
+    # Returns an iterator that iterates over the items in the bag in arbitrary order.
+    # @return an iterator that iterates over the items in the bag in arbitrary order
+    def __iter__(self): return self._ListIterator(self._first)
 
     # an iterator, doesn't implement remove() since it's optional
-    private class ListIterator<Item> implements Iterator<Item>:
-        private <Item> current
+    class _ListIterator: # <Item> implements Iterator<Item>:
 
-        public ListIterator(<Item> first):
-            current = first
+        def __init__(self, first):
+            self._current = first
 
-        def hasNext(): return current != None;                     }
-        def UnsupportedOperationException();  }
+        def hasNext(self): return self._current is not None
 
-        def next():
-            if !hasNext()) raise new NoSuchElementException()
-            Item item = current.item
-            current = current.next
+        def next(self):
+            if not self.hasNext(): raise StopIteration
+            item = self._current._item
+            self._current = self._current._next
             return item
 
-    #*
-     # Unit tests the <tt>Bag</tt> data type.
-     #/
-    def main(String[] args):
-        Bag<String> bag = new Bag<String>()
-        while (!StdIn.isEmpty()):
-            String item = StdIn.readString()
-            bag.add(item)
+# Unit tests the <tt>Bag</tt> data type.
+def run(item_list):
+    import sys
+    bag = Bag()
+    for item in item_list:
+        bag.add(item)
 
-        StdOut.println("size of bag = " + bag.size())
-        for (String s : bag):
-            StdOut.println(s)
+    sys.stdout.write("size of bag = {}\n".format(bag.size()))
+    for s in bag:
+        sys.stdout.write("  BAG CONTAINS: {}\n".format(s))
+
+def default_examples():
+  import InputArgs as IA
+  bag = run( IA.get_seq__int_or_str("1 2 3 4 5 6 7 8 9") )
+
+if __name__ == '__main__':
+  import InputArgs as IA
+  import sys
+  if len(sys.argv) == 1: default_examples()
+  else: run( IA.get_list_from_args() )
 
 
 
-# Copyright (C) 2002–2010, Robert Sedgewick and Kevin Wayne. 
+
+# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne. 
 # Java last updated: Tue Mar 25 04:52:35 EDT 2014.
 
