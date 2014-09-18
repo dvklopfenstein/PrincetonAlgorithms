@@ -200,28 +200,29 @@ class ResizingArrayStack: #<Item> implements Iterable<Item>:
     # EXPLANATION: Upon termination of the loop, x is a reference to the second to last node.
     # The final statement deletes the last node from the list.
 
+    def __str__(self): return ' '.join([str(item) for item in self])
 
     # Returns (but does not remove) the item most recently added to this stack.
     # @return the item most recently added to this stack
     # @throws java.util.NoSuchElementException if this stack is empty
-    # def peek():
-    #     if isEmpty()) raise new NoSuchElementException("Stack underflow")
-    #     return a[N-1]
+    def peek():
+        if self.isEmpty(): raise Exception("Stack underflow")
+        return self._a[N-1]
 
     # Returns an iterator to this stack that iterates through the items in LIFO order.
     # @return an iterator to this stack that iterates through the items in LIFO order.
-    # def iterator():
-    #     return new ReverseArrayIterator()
+    def __iter__(self): return self._ReverseArrayIterator(self)
 
-    # an iterator, doesn't implement remove() since it's optional
-    # class _ReverseArrayIterator: # implements Iterator<Item>:
-    #     def __init__(self): self._i = self._N
-    #     def hasNext(): return self_i > 0
-    #     def remove(): raise Exception("ResizingArrayStack.py: UnsupportedOperation(remove)"))
-    #     def next():
-    #         if !self.hasNext()) raise Exception("ResizingArrayStack.py: NoSuchElement")
-    #         self._i -= 1
-    #         return a[self._i]
+    class _ReverseArrayIterator: # implements Iterator<Item>:
+         def __init__(self, stk): 
+           self._arr = stk._a
+           self._i   = stk._N
+         def hasNext(self): return self._i > 0
+         def next(self):
+             if not self.hasNext(): 
+               raise StopIteration
+             self._i -= 1
+             return self._arr[self._i]
 
 # Unit tests the <tt>Stack</tt> data type.
 def main():
@@ -235,6 +236,7 @@ def main():
     if item != "-": s.push(item)
     elif not s.isEmpty(): print s.pop(), " "
   sys.stdout.write("({}) left on stack)".format(s.size()))
+  for S in s: print S
 
 if __name__ == '__main__':
   main()
