@@ -161,6 +161,24 @@ class Stack:
 #                                      String s = i.next();
 #                                      Stdout.println(s);
 #                                    }    
+
+# 07:13 QUESTION: Suppose that we copy the iterator code from our linked list
+# and resizing array implementations of a stack to the corresponding
+# implementations of a queue.
+# 
+# Which queue iterator(s) will correctly return the items in FIFO order?
+#    NO: neither
+#   YES: linked list iterator only
+#    NO: array iterator only
+#    NO: both
+# 
+# EXPLANATION: The linkes list iterator will work without modifiction because
+# the items in the linked list are ordered in FIFO order (which is the main
+# reason we dequeue from the front and enqueue to the back instead of vice versa).
+# The array iterator will fail for two reasons:
+#   i. the items should be iterated over in the opposite order
+#   ii. the items won't typically be stored in the array as entries 0 to N-1
+
   def __iter__(self): 
     return self.ListIterator(self.first)
 

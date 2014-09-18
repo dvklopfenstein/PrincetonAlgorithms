@@ -102,32 +102,30 @@ class ResizingArrayQueue: # <Item> implements Iterable<Item>:
         return item
 
 
-    def __str__(self):
-        return ' '.join(item for item in self._q[self._first:self._last])
+    def __str__(self): return ' '.join([str(item) for item in self])
 
-#    # Returns the item least recently added to this queue.
-#    # @return the item least recently added to this queue
-#    # @throws java.util.NoSuchElementException if this queue is empty
-#    def peek(self):
-#        if self.isEmpty(): raise Exception("Queue underflow")
-#        return self._q[self._first]
-#
-#    # Returns an iterator that iterates over the items in this queue in FIFO order.
-#    # @return an iterator that iterates over the items in this queue in FIFO order
-#    def iterator(self):
-#        return new ArrayIterator()
-#
-#    # an iterator, doesn't implement remove() since it's optional
-#    private class ArrayIterator implements Iterator<Item>:
-#        private i = 0
-#        def hasNext(): return i < N;                               }
-#        def UnsupportedOperationException();  }
-#
-#        def next():
-#            if !hasNext()) raise new NoSuchElementException()
-#            Item item = q[(i + first) % len(q)]
-#            i++
-#            return item
+    # Returns the item least recently added to this queue.
+    # @return the item least recently added to this queue
+    # @throws java.util.NoSuchElementException if this queue is empty
+    def peek(self):
+        if self.isEmpty(): raise Exception("Queue underflow")
+        return self._q[self._first]
+
+    # Returns an iterator that iterates over the items in this queue in FIFO order.
+    # @return an iterator that iterates over the items in this queue in FIFO order
+    def __iter__(self): return self._ArrayIterator(self)
+
+    # an iterator, doesn't implement remove() since it's optional
+    class _ArrayIterator: # implements Iterator<Item>:
+        def __init__(self, Q): 
+          self._Q = Q
+          self._i = 0
+        def hasNext(self): return self._i < self._Q._N
+        def next(self):
+            if not self.hasNext(): raise StopIteration
+            item = self._Q._q[(self._i + self._Q._first) % len(self._Q._q)]
+            self._i += 1
+            return item
 
     # Unit tests the <tt>ResizingArrayQueue</tt> data type.
 def run(item_list):

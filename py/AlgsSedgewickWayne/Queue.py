@@ -83,69 +83,34 @@ class Queue:
         if self.isEmpty(): self.last = None  # to avoid loitering
         return item;
 
-#      #*
-#      # Returns the item least recently added to this queue.
-#      # @return the item least recently added to this queue
-#      # @throws java.util.NoSuchElementException if this queue is empty
-#      #/
-#     public Item peek() {
-#         if (isEmpty()) throw new NoSuchElementException("Queue underflow");
-#         return first.item;
-#     }
-# 
-#      #*
-#      # Returns a string representation of this queue.
-#      # @return the sequence of items in FIFO order, separated by spaces
-#      #/
-#     public String toString() {
-#         StringBuilder s = new StringBuilder();
-#         for (Item item : this)
-#             s.append(item + " ");
-#         return s.toString();
-#     } 
-# 
-#      #*
-#      # Returns an iterator that iterates over the items in this queue in FIFO order.
-#      # @return an iterator that iterates over the items in this queue in FIFO order
-#      #/
-#     public Iterator<Item> iterator()  {
-#         return new ListIterator<Item>(first);  
-#     }
-# 
-#     # an iterator, doesn't implement remove() since it's optional
-#     private class ListIterator<Item> implements Iterator<Item> {
-#         private Node<Item> current;
-# 
-#         public ListIterator(Node<Item> first) {
-#             current = first;
-#         }
-# 
-#         public boolean hasNext()  { return current != null;                     }
-#         public void remove()      { throw new UnsupportedOperationException();  }
-# 
-#         public Item next() {
-#             if (!hasNext()) throw new NoSuchElementException();
-#             Item item = current.item;
-#             current = current.next; 
-#             return item;
-#         }
-#     }
-# 
-# 
-#      #*
-#      # Unit tests the <tt>Queue</tt> data type.
-#      #/
-#     public static void main(String[] args) {
-#         Queue<String> q = new Queue<String>();
-#         while (!StdIn.isEmpty()) {
-#             String item = StdIn.readString();
-#             if (!item.equals("-")) q.enqueue(item);
-#             else if (!q.isEmpty()) StdOut.print(q.dequeue() + " ");
-#         }
-#         StdOut.println("(" + q.size() + " left on queue)");
-#     }
-# }
+    # Returns the item least recently added to this queue.
+    # @return the item least recently added to this queue
+    # @throws java.util.NoSuchElementException if this queue is empty
+    def peek(self):
+        if self.isEmpty(): raise Exception("Queue underflow");
+        return self.first.Item
 
+     # Returns a string representation of this queue.
+     # @return the sequence of items in FIFO order, separated by spaces
+    def __str__(self): return ' '.join([str(item) for item in self])
+ 
+    # Returns an iterator that iterates over the items in this queue in FIFO order.
+    # @return an iterator that iterates over the items in this queue in FIFO order
+    def __iter__(): return _ListIterator(self.first)
+
+    # an iterator, doesn't implement remove() since it's optional
+    class _ListIterator: # <Item> implements Iterator<Item> {
+
+        def ListIterator(self, first):
+            self._current = first
+
+        def next(self):
+            if self._current is None: raise StopIteration
+            item = self._current.item
+            self._current = self._current.Next 
+            return item
+ 
+ 
 def run(line):
   import sys
   sys.stdout.write("Running: {}\n".format(line))
