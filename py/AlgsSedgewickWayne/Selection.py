@@ -176,6 +176,7 @@
 
 # Rearranges the array in ascending order, using the natural order.
 # @param a the array to be Sorted
+# @param array_history; Used in tests. When true prints ASCII Art demonstrating the sort
 def Sort(ARR, array_history=None):
   N = len(ARR)
   # Items from i to j-1 are Sorted

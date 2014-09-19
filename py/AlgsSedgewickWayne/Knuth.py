@@ -114,36 +114,41 @@
 
 import random
 
-#*
 # Rearranges an array of objects in uniformly random order
 # (under the assumption that <tt>Math.random()</tt> generates independent
 # and uniformly distributed numbers between 0 and 1).
 # @param a the array to be shuffled
 # @see StdRandom
-#/
 def shuffle(a):
     N = len(a)
-    for i in range(N):
-        # choose index uniformly in [i, N-1], endpoints included?
-        r = random.randint(i, N-i)
-        swap = a[r]
-        a[r] = a[i]
-        a[i] = swap
+    for i in range(1,N):
+        # Knuth shuffle (03:00) Linear-time shuffling algorithm
+        #   * In iteration i, pick integer r between 0 and i uniformly at random.
+        #   * Swap a[i] and a[r]
+        # COMMON BUG:      Choosing r between 0 and N-1 => Not Uniformly Random
+        # CORRECT VARIANT: Choosing r between i and N-1
+        #r = random.randint(i, N-1)
+        r = random.randint(0, i-1)
+        a[i], a[r] = a[r], a[i]
+        #swap = a[r]
+        #a[r] = a[i]
+        #a[i] = swap
 
-#*
 # Reads in a sequence of strings from standard input, shuffles
 # them, and prints out the results.
-#/
 def main(): 
+    import InputArgs
+    import sys
+
     # read in the data
-    String[] a = StdIn.readAllStrings();
+    a = InputArgs.getStrArray("a b c d e f")
 
     # shuffle the array
-    Knuth.shuffle(a);
+    shuffle(a)
 
     # print results.
-    for i in range(len(a)):
-        print a[i]
+    sys.stdout.write('{}\n'.format(' '.join(map(str, a))))
+
 
 if __name__ == '__main__':
   main()

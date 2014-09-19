@@ -49,7 +49,8 @@
 # PROOF: 05:16 Expect each entry to move halfway back below the diagonal on the average
 # 
 # INSERTION SORT: BEST CASE AND WORST CASE: 06:10
-# BEST CASE 06:12: If the array is in ascending order, insertion sort makes N-1 compares and 0 exchanges
+# BEST CASE 06:12: If the array is in ascending order, 
+#   insertion sort makes N-1 compares and 0 exchanges
 #   A E E L , O P R S T X
 # WORST CASE 06:37: If the array is in descending order (and no duplicates),
 #   insertion sort makes ~ 1/2*N^2 compares and ~ 1/2*N^2 exchanges (Slower that Selection sort)
@@ -69,6 +70,9 @@
 # PROPOSITION: For partially-sorted arrays, insertion sort runs in linear time. 08:57
 # PROOF: Number of exchanges equals the numbers of inversions
 #   number of compares = exchanges + (N - 1)
+#
+# INSERTION SORT IS INEFFICIENT because elements only move one place at a time
+# even if we know that they have to move far away.
 #   
 # QUESTION: How many compares does insertion sort make on an imput array that is already sorted? 
 # ANSWER: linear
@@ -88,7 +92,7 @@
 # key, "A".  The 1 and 2 following the "A" are denote that A1 was 1st
 # and A2 was 2nd.
 #
-# NOTE: if "_less" in the "Sort" routine were "less than or equal to",
+# NOTE: if "__lt__" in the "Sort" routine were "less than or equal to",
 # it would not work.
 # 
 # i j   0   1   2   3   4
@@ -114,7 +118,7 @@ def Sort(ARR, array_history=None):
         #for (int j = i; j > 0 && less(a[j], a[j-1]); j--):
         j = i
         # Exchange the curr Elem with every element to the left that is > 01:21
-        while j > 0 and _less(ARR[j], ARR[j-1]): 
+        while j > 0 and __lt__(ARR[j], ARR[j-1]): 
             #if array_history is not None: 
             if isinstance(array_history, list): add_history(array_history, ARR, {j:'*', j-1:'*'} )
             _exch(ARR, j, j-1)
@@ -141,6 +145,7 @@ def Sort(ARR, array_history=None):
  #*
  # Returns a permutation that gives the elements in the array in ascending order.
  # @param a the array
+ # @param array_history; Used in tests. When true prints ASCII Art demonstrating the sort
  # @return a permutation <tt>p[]</tt> such that <tt>a[p[0]]</tt>, <tt>a[p[1]]</tt>,
  #    ..., <tt>a[p[N-1]]</tt> are in ascending order
  #/
@@ -152,7 +157,7 @@ def indexSort(ARR, array_history=None):
 
     for i in range(N):
         j = i
-        while j > 0 and _less(ARR[index[j]], ARR[index[j-1]]):
+        while j > 0 and __lt__(ARR[index[j]], ARR[index[j-1]]):
           _exch(index, j, j-1)
           if array_history is not None: 
             add_history(array_history, ARR, {j:'*', j-1:'*'} )
@@ -164,10 +169,10 @@ def indexSort(ARR, array_history=None):
 #**********************************************************************/
 
 # is v < w ?
-def _less(v, w): return v < w
+def __lt__(v, w): return v < w
 
 # # is v < w ?
-# def _less(c, v, w):
+# def __lt__(c, v, w):
 #     return (c.compare(v, w) < 0);
     
 # exchange a[i] and a[j]
@@ -185,7 +190,7 @@ def _isSorted(a, lo=None, hi=None):
       hi = len(a) - 1
     # is the array sorted from a[lo] to a[hi]
     for i in range(lo+1, hi+1):
-        if _less(a[i], a[i-1]): return False
+        if __lt__(a[i], a[i-1]): return False
     return True
 
 # def _isSorted(a, c):

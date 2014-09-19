@@ -24,6 +24,7 @@
 # 04:58 SHELLSORT: INTUITION
 # PROPOSITION: A g-sorted array remains g-sorted after h-sorting it.
 # CHALLENGE:   Prove this fact--it's more subtle than you'd think!
+# Each element moves only a little bit; how Shellsort gains its efficiency
 # 
 # 05:31 SHELLSORT: WHICH INCREMENT SEQUENCE TO USE?
 # We will use 3x+1 (Knuth's choice in the 1960s)
@@ -66,11 +67,11 @@
 # LESSON: Some good algorithms are still waiting discovery (special inc seq?)
 
 # QUESTION: How many compares does shellsort (using the 3x+1 increment
-# sequence) make on an input array that is *already sorted*?
+# sequence) make on an input array that is *already sorted?
 # ANSWER: linearithmic (look at table above)
 # EXPLANATION: Since successive increment values of h differ by at least a 
 # a factor of 3, there are ~log_3(N) increment values. For each increment
-# value h, the array is alreasy h-sorted so it will make ~ N compares.
+# value h, the array is already h-sorted so it will make ~ N compares.
 
 # QUESTION: The number of compares to Shellsort (with Knuth's 3x+1 
 # increments) a sorted array of N distinct keys is ~ N log_3 N.
@@ -95,7 +96,7 @@
 # an item past some equal item.
 #
 #
-# NOTE: if "_less" in the "Sort" routine were "less than or equal to",
+# NOTE: if "__lt__" in the "Sort" routine were "less than or equal to",
 # it would not work.
 # 
 
@@ -148,28 +149,27 @@
 #  @author Kevin Wayne
 #/
 
-#*
 # Rearranges the array in ascending order, using the natural order.
 # @param a the array to be sorted
-#/
+# @param array_history; Used in tests. When true prints ASCII Art demonstrating the sort
 def Sort(ARR, array_history=None):
     N = len(ARR)
 
     # 3x+1 increment sequence:  1, 4, 13, 40, 121, 364, 1093, ... 
-    h = 1
-    while (h < N/3): h = 3*h + 1; 
+    ha = [1]
+    while (ha[-1] < N/3): 
+      ha.append(3*ha[-1] + 1)
 
-    while (h >= 1):
-        # h-sort the array
+    for h in reversed(ha):
+        # h-sort the array (insertion sort)
         for i in range(h,N):
             j = i
-            while j >= h and _less(ARR[j], ARR[j-h]): 
+            while j >= h and __lt__(ARR[j], ARR[j-h]): 
                 if array_history is not None:
                   add_history(array_history, ARR, {j:'*', j-h:'*'} )
                 _exch(ARR, j, j-h)
                 j -= h
         assert _isHsorted(ARR, h) 
-        h /= 3
     assert _isSorted(ARR)
     if array_history is not None:
       add_history(array_history, ARR, None )
@@ -180,26 +180,27 @@ def Sort(ARR, array_history=None):
 #**********************************************************************/
 
 # is v < w ?
-def _less(v, w): return v<w
+def __lt__(v, w): return v < w
     
 # exchange a[i] and a[j]
 def _exch(a, i, j):
-    swap = a[i]
-    a[i] = a[j]
-    a[j] = swap
+    a[i], a[j] = a[j], a[i]
+    #swap = a[i]
+    #a[i] = a[j]
+    #a[j] = swap
 
 #**********************************************************************
 #  Check if array is sorted - useful for debugging
 #**********************************************************************/
 def _isSorted(a):
     for i in range(1,len(a)):
-        if _less(a[i], a[i-1]): return False
+        if __lt__(a[i], a[i-1]): return False
     return True
 
 # is the array h-sorted?
 def _isHsorted(a, h):
     for i in range(h,len(a)):
-        if _less(a[i], a[i-h]): return False
+        if __lt__(a[i], a[i-h]): return False
     return True
 
 def add_history(ret, ARR, anno):
