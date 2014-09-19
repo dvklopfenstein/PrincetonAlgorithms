@@ -67,6 +67,46 @@
 #    8 bytes (reference to _Node.next; Node)
 #  --- -------------------------
 #   40 bytes per stack Node
+
+
+# -----------------------------------------------------------
+# Bruno Lehouque: boolean is a primitive type while Boolean is an object type.
+#   It's a wrapper type for booleans. Its size is 
+#   16(overhead) + 1(boolean value) + 7(padding)
+# 
+# public class GenericMysteryBox<Item> {  16 bytes(class overhead)
+#         private Node first;              8 bytes(reference)
+# 
+#                                          8 bytes(inner class _Node overhead)
+#         private class Node {            16 bytes(_Node overhead)
+#             private Item item;           8 bytes(reference to _Node.Item, a Boolean)
+#                                         24 bytes(Boolean)
+#             private Node next;           8 bytes
+#             private Node prev;           8 bytes
+#         }
+#         ...               ANSWER   24 + 72N
+#     }
+
+# -----------------------------------------------------------
+#    public class MysteryBox {          16 class
+#        private Node first;             8 reference
+#
+#                                        8 inner class
+#        private static class Node {    16 class
+#            private int item;           4 int
+#            private Node next;          8 ref
+#        }                               4 padding to round up to multiple of 8
+#        ...                ANSWER 24 + 32N
+#    }
+
+# -----------------------------------------------------------
+#     public class MysteryBox {      16 class
+#         private int N;              4 int
+#         private double[] items;    24 + 8N
+#         ...                         
+#     }                             ~8N
+
+
 # 
 # 09:48 *** REMARK: Analysis included memory for the stack
 #   (but not the strings themselves, which the client owns). 
@@ -200,24 +240,29 @@ class Stack:
 # Which queue iterator(s) will correctly return the items in FIFO order?
 # 
 # ANSWER: The linked list iterator will work without modification because the items in the linked
-# list are orered in FIFO  order (which is the main reason we dequeue from the front 
+# list are ordered in FIFO  order (which is the main reason we dequeue from the front 
 # and enqueue to the back instead of vece versa). The array iterator will fail for two reasons:
 #   1) The items should be iterated over in the opposite order
 #   2) the items won't typically be stored in the array as entries 0 to N-1.
 
-def run(item_list):
-  sys.stdout.write("\nINPUT: {}\n".format(' '.join(item_list)))
+def run(seqstr):
+  import InputArgs as IA
+  return run_list( IA.get_seq__int_or_str(seqstr) )
+
+def run_list(item_list):
+  sys.stdout.write("\nINPUT: {}\n".format(' '.join(map(str, item_list))))
   s = Stack()
+  res = []
   for item in item_list:
-    if not item: break
     if item != "-": 
       s.push(item)
       sys.stdout.write("{:10}   PUSH {:10} +STACK: {}\n".format("", item, s))
     elif not s.isEmpty(): 
       popped = s.pop()
+      res.append(popped)
       sys.stdout.write("{:>10} <-POP  {:10} -STACK: {}\n".format(popped, item, s))
   sys.stdout.write('({} left on stack)\n'.format(s.size()))
-  return s
+  return ' '.join(map(str, res)), s
 
 def ex_stdin():
   s = Stack()
@@ -230,9 +275,9 @@ def ex_stdin():
   sys.stdout.write('(%d left on stack) OUTPUT: %s\n'%(s.size(),res))
 
 def default_examples():
-  stk = run( IA.get_seq__int_or_str("to be or not to be - - - - - -") )
+  stk = run( "to be or not to be - - - - - -" )
   # Slide 6 Week 2 Lecture 4-1-Stacks(16-24)
-  stk = run( IA.get_seq__int_or_str("to be or not to - be - - that - - - is") )
+  stk = run( "to be or not to - be - - that - - - is" )
   sys.stdout.write("\nDEMOSTRATE ITERATION:\n"); 
   for S in stk: print S
   sys.stdout.write("\nDEMONSTRATE 'toString()': {}\n".format(stk.__str__()))
