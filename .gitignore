@@ -7,12 +7,21 @@ py/AlgsSedgewickWayne/PercolationStats.py
 
 # Programming Assignment 2
 thirdparty/Deque.java
-py/AlgsSedgewickWayne/Deque.py
 thirdparty/RandomizedQueue.java
-py/AlgsSedgewickWayne/RandomizedQueue.py
 thirdparty/Subset.java
+py/AlgsSedgewickWayne/Deque.py
+py/AlgsSedgewickWayne/RandomizedQueue.py
 py/AlgsSedgewickWayne/Subset.py
 thirdparty/queues.zip
+
+# Programming Assignment 3
+thirdparth/Point.java
+thirdparth/Brute.java
+thirdparth/Fast.java
+py/AlgsSedgewickWayne/Point.py
+py/AlgsSedgewickWayne/Brute.py
+py/AlgsSedgewickWayne/Fast.py
+thirdparty/collinear.zip
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
