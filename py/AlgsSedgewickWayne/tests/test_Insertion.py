@@ -26,6 +26,9 @@ class Insertion_Tests(unittest.TestCase):
   def test_4(self):
     run(map(str, "14 23 77 94 96 48 39 18 41 13".split()), "INSERTION SORT: seed 72847")
 
+  def test_5(self):
+    run(map(str, "34 38 69 83 93 68 37 28 85 99".split()), "INSERTION SORT: seed 329024")
+
 if __name__ == '__main__':
   #unittest.main()
   run(map(str, "34 38 69 83 93 68 37 28 85 99".split()), "INSERTION SORT: seed 329024")

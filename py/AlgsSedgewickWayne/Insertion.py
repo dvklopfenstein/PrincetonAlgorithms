@@ -56,6 +56,9 @@
 #   insertion sort makes ~ 1/2*N^2 compares and ~ 1/2*N^2 exchanges (Slower that Selection sort)
 #   X T S R P O M L E E A
 #   For every step, it is not just comparing, it is also exchanging
+#
+# MEMORY: Insertion sort uses only a constant amount of memory (other than the input array).
+# This is a key property of insertion sort.
 # 
 # INSERTION SORT: PARTIALLY-SORTED ARRAYS 07:47 - 08:20
 #   Appear often in practice:
@@ -76,6 +79,20 @@
 #   
 # QUESTION: How many compares does insertion sort make on an imput array that is already sorted? 
 # ANSWER: linear
+#
+# QUESTION: True or False? The expected #of compares to insertion sort an array containint N/2 0s and N/2 1s
+# in uniformly random order is ~1/4 N^2.
+# ANSWER: False. Consider element i> 0. How many of the items a[0], a[1], ..., a[i-1] is a[i] inverted with?
+# If a[i] == 1 (which happens with probability 1/2), then the number is 0.
+# If a[i] == 0 (which happens with probability 1/2), then we expect half of the i previous 
+# elements to be 1s, so the expected number is i/2.
+# So the expected number of inversions is 1/2(0/2 + 1/2 + 2/2 + 3/2 + ... + (N-1)/2) ~N^2/8.
+# Thus, the expected number of compares is ~ 1/8 N^2
+
+# TRUE: Any pair of items is compared no more than once during insertion sort.
+# EXPLANATION: Let a[i] and a[j] be two entries in the unsorted array with i<j.
+# The entries a[i] and a[j] are compred no more than once during iteration j and they are not 
+# compared during any other iteration.
 
 
 

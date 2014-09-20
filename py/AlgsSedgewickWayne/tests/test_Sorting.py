@@ -38,66 +38,67 @@ import AlgsSedgewickWayne.ArrayHistory as H
 import unittest
 import copy
 
+
+def getData(blktxt):
+  blkdata = []
+  hstdata = []
+  txt = blktxt.split("\n")
+  # Loop through each line in the block text
+  for T in txt:
+    # If the text contains elements in the sort 
+    if len(T)!=0 and not T.isspace():
+      blkdata.append( T.split() )
+  # Transpose the block data so each array contains one instance in the sort history
+  # Map to a list so elements can be changed.
+  hstdata = map( list, zip(*blkdata) )
+  return hstdata
+
+def prtData(D):
+  for idx, sort_this in enumerate(D):
+    #print idx, 'SORT THIS:', ' '.join(sort_this)
+    print idx, 'SORT THIS:', sort_this
+  print
+
+def get_sort_history(lst ):
+  lst_Selection = copy.deepcopy( lst )
+  lst_Insertion = copy.deepcopy( lst )
+  lst_Shell     = copy.deepcopy( lst )
+  history_Selection = []
+  history_Insertion = []
+  history_Shell     = []
+  Selection.Sort( lst_Selection, history_Selection )
+  Insertion.Sort( lst_Insertion, history_Insertion )
+  Shell.Sort(     lst_Shell,     history_Shell )
+  return [history_Selection, history_Insertion, history_Shell]
+
+def determine_sort( list_orig, data ):
+  # Get history for sorts: Selection, Insertion, and Shell
+  hSelection, hInsertion, hShell = get_sort_history( list_orig )
+  # Append 0 for "Original Sort"
+  res = [0] 
+  # Determine sorts for test_data 1 to N-1 
+  for i,test_data in enumerate(data[1:-1]):
+    R = [H.history_contains( hInsertion, test_data ), 
+         H.history_contains( hSelection, test_data ), 
+         H.history_contains( hShell,     test_data )]
+    if   R[0] and not R[1] and not R[2]:
+      res.append(1) # Insertion sort
+    elif not R[0] and R[1] and not R[2]:
+      res.append(2) # Selection sort
+    elif not R[0] and not R[1] and R[2]:
+      res.append(3) # Shell sort
+    else:
+      raise Exception("UNKNOWN SORT")
+    print test_data
+    print i+1, res[-1], R[0]
+    print i+1, res[-1], R[1]
+    print i+1, res[-1], R[2]
+  # Append 4 for "Sorted"
+  res.append(4)
+  return res
+
+
 class Sorting_Tests(unittest.TestCase):
-
-  def getData(self, blktxt):
-    blkdata = []
-    hstdata = []
-    txt = blktxt.split("\n")
-    # Loop through each line in the block text
-    for T in txt:
-      # If the text contains elements in the sort 
-      if len(T)!=0 and not T.isspace():
-        blkdata.append( T.split() )
-    # Transpose the block data so each array contains one instance in the sort history
-    # Map to a list so elements can be changed.
-    hstdata = map( list, zip(*blkdata) )
-    return hstdata
-
-  def prtData(self, D):
-    for idx, sort_this in enumerate(D):
-      #print idx, 'SORT THIS:', ' '.join(sort_this)
-      print idx, 'SORT THIS:', sort_this
-    print
-
-  def get_sort_history( self, lst ):
-    lst_Selection = copy.deepcopy( lst )
-    lst_Insertion = copy.deepcopy( lst )
-    lst_Shell     = copy.deepcopy( lst )
-    history_Selection = []
-    history_Insertion = []
-    history_Shell     = []
-    Selection.Sort( lst_Selection, history_Selection )
-    Insertion.Sort( lst_Insertion, history_Insertion )
-    Shell.Sort(     lst_Shell,     history_Shell )
-    return [history_Selection, history_Insertion, history_Shell]
-
-  def determine_sort( self, list_orig, data ):
-    # Get history for sorts: Selection, Insertion, and Shell
-    hSelection, hInsertion, hShell = self.get_sort_history( list_orig )
-    # Append 0 for "Original Sort"
-    res = [0] 
-    # Determine sorts for test_data 1 to N-1 
-    for i,test_data in enumerate(data[1:-1]):
-      R = [H.history_contains( hInsertion, test_data ), 
-           H.history_contains( hSelection, test_data ), 
-           H.history_contains( hShell,     test_data )]
-      if   R[0] and not R[1] and not R[2]:
-        res.append(1) # Insertion sort
-      elif not R[0] and R[1] and not R[2]:
-        res.append(2) # Selection sort
-      elif not R[0] and not R[1] and R[2]:
-        res.append(3) # Shell sort
-      else:
-        raise Exception("UNKNOWN SORT")
-      print test_data
-      print i+1, res[-1], R[0]
-      print i+1, res[-1], R[1]
-      print i+1, res[-1], R[2]
-    # Append 4 for "Sorted"
-    res.append(4)
-    return res
-
 
   def test_week2_exercise_Q2(self): # Lecture: Quick-Union Improvements 1:22
     # (seed = 709890)
@@ -106,7 +107,7 @@ class Sorting_Tests(unittest.TestCase):
     # the other 6 columns contain the contents at some intermediate 
     # step during one of the elementary sorting algorithms listed below.
     # 
-    strData = """
+    str_data = """
     gold   aqua   drab   aqua   aqua   gold   aqua   aqua   
     bone   bark   aqua   bone   bark   bone   bone   bark   
     pink   bone   bark   dust   bone   bark   dust   bone   
@@ -131,7 +132,7 @@ class Sorting_Tests(unittest.TestCase):
     # sequence of 8 integers between 0 and 4 (starting with 0 and ending with 4) 
     # and with each integer separated by a whitespace.
 
-    data = self.getData(strData) 
+    data = getData(str_data) 
     list_orig   = data[0]   # Original unsorted data
     list_sorted = data[-1]  # Data sorted
 
@@ -141,7 +142,7 @@ class Sorting_Tests(unittest.TestCase):
     #     2. Selection sort
     #     3. Shellsort (3x + 1 increments)
     #     4. Sorted
-    res = self.determine_sort( list_orig, data )
+    res = determine_sort( list_orig, data )
 
     # Print results 
     print ' '.join(map(str,res))
@@ -150,7 +151,7 @@ class Sorting_Tests(unittest.TestCase):
   def test_week2_exercise_Q2a(self): # Lecture: Quick-Union Improvements 1:22
     # (seed = 213292)
     #        1      2      3      4      5      6
-    strData = """
+    str_data = """
     HOLE   BECK   HOLE   BECK   BECK   HOLE   BECK   BECK   
     BUSH   BUSH   BUSH   BUSH   BUSH   BUSH   BUSH   BUSH   
     MIMS   DEVO   EVE6   DEVO   DEVO   DEVO   HOLE   DEVO   
@@ -171,7 +172,7 @@ class Sorting_Tests(unittest.TestCase):
     #---   ----   ----   ----   ----   ----   ----   ----   
     #0      ?      ?      ?      ?      ?      ?      4     
 
-    data = self.getData(strData) 
+    data = getData(str_data) 
     list_orig   = data[0]   # Original unsorted data
     list_sorted = data[-1]  # Data sorted
 
@@ -181,13 +182,79 @@ class Sorting_Tests(unittest.TestCase):
     #     2. Selection sort
     #     3. Shellsort (3x + 1 increments)
     #     4. Sorted
-    res = self.determine_sort( list_orig, data )
+    res = determine_sort( list_orig, data )
 
     # Print results 
     print ' '.join(map(str,res))
 
 
+def curr(): # Exercise
+#  self = Sorting_Tests()
+  # (seed = 419606)
+  #        1      2      3      4      5      6
+  str_data = """
+    gnat   frog   carp   carp   dove   carp   gnat   carp   
+    seal   gnat   clam   frog   carp   clam   lynx   clam   
+    sole   goat   dove   gnat   clam   dove   clam   dove   
+    pony   hake   frog   goat   frog   frog   pony   frog   
+    myna   myna   gnat   hake   gnat   gnat   myna   gnat   
+    goat   pony   goat   mole   goat   goat   goat   goat   
+    hake   seal   hake   myna   hake   hake   hake   hake   
+    frog   sole   lynx   pony   newt   lynx   frog   lynx   
+    mole   mole   mole   seal   mole   mole   mole   mole   
+    carp   carp   myna   sole   lynx   myna   carp   myna   
+    tuna   tuna   tuna   tuna   seal   newt   tuna   newt   
+    newt   newt   newt   newt   pony   tuna   newt   oryx   
+    dove   dove   sole   dove   myna   sole   dove   pony   
+    oryx   oryx   oryx   oryx   oryx   oryx   oryx   seal   
+    lynx   lynx   pony   lynx   tuna   pony   seal   sole   
+    clam   clam   seal   clam   sole   seal   sole   tuna   
+  """
+  #---   ----   ----   ----   ----   ----   ----   ----   
+  #0      ?      ?      ?      ?      ?      ?      4     
+
+  data = getData(str_data) 
+  list_orig   = data[0]   # Original unsorted data
+  list_sorted = data[-1]  # Data sorted
+
+  # Determine which intermediate result could have come from which sort for all data[1:-2]
+  #     0. Original input
+  #     1. Insertion sort
+  #     2. Selection sort
+  #     3. Shellsort (3x + 1 increments)
+  #     4. Sorted
+  res = determine_sort( list_orig, data )
+
+  # Print results 
+  print ' '.join(map(str,res))
+
+  # Print str_data in a format that is easier to visualize word order
+  prt_easy_viz(str_data)
+
+
+
+def prt_easy_viz(str_data):
+  data = getData(str_data) 
+  """Prints in a format which is easier to visualize sort order."""
+  num_lists = len(data)     # Number of lists
+  num_elems = len(data[-1]) # Number of elements per list
+
+  # Assign symbols to each word which are easier to visualize 
+  d2s = { elem:'{sym:{width}}'.format(sym='*'*(i+1), width=num_elems) for i, elem in enumerate(data[-1]) }
+
+  # Convert data to symbols stored in a list of lists
+  data2sym = []
+  for curr_lst in data:
+    data2sym.append(d2s[elem] for elem in curr_lst)
+
+  print str_data
+  elems_by_lists = zip(*data2sym)
+  for elem_per_list in elems_by_lists:
+    print ' '.join(elem_per_list)
+
+
 if __name__ == '__main__':
-  unittest.main()
+  #unittest.main()
+  curr()
 
 
