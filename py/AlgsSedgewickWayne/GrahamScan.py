@@ -5,10 +5,15 @@
 #   https://class.coursera.org/algs4partI-005/lecture/29
 ##########################################
 
-# CONVEX HULL: Application of sorting fro the field of computational geometry
+# CONVEX HULL: Application of sorting for the field of computational geometry
 # 
-# CONVEX HULL is the smallest polygon which encloses all the points for 
+# DEFINITION: CONVEX HULL is the smallest polygon which encloses all the points for 
 # a set of points on a plane
+#
+# 00:38 EQUIVALENT DEFINITIONS:
+#   * Smallest convex set contining all the points.
+#   * Smallest area convex polygon enclosing the points.
+#   * Convex polygon enclosing the points, whose vertices are points in set.
 # 
 # 01:40 CONVEX HULL OUTPUT: Sequence of vertics in counterclockwise order.
 # (Do not include point on the boundry which are not vertices)
@@ -24,7 +29,7 @@
 # ROBOT MOTION PLANNING: Find shorest path in the plane from s to t
 # that avoids polygon obstacle between s and t.
 # 02:48 FACT: Shortest path is either straight line from s to t or 
-#             is is one of two polygonal chains of convex hull.  
+#             is is part of one of the two polygonal chains of convex hull.  
 
 # 03:08 CONVEX HULL APPLICATION: FARTHEST PAIR PROBLEM
 # Given N points in the plane, find a pair of points with the largest
@@ -45,29 +50,38 @@
 
 #-----------------------------------------
 # 8:00 GRAHAM SCAN: IMPLMENTATION CHALLENGES
-# Q: How to find point p with smallest y-coordinate?
+# Q: How to find point p with SMALLEST Y-COORDINATE?
 # A: Define a total order, comparing by y-coordinate. [next lecture]
 # 
-# Q: How to sort points by polar angle with respect to p? 08:48
+# Q: How to SORT POINTS BY POLAR ANGLE with respect to p? 08:48
 # A: Define a total order *for each* point p. [next lecture]
 #    Example of wanting to be able to sort the same thing in different ways
 # 
-# Q: How to determine whether p1->p2->p3 is a counterclockwise turn? 09:15
+# Q: How to determine whether p1->p2->p3 is a COUNTERCLOCKWISE TURN? 09:15
 # A: Computational geometery. [briefly on the next two slides]
 # 
-# Q: How to sort efficiently? 09:35 (Convex sorting:  Where the most work is)
+# Q: How to SORT EFFICIENTLY? 09:35 (Convex sorting:  Where the most work is)
 # A: Mergesort sorts in N*log(N) time. [next lecture]
 # 
-# Q: How to handle degeneracies (3+ points on a line)? 10:19
+# Q: How to handle DEGENERACIES (3+ points on a line)? 10:19
 # A: Requires some care, but not hard [see booksite]
 
 #-----------------------------------------
 # 10:37 IMPLEMENTING CCW 
 # CCW: Given 3 points a, b, and c, is a->b->c a counterclockwise turn?
 #   i.e. is c to the left of the ray a->b?
+#       1        2       3    4    5    6
+#       c               c     c    c    b                  
+#        \               \    |    |    |                  
+#         b     b-c       b   b    A    c                   
+#        /       \        |   |    |    |                  
+#       A         A       A   A    b    A                  
+#                                                          
+#      yes       no     yes   no   no   no                  
+#                      m=Inf  <-collinear->
 # TRICKY BECAUSE:
-# * Infinite slope
-# * collinear points
+# * Infinite slope:   3 4 5 6
+# * collinear points:   4 5 6
 # 
 # LESSON: Geometric primitives are tricky to implement.
 #   * Dealing with degenerate cases.
@@ -76,6 +90,28 @@
 # 12:04 THE IDEA FOR CALCULATING IF 3 POINTS ARE CCW:
 # Computing slopes between a-b and a-c and comparing the slopes to see if you 
 # are turning counter-clockwise or clockwise
+
+# 12:05 IMPLEMENTING CCW
+# CCW. Given three points a, b, and c, is a->b->c a counterclockwise turn?
+#  * Determinant (or cross product) gives 2x signed area of planar triangle.
+# 
+#                        | ax ay 1 |
+#    2 x Area(a, b, c) = | bx by 1 | = (bx - ax)(cy - ay)(cx - ax)
+#                        | cx cy 1 |        
+#                                          (b - a) x (c - a)
+# 
+# * If signed area > 0, then a->b->c is counterclockwise
+# * If signed area < 0, then a->b->c is clockwise
+# * If signed area = 0, then a->b->c are collinear
+# 
+#         (bx, by)               (bx, by)           (bx, by)      
+#            o                      o                  o          
+#           / \                    / \                 |          
+#          /<--\                  /-->\            = 0 o (cx, cy) 
+#         /  >0 \                /  <0 \               |          
+#        o-------o              o-------o              o          
+#   (cx, cy)   (ax, ay)    (ax, ay)   (cx, cy)      (ax, ay)      
+#    counterclockwise          clockwise            collinear   
 # 
 #-----------------------------------------
 # 12:50 GRAHAM SCAN: IMPLEMENTATION
@@ -87,7 +123,7 @@
 # Arrays.sort(p, Point2D.Y_ORDER); # p[0] is not point w/lowest y-coord
 # Arrays.sort(p, p[0].BY_POLAR_ORDER); # sort by polar angle w/respect to p[0]
 # 
-# hull.push(p[0]); # definitely on hull
+# hull.push(p[0]); # <- definitely on hull
 # hull.push(p[1]);
 # 
 # for (int i = 2; i < N; i++) {
@@ -96,7 +132,7 @@
 #   while (Point2D.ccw(hull.peek(), top, p[i] <= 0)
 #     top.hull.pop();
 #   hull.push(top);
-#   hull.push(p[i]); # add p[i] to putative hull
+#   hull.push(p[i]); # <- add p[i] to putative hull
 # }
 # 
 # RUNNING TIME: N*log(N) for sorting and linear for rest.
@@ -106,6 +142,8 @@
 # 13:44 QUESTION: What is the maximum number of vertices that can be on the convex hull
 # of a set of N points:
 # ANSWER: linear
+# EXPLANATION: If the input points are points on the circumference of a 
+# circle (or a regular N-gon), then all N pointw will be on the convex hull.
 
 
  #************************************************************************
