@@ -10,10 +10,11 @@ Implemented in Python 2.7.x by D Klopfenstein is selected code from:
 Python implementations contain:
 * Additional comments in the code that are based on material from the [coursera class](https://class.coursera.org/algs4partI-006) or
 [book](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1410217876&sr=1-1)
-* Frequently additional code for visualization or runtime which helped me absorb the material
+* Additional code used for visualization to help me absorb the material
 
 **TESTS**: 
  * **Python** tests are run from: [./py/AlgsSedgewickWayne/tests/](./py/AlgsSedgewickWayne/tests)
+ * Some algorithms contain "main" methods and can be run from [./py/AlgsSedgewickWayne](./py/AlgsSedgewickWayne)
  * **Java** code is run from: [./thirdparty/](./thirdparty)
    * To download Sedgewick-Wayne Java programming environment: 
      [Linux](http://algs4.cs.princeton.edu/linux/),
