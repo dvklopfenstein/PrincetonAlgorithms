@@ -1,27 +1,27 @@
 # Programming Assignment 1
+thirdparty/percolation.zip
 thirdparty/PercolationStats.java
 thirdparty/Percolation.java
-thirdparty/percolation.zip
 py/AlgsSedgewickWayne/Percolation.py
 py/AlgsSedgewickWayne/PercolationStats.py
 
 # Programming Assignment 2
+thirdparty/queues.zip
 thirdparty/Deque.java
 thirdparty/RandomizedQueue.java
 thirdparty/Subset.java
 py/AlgsSedgewickWayne/Deque.py
 py/AlgsSedgewickWayne/RandomizedQueue.py
 py/AlgsSedgewickWayne/Subset.py
-thirdparty/queues.zip
 
 # Programming Assignment 3
+thirdparty/collinear.zip
 thirdparth/Point.java
 thirdparth/Brute.java
 thirdparth/Fast.java
 py/AlgsSedgewickWayne/Point.py
 py/AlgsSedgewickWayne/Brute.py
 py/AlgsSedgewickWayne/Fast.py
-thirdparty/collinear.zip
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
