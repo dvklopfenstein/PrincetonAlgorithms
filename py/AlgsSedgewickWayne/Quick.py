@@ -168,7 +168,7 @@
 # 10:25 QUICKSORT: BEST-CASE ANAYSIS
 #
 # Number of compares:
-#   BEST CASE:  ~N lg N   compares
+#   BEST  CASE:  ~N lg N  compares
 #   WORST CASE: ~ 1/2 N^2 Random shufle puts items exactly in order
 #
 #-------------------------------------------------------

@@ -1,11 +1,11 @@
-# Programming Assignment 1
+# Programming Assignment 1.1
 thirdparty/percolation.zip
 thirdparty/PercolationStats.java
 thirdparty/Percolation.java
 py/AlgsSedgewickWayne/Percolation.py
 py/AlgsSedgewickWayne/PercolationStats.py
 
-# Programming Assignment 2
+# Programming Assignment 1.2
 thirdparty/queues.zip
 thirdparty/Deque.java
 thirdparty/RandomizedQueue.java
@@ -14,7 +14,7 @@ py/AlgsSedgewickWayne/Deque.py
 py/AlgsSedgewickWayne/RandomizedQueue.py
 py/AlgsSedgewickWayne/Subset.py
 
-# Programming Assignment 3
+# Programming Assignment 1.3
 thirdparty/collinear.zip
 thirdparth/Point.java
 thirdparth/Brute.java
@@ -22,6 +22,40 @@ thirdparth/Fast.java
 py/AlgsSedgewickWayne/Point.py
 py/AlgsSedgewickWayne/Brute.py
 py/AlgsSedgewickWayne/Fast.py
+
+# Programming Assignment 1.4
+thirdparty/8puzzle.zip
+thirdparty/Board.java
+thirdparty/Solver.java
+py/AlgsSedgewickWayne/Board.py
+py/AlgsSedgewickWayne/Solver.py
+
+# Programming Assignment 1.5
+thirdparty/kdtree.zip
+thirdparty/PointSET.java
+thirdparty/KdTree.java
+py/AlgsSedgewickWayne/PointSET.py
+py/AlgsSedgewickWayne/KdTree.py
+
+# Programming Assignment 2.1
+thirdparty/wordnet.zip
+thirdparty/SAP.java
+thirdparty/WordNet.java
+thirdparty/Outcast.java
+py/AlgsSedgewickWayne/SAP.py
+py/AlgsSedgewickWayne/WordNet.py
+py/AlgsSedgewickWayne/Outcast.py
+
+# Programming Assignment 2.2
+thirdparty/seamCarving.zip
+thirdparty/SeamCarver.java
+py/AlgsSedgewickWayne/SeamCarver.py
+
+# Programming Assignment 2.3
+thirdparty/baseball.zip
+thirdparty/BaseballElimination.java
+py/AlgsSedgewickWayne/BaseballElimination.py
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
