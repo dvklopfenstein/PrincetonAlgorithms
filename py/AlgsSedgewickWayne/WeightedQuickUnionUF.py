@@ -41,10 +41,10 @@
 #   Stay runed (Chapter 3)
 # 
 # 05:33 MODELING THE CONNECTIONS
-# We assume "is connected to" is an equivalence relation:
-# * Reflexive:  p is connected to p
-# * Symmetric:  If p is connect to q, then q is connected to p.
-# * Transitive: If p is connected to q and q is connected to r, then p is connected to r.
+# We assume "is connected to" is an **equivalence relation**:
+# * **Reflexive**:  p is connected to p
+# * **Symmetric**:  If p is connect to q, then q is connected to p.
+# * **Transitive**: If p is connected to q and q is connected to r, then p is connected to r.
 
 # 06:17 CONNECTED COMPONENTS
 # Maximal set of objects that are mutually connected.
@@ -54,6 +54,20 @@
 #   4-5 6 7
 # 
 # 3 Connected Components: {0} {1 4 5} {2 3 6 7}
+#
+# PROPERTY: Any two objects in the component are connected,
+# and there is no object outside that is connected to those objects
+
+# 07:53 Union-find data type (API)
+# **Goal:** Design efficient data structure for union-find
+#   * Number of objects N can be huge.
+#   * Number of operations(e.g. union, connected) M can be huge.
+#   * Find queries and union commands may be intermixed.
+#
+# public class UF
+#   UP(int N)                       # init union-find data structure w/N objects(0 to N-1)
+#   void union(int p, int q)        # Add connection between p and q
+#   boolean connected(int p, int q) # are p and q in the same component
 
 # 10:15 QUESTION: How many connected components result after performing the
 # following sequence of union operations on a set of 10 items?
@@ -399,6 +413,7 @@ class WeightedQuickUnionUF:
   """
  
   def __init__(self, N):
+    """Initialize union-find data structure w/N objects (0 to N-1)."""
     self.cnt = N
     """Set if of each object to itself."""
     self.ID = np.arange(N, dtype=np.int32)
@@ -425,21 +440,21 @@ class WeightedQuickUnionUF:
     return i, d
 
   def connected(self, p, q):
-    """Check if p and q have the same root."""
+    """Return if p and q are in the same connected component (i.e. have the same root)."""
     return self._root(p)[0] == self._root(q)[0] # Runs depth of p & q array accesses
 
   def union(self, p, q):
-    """Modified quick-union:
-         * Link root of smaller tree to root of larger tree.
-         * Update the SZ[] array.
-       Each union involves changing only one array entry
-    """
-    # Runs Depth of p and q array accesses
+    """Add connection between p and q."""
+    # Runs Depth of p and q array accesses...
     i = self._root(p)[0]
     j = self._root(q)[0]
     if i ==  j:  return
     # IMPROVEMENT #1: Modification to Quick-Union to make it weights: 4:03
     # Balance trees by linking root of smaller tree to root of larger tree
+    #   Modified quick-union:
+    #     * Link root of smaller tree to root of larger tree.
+    #     * Update the SZ[] array.
+    #   Each union involves changing only one array entry
     if   self.SZ[i] < self.SZ[j]: 
       # Make id[i] a child of j
       self.ID[i] = j 
