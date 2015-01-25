@@ -81,39 +81,33 @@
 # EXPLANATION: In the worst case, all of the entries except id[q] are
 # changed from id[p] to id[q]
 
-class QuickFindUF:
-  """ Quick-find [eager approach].
+class QuickFindUF: # Eager Approach
+  """ *Quickly* **find** if two components are connected."""
 
-      Algorithm   init union find
+  """ Algorithm   init union find
       ---------   ---- ----- ----
       quick-find  N    N     1
 
       DEFECT: Union too expensive!
-      Ex: Takes N^2 array accesses to process sequence of N union commands on N objects.
+      COST: Takes N^2 array accesses to process sequence of N union commands on N objects.
   """
  
-  def __init__(self, N):
-    """Set id value of each index i, to i.
-               i  0  1  2  3  4  5  6  7  8  9    
-       INIT: id[] 0  1  2  3  4  5  6  7  8  9    
-    """
-    self.ID = []
-    # N array accesses
-    for i in range(N): # N array accesses
-      self.ID.append(i)
+  def __init__(self, N):                    #      i        0 1 2 3 4 5 6 7 8 9
+    """Init ID value of each index i, to i: i.e. ID[0:9] = [0 1 2 3 4 5 6 7 8 9]."""
+    self.ID = [i for i in range(N)] # N array accesses (wo/comprehension)
 
   def connected(self, p, q):
-    """Check whether p and q are in the same component."""
-    # 2 array accesses
+    """ **Find** whether p and q are in the same component. """
     return self.ID[p] == self.ID[q] # 2 array accesses
 
   def union(self, p, q):
-    """Change all entries with id[p] to id[q]."""
+    """ **Union** by changing all entries with id[p] to id[q]."""
     pID = self.ID[p]
     qID = self.ID[q]
-    for i in range(len(self.ID)): # At most 2N + 2 array accesses
-      # Mistake many make is to put id[p] instead of pID
-      if self.ID[i] == pID:
+    for i, self_ID in enumerate(self.ID): 
+      # At most 2N + 2 array accesses. 
+      #   w/self_ID replaced w/self.ID[i] and "for i in range(len(self.ID))":
+      if self_ID == pID: # Mistake many make is to put ID[p] instead of pID:
         self.ID[i] = qID
 
   def __str__(self):
