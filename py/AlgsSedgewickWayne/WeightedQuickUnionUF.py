@@ -290,15 +290,15 @@
 # BOTTOM LINE. Weighted quick union (with path compression) makes it
 # possible to solve problems that could not otherwise be addressed.
 # 
-# M union-find operations on a set of N objects
+# $ M union-find operations on a set of N objects
 # 
-# algorithm                       worst-case time
-# ------------------------------  ---------------------
-# quick-find                      M * N
-# quick-union                     M * N
-# weighted QU                     N + M log N    
-# QU + path compression           N + M log N
-# weighted QU + path compression  N + M lg*N
+# $ algorithm                       worst-case time
+# $ ------------------------------  ---------------------
+# $ quick-find                      M * N
+# $ quick-union                     M * N
+# $ weighted QU                     N + M log N    
+# $ QU + path compression           N + M log N
+# $ weighted QU + path compression  N + M lg*N
 # 
 # EX. [10^9 union and finds with 10^9 objects]
 #   * WQUPC reduces time from 30 years to 6 seconds.
@@ -318,8 +318,8 @@
 # EXPLANATION: In weighted quick union, we make the root of the smaller tree 
 # points to the root of the larger tree. In this example, the algorithm sets id[8]=0
 #
-# Be careful not to confuse union-by-size with union-by-height = the former
-# uses the **size** of the three (number of nodes) while the latter uses
+# Be careful not to confuse union-by-size with union-by-height - the former
+# uses the **size** of the tree (number of nodes) while the latter uses
 # the **height** of the tree (number of links on longest path from the root 
 # of the tree to a leaf node). Both variants guarantee logarithmic height.
 # There is a third variant known as "union-by-rank" that is also widely used.
@@ -412,14 +412,14 @@ class WeightedQuickUnionUF:
       Each item can be assoiciated with a root.
   """
  
-  def __init__(self, N):
+  def __init__(self, N):     # $ = N
     """Initialize union-find data structure w/N objects (0 to N-1)."""
     self.cnt = N
     """Set if of each object to itself."""
     self.ID = np.arange(N, dtype=np.int32)
     # Keep track of size of each tree (number of objects)
     # Each entry contains a count of objects in the tree rooted at i.
-    self.SZ = np.ones(N,dtype=np.int32) # Needed to determine  which tree is smaller and bigger
+    self.SZ = np.ones(N,dtype=np.int32) # Needed to determine which tree is smaller/bigger
 
   def count(self): return self.cnt
 
@@ -439,11 +439,11 @@ class WeightedQuickUnionUF:
       d += 1
     return i, d
 
-  def connected(self, p, q):
+  def connected(self, p, q): # $ = lg N
     """Return if p and q are in the same connected component (i.e. have the same root)."""
     return self._root(p)[0] == self._root(q)[0] # Runs depth of p & q array accesses
 
-  def union(self, p, q):
+  def union(self, p, q):     # $ = lg N
     """Add connection between p and q."""
     # Runs Depth of p and q array accesses...
     i = self._root(p)[0]
@@ -456,11 +456,11 @@ class WeightedQuickUnionUF:
     #     * Update the SZ[] array.
     #   Each union involves changing only one array entry
     if   self.SZ[i] < self.SZ[j]: 
-      # Make id[i] a child of j
+      # Make ID[i] a child of j
       self.ID[i] = j 
       self.SZ[j] += self.SZ[i]
     else: 
-      # Make id[j] a child of i
+      # Make ID[j] a child of i
       self.ID[j] = i 
       self.SZ[i] += self.SZ[j]
 

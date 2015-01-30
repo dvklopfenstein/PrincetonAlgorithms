@@ -207,7 +207,7 @@
 #   * Trees are flat, but too expensive to keep them flat.
 # 
 # QUICK-UNION DEFECT.
-#   * Trees can get tall.
+#   * Trees can get too tall.
 #   * FIND too expensive (could be N array accesses).
 # 
 
@@ -221,24 +221,23 @@ class QuickUnionUF:
       Each item can be assoiciated with a root.
   """
  
-  def __init__(self, N):
+  def __init__(self, N):     # $ = N
     """Set if of each object to itself."""
-    self.ID = []
-    for i in range(N): self.ID.append(i) # Runs N array accesses
+    self.ID = [i for i in range(N)] # Runs N array accesses; if not Pythonic
 
   def _root(self, i):
     """Chase parent pointers until reach root."""
     while i != self.ID[i]: # Runs the depth of i array accesses
-      i = self.ID[i] 
-    return i
+      i = self.ID[i] # Move i up one level of the tree
+    return i # Found root: ID[i] == i
 
-  def connected(self, p, q):
+  def connected(self, p, q): # $ = N
     """Check if p and q have the same root."""
     return self._root(p) == self._root(q) # Runs the depth of p & q array accesses
 
-  def union(self, p, q):
+  def union(self, p, q): #     $ = N
     """Change root of p to point to root of q.
-       each union involves changing only one array entry
+       Simple: each union involves changing only one array entry
     """
     # Runs Depth of p and q array accesses
     i = self._root(p)
@@ -248,14 +247,14 @@ class QuickUnionUF:
 
   def __str__(self):
     """>>> print obj."""
-    k = " ".join(str(e) for e in range(len(self.ID)))
-    v = " ".join(str(e) for e in self.ID)
+    idxs = " ".join(str(e) for e in range(len(self.ID)))
+    vals = " ".join(str(e) for e in self.ID)
     #prt = ['']*len(self.ID)
     #for i in self.ID:
     #  if self.ID[i] == i:
     #    prt[i] = '-'
     #for i,v in enumerate(prt):
     #  print v, i
-    return '\n'.join([k,v])
+    return '\n'.join([idxs, vals])
 
 
