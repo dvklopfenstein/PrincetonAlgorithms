@@ -13,6 +13,6 @@
 * [Programming Assignment 4](http://htmlpreview.github.com/?https://github.com/dvklopfenstein/PrincetonAlgorithms/blob/master/thirdparty/hw4/8-Puzzle_Programming_Assignment.html)
   and [checklist](http://htmlpreview.github.com/?https://github.com/dvklopfenstein/PrincetonAlgorithms/blob/master/thirdparty/hw4/Programming_Assignment_4_Checklist_8_Puzzle.html)
 
-* [Programming Assignment 5](http://htmlpreview.github.com/?https://github.com/dvklopfenstein/PrincetonAlgorithms/blob/master/thirdparty/hw5/Programming_Assignment_5_Kd-Trees.html
+* [Programming Assignment 5](http://htmlpreview.github.com/?https://github.com/dvklopfenstein/PrincetonAlgorithms/blob/master/thirdparty/hw5/Programming_Assignment_5_Kd-Trees.html)
   and [checklist](http://htmlpreview.github.com/?https://github.com/dvklopfenstein/PrincetonAlgorithms/blob/master/thirdparty/hw5/Programming_Assignment_5_Checklist_Kd-Trees.html)
 
