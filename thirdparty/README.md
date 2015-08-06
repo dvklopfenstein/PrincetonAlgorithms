@@ -1,4 +1,4 @@
-[hw1](./hw1/Programming_Assignment_1_Checklist_Percolation.html)
+[hw1](http://htmlpreview.github.com/?./hw1/Programming_Assignment_1_Checklist_Percolation.html)
 ./hw1/Programming_Assignment_1_Percolation.html
 ./hw2/Programming_Assignment_2_Checklist_Randomized_Queues_and_Dequeues.html
 ./hw2/Programming_Assignment_2_Randomized_Queues_and_Deques.html
