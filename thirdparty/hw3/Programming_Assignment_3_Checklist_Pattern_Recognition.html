@@ -1,0 +1,268 @@
+
+<!-- saved from url=(0064)http://coursera.cs.princeton.edu/algs4/checklists/collinear.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>
+Programming Assignment 3 Checklist: Pattern Recognition
+</title>
+</head>
+
+<body>
+<h3>
+Programming Assignment 3 Checklist: Pattern Recognition
+</h3>
+
+<p><br>
+
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center><b>Frequently Asked Questions</b></center>
+</font></td></tr></tbody></table>
+
+
+</p><p><b>Can the same point appear more than once as input to Brute or Fast?</b>
+You may assume the input to <tt>Brute</tt> and <tt>Fast</tt> are <em>N</em> distinct points.
+Nevertheless, the methods implemented as part of the <tt>Point</tt> data type
+must correctly handle the case when the points are not distinct:
+for the <tt>slopeTo()</tt> method, this requirement is explicitly stated in the API;
+for the comparison methods, this requirement is implict in the 
+contracts for <tt>Comparable</tt> and <tt>Comparator</tt>.
+
+
+</p><p><b>The reference solution outputs a line segment in the order
+<em>p</em>→<em>q</em>→<em>r</em>→<em>s</em>
+but my solution outputs it in the reverse order
+<em>s</em>→<em>r</em>→<em>q</em>→<em>p</em>. Is that ok?</b>
+Yes, there are two valid ways to output a line segment.
+
+</p><p><b>The reference solution outputs the line segments in a different order
+than my solution. Is that ok?</b>
+Yes, if there are <em>k</em> line segments, then there are <em>k</em>! different possible
+ways to output them.
+
+</p><p><b>Can I draw a line segment containing 4 (or more) points by drawing
+several subsegments?</b>
+No, you should draw one (and only one) line segment for each
+set of collinear points discovered: For example, you should draw the line segment
+<em>p</em>→<em>q</em>→<em>r</em>→<em>s</em>,
+with either <tt>p.drawTo(s)</tt> or <tt>s.drawTo(p)</tt>.
+
+</p><p><b>How do I sort a subarray?</b>
+ <tt>Arrays.sort(a, lo, hi)</tt> sorts the subarray
+from <tt>a[lo]</tt> to <tt>a[hi-1]</tt> according to the natural
+order of <tt>a[]</tt>. You can use a <tt>Comparator</tt> as the fourth
+argument to sort according to an alternate order. 
+
+</p><p><b>Where can I see examples of Comparable and Comparator?</b>
+See the lecture slides.
+We assume this is new Java material for most of you,
+so don't hesitate to ask for clarifications in the Discussion Forums.
+
+<!--
+, and go to precept.
+We assume this is new Java material for most of you,
+so don't hesitate to ask for clarifications on Piazza.
+-->
+
+</p><p><b>My program fails only on (some) vertical line segments. What could be going wrong?</b>
+Are you dividing by zero? With integers, this produces a runtime
+exception. With floating-point numbers, 1.0/0.0 is  positive infinity
+and -1.0/0.0 is negative infinity. You may also use the constants 
+<tt>Double.POSITIVE_INFINITY</tt> and <tt>Double.NEGATIVE_INFINITY</tt>.
+
+</p><p><b>What does it mean for slopeTo() to return positive zero?</b>
+Java (and the IEEE 754 floating-point standard) define two representations of zero: negative zero and positive zero.
+</p><blockquote><pre>double a = 1.0;
+double x = (a - a) /  a;   // positive zero ( 0.0)
+double y = (a - a) / -a;   // negative zero (-0.0)
+</pre></blockquote>
+
+Note that while <tt>(x == y)</tt> is guaranteed to be true,
+<a href="http://docs.oracle.com/javase/7/docs/api/java/util/Arrays.html#sort(double[])">Arrays.sort()</a> treats
+negative zero as strictly less than positive zero.
+Thus, to make the specification precise, we require you to return positive zero for horizontal line segments.
+Unless your program casts to the wrapper type <tt>Double</tt> (either explicitly or via autoboxing),
+you probably will not notice any difference in behavior;
+but, if your program does cast to the wrapper type and fails only on (some) horizontal line segments, this may be
+the cause.
+
+<p><b>Is it ok to compare two floating-point numbers a and b for exactly equality?</b>
+In general, it is hazardous to compare a and b for equality if either is susceptible to
+floating-point roundoff error.
+However, in this case, you are computing b/a, where a and b are integers between -32,767 and 32,767.
+In Java (and the IEEE 754 floating-point standard), the result of
+a floating-point operation (such as division) is the nearest representable value. Thus, for example,
+it is guaranteed that <tt>(9.0/7.0 == 45.0/35.0)</tt>.
+In other words, it's sometimes OK to compare floating-point numbers for exact equality
+(but only when you know exactly what you are doing!)
+</p><p>
+Note also that it is possible to implement <tt>compare()</tt> and <tt>Fast</tt> using only integer arithmetic,
+though you are not required to do so.
+
+</p><p><b>I'm having trouble avoiding subsegments 
+Fast.java when there are 5 or more points on a line
+segment. Any advice?</b>
+Not handling the 5-or-more case is a bit tricky,
+so don't kill yourself over it.
+
+<!--
+<p><b>Why are most of the line segments in the input files horizontal and vertical?</b>
+We generate most of the data sets at random. Since the points have integer coordinates
+in a small range, there are more opportunities to form horizontal and vertical lines.
+-->
+
+</p><p><b>I created a nested Comparator class within Point. Within the nested Comparator class,
+the keyword <tt>this</tt> refers to the Comparator object. How do I refer to the Point instance
+of the outer class?</b>
+Use <tt>Point.this</tt> instead of <tt>this</tt>.
+Note that you can refer directly to instance methods of the outer class (such as <tt>slopeTo()</tt>);
+with proper design, you shouldn't need this awkward notation.
+
+<!--
+<p><b>Why aren't I allowed to change the pen color or pen radius?</b>
+It will mess with our grading script.
+-->
+
+</p><p><br>
+
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center><b>Testing</b></center>
+</font></td></tr></tbody></table>
+
+
+</p><p><b>Sample data files.</b>
+The directory
+<a href="http://coursera.cs.princeton.edu/algs4/testing/collinear">collinear</a>
+contains some sample input files in the specified format.
+Assoicated with some of the input .txt files are output .png files that contains the
+desired graphical output.
+For convenience, <a href="http://coursera.cs.princeton.edu/algs4/testing/collinear-testing.zip">collinear-testing.zip</a>
+contains all of these files bundled together.
+Thanks to Jesse Levinson '05 for the remarkable input file <tt>rs1423.txt</tt>; feel free
+to create your own and share with us in the Discussion Forums.
+
+</p><p><br>
+
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center><b>Possible Progress Steps</b></center>
+</font></td></tr></tbody></table>
+</p><p>
+
+These are purely suggestions for how you might make progress.  You do
+not have to follow these steps.
+
+</p><ol>
+
+<p></p><li><b>Getting started.</b>
+Download 
+<a href="http://coursera.cs.princeton.edu/algs4/testing/collinear/Point.java">Point.java</a>
+and 
+<a href="http://coursera.cs.princeton.edu/algs4/testing/collinear/PointPlotter.java">PointPlotter.java</a>.
+The latter takes a command-line argument, reads in a list of points
+from the file specified as a command-line argument (in the format specified)
+and plots the results using standard draw.
+
+To plot the points, type the following at the command line
+<blockquote><pre>% <b>java PointPlotter input56.txt</b>
+</pre></blockquote>
+
+
+<p></p></li><li> <b>Slope.</b> 
+To begin, implement the <tt>slopeTo()</tt> method.
+Be sure to consider a variety of corner cases, including horizontal, vertical,
+and degenerate line segments.
+
+<p></p></li><li> <b>Brute force algorithm.</b>
+Write code to iterate through all 4-tuples and check if the 4 points are
+collinear.
+To draw the line segment, you need to know the endpoints.
+One approach is to print out a line segment
+only if the 4 points are in ascending order (say, relative to the natural order),
+in which case, the endpoints are the first and last points.
+
+<p>
+<em>Hint</em>: don't waste time micro-optimizing the brute-force solution. Though, if you really want to, there
+are two easy opportunities. First, you can iterate through all combinations of 4 points (N choose 4)
+instead of all 4 tuples (N^4), saving a factor of 4! = 24. Second, you don't need to consider whether
+4 points are collinear if you already know that the first 3 are not collinear;
+this can save you a factor of N on typical inputs.
+
+</p><p></p></li><li> <b>Fast algorithm.</b>
+<ul>
+<p></p><li>
+Implement the <tt>SLOPE_ORDER</tt> comparator in <tt>Point</tt>.
+The complicating issue is that the comparator needed to compare the
+slopes that two points <tt>q</tt> and <tt>r</tt> make with a third
+point <tt>p</tt>, which changes from sort to sort.
+To do this include a
+<tt>public</tt> and <tt>final</tt> (but not <tt>static</tt>)
+instance variable <tt>SLOPE_ORDER</tt>
+in <tt>Point</tt> of type <tt>Comparator&lt;Point&gt;</tt>.
+This <tt>Comparator</tt> has a <tt>compare()</tt> method so
+that <tt>compare(q, r)</tt> compares the slopes that <tt>q</tt>
+and <tt>r</tt> make with the invoking object <tt>p</tt>.
+
+<p></p></li><li>
+Implement the sorting solution. Watch out for corner cases.
+Don't worry about 5 or more points on a line segment yet.
+
+
+</li></ul>
+
+</li></ol>
+
+
+
+
+
+<p><br>
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center><b>Enrichment</b></center>
+</font></td></tr></tbody></table>
+</p><p>
+
+</p><p><b>Can the problem be solved in quadratic time and linear space?</b>
+Yes, but the only compare-based algorithm I know of that guarantees quadratic time in the
+worst case is quite sophisticated. It involves
+converting the points to their dual line segments and
+<a href="http://www.hpl.hp.com/techreports/Compaq-DEC/SRC-RR-9.pdf">topologically sweeping the
+arrangement of lines</a> by Edelsbrunner and Guibas.
+
+</p><p><b>Can the decision version of the problem be solved in subquadratic time?</b>
+The original version of the problem cannot be solved in subquadratic time
+because there might be a quadratic number of line segments to output. (See
+next question.)
+The decision version asks whether there exists a set of 4 collinear points.
+This version of the problem belongs to a group of problems that are known as
+<a href="http://cs.smith.edu/~orourke/TOPP/P11.html#Problem.11">3SUM-hard</a>.
+A famous unresolved conjecture is that such problems have
+no subquadratic algorithms. Thus, the sorting algorithm presented
+above is about the best we can hope for (unless the conjecture
+is wrong). Under a <a href="http://cjtcs.cs.uchicago.edu/articles/1999/8/contents.html">
+restricted decision tree</a> model of computation, Erickson proved that
+the conjecture is true.
+
+</p><p><b>What's the maximum number of (maximal) collinear sets of points
+in a set of N points in the plane?</b>
+It can grow quadratically as a function of <em>N</em>.
+Consider the <em>N</em> points of the form:
+(<em>x</em>, <em>y</em>) for <em>x</em> = 0, 1, 2, and 3 and
+<em>y</em> = 0, 1, 2, ..., <em>N</em> / 4.
+This means that if you store all of the (maximal) collinear sets of points,
+you will need quadratic space in the worst case.
+
+
+
+
+
+</p></body></html>

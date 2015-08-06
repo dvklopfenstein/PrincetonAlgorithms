@@ -1,0 +1,357 @@
+
+<!-- saved from url=(0061)http://coursera.cs.princeton.edu/algs4/checklists/queues.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>
+Programming Assignment 2 Checklist: Randomized Queues and Dequeues
+</title>
+</head>
+
+<body>
+
+<p><br>
+</p><h2>
+Programming Assignment 2 Checklist: Randomized Queues and Dequeues
+</h2>
+
+<p><br>
+
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center><b>Frequently Asked Questions</b></center>
+</font></td></tr></tbody></table>
+
+</p><p><b>Should I use arrays or linked lists in my implementations?</b>
+In general we don't tell you <em>how</em> to implement your data structures—you
+can use arrays, linked lists, or maybe even invent your own new structure provide
+you abide by the specified time and space requirements.
+So, before you begin to write the code, make sure that your data structure 
+will achieve the required resource bounds.
+
+</p><p><b>How serious are you about not calling any external library function other than those in <tt>stdlib.jar</tt>?</b>
+You will receive a substantial deduction.
+The goal of this assignment is to implement data types from first principles, using
+resizing arrays and linked lists—feel free to use
+<a href="http://docs.oracle.com/javase/7/docs/api/java/util/LinkedList.html">java.util.LinkedList</a>
+and
+<a href="http://docs.oracle.com/javase/7/docs/api/java/util/ArrayList.html">java.util.ArrayList</a>
+on future programming assignments.
+We also require you to use <tt>StdIn</tt> (instead of 
+<a href="http://docs.oracle.com/javase/7/docs/api/java/util/Scanner.html">java.util.Scanner</a>)
+because we will intercept the calls to <tt>StdIn</tt> in our testing.
+
+</p><p><b>
+Can I add extra public methods to the <tt>Deque</tt> or
+<tt>RandomizedQueue</tt> APIs?
+Can I use different names for the methods?</b>
+No, you must implement the API exactly as specified.
+The only exception is the <tt>main()</tt> method, which you should use for
+unit testing.
+
+<!--
+<p><b>If a client creates two randomized queue iterators, should 
+they return the items in the same order?</b>
+No, each should return them in random order, independent
+of the other.
+-->
+
+
+</p><p><b>What is meant by uniformly at random?</b>
+If there are <em>N</em> items in the randomized queue, then you should choose each one
+with probability 1/<em>N</em>, up to the randomness of <tt>StdRandom.uniform()</tt>,
+independent of past decisions.
+You can generate a pseudo-random integer between 0 and <em>N</em>-1 using
+<tt>StdRandom.uniform(N)</tt> from the
+<a href="http://introcs.cs.princeton.edu/22library/StdRandom.java.html">StdRandom.java</a>
+library.
+
+</p><p><b>Given an array, how can I rearrange the entries in random order?</b>
+Use <tt>StdRandom.shuffle()</tt>—it implements the Knuth shuffle
+discussed in lecture and runs in linear time. Note that depending on your implementation,
+you may not need to call this method.
+
+</p><p><b>What should my deque (or randomized queue) iterator do if the deque
+(or randomized queue) is structurally modified
+at any time after the iterator is created (but before it is done iterating)?</b>
+You don't need to worry about this in your solution.
+An industrial-strength solution (used in the Java libraries)
+is to make the iterator <em>fail-fast</em>: throw a
+<tt>java.lang.ConcurrentModificationException</tt> as soon as this is detected.
+
+</p><p><b>Why does the following code lead to a 
+<tt>generic array creation</tt> compile-time error when <tt>Item</tt> is a generic
+type parameter?</b>
+
+</p><blockquote>
+<pre>Item[] a = new Item[1];
+</pre>
+</blockquote>
+
+Java prohibits the creation of arrays of generic types. See the
+<a href="http://algs4.cs.princeton.edu/13stacks/index.php#Q+A">Q+A in Section 1.3</a>
+for a brief discussion. Instead, use a cast.
+
+<blockquote>
+<pre>Item[] a = (Item[]) new Object[1];
+</pre>
+</blockquote>
+
+Unfortuantely, this leads to an unavoidable compiler warning.
+
+<!---
+<p><b>I'm using a linked list and don't like dealing with these special cases when the list is empty or almost 
+empty. Is there some way to simplify them?</b> Yes. One common method is to include sentinel nodes. A sentinel node 
+is just a special node created by the constructor which is never removed, and which contains dummy data which is 
+never used. The trick is that your head (and tail, if applicable) pointers always point at these special sentinel 
+nodes, even if the list is empty. In other words, the head (and tail) pointers are never null, thus avoiding the 
+need to check to see if the head (or tail) is null.
+-->
+
+<p><b>The compiler says that my program uses unchecked or unsafe operations
+and to recompile with -Xlint:unchecked for details.</b>
+Usually this means you did a potentially unsafe cast. 
+When implementing a generic stack with an array, this is unavoidable since
+Java does not allow generic array creation. For example, the compiler outputs
+the following warning with
+<a href="http://algs4.cs.princeton.edu/13stacks/ResizingArrayStack.java.html">ResizingArrayStack.java</a>:
+
+</p><blockquote>
+<pre>% javac ResizingArrayStack.java
+Note: ResizingArrayStack.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+% javac -Xlint:unchecked ResizingArrayStack.java
+ResizingArrayStack.java:25: warning: [unchecked] unchecked cast
+found   : java.lang.Object[]
+required: Item[]
+        a = (Item[]) new Object[2];
+                     ^
+ResizingArrayStack.java:36: warning: [unchecked] unchecked cast
+found   : java.lang.Object[]
+required: Item[]
+        Item[] temp = (Item[]) new Object[capacity];
+                               ^
+2 warnings
+</pre>
+</blockquote>
+
+
+<p>
+You should not make any other casts.
+
+
+</p><p><b>Checkstyle complains that my nested class' instance variables must be
+private and have accessor methods that are not private. Do I need to make them private? </b>
+No, but there's no harm in doing so.
+The access modifier of a nested class' instance variable
+is irrelevant—regardless of its access modifiers, it can be accessed 
+anywhere in the file. (Of course, the enclosing class' instance
+variables should be private.)
+
+</p><p><b>Can a nested class have a constructor?</b>
+Yes.
+
+</p><p><b>What assumptions can I make about the input to <tt>Subset</tt>?</b>
+Standard input can contain any sequence of strings.
+You may assume that there is one integer command-line argument <em>k</em>
+and it is between 0 and the number of strings on standard input.
+
+<!--
+<p><b>What assumptions can I make about the input to <tt>Palindrome</tt>?</b>
+It can be any sequence of characters. 
+Of course, if the input contains any character other than an <tt>'A'</tt>,
+<tt>'C'</tt>, <tt>'T'</tt>, or <tt>'G'</tt> (including any lowercase character or whitespace character),
+it cannot be a Watson-Crick complemented palindrome.
+
+<p><b>I'm using Windows and my program doesn't work when I type
+<tt>echo | java Palindrome</tt>. What could be wrong?</b>
+On Windows, the <tt>echo</tt> command without an argument outputs <tt>"ECHO is on"</tt>,
+so this becomes the input to your program; instead you can use <tt>echo. | java Palindrome</tt>.
+We will test on a machine where <tt>echo | java Palindrome</tt> passes the empty string
+to your program.
+-->
+
+</p><p><b>Will I lose points for loitering?</b>
+Yes. <!-- See p. 137 of the textbook for a discussion of loitering. -->
+Loitering is maintaining a useless reference to an object that could otherwise be garbage collected.
+
+</p><p>
+
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center><b>Possible Progress Steps</b></center>
+</font></td></tr></tbody></table>
+</p><p>
+
+These are purely suggestions for how you might make progress.  You do
+not have to follow these steps. These same steps apply to each of the two data
+types that you will be implementing.
+
+</p><ol>
+
+<p></p><li><b>
+Make sure you understand the performance requirements for both <tt>Deque</tt> and <tt>RandomizedQueue</tt>.</b> 
+<!--
+Your Deque should use space proportional to the number of items <i>currently</i> in the deque, and each 
+operation must complete in <i>constant worst-case time</i>. Your Deque iterator must support each iteration 
+operation (including construction) in <i>constant worst-case time</i>, and use a <i>constant</i> amount of 
+extra space per iterator. Your RandomizeQueue should use space proportional to the number of items 
+<i>currently</i> in the queue, and each operation should complete in <i>constant <b>amortized</b> time</i>. 
+Your RandomizedQueue iterator implementation must support each iteration operation (<b>excluding</b> 
+construction) in <i>constant worst-case time</i>, and use a <i>linear</i> amount of extra space per iterator.-->
+They are summarized in the table below.
+<em>Every detail in these performance requirements is important.
+Do not proceed until you understand them.</em>
+
+<center>
+<p><table border="1">
+  <tbody>
+    <!-- Results table headers -->
+    <tr>
+      <th></th>
+      <th>Deque</th>
+      <th>Randomized Queue</th>
+    </tr>
+    <tr>
+      <td><b>Non-iterator operations</b></td>
+      <td>Constant worst-case time</td>
+      <td>Constant amortized time</td>
+    </tr>
+    <tr>
+      <td><b>Iterator constructor</b></td>
+      <td>Constant worst-case time</td>
+      <td>linear in current # of items</td>
+    </tr>
+    <tr>
+      <td><b>Other iterator operations</b></td>
+      <td>Constant worst-case time</td>
+      <td>Constant worst-case time</td>
+    </tr>
+    <tr>
+      <td><b>Non-iterator memory use</b></td>
+      <td>Linear in current # of items</td>
+      <td>Linear in current # of items</td>
+    </tr>
+    <tr>
+      <td><b>Memory per iterator</b></td>
+      <td>Constant</td>
+      <td>Linear in current # of items</td>
+    </tr>
+  </tbody>
+</table>
+</p></center>
+
+<p></p></li><li><b>Decide whether you want to use an array, linked list, or your own class.</b>
+This choice should be made based on the performance requirements discussed above.
+You may make different choices for 
+<tt>Deque</tt> and <tt>RandomizedQueue</tt>.
+You might start by considering why a resizing array does not support 
+<i>constant worst-case</i> time operations in a stack.
+
+<p></p></li><li><b>Use our example programs as a guide when implementing your methods.</b>
+There are many new ideas in this programming assignment, including resizing arrays, linked lists, iterators, the 
+<i>foreach</i> keyword, and generics. If you are not familiar with these topics, our example code should make things 
+much easier.
+<a href="http://algs4.cs.princeton.edu/13stacks/ResizingArrayStack.java.html">ResizingArrayStack.java</a>
+uses a resizing array;
+<a href="http://algs4.cs.princeton.edu/13stacks/LinkedStack.java.html">LinkedStack.java</a> uses a singly-linked list.
+Both examples use iterators, foreach, and generics.
+<!-- <a href="http://algs4.cs.princeton.edu/13stacks/DoublyLinkedList.java.html">DoublyLinkedList</a> provides an example of 
+a linked list where each node has two links, which is useful for being able to go backwards in a linked list.
+-->
+
+<p></p></li><li>
+<b>We strongly recommend that you develop <a href="http://en.wikipedia.org/wiki/Unit_testing">unit tests</a> 
+for your code as soon as you've written enough methods to allow for testing.</b>
+As an example for <tt>Deque</tt>, you 
+know that if you call <tt>addFirst()</tt> with the numbers 1 through N in ascending order, then call 
+<tt>removeLast()</tt> N times, you should see the numbers 1 through N in ascending order. As soon as you have 
+those two methods written, you can write a unit test for these methods. Arguably even better are randomized 
+unit tests (which we employ heavily in our correctness testing). We recommend that you create a client class 
+with a name like <tt>TestDeque</tt>, where each unit test is a method in this class. Don't forget to test 
+your iterator.
+
+</li></ol>
+
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center><b>Programming Tricks and Common Pitfalls</b></center>
+</font></td></tr></tbody></table>
+<p>
+
+</p><ol>
+<p></p><li>
+<b>It is very important that you carefully plan your implementation before you begin.</b>
+In particular, for each data structure that you're implementing (<tt>RandomizedQueue</tt> and 
+<tt>Deque</tt>), you must decide whether to use a linked list, an array, or something else.
+If you make the wrong choice, you will not achieve the peformance requirements and
+you will have to abandon your code and start over.
+
+<p></p></li><li>
+<b>Make sure that your memory use is linear in the current number of items, as opposed to the 
+greatest number of items that has ever been in the data structure since its instantiation.</b> 
+If you're using a resizing array, you must resize the array when it becomes sufficiently empty. 
+You must also take care to avoid loitering anytime you remove an item.
+
+<p></p></li><li>
+<b>Make sure to test what happens when your data structures are emptied.</b> One very common 
+bug is for something to go wrong when your data structure goes from non-empty to empty and 
+then back to non-empty. Make sure to include this in your tests.
+
+
+<p></p></li><li>
+<b>Make sure to test that multiple iterators can be used simultaneously.</b>
+You can test this with a nested <i>foreach</i> loop.
+The iterators should operate independently of one another.
+
+<p></p></li><li>
+<b>Don't rely on our automated tests for debugging.</b>
+You don't have access to the source code of our testing suite,
+so the <em>Assessment Details</em> may be hard to utilize for debugging.
+As suggested above, write your own unit tests; it's good practice.
+
+<p></p></li><li>
+<b>If you use a linked list, consider using a sentinel node (or nodes).</b> Sentinel 
+nodes can simplify your code and prevent bugs. However, they are not 
+required (and we have not provided examples that use sentinel nodes).
+
+</li></ol>
+
+<!--
+<p><b>When I am asked to give an answer using tilde notation or order-of-growth notation,
+should I include  the leading coefficient and the lower order terms?</b>
+By definition, tilde notation includes the leading coefficient but discards the lower order terms;
+order of growth notation discards both the leading coefficient and the lower order terms.
+See pp. 178-179 of the textbook.
+-->
+<!--
+<p><br>
+
+<TABLE BORDER = 0 CELLPADDING = 2 CELLSPACING = 0 WIDTH = 100%>
+<tr align = left>
+<td bgcolor = "000000">
+<font size = +0 face = "helvetica" color = "ffffff">
+<center><b>Testing and Submitting</b></center>
+</table>
+
+
+<!--
+<p><li><b>Getting started.</b>
+Review the code from the textbook for generic stacks and queues
+with iterators.
+You can download the code from
+the 
+<a href = "http://algs4.cs.princeton.edu/code">booksite</a>.
+If you adapt our code, you should include a citation to the original source
+from either the textbook or the booksite.
+-->
+
+
+
+
+</body></html>

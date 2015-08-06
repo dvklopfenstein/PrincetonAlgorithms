@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!-- saved from url=(0067)http://coursera.cs.princeton.edu/algs4/assignments/percolation.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Programming Assignment 1: Percolation</title></head><body>
+
+
+<h2>Programming Assignment 1: Percolation</h2>
+
+<p>
+Write a program to estimate the value of the 
+<em>percolation threshold</em>
+via Monte Carlo simulation.
+
+
+</p><p><b>Install a Java programming environment.</b>
+Install a Java programming environment on your computer by following
+these step-by-step instructions for your operating system
+[
+<a href="http://algs4.cs.princeton.edu/mac">Mac OS X</a>
+·
+<a href="http://algs4.cs.princeton.edu/windows">Windows</a>
+·
+<a href="http://algs4.cs.princeton.edu/linux">Linux</a>
+]. After following these instructions, the commands <tt>javac-algs4</tt> and <tt>java-algs4</tt>
+will classpath in both
+<a href="http://algs4.cs.princeton.edu/code/stdlib.jar">stdlib.jar</a>
+and  <a href="http://algs4.cs.princeton.edu/code/algs4.jar">algs4.jar</a>:
+the former contains libraries for reading data from <em>standard input</em>,
+writing data to <em>standard output</em>, 
+drawing results to <em>standard draw</em>, generating random numbers,
+computing statistics, and timing programs;
+the latter contains all of the algorithms in the textbook.
+
+
+
+</p><p><b>Percolation.</b>
+Given a composite systems comprised of randomly distributed insulating and metallic
+materials: what fraction of the materials need to be metallic so that the composite system is an 
+electrical conductor? Given a porous landscape with water on the surface (or oil below),
+under what conditions will the water be able to drain through to the bottom (or the
+oil to gush through to the surface)?
+Scientists have defined an abstract process known as <em>percolation</em>
+to model such situations.
+
+</p><p><b>The model.</b>
+We model a percolation system using an <em>N</em>-by-<em>N</em> grid of <em>sites</em>.
+Each site is either <em>open</em> or <em>blocked</em>.
+A <em>full</em> site is an open site
+that can be connected to an open site in the top row via a chain of
+neighboring (left, right, up, down) open sites.
+We say the system <em>percolates</em> if 
+there is a full site in the bottom row.
+In other words, a system percolates if we fill all open sites
+connected to the top row and that process fills some open
+site on the bottom row. (For the 
+insulating/metallic materials example, the open sites correspond
+to metallic materials, so that a system that percolates 
+has a metallic path from top to bottom, with full sites conducting.
+For the porous substance example, the open sites 
+correspond to empty space through which water might 
+flow, so that a system that percolates lets water fill open sites, 
+flowing from top to bottom.)
+
+</p><p>
+</p><center>
+<img src="./Programming_Assignment 1_Percolation_files/percolates.png" alt="Percolates">
+</center>
+
+
+
+<p><b>The problem.</b>
+In a famous scientific problem, researchers are interested in the
+following question: if sites are independently set to be open with
+probability <em>p</em> (and therefore blocked with
+probability 1 − <em>p</em>), what is the probability that the system percolates?
+When <em>p</em> equals 0, the system does not percolate; when <em>p</em> equals 1,
+the system percolates.
+The plots below show the site vacancy probability <em>p</em> versus the percolation
+probability for 20-by-20 random grid (left) and 100-by-100 random grid (right).
+</p><p>
+
+</p><center>
+<img src="./Programming_Assignment 1_Percolation_files/percolation-threshold20.png" alt="Percolation threshold for 20-by-20 grid">
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="./Programming_Assignment 1_Percolation_files/percolation-threshold100.png" alt="Percolation threshold for 100-by-100 grid">
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;
+</center>
+
+<p>
+When <em>N</em> is sufficiently large, there is a <em>threshold</em> value <em>p</em>* such
+that when <em>p</em> &lt; <em>p</em>* a random <em>N</em>-by-<em>N</em> grid 
+almost never percolates, and when <em>p</em> &gt; <em>p</em>*,
+a random <em>N</em>-by-<em>N</em> grid almost always percolates.
+No mathematical solution for determining the percolation threshold <em>p</em>*
+has yet been derived.
+Your task is to write a computer program to estimate <em>p</em>*.
+
+
+</p><p><b>Percolation data type.</b>
+To model a percolation system, create a data type <tt>Percolation</tt> with the following API:
+
+</p><blockquote>
+<pre><b>public class Percolation {</b>
+   <b>public Percolation(int N)</b>               <font color="gray">// create N-by-N grid, with all sites blocked</font>
+   <b>public void open(int i, int j)</b>          <font color="gray">// open site (row i, column j) if it is not open already</font>
+   <b>public boolean isOpen(int i, int j)</b>     <font color="gray">// is site (row i, column j) open?</font>
+   <b>public boolean isFull(int i, int j)</b>     <font color="gray">// is site (row i, column j) full?</font>
+   <b>public boolean percolates()</b>             <font color="gray">// does the system percolate?</font>
+
+   <b>public static void main(String[] args</b>   <font color="gray">// test client (optional)</font>
+<b>}</b>
+</pre></blockquote>
+
+
+<p><em>Corner cases.&nbsp;</em>
+By convention, the row and column indices <em>i</em> and <em>j</em>
+are integers between 1 and <em>N</em>, where (1, 1) is the upper-left site:
+Throw a <tt>java.lang.IndexOutOfBoundsException</tt>
+if any argument to <tt>open()</tt>, <tt>isOpen()</tt>, or <tt>isFull()</tt> 
+is outside its prescribed range.
+The constructor should throw a <tt>java.lang.IllegalArgumentException</tt> if <em>N</em> ≤ 0.
+
+
+</p><p><em>Performance requirements.&nbsp;</em>
+The constructor should take time proportional to <em>N</em><sup>2</sup>; all methods should
+take constant time plus a constant number of calls to the union-find methods 
+<tt>union()</tt>, <tt>find()</tt>, <tt>connected()</tt>, and <tt>count()</tt>.
+
+
+</p><p><b>Monte Carlo simulation.</b>
+To estimate the percolation threshold, consider the following computational experiment:
+</p><ul>
+
+<p></p><li> Initialize all sites to be blocked.
+
+<p></p></li><li> Repeat the following until the system percolates:
+
+<ul>
+<p></p><li> Choose a site (row <em>i</em>, column <em>j</em>) uniformly at
+random among all blocked sites.
+<p></p></li><li> Open the site (row <em>i</em>, column <em>j</em>).
+</li></ul>
+
+<p></p></li><li> The fraction of sites that are opened when the system percolates
+provides an estimate of the percolation threshold.
+</li></ul>
+
+
+<p>
+For example, if sites are opened in a 20-by-20 lattice according to the snapshots below,
+then our estimate of the percolation threshold is 204/400 = 0.51 because the system
+percolates when the 204th site is opened.
+</p><p>
+<table border="0" cellpadding="2" cellspacing="0">
+<tbody><tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</td><td><img src="./Programming_Assignment 1_Percolation_files/percolation-50.png" alt="Percolation 50 sites">
+<br><center><font size="-1"><em>50 open sites</em></font></center>
+</td><td><img src="./Programming_Assignment 1_Percolation_files/percolation-100.png" alt="Percolation 100 sites">
+<br><center><font size="-1"><em>100 open sites</em></font></center>
+</td><td><img src="./Programming_Assignment 1_Percolation_files/percolation-150.png" alt="Percolation 150 sites">
+<br><center><font size="-1"><em>150 open sites</em></font></center>
+</td><td><img src="./Programming_Assignment 1_Percolation_files/percolation-204.png" alt="Percolation 204 sites">
+<br><center><font size="-1"><em>204 open sites</em></font></center>
+<!--
+<td><IMG SRC="percolation-250.png" alt = "Percolation 250 sites">
+<br><center><font size = -1><em>250 open sites</em></font></center>
+-->
+</td></tr>
+</tbody></table>
+
+</p><p>
+By repeating this computation experiment <em>T</em> times and averaging the results,
+we obtain a more accurate estimate of the percolation threshold.
+Let <em>x<sub>t</sub></em> be the fraction of open sites in computational experiment <em>t</em>.
+The sample mean μ provides an estimate of the percolation threshold;
+the sample standard deviation σ measures the sharpness of the threshold.
+
+</p><p>
+</p><blockquote>
+<img src="./Programming_Assignment 1_Percolation_files/percolation-stats.png" alt="Estimating the sample mean and variance">
+</blockquote>
+
+Assuming <em>T</em> is sufficiently large (say, at least 30), the following
+provides a 95% confidence interval for the percolation threshold:
+
+<p>
+</p><blockquote>
+<img src="./Programming_Assignment 1_Percolation_files/percolation-confidence.png" alt="95% confidence interval for percolation threshold">
+</blockquote>
+
+<p>
+To perform a series of computational experiments, create a data type <tt>PercolationStats</tt>
+with the following API.
+
+</p><blockquote>
+<pre><b>public class PercolationStats {</b>
+<b>   public PercolationStats(int N, int T)   </b>  <font color="gray">// perform T independent experiments on an N-by-N grid</font>
+<b>   public double mean()                    </b>  <font color="gray">// sample mean of percolation threshold</font>
+<b>   public double stddev()                  </b>  <font color="gray">// sample standard deviation of percolation threshold</font>
+<b>   public double confidenceLo()            </b>  <font color="gray">// low  endpoint of 95% confidence interval</font>
+<b>   public double confidenceHi()            </b>  <font color="gray">// high endpoint of 95% confidence interval</font>
+
+<b>   public static void main(String[] args)  </b>  <font color="gray">// test client (described below)</font>
+<b>}</b>
+</pre>
+</blockquote>
+
+The constructor should throw a <tt>java.lang.IllegalArgumentException</tt> if either <em>N</em> ≤ 0 or
+<em>T</em> ≤ 0.
+<p>
+Also, include a <tt>main()</tt> method
+that takes two <em>command-line arguments</em>
+<em>N</em> and <em>T</em>, performs <em>T</em> independent
+computational experiments (discussed above) on an <em>N</em>-by-<em>N</em> grid,
+and prints out the mean, standard deviation, and the 
+<em>95% confidence interval</em> for the percolation threshold.
+Use <em>standard random</em> from our standard libraries to generate random numbers;
+use <em>standard statistics</em> to compute the sample mean and standard deviation.
+
+</p><blockquote>
+<pre>% <b>java PercolationStats 200 100</b>
+mean                    = 0.5929934999999997
+stddev                  = 0.00876990421552567
+95% confidence interval = 0.5912745987737567, 0.5947124012262428
+
+% <b>java PercolationStats 200 100</b>
+mean                    = 0.592877
+stddev                  = 0.009990523717073799
+95% confidence interval = 0.5909188573514536, 0.5948351426485464
+
+
+% <b>java PercolationStats 2 10000</b>
+mean                    = 0.666925
+stddev                  = 0.11776536521033558
+95% confidence interval = 0.6646167988418774, 0.6692332011581226
+
+% <b>java PercolationStats 2 100000</b>
+mean                    = 0.6669475
+stddev                  = 0.11775205263262094
+95% confidence interval = 0.666217665216461, 0.6676773347835391
+</pre>
+</blockquote>
+
+
+
+<p><b>Analysis of running time and memory usage (optional and not graded).</b>
+Implement the <tt>Percolation</tt> data type using the quick-find algorithm 
+<a href="http://algs4.cs.princeton.edu/15uf/QuickFindUF.java.html">QuickFindUF.java</a>
+from <tt>algs4.jar</tt>.
+</p><ul>
+<p></p><li>
+Use the <em>stopwatch data type</em> from our standard library to 
+measure the total running time of <tt>PercolationStats</tt>.
+How does doubling <em>N</em> affect the total running time?
+How does doubling <em>T</em> affect the total running time?
+Give a formula (using tilde notation) of the total running
+time on your computer (in seconds) as a single function of both
+<em>N</em> and <em>T</em>.
+
+<p></p></li><li>
+Using the 64-bit memory-cost model from lecture,
+give the total memory usage in bytes (using tilde notation) that a <tt>Percolation</tt>
+object uses to model an <em>N</em>-by-<em>N</em> percolation system.     
+Count all memory that is used, including memory for the union-find data structure.
+</li></ul>
+
+
+
+<p>
+Now, implement the <tt>Percolation</tt> data type using the weighted quick-union algorithm
+<a href="http://algs4.cs.princeton.edu/15uf/WeightedQuickUnionUF.java.html">WeightedQuickUnionUF.java</a>
+from <tt>algs4.jar</tt>.
+Answer the questions in the previous paragraph.
+
+
+</p><p><b>Deliverables.</b>
+Submit only <tt>Percolation.java</tt> (using the weighted quick-union algorithm as implemented in the <tt>WeightedQuickUnionUF</tt> class)
+and <tt>PercolationStats.java</tt>.
+We will supply <tt>stdlib.jar</tt> and <tt>WeightedQuickUnionUF</tt>.
+Your submission may not call any library functions other than those in <tt>java.lang</tt>, <tt>stdlib.jar</tt>, and 
+<tt>WeightedQuickUnionUF</tt>.
+
+</p><p><b>For fun.</b>
+Create your own percolation input file and share it in the discussion forums.
+For some inspiration, see these 
+<a href="http://photo.qip.ru/users/syusyu/2208847/?sort=visitors&page=1">nonogram puzzles</a>.
+
+</p><p><br>
+
+
+</p><address><small>
+This assignment was developed by Bob Sedgewick and Kevin Wayne.
+<br>Copyright © 2008.
+</small>
+</address>
+
+</body></html>

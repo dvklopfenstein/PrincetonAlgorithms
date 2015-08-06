@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!-- saved from url=(0062)http://coursera.cs.princeton.edu/algs4/assignments/queues.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>
+Programming Assignment 2: Randomized Queues and Deques
+</title></head>
+
+<body>
+<h2>Programming Assignment 2: Randomized Queues and Deques</h2>
+
+<p>
+
+Write a generic data type for a deque and a randomized queue.
+The goal of this assignment is to implement elementary data structures
+using arrays and linked lists, and to introduce you to generics and
+iterators.
+
+</p><p>
+<b>Dequeue.</b>
+A <em>double-ended queue</em> or <em>deque</em> (pronounced "deck")
+is a generalization of a 
+stack and a queue that supports adding and removing items 
+from either the front or the back of the data structure.
+Create a generic data type <tt>Deque</tt> that implements the following API:
+
+</p><blockquote>
+<pre><b>public class Deque&lt;Item&gt; implements Iterable&lt;Item&gt; {</b>
+<b>   public Deque()                           </b><font color="gray">// construct an empty deque</font>
+<b>   public boolean isEmpty()                 </b><font color="gray">// is the deque empty?</font>
+<b>   public int size()                        </b><font color="gray">// return the number of items on the deque</font>
+<b>   public void addFirst(Item item)          </b><font color="gray">// add the item to the front</font>
+<b>   public void addLast(Item item)           </b><font color="gray">// add the item to the end</font>
+<b>   public Item removeFirst()                </b><font color="gray">// remove and return the item from the front</font>
+<b>   public Item removeLast()                 </b><font color="gray">// remove and return the item from the end</font>
+<b>   public Iterator&lt;Item&gt; iterator()         </b><font color="gray">// return an iterator over items in order from front to end</font>
+<b>   public static void main(String[] args)   </b><font color="gray">// unit testing</font>
+<b>}</b>
+</pre>
+</blockquote>
+
+
+<p><em>Corner cases.</em>
+Throw a <tt>java.lang.NullPointerException</tt>
+if the client attempts to add a null item;
+throw a <tt>java.util.NoSuchElementException</tt>
+if the client attempts to remove an item from an empty deque;
+throw a <tt>java.lang.UnsupportedOperationException</tt> if the client calls
+the <tt>remove()</tt> method in the iterator;
+throw a <tt>java.util.NoSuchElementException</tt> if the client calls the <tt>next()</tt>
+method in the iterator and there are no more items to return.
+
+</p><p><em>Performance requirements.</em> &nbsp;
+Your deque implementation must support each deque operation
+in <em>constant worst-case time</em>
+and use space proportional to the number of items <em>currently</em> in
+the deque.
+Additionally, your iterator implementation must support
+each operation (including construction) in <em>constant worst-case time</em>.
+
+
+
+</p><p><b>Randomized queue.</b>
+A <em>randomized queue</em> is similar to a stack or queue, except that
+the item removed is chosen uniformly at random from items in
+the data structure.
+Create a generic data type <tt>RandomizedQueue</tt>
+that implements the following API:
+
+</p><blockquote>
+<pre><b>public class RandomizedQueue&lt;Item&gt; implements Iterable&lt;Item&gt; {</b>
+<b>   public RandomizedQueue()                 </b><font color="gray">// construct an empty randomized queue</font>
+<b>   public boolean isEmpty()                 </b><font color="gray">// is the queue empty?</font>
+<b>   public int size()                        </b><font color="gray">// return the number of items on the queue</font>
+<b>   public void enqueue(Item item)           </b><font color="gray">// add the item</font>
+<b>   public Item dequeue()                    </b><font color="gray">// remove and return a random item</font>
+<b>   public Item sample()                     </b><font color="gray">// return (but do not remove) a random item</font>
+<b>   public Iterator&lt;Item&gt; iterator()         </b><font color="gray">// return an independent iterator over items in random order</font>
+<b>   public static void main(String[] args)   </b><font color="gray">// unit testing</font>
+<b>}</b>
+</pre>  
+</blockquote>
+
+
+<p><em>Corner cases.</em>
+The order of two or more iterators to the same randomized queue must be
+<em>mutually independent</em>; each iterator must maintain its own random order.
+Throw a <tt>java.lang.NullPointerException</tt>
+if the client attempts to add a null item;
+throw a <tt>java.util.NoSuchElementException</tt>
+if the client attempts to sample or dequeue an item from an empty randomized queue;
+throw a <tt>java.lang.UnsupportedOperationException</tt> if the client calls
+the <tt>remove()</tt> method in the iterator;
+throw a <tt>java.util.NoSuchElementException</tt> if the client calls the <tt>next()</tt>
+method in the iterator and there are no more items to return.
+
+
+
+</p><p><em>Performance requirements.</em>
+Your randomized queue implementation must support each randomized queue operation
+(besides creating an iterator) in <em>constant amortized time</em> and
+use space proportional to the number of items <em>currently</em> in the queue.
+That is, any sequence of <em>M</em> randomized queue operations (starting from
+an empty queue) should take at most <em>cM</em> steps in the worst case,
+for some constant <em>c</em>.
+Additionally, your iterator implementation must support 
+operations <tt>next()</tt> and <tt>hasNext()</tt> in <em>constant worst-case time</em>;
+and construction in <em>linear time</em>; you may use a
+linear amount of extra memory per iterator.
+
+
+
+
+
+</p><p>
+<b>Subset client.</b>
+
+Write a client program <tt>Subset.java</tt> that takes a
+command-line integer <em>k</em>; reads in a sequence of
+<em>N</em> strings from standard input using <tt>StdIn.readString()</tt>;
+and prints out exactly <em>k</em> of them, uniformly at random.
+Each item from the sequence can be printed out at most once.
+You may assume that 0 ≤ <em>k</em> ≤ <em>N</em>, where <em>N</em>
+is  the number of string on standard input.
+
+</p><blockquote>
+<pre>% <b>echo A B C D E F G H I | java Subset 3</b>       % <b>echo AA BB BB BB BB BB CC CC | java Subset 8</b>
+C                                              BB
+G                                              AA
+A                                              BB
+                                               CC
+% <b>echo A B C D E F G H I | java Subset 3</b>       BB
+E                                              BB
+F                                              CC
+G                                              BB
+</pre>
+</blockquote>
+
+
+The running time of <tt>Subset</tt> must be linear in the size of the input.
+You may use only a constant amount of memory plus either
+one <tt>Deque</tt> or <tt>RandomizedQueue</tt> object of maximum size at most <em>N</em>,
+where <em>N</em> is the number of strings on standard input.
+(For an extra challenge, use only one <tt>Deque</tt> or <tt>RandomizedQueue</tt> object of maximum
+size at most <em>k</em>.)
+It should have the following API.
+
+<blockquote>
+<pre><b>public class Subset {</b>
+<b>   public static void main(String[] args)</b>
+<b>}</b>
+</pre>
+</blockquote>
+
+
+
+<!--
+
+<p><li>
+Write a program <tt>Palindrome.java</tt> that
+reads in a sequence of characters from standard input,
+using <tt>StdIn.readChar()</tt>, and determines 
+whether that sequence represents a <em>Watson-Crick
+complemented palindrome</em>: the {A, C, T, G}-sequence
+equals its reverse
+when you replace each base with its complement: A-T, C-G).
+Watson-Crick palindromes have many important biological roles.
+For example, tumor cells frequently amplify their genes by
+forming Watson-Crick palindromes.
+
+<blockquote>
+<pre>
+% <b>echo AAAACGTTTT | java Palindrome</b>            % <b>echo AAAACTTTT | java Palindrome</b>
+true                                           false
+
+% <b>echo AGCTAGCT | java Palindrome</b>              % <b>echo agctagct | java Palindrome</b>
+true                                           false
+
+% <b>echo GC | java Palindrome</b>                    % <b>echo AGCTTCGA | java Palindrome</b>
+true                                           false
+
+% <b>echo | java Palindrome</b>                       % <b>echo A | java Palindrome</b>
+true                                           false
+</pre>
+</blockquote>
+
+
+</ul>
+-->
+
+
+<p>
+<b>Deliverables.</b>
+Submit only <tt>Deque.java</tt>, <tt>RandomizedQueue.java</tt>, and <tt>Subset.java</tt>.
+We will supply <tt>stdlib.jar</tt>.
+You may not call any library functions other than those in <tt>stdlib.jar</tt>,
+<tt>java.lang</tt>, <tt>java.util.Iterator</tt>, and
+<tt>java.util.NoSuchElementException</tt>.
+
+
+
+
+<!--
+<p><br><Br>
+
+<ADDRESS><SMALL>
+This assignment was developed by Kevin Wayne.
+<br>Copyright &copy; 2005.
+</SMALL>
+</ADDRESS>
+</BODY></HTML>
+-->
+
+
+
+</p></body></html>

@@ -1,0 +1,245 @@
+
+<!-- saved from url=(0061)http://coursera.cs.princeton.edu/algs4/checklists/kdtree.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>
+Programming Assignment 5 Checklist: Kd-Trees
+</title>
+</head>
+
+<body>
+<h3>
+Programming Assignment 5 Checklist: Kd-Trees
+</h3>
+
+<p>
+
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center><b>Frequently Asked Questions</b></center>
+</font></td></tr></tbody></table>
+
+<!--
+<p><b>
+Can I add extra public methods to the <tt>Point2D</tt> and <tt>RectHV</tt>
+APIs?</b>
+You are permitted (and encouraged) to add a <tt>main()</tt> test client, 
+but you may not add any other public methods.
+
+<p><b>Is a point on the boundary of a rectangle considered inside it?
+Do two rectangle intersect if they have just one point in common?</b>
+Yes, and yes.
+<p><b>What should be the format of the toString() methods in RectHV?</b>
+These methods are primarily for debuginng, so any reasonable format is fine.
+We recommend <tt>[xmin, xmax] x [ymin, ymax]</tt>.
+
+<p><b>Can I assume that the arguments to methods in <tt>RectHV</tt> are not null?</b>
+You can assume that the arguments to <tt>contains()</tt>, <tt>intersects()</tt>,
+<tt>distanceTo()</tt>, and <tt>distanceSquaredTo()</tt> are not null.
+However, if the argument to <tt>equals()</tt> is null, you must return
+false to obey the contract.
+You can also assume that none of the arguments to the constructor are 
+<tt>Double.NaN</tt>.
+
+<p><b>My implementation of <tt>distanceTo()</tt> in <tt>RectHV</tt> has
+numerous cases. Am I on the right track?</b>
+This is acceptable provided you handle every possible case.
+However, there is a direct approach that requires about 6 lines of code.
+-->
+
+</p><p><b>What should I do if a point has the same x-coordinate as the point
+in a node when inserting / searching in a 2d-tree?</b>
+Go the right subtree as specified.
+
+
+<!--
+<p><b>When do I need private methods?</b>
+Private methods are useful for keeping your code organized. One common organizational scheme
+is to recursively call private methods. See page 399 of the book or the code for BST.java.
+For example, the public <tt>insert()</tt> method for KdTree is best implemented using a supporting
+private <tt>insert()</tt> method which is called recursively. As with BST, this private method
+will have more arguments than the public method. Part of the assignment is deciding what arguments
+are needed.
+-->
+
+</p><p><b>Can I assume that all x- or y-coordinates of points inserted into
+the <tt>KdTree</tt>  will be between 0 and 1?</b>
+Yes. You may also assume that the <tt>insert()</tt>, <tt>contains()</tt>, and 
+<tt>nearest()</tt> methods in <tt>KdTree</tt> 
+are passed points with x- and y-coordinates between 0 and 1.
+You may also assume that the <tt>range()</tt> method in <tt>KdTree</tt> is
+passed a rectangle that lies in the unit box.
+<!-- However, the <tt>RectHV</tt> data type should not make such assumptions. -->
+
+</p><p><b>What should I do if a point is inserted twice in the data structure?</b>
+The data structure represents a <em>set</em> of points, so you should keep only one copy.
+
+
+</p><p><b>How should I scale the coordinate system when drawing?</b>
+Don't, please keep the default range of 0 to 1.
+
+
+</p><p><b>How should I set the size and color of the points and rectangles when drawing?</b>
+<!--
+Your <tt>RectHV</tt> data types should draw lines using <tt>StdDraw.line()</tt> 
+or <tt>StdDraw.rectangle()</tt>, without calling 
+<tt>StdDraw.setPenColor()</tt> or <tt>StdDraw.setPenRadius()</tt>.
+In <em>client code</em> (such as the <tt>draw()</tt> method in <tt>KdTree</tt>),
+ -->
+Use <tt>StdDraw.setPenColor(StdDraw.BLACK)</tt> and <tt>StdDraw.setPenRadius(.01)</tt> before
+before drawing the points;
+use <tt>StdDraw.setPenColor(StdDraw.RED)</tt> or <tt>StdDraw.setPenColor(StdDraw.BLUE)</tt>
+and <tt>StdDraw.setPenRadius()</tt> before drawing the splitting lines.
+
+</p><p><b>What should <tt>range()</tt> return if there are no points in the range?</b>
+It should return an <tt>Iterable&lt;Point2D&gt;</tt> object with zero points.
+
+</p><p><b>How much memory does a <tt>Point2D</tt> object use?</b>
+For simplicity, assume that each <tt>Point2D</tt> object uses 32 bytes—in reality,
+it uses a bit more because of the <tt>Comparator</tt> instance variables.
+
+</p><p><b>How much memory does a <tt>RectHV</tt> object use?</b>
+You can look at the code and analyze it.
+
+</p><p><b>I run out of memory when running some of the large sample files. What should I do?</b>
+Be sure to ask Java for additional memory,
+e.g., <tt>java -Xmx1600m RangeSearchVisualizer input1M.txt</tt>.
+
+</p><p>
+
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center><b>Testing</b></center>
+</font></td></tr></tbody></table>
+
+</p><p><b>Testing.</b>
+A good way to test <tt>KdTree</tt> is to perform
+the same sequence of operations on both the <tt>PointSET</tt> and 
+<tt>KdTree</tt> data types and identify any discrepancies.
+The sample clients
+ <a href="http://coursera.cs.princeton.edu/algs4/testing/kdtree/RangeSearchVisualizer.java">RangeSearchVisualizer.java</a>
+and 
+ <a href="http://coursera.cs.princeton.edu/algs4/testing/kdtree/NearestNeighborVisualizer.java">NearestNeighborVisualizer.java</a>
+take this approach.
+
+</p><p><b>Sample input files.</b>
+&nbsp;
+The directory <a href="http://coursera.cs.princeton.edu/algs4/testing/kdtree">kdtree</a> contains
+some sample input files in the specified format.
+For convenience, <a href="http://coursera.cs.princeton.edu/algs4/testing/kdtree-testing.zip">kdtree-testing.zip</a>
+contains all of these files bundled together. 
+
+</p><ul>
+<p></p><li><tt>circleN.txt</tt> contains <tt>N</tt> points on the circumference
+of the circle centered on (0.5, 0.5) of radius 0.5.
+
+</li></ul>
+
+The result of calling <tt>draw()</tt> on the points in <tt>circle10.txt</tt>
+should look like the following:
+
+<br><blockquote>
+<img src="./Programming_Assignment_5_Checklist_Kd-Trees_files/circle10.png" width="300">
+</blockquote>
+
+<br>If <tt>nearest()</tt> is called with <tt>p = (.81, .30)</tt> the number of nodes visited in order
+to find that F is nearest is 5.
+
+<p>Starting with <tt>circle10k.txt</tt> if nearest is called with <tt>p = (.81, .30)</tt> 
+the number of nodes visited in order to find that K is nearest is 6.
+
+</p><p>
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center><b>Possible Progress Steps</b></center>
+</font></td></tr></tbody></table>
+</p><p>
+
+These are purely suggestions for how you might make progress.  You do
+not have to follow these steps.
+
+</p><ol>
+
+
+<p></p><li><b>Node data type.</b>
+There are several reasonable ways to represent a node in a 2d-tree.
+One approach is to include the point, a link to the left/bottom subtree,
+a link to the right/top subtree, and an axis-aligned rectangle corresponding
+to the node.
+
+<blockquote>
+<pre>private static class Node {
+   private Point2D p;      // the point
+   private RectHV rect;    // the axis-aligned rectangle corresponding to this node
+   private Node lb;        // the left/bottom subtree
+   private Node rt;        // the right/top subtree
+}
+</pre>
+</blockquote>
+
+Unlike the <tt>Node</tt> class for <tt>BST</tt>, this <tt>Node</tt> class is
+static because it does not refer to a generic <tt>Key</tt> or <tt>Value</tt> type
+that depends on the object associated with the outer class. This saves the 
+8-byte inner class object overhead. (Making the <tt>Node</tt> class static 
+in <tt>BST</tt> is also possible if you make the <tt>Node</tt> type itself
+generic as well).
+Also, since we don't need to implement
+the rank and select operations, there is no need to store the subtree size.
+
+<p></p></li><li><b>Writing KdTree.</b>
+Start by writing <tt>isEmpty()</tt> and <tt>size()</tt>. These should be very easy. From there, 
+write a simplified version of insert() which does everything except set up the
+<tt>RectHV</tt> for each node. Write the <tt>contains()</tt> method, and use this to test that
+<tt>insert()</tt> was implemented properly. Note that <tt>insert()</tt> and <tt>contains()</tt> 
+are best implemented by using private helper methods analogous to those found on page 399
+of the book or by looking at BST.java. We recommend using orientation as an 
+argument to these helper methods.
+
+<p>Now add the code to <tt>insert()</tt> which sets up the RectHV for each Node. Next,
+write <tt>draw()</tt>, and use this to test these rectangles. Finish up KdTree with the 
+nearest and range methods. Finally, test your implementation using our interactive client 
+programs as well as any other tests you'd like to conduct.
+
+</p></li></ol>
+
+
+<p>
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center><b>Optimizations</b></center>
+</font></td></tr></tbody></table>
+</p><p>
+
+These are many ways to improve performance of your 2d-tree. Here are some ideas.
+
+</p><ul>
+
+<p></p><li><b>Squared distances.</b>
+Whenever you need to compare two Euclidean distances, it is often more efficient
+to compare the squares of the two distances to avoid the expensive
+operation of taking square roots.
+Everyone should implement this optimization because it is both easy to do
+and likely a bottleneck.
+
+<p></p></li><li><b>Range search.</b>
+Instead of checking whether the query rectangle intersects the rectangle corresponding
+to a node, it suffices to check only whether the query rectangle intersects
+the splitting line segment: if it does,
+then recursively search both subtrees; otherwise, recursively search the
+one subtree where points intersecting the query rectangle could be.
+
+<p></p></li><li><b>Save memory.</b>
+You are not required to explictily store a <tt>RectHV</tt> in each 2d-tree node (though it
+is probably wise in your first version).
+
+
+</li></ul>
+
+</body></html>

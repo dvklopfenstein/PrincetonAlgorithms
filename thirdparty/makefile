@@ -13,6 +13,15 @@ wk1_zip:
 wk2_zip:
 	zip queues.zip Deque.java RandomizedQueue.java Subset.java
 
+wk3_zip:
+	zip collinear.zip Point.java Brute.java Fast.java
+
+wk4_zip:
+	zip 8puzzle.zip Board.java Solver.java
+
+wk5_zip:
+	zip kdtree.zip PointSET.java KdTree.java
+
 
 
 Percolation.class: Percolation.java

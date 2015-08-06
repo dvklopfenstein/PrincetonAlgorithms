@@ -1,0 +1,454 @@
+
+<!-- saved from url=(0062)http://coursera.cs.princeton.edu/algs4/checklists/8puzzle.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>
+Programming Assignment 4 Checklist: 8 Puzzle
+</title>
+</head>
+
+<body>
+<h3>
+Programming Assignment 4 Checklist: 8 Puzzle
+</h3>
+
+<p>
+
+
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center><b>Frequently Asked Questions</b></center>
+</font></td></tr></tbody></table>
+
+</p><p><b> Can I use different class names, method names,
+or method signatures from those prescribed in the API?</b>
+No, as usual, your assignment will not be graded if it violates the API.
+
+
+</p><p><b> Is 0 a block?</b>
+No, 0 represents the blank square. Do not treat it as a block when computing either
+the Hamming or Manhattan priority functions.
+
+</p><p><b> Can I assume that the puzzle inputs (arguments to the Board constructor and input to Solver)
+are valid?</b>
+Yes, though it never hurts to include some basic error checking.
+
+</p><p><b>Do I have to implement my own stack, queue, and priority queue?</b>
+You must use either <tt>MinPQ</tt> or <tt>MaxPQ</tt> for your priority queue (because we will intercept calls in
+order to do performance analysis).
+For the other data types, you may use versions from either <tt>algs4.jar</tt> or <tt>java.util</tt>.
+
+
+</p><p><b>How do I return an <tt>Iterable&lt;Board&gt;</tt>?</b>
+Add the items you want to a <tt>Stack&lt;Board&gt;</tt>
+or <tt>Queue&lt;Board&gt;</tt> and return that.
+
+</p><p><b>How do I implement <tt>equals()</tt>?</b>
+Java has some arcane rules for implementing <tt>equals()</tt>,
+discussed on p. 103 of Algorithms, 4th edition.
+Note that the argument to <tt>equals()</tt> is required to be <tt>Object</tt>.
+You can also inspect
+<a href="http://algs4.cs.princeton.edu/12oop/Date.java.html">Date.java</a>
+or
+<a href="http://algs4.cs.princeton.edu/12oop/Transaction.java.html">Transaction.java</a>
+for online examples.
+
+
+</p><p><b>Must I implement the <tt>toString()</tt> method for <tt>Board</tt> exactly as specified?</b>
+Yes. Be sure to include the board dimension and use 0 for the blank square.
+Use <tt>String.format()</tt> to format strings—it works like <tt>StdOut.printf()</tt>, but
+returns the string instead of printing it to standard output.
+For reference, our implementation is below, but yours may vary depending on your choice of
+instance variables.
+
+</p><blockquote>
+<pre>public String toString() {
+    StringBuilder s = new StringBuilder();
+    s.append(N + "\n");
+    for (int i = 0; i &lt; N; i++) {
+        for (int j = 0; j &lt; N; j++) {
+            s.append(String.format("%2d ", tiles[i][j]));
+        }
+        s.append("\n");
+    }
+    return s.toString();
+}
+</pre>
+</blockquote>
+
+<!--
+<p><b>How should I implement the <tt>draw()</tt> method in <tt>Board</tt>?</b>
+It is intended primarily for debugging. You should draw a graphical representation of
+the board, similar to the output of the <tt>toString()</tt> method. You can
+use <tt>StdDraw.text(x, y, s)</tt> (where <tt>s</tt> is a string that does not contain newlines) to draw the string <tt>s</tt>, centered on
+(<em>x</em>, <em>y</em>). You can also use
+<tt>StdDraw.setFont(new Font("SansSerif", Font.PLAIN, 24));</tt> to change 
+the font size.
+-->
+
+<p><b>Should the <tt>hamming()</tt> and <tt>manhattan()</tt> methods
+in <tt>Board</tt> return the Hamming and Manhattan priority functions, respectively?</b>
+No, <tt>hamming()</tt> should return the number of blocks out of position and 
+<tt>manhattan()</tt> should return the sum of the Manhattan distances between
+the blocks and their goal positions. Recall that the blank square is not considered a block.
+You will compute the priority function
+in <tt>Solver</tt> by calling <tt>hamming()</tt> or <tt>manhattan()</tt>
+and adding to it the number of moves.
+
+</p><p><b>I'm a bit confused about the purpose of the twin() method.</b>
+You will use it to determine whether a puzzle is solvable: exactly one of
+a board and its twin are solvable. A twin is obtained by swapping two adjacent blocks (the blank
+does not count) in the same row. For example, here is a board and its 5 possible 
+twins. Your solver will use only one twin.
+</p><blockquote>
+<pre>    1  3       3  1       1  3       1  3       1  3       1  3
+ 4  2  5    4  2  5    2  4  5    4  5  2    4  2  5    4  2  5
+ 7  8  6    7  8  6    7  8  6    7  8  6    8  7  6    7  6  8
+
+  board      twin       twin       twin       twin       twin
+</pre>
+</blockquote>
+
+
+<p><b> How do I reconstruct the solution once I've dequeued
+the goal search node?</b>
+Since each search node records the previous search node to get there,
+you can chase the pointers all the way back to the initial
+search node (and consider them in reverse order).
+
+</p><p><b> Can I terminate the search as soon as a goal search node is enqueued
+(instead of dequeued)?</b>
+No, even though it does lead to a correct solution for the slider
+puzzle problem using the Hamming and Manhattan priority functions,
+it's not techincally the A* algorithm (and will not find the correct solution
+for other problems and other priority functions).
+<!--
+Here’s a simple argument that checking the search node
+when it is enqueued (instead of dequeued) 
+is correct here; moreover, it is (nearly) a correct implementation of the A* algorithm here. 
+When a goal search node s* is enqueued, it is because a neighboring search node s
+is one move away from 
+the solution. Assume this neighbor s has hamming (or manhattan) priority k. Since it is one 
+move away, its hamming (or manhattan) distance is 1, so the number of moves to get there is 
+k-1. The goal search node s* has exactly the same priority k: its hamming (or manhattan) distance is 
+0 and its number of moves is k. Thus, if we enqueue s*, the A* algorithm can dequeue s* next 
+(and terminate) because s* has the minimum priority k. I guess, technically, the other 
+neighbors of s should be enqueued, but these will have higher priorities and not be relevant. 
+-->
+
+</p><p><b> I noticed that the priorities of the search nodes
+dequeued from the priority queue
+never decrease. Is this a property of the A* algorithm?</b>
+Yes.
+In the language of the A* algorithm, the Hamming and Manhattan distances (before
+adding in the number of moves so far) are known as <em>heuristics</em>. If
+a heuristic is both <em>admissible</em> (never overestimates the number of moves to
+the goal search node) and <em>consistent</em> (satisfies a certain triangle inequality),
+then this noticed property is guaranteed. 
+The Hamming and Manhattan heuristics are both admissible and consistent.
+You may use this noticed property as a debugging clue: if the priority of the search node dequeued 
+from the priority queue decreases, then you know you did something wrong.
+
+</p><p><b>Even with the critical optimization, the priority queue may contain two or more search nodes
+corresponding to the same board. Should I try to eliminate these?</b>
+In principle, you could do so with a set data type such as <tt>SET</tt> in <tt>algs4.jar</tt> or
+<tt>java.util.TreeSet</tt> or <tt>java.util.HashSet</tt>
+(provided that the <tt>Board</tt> data type were either <tt>Comparable</tt> or had a <tt>hashCode()</tt>
+method).
+However, almost all of the benefit from avoiding duplicate boards is already
+extracted from the critical optimization and the cost of identifying other duplicate 
+boards will be more than the remaining benefit from doing so.
+
+</p><p><b>Can I put the logic for detecting whether a puzzle is infeasible in
+Board instead of Solver?</b>
+There is a elegant algorithm for determining whether a board is solvable that relies on a
+parity argument (and occasionally we change our API to require this solution).
+However, the current API requires you to detect infeasiblity
+in <tt>Solver</tt> by using two synchronized A* searches (e.g., using two priority queues).
+
+</p><p><b>I run out of memory when running some of the large sample puzzles. What should I do?</b>
+Be sure to ask Java for additional memory,
+e.g., <tt>java -Xmx1600m Solver puzzle36.txt</tt>.
+We recommend running from the command line (and not from the DrJava interaction pane).
+You should expect to run out of memory when using the Hamming priority function.
+Be sure not to put the JVM option in the wrong spot or it will be
+treated as a command-line argument, 
+e.g., <tt>java Solver -Xmx1600m puzzle36.txt</tt>.
+
+
+</p><p><b>My program can't solve puzzle4x4-hard1.txt or puzzle4x4-hard2.txt,
+even if I give it a huge amount of space. What am I doing wrong?</b>
+Probably nothing. The A* algorithm will struggle to solve even some 4-by-4 instances.
+
+
+</p><p>
+
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center><b>Testing</b></center>
+</font></td></tr></tbody></table>
+
+</p><p><b>Input files.</b>
+&nbsp;
+The directory
+<a href="http://coursera.cs.princeton.edu/algs4/testing/8puzzle">8puzzle</a>
+contains many sample puzzle input files.
+For convenience, 
+<a href="http://coursera.cs.princeton.edu/algs4/testing/8puzzle-testing.zip">8puzzle-testing.zip</a> contains all of these files bundled together.
+
+</p><ul>
+<p></p><li>
+The shortest solution to <tt>puzzle[T].txt</tt> requires exactly <em>T</em> moves.
+<p></p></li><li>
+The shortest solution to <tt>puzzle4x4-hard1.txt</tt> and
+<tt>puzzle4x4-hard2.txt</tt> are 38 and 47, respectively.
+<p></p></li><li>
+Warning: <tt>puzzle36.txt</tt> is especially difficult.
+</li></ul>
+
+<p><b>Test client.</b>
+A good way to automatically run your program on our sample puzzles
+is to use the client
+<a href="http://coursera.cs.princeton.edu/algs4/testing/8puzzle/PuzzleChecker.java">PuzzleChecker.java</a>.
+
+
+</p><p><b>Priority queue trace.</b>
+</p><ul>
+<p></p><li>
+Here are the contents of our priority queue (sorted by priority)
+just before dequeueing each node when using the Manhattan 
+priority function on <tt>puzzle04.txt</tt>.
+
+<blockquote>
+<pre>Step 0:    priority  = 4
+           moves     = 0
+           manhattan = 4
+           3            
+            0  1  3     
+            4  2  5     
+            7  8  6     
+
+Step 1:    priority  = 4    priority  = 6
+           moves     = 1    moves     = 1
+           manhattan = 3    manhattan = 5
+           3                3            
+            1  0  3          4  1  3     
+            4  2  5          0  2  5     
+            7  8  6          7  8  6     
+
+Step 2:    priority  = 4    priority  = 6    priority  = 6
+           moves     = 2    moves     = 1    moves     = 2
+           manhattan = 2    manhattan = 5    manhattan = 4
+           3                3                3            
+            1  2  3          4  1  3          1  3  0     
+            4  0  5          0  2  5          4  2  5     
+            7  8  6          7  8  6          7  8  6     
+
+Step 3:    priority  = 4    priority  = 6    priority  = 6    priority  = 6    priority  = 6
+           moves     = 3    moves     = 3    moves     = 2    moves     = 3    moves     = 1
+           manhattan = 1    manhattan = 3    manhattan = 4    manhattan = 3    manhattan = 5
+           3                3                3                3                3            
+            1  2  3          1  2  3          1  3  0          1  2  3          4  1  3     
+            4  5  0          4  8  5          4  2  5          0  4  5          0  2  5     
+            7  8  6          7  0  6          7  8  6          7  8  6          7  8  6     
+
+Step 4:    priority  = 4    priority  = 6    priority  = 6    priority  = 6    priority  = 6    priority  = 6
+           moves     = 4    moves     = 3    moves     = 4    moves     = 2    moves     = 3    moves     = 1
+           manhattan = 0    manhattan = 3    manhattan = 2    manhattan = 4    manhattan = 3    manhattan = 5
+           3                3                3                3                3                3            
+            1  2  3          1  2  3          1  2  0          1  3  0          1  2  3          4  1  3     
+            4  5  6          0  4  5          4  5  3          4  2  5          4  8  5          0  2  5     
+            7  8  0          7  8  6          7  8  6          7  8  6          7  0  6          7  8  6     
+</pre>
+</blockquote>
+
+
+There were a total of 10 search nodes enqueued and 5 search nodes dequeued.
+In general, the number of search nodes enqueued and dequeued may vary slightly, depending
+the order in which the search nodes with equal priorities come off the priority queue,
+which depends on the order in which <tt>neighbors()</tt>
+returns the neighbors of a board. However, for this input, there are no such ties,
+so you should have exactly 10 search nodes enqueued and 5 search nodes dequeued.
+
+
+<p></p></li><li>
+The contents of our priority queue (sorted by priority)
+just before dequeueing each node when using the Hamming priority function on <tt>puzzle04.txt</tt> 
+turns out to be identical to the results above: for this input file, throughout the A* algorithm,
+a block is never more than one position away from its goal position, which implies that the
+Hamming function and the Manhattan functions are equal.
+
+
+</li></ul>
+
+
+
+
+
+
+<!--
+<p>
+<TABLE BORDER = 0 CELLPADDING = 2 CELLSPACING = 0 WIDTH = 100%>
+<tr align = left>
+<td bgcolor = "000000">
+<font size = +0 face = "helvetica" color = "ffffff">
+<center><b>Possible Progress Steps</b></center>
+</table>
+<p>
+
+These are purely suggestions for how you might make progress.  You do
+not have to follow these steps.
+
+<ul>
+
+<p><li> Be sure that you understand the relevant terminology, including
+<em>board</em>, <em>block</em>, <em>search node</em>, <em>Hamming distance</em>,
+<em>Manhattan distance</em>, <em>Hamming priority function</em>,
+<em>Manhattan priority function</em>, and <em>twin board</em>.
+
+
+<p><li> Write the data type <tt>Board</tt> that represents
+an <em>N</em>-by-<em>N</em> puzzle board.
+Be sure to throughly test and debug it before proceding.
+
+<p><li> Write a nested class <tt>SearchNode</tt> that represents a search node
+of the game (board, number of moves to reach it, and previous search node).
+Make it implement the <tt>Comparable&lt;SearchNode&gt;</tt> interface
+so that you can use it with a <tt>MinPQ</tt>. 
+The <tt>compareTo()</tt> method should compare search nodes based on their
+Hamming or Manhattan priorities.
+<!-- 
+You can either
+make this a nested class within <tt>Solver</tt> or make it a 
+stand-alone class.
+-->
+
+<p></p><li> Write the class <tt>Solver</tt> that uses the A*
+algorithm to solve puzzle instances.
+
+
+
+--&gt;
+
+<p>
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center><b>Enrichment</b></center>
+</font></td></tr></tbody></table>
+</p><p>
+
+</p><p><b>How can I reduce the amount of memory a <tt>Board</tt> uses?</b>
+For starters, recall that an N-by-N <tt>int[][]</tt> array in Java uses
+about 24 + 32N + 4N^2 bytes; when N equals 3, this is 156 bytes.
+To save memory, consider using an <em>N</em>-by-<em>N</em> <tt>char[][]</tt> array
+or a length <em>N</em>^2 <tt>char[]</tt> array.
+In principle, each board is a permutation of size N^2, so you need only about lg ((N^2)!)
+bits to represent it; when N equals 3, this is only 19 bits.
+
+</p><p><b>Any ways to speed up the algorithm?</b>
+Yes there are many opportunities for optimization here.
+</p><ul>
+<p></p><li> Use a 1d array instead of a 2d array (as suggested above).
+
+<p></p></li><li> Cache either the Manhattan distance of a board (or Manhattan 
+priority of a search node). It is waste to recompute the same quantity over
+and over again.
+
+<p></p></li><li> Exploit the fact that the difference in Manhattan distance 
+between a board and a neighbor is either +1, -1, or 0, based on the
+direction that the block moves.
+
+<p></p></li><li> Use only one PQ to run the A* algorithm on the initial board
+and its twin.
+
+<p></p></li><li> When two search nodes have the same Manhattan priority,
+you can break ties however you want, e.g., by comparing either 
+the Hamming or Manhattan distances of the two boards.
+
+<p></p></li><li> Use a parity argument to determine whether a puzzle is
+unsolvable (instead of two synchronous A* searches). However,
+this will either break the API or will require a fragile dependence
+on the <tt>toString()</tt> method, so don't do it.
+
+</li></ul>
+
+<p><b>Is there an efficient way to solve the 8-puzzle and its generalizations?</b>
+Finding a shortest solution to an <em>N</em>-by-<em>N</em> slider puzzle is
+<a href="http://www.aaai.org/Library/AAAI/1986/aaai86-027.php">NP-hard</a>,
+so it's unlikely that an efficient solution exists.
+
+</p><p><b>What if I'm satisfied with any solution and don't need one 
+that uses the fewest number of moves?</b>
+Yes, change the priority function to put more weight on the
+Manhattan distance, e.g., 100 times the Manhattan distance plus
+the number of moves made already.
+<a href="http://www-cse.ucsd.edu/~ccalabro/essays/15_puzzle.pdf">This paper</a>
+describes an algorithm that guarantees to perform at most N^3 moves.
+
+</p><p><b>Are ther better ways to solve 8- and 15-puzzle instances using
+the minimum number of moves?</b>
+Yes, there are a number of approaches.
+
+</p><ul>
+<p></p><li> Use the A* algorithm with a better admissible priority function:
+<ul>
+
+<p></p><li>
+<em>Linear conflict</em>: add two to the Manhattan priority function whenever
+two tiles are in their goal row (or column) but are reversed relative to
+their goal position.
+
+<p></p></li><li>
+<em>Pattern database</em>: For each possible
+configuration of 4 tiles and the blank, determine the minimum number of
+moves to put just these tiles in their proper position and store these
+values in a database. The heuristic value is the maximum over all configurations,
+plus the number of moves made so far.
+This can reduce the number of search nodes examined for random 15-puzzle instances
+by a factor of 1000. 
+</li></ul>
+
+<p></p></li><li> Use a variant of the A* algorithm known as 
+IDA* (for iterative deepening).
+<a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.56.6688">This paper</a>
+describes its application to the 15-slider puzzle.
+
+<p></p></li><li>
+Another approach
+is to use <a href="http://en.wikipedia.org/wiki/Bidirectional_search">bidirectional
+search</a>, where you simultaneously search from the initial board to find the goal board
+and from the goal board to find the initial board, and have the two search trees meet 
+in the middle. Handling the stopping condition is delicate.
+</li></ul>
+
+
+<p><b>Can a puzzle have more than one shortest solution?</b>
+Yes. See <tt>puzzle07.txt</tt>.
+
+</p><blockquote>
+<pre> Solution 1
+ ------------------------------------------------------------------------------------
+ 1  2  3    1  2  3    1  2  3    1  2  3    1  2  3    1  2  3    1  2  3    1  2  3 
+    7  6    7     6    7  4  6    7  4  6       4  6    4     6    4  5  6    4  5  6 
+ 5  4  8    5  4  8    5     8       5  8    7  5  8    7  5  8    7     8    7  8   
+
+ Solution 2
+ ------------------------------------------------------------------------------------
+ 1  2  3    1  2  3    1  2  3    1  2  3    1  2  3    1  2  3    1  2  3    1  2  3
+    7  6    5  7  6    5  7  6    5     6       5  6    4  5  6    4  5  6    4  5  6 
+ 5  4  8       4  8    4     8    4  7  8    4  7  8       7  8    7     8    7  8  
+</pre>
+</blockquote>
+
+In such cases, you are required to output any one such solution.
+
+
+
+
+
+</li></body></html>
