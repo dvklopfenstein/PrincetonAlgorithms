@@ -62,7 +62,7 @@
 # * 10^9 words of main memory.
 # * Touch all words in approximately 1 second (a truism since 1950!)
 #
-# EX. HUGR PROBLEM FOR QUICK-FIND
+# EX. HUGE PROBLEM FOR QUICK-FIND
 # * 10^9 union commands on 10^9 objects
 # * Quick-find takes more tha 10^18 operations.
 # * 30+ years of computer time!
@@ -109,7 +109,7 @@ class QuickFindUF(object): # Eager Approach
     for i, self_ID in enumerate(self.ID):
       # At most 2N + 2 array accesses.
       #   w/self_ID replaced w/self.ID[i] and "for i in range(len(self.ID))":
-      if self_ID == pID: # Mistake many make is to put ID[p] instead of pID:
+      if self_ID == pID: # Common mistake many make is to put ID[p] instead of pID:
         self.ID[i] = qID
 
   def __str__(self):
