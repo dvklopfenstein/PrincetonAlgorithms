@@ -242,7 +242,7 @@ class QuickUnionUF(object):
     # Runs Depth of p and q array accesses
     i = self._root(p)
     j = self._root(q)
-    print p, q, i, j
+    # print p, q, i, j
     self.ID[i] = j
 
   def __str__(self):
