@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+"""QuickFind Algorithm."""
 
 # --------------------------------------------------------------
 # Lecture Week 1 "Quick Union"(7:50)
@@ -31,9 +31,9 @@
 
 # 01:43 QUESTION: Suppose that in a quick-union data structure on 10 elements
 # that the id[] array is
-#   0 1 2 3 4 5 6 7 8 9
 #   0 9 6 5 4 2 6 1 0 5
-# What are the roots of 2 and 7?
+#   0 1 2 3 4 5 6 7 8 9
+# What are the roots of 3 and 7?
 # ANSWER: 6 and 6
 #
 #  i   0 1 2 3 4 5 6 7 8 9
@@ -214,7 +214,7 @@
 # 07:43 QUESTION: What is the maximum number of array accesses during a
 # find operation when using the quick-union stata structure on N elements?
 # ANSWER: linear
-class QuickUnionUF:
+class QuickUnionUF(object):
   """ Quick-union [lazy approach].
 
       Uses a rooted tree.  Each element is in a rooted tree.
@@ -256,5 +256,14 @@ class QuickUnionUF:
     #for i,v in enumerate(prt):
     #  print v, i
     return '\n'.join([idxs, vals])
+
+  def get_connected_components(self):
+    """Return a list of the contents of each component."""
+    import collections as cx
+    roots = cx.defaultdict(set)
+    for ID, parent in enumerate(self.ID):
+      roots[parent].add(ID)
+    return list(roots.values())
+
 
 
