@@ -83,6 +83,7 @@
 
 import collections as cx
 
+# Python adatation by DV Klopfenstein
 class QuickFindUF(object): # Eager Approach
   """ *Quickly* **find** if two components are connected.
 

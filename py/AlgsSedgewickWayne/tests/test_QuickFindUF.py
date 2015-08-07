@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 """Test QuickFind."""
 
+# Writtein by DV Klopfenstein
+
 import sys
 
 #---------------------------------------------------------------
