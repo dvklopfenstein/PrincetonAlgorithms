@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+"""Python implentation of QuickFind."""
 
 # ----------------------------------------------------------------------
 # Week 1 Lecture "Quick Find"(10:18)
@@ -83,10 +83,10 @@
 
 import collections as cx
 
-class QuickFindUF: # Eager Approach
-  """ *Quickly* **find** if two components are connected."""
+class QuickFindUF(object): # Eager Approach
+  """ *Quickly* **find** if two components are connected.
 
-  """ Algorithm   init union find
+      Algorithm   init union find
       ---------   ---- ----- ----
       quick-find  N    N     1
 
@@ -117,13 +117,14 @@ class QuickFindUF: # Eager Approach
     return " ".join(str(e) for e in self.ID)
 
   def get_connected_components(self):
-    """Clearly print the contents of each component."""
+    """Return a list of the contents of each component."""
     roots = cx.defaultdict(set)
     for ID, parent in enumerate(self.ID):
       roots[parent].add(ID)
-    return map(list, roots.values())
+    return list(roots.values())
 
   def str_connected_components(self):
+    """Clearly print the contents of each component."""
     comp_lst = self.get_connected_components()
     #return ' '.format(join(str(component)) for component in comp_lst)
     for component in comp_lst:
