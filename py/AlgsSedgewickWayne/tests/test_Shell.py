@@ -27,10 +27,10 @@ class Selection_Tests(unittest.TestCase):
   # QUESTION: If two items a and b have equal keys and a appears before b
   #   in the input array, then a appears before b in the array
   #   after Shellsorting (with Knuth's 3x+1 increments) the array.
-  # ANSWER(FALSE): Consider an array with five items 
-  #     { (B, 1), (B, 2), (B, 3), (B, 4), (A, 1) }, 
-  #   where the key is the letter A or B. After Shellsort, the array is 
-  #     { (A, 1), (B, 2), (B, 3), (B, 4), (B, 1) }. 
+  # ANSWER(FALSE): Consider an array with five items
+  #     { (B, 1), (B, 2), (B, 3), (B, 4), (A, 1) },
+  #   where the key is the letter A or B. After Shellsort, the array is
+  #     { (A, 1), (B, 2), (B, 3), (B, 4), (B, 1) }.
   #   This property is known as stability. Stay tuned for the mergesort lecture.
   def test_2(self):
     # Keys are 'A' and 'B':

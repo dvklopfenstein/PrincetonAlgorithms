@@ -6,19 +6,19 @@
  #  Dependencies: StdOut.java StdIn.java
  #  Data files:   http://algs4.cs.princeton.edu/22mergesort/tiny.txt
  #                http://algs4.cs.princeton.edu/22mergesort/words3.txt
- #   
+ #
  #  Sorts a sequence of strings from standard input using
  #  bottom-up mergesort.
- #   
+ #
  #  % more tiny.txt
  #  S O R T E X A M P L E
  #
  #  % java MergeBU < tiny.txt
  #  A E E L M O P R S T X                 [ one string per line ]
- #    
+ #
  #  % more words3.txt
  #  bed bug dad yes zoo ... all bad yet
- #  
+ #
  #  % java MergeBU < words3.txt
  #  all bad bed bug dad ... yes yet zoo    [ one string per line ]
  #
@@ -37,7 +37,7 @@
 
 #------------------------------------------------------------------------------
 # 00:34 BOTTOM-UP MERGESORT: TRACE MERGE RESULTS FOR TOP-DOWN MERGESORT
-# 
+#
 # BASIC PLAN:
 #   * Pass through array, merging subarrays of size 1.
 #   * Repeat for subarrays of size 2, 4, 8, 16, ...
@@ -52,7 +52,7 @@
 #                         0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
 #                         -------------------------------
 # a           lo      hi  M E R G E S O R T E X A M P L E
-# size=1 
+# size=1
 # b merge(a,  0,  0,  1)  E M   .       .               .
 # c merge(a,  2,  2,  3)      G R       .               .
 # e merge(a,  4,  4,  5)        . E S   .               .
@@ -75,7 +75,7 @@
 
 #------------------------------------------------------------------------------
 # QUESTION: How many passes (over the input array) does bottom-up mergesort make in the worst-case?
-# ANSWER: 
+# ANSWER:
 
 
 # stably merge a[lo..mid] with a[mid+1..hi] using aux[lo..hi]
@@ -105,7 +105,7 @@ def Sort(a, array_history=None):
     aux = [None for i in range(N)]
     n = 1
     # First nested loop is "Size of the sub-array" executed only lg N times (lg N passes)
-    while n < N: 
+    while n < N:
         i = 0
         while i < N-n:
             lo = i
@@ -113,9 +113,9 @@ def Sort(a, array_history=None):
             hi = min(i+n+n-1, N-1)
             _merge(a, aux, lo, mi, hi)
             i += n+n
-        # Outer Loop is executed lg N times because each time 
+        # Outer Loop is executed lg N times because each time
         # we double the size of the sub-array until we get to N
-        n = n+n 
+        n = n+n
     assert _isSorted(a)
 
 #**********************************************************************
@@ -151,5 +151,5 @@ def main():
 if __name__ == '__main__':
   main()
 
-# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne. 
+# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
 # Java version Last updated: Wed Dec 4 11:48:10 EST 2013.

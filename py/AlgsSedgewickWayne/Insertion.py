@@ -9,7 +9,7 @@
  #  Dependencies: StdOut.java StdIn.java
  #  Data files:   http:#algs4.cs.princeton.edu/21sort/tiny.txt
  #                http:#algs4.cs.princeton.edu/21sort/words3.txt
- #  
+ #
  #  Sorts a sequence of strings from standard input using insertion sort.
  #
  #  % more tiny.txt
@@ -38,7 +38,7 @@
  #/
 
 # SIMULATION: 00:32 to 02:40
-# 
+#
 # ALGORITHM: Ptr scans from Left to Right
 # INVARIANTS: 02:50
 #   * Entries to the left or Ptr (inc Ptr) are in ascending order
@@ -47,9 +47,9 @@
 #   ~ 1/4*N^2 compares  on average
 #   ~ 1/4*N^2 exchanges on average
 # PROOF: 05:16 Expect each entry to move halfway back below the diagonal on the average
-# 
+#
 # INSERTION SORT: BEST CASE AND WORST CASE: 06:10
-# BEST CASE 06:12: If the array is in ascending order, 
+# BEST CASE 06:12: If the array is in ascending order,
 #   insertion sort makes N-1 compares and 0 exchanges
 #   A E E L , O P R S T X
 # WORST CASE 06:37: If the array is in descending order (and no duplicates),
@@ -59,7 +59,7 @@
 #
 # MEMORY: Insertion sort uses only a constant amount of memory (other than the input array).
 # This is a key property of insertion sort.
-# 
+#
 # INSERTION SORT: PARTIALLY-SORTED ARRAYS 07:47 - 08:20
 #   Appear often in practice:
 #     1. All elems sorted except the last ones
@@ -69,29 +69,29 @@
 # DEFINITION: An array is PARTIALLY-SORTED if the number of inversions is <= c*N
 #  * Ex 1. A subarray of size 10 appended to a sorted subarray of size N
 #  * Ex 2. An array of size N with only 10 entries out of place
-# 
+#
 # PROPOSITION: For partially-sorted arrays, insertion sort runs in linear time. 08:57
 # PROOF: Number of exchanges equals the numbers of inversions
 #   number of compares = exchanges + (N - 1)
 #
 # INSERTION SORT IS INEFFICIENT because elements only move one place at a time
 # even if we know that they have to move far away.
-#   
-# QUESTION: How many compares does insertion sort make on an imput array that is already sorted? 
+#
+# QUESTION: How many compares does insertion sort make on an imput array that is already sorted?
 # ANSWER: linear
 #
 # QUESTION: True or False? The expected #of compares to insertion sort an array containint N/2 0s and N/2 1s
 # in uniformly random order is ~1/4 N^2.
 # ANSWER: False. Consider element i> 0. How many of the items a[0], a[1], ..., a[i-1] is a[i] inverted with?
 # If a[i] == 1 (which happens with probability 1/2), then the number is 0.
-# If a[i] == 0 (which happens with probability 1/2), then we expect half of the i previous 
+# If a[i] == 0 (which happens with probability 1/2), then we expect half of the i previous
 # elements to be 1s, so the expected number is i/2.
 # So the expected number of inversions is 1/2(0/2 + 1/2 + 2/2 + 3/2 + ... + (N-1)/2) ~N^2/8.
 # Thus, the expected number of compares is ~ 1/8 N^2
 
 # TRUE: Any pair of items is compared no more than once during insertion sort.
 # EXPLANATION: Let a[i] and a[j] be two entries in the unsorted array with i<j.
-# The entries a[i] and a[j] are compred no more than once during iteration j and they are not 
+# The entries a[i] and a[j] are compred no more than once during iteration j and they are not
 # compared during any other iteration.
 
 
@@ -99,10 +99,10 @@
 ########################################################
 ### Stability (Week 3 Lecture "Stability")
 ########################################################
-# 
+#
 # #----------------------------------------------
 # 03:29 PROPOSITION: INSERTION SORT IS STABLE
-# 
+#
 # PROOF: Equal items never move past each other (in the "Sort" code)
 #
 # NOTE: Items depicted as A1 and A2 in the example below have the same
@@ -111,7 +111,7 @@
 #
 # NOTE: if "__lt__" in the "Sort" routine were "less than or equal to",
 # it would not work.
-# 
+#
 # i j   0   1   2   3   4
 # -----------------------
 # 0 0 >B1  A1  A2  A3  B2
@@ -120,8 +120,8 @@
 # 3 2 *A1 *A2 >A3 *B1  B2
 # 4 4 *A1 *A2 *A3 *B1 >B2
 #     *A1 *A2 *A3 *B1 *B2
-# 
-# 
+#
+#
 
 
 
@@ -135,8 +135,8 @@ def Sort(ARR, array_history=None):
         #for (int j = i; j > 0 && less(a[j], a[j-1]); j--):
         j = i
         # Exchange the curr Elem with every element to the left that is > 01:21
-        while j > 0 and __lt__(ARR[j], ARR[j-1]): 
-            #if array_history is not None: 
+        while j > 0 and __lt__(ARR[j], ARR[j-1]):
+            #if array_history is not None:
             if isinstance(array_history, list): add_history(array_history, ARR, {j:'*', j-1:'*'} )
             _exch(ARR, j, j-1)
             j -= 1
@@ -176,7 +176,7 @@ def indexSort(ARR, array_history=None):
         j = i
         while j > 0 and __lt__(ARR[index[j]], ARR[index[j-1]]):
           _exch(index, j, j-1)
-          if array_history is not None: 
+          if array_history is not None:
             add_history(array_history, ARR, {j:'*', j-1:'*'} )
           j -= 1
     return index
@@ -191,7 +191,7 @@ def __lt__(v, w): return v < w
 # # is v < w ?
 # def __lt__(c, v, w):
 #     return (c.compare(v, w) < 0);
-    
+
 # exchange a[i] and a[j]
 def _exch(a, i, j):
     swap = a[i]
@@ -212,7 +212,7 @@ def _isSorted(a, lo=None, hi=None):
 
 # def _isSorted(a, c):
 #     return _isSorted(a, c, 0, a.length - 1)
-# 
+#
 # # is the array sorted from a[lo] to a[hi]
 # def _isSorted(a, c, lo, hi):
 #     for i in range(lo+1,hi+1):

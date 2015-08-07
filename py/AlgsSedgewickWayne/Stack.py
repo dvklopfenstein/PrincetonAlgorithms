@@ -10,8 +10,8 @@
  #  This version uses a static nested class Node (to save 8 bytes per
  #  Node), whereas the version in the textbook uses a non-static nested
  #  class (for simplicity).
- #  
- #  % more tobe.txt 
+ #
+ #  % more tobe.txt
  #  to be or not to - be - - that - - - is
  #
  #  % java Stack < tobe.txt
@@ -30,12 +30,12 @@
 
 # 06:15 RECURSIVE FUNCTION
 # NOTE: Can always use an expilicit stack to remove recursion.
-#     
+#
 #     static int gcd(int p, int q) {
 #       if (q == 0) return p;
 #       else return gcd(q, p % q);
-#     }  
-#     
+#     }
+#
 
  #*
  #  The <tt>Stack</tt> class represents a last-in-first-out (LIFO) stack of generic items.
@@ -57,7 +57,7 @@
  #/
 
 # 09:40/16:24 Stack: linked-list implementation performance
-# 09:40 TIME  PROPOSITION: Every operation takes constant time in the worst case: 
+# 09:40 TIME  PROPOSITION: Every operation takes constant time in the worst case:
 #   * There are only a few operations for each function
 #   * No loops
 # 11:00 SPACE PROPOSITION: A stack with N items useds ~40 N bytes:
@@ -71,12 +71,12 @@
 
 # -----------------------------------------------------------
 # Bruno Lehouque: boolean is a primitive type while Boolean is an object type.
-#   It's a wrapper type for booleans. Its size is 
+#   It's a wrapper type for booleans. Its size is
 #   16(overhead) + 1(boolean value) + 7(padding)
-# 
+#
 # public class GenericMysteryBox<Item> {  16 bytes(class overhead)
 #         private Node first;              8 bytes(reference)
-# 
+#
 #                                          8 bytes(inner class _Node overhead)
 #         private class Node {            16 bytes(_Node overhead)
 #             private Item item;           8 bytes(reference to _Node.Item, a Boolean)
@@ -103,16 +103,16 @@
 #     public class MysteryBox {      16 class
 #         private int N;              4 int
 #         private double[] items;    24 + 8N
-#         ...                         
+#         ...
 #     }                             ~8N
 
 
-# 
+#
 # 09:48 *** REMARK: Analysis included memory for the stack
-#   (but not the strings themselves, which the client owns). 
+#   (but not the strings themselves, which the client owns).
 
 # Lecture Week 2 "Resizing Arrays" (9:56)
-# 
+#
 # 08:33 LINKED-LIST IMPLEMENTATION.
 #   * Every operation takes constant time in the WORST CASE
 #   * Uses extra time and space to deal with the links.
@@ -129,7 +129,7 @@ class Stack:
     self.first = None # Node<Item>
     self.N = 0        # size of the stack
 
-  def isEmpty(self): return self.first is None 
+  def isEmpty(self): return self.first is None
 
   def size(self): return self.N # Number of items in the stack
 
@@ -167,51 +167,51 @@ class Stack:
 ################################################################################
 # Lecture Alg 1 Week 2 "Iterators" (7:16)
 ################################################################################
-# 
+#
 # Q. What is an "Iterable"?
 # A. Has a method that returns an "Iterator."
-# 
+#
 #   JAVA ITERABLE INTERFACE
-# 
+#
 #       public interface Iterable<Item>
 #       {
 #         Iterator<Item> iterator();
 #       }
-# 
+#
 # Q. What is an "Iterator"?
 # A. Has methods "hasNext()" and "next()".
-# 
+#
 #   JAVA ITERATOR INTERFACE:
-# 
+#
 #       public interface Iterator<Item>
 #       {
 #         boolean hasNext();
 #         Item next();
 #         void remove(); # <- WARNING: USER AT YOUR OWN RISK
 #       {
-# 
+#
 # Q. Why make data structures "Iterable"?
 # A. Java supports elegant client code.
-# 
-#   SHORTHAND "foreach" statement    LONGHAND equivalent code 
-#                                                                                  
+#
+#   SHORTHAND "foreach" statement    LONGHAND equivalent code
+#
 #   for (String s: stack)            Iterator<String> i = stack.iterator();
 #     StdOut.println(s);             while (i.hasNext())
 #                                    {
 #                                      String s = i.next();
 #                                      Stdout.println(s);
-#                                    }    
+#                                    }
 
 # 07:13 QUESTION: Suppose that we copy the iterator code from our linked list
 # and resizing array implementations of a stack to the corresponding
 # implementations of a queue.
-# 
+#
 # Which queue iterator(s) will correctly return the items in FIFO order?
 #    NO: neither
 #   YES: linked list iterator only
 #    NO: array iterator only
 #    NO: both
-# 
+#
 # EXPLANATION: The linkes list iterator will work without modifiction because
 # the items in the linked list are ordered in FIFO order (which is the main
 # reason we dequeue from the front and enqueue to the back instead of vice versa).
@@ -219,28 +219,28 @@ class Stack:
 #   i. the items should be iterated over in the opposite order
 #   ii. the items won't typically be stored in the array as entries 0 to N-1
 
-  def __iter__(self): 
+  def __iter__(self):
     return self.ListIterator(self.first)
 
   class ListIterator:
       # Iterator Starts at the first item
       def __init__(self, first):
           self.current = first # Node<Item>
-      
+
       def next(self):
           if self.current is None:
             raise StopIteration
           item = self.current.Item
-          self.current = self.current.Next 
+          self.current = self.current.Next
           return item
 
 
 # QUESTION: Suppose that we copy the iterator code from our linked list and resizing array
 # implrmentations of a stack to the corresponging implementations of a queue.
 # Which queue iterator(s) will correctly return the items in FIFO order?
-# 
+#
 # ANSWER: The linked list iterator will work without modification because the items in the linked
-# list are ordered in FIFO  order (which is the main reason we dequeue from the front 
+# list are ordered in FIFO  order (which is the main reason we dequeue from the front
 # and enqueue to the back instead of vece versa). The array iterator will fail for two reasons:
 #   1) The items should be iterated over in the opposite order
 #   2) the items won't typically be stored in the array as entries 0 to N-1.
@@ -254,10 +254,10 @@ def run_list(item_list):
   s = Stack()
   res = []
   for item in item_list:
-    if item != "-": 
+    if item != "-":
       s.push(item)
       sys.stdout.write("{:10}   PUSH {:10} +STACK: {}\n".format("", item, s))
-    elif not s.isEmpty(): 
+    elif not s.isEmpty():
       popped = s.pop()
       res.append(popped)
       sys.stdout.write("{:>10} <-POP  {:10} -STACK: {}\n".format(popped, item, s))
@@ -278,7 +278,7 @@ def default_examples():
   stk = run( "to be or not to be - - - - - -" )
   # Slide 6 Week 2 Lecture 4-1-Stacks(16-24)
   stk = run( "to be or not to - be - - that - - - is" )
-  sys.stdout.write("\nDEMOSTRATE ITERATION:\n"); 
+  sys.stdout.write("\nDEMOSTRATE ITERATION:\n");
   for S in stk: print S
   sys.stdout.write("\nDEMONSTRATE 'toString()': {}\n".format(stk.__str__()))
 

@@ -21,9 +21,9 @@ class WeightedQuickUnionUF_Tests(unittest.TestCase):
     msg = """
     test_week1_lecture quick-union.
        _____6
-      /    /|\ 
+      /    /|\
      4    0 2 5
-    /|\    / \ 
+    /|\    / \
    3 8 9  1   7
     """
     o = run_unions(10, "4-3 3-8 6-5 9-4 2-1 5-0 7-2 6-1 7-3", msg)
@@ -34,19 +34,19 @@ class WeightedQuickUnionUF_Tests(unittest.TestCase):
     msg = """
       test_week1_exercise_Q2"
       The correct answer is: 0 0 1 0 0 0 0 1 0 7
-      
+
       Here is the id[] array after each union operation:
-      
-            0 1 2 3 4 5 6 7 8 9 
-      1-2:  0 1 1 3 4 5 6 7 8 9 
-      7-9:  0 1 1 3 4 5 6 7 8 7 
-      0-4:  0 1 1 3 0 5 6 7 8 7 
-      8-0:  0 1 1 3 0 5 6 7 0 7 
-      4-6:  0 1 1 3 0 5 0 7 0 7 
-      1-9:  0 1 1 3 0 5 0 1 0 7 
-      3-4:  0 1 1 0 0 5 0 1 0 7 
-      7-0:  0 0 1 0 0 5 0 1 0 7 
-      0-5:  0 0 1 0 0 0 0 1 0 7 
+
+            0 1 2 3 4 5 6 7 8 9
+      1-2:  0 1 1 3 4 5 6 7 8 9
+      7-9:  0 1 1 3 4 5 6 7 8 7
+      0-4:  0 1 1 3 0 5 6 7 8 7
+      8-0:  0 1 1 3 0 5 6 7 0 7
+      4-6:  0 1 1 3 0 5 0 7 0 7
+      1-9:  0 1 1 3 0 5 0 1 0 7
+      3-4:  0 1 1 0 0 5 0 1 0 7
+      7-0:  0 0 1 0 0 5 0 1 0 7
+      0-5:  0 0 1 0 0 0 0 1 0 7
     """
     o = run_unions(10, "1-2 7-9 0-4 8-0 4-6 1-9 3-4 7-0 0-5", msg)
     self.failUnless( np.array_equal( o.ID, [0, 0, 1, 0, 0, 0, 0, 1, 0, 7] )) # Wrong Answer
@@ -58,7 +58,7 @@ class WeightedQuickUnionUF_Tests(unittest.TestCase):
 
 
   def test_week1_exercise_Q2_Fall2014_a(self):
-    o = run_unions(10, "0-8 9-2 2-3 6-7 5-4 5-6 0-9 4-8 9-1", 
+    o = run_unions(10, "0-8 9-2 2-3 6-7 5-4 5-6 0-9 4-8 9-1",
       "\nWeek 1 Exercise Question 2 seed = 114579")
     self.failUnless( np.array_equal( o.ID, [9, 9, 9, 9, 5, 9, 5, 6, 0, 9] ))
 

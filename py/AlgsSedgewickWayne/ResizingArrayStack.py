@@ -4,10 +4,10 @@
  #  Compilation:  javac ResizingArrayStack.java
  #  Execution:    java ResizingArrayStack < input.txt
  #  Data files:   http://algs4.cs.princeton.edu/13stacks/tobe.txt
- #  
+ #
  #  Stack implementation with a resizing array.
  #
- #  % more tobe.txt 
+ #  % more tobe.txt
  #  to be or not to - be - - that - - - is
  #
  #  % java ResizingArrayStack < tobe.txt
@@ -25,7 +25,7 @@
  #  when it is full and halves the underlying array when it is one-quarter full.
  #  The <em>push</em> and <em>pop</em> operations take constant amortized time.
  #  The <em>size</em>, <em>peek</em>, and <em>is-empty</em> operations takes
- #  constant time in the worst case. 
+ #  constant time in the worst case.
  #  <p>
  #  For additional documentation, see <a href="/algs4/13stacks">Section 1.3</a> of
  #  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
@@ -70,7 +70,7 @@
 # 05:09 INVARIANT. Array is between 25% and 100% full.
 
 # 06:45 STACK RESIZING-ARRAY IMPLEMENTATION: PERFORMANCE
-# 
+#
 # AMORTIZED ANALYSIS. Average running time per operation over
 # a worst-case sequence of operations.
 #
@@ -87,7 +87,7 @@
 #  size      |    1 |     1 |         1
 
 # 07:34 STACK RESIZING-ARRAY IMPLEMENTATION: MEMORY USAGE
-# 
+#
 # PROPOSITION. Uses between ~8N and ~32N bytes to represent a stack with N items.
 #   * ~8N when full.
 #   * ~32N when one quarter full.
@@ -99,7 +99,7 @@
 #   private int N = 0;  <- 4 bytes int
 #   ...                    4 bytes (padding)
 # }
-# 
+#
 # REMARK. Analysis includes memory for the stack
 # (but not the strings themselves, which the client owns).
 
@@ -109,17 +109,17 @@
 # LINKED-LIST IMPLEMENTATION. (SLOWER) GUARANTED that each op is fast.
 #  * Every operation takes constant time in the WORST CASE.
 #  * Uses extra time and space to deal with the links.
-# 
+#
 # RESIZING-ARRAY IMPLEMENTATION. (FASTER for each operation. But delays upon resizing)
 #  * Every operation takes constant AMORTIZED time.
 #  * Less wasted space.
 
 # 09:50 "Resizing Arrays" QUESTION: Suppose that, starting from an empty data structure,
-# we perform N push operations in our resizing array implementation of a stack. 
+# we perform N push operations in our resizing array implementation of a stack.
 # How many times is the "resize()" method called?
-# 
+#
 # ANSWER: logarithmic
-# EXPLANATION: The "resize()" method is called only when the size of the stack 
+# EXPLANATION: The "resize()" method is called only when the size of the stack
 # is a power of two.
 
 
@@ -129,10 +129,10 @@ class ResizingArrayStack: #<Item> implements Iterable<Item>:
 
     def __init__(self): # Initializes an empty stack.
         # array of items
-        self._a = [None for i in range(2)]  
+        self._a = [None for i in range(2)]
         # number of elements on stack
         # Also the next location in the array to get filled upon push
-        self._N = 0 
+        self._N = 0
 
     # Is this stack empty?
     # @return true if this stack is empty; false otherwise
@@ -154,8 +154,8 @@ class ResizingArrayStack: #<Item> implements Iterable<Item>:
     # @param item the item to add
     def push(self, item):
         # double size of array if necessary
-        if self._N == len(self._a): 
-          self._resize(2*len(self._a)) 
+        if self._N == len(self._a):
+          self._resize(2*len(self._a))
         self._a[self._N] = item               # add item
         self._N += 1
 
@@ -163,7 +163,7 @@ class ResizingArrayStack: #<Item> implements Iterable<Item>:
     # @return the item most recently added
     # @throws java.util.NoSuchElementException if this stack is empty
     def pop(self):
-        if self.isEmpty(): 
+        if self.isEmpty():
           raise Exception("FatalResizingArrayStack.py: Stack underflow")
         item = self._a[self._N-1]
         self._N -= 1
@@ -189,13 +189,13 @@ class ResizingArrayStack: #<Item> implements Iterable<Item>:
 
     # 16:18 QUESTION: Given a reference "first" to the first node of a null-terminated linked
     # list with at least two nodes, what does the code frag,emt below do?
-    # 
+    #
     #   Node x = first;
     #   while (x.next.next != null) {
     #     x = x.next;
     #   }
-    #   x.next = null; 
-    # 
+    #   x.next = null;
+    #
     # ANSWER: Deletes the last node in the list
     # EXPLANATION: Upon termination of the loop, x is a reference to the second to last node.
     # The final statement deletes the last node from the list.
@@ -214,12 +214,12 @@ class ResizingArrayStack: #<Item> implements Iterable<Item>:
     def __iter__(self): return self._ReverseArrayIterator(self)
 
     class _ReverseArrayIterator: # implements Iterator<Item>:
-         def __init__(self, stk): 
+         def __init__(self, stk):
            self._arr = stk._a
            self._i   = stk._N
          def hasNext(self): return self._i > 0
          def next(self):
-             if not self.hasNext(): 
+             if not self.hasNext():
                raise StopIteration
              self._i -= 1
              return self._arr[self._i]
@@ -242,5 +242,5 @@ if __name__ == '__main__':
   main()
 
 
-# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne. 
+# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
 # Java last updated: Mon Oct 7 11:58:25 EDT 2013.

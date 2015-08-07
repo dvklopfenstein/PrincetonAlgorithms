@@ -45,7 +45,7 @@ def getData(blktxt):
   txt = blktxt.split("\n")
   # Loop through each line in the block text
   for T in txt:
-    # If the text contains elements in the sort 
+    # If the text contains elements in the sort
     if len(T)!=0 and not T.isspace():
       blkdata.append( T.split() )
   # Transpose the block data so each array contains one instance in the sort history
@@ -75,11 +75,11 @@ def determine_sort( list_orig, data ):
   # Get history for sorts: Selection, Insertion, and Shell
   hSelection, hInsertion, hShell = get_sort_history( list_orig )
   # Append 0 for "Original Sort"
-  res = [0] 
-  # Determine sorts for test_data 1 to N-1 
+  res = [0]
+  # Determine sorts for test_data 1 to N-1
   for i,test_data in enumerate(data[1:-1]):
-    R = [H.history_contains( hInsertion, test_data ), 
-         H.history_contains( hSelection, test_data ), 
+    R = [H.history_contains( hInsertion, test_data ),
+         H.history_contains( hSelection, test_data ),
          H.history_contains( hShell,     test_data )]
     if   R[0] and not R[1] and not R[2]:
       res.append(1) # Insertion sort
@@ -103,36 +103,36 @@ class Sorting_Tests(unittest.TestCase):
   def test_week2_exercise_Q2(self): # Lecture: Quick-Union Improvements 1:22
     # (seed = 709890)
     # The column on the left contains the original input of 16 strings to be sorted;
-    # the column on the right contains the strings in sorted order; 
-    # the other 6 columns contain the contents at some intermediate 
+    # the column on the right contains the strings in sorted order;
+    # the other 6 columns contain the contents at some intermediate
     # step during one of the elementary sorting algorithms listed below.
-    # 
+    #
     str_data = """
-    gold   aqua   drab   aqua   aqua   gold   aqua   aqua   
-    bone   bark   aqua   bone   bark   bone   bone   bark   
-    pink   bone   bark   dust   bone   bark   dust   bone   
-    dust   corn   corn   gold   corn   dust   gold   corn   
-    iris   drab   gold   iris   iris   iris   iris   drab   
-    aqua   dust   bone   pink   gold   aqua   kobi   dust   
-    rust   gold   pine   rust   rust   rust   pink   gold   
-    kobi   iris   dust   kobi   kobi   kobi   rust   iris   
-    wine   wine   iris   wine   wine   wine   wine   jade   
-    jade   jade   jade   jade   jade   jade   jade   kobi   
-    pine   pine   plum   pine   pine   pine   pine   pine   
-    corn   rust   kobi   corn   dust   corn   corn   pink   
-    drab   kobi   wine   drab   drab   drab   drab   plum   
-    puce   puce   puce   puce   puce   puce   puce   puce   
-    plum   plum   rust   plum   plum   plum   plum   rust   
-    bark   pink   pink   bark   pink   pink   bark   wine 
+    gold   aqua   drab   aqua   aqua   gold   aqua   aqua
+    bone   bark   aqua   bone   bark   bone   bone   bark
+    pink   bone   bark   dust   bone   bark   dust   bone
+    dust   corn   corn   gold   corn   dust   gold   corn
+    iris   drab   gold   iris   iris   iris   iris   drab
+    aqua   dust   bone   pink   gold   aqua   kobi   dust
+    rust   gold   pine   rust   rust   rust   pink   gold
+    kobi   iris   dust   kobi   kobi   kobi   rust   iris
+    wine   wine   iris   wine   wine   wine   wine   jade
+    jade   jade   jade   jade   jade   jade   jade   kobi
+    pine   pine   plum   pine   pine   pine   pine   pine
+    corn   rust   kobi   corn   dust   corn   corn   pink
+    drab   kobi   wine   drab   drab   drab   drab   plum
+    puce   puce   puce   puce   puce   puce   puce   puce
+    plum   plum   rust   plum   plum   plum   plum   rust
+    bark   pink   pink   bark   pink   pink   bark   wine
     """
-    #---   ----   ----   ----   ----   ----   ----   ----   
-    #0      ?      ?      ?      ?      ?      ?      4     
-    # 
-    # You may use an algorithm more than once. Your answer should be a 
-    # sequence of 8 integers between 0 and 4 (starting with 0 and ending with 4) 
+    #---   ----   ----   ----   ----   ----   ----   ----
+    #0      ?      ?      ?      ?      ?      ?      4
+    #
+    # You may use an algorithm more than once. Your answer should be a
+    # sequence of 8 integers between 0 and 4 (starting with 0 and ending with 4)
     # and with each integer separated by a whitespace.
 
-    data = getData(str_data) 
+    data = getData(str_data)
     list_orig   = data[0]   # Original unsorted data
     list_sorted = data[-1]  # Data sorted
 
@@ -144,7 +144,7 @@ class Sorting_Tests(unittest.TestCase):
     #     4. Sorted
     res = determine_sort( list_orig, data )
 
-    # Print results 
+    # Print results
     print ' '.join(map(str,res))
 
 
@@ -152,27 +152,27 @@ class Sorting_Tests(unittest.TestCase):
     # (seed = 213292)
     #        1      2      3      4      5      6
     str_data = """
-    HOLE   BECK   HOLE   BECK   BECK   HOLE   BECK   BECK   
-    BUSH   BUSH   BUSH   BUSH   BUSH   BUSH   BUSH   BUSH   
-    MIMS   DEVO   EVE6   DEVO   DEVO   DEVO   HOLE   DEVO   
-    BECK   EVE6   BECK   EVE6   HOLE   BECK   MIMS   EVE6   
-    WHAM   HOLE   WHAM   HOLE   MIMS   SADE   NOFX   HOLE   
-    SOAD   JAYZ   SOAD   JAYZ   NOFX   KORN   SOAD   JAYZ   
-    NOFX   NOFX   NOFX   KORN   RATT   EVE6   TOTO   KORN   
-    TOTO   TOTO   TOTO   MIMS   SOAD   MIMS   WHAM   MIMS   
-    VAIN   VAIN   VAIN   VAIN   TOTO   VAIN   VAIN   NOFX   
-    RATT   RATT   RATT   RATT   VAIN   RATT   RATT   PINK   
-    DEVO   MIMS   DEVO   TOTO   WHAM   JAYZ   DEVO   RATT   
-    PINK   PINK   PINK   PINK   PINK   PINK   PINK   SADE   
-    SADE   SADE   SADE   SADE   SADE   WHAM   SADE   SOAD   
-    KORN   KORN   KORN   NOFX   KORN   SOAD   KORN   TOTO   
-    JAYZ   SOAD   JAYZ   SOAD   JAYZ   NOFX   JAYZ   VAIN   
-    EVE6   WHAM   MIMS   WHAM   EVE6   TOTO   EVE6   WHAM   
+    HOLE   BECK   HOLE   BECK   BECK   HOLE   BECK   BECK
+    BUSH   BUSH   BUSH   BUSH   BUSH   BUSH   BUSH   BUSH
+    MIMS   DEVO   EVE6   DEVO   DEVO   DEVO   HOLE   DEVO
+    BECK   EVE6   BECK   EVE6   HOLE   BECK   MIMS   EVE6
+    WHAM   HOLE   WHAM   HOLE   MIMS   SADE   NOFX   HOLE
+    SOAD   JAYZ   SOAD   JAYZ   NOFX   KORN   SOAD   JAYZ
+    NOFX   NOFX   NOFX   KORN   RATT   EVE6   TOTO   KORN
+    TOTO   TOTO   TOTO   MIMS   SOAD   MIMS   WHAM   MIMS
+    VAIN   VAIN   VAIN   VAIN   TOTO   VAIN   VAIN   NOFX
+    RATT   RATT   RATT   RATT   VAIN   RATT   RATT   PINK
+    DEVO   MIMS   DEVO   TOTO   WHAM   JAYZ   DEVO   RATT
+    PINK   PINK   PINK   PINK   PINK   PINK   PINK   SADE
+    SADE   SADE   SADE   SADE   SADE   WHAM   SADE   SOAD
+    KORN   KORN   KORN   NOFX   KORN   SOAD   KORN   TOTO
+    JAYZ   SOAD   JAYZ   SOAD   JAYZ   NOFX   JAYZ   VAIN
+    EVE6   WHAM   MIMS   WHAM   EVE6   TOTO   EVE6   WHAM
     """
-    #---   ----   ----   ----   ----   ----   ----   ----   
-    #0      ?      ?      ?      ?      ?      ?      4     
+    #---   ----   ----   ----   ----   ----   ----   ----
+    #0      ?      ?      ?      ?      ?      ?      4
 
-    data = getData(str_data) 
+    data = getData(str_data)
     list_orig   = data[0]   # Original unsorted data
     list_sorted = data[-1]  # Data sorted
 
@@ -184,7 +184,7 @@ class Sorting_Tests(unittest.TestCase):
     #     4. Sorted
     res = determine_sort( list_orig, data )
 
-    # Print results 
+    # Print results
     print ' '.join(map(str,res))
 
 
@@ -193,27 +193,27 @@ def curr(): # Exercise
   # (seed = 419606)
   #        1      2      3      4      5      6
   str_data = """
-    gnat   frog   carp   carp   dove   carp   gnat   carp   
-    seal   gnat   clam   frog   carp   clam   lynx   clam   
-    sole   goat   dove   gnat   clam   dove   clam   dove   
-    pony   hake   frog   goat   frog   frog   pony   frog   
-    myna   myna   gnat   hake   gnat   gnat   myna   gnat   
-    goat   pony   goat   mole   goat   goat   goat   goat   
-    hake   seal   hake   myna   hake   hake   hake   hake   
-    frog   sole   lynx   pony   newt   lynx   frog   lynx   
-    mole   mole   mole   seal   mole   mole   mole   mole   
-    carp   carp   myna   sole   lynx   myna   carp   myna   
-    tuna   tuna   tuna   tuna   seal   newt   tuna   newt   
-    newt   newt   newt   newt   pony   tuna   newt   oryx   
-    dove   dove   sole   dove   myna   sole   dove   pony   
-    oryx   oryx   oryx   oryx   oryx   oryx   oryx   seal   
-    lynx   lynx   pony   lynx   tuna   pony   seal   sole   
-    clam   clam   seal   clam   sole   seal   sole   tuna   
+    gnat   frog   carp   carp   dove   carp   gnat   carp
+    seal   gnat   clam   frog   carp   clam   lynx   clam
+    sole   goat   dove   gnat   clam   dove   clam   dove
+    pony   hake   frog   goat   frog   frog   pony   frog
+    myna   myna   gnat   hake   gnat   gnat   myna   gnat
+    goat   pony   goat   mole   goat   goat   goat   goat
+    hake   seal   hake   myna   hake   hake   hake   hake
+    frog   sole   lynx   pony   newt   lynx   frog   lynx
+    mole   mole   mole   seal   mole   mole   mole   mole
+    carp   carp   myna   sole   lynx   myna   carp   myna
+    tuna   tuna   tuna   tuna   seal   newt   tuna   newt
+    newt   newt   newt   newt   pony   tuna   newt   oryx
+    dove   dove   sole   dove   myna   sole   dove   pony
+    oryx   oryx   oryx   oryx   oryx   oryx   oryx   seal
+    lynx   lynx   pony   lynx   tuna   pony   seal   sole
+    clam   clam   seal   clam   sole   seal   sole   tuna
   """
-  #---   ----   ----   ----   ----   ----   ----   ----   
-  #0      ?      ?      ?      ?      ?      ?      4     
+  #---   ----   ----   ----   ----   ----   ----   ----
+  #0      ?      ?      ?      ?      ?      ?      4
 
-  data = getData(str_data) 
+  data = getData(str_data)
   list_orig   = data[0]   # Original unsorted data
   list_sorted = data[-1]  # Data sorted
 
@@ -225,7 +225,7 @@ def curr(): # Exercise
   #     4. Sorted
   res = determine_sort( list_orig, data )
 
-  # Print results 
+  # Print results
   print ' '.join(map(str,res))
 
   # Print str_data in a format that is easier to visualize word order
@@ -234,12 +234,12 @@ def curr(): # Exercise
 
 
 def prt_easy_viz(str_data):
-  data = getData(str_data) 
+  data = getData(str_data)
   """Prints in a format which is easier to visualize sort order."""
   num_lists = len(data)     # Number of lists
   num_elems = len(data[-1]) # Number of elements per list
 
-  # Assign symbols to each word which are easier to visualize 
+  # Assign symbols to each word which are easier to visualize
   d2s = { elem:'{sym:{width}}'.format(sym='*'*(i+1), width=num_elems) for i, elem in enumerate(data[-1]) }
 
   # Convert data to symbols stored in a list of lists

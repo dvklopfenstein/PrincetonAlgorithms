@@ -9,7 +9,7 @@ class PowerLaw_Tests(unittest.TestCase):
     """Question from the end of the Week 1 Lecture, Observations.
 
        EXPLANATION: We assume T(N) = sN^b for some constants a and b.
-       As we double the size of the input N, the running time 
+       As we double the size of the input N, the running time
        approximately quadruples, indicating a algorithm or b=2.
        Plugging in T(54,000) = 20.5 and solving for a, we obtain
        a = 20.5/64,000^2 ~ 5.0 x 10-9
@@ -51,7 +51,7 @@ class PowerLaw_Tests(unittest.TestCase):
       268435456   109.962
       536870912   281.688
     """
-    data = getData(strData) 
+    data = getData(strData)
     b = est_b( data )
     a = solve_a( data, b )
     #do_plot(data, a, b)
@@ -71,7 +71,7 @@ class PowerLaw_Tests(unittest.TestCase):
          4096   666.576
          8192  6594.977
     """
-    data = getData(strData) 
+    data = getData(strData)
     b = est_b( data )
     a = solve_a( data, b )
 
@@ -97,7 +97,7 @@ class PowerLaw_Tests(unittest.TestCase):
     268435456    46.850
     536870912   122.325
     """
-    data = getData(strData) 
+    data = getData(strData)
     b = est_b( data )
     a = solve_a( data, b )
 
@@ -119,12 +119,12 @@ class PowerLaw_Tests(unittest.TestCase):
     131072   728.101
     262144  3978.674
     """
-    data = getData(strData) 
+    data = getData(strData)
     b = est_b( data )
     a = solve_a( data, b )
 
 
-  def test_week1_exerciseA_Q1(self): 
+  def test_week1_exerciseA_Q1(self):
     print "\ntest_week1_exerciseA_Q1"
     # (seed = 331534)
     #         N   seconds
@@ -139,25 +139,25 @@ class PowerLaw_Tests(unittest.TestCase):
      4096   439.291
      8192  3998.962
     """
-    data = getData(strData) 
+    data = getData(strData)
     b = est_b( data )
     a = solve_a( data, b )
 
-  def test_week1_exerciseA_Q2(self): 
+  def test_week1_exerciseA_Q2(self):
     print "\ntest_week1_exerciseA_Q2"
     # (seed = 331534)
     #         N   seconds
     # -------------------
     strData = """
-       2     7.000 
-       4    31.000 
-       8   127.000 
-      16   511.000 
-      32  2047.000 
-      64  8191.000 
-     128 32767.000 
+       2     7.000
+       4    31.000
+       8   127.000
+      16   511.000
+      32  2047.000
+      64  8191.000
+     128 32767.000
     """
-    data = getData(strData) 
+    data = getData(strData)
     b = est_b( data )
     a = solve_a( data, b )
 

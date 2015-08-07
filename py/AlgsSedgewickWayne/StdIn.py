@@ -16,7 +16,7 @@
 
 #*
 #  The <tt>StdIn</tt> class provides static methods for reading strings
-#  and numbers from standard input. See 
+#  and numbers from standard input. See
 #  <a href="http:#introcs.cs.princeton.edu/15inout">Section 1.5</a> of
 #  <i>Introduction to Programming in Java: An Interdisciplinary Approach</i>
 #  by Robert Sedgewick and Kevin Wayne.
@@ -29,7 +29,7 @@
 #  <p>
 #  Like {@link Scanner}, reading a <em>token</em> also consumes preceding Java
 #  whitespace; reading a line consumes the following end-of-line
-#  delimeter; reading a character consumes nothing extra. 
+#  delimeter; reading a character consumes nothing extra.
 #  <p>
 #  Whitespace is defined in {@link Character#isWhitespace(char)}. Newlines
 #  consist of \n, \r, \r\n, and Unicode hex code points 0x2028, 0x2029, 0x0085;
@@ -55,9 +55,9 @@
 #    private StdIn() { }
 #
 #    private static Scanner scanner;
-# 
+#
 #     #** begin: section (1 of 2) of code duplicated from In to StdIn #/
-#    
+#
 #    # assume Unicode UTF-8 encoding
 #    private static final String CHARSET_NAME = "UTF-8";
 #
@@ -81,7 +81,7 @@
 #
 #    #*
 #     # Is the input empty (except possibly for whitespace)? Use this
-#     # to know whether the next call to {@link #readString()}, 
+#     # to know whether the next call to {@link #readString()},
 #     # {@link #readDouble()}, etc will succeed.
 #     # @return true if standard input is empty (except possibly
 #     #     for whitespae), and false otherwise
@@ -101,7 +101,7 @@
 #    }
 #
 #     #*
-#     # Is the input empty (including whitespace)? Use this to know 
+#     # Is the input empty (including whitespace)? Use this to know
 #     # whether the next call to {@link #readChar()} will succeed.
 #     # <p>Functionally equivalent to {@link #hasNextLine()}.
 #     # @return true if standard input is empty, and false otherwise
@@ -136,7 +136,7 @@
 #            + " Please contact the authors.";
 #        scanner.useDelimiter(WHITESPACE_PATTERN);
 #        return ch.charAt(0);
-#    }  
+#    }
 #
 #
 #    #*
@@ -241,7 +241,7 @@
 #     String[] tokens = WHITESPACE_PATTERN.split(readAll());
 #     if (tokens.length == 0 || tokens[0].length() > 0)
 #         return tokens;
-# 
+#
 #     # don't include first token if it is leading whitespace
 #     String[] decapitokens = new String[tokens.length-1];
 #     for (int i = 0; i < tokens.length - 1; i++)
@@ -287,10 +287,10 @@
 #            vals[i] = Double.parseDouble(fields[i]);
 #        return vals;
 #    }
-#    
+#
 #     #** end: section (2 of 2) of code duplicated from In to StdIn #/
-#    
-#    
+#
+#
 #    # do this once when StdIn is initialized
 #    static {
 #        resync();
@@ -302,7 +302,7 @@
 #    private static void resync() {
 #        setScanner(new Scanner(new java.io.BufferedInputStream(System.in), CHARSET_NAME));
 #    }
-#    
+#
 #    private static void setScanner(Scanner scanner) {
 #        StdIn.scanner = scanner;
 #        StdIn.scanner.useLocale(LOCALE);

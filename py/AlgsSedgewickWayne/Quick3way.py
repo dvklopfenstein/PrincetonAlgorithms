@@ -5,18 +5,18 @@
  #  Dependencies: StdOut.java StdIn.java
  #  Data files:   http://algs4.cs.princeton.edu/23quicksort/tiny.txt
  #                http://algs4.cs.princeton.edu/23quicksort/words3.txt
- #   
+ #
  #  Sorts a sequence of strings from standard input using 3-way quicksort.
- #   
+ #
  #  % more tiny.txt
  #  S O R T E X A M P L E
  #
  #  % java Quick3way < tiny.txt
  #  A E E L M O P R S T X                 [ one string per line ]
- #    
+ #
  #  % more words3.txt
  #  bed bug dad yes zoo ... all bad yet
- #  
+ #
  #  % java Quick3way < words3.txt
  #  all bad bed bug dad ... yes yet zoo    [ one string per line ]
  #
@@ -44,9 +44,9 @@ def Sort(a, array_history=None):
     assert _isSorted(a)
 
 # quicksort the subarray a[lo .. hi] using 3-way partitioning
-def _sort(a, lo, hi): 
+def _sort(a, lo, hi):
     if hi <= lo: return
-    lt = lo 
+    lt = lo
     gt = hi
     v  = a[lo]
     i  = lo
@@ -55,12 +55,12 @@ def _sort(a, lo, hi):
           _exch(a, lt, i)
           lt += 1
           i  += 1
-        elif a[i] > v: 
+        elif a[i] > v:
           _exch(a, i, gt)
           gt -= 1
         else: i += 1
 
-    # a[lo..lt-1] < v = a[lt..gt] < a[gt+1..hi]. 
+    # a[lo..lt-1] < v = a[lt..gt] < a[gt+1..hi].
     _sort(a, lo, lt-1)
     _sort(a, gt+1, hi)
     assert _isSorted(a, lo, hi)
@@ -76,7 +76,7 @@ def _less(v, w): return v < w
 
 # does v == w ?
 def _eq(v, w): return v == w
-    
+
 # exchange a[i] and a[j]
 def _exch(a, i, j):
     swap = a[i]
@@ -98,7 +98,7 @@ def _isSorted(a, lo=None, hi=None):
 
 #*
  # Reads in a sequence of strings from standard input; 3-way
- # quicksorts them; and prints them to standard output in ascending order. 
+ # quicksorts them; and prints them to standard output in ascending order.
  #/
 # def main(String[] args):
 #     String[] a = StdIn.readAllStrings()
@@ -107,5 +107,5 @@ def _isSorted(a, lo=None, hi=None):
 
 
 
-# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne. 
+# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
 # Last updated: Tue Sep 24 11:52:34 EDT 2013.

@@ -5,19 +5,19 @@
  #  Dependencies: StdOut.java StdIn.java
  #  Data files:   http://algs4.cs.princeton.edu/22mergesort/tiny.txt
  #                http://algs4.cs.princeton.edu/22mergesort/words3.txt
- #   
+ #
  #  Sorts a sequence of strings from standard input using an
  #  optimized version of mergesort.
- #   
+ #
  #  % more tiny.txt
  #  S O R T E X A M P L E
  #
  #  % java MergeX < tiny.txt
  #  A E E L M O P R S T X                 [ one string per line ]
- #    
+ #
  #  % more words3.txt
  #  bed bug dad yes zoo ... all bad yet
- #  
+ #
  #  % java MergeX < words3.txt
  #  all bad bed bug dad ... yes yet zoo    [ one string per line ]
  #
@@ -42,7 +42,7 @@ def _merge(src, dst, lo, mid, hi):
     assert _isSorted(src, lo, mid)
     assert _isSorted(src, mid+1, hi)
 
-    i = lo 
+    i = lo
     j = mid+1
     for k in range(lo, hi+1):
         if    i > mid:              dst[k] = src[j]; j += 1
@@ -56,7 +56,7 @@ def _merge(src, dst, lo, mid, hi):
 def _sort(src, dst, lo, hi):
     # if (hi <= lo) return;
     CUTOFF = 7
-    if hi <= lo + CUTOFF: 
+    if hi <= lo + CUTOFF:
         _insertionSort(dst, lo, hi)
         return
     mid = lo + (hi - lo) / 2
@@ -116,8 +116,8 @@ def _isSorted(a, lo=None, hi=None):
 
 #*
  # Reads in a sequence of strings from standard input; mergesorts them
- # (using an optimized version of mergesort); 
- # and prints them to standard output in ascending order. 
+ # (using an optimized version of mergesort);
+ # and prints them to standard output in ascending order.
  #/
 #def main():
 #    String[] a = StdIn.readAllStrings()
@@ -125,5 +125,5 @@ def _isSorted(a, lo=None, hi=None):
 #    show(a)
 
 
-# Copyright 2002-2010, Robert Sedgewick and Kevin Wayne. 
+# Copyright 2002-2010, Robert Sedgewick and Kevin Wayne.
 # Java Last updated: Fri Feb 14 17:45:37 EST 2014.

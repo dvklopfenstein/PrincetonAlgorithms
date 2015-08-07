@@ -86,5 +86,5 @@ def add_history(ret, ARR, anno):
   import copy
   if isinstance(ret, list):
     ret.append([copy.deepcopy(ARR), anno])
-  
+
 

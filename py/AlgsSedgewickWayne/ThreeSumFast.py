@@ -22,13 +22,13 @@
  #
  #  % java ThreeSumFast 1Kints.txt
  #  70
- #  
+ #
  #  % java ThreeSumFast 2Kints.txt
  #  528
- #                
+ #
  #  % java ThreeSumFast 4Kints.txt
  #  4039
- # 
+ #
  #  % java ThreeSumFast 8Kints.txt
  #  32074
  #
@@ -64,8 +64,8 @@
 #   (-20,  10)  10 -- only count if a[i] < a[j] < a[k] to avoid double-counting
 #     ...
 #   ( 10,  30) -40 --
-#   ( 10,  40) -50 
-#   ( 30,  40) -70 
+#   ( 10,  40) -50
+#   ( 30,  40) -70
 #
 # 13:09 ANALYSIS. Order of growth is N^2 log N.
 #   * Step 1: N^2 with insertion sort.
@@ -82,7 +82,7 @@
 # the maximum number of array accesses used to binary search a sorted array
 # of size N?
 # ANSWER:  logarithmic
-# EXPLANATION: In bainary search, the number of array accesses equal the 
+# EXPLANATION: In bainary search, the number of array accesses equal the
 # number of compares, which we have seen is ~ 1 lg N, i.g., when the key
 # we are searching for is not in the array.
 
@@ -92,7 +92,7 @@
  #  and printing the number of triples in an array of distinct integers that
  #  sum to 0 (ignoring integer overflow).
  #  <p>
- #  This implementation uses sorting and binary search and takes time 
+ #  This implementation uses sorting and binary search and takes time
  #  proportional to N^2 log N, where N is the number of integers.
  #  <p>
  #  For additional documentation, see <a href="http://algs4.cs.princeton.edu/14analysis">Section 1.4</a> of
@@ -144,12 +144,12 @@ public class ThreeSumFast:
      # counts the number of triples sum to exactly zero; prints out the time to perform
      # the computation.
      #/
-    def main(String[] args): 
+    def main(String[] args):
         In in = new In(args[0])
         int[] a = in.readAllInts()
         cnt = count(a)
         StdOut.println(cnt)
 
 
-# Copyright © 2002–2010, Robert Sedgewick and Kevin Wayne. 
+# Copyright © 2002–2010, Robert Sedgewick and Kevin Wayne.
 # Java last updated: Tue Sep 24 09:30:55 EDT 2013.

@@ -3,11 +3,11 @@
  #  Compilation:  javac LinkedQueue.java
  #  Execution:    java LinkedQueue < input.txt
  #  Dependencies: StdIn.java StdOut.java
- #  Data files:   http://algs4.cs.princeton.edu/13stacks/tobe.txt  
+ #  Data files:   http://algs4.cs.princeton.edu/13stacks/tobe.txt
  #
  #  A generic queue, implemented using a singly-linked list.
  #
- #  % java Queue < tobe.txt 
+ #  % java Queue < tobe.txt
  #  to be or not to be (2 left on queue)
  #
  #************************************************************************/
@@ -23,7 +23,7 @@ import java.util.NoSuchElementException
  #  testing if the queue is empty, and iterating through
  #  the items in FIFO order.
  #  <p>
- #  This implementation uses a singly-linked list with a non-static nested class 
+ #  This implementation uses a singly-linked list with a non-static nested class
  #  for linked-list nodes.  See {@link Queue} for a version that uses a static nested class.
  #  The <em>enqueue</em>, <em>dequeue</em>, <em>peek</em>, <em>size</em>, and <em>is-empty</em>
  #  operations all take constant time in the worst case.
@@ -141,7 +141,7 @@ public class LinkedQueue<Item> implements Iterable<Item>:
             if last != last) return False
 
         return True
- 
+
 
     #*
      # Returns an iterator that iterates over the items in this queue in FIFO order.
@@ -176,5 +176,5 @@ public class LinkedQueue<Item> implements Iterable<Item>:
         StdOut.println("(" + q.size() + " left on queue)")
 
 
-# Copyright (C) 2002–2010, Robert Sedgewick and Kevin Wayne. 
+# Copyright (C) 2002–2010, Robert Sedgewick and Kevin Wayne.
 # Java last updated: Tue Sep 24 10:45:31 EDT 2013.

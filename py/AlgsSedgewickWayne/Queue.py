@@ -6,11 +6,11 @@
  #************************************************************************
  #  Compilation:  javac Queue.java
  #  Execution:    java Queue < input.txt
- #  Data files:   http:#algs4.cs.princeton.edu/13stacks/tobe.txt  
+ #  Data files:   http:#algs4.cs.princeton.edu/13stacks/tobe.txt
  #
  #  A generic queue, implemented using a linked list.
  #
- #  % java Queue < tobe.txt 
+ #  % java Queue < tobe.txt
  #  to be or not to be (2 left on queue)
  #
  #************************************************************************/
@@ -93,7 +93,7 @@ class Queue:
      # Returns a string representation of this queue.
      # @return the sequence of items in FIFO order, separated by spaces
     def __str__(self): return ' '.join([str(item) for item in self])
- 
+
     # Returns an iterator that iterates over the items in this queue in FIFO order.
     # @return an iterator that iterates over the items in this queue in FIFO order
     def __iter__(): return _ListIterator(self.first)
@@ -107,10 +107,10 @@ class Queue:
         def next(self):
             if self._current is None: raise StopIteration
             item = self._current.item
-            self._current = self._current.Next 
+            self._current = self._current.Next
             return item
- 
- 
+
+
 def run(line):
   import sys
   sys.stdout.write("Running: {}\n".format(line))

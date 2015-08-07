@@ -12,21 +12,21 @@
 #  Dependencies: StdOut.java StdIn.java
 #  Data files:   http:#algs4.cs.princeton.edu/22mergesort/tiny.txt
 #                http:#algs4.cs.princeton.edu/22mergesort/words3.txt
-#   
+#
 #  Sorts a sequence of strings from standard input using mergesort.
-#   
+#
 #  % more tiny.txt
 #  S O R T E X A M P L E
 #
 #  % java Merge < tiny.txt
 #  A E E L M O P R S T X                 [ one string per line ]
-#    
+#
 #  % more words3.txt
 #  bed bug dad yes zoo ... all bad yet
-#  
+#
 #  % java Merge < words3.txt
 #  all bad bed bug dad ... yes yet zoo    [ one string per line ]
-#  
+#
 #************************************************************************/
 
 #------------------------------------------------------------------------------
@@ -37,7 +37,7 @@
 #   to develop them into practical system sorts.
 # * Quicksort honored as one of top 1 algorithms of 20th century
 #   in science and engineering.
-# 
+#
 # 00:39 MERGESORT
 # * Java sort for objects.
 # * Perl, C++ stable sort, Python stable sort, Firefox JavaScript, ...
@@ -48,7 +48,7 @@
 # * Divide array into two halves.
 # * **Recursively** sort each half.
 # * Merge two halves.
-# 
+#
 # John von Neumann credited with the invention of Mergesort.
 
 #------------------------------------------------------------------------------
@@ -69,18 +69,18 @@
 #------------------------------------------------------------------------------
 # 10:20 MERGESORT: TRACE MERGE RESULTS FOR TOP-DOWN MERGESORT
 #
-# Start with a big problem to solve (a), then 
-#   divide it in half (h) and 
-#   divide it in half (d) and 
+# Start with a big problem to solve (a), then
+#   divide it in half (h) and
+#   divide it in half (d) and
 #   divide it in half (b) and sort
 # First thing we actually do is (b), then (c)
-# 
+#
 #                                    a[]
 #                                             1 1 1 1 1 1
 #                         0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
-#                         ------------------------------- 
+#                         -------------------------------
 # a           lo      hi  M E R G E S O R T E X A M P L E
-# b merge(a,  0,  0,  1)  E M     . .                   . 
+# b merge(a,  0,  0,  1)  E M     . .                   .
 # c merge(a,  2,  2,  3)      G R . .                   .
 # d merge(a,  0,  1,  3)  E G M R . .                   .
 # e merge(a,  4,  4,  5)          E S                   .
@@ -108,24 +108,24 @@
 # :------:|:-------:|:---------:|:---------:|:-------:|:---------:|:---------:|
 #   home  | instant | 2.8 hours | 317 years | instant | 1 second  |  18 min   |
 #   super | instant |  1 second |   1 week  | instant |  instant  | instant   |
-# 
+#
 # BOTTOM LINE: Good algorithms are better than supercomputers.
 
 #------------------------------------------------------------------------------
 # 13:15 MERGESORT: NUMBER OF COMPARES AND ARRAY ACCESSES
 # PROPOSITION: Mergesort uses at most:
 #     N lg N  compares and
-#   6 N lg N  accesses 
+#   6 N lg N  accesses
 # to sort any array of size N.
 #
 # * Was a problem that took us quadratic time using insertion sort and selection sort.
 #   Now N lg N
-# 
-# PROOF SKETCH: The number of compares and array accesses 
+#
+# PROOF SKETCH: The number of compares and array accesses
 #   * C(N): COMPARES
 #   * A(N): ARRAY ACCESSES
 # to mergesort an array of size N satisy the recurrences:
-# 
+#
 #   C(N) <= C(ceiling(N/2)) + C(floor(N/2)) +   N for N > 1, with C(1)=0.
 #               |                  |            |
 #           left-half         right-half      merge
@@ -133,36 +133,36 @@
 #   A(N) <= A(ceiling(N/2)) + A(floor(N/2)) + 6*N for N > 1, with A(1)=0.
 
 #------------------------------------------------------------------------------
-# 15:44 WE WILL SOLVE THR RECURRENCE WITH N IS A POWER OF 2. 
+# 15:44 WE WILL SOLVE THR RECURRENCE WITH N IS A POWER OF 2.
 # <- results holds for all N; Can proove by induction
 #
 #   D(N) <= 2*D(N/2) + N, for N>1, with D(1) = 0.
 
 #------------------------------------------------------------------------------
 # 17:16 DIVIDE-AND-CONQUER RECURRENCE: PROOF BY PICTURE
-# 
+#
 # PROPOSITION: Id D(N) satisfies D(N) <= 2*D(N/2) + N, for N>1, with D(1) = 0,
 # then D(N) = N lg N:
-# 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # PROOF 1: PROOF BY PICTURE [assuming N is a power of 2]
-#                                                    Cost of merge: 
+#                                                    Cost of merge:
 #                                                    (where compares are)
-# 
+#
 #    ^                    D(N)                       N          = N
-#    |    
+#    |
 #    |         D(N/2)             D(N/2)             2(N/2)     = N
-#  lg N  
+#  lg N
 #    |     D(N/4)   D(N/4)    D(N/4)    D(N/4)       4(N/4)     = N
-#    |   
+#    |
 #    |    |<-----------D(N/2^k)------------->|       2^k(N/2^k) = N
-#    |   
+#    |
 #    V   D(2) D(2) D(2) D(2) D(2) D(2) D(2) D(2)     N/2(2)     = N
 #                                                    ----------------
 #                                                              N lg N
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # 17:26 PROOF 2: PRROF BY EXPANSION
-# 
+#
 # TELESCOPE NOTE: 1st term on RHS(D(N/2)(N/2))
 # is exactly the same as LHS(D(N)/N), so can apply same formula
 #  D(N)/N = 2*D(N/2)/N    + 1              divide both sides by N
@@ -179,12 +179,12 @@
 #         =   D(N/N)(N/N) + 1 + 1 +...+ 1  stop applying. D(1) = 0
 #         = lg(N)
 #
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # 18:20  PROOF 3: PROOF BY INDUCTION
 # * Base case: N = 1
 # * Inductive hypothesis: D(N) =    N*lg(N)
 # * GOAL: Show that      D(2N) = (2N)*lg(2N)
-# 
+#
 #   D(2*N) = 2*D(N) + 2*N            given
 #          = 2*N*lg(N) + 2*N         inductive hypothesis
 #          = 2*N(lg(2N) - 1) + 2*N   algebra
@@ -196,10 +196,10 @@
 # We need auxiliary array for the last merge
 #
 # PROOF: The array aux[] needs to be of size N for the last merge.
-# 
+#
 # DEFINITION: A sorting algorithm is IN-PLACE if it uses <= c*log(N) extra memory.
 # EXAMPLE: Insertion sort, selection sort, shellsort.
-# 
+#
 # WAITING TO BE DISCOVERED: An IN-PLACE MERGE that is simple enough to be practical.
 
 #------------------------------------------------------------------------------
@@ -208,16 +208,16 @@
 # TECHNIQUE 1: USE INSERTION SORT FOR SMALL SUBARRAYS: (~20% faster)
 #   * Mergesort has too much overhead for tiny subarrays.
 #   * Cuttoff to insertion sort for ~ 7 items.
-# 
+#
 # TECHNIQUE 2:  21:51 STOP IF ALREADY SORTED
 # * Is biggest item in first half <= smallest item in second half?
 # * Helps for partially-ordered arrays.
-# 
+#
 # TECHNIQUE 3: 22:31 ELIMINATE THE COPY TO THE AUXILIARY ARRAY
 # Mind-bending: ONly for experts
-# Save time (but not space) by switching the role of the input and 
+# Save time (but not space) by switching the role of the input and
 # auxiliary array in each recursive call.
-# 
+#
 # QUESTION: How many compares does mergesort - the pure version without
 # any optimizations - make to sort an input array that is already sorted?
 # ANSWER: linearithmic
@@ -229,10 +229,10 @@
 ########################################################
 ### Stability (Alg 1Week 3 Lecture)
 ########################################################
-# 
+#
 #-------------------------------------------------------
 # 05:00 PROPOSITION: Merge operation IS STABLE.
-# 
+#
 # PROOF: Takes from left subarray if equal keys.
 #
 
@@ -240,9 +240,9 @@
 ### Duplicate Kes (Alg 1, Week 3 Lecture)
 ########################################################
 #
-# MERGESORT WITH DUPLICATE KEYS: Always between 
-#   * 1/2 N lg N and 
-#   *     N lg N 
+# MERGESORT WITH DUPLICATE KEYS: Always between
+#   * 1/2 N lg N and
+#   *     N lg N
 # compares.
 
 ########################################################
@@ -304,7 +304,7 @@ def _sort_init(a, aux, lo, hi): # 09:07-
 # Rearranges the array in ascending order, using the natural order.
 # @param a the array to be sorted
 def Sort(a, array_history=None): # 09:30
-  # NOTE: Do not create array in recursive _sort routine 
+  # NOTE: Do not create array in recursive _sort routine
   # to avoid extensive cost of extra array production
   aux = [None for i in range(len(a))]
   _sort_init(a, aux, 0, len(a)-1)
@@ -317,7 +317,7 @@ def Sort(a, array_history=None): # 09:30
 
 # is v < w ?
 def _less(v, w): return v < w
-    
+
 # exchange a[i] and a[j]
 def _exch(a, i, j):
   swap = a[i]
@@ -386,8 +386,8 @@ def _sort(a, index, aux, lo, hi):
   _sort(a, index, aux, mid + 1, hi)
   merge(a, index, aux, lo, mid, hi)
 
-# Reads in a sequence of strings from standard input; mergesorts them; 
-# and prints them to standard output in ascending order. 
+# Reads in a sequence of strings from standard input; mergesorts them;
+# and prints them to standard output in ascending order.
 def main():
   import InputArgs
   a = InputArgs.getStrArray("S O R T E X A M P L E")
@@ -399,5 +399,5 @@ if __name__ == '__main__':
   main()
 
 
-# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne. 
+# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
 # Based on java which was Last updated: Fri Feb 14 17:45:37 EST 2014

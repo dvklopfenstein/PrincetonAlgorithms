@@ -10,24 +10,24 @@
 #   * PREDICT     events using the hypothesis
 #   * VERIFY      the predictions by making further observations
 #   * VALIDATE    by repeating until the hypothesis and observations agree.
-# 
+#
 # Principles:
 #   * Experiments must be REPRODUCIBLE
 #   * Hypothesis  must be FALSIFIABLE
 
 #   Why is my program so slow?
 #   Why does it run out of memory?
-#   
+#
 #   N^2 unacceptable because it does not scale
 #   N*log(N) is almost linear
-#   
-# QUESTION: Suppose that N == 1,000,000. Approximately how much faster is 
-# an algorithm that performs N*lg(N) operations versus one that performs 
+#
+# QUESTION: Suppose that N == 1,000,000. Approximately how much faster is
+# an algorithm that performs N*lg(N) operations versus one that performs
 # N^2 operations? Recall that lg is log_2.
-#   N^2     = (10^6)^2  =   10^12  
+#   N^2     = (10^6)^2  =   10^12
 #   N*lg(N) = 10^6*(20) = 2*10^7
 #
-# N^2        10^12              
+# N^2        10^12
 # ------ = ------- =  .5(10^5) = 5(10^-1)(10^5) = 5(10^4) = 5*10000 = 50,000
 # N lg N   2*10^7
 
@@ -55,7 +55,7 @@ def getData( blktxt ):
 
 def est_b( data ):
   """Doubling hypothesis: Quick way to estimate b in a power-law relationship.
-  
+
   HYPOTHESIS: Running time is about a*N^b with b = lg(ratio)
 
   CAVEAT: Cannot identify logarithmic factors with doubling hypothesis.
@@ -64,7 +64,7 @@ def est_b( data ):
   prev = data[0]
   for D in data[1:]:
     if D[0] == 2*prev[0]:
-      if prev[1] != 0: 
+      if prev[1] != 0:
         ratio = D[1]/prev[1]
         lg_ratio = math.log(ratio,2)
         sys.stdout.write('{:10d} {:7.3f} ratio={:7.3f} lg(ratio)={:7.3f}\n'.format(
@@ -73,7 +73,7 @@ def est_b( data ):
     else:
       raise Exception("DATA IS NOT DOUBLED")
   return lg_ratio
- 
+
 def solve_a(data, b):
   """Solve for a once b is known with T(N)=a*N^b (08:36)."""
   a = []

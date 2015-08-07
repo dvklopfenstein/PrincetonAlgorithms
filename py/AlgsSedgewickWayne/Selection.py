@@ -7,18 +7,18 @@
 #  Dependencies: StdOut.java StdIn.java
 #  Data files:   http:#algs4.cs.princeton.edu/21Sort/tiny.txt
 #                http:#algs4.cs.princeton.edu/21Sort/words3.txt
-#   
+#
 #  Sorts a sequence of strings from standard input using selection Sort.
-#   
+#
 #  % more tiny.txt
 #  S O R T E X A M P L E
 #
 #  % java Selection < tiny.txt
 #  A E E L M O P R S T X                 [ one string per line ]
-#    
+#
 #  % more words3.txt
 #  bed bug dad yes zoo ... all bad yet
-#  
+#
 #  % java Selection < words3.txt
 #  all bad bed bug dad ... yes yet zoo    [ one string per line ]
 #
@@ -40,7 +40,7 @@
 ########################################################
 #
 # ALGORITHM: Ptr which scans from left to right
-# INVARIANTS: 
+# INVARIANTS:
 #   * Entries left of the Ptr (inc the Ptr) fixed and in ascending order
 #   * No entry to the right of Ptr is smaller than any entry to the left of Ptr.
 # TO MAINTAIN ALGORITHM INVARIANTS:
@@ -54,7 +54,7 @@
 # 06:12 DATA MOVEMENT IS MIMAL. Linear number of exchanges.
 # http://www.Sorting-algorithms.com/selection-Sort 06:39
 
-# 06:52 QUESTION. How many compares does selection sort make when the input 
+# 06:52 QUESTION. How many compares does selection sort make when the input
 # array is **already sorted**?
 # ANSWER: quadratic
 
@@ -64,24 +64,24 @@
 ########################################################
 
 # 04:50 GOAL. Sort any type of data.
-# 
+#
 # Q. How can sort() know how to compare data of type "Double",
-# "String", and "java.io.File" without any information about the 
+# "String", and "java.io.File" without any information about the
 # type of an item's key?
-# 
+#
 # CALLBACK = REFERENCE TO EXECUTABLE CODE. (Passing fncs to fncs)
 #   * Client passes array of objecys to sort() function.
 #   * The "sort()" function calls back object's "compareTo()" method as needed.
-# 
+#
 # IMPLEMENTING CALLBACKS.
 #   * java: interfaces
 #   * C: function pointers.
 #   * C++: class-type functors.
 #   * C#: delegates.
 #   * Python, Perl, ML, Javascript: first-class functions.
-# 
+#
 # 05:57 COMPARABLE INTERFACE
-# 
+#
 # public interface Comparable<Item>
 # {
 #   public int compareTo(Item that)
@@ -96,12 +96,12 @@
 # }
 
 # 08:05 TOTAL ORDER
-# 
+#
 # A TOTAL ORDER is a binary relation <= that satisfies:
 #   * Antisymmetry: if v<=w and w<=v, then v==w.
 #   * Transitivity: if v<=w and w<=x, then v<=x.   v-w-x
 #   * Totality: either v<=w or w<=v or both.
-# 
+#
 # Rock-Paper-Scissors is NOT a TOTAL ORDER (intransitivity)
 
 #13:21 TESTING IF SORTED
@@ -111,17 +111,17 @@
 #Q. If the sorting algorithm passes the test, did it correctly sor the array?
 #A. YES. If you used the __lt__ and exchange method.
 
-# 14:36 QUESTION: Consider the data type "Temp" defined below. Which 
-# of the following required properties of the "Comparble" interface 
+# 14:36 QUESTION: Consider the data type "Temp" defined below. Which
+# of the following required properties of the "Comparble" interface
 # does the compareTo() method violate?
-#  
+#
 # public class Temp implements Comparable<Temp> {
 #   private final double deg;
-# 
+#
 #   public Temp(double deg) {
 #     this.deg = deg;
 #   }
-#  
+#
 #   public int compareTo(Temp that) {
 #     double EPS = 0.1;
 #     if (this.deg < that.deg - EPS)
@@ -130,16 +130,16 @@
 #       return +1;
 #     return 0;
 #   }
-# 
+#
 #       deg-EPS    deg    deg+EPS
-#             <     |     > 
-# 
+#             <     |     >
+#
 #       v     <   |   >
 #       x    <   |   >
 #       w           <   |   >
-# 
+#
 # ANSWER: Transitivity
-# EXPLANATION: Transitivity is violated. 
+# EXPLANATION: Transitivity is violated.
 # YOU MUST NOT INTRODUCE A FUDGE FACTOR WHEN COMPARING TWO
 # FLOATINING_POINT NUMBERS IF YOU WANT TO IMPLEMENT THE Comparable INTERFACE.
 
@@ -149,12 +149,12 @@
 ########################################################
 ### Stability (Week 3 Lecture "Stability")
 ########################################################
-# 
+#
 #-------------------------------------------------------
 # 03:42 PROPOSITION: Selection Sort IS NOT stable.
-# 
-# NOTE ON TABLE BELOW: Items depicted as A1 and A2 in the example 
-# below have the same key, "A".  The 1 and 2 following the "A" 
+#
+# NOTE ON TABLE BELOW: Items depicted as A1 and A2 in the example
+# below have the same key, "A".  The 1 and 2 following the "A"
 # are denote that A1 was 1st and A2 was 2nd.
 #
 # PROOF BY COUNTEREXAMPLE: Long distance exchange might move
@@ -163,15 +163,15 @@
 #
 # NOTE: if "__lt__" in the "Sort" routine were "less than or equal to",
 # it would not work.
-# 
-# i min 0  1   2 
+#
+# i min 0  1   2
 # ----------------
 # 0 2 *B1 *B2 >A   > Choose min(A), exch(B1,A), B1 moved past equal B2
-# 1 1  A  >B2 *B1 
-# 2 2  A   B2 >B1 
-#     *A  *A2 *A3 
-# 
-# 
+# 1 1  A  >B2 *B1
+# 2 2  A   B2 >B1
+#     *A  *A2 *A3
+#
+#
 
 
 # Rearranges the array in ascending order, using the natural order.
@@ -215,7 +215,7 @@ def __lt__(v, w): return v < w
 
 ## is v < w ?
 #def __lt__C(c, v, w): return v < w
-    
+
 # exchange a[i] and a[j]
 def _exch(a, i, j):
     swap = a[i]
@@ -237,7 +237,7 @@ def _isSorted(a, lo=None, hi=None):
 
 # # is the array a[] Sorted?
 # def _isSorted(a, c): return _isSorted(a, c, 0, a.length - 1)
-# 
+#
 # is the array Sorted from a[lo] to a[hi]
 # def _isSortedC(a, c, lo, hi):
 #     for i in rane(lo+1, hi+1):
@@ -248,8 +248,8 @@ def add_history(ret, ARR, anno):
   import ArrayHistory
   ArrayHistory.add_history(ret, ARR, anno)
 
-# Reads in a sequence of strings from standard input selection Sorts them; 
-# and prints them to standard output in ascending order. 
+# Reads in a sequence of strings from standard input selection Sorts them;
+# and prints them to standard output in ascending order.
 def main():
     import InputArgs
     a = InputArgs.getStrArray()

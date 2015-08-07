@@ -6,8 +6,8 @@
  #
  #  A generic stack, implemented using a linked list. Each stack
  #  element is of type Item.
- #  
- #  % more tobe.txt 
+ #
+ #  % more tobe.txt
  #  to be or not to - be - - that - - - is
  #
  #  % java LinkedStack < tobe.txt
@@ -22,7 +22,7 @@
  #  for peeking at the top item, testing if the stack is empty, and iterating through
  #  the items in LIFO order.
  #  <p>
- #  This implementation uses a singly-linked list with a non-static nested class for 
+ #  This implementation uses a singly-linked list with a non-static nested class for
  #  linked-list nodes. See {@link Stack} for a version that uses a static nested class.
  #  The <em>push</em>, <em>pop</em>, <em>peek</em>, <em>size</em>, and <em>is-empty</em>
  #  operations all take constant time in the worst case.
@@ -37,7 +37,7 @@
 class LinkedStack: # <Item> implements Iterable<Item>:
 
     class _Node: # helper linked list class
-        self.Item = None 
+        self.Item = None
         self.Next = None
 
     def __init__(self):    # Initializes an empty stack.
@@ -89,7 +89,7 @@ class LinkedStack: # <Item> implements Iterable<Item>:
         for (Item item : this)
             s.append(item)
         return s.__str__()
-       
+
 #    # Returns an iterator to this stack that iterates through the items in LIFO order.
 #    # @return an iterator to this stack that iterates through the items in LIFO order.
 #    def ListIterator();  }
@@ -139,5 +139,5 @@ def main(String[] args):
 
 
 
-# Copyright (C) 2002–2010, Robert Sedgewick and Kevin Wayne. 
+# Copyright (C) 2002–2010, Robert Sedgewick and Kevin Wayne.
 # Java last updated: Tue Sep 24 10:45:31 EDT 2013.

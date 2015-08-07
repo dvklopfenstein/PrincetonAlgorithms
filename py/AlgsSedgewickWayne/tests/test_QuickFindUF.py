@@ -18,11 +18,11 @@ class QuickFindUF_Tests(unittest.TestCase):
   #  o = run_unions(10, "4-3 3-8 6-5 9-4 2-1 8-9 5-0 7-2 6-1", "\ntest_1")
   #  self.failUnless( o.ID == [1,1,1,8,8,1,1,1,8,8] )
 
-  #def test_week1_quiz_Q1(self): 
+  #def test_week1_quiz_Q1(self):
   #  o = run_unions(10, "6-3 6-5 9-5 7-0 3-1 9-4", "\ntest_week1_quiz_Q1 seed=686930")
   #  self.failUnless( o.ID == [0,4,2,4,4,4,4,0,8,4] )
 
-  #def test_week1_quiz_Q1b(self): 
+  #def test_week1_quiz_Q1b(self):
   #  o = run_unions(10, "4-7 7-8 9-7 6-5 8-6 2-0", "\ntest_week1_quiz_Q1b seed=686930")
   #  self.failUnless( o.ID == [0,1,0,3,5,5,5,5,5,5])
 
@@ -42,4 +42,4 @@ class QuickFindUF_Tests(unittest.TestCase):
 
 if __name__ == '__main__':
   unittest.main()
-  
+

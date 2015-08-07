@@ -2,7 +2,7 @@
 #************************************************************************
  #  Compilation:  javac ResizingArrayBag.java
  #  Execution:    java ResizingArrayBag
- #  
+ #
  #  Bag implementation with a resizing array.
  #
  #************************************************************************/
@@ -11,8 +11,8 @@ import java.util.Iterator
 import java.util.NoSuchElementException
 
 #*
- #  The <tt>ResizingArrayBag</tt> class represents a bag (or multiset) of 
- #  generic items. It supports insertion and iterating over the 
+ #  The <tt>ResizingArrayBag</tt> class represents a bag (or multiset) of
+ #  generic items. It supports insertion and iterating over the
  #  items in arbitrary order.
  #  <p>
  #  This implementation uses a resizing array.
@@ -100,5 +100,5 @@ public class ResizingArrayBag<Item> implements Iterable<Item>:
             StdOut.println(s)
 
 
-# Copyright (C) 2002–2010, Robert Sedgewick and Kevin Wayne. 
+# Copyright (C) 2002–2010, Robert Sedgewick and Kevin Wayne.
 # Java last updated: Tue Oct 8 21:23:24 EDT 2013.

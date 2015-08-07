@@ -4,7 +4,7 @@
  #
  #  A generic bag or multiset, implemented using a singly-linked list.
  #
- #  % more tobe.txt 
+ #  % more tobe.txt
  #  to be or not to - be - - that - - - is
  #
  #  % java Bag < tobe.txt
@@ -30,8 +30,8 @@ import java.util.Iterator
 import java.util.NoSuchElementException
 
 #*
- #  The <tt>LinkedBag</tt> class represents a bag (or multiset) of 
- #  generic items. It supports insertion and iterating over the 
+ #  The <tt>LinkedBag</tt> class represents a bag (or multiset) of
+ #  generic items. It supports insertion and iterating over the
  #  items in arbitrary order.
  #  <p>
  #  This implementation uses a singly-linked list with a non-static nested class Node.
@@ -122,5 +122,5 @@ public class LinkedBag<Item> implements Iterable<Item>:
 
 
 
-# Copyright (C) 2002–2010, Robert Sedgewick and Kevin Wayne. 
+# Copyright (C) 2002–2010, Robert Sedgewick and Kevin Wayne.
 # Java last updated: Tue Sep 24 10:45:31 EDT 2013.

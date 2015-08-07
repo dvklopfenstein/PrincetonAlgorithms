@@ -21,31 +21,31 @@
  #  140925
  #  161828
  #  [367,966 total values]
- #  
+ #
  #************************************************************************/
 
 
 ########################################################################
 # Lecture Week 1 "Order-of-Growth Classifications" (14:39)
 ########################################################################
-# 
+#
 # COMMON ORDER-OF-GROWTH CLASSIFICATIONS
-# 
+#
 # 02:44 GOOD NEWS. The small set of functions
 #  order    name           code, typical          T(2N)/T(N)
 #  -----    --------       -------------          ---------
 #   1       constant       a = b + c               1
 #   log N   logarithmic    while (N>1)
 #                            N = N/2;             ~1
-#   
+#
 #   N       linear    for i in range(N):           2
 #   N log N linearithmic   mergesort              ~2 DIVIDE-AND-CONQUER
-# 
+#
 #   N^2     quadratic      for i in range(N):      4
 #                            for j in range(N):
-# 
+#
 #   N^3     cubic          ...                     8
-# 
+#
 #   2^N     exponential    combinatorial search    T(N)
 
 # 07:50 BINARY SEARCH: JAVA IMPLEMENTATION
@@ -53,12 +53,12 @@
 # TRIVIAL TO IMPLEMENT?
 # * Fist binary search published in 1946; first bug-free one in 1962
 # * Bug in Java's Arrays.binarySerch() discovered in 2006.
-# 
+#
 # INVARIANT. If key appears in the array a[], then a[lo] <= key <= a[hi]
 
 # 09:52 BINARY SEARCH: MATHEMATICAL ANALYSIS
 #
-# PROPOSITION. Binary search uses at most 1 + lg N compares to 
+# PROPOSITION. Binary search uses at most 1 + lg N compares to
 # search in a sorted array of size N.
 #
 # DEFINITION. T(N) = # compares to binary search in a sorted subarray of size <= N.
@@ -66,19 +66,19 @@
 # BINARY SEARCH RECURRENCE. T(N) <= T(N/2) + 1 for N > 1, with T(1) = 1.
 #   T(N/2)  left half or right half
 #   1       possible to implement w/one 2-way compare instead of 3-way
-# 
+#
 # PROOF SKETCH. (Only holds if power of 2, but can extrapolate)
-#  
+#
 # T(N) <= T(N/2) + 1                          given
 #      <= T(N/4) + 1 + 1                      apply recurrence to first term
 #      <= T(N/8) + 1 + 1 + 1                  apply recurrence to first term
 #      ...
 #      <= T(N/N) + 1 + 1 + ... + 1            stop applying. T(1) = 1
 #      = 1 + lg N
-# 
+#
 
 # 02:00 Lecture Week 1 "Theory of Algorithms" (11:35)
-# 
+#
 #   BEST     ~ 1
 #   AVERAGE  ~ lg N
 #   WORST    ~ lg N
@@ -96,7 +96,7 @@
  #  @author Kevin Wayne
  #/
 
-import random 
+import random
 import sys
 import InputArgs
 import timeit
@@ -182,5 +182,5 @@ if __name__ == '__main__':
     a = [random.randrange(-2*dig, 2*dig) for i in range(dig)]
     run_timed(a)
 
-# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne. 
+# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
 # Java last updated: Sun Aug 31 21:38:23 EDT 2014.

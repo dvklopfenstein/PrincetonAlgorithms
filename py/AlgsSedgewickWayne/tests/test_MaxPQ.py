@@ -8,7 +8,7 @@ class MaxPQ_Tests(unittest.TestCase):
   def test_week4_lec_8_2_m11_29(self): # Lecture 8 - 2 12:18
     print "\nTEST_WEEK4_LEC_8_2_m11_29"
     o = MaxPQ(11); o
-    o.insert_array(['T','P','R','N','H','O','A','E','I','G']); 
+    o.insert_array(['T','P','R','N','H','O','A','E','I','G']);
     print                "Init         ", o
     o.insert('S');  print "o.insert('S')", o
     X = o.delMax(); print "o.delMax()   ", o, "Removed", X # 12:55
@@ -28,9 +28,9 @@ class MaxPQ_Tests(unittest.TestCase):
     print "\nTEST_WEEK4_QUIZ_Q2"
     o = MaxPQ(10); o
     o.insert_array([95,84,67,66,81,15,52,18,57,24])
-    X = o.delMax(); print "o.delMax()   ", o, "Removed", X 
-    X = o.delMax(); print "o.delMax()   ", o, "Removed", X 
-    X = o.delMax(); print "o.delMax()   ", o, "Removed", X 
+    X = o.delMax(); print "o.delMax()   ", o, "Removed", X
+    X = o.delMax(); print "o.delMax()   ", o, "Removed", X
+    X = o.delMax(); print "o.delMax()   ", o, "Removed", X
 
   def test_week4_quiz_Q1b(self): # seed 201303
     print "\nTEST_WEEK4_QUIZ_Q1b"
@@ -46,9 +46,9 @@ class MaxPQ_Tests(unittest.TestCase):
     o = MaxPQ(10); o
     o.insert_array([98,97,91,56,78,69,51,44,46,72])
     print                 "INIT         ", o
-    X = o.delMax(); print "o.delMax()   ", o, "Removed", X 
-    X = o.delMax(); print "o.delMax()   ", o, "Removed", X 
-    X = o.delMax(); print "o.delMax()   ", o, "Removed", X 
+    X = o.delMax(); print "o.delMax()   ", o, "Removed", X
+    X = o.delMax(); print "o.delMax()   ", o, "Removed", X
+    X = o.delMax(); print "o.delMax()   ", o, "Removed", X
 
 if __name__ == '__main__':
   unittest.main()

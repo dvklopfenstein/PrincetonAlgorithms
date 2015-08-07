@@ -7,22 +7,22 @@
 # * Generate a random real number for each array entry
 #   (Useful for shuffling columns in a spreadsheet)
 # * Sort the array
-# 
+#
 # An effective way to shuffle an array is to generate a random number
-# for each entry in the array.  Then sort the array using the random 
+# for each entry in the array.  Then sort the array using the random
 # numbers as the key.
-# 
+#
 # PROPOSITION: Shuffle sort produces a uniformly random premutation
 # of the input array, provided no duplicate values.
 # (assuming real numbers uniformly at random)
 # Well shuffled:  Every possible way of shuffling the deck appears with equal probability
-# 
+#
 # DRAWBACK: Need to pay cost of full sort?  NO, WE DO NOT HAVE TO PAY THAT COST...
 
 # 01:32 KNUTH SHUFFLE DEMO: (Linear time shuffling algorithm)
 # * In iteration i, pick integer r between 0 and i uniformly at random.
 # * Swap a[i] and a[r]
-# 
+#
 # 03:31 PROPOSITION: [Fisher-Yates 1938] Knuth shuffling algorithm produces a
 # uniformly random permutation of the input array in linear time.
 # (Assuming integers uniformly chosen at random)
@@ -34,7 +34,7 @@
 # * Swap a[i] and a[r]
 
 # WAR STORY (online poker) 05:10
-# 
+#
 #   # Shuffling algorithm in FAQ at www.planetpoker.com
 #   for i := 1 to 52 do begin
 #     r := random(51) + 1; # BUG: between 1 and 51
@@ -42,13 +42,13 @@
 #     card[r] := card[i];
 #     card[i] := swap;
 #   end;
-# 
+#
 # BUG 1: Random number r never 52 => 52nd card can't end up in 52nd place.
 # BUG 2: Shuffle not uniform (because choosing between 0 and N-1 instead of
 #        between i and N-1.
 # BUG 3: random() uses 32-bit seed => 2^32 possible shuffles (not enough)
 # BUG 4: Seed = ms since midnight => Only 86.4 million shuffles
-# 
+#
 # EXPLOIT: After seeing 5 cards and synchronizing with server clock,
 # can determine **all** future cards in real time!!
 #
@@ -61,7 +61,7 @@
 # * Continously monitor statistical properties:
 #   hardware random-number generators are fragile and fail silently
 # * Use an unbiased shuffling algorithm.
-# 
+#
 
 # QUESTION: How many possible permuations are there in a deck of 52 playing cards?
 # ANSWER:   52!
@@ -73,7 +73,7 @@
  #  Execution:    java Knuth < list.txt
  #  Dependencies: StdIn.java StdOut.java
  #  Data files:   http:#algs4.cs.princeton.edu/11model/cards.txt
- #  
+ #
  #  Reads in a list of strings and prints them in random order.
  #  The Knuth (or Fisher-Yates) shuffling algorithm guarantees
  #  to rearrange the elements in uniformly random order, under
@@ -98,7 +98,7 @@
  #************************************************************************/
 
  #*
- #  The <tt>Knuth</tt> class provides a client for reading in a 
+ #  The <tt>Knuth</tt> class provides a client for reading in a
  #  sequence of strings and <em>shuffling</em> them using the Knuth (or Fisher-Yates)
  #  shuffling algorithm. This algorithm guarantees to rearrange the
  #  elements in uniformly random order, under
@@ -136,7 +136,7 @@ def shuffle(a):
 
 # Reads in a sequence of strings from standard input, shuffles
 # them, and prints out the results.
-def main(): 
+def main():
     import InputArgs
     import sys
 

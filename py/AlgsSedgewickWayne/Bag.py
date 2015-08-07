@@ -6,7 +6,7 @@
  #
  #  A generic bag or multiset, implemented using a singly-linked list.
  #
- #  % more tobe.txt 
+ #  % more tobe.txt
  #  to be or not to - be - - that - - - is
  #
  #  % java Bag < tobe.txt
@@ -29,8 +29,8 @@
  #************************************************************************/
 
 
- #  The <tt>Bag</tt> class represents a bag (or multiset) of 
- #  generic items. It supports insertion and iterating over the 
+ #  The <tt>Bag</tt> class represents a bag (or multiset) of
+ #  generic items. It supports insertion and iterating over the
  #  items in arbitrary order.
  #  <p>
  #  This implementation uses a singly-linked list with a static nested class Node.
@@ -114,6 +114,6 @@ if __name__ == '__main__':
 
 
 
-# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne. 
+# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
 # Java last updated: Tue Mar 25 04:52:35 EDT 2014.
 

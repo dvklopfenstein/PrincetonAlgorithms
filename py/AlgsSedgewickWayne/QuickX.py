@@ -2,7 +2,7 @@
 #************************************************************************
  #  Compilation:  javac QuickX.java
  #  Execution:    java QuickX N
- #  
+ #
  #  Uses the Bentley-McIlroy 3-way partitioning scheme,
  #  chooses the partitioning element using Tukey's ninther,
  #  and cuts off to insertion sort.
@@ -33,7 +33,7 @@
 def Sort(a, array_history=None):
     _sort(a, 0, len(a) - 1)
 
-def _sort(a, lo, hi): 
+def _sort(a, lo, hi):
     N = hi - lo + 1
 
     # cutoff to insertion sort
@@ -78,17 +78,17 @@ def _sort(a, lo, hi):
         if i >= j: break
 
         _exch(a, i, j)
-        if _eq(a[i], v): 
+        if _eq(a[i], v):
           p += 1
           _exch(a, p, i)
-        if _eq(a[j], v): 
+        if _eq(a[j], v):
           q -= 1
           _exch(a, q, j)
 
 
     i = j + 1
     for k in range(lo, p+1): _exch(a, k, j); j -= 1
-    #for (int k = hi; k >= q; k--: 
+    #for (int k = hi; k >= q; k--:
     for k in range(hi, q-1, -1): _exch(a, k, i); i += 1
 
     _sort(a, lo, j)
@@ -106,7 +106,7 @@ def _insertionSort(a, lo, hi):
 
 # return the index of the median element among a[i], a[j], and a[k]
 def _median3(a, i, j, k):
-    return (_less(a[i], a[j]) if 
+    return (_less(a[i], a[j]) if
            (_less(a[j], a[k]) if  j else _less(a[i], a[k]) if k else i) else
            (_less(a[k], a[j]) if  j else _less(a[k], a[i]) if k else i))
 
@@ -119,7 +119,7 @@ def _less(v, w): return v < w
 
 # does v == w ?
 def _eq(v, w): return v == w
-    
+
 # exchange a[i] and a[j]
 def _exch(a, i, j):
     swap = a[i]
@@ -137,8 +137,8 @@ def _isSorted(a):
 
 #*
  # Reads in a sequence of strings from standard input; quicksorts them
- # (using an optimized version of quicksort); 
- # and prints them to standard output in ascending order. 
+ # (using an optimized version of quicksort);
+ # and prints them to standard output in ascending order.
  #/
 #def main(String[] args):
 #    String[] a = StdIn.readAllStrings()
@@ -147,5 +147,5 @@ def _isSorted(a):
 
 
 
-# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne. 
+# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
 # java Last updated: Sun Feb 2 06:06:56 EST 2014.
