@@ -124,12 +124,4 @@ class QuickFindUF(object): # Eager Approach
       roots[parent].add(ID)
     return list(roots.values())
 
-  def str_connected_components(self):
-    """Clearly print the contents of each component."""
-    comp_lst = self.get_connected_components()
-    #return ' '.format(join(str(component)) for component in comp_lst)
-    for component in comp_lst:
-      print component
-      print ' '.join(str(elem) for elem in component)
-
 
