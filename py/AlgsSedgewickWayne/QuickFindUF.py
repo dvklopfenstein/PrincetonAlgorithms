@@ -81,10 +81,10 @@
 # EXPLANATION: In the worst case, all of the entries except id[q] are
 # changed from id[p] to id[q]
 
-import collections as cx
+from AlgsSedgewickWayne.BaseComp import BaseComp
 
-# Python adatation by DV Klopfenstein
-class QuickFindUF(object): # Eager Approach
+# Python adaptation by DV Klopfenstein
+class QuickFindUF(BaseComp): # Eager Approach
   """ *Quickly* **find** if two components are connected.
 
       Algorithm   init union find
@@ -97,6 +97,7 @@ class QuickFindUF(object): # Eager Approach
 
   def __init__(self, N): #     $ = N               i        0 1 2 3 4 5 6 7 8 9
     """Init ID value of each index i, to i: i.e. ID[0:9] = [0 1 2 3 4 5 6 7 8 9]."""
+    super(QuickFindUF, self).__init__()
     self.ID = [i for i in range(N)] # N array accesses (wo/comprehension)
 
   def connected(self, p, q): # $ = 1
@@ -107,21 +108,18 @@ class QuickFindUF(object): # Eager Approach
     """ **Union** by changing all entries with id[p] to id[q]."""
     pID = self.ID[p]
     qID = self.ID[q]
-    for i, self_ID in enumerate(self.ID):
+    for i, curr_ID in enumerate(self.ID):
       # At most 2N + 2 array accesses.
-      #   w/self_ID replaced w/self.ID[i] and "for i in range(len(self.ID))":
-      if self_ID == pID: # Common mistake many make is to put ID[p] instead of pID:
+      #   w/self.ID replaced w/self.ID[i] and "for i in range(len(self.ID))":
+      if curr_ID == pID: # Common mistake many make is to put ID[p] instead of pID:
         self.ID[i] = qID
+
+  def _root(self, p): 
+    """Return root of node p."""
+    return self.ID[p]
 
   def __str__(self):
     """>>> print obj."""
     return " ".join(str(e) for e in self.ID)
-
-  def get_connected_components(self):
-    """Return a list of the contents of each component."""
-    roots = cx.defaultdict(set)
-    for ID, parent in enumerate(self.ID):
-      roots[parent].add(ID)
-    return list(roots.values())
 
 

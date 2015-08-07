@@ -214,7 +214,10 @@
 # 07:43 QUESTION: What is the maximum number of array accesses during a
 # find operation when using the quick-union stata structure on N elements?
 # ANSWER: linear
-class QuickUnionUF(object):
+
+from AlgsSedgewickWayne.BaseComp import BaseComp
+
+class QuickUnionUF(BaseComp):
   """ Quick-union [lazy approach].
 
       Uses a rooted tree.  Each element is in a rooted tree.
@@ -223,6 +226,7 @@ class QuickUnionUF(object):
 
   def __init__(self, N):     # $ = N
     """Set if of each object to itself."""
+    super(QuickUnionUF, self).__init__()
     self.ID = [i for i in range(N)] # Runs N array accesses; if not Pythonic
 
   def _root(self, i):
@@ -244,26 +248,6 @@ class QuickUnionUF(object):
     j = self._root(q)
     # print p, q, i, j
     self.ID[i] = j
-
-  def __str__(self):
-    """>>> print obj."""
-    idxs = " ".join(str(e) for e in range(len(self.ID)))
-    vals = " ".join(str(e) for e in self.ID)
-    #prt = ['']*len(self.ID)
-    #for i in self.ID:
-    #  if self.ID[i] == i:
-    #    prt[i] = '-'
-    #for i,v in enumerate(prt):
-    #  print v, i
-    return '\n'.join([idxs, vals])
-
-  def get_connected_components(self):
-    """Return a list of the contents of each component."""
-    import collections as cx
-    roots = cx.defaultdict(set)
-    for ID, parent in enumerate(self.ID):
-      roots[self._root(parent)].add(ID)
-    return list(roots.values())
 
 
 
