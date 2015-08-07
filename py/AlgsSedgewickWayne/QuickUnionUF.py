@@ -262,7 +262,7 @@ class QuickUnionUF(object):
     import collections as cx
     roots = cx.defaultdict(set)
     for ID, parent in enumerate(self.ID):
-      roots[parent].add(ID)
+      roots[self._root(parent)].add(ID)
     return list(roots.values())
 
 
