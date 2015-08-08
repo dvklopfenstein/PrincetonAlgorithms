@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+"""Weighter Quick Union Algorithm."""
 
 #--------------------------------------------------------------------------
 # Lecture Week 1 Union-Find: Dynamic Connectivity (10:22)
@@ -403,9 +403,9 @@
 #    >>> print set([2,7,1,3,8,1,3,7,1,0]) set([0, 1, 2, 3, 7, 8])
 #    NO:  Height of forest = 4 > lg N = lg(10)
 
-import numpy as np
+from AlgsSedgewickWayne.BaseComp import BaseComp
 
-class WeightedQuickUnionUF:
+class WeightedQuickUnionUF(BaseComp):
   """ UNION FIND: Modified Quick-union [lazy approach] to avoid tall trees.
 
       Uses a rooted tree.  Each element is in a rooted tree.
@@ -414,14 +414,11 @@ class WeightedQuickUnionUF:
 
   def __init__(self, N):     # $ = N
     """Initialize union-find data structure w/N objects (0 to N-1)."""
-    self.cnt = N
-    """Set if of each object to itself."""
-    self.ID = np.arange(N, dtype=np.int32)
+    super(WeightedQuickUnionUF, self).__init__()
+    self.ID = range(N) # Set if of each object to itself.
     # Keep track of size of each tree (number of objects)
     # Each entry contains a count of objects in the tree rooted at i.
-    self.SZ = np.ones(N,dtype=np.int32) # Needed to determine which tree is smaller/bigger
-
-  def count(self): return self.cnt
+    self.SZ = [1]*N # Needed to determine which tree is smaller/bigger
 
   def _root(self, i):
     """Chase parent pointers until reach root."""
@@ -448,7 +445,8 @@ class WeightedQuickUnionUF:
     # Runs Depth of p and q array accesses...
     i = self._root(p)[0]
     j = self._root(q)[0]
-    if i ==  j:  return
+    if i == j:
+      return
     # IMPROVEMENT #1: Modification to Quick-Union to make it weights: 4:03
     # Balance trees by linking root of smaller tree to root of larger tree
     #   Modified quick-union:
@@ -465,12 +463,9 @@ class WeightedQuickUnionUF:
       self.SZ[i] += self.SZ[j]
 
   def __str__(self):
-    """>>> print obj."""
-    h  = " ".join('%3s'%str(e) for e in range(len(self.ID)))+" header" # Header
-    s  = " ".join('%3s'%str(e) for e in self.SZ)+" SZ[]"     # Size
-    rv = [self._root(e)[0] for e in self.ID]     # Root Values
-    #roots = set(rv)
-    rv = " ".join(['%3s'%str(e) for e in rv])+" root values" # Root Values
-    return '\n'.join([h,rv,s])
+    """Print the size vector as well as the ID vector."""
+    return '\n'.join([
+        super(WeightedQuickUnionUF, self).__str__(),
+        "siz: " + ' '.join('{SZ:>2}'.format(SZ=e) for e in self.SZ)])
 
 

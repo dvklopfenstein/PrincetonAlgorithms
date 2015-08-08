@@ -16,16 +16,16 @@ class BaseComp(object):
     raise Exception("TIME TO IMPLEMENT A _root METHOD IN THE DERIVED CLASS")
 
   def __str__(self):
-    """>>> print obj."""
-    idxs = " ".join(str(e) for e in range(len(self.ID)))
-    vals = " ".join(str(e) for e in self.ID)
+    """Print the ID vector. Used in  >>> print obj"""
+    idxs = " ".join("{IDX:>2}".format(IDX=e) for e in range(len(self.ID)))
+    vals = " ".join("{VAL:>2}".format(VAL=e) for e in self.ID)
     #prt = ['']*len(self.ID)
     #for i in self.ID:
     #  if self.ID[i] == i:
     #    prt[i] = '-'
     #for i,v in enumerate(prt):
     #  print v, i
-    return '\n'.join([idxs, vals])
+    return '\n'.join(["IDX: " + idxs, "val: " + vals])
 
   def get_connected_components(self):
     """Return a list of the contents of each component."""

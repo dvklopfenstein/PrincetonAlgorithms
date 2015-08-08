@@ -4,7 +4,7 @@ import sys
 def run_unions(alg, union_txt, msg, prt=sys.stdout):
   """Test user-created sets of union instructions."""
   prt.write("{MSG}\n".format(MSG=msg))
-  prt.write("{NODES}\n".format(NODES=alg))
+  prt.write("{NODES} Initial values\n".format(NODES=alg))
   for U_str in union_txt.split():
     I = [int(intstr) for intstr in U_str.split('-')]
     alg.union(I[0], I[1])
