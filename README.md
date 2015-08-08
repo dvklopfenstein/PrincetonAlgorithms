@@ -15,7 +15,6 @@ Implemented in Python 2.7.x by D Klopfenstein is selected code from:
 
 **TESTS**: 
  * **Python** tests are run from: [./py/AlgsSedgewickWayne/tests/](./py/AlgsSedgewickWayne/tests)
- * Some algorithms implemented in Python contain "main" methods and can be run from their local directory: [./py/AlgsSedgewickWayne](./py/AlgsSedgewickWayne)
  * **Java** code is run from: [./thirdparty/](./thirdparty)
    * To download Sedgewick-Wayne Java programming environment: 
      [Linux](http://algs4.cs.princeton.edu/linux/),
