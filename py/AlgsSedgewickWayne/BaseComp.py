@@ -38,15 +38,20 @@ class BaseComp(object):
   def mk_png(self, fout_png="components.png", prt=sys.stdout):
     """Make a png showing a diagram of the connected components."""
     import pydot
+    # 1. Create/initialize Graph
     G = pydot.Dot(graph_type='digraph') # Directed Graph
+    # 2. Create Nodes
     nodes = [pydot.Node(str(idx)) for idx, val in enumerate(self.ID)]
+    # 3. Add nodes to Graph
     for node in nodes:
       G.add_node(node)
+    # 4. Add Edges between Nodes to Graph
     for child, parent in enumerate(self.ID):
       if child != parent: # Print only edges from one node to another (not to self)
         G.add_edge(pydot.Edge(nodes[parent], nodes[child]))
+    # 5. Write Graph to png file
     G.write_png(fout_png)
-    prt.write("  WROTE: {}".format(fout_png))
+    prt.write("  WROTE: {}\n".format(fout_png))
     
 
 
