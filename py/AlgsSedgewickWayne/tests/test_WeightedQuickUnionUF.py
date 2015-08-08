@@ -16,7 +16,7 @@ def test_week1_lecture(): # Lecture: Quick-Union Improvements 1:22
  3 8 9  1   7
   """
   alg = WeightedQuickUnionUF(10)
-  run_unions(alg, "4-3 3-8 6-5 9-4 2-1 5-0 7-2 6-1 7-3", msg)
+  run_unions(alg, "4-3 3-8 6-5 9-4 2-1 5-0 7-2 6-1 7-3", msg, "Lec_WtUnion")
   chk_arrays(alg.ID, [6, 2, 6, 4, 6, 6, 6, 2, 4, 4])
 
 
@@ -69,7 +69,7 @@ def test_week1_exercise_Q2_Fall2014_c():
 def test_week1_exercise_Q2_Fall2014_d():
   """Test"""
   alg = WeightedQuickUnionUF(10)
-  run_unions(alg, "2-3 1-8 1-7 5-0 0-3 8-9 7-6 2-1 4-1", "\nWk1 Ex Q3 seed = 259961")
+  run_unions(alg, "2-3 1-8 1-7 5-0 0-3 8-9 7-6 2-1 4-1", "\nWk1 Ex Q3 seed = 259961" )
 
 def test_all():
   """Run all tests."""

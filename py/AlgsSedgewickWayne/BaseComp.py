@@ -3,6 +3,7 @@
 # Copyright (C) 2014-2015 DV Klopfenstein. All rights reserved.
 
 import collections as cx
+import sys
 
 class BaseComp(object):
   """ Holds an index of Nodes which can be combined into components."""
@@ -33,5 +34,19 @@ class BaseComp(object):
     for ID, parent in enumerate(self.ID):
       roots[self._root(parent)].add(ID)
     return list(roots.values())
+
+  def mk_png(self, fout_png="components.png", prt=sys.stdout):
+    """Make a png showing a diagram of the connected components."""
+    import pydot
+    G = pydot.Dot(graph_type='digraph') # Directed Graph
+    nodes = [pydot.Node(str(idx)) for idx, val in enumerate(self.ID)]
+    for node in nodes:
+      G.add_node(node)
+    for child, parent in enumerate(self.ID):
+      if child != parent: # Print only edges from one node to another (not to self)
+        G.add_edge(pydot.Edge(nodes[parent], nodes[child]))
+    G.write_png(fout_png)
+    prt.write("  WROTE: {}".format(fout_png))
+    
 
 
