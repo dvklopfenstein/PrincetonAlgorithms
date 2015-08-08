@@ -9,7 +9,7 @@ Implemented in Python 2.7.x by D Klopfenstein is selected code from:
 * Additional comments in the code that are based on material from the 
   [**book**](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1410217876&sr=1-1) or
   [**booksite**](http://algs4.cs.princeton.edu/home/) or
-  [**coursera class**](https://class.coursera.org/algs4partI-007) 
+  [**coursera class**](https://www.coursera.org/course/algs4partI)
 * Additional code used for visualization to help me absorb the material
 * Links to [Programming Assignment Specs](./thirdparty/README.md) (No programming answers are on this site)
 
