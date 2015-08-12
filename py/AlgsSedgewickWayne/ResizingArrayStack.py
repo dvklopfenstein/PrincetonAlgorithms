@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+"""Class ResizingArrayStack."""
 
 #************************************************************************
  #  Compilation:  javac ResizingArrayStack.java
@@ -123,55 +123,6 @@
 # is a power of two.
 
 
-import sys
-
-class ResizingArrayStack: #<Item> implements Iterable<Item>:
-
-    def __init__(self): # Initializes an empty stack.
-        # array of items
-        self._a = [None for i in range(2)]
-        # number of elements on stack
-        # Also the next location in the array to get filled upon push
-        self._N = 0
-
-    # Is this stack empty?
-    # @return true if this stack is empty; false otherwise
-    def isEmpty(self): return self._N == 0
-
-    # Returns the number of items in the stack.
-    # @return the number of items in the stack
-    def size(self): return self._N
-
-    # resize the underlying array holding the elements
-    def _resize(self, capacity):
-        assert capacity >= self._N
-        temp = [None for i in range(capacity)] # type: Item[]
-        for i in range(self._N):
-            temp[i] = self._a[i]
-        self._a = temp
-
-    # Adds the item to this stack.
-    # @param item the item to add
-    def push(self, item):
-        # double size of array if necessary
-        if self._N == len(self._a):
-          self._resize(2*len(self._a))
-        self._a[self._N] = item               # add item
-        self._N += 1
-
-    # Removes and returns the item most recently added to this stack.
-    # @return the item most recently added
-    # @throws java.util.NoSuchElementException if this stack is empty
-    def pop(self):
-        if self.isEmpty():
-          raise Exception("FatalResizingArrayStack.py: Stack underflow")
-        item = self._a[self._N-1]
-        self._N -= 1
-        self._a[self._N] = None  # to avoid loitering
-        # shrink size of array if necessary
-        if self._N > 0 and self._N == len(self._a)/4: self._resize(len(self._a)/2)
-        return item
-
     # 15:49 14 STACK CONSIDERATIONS: ...
     # LOITERING. Holding a reference to an object when it is no longer needed.
     # When we decrement the value N, there is still a pointer to the thing
@@ -200,47 +151,73 @@ class ResizingArrayStack: #<Item> implements Iterable<Item>:
     # EXPLANATION: Upon termination of the loop, x is a reference to the second to last node.
     # The final statement deletes the last node from the list.
 
-    def __str__(self): return ' '.join([str(item) for item in self])
+class ResizingArrayStack: #<Item> implements Iterable<Item>:
 
-    # Returns (but does not remove) the item most recently added to this stack.
-    # @return the item most recently added to this stack
-    # @throws java.util.NoSuchElementException if this stack is empty
-    def peek():
-        if self.isEmpty(): raise Exception("Stack underflow")
-        return self._a[N-1]
+  def __init__(self): # Initializes an empty stack.
+    self._a = [None, None]
+    # Also the next location in the array to get filled upon push
+    self._N = 0 # number of elements on stack
 
-    # Returns an iterator to this stack that iterates through the items in LIFO order.
-    # @return an iterator to this stack that iterates through the items in LIFO order.
-    def __iter__(self): return self._ReverseArrayIterator(self)
+  def isEmpty(self): 
+    """return true if this stack is empty; false otherwise."""
+    return self._N == 0
 
-    class _ReverseArrayIterator: # implements Iterator<Item>:
-         def __init__(self, stk):
-           self._arr = stk._a
-           self._i   = stk._N
-         def hasNext(self): return self._i > 0
-         def next(self):
-             if not self.hasNext():
-               raise StopIteration
-             self._i -= 1
-             return self._arr[self._i]
+  def size(self): 
+    """Returns the number of items in the stack."""
+    return self._N
 
-# Unit tests the <tt>Stack</tt> data type.
-def main():
-  import InputArgs
-  a = InputArgs.getStrArray("to be or not to be")
-  print a
-  s = ResizingArrayStack()
-  while a:
-    item = a.pop()
-    print item
-    if item != "-": s.push(item)
-    elif not s.isEmpty(): print s.pop(), " "
-  sys.stdout.write("({}) left on stack)".format(s.size()))
-  for S in s: print S
+  def _resize(self, capacity):
+    """resize the underlying array holding the elements."""
+    assert capacity >= self._N
+    temp = [None for i in range(capacity)] # type: Item[]
+    for i in range(self._N):
+        temp[i] = self._a[i]
+    self._a = temp
 
-if __name__ == '__main__':
-  main()
+  def push(self, item):
+    """Adds the item to this stack."""
+    # double size of array if necessary
+    if self._N == len(self._a):
+      self._resize(2*len(self._a))
+    self._a[self._N] = item               # add item
+    self._N += 1
 
+  def pop(self):
+    """Removes and returns the item most recently added to this stack."""
+    if self.isEmpty():
+      raise Exception("FatalResizingArrayStack.py: Stack underflow")
+    item = self._a[self._N-1]
+    self._N -= 1
+    self._a[self._N] = None  # to avoid loitering
+    # shrink size of array if necessary
+    if self._N > 0 and self._N == len(self._a)/4: 
+      self._resize(len(self._a)/2)
+    return item
+
+  def __str__(self): 
+    return ' '.join([str(item) for item in self])
+
+  def peek():
+    """Returns (but does not remove) the item most recently added to this stack."""
+    if self.isEmpty(): raise Exception("Stack underflow")
+    return self._a[N-1]
+
+  def __iter__(self): 
+    """Returns an iterator to this stack that iterates through the items in LIFO order."""
+    return self._ReverseArrayIterator(self)
+
+  class _ReverseArrayIterator: # implements Iterator<Item>:
+    def __init__(self, stk):
+      self._arr = stk._a
+      self._i   = stk._N
+    def hasNext(self): 
+      return self._i > 0
+    def next(self):
+      if not self.hasNext():
+        raise StopIteration
+      self._i -= 1
+      return self._arr[self._i]
 
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
+# Copyright (C) 2014-2015, DV Klopfenstein ported to Python
 # Java last updated: Mon Oct 7 11:58:25 EDT 2013.

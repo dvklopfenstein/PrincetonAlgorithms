@@ -40,11 +40,10 @@ def _prt_usage_msg(default_seq="a f b d g e c"):
 
 
 def get_list_from_args():
-  for arg in sys.argv[1:]:
-    if os.path.isfile(arg):
+  if len(sys.argv) > 1:
+    if os.path.isfile(sys.argv[1]):
       return get_ints_from_file(arg)
-    else:
-      return get_seq__int_or_str(arg)
+    return sys.argv[1:]
 
 def get_seq__int_or_str(seqstr):
   """Return a list of ints if string contains a sequence of ints."""

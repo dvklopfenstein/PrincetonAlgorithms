@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 #************************************************************************
  #  Compilation:  javac ResizingArrayBag.java
  #  Execution:    java ResizingArrayBag

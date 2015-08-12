@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+"""Stack Class"""
 
  #************************************************************************
  #  Compilation:  javac Stack.java
@@ -116,54 +116,6 @@
 # 08:33 LINKED-LIST IMPLEMENTATION.
 #   * Every operation takes constant time in the WORST CASE
 #   * Uses extra time and space to deal with the links.
-
-import sys
-
-class Stack:
-
-  class _Node: # helper linked list class
-    Item = None # Type String Item
-    Next = None # Type Node<Item>
-
-  def __init__(self):
-    self.first = None # Node<Item>
-    self.N = 0        # size of the stack
-
-  def isEmpty(self): return self.first is None
-
-  def size(self): return self.N # Number of items in the stack
-
-  def push(self, item): # 05:27 Lecture Week 2 "Stacks" (16:24)
-      oldfirst   = self.first    # Save a link to the list
-      self.first = self._Node()  # Create a new node for the beginning
-      # Set the instance variables in the new node
-      self.first.Item = item;
-      self.first.Next = oldfirst;
-      self.N += 1
-
-  def pop(self): # 06:30 Lecture Week 2 "Stacks" (16:24)
-      if self.isEmpty(): raise Exception("Stack underflow")
-      item = self.first.Item        # save item to return
-      self.first = self.first.Next  # delete first node
-      self.N -= 1
-      return item                   # return the saved item
-
-  # Returns (but does not remove) the item most recently added to this stack.
-  # @return the item most recently added to this stack
-  # @raises Exception if this stack is empty
-  def peek(self):
-      if isEmpty(): raise Exception("Stack underflow")
-      return first.item
-
-  # Returns a string representation of this stack.
-  # @return the sequence of items in the stack in LIFO order, separated by spaces
-  def __str__(self): return ' '.join([str(item) for item in self])
-
-  # Returns an iterator to this stack that iterates through the items in LIFO order.
-  # @return an iterator to this stack that iterates through the items in LIFO order.
-  # https://mail.python.org/pipermail/tutor/2006-January/044455.html
-  # https://www.inkling.com/read/learning-python-mark-lutz-4th/chapter-29/iterator-objects---iter---and--
-
 ################################################################################
 # Lecture Alg 1 Week 2 "Iterators" (7:16)
 ################################################################################
@@ -219,22 +171,6 @@ class Stack:
 #   i. the items should be iterated over in the opposite order
 #   ii. the items won't typically be stored in the array as entries 0 to N-1
 
-  def __iter__(self):
-    return self.ListIterator(self.first)
-
-  class ListIterator:
-      # Iterator Starts at the first item
-      def __init__(self, first):
-          self.current = first # Node<Item>
-
-      def next(self):
-          if self.current is None:
-            raise StopIteration
-          item = self.current.Item
-          self.current = self.current.Next
-          return item
-
-
 # QUESTION: Suppose that we copy the iterator code from our linked list and resizing array
 # implrmentations of a stack to the corresponging implementations of a queue.
 # Which queue iterator(s) will correctly return the items in FIFO order?
@@ -245,47 +181,72 @@ class Stack:
 #   1) The items should be iterated over in the opposite order
 #   2) the items won't typically be stored in the array as entries 0 to N-1.
 
-def run(seqstr):
-  import InputArgs as IA
-  return run_list( IA.get_seq__int_or_str(seqstr) )
+class Stack(object):
+  """Stack class: Linked list of Nodes."""
 
-def run_list(item_list):
-  sys.stdout.write("\nINPUT: {}\n".format(' '.join(map(str, item_list))))
-  s = Stack()
-  res = []
-  for item in item_list:
-    if item != "-":
-      s.push(item)
-      sys.stdout.write("{:10}   PUSH {:10} +STACK: {}\n".format("", item, s))
-    elif not s.isEmpty():
-      popped = s.pop()
-      res.append(popped)
-      sys.stdout.write("{:>10} <-POP  {:10} -STACK: {}\n".format(popped, item, s))
-  sys.stdout.write('({} left on stack)\n'.format(s.size()))
-  return ' '.join(map(str, res)), s
+  class _Node(object): # helper linked list class
+    """Node object. Nodes are stored in a Stack."""
 
-def ex_stdin():
-  s = Stack()
-  res = ""
-  while True:
-    item = raw_input('TYPE WORDS OR -')
-    if not item: break
-    if item != "-": s.push(item)
-    elif not s.isEmpty(): res = ' '.join([res,s.pop()])
-  sys.stdout.write('(%d left on stack) OUTPUT: %s\n'%(s.size(),res))
+    def __init__(self, item, nxt):
+      self.Item = item # Type String Item
+      self.Next = nxt  # Type Node<Item>
 
-def default_examples():
-  stk = run( "to be or not to be - - - - - -" )
-  # Slide 6 Week 2 Lecture 4-1-Stacks(16-24)
-  stk = run( "to be or not to - be - - that - - - is" )
-  sys.stdout.write("\nDEMOSTRATE ITERATION:\n");
-  for S in stk: print S
-  sys.stdout.write("\nDEMONSTRATE 'toString()': {}\n".format(stk.__str__()))
+  def __init__(self):
+    self.first = None # Node<Item>
+    self.N = 0        # size of the stack
 
+  def isEmpty(self):
+    """Returns True if the Stack contains no nodes."""
+    return self.first is None
 
-if __name__ == '__main__':
-  import InputArgs as IA
-  if len(sys.argv) == 1: default_examples()
-  else: run( IA.get_list_from_args() )
+  def size(self):
+    """Returns the size of the Stack."""
+    return self.N # Number of items in the stack
 
+  def push(self, item): # 05:27 Lecture Week 2 "Stacks" (16:24)
+    """Add a new item to the top of the Stack."""
+    oldfirst = self.first     # Save a link to the list
+    self.first = self._Node(item, oldfirst)
+    self.N += 1
+
+  def pop(self): # 06:30 Lecture Week 2 "Stacks" (16:24)
+    """Returns the item most recently added."""
+    if self.isEmpty():
+      raise Exception("Stack underflow")
+    item = self.first.Item        # save item to return
+    self.first = self.first.Next  # delete first node
+    self.N -= 1
+    return item                   # return the saved item
+
+  def peek(self):
+    """Returns (but does not remove) the item most recently added to this stack."""
+    if self.isEmpty():
+      raise Exception("Stack underflow") # Nothing to peek at
+    return self.first.Item # most recently added item
+
+  def __str__(self):
+    """Returns string containing the sequence of items in the stack in LIFO order"""
+    return ' '.join([str(item) for item in self])
+
+  # Returns an iterator to this stack that iterates through the items in LIFO order.
+  # @return an iterator to this stack that iterates through the items in LIFO order.
+  # https://mail.python.org/pipermail/tutor/2006-January/044455.html
+  # https://www.inkling.com/read/learning-python-mark-lutz-4th/chapter-29/iterator-objects---iter---and--
+  def __iter__(self):
+    """Returns an iterator object."""
+    return self.ListIterator(self.first)
+
+  class ListIterator(object):
+    """Iterator Starts at the first item."""
+
+    def __init__(self, first):
+      self.current = first # Node<Item>
+
+    def next(self):
+      """Return Next item."""
+      if self.current is None:
+        raise StopIteration
+      item = self.current.Item
+      self.current = self.current.Next
+      return item
 
