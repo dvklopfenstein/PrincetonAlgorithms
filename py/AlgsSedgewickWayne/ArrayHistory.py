@@ -39,6 +39,26 @@ def run_list(container, item_list, prt=sys.stdout):
   prt.write('({} left on stack)\n'.format(container.size()))
   return ' '.join([str(item) for item in result])
 
+def run_Queue(container, seqstr, prt=sys.stdout):
+  """Inserts items in a string into a container."""
+  import AlgsSedgewickWayne.InputArgs as IA
+  return run_Queue_list(container, IA.get_seq__int_or_str(seqstr), prt)
+
+def run_Queue_list(container, item_list, prt=sys.stdout):
+  """Inserts items in a string into a container. Prints steps. Returns end state."""
+  prt.write("\nINPUT: {}\n".format(' '.join([str(item) for item in item_list])))
+  result = []
+  for item in item_list:
+    if item != "-":
+      container.enqueue(item)
+      prt.write("{:10}   ENQUEUE {:10} +QUEUE: {}\n".format("", item, container))
+    elif not container.isEmpty():
+      popped = container.dequeue()
+      result.append(popped)
+      prt.write("{:>10} <-DEQUQUE {:10} -QUEUE: {}\n".format(popped, item, container))
+  prt.write('({} left on stack)\n'.format(container.size()))
+  return ' '.join([str(item) for item in result])
+
 def ex_stdin(container, prt=sys.stdout):
   """Read a string sequence from STDIN."""
   result = ""
