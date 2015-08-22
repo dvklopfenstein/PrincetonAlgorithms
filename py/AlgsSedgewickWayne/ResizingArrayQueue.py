@@ -30,7 +30,7 @@
 #
 #  @author Robert Sedgewick
 #  @author Kevin Wayne
-#  @edited D Klopfenstein: Converted t Python
+#  @edited DV Klopfenstein: Converted to Python
 
 
 # Lecture Part 1 Week 2 Queues (4:33)

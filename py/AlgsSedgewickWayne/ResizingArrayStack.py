@@ -32,7 +32,7 @@
  #
  #  @author Robert Sedgewick
  #  @author Kevin Wayne
- #  @edited D Klopfenstein
+ #  @edited DV Klopfenstein
 
 # Lecture Week 2 Resizing Arrays (09:56)
 # 00:51 17 PROBLEM. Requiring client to provide capacity does not implement API!

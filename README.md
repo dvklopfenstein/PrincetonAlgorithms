@@ -1,7 +1,7 @@
 # Princeton University's "Algorithms and Clients"
 ## by Kevin Wayne, Robert Sedgewick
   
-Implemented in Python 2.7.x by D Klopfenstein is selected code from:
+Implemented in Python 2.7.x by DV Klopfenstein is selected code from:
 
   * http://algs4.cs.princeton.edu/code/
 
