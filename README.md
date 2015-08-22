@@ -11,7 +11,7 @@ Implemented in Python 2.7.x by DV Klopfenstein is selected code from:
   [**booksite**](http://algs4.cs.princeton.edu/home/) or
   [**coursera class**](https://www.coursera.org/course/algs4partI)
 * Additional code used for visualization to help me absorb the material
-* Links to [Programming Assignment Specs](./thirdparty/README.md) (No programming answers are on this site)
+* Links to [Programming Assignment Specs](./thirdparty/README.md) (No programming solutions are on this site)
 
 **TESTS**: 
  * **Python** tests are run from: [./py/AlgsSedgewickWayne/tests/](./py/AlgsSedgewickWayne/tests)
