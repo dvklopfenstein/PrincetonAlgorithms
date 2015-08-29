@@ -27,7 +27,7 @@ Implemented in Python 2.7.x by DV Klopfenstein is selected code from:
 **PYTHONPATH**: Add the directory: \<your_directory\>/PrincetonAlgorithms/py/AlgsSedgewickWayne/
 
 **Key:**
-* J: Java file downloaded from Princeton Algorithm's "Java Algorithms and Clients"
+* J: Java file downloaded from Princeton Algorithm's ["Java Algorithms and Clients"](http://algs4.cs.princeton.edu/code/)
 * P: Python implementation is present
 
 ```
