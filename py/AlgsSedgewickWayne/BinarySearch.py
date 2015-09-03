@@ -1,28 +1,28 @@
 #!/usr/bin/env python
 #************************************************************************
- #  Compilation:  javac BinarySearch.java
- #  Execution:    java BinarySearch whitelist.txt < input.txt
- #  Dependencies: In.java StdIn.java StdOut.java
- #  Data files:   http://algs4.cs.princeton.edu/11model/tinyW.txt
- #                http://algs4.cs.princeton.edu/11model/tinyT.txt
- #                http://algs4.cs.princeton.edu/11model/largeW.txt
- #                http://algs4.cs.princeton.edu/11model/largeT.txt
- #
- #  % java BinarySearch tinyW.txt < tinyT.txt
- #  50
- #  99
- #  13
- #
- #  % java BinarySearch largeW.txt < largeT.txt | more
- #  499569
- #  984875
- #  295754
- #  207807
- #  140925
- #  161828
- #  [367,966 total values]
- #
- #************************************************************************/
+#  Compilation:  javac BinarySearch.java
+#  Execution:    java BinarySearch whitelist.txt < input.txt
+#  Dependencies: In.java StdIn.java StdOut.java
+#  Data files:   http://algs4.cs.princeton.edu/11model/tinyW.txt
+#                http://algs4.cs.princeton.edu/11model/tinyT.txt
+#                http://algs4.cs.princeton.edu/11model/largeW.txt
+#                http://algs4.cs.princeton.edu/11model/largeT.txt
+#
+#  % java BinarySearch tinyW.txt < tinyT.txt
+#  50
+#  99
+#  13
+#
+#  % java BinarySearch largeW.txt < largeT.txt | more
+#  499569
+#  984875
+#  295754
+#  207807
+#  140925
+#  161828
+#  [367,966 total values]
+#
+#************************************************************************/
 
 
 ########################################################################
@@ -103,21 +103,21 @@ import timeit
 import datetime
 import os
 
-# Searches for the integer key in the sorted array a[].
 # @param key the search key
 # @param a the array of integers, must be sorted in ascending order
 # @return index of key in array a[] if present; -1 if not present
 def rank(key, a):
-    lo = 0
-    hi = len(a) - 1
-    while lo <= hi:
-        #  is in a[lo..hi] or not present.
-        mid = lo + (hi - lo) / 2
-        # One 3-way compare:
-        if   key < a[mid]: hi = mid - 1
-        elif key > a[mid]: lo = mid + 1
-        else: return mid
-    return -1
+  """Searches for the integer key in the sorted array a[]."""
+  lo = 0
+  hi = len(a) - 1
+  while lo <= hi:
+      #  is in a[lo..hi] or not present.
+      mid = lo + (hi - lo) / 2
+      # One 3-way compare:
+      if   key < a[mid]: hi = mid - 1
+      elif key > a[mid]: lo = mid + 1
+      else: return mid
+  return -1
 
 # Reads in a sequence of integers from the whitelist file, specified as
 # a command-line argument. Reads in integers from standard input and

@@ -3,39 +3,39 @@
 # Alg1 Week2 Lecture Insertion Sort
 
 
- #************************************************************************
- #  Compilation:  javac Insertion.java
- #  Execution:    java Insertion < input.txt
- #  Dependencies: StdOut.java StdIn.java
- #  Data files:   http:#algs4.cs.princeton.edu/21sort/tiny.txt
- #                http:#algs4.cs.princeton.edu/21sort/words3.txt
- #
- #  Sorts a sequence of strings from standard input using insertion sort.
- #
- #  % more tiny.txt
- #  S O R T E X A M P L E
- #
- #  % java Insertion < tiny.txt
- #  A E E L M O P R S T X                 [ one string per line ]
- #
- #  % more words3.txt
- #  bed bug dad yes zoo ... all bad yet
- #
- #  % java Insertion < words3.txt
- #  all bad bed bug dad ... yes yet zoo   [ one string per line ]
- #
- #************************************************************************/
+#************************************************************************
+#  Compilation:  javac Insertion.java
+#  Execution:    java Insertion < input.txt
+#  Dependencies: StdOut.java StdIn.java
+#  Data files:   http:#algs4.cs.princeton.edu/21sort/tiny.txt
+#                http:#algs4.cs.princeton.edu/21sort/words3.txt
+#
+#  Sorts a sequence of strings from standard input using insertion sort.
+#
+#  % more tiny.txt
+#  S O R T E X A M P L E
+#
+#  % java Insertion < tiny.txt
+#  A E E L M O P R S T X                 [ one string per line ]
+#
+#  % more words3.txt
+#  bed bug dad yes zoo ... all bad yet
+#
+#  % java Insertion < words3.txt
+#  all bad bed bug dad ... yes yet zoo   [ one string per line ]
+#
+#************************************************************************/
 
- #*
- #  The <tt>Insertion</tt> class provides static methods for sorting an
- #  array using insertion sort.
- #  <p>
- #  For additional documentation, see <a href="http:#algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
- #  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- #
- #  @author Robert Sedgewick
- #  @author Kevin Wayne
- #/
+#*
+#  The <tt>Insertion</tt> class provides static methods for sorting an
+#  array using insertion sort.
+#  <p>
+#  For additional documentation, see <a href="http:#algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
+#  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+#
+#  @author Robert Sedgewick
+#  @author Kevin Wayne
+#/
 
 # SIMULATION: 00:32 to 02:40
 #
@@ -125,24 +125,24 @@
 
 
 
- # Rearranges the array in ascending order, using the natural order.
  # @param a the array to be sorted
 def Sort(ARR, array_history=None):
-    N = len(ARR)
-    # 00:57 Everything to the left is in acending order
-    #       Everything to the right, we have not seen at all
-    for i in range(N):
-        #for (int j = i; j > 0 && less(a[j], a[j-1]); j--):
-        j = i
-        # Exchange the curr Elem with every element to the left that is > 01:21
-        while j > 0 and __lt__(ARR[j], ARR[j-1]):
-            #if array_history is not None:
-            if isinstance(array_history, list): add_history(array_history, ARR, {j:'*', j-1:'*'} )
-            _exch(ARR, j, j-1)
-            j -= 1
-        assert _isSorted(ARR, 0, i)
-    assert _isSorted(ARR);
-    if isinstance(array_history, list): add_history(array_history, ARR, None )
+  """Rearranges the array in ascending order, using the natural order."""
+  N = len(ARR)
+  # 00:57 Everything to the left is in acending order
+  #       Everything to the right, we have not seen at all
+  for i in range(N):
+    #for (int j = i; j > 0 && less(a[j], a[j-1]); j--):
+    j = i
+    # Exchange the curr Elem with every element to the left that is > 01:21
+    while j > 0 and __lt__(ARR[j], ARR[j-1]):
+      #if array_history is not None:
+      if isinstance(array_history, list): add_history(array_history, ARR, {j:'*', j-1:'*'} )
+      _exch(ARR, j, j-1)
+      j -= 1
+    assert _isSorted(ARR, 0, i)
+  assert _isSorted(ARR);
+  if isinstance(array_history, list): add_history(array_history, ARR, None )
 
 #  #*
 #  # Rearranges the array in ascending order, using a comparator.
@@ -167,48 +167,47 @@ def Sort(ARR, array_history=None):
  #    ..., <tt>a[p[N-1]]</tt> are in ascending order
  #/
 def indexSort(ARR, array_history=None):
-    N = len(ARR)
-    index = [None]*N
-    for i in range(N):
-        index[i] = i
+  N = len(ARR)
+  index = [None]*N
+  for i in range(N):
+    index[i] = i
 
-    for i in range(N):
-        j = i
-        while j > 0 and __lt__(ARR[index[j]], ARR[index[j-1]]):
-          _exch(index, j, j-1)
-          if array_history is not None:
-            add_history(array_history, ARR, {j:'*', j-1:'*'} )
-          j -= 1
-    return index
+  for i in range(N):
+    j = i
+    while j > 0 and __lt__(ARR[index[j]], ARR[index[j-1]]):
+      _exch(index, j, j-1)
+      if array_history is not None:
+        add_history(array_history, ARR, {j:'*', j-1:'*'} )
+      j -= 1
+  return index
 
 #**********************************************************************
 #  Helper sorting functions
 #**********************************************************************/
 
-# is v < w ?
-def __lt__(v, w): return v < w
+def __lt__(v, w):
+  """is v < w ?"""
+  return v < w
 
 # # is v < w ?
 # def __lt__(c, v, w):
 #     return (c.compare(v, w) < 0);
 
-# exchange a[i] and a[j]
 def _exch(a, i, j):
-    swap = a[i]
-    a[i] = a[j]
-    a[j] = swap
+  """exchange a[i] and a[j]."""
+  a[i], a[j] = a[j], a[i]
 
 #**********************************************************************
 #  Check if array is sorted - useful for debugging
 #**********************************************************************/
 def _isSorted(a, lo=None, hi=None):
-    if lo is None and hi is None:
-      lo = 0
-      hi = len(a) - 1
-    # is the array sorted from a[lo] to a[hi]
-    for i in range(lo+1, hi+1):
-        if __lt__(a[i], a[i-1]): return False
-    return True
+  if lo is None and hi is None:
+    lo = 0
+    hi = len(a) - 1
+  # is the array sorted from a[lo] to a[hi]
+  for i in range(lo+1, hi+1):
+      if __lt__(a[i], a[i-1]): return False
+  return True
 
 # def _isSorted(a, c):
 #     return _isSorted(a, c, 0, a.length - 1)
@@ -227,11 +226,11 @@ def add_history(ret, ARR, anno):
 # Reads in a sequence of strings from standard input; insertion sorts them;
 # and prints them to standard output in ascending order.
 def main():
-    import InputArgs
-    data = InputArgs.getStrArray("6 3 7 2 0 1 9");
-    print "ORIG:", ' '.join(map(str,data))
-    Sort(data)
-    print "SORT:", ' '.join(map(str,data))
+  import InputArgs
+  data = InputArgs.getStrArray("6 3 7 2 0 1 9");
+  print "ORIG:", ' '.join(map(str,data))
+  Sort(data)
+  print "SORT:", ' '.join(map(str,data))
 
 if __name__ == '__main__':
   main()

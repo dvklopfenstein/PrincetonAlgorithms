@@ -9,6 +9,7 @@
  *  Weighted quick-union (without path compression).
  *
  ****************************************************************************/
+//import edu.princeton.cs.algs4.StdIn;
 
 /**
  *  The <tt>WeightedQuickUnionUF</tt> class represents a union-find data structure.
