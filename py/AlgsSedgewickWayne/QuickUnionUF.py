@@ -23,9 +23,9 @@ class QuickUnionUF(BaseComp):
 
   def union(self, p, q): #     $ = N
     """Change root of p to point to root of q: Changes only 1 array entry."""
-    i = self._root(p)
-    j = self._root(q)
-    self.ID[i] = j
+    p_root = self._root(p)
+    q_root = self._root(q)
+    self.ID[p_root] = q_root
 
 #  """ Quick-union [lazy approach].
 #
