@@ -2,8 +2,8 @@
 
 ## Code
   * [QuickUnionUF](../QuickUnionUF.py)
-  * [WeightedQuickUnionUF](../WeightedQuickUnionUF.py)
-  * [WeightedQuickUnionPlusUF.py](../WeightedQuickUnionPlusUF.py)
+  * [WeightedQuickUnionUF](../WeightedQuickUnionUF.py) puts smaller tree under bigger tree
+  * [WeightedQuickUnionPlusUF.py](../WeightedQuickUnionPlusUF.py) with path compression
 
 ## Example Contents
   1. [Force the state of QuickUnion and visualize](#ex1)
@@ -21,7 +21,20 @@
 
 ### [ex2](#example-contents)
 2. Recreate demo from Quick Union (7:50) lecture: From the cmdline...
+
+Runs these unions using QuickUnion with no speed improvements:
 ```
+  union(7-3) 
+  union(6-1) 
+  union(7-2) 
+  union(5-0) 
+  union(8-9) 
+  union(2-1) 
+  union(9-4) 
+  union(6-5) 
+  union(3-8) 
+  union(4-3) 
+
 > python -c 'import test_QuickUnionUF as T; T.test_week1_lecture()
 
 IDX:  0  1  2  3  4  5  6  7  8  9    
