@@ -1,5 +1,4 @@
-"""Weighter Quick Union Algorithm."""
-
+"""Weighted Quick Union Algorithm."""
 
 from AlgsSedgewickWayne.BaseComp import BaseComp
 
