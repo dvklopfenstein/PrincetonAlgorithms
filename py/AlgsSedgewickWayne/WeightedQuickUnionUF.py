@@ -36,9 +36,9 @@ class WeightedQuickUnionUF(BaseComp):
   def union(self, p, q):     # $ = lg N
     """Add connection between p and q."""
     # Runs Depth of p and q array accesses...
-    i = self._root(p)[0]
-    j = self._root(q)[0]
-    if i == j:
+    p_root = self._root(p)[0]
+    q_root = self._root(q)[0]
+    if p_root == q_root:
       return
     # IMPROVEMENT #1: Modification to Quick-Union to make it weights: 4:03
     # Balance trees by linking root of smaller tree to root of larger tree
@@ -46,14 +46,14 @@ class WeightedQuickUnionUF(BaseComp):
     #     * Link root of smaller tree to root of larger tree.
     #     * Update the SZ[] array.
     #   Each union involves changing only one array entry
-    if   self.SZ[i] < self.SZ[j]:
-      # Make ID[i] a child of j
-      self.ID[i] = j
-      self.SZ[j] += self.SZ[i]
+    if self.SZ[p_root] < self.SZ[q_root]:
+      # Make ID[p_root] a child of q_root
+      self.ID[p_root] = q_root
+      self.SZ[q_root] += self.SZ[p_root]
     else:
-      # Make ID[j] a child of i
-      self.ID[j] = i
-      self.SZ[i] += self.SZ[j]
+      # Make ID[q_root] a child of p_root
+      self.ID[q_root] = p_root
+      self.SZ[p_root] += self.SZ[q_root]
 
   def __str__(self):
     """Print the size vector as well as the ID vector."""
@@ -61,6 +61,11 @@ class WeightedQuickUnionUF(BaseComp):
         super(WeightedQuickUnionUF, self).__str__(),
         "siz: " + ' '.join('{SZ:>2}'.format(SZ=e) for e in self.SZ)])
 
+# algorithm   init  union  find
+# ----------- ----  -----  ----
+# quick-find    N     N     1
+# quick-union   N     N*    N <- worst case, if tree is tall
+# weighted QU   N  lg N  lg N 
 
 #--------------------------------------------------------------------------
 # Lecture Week 1 Union-Find: Dynamic Connectivity (10:22)
