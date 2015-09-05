@@ -22,7 +22,7 @@
 ### [ex2](#example-contents)
 2. Recreate demo from Quick Union (7:50) lecture: From the cmdline...
 
-Runs these unions using QuickUnion with no speed improvements:
+Runs these unions using QuickUnion with no speed improvements (Weighing, Path compression):
 ```
   union(7-3) 
   union(6-1) 
