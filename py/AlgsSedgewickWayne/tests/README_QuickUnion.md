@@ -4,7 +4,10 @@
   * [QuickUnionUF](../QuickUnionUF.py)
 
 ## Examples
-  [1. Force the state of QuickUnion and visualize](#ex1)
+  1. [Force the state of QuickUnion and visualize](#ex1)
+  2. [TBD]
+  3. [TBD]
+  4. [TBD]
 
   <a href="ex1">1. Force the state of QuickUnion and visualize:</a>    
     ```python -c 'import QuickUnionUF as Q; Q.QuickUnionUF(10).wr_png_tree_state([0, 9, 6, 5, 4, 2, 6, 1, 0, 5])'```
