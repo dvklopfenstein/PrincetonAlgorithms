@@ -1,5 +1,40 @@
 """QuickFind Algorithm."""
 
+from AlgsSedgewickWayne.BaseComp import BaseComp
+
+# Python implementation by DV Klopfenstein
+class QuickUnionUF(BaseComp):
+  """Union command is Quick."""
+
+  def __init__(self, N):     # $ = N
+    """Set if of each object to itself."""
+    super(QuickUnionUF, self).__init__()
+    self.ID = range(N) # Runs N array accesses; if not Pythonic
+
+  def _root(self, i):
+    """Chase parent pointers until reach root."""
+    while i != self.ID[i]: # Runs the depth of i array accesses
+      i = self.ID[i] # Move i up one level of the tree
+    return i # Found root: ID[i] == i
+
+  def connected(self, p, q): # $ = N
+    """Check if p and q have the same root."""
+    return self._root(p) == self._root(q) # Runs the depth of p & q array accesses
+
+  def union(self, p, q): #     $ = N
+    """Change root of p to point to root of q.
+       Simple: each union involves changing only one array entry
+    """
+    # Runs Depth of p and q array accesses
+    i = self._root(p)
+    j = self._root(q)
+    self.ID[i] = j
+
+#  """ Quick-union [lazy approach].
+#
+#      Uses a rooted tree.  Each element is in a rooted tree.
+#      Each item can be assoiciated with a root.
+#  """
 # --------------------------------------------------------------
 # Lecture Week 1 "Quick Union"(7:50)
 # --------------------------------------------------------------
@@ -214,39 +249,5 @@
 # 07:43 QUESTION: What is the maximum number of array accesses during a
 # find operation when using the quick-union stata structure on N elements?
 # ANSWER: linear
-
-from AlgsSedgewickWayne.BaseComp import BaseComp
-
-class QuickUnionUF(BaseComp):
-  """ Quick-union [lazy approach].
-
-      Uses a rooted tree.  Each element is in a rooted tree.
-      Each item can be assoiciated with a root.
-  """
-
-  def __init__(self, N):     # $ = N
-    """Set if of each object to itself."""
-    super(QuickUnionUF, self).__init__()
-    self.ID = range(N) # Runs N array accesses; if not Pythonic
-
-  def _root(self, i):
-    """Chase parent pointers until reach root."""
-    while i != self.ID[i]: # Runs the depth of i array accesses
-      i = self.ID[i] # Move i up one level of the tree
-    return i # Found root: ID[i] == i
-
-  def connected(self, p, q): # $ = N
-    """Check if p and q have the same root."""
-    return self._root(p) == self._root(q) # Runs the depth of p & q array accesses
-
-  def union(self, p, q): #     $ = N
-    """Change root of p to point to root of q.
-       Simple: each union involves changing only one array entry
-    """
-    # Runs Depth of p and q array accesses
-    i = self._root(p)
-    j = self._root(q)
-    self.ID[i] = j
-
 
 
