@@ -1,5 +1,43 @@
 """Python implentation of QuickFind."""
 
+from AlgsSedgewickWayne.BaseComp import BaseComp
+
+# Python adaptation by DV Klopfenstein
+class QuickFindUF(BaseComp): # Eager Approach
+  """ *Quickly* **find** if two components are connected.
+
+      Algorithm   init union find
+      ---------   ---- ----- ----
+      quick-find  N    N     1
+
+      DEFECT: Union too expensive!
+      COST: Takes N^2 array accesses to process sequence of N union commands on N objects.
+  """
+
+  def __init__(self, N): #     $ = N               i        0 1 2 3 4 5 6 7 8 9
+    """Init ID value of each index i, to i: i.e. ID[0:9] = [0 1 2 3 4 5 6 7 8 9]."""
+    super(QuickFindUF, self).__init__()
+    self.ID = range(N) # N array accesses (wo/comprehension)
+
+  def connected(self, p, q): # $ = 1
+    """ **Find** whether p and q are in the same component. """
+    return self.ID[p] == self.ID[q] # 2 array accesses
+
+  def union(self, p, q): #     $ = N
+    """ **Union** by changing all entries with id[p] to id[q]."""
+    pID = self.ID[p]
+    qID = self.ID[q]
+    for i, curr_ID in enumerate(self.ID):
+      # At most 2N + 2 array accesses.
+      #   w/self.ID replaced w/self.ID[i] and "for i in range(len(self.ID))":
+      if curr_ID == pID: # Common mistake many make is to put ID[p] instead of pID:
+        self.ID[i] = qID
+
+  def _root(self, p): 
+    """Return root of node p."""
+    return self.ID[p]
+
+
 # ----------------------------------------------------------------------
 # Week 1 Lecture "Quick Find"(10:18)
 # ----------------------------------------------------------------------
@@ -80,43 +118,4 @@
 # ANSWER: N - 1
 # EXPLANATION: In the worst case, all of the entries except id[q] are
 # changed from id[p] to id[q]
-
-from AlgsSedgewickWayne.BaseComp import BaseComp
-
-# Python adaptation by DV Klopfenstein
-class QuickFindUF(BaseComp): # Eager Approach
-  """ *Quickly* **find** if two components are connected.
-
-      Algorithm   init union find
-      ---------   ---- ----- ----
-      quick-find  N    N     1
-
-      DEFECT: Union too expensive!
-      COST: Takes N^2 array accesses to process sequence of N union commands on N objects.
-  """
-
-  def __init__(self, N): #     $ = N               i        0 1 2 3 4 5 6 7 8 9
-    """Init ID value of each index i, to i: i.e. ID[0:9] = [0 1 2 3 4 5 6 7 8 9]."""
-    super(QuickFindUF, self).__init__()
-    self.ID = range(N) # N array accesses (wo/comprehension)
-
-  def connected(self, p, q): # $ = 1
-    """ **Find** whether p and q are in the same component. """
-    return self.ID[p] == self.ID[q] # 2 array accesses
-
-  def union(self, p, q): #     $ = N
-    """ **Union** by changing all entries with id[p] to id[q]."""
-    pID = self.ID[p]
-    qID = self.ID[q]
-    for i, curr_ID in enumerate(self.ID):
-      # At most 2N + 2 array accesses.
-      #   w/self.ID replaced w/self.ID[i] and "for i in range(len(self.ID))":
-      if curr_ID == pID: # Common mistake many make is to put ID[p] instead of pID:
-        self.ID[i] = qID
-
-  def _root(self, p): 
-    """Return root of node p."""
-    return self.ID[p]
-
-
 
