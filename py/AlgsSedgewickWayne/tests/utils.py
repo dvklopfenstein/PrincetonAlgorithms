@@ -12,7 +12,7 @@ def run_unions(alg, union_txt, msg, pngbase=None, prt=sys.stdout):
     prt.write("{NODES} union({STR}) {SETS}\n".format(
         NODES=alg, STR=U_str, SETS=' '.join(set_str)))
     if pngbase is not None:
-      alg.mk_png("{PNGBASE}_step{IDX}.png".format(PNGBASE=pngbase, IDX=idx))
+      alg.wr_png("{PNGBASE}_step{IDX}.png".format(PNGBASE=pngbase, IDX=idx))
   return alg
 
 def chk_arrays(actual, expected):

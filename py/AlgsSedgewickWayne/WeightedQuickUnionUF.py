@@ -1,5 +1,68 @@
 """Weighter Quick Union Algorithm."""
 
+
+from AlgsSedgewickWayne.BaseComp import BaseComp
+
+class WeightedQuickUnionUF(BaseComp):
+  """ UNION FIND: Modified Quick-union [lazy approach] to avoid tall trees."""
+
+  def __init__(self, N):     # $ = N
+    """Initialize union-find data structure w/N objects (0 to N-1)."""
+    super(WeightedQuickUnionUF, self).__init__("WeightedQuickUnionUF")
+    self.ID = range(N) # Set if of each object to itself.
+    # Keep track of size of each tree (number of objects)
+    # Each entry contains a count of objects in the tree rooted at i.
+    self.SZ = [1]*N # Needed to determine which tree is smaller/bigger
+
+  def _root(self, i):
+    """Chase parent pointers until reach root."""
+    d = 0 # Used for informative prints for educational purposes
+    while i != self.ID[i]: # depth of i array accesses
+      # IMPROVEMENT #2: Path compression. Keeps tree almost completely flat. 8:08..10:21
+      # Make every path on that path point to the root.         N  lg*N
+      # PROPOSITION: [Hopcroft-Ulman, Tarjan] Starting from an  1     0
+      # empty data structure, any sequence of M union-find ops  2     1
+      # on N objects makes <= c(N + M*lg(N) array accesses.     4     2
+      #   * Analysis can be improved to N + M*alpha(M,N)       16     3
+      #   * Simple algorithm with fascinating mathematics.  65536     4
+      #self.ID[i] = self.ID[self.ID[i]]                   2^65536     5
+      i = self.ID[i]
+      d += 1
+    return i, d
+
+  def connected(self, p, q): # $ = lg N
+    """Return if p and q are in the same connected component (i.e. have the same root)."""
+    return self._root(p)[0] == self._root(q)[0] # Runs depth of p & q array accesses
+
+  def union(self, p, q):     # $ = lg N
+    """Add connection between p and q."""
+    # Runs Depth of p and q array accesses...
+    i = self._root(p)[0]
+    j = self._root(q)[0]
+    if i == j:
+      return
+    # IMPROVEMENT #1: Modification to Quick-Union to make it weights: 4:03
+    # Balance trees by linking root of smaller tree to root of larger tree
+    #   Modified quick-union:
+    #     * Link root of smaller tree to root of larger tree.
+    #     * Update the SZ[] array.
+    #   Each union involves changing only one array entry
+    if   self.SZ[i] < self.SZ[j]:
+      # Make ID[i] a child of j
+      self.ID[i] = j
+      self.SZ[j] += self.SZ[i]
+    else:
+      # Make ID[j] a child of i
+      self.ID[j] = i
+      self.SZ[i] += self.SZ[j]
+
+  def __str__(self):
+    """Print the size vector as well as the ID vector."""
+    return '\n'.join([
+        super(WeightedQuickUnionUF, self).__str__(),
+        "siz: " + ' '.join('{SZ:>2}'.format(SZ=e) for e in self.SZ)])
+
+
 #--------------------------------------------------------------------------
 # Lecture Week 1 Union-Find: Dynamic Connectivity (10:22)
 #--------------------------------------------------------------------------
@@ -402,70 +465,3 @@
 #
 #    >>> print set([2,7,1,3,8,1,3,7,1,0]) set([0, 1, 2, 3, 7, 8])
 #    NO:  Height of forest = 4 > lg N = lg(10)
-
-from AlgsSedgewickWayne.BaseComp import BaseComp
-
-class WeightedQuickUnionUF(BaseComp):
-  """ UNION FIND: Modified Quick-union [lazy approach] to avoid tall trees.
-
-      Uses a rooted tree.  Each element is in a rooted tree.
-      Each item can be assoiciated with a root.
-  """
-
-  def __init__(self, N):     # $ = N
-    """Initialize union-find data structure w/N objects (0 to N-1)."""
-    super(WeightedQuickUnionUF, self).__init__()
-    self.ID = range(N) # Set if of each object to itself.
-    # Keep track of size of each tree (number of objects)
-    # Each entry contains a count of objects in the tree rooted at i.
-    self.SZ = [1]*N # Needed to determine which tree is smaller/bigger
-
-  def _root(self, i):
-    """Chase parent pointers until reach root."""
-    d = 0 # Used for informative prints for educational purposes
-    while i != self.ID[i]: # depth of i array accesses
-      # IMPROVEMENT #2: Path compression. Keeps tree almost completely flat. 8:08..10:21
-      # Make every path on that path point to the root.         N  lg*N
-      # PROPOSITION: [Hopcroft-Ulman, Tarjan] Starting from an  1     0
-      # empty data structure, any sequence of M union-find ops  2     1
-      # on N objects makes <= c(N + M*lg(N) array accesses.     4     2
-      #   * Analysis can be improved to N + M*alpha(M,N)       16     3
-      #   * Simple algorithm with fascinating mathematics.  65536     4
-      #self.ID[i] = self.ID[self.ID[i]]                   2^65536     5
-      i = self.ID[i]
-      d += 1
-    return i, d
-
-  def connected(self, p, q): # $ = lg N
-    """Return if p and q are in the same connected component (i.e. have the same root)."""
-    return self._root(p)[0] == self._root(q)[0] # Runs depth of p & q array accesses
-
-  def union(self, p, q):     # $ = lg N
-    """Add connection between p and q."""
-    # Runs Depth of p and q array accesses...
-    i = self._root(p)[0]
-    j = self._root(q)[0]
-    if i == j:
-      return
-    # IMPROVEMENT #1: Modification to Quick-Union to make it weights: 4:03
-    # Balance trees by linking root of smaller tree to root of larger tree
-    #   Modified quick-union:
-    #     * Link root of smaller tree to root of larger tree.
-    #     * Update the SZ[] array.
-    #   Each union involves changing only one array entry
-    if   self.SZ[i] < self.SZ[j]:
-      # Make ID[i] a child of j
-      self.ID[i] = j
-      self.SZ[j] += self.SZ[i]
-    else:
-      # Make ID[j] a child of i
-      self.ID[j] = i
-      self.SZ[i] += self.SZ[j]
-
-  def __str__(self):
-    """Print the size vector as well as the ID vector."""
-    return '\n'.join([
-        super(WeightedQuickUnionUF, self).__str__(),
-        "siz: " + ' '.join('{SZ:>2}'.format(SZ=e) for e in self.SZ)])
-
-

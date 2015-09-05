@@ -9,7 +9,7 @@ class QuickFindUF(BaseComp): # Eager Approach
 
   def __init__(self, N): #     $ = N               i        0 1 2 3 4 5 6 7 8 9
     """Init ID value of each index i, to i: i.e. ID[0:9] = [0 1 2 3 4 5 6 7 8 9]."""
-    super(QuickFindUF, self).__init__()
+    super(QuickFindUF, self).__init__("QuickFindUF")
     self.ID = range(N) # N array accesses (wo/comprehension)
 
   def connected(self, p, q): # $ = 1
