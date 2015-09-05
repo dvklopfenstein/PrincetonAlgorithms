@@ -1,5 +1,6 @@
 """Python implentation of QuickFind."""
 
+# Derived from a class used for visualization to gain further understanding
 from AlgsSedgewickWayne.BaseComp import BaseComp
 
 # Python adaptation by DV Klopfenstein
