@@ -5,15 +5,7 @@ from AlgsSedgewickWayne.BaseComp import BaseComp
 
 # Python adaptation by DV Klopfenstein
 class QuickFindUF(BaseComp): # Eager Approach
-  """ *Quickly* **find** if two components are connected.
-
-      Algorithm   init union find
-      ---------   ---- ----- ----
-      quick-find  N    N     1
-
-      DEFECT: Union too expensive!
-      COST: Takes N^2 array accesses to process sequence of N union commands on N objects.
-  """
+  """ *Quickly* **find** if two components are connected."""
 
   def __init__(self, N): #     $ = N               i        0 1 2 3 4 5 6 7 8 9
     """Init ID value of each index i, to i: i.e. ID[0:9] = [0 1 2 3 4 5 6 7 8 9]."""
@@ -30,7 +22,7 @@ class QuickFindUF(BaseComp): # Eager Approach
     qID = self.ID[q]
     for i, curr_ID in enumerate(self.ID):
       # At most 2N + 2 array accesses.
-      #   w/self.ID replaced w/self.ID[i] and "for i in range(len(self.ID))":
+      #   2N: 1st in for-loop above, 2nd in assignment below
       if curr_ID == pID: # Common mistake many make is to put ID[p] instead of pID:
         self.ID[i] = qID
 
@@ -38,6 +30,13 @@ class QuickFindUF(BaseComp): # Eager Approach
     """Return root of node p."""
     return self.ID[p]
 
+
+# Algorithm   init union find
+# ---------   ---- ----- ----
+# quick-find  N    N     1
+# 
+# DEFECT: Union too expensive!
+# COST: Takes N^2 array accesses to process sequence of N union commands on N objects.
 
 # ----------------------------------------------------------------------
 # Week 1 Lecture "Quick Find"(10:18)
