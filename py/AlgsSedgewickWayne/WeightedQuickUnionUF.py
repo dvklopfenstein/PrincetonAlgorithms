@@ -4,7 +4,7 @@
 from AlgsSedgewickWayne.BaseComp import BaseComp
 
 class WeightedQuickUnionUF(BaseComp):
-  """ UNION FIND: Modified Quick-union [lazy approach] to avoid tall trees."""
+  """ UNION FIND: Weighted Quick-union [lazy approach] to avoid tall trees."""
 
   def __init__(self, N):     # $ = N
     """Initialize union-find data structure w/N objects (0 to N-1)."""

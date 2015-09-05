@@ -27,6 +27,24 @@ class QuickUnionUF(BaseComp):
     q_root = self._root(q)
     self.ID[p_root] = q_root
 
+# 06:58 QUICK-UNION IS ALSO TOO SLOW
+#
+# COST MODEL. Number of array accesses (fro read or write).
+# algorithm   init union find
+# quick-find    N    N    1
+# quick-union   N    N*   N <- worst case, if tree is tall
+#     * Included cost of finding roots
+
+# QUICK-FIND  DEFECT.  Too slow for huge problems
+#   * UNION too expensive (N array accesses)
+#   * Trees are flat, but too expensive to keep them flat.
+#
+# QUICK-UNION DEFECT.
+#   * Trees can get too tall.
+#   * FIND too expensive (could be N array accesses).
+#
+
+
 #  """ Quick-union [lazy approach].
 #
 #      Uses a rooted tree.  Each element is in a rooted tree.
@@ -226,22 +244,6 @@ class QuickUnionUF(BaseComp):
 #   |
 #   6
 
-# 06:58 QUICK-UNION IS ALSO TOO SLOW
-#
-# COST MODEL. Number of array accesses (fro read or write).
-# algorithm   init union union
-# quick-find    N    N    1
-# quick-union   N    N*   N <- worst case, if tree is tall
-#     * Included cost of finding roots
-
-# QUICK-FIND  DEFECT.  Too slow for huge problems
-#   * UNION too expensive (N array accesses)
-#   * Trees are flat, but too expensive to keep them flat.
-#
-# QUICK-UNION DEFECT.
-#   * Trees can get too tall.
-#   * FIND too expensive (could be N array accesses).
-#
 
 # 07:43 QUESTION: What is the maximum number of array accesses during a
 # find operation when using the quick-union stata structure on N elements?

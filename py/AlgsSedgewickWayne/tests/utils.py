@@ -19,6 +19,8 @@ def chk_arrays(actual, expected):
   """Test to see if QuickFind passed."""
   if actual == expected:
     return
+  sys.stdout.write("EXPECTED: {EXP}\n".format(EXP=expected))
+  sys.stdout.write("ACTUAL:   {ACT}\n".format(ACT=actual))
   raise Exception("TEST FAILED.")
 
 
