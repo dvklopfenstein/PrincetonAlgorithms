@@ -2,6 +2,7 @@
 
 ## Code
   * [QuickUnionUF](../QuickUnionUF.py)
+  * [WeightedQuickUnionUF](../WeightedQuickUnionUF.py)
 
 ## Example Contents
   1. [Force the state of QuickUnion and visualize](#ex1)
