@@ -10,14 +10,16 @@
   4. [TBD]
 
 ## Examples
-1. <a href="ex1"> Force the state of QuickUnion and visualize:</a> From the cmdline...   
+### ex1
+1. <a href="ex1"></a> Force the state of QuickUnion and visualize: From the cmdline...   
 ```
 > python -c 'import QuickUnionUF as Q; Q.QuickUnionUF(10).wr_png_tree_state([0, 9, 6, 5, 4, 2, 6, 1, 0, 5])'
 ```    
 ![QuickUnionUF state](./images/state_QuickUnionUF_0_9_6_5_4_2_6_1_0_5.png)
 
 
-2. <a href="ex2">Recreate demo from Quick Union (7:50) lecture]:</a> From the cmdline...
+### ex2
+2. <a href="ex2"></a>Recreate demo from Quick Union (7:50) lecture: From the cmdline...
 ```
 > python -c 'import test_QuickUnionUF as T; T.test_week1_lecture()
 
