@@ -9,7 +9,7 @@ class QuickUnionUF(BaseComp):
   def __init__(self, N):     # $ = N
     """Set if of each object to itself."""
     super(QuickUnionUF, self).__init__()
-    self.ID = range(N) # Runs N array accesses; if not Pythonic
+    self.ID = range(N) # Runs N array accesses
 
   def _root(self, i):
     """Chase parent pointers until reach root."""
@@ -22,10 +22,7 @@ class QuickUnionUF(BaseComp):
     return self._root(p) == self._root(q) # Runs the depth of p & q array accesses
 
   def union(self, p, q): #     $ = N
-    """Change root of p to point to root of q.
-       Simple: each union involves changing only one array entry
-    """
-    # Runs Depth of p and q array accesses
+    """Change root of p to point to root of q: Changes only 1 array entry."""
     i = self._root(p)
     j = self._root(q)
     self.ID[i] = j
