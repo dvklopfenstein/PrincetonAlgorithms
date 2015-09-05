@@ -1,4 +1,4 @@
-"""QuickFind Algorithm."""
+"""QuickUnion (union-find) Algorithm."""
 
 from AlgsSedgewickWayne.BaseComp import BaseComp
 
