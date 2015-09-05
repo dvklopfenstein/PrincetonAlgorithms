@@ -31,8 +31,8 @@ Implemented in Python 2.7.x by DV Klopfenstein is selected code from:
 * P: Python implementation is present
 
 ```
-Key   1 FUNDAMENTALS         Description                      DATA
-:-- --: :------------------- :-----------------------------   :-------------
+Key  1 FUNDAMENTALS         Description                      DATA
+:- --: :------------------- :-----------------------------   :-------------
 JP   – BinarySearch         binary search                    tinyW.txt tinyT.txt largeW.txt largeT.txt
 ..   – RandomSeq            random numbers in a given range  –
 ..   – Average              average of a sequence of numbers –
@@ -67,7 +67,8 @@ J.   – ThreeSumFast         faster three sum                 1Kints.txt 2Kints
 JP   – QuickFindUF          quick find                       tinyUF.txt mediumUF.txt largeUF.txt
 JP   – QuickUnionUF         quick union                      tinyUF.txt mediumUF.txt largeUF.txt
 JP 1.5 WeightedQuickUnionUF weighted quick union             tinyUF.txt mediumUF.txt largeUF.txt
-..  –  UF                   union-by-rank with path halving  tinyUF.txt mediumUF.txt largeUF.txt
+.P   - WeightedQuickUnionUFPlus weighted quick union w/path compression        
+..   - UF                   union-by-rank with path halving  tinyUF.txt mediumUF.txt largeUF.txt
 
 
 Key  2 SORTING     Description                       DATA
