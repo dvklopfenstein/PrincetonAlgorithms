@@ -5,7 +5,7 @@
 
 ## Example Contents
   1. [Force the state of QuickUnion and visualize](#ex1)
-  2. [Recreate demo from Quick Union (7:50) lecture](ex2)
+  2. [Recreate demo from Quick Union (7:50) lecture](#ex2)
   3. [TBD]
   4. [TBD]
 
@@ -17,7 +17,7 @@
 ![QuickUnionUF state](./images/state_QuickUnionUF_0_9_6_5_4_2_6_1_0_5.png)
 
 
-2. <a href="ex2">Recreate demo from Quick Union (7:50) lecture](ex2):</a> From the cmdline...
+2. <a href="ex2">Recreate demo from Quick Union (7:50) lecture]:</a> From the cmdline...
 ```
 > python -c 'import test_QuickUnionUF as T; T.test_week1_lecture()
 
