@@ -17,14 +17,6 @@ class WeightedQuickUnionUF(BaseComp):
     """Chase parent pointers until reach root."""
     d = 0 # Used for informative prints for educational purposes
     while i != self.ID[i]: # depth of i array accesses
-      # IMPROVEMENT #2: Path compression. Keeps tree almost completely flat. 8:08..10:21
-      # Make every path on that path point to the root.         N  lg*N
-      # PROPOSITION: [Hopcroft-Ulman, Tarjan] Starting from an  1     0
-      # empty data structure, any sequence of M union-find ops  2     1
-      # on N objects makes <= c(N + M*lg(N) array accesses.     4     2
-      #   * Analysis can be improved to N + M*alpha(M,N)       16     3
-      #   * Simple algorithm with fascinating mathematics.  65536     4
-      #self.ID[i] = self.ID[self.ID[i]]                   2^65536     5
       i = self.ID[i]
       d += 1
     return i, d
@@ -46,12 +38,10 @@ class WeightedQuickUnionUF(BaseComp):
     #     * Link root of smaller tree to root of larger tree.
     #     * Update the SZ[] array.
     #   Each union involves changing only one array entry
-    if self.SZ[p_root] < self.SZ[q_root]:
-      # Make ID[p_root] a child of q_root
+    if self.SZ[p_root] < self.SZ[q_root]: # Make ID[p_root] a child of q_root
       self.ID[p_root] = q_root
       self.SZ[q_root] += self.SZ[p_root]
-    else:
-      # Make ID[q_root] a child of p_root
+    else: # Make ID[q_root] a child of p_root
       self.ID[q_root] = p_root
       self.SZ[p_root] += self.SZ[q_root]
 
