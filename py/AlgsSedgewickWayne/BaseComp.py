@@ -36,10 +36,10 @@ class BaseComp(object):
       roots[self._root(parent)].add(ID)
     return list(roots.values())
 
-  def wr_png(self, fout_png="components.png", prt=sys.stdout):
+  def wr_png(self, fout_png="components.png", prt=sys.stdout, **kwargs):
     """Make a png showing a diagram of the connected components."""
     import pydot
-    label = " ".join([str(e) for e in self.ID])
+    label = self.get_label(kwargs)
     # 1. Create/initialize Graph
     G = pydot.Dot(label=label, graph_type='digraph') # Directed Graph
     # 2. Create Nodes
@@ -54,6 +54,29 @@ class BaseComp(object):
     # 5. Write Graph to png file
     G.write_png(fout_png)
     prt.write("  WROTE: {}\n".format(fout_png))
+
+  def union_pngs(self, unions, png_base):
+    """Do a union, draw a state image. Repeat."""
+    for i, (u0, u1) in enumerate(unions):
+      fout_png = "{BASE}{I}.png".format(BASE=png_base, I=i)
+      self.union_png(u0, u1, fout_png)
+
+  def union_png(self, u0, u1, fout_png):
+    """Do a union, draw a state image."""
+    self.union(u0, u1)
+    if fout_png is not None:
+      label_pat = "union({u0}, {u1}) -> {{STATE}}".format(u0=u0, u1=u1)
+      self.wr_png(fout_png, label_pat=label_pat)
+
+  def get_label(self, kwargs):
+    """Return label to be used in image."""
+    if 'label' in kwargs:
+      return kwargs['label']
+    pat = "{STATE}"
+    state_str = " ".join([str(e) for e in self.ID])
+    if 'label_pat' in kwargs:
+      pat = kwargs['label_pat']
+    return pat.format(STATE=state_str)
 
   def get_png(self):
     """Generate a png filename."""

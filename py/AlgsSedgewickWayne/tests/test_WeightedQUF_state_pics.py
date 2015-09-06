@@ -19,11 +19,23 @@ def test_wk1_ex_166199b():
   unions = [(9, 5), (7, 8), (7, 9), (4, 0), (1, 4), (2, 4), (3, 4), (6, 4), (7, 4)]
   try_unions(alg, 166199, unions)
 
+def test_wk1_ex_686557x():
+  """Try to create this state: 2 2 2 1 5 1 2 6 5 1"""
+  alg = WeightedQuickUnionUF(10)
+  unions = [(5, 4), (5, 8), (1, 3), (1, 9), (2, 0), (6, 7), (2, 6), (1, 5), (1, 2)]
+  try_unions(alg, 166199, unions)
+
+def test_wk1_ex_x1():
+  """Try to create this state: 2 2 2 1 5 1 2 6 5 1"""
+  alg = WeightedQuickUnionUF(10)
+  unions = [(7, 9), (2, 8), (2, 1), (5, 6), (1, 4), (9, 6), (4, 9), (3, 4), (9, 0)]
+  try_unions(alg, "x", unions)
+
+
 def try_unions(alg, seed, unions):
   """Try various unions to determine if we can create a specific state."""
-  for i, u in enumerate(unions):
-    alg.union(*u)
-    alg.wr_png("./work/s{SEED}_{I}.png".format(SEED=seed, I=i))
+  png_base = "./work/s{SEED}_".format(SEED=seed)
+  alg.union_pngs(unions, png_base)
 
 def run_all():
   """Run all tests."""

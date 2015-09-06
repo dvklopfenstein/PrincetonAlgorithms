@@ -26,7 +26,7 @@ def test_week1_lecture_print():
 def test_week1_lecture():
   """From Quick Union (7:50) Lecture Example."""
   alg = QuickUnionUF(10)
-  run_unions(alg, "4-3 3-8 6-5 9-4 2-1 8-9 5-0 7-2 6-1 7-3", "\nwk1_lec quick-union", "QU_demo")
+  run_unions(alg, "4-3 3-8 6-5 9-4 2-1 8-9 5-0 7-2 6-1 7-3", "\nwk1_lec quick-union", "./images/QU_demo")
   chk_arrays(alg.ID, [1, 8, 1, 8, 3, 0, 5, 1, 8, 8])
 
 def test_week1_exercise_Q2():
