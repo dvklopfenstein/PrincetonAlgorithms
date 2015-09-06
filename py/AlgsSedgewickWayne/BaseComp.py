@@ -39,8 +39,9 @@ class BaseComp(object):
   def wr_png(self, fout_png="components.png", prt=sys.stdout):
     """Make a png showing a diagram of the connected components."""
     import pydot
+    label = " ".join([str(e) for e in self.ID])
     # 1. Create/initialize Graph
-    G = pydot.Dot(graph_type='digraph') # Directed Graph
+    G = pydot.Dot(label=label, graph_type='digraph') # Directed Graph
     # 2. Create Nodes
     nodes = [pydot.Node(str(idx)) for idx in range(len(self.ID))]
     # 3. Add nodes to Graph
@@ -54,15 +55,23 @@ class BaseComp(object):
     G.write_png(fout_png)
     prt.write("  WROTE: {}\n".format(fout_png))
 
+  def get_png(self):
+    """Generate a png filename."""
+    return "state_{NAME}_{STATE}.png".format(
+        NAME = self.name,
+        STATE = "_".join([str(s) for s in self.ID]))
+
   def wr_png_tree_state(self, state=None, fout_png=None):
-    """Set the state and write a png showing tree image of the state."""
-    # Expecting state is an ID array. e.g. state=[0, 9, 6, 5, 4, 2, 6, 1, 0, 5]
+    """Force state (e.g. [0, 9, 6, 5, 4, 2, 6, 1, 0, 5]), create png showing current state."""
     self.ID = state
     if fout_png is None:
-      fout_png = "state_{NAME}_{STATE}.png".format(
-          NAME = self.name,
-          STATE = "_".join([str(s) for s in state]))
+      fout_png = self.get_png()
     self.wr_png(fout_png)
+
+  def wr_png_tree_statestr(self, statestr=None, fout_png=None):
+    """Given state string (e.g. "0 9 6 5 4 2 6 1 0 5"), create png showing current state."""
+    usr_state = [int(n) for n in statestr.split()]
+    self.wr_png_tree_state(usr_state, fout_png)
 
 
 

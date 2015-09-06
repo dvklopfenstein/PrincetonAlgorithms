@@ -9,8 +9,7 @@ class WeightedQuickUnionUF(BaseComp):
     """Initialize union-find data structure w/N objects (0 to N-1)."""
     super(WeightedQuickUnionUF, self).__init__("WeightedQuickUnionUF")
     self.ID = range(N) # Set if of each object to itself.
-    # Keep track of size of each tree (number of objects)
-    # Each entry contains a count of objects in the tree rooted at i.
+    # Keep track of SIZE(# objects in tree) of each tree rooted at i
     self.SZ = [1]*N # Needed to determine which tree is smaller/bigger
 
   def _root(self, i):

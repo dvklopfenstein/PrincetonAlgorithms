@@ -45,6 +45,11 @@ def test_week1_quiz_Q1_489602():
   alg = QuickFindUF(10)
   run_unions(alg, "2-7 9-6 8-1 5-9 0-8 9-1", "\nWeek 1 Exercise Question 1 seed = 489602")
 
+def test_week1_quiz_Q1_126228():
+  """Test 126228."""
+  alg = QuickFindUF(10)
+  run_unions(alg, "8-9 4-0 8-5 2-6 1-7 0-3", "\nWeek 1 Exercise Question 1 seed = 126228")
+
 def test_all():
   """Test All."""
   test_1()
