@@ -10,10 +10,10 @@ from AlgsSedgewickWayne.PowerLaw import do_plot
 def test_Lecture_Observations_Question():
   """Question from the end of the Week 1 Lecture, Observations.
 
-     EXPLANATION: We assume T(N) = sN^b for some constants a and b.
+     EXPLANATION: We assume T(N) = aN^b for some constants a and b.
      As we double the size of the input N, the running time
      approximately quadruples, indicating a algorithm or b=2.
-     Plugging in T(54,000) = 20.5 and solving for a, we obtain
+     Plugging in T(64,000) = 20.5 and solving for a, we obtain
      a = 20.5/64,000^2 ~ 5.0 x 10-9
   """
   strData = """
@@ -29,6 +29,51 @@ def test_Lecture_Observations_Question():
   b = est_b(data)
   a = solve_a(data, b)
   do_plot(data, a, b)
+
+
+
+def test_week1_ex_Q1_398112(): # Lecture: Quick-Union Improvements 1:22
+  """seed = 398112 """
+  # estimate b: 7:58
+  #        N   seconds
+  # -------------------
+  strData = """
+      128     0.000
+      256     0.001
+      512     0.006
+     1024     0.029
+     2048     0.158
+     4096     0.852
+     8192     4.561
+    16384    24.586
+    32768   129.467
+    65536   697.828
+   131072  3730.438
+  """
+  data = getData(strData)
+  est_b(data)
+
+def test_week1_ex_Q1_990354(): # Lecture: Quick-Union Improvements 1:22
+  """seed = 990354 """
+  # estimate b: 7:58
+  #        N   seconds
+  # -------------------
+  strData = """
+      256     0.000
+      512     0.001
+     1024     0.005
+     2048     0.022
+     4096     0.099
+     8192     0.467
+    16384     2.133
+    32768     9.998
+    65536    46.309
+   131072   214.246
+   262144   998.222
+   524288  4622.897
+  """
+  data = getData(strData)
+  est_b(data)
 
 def test_week1_ex_Q1_130450(): # Lecture: Quick-Union Improvements 1:22
   """seed = 130450 """

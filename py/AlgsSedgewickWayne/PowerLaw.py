@@ -7,11 +7,16 @@ import pylab as plt
 import numpy as np
 
 def getData(blktxt):
-  """Given a block of text with data on each line, return the numeric data."""
+  """Given a block of text with data on each line, return the numeric data.
+        4096     0.003
+        8192     0.013
+       16384     0.053
+       32768     0.227
+  """
   data = []
-  txt = blktxt.split('\n')
-  for T in txt:
-    M = re.search(r'^\s*(\d+)\s+(\d+\.\d+)', T)
+  lines = blktxt.split('\n')
+  for txt in lines:
+    M = re.search(r'^\s*(\d+)\s+(\d+\.\d+)', txt)
     if M:
       data.append([int(M.group(1)), float(M.group(2))])
   return data

@@ -203,6 +203,17 @@
 # is executed is (N choose 2) ~ 1/2 N^2
 
 ####################################################################
+# 01:45 Lecture Week 1 "Order-of-Growth Classifications (14:39)
+####################################################################
+# constant            1
+# logarithmic     log N
+# linear              N
+# linearithmic  N log N
+# quadratic         N^2
+# cubic             N^3
+# exponential       2^N
+
+####################################################################
 # 01:45 Lecture Week 1 "Theory of Algorithms"
 ####################################################################
 #

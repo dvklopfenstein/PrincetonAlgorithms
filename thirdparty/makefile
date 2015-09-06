@@ -1,59 +1,63 @@
 
 MAIN := HelloWorld
+ARG := 1Kints.txt
 
 ALGS4SRC ?= .
+
+# $ javac-algs4.bat -cp ./algs4.jar ThreeSum.java Stopwatch.java
 
 JC := javac-algs4.bat
 JVM := java-algs4.bat
 CHK := checkstyle-algs4.bat
 BUG := findbugs-algs4.bat
+JFLAGS := -cp ./algs4.jar
 .PHONY: clean
 
 SRCS = \
-  StdArrayIO.java \
-  StdDraw.java \
-  StdIn.java \
-  StdOut.java \
-  StdRandom.java \
-  StdStats.java \
-  Stopwatch.java \
-  Bag.java \
-  BinarySearch.java \
-  BouncingBalls.java \
-  BST.java \
-  Date.java \
-  EvaluatePostfix.java \
-  GrahamScan.java \
-  Heap.java \
   HelloWorld.java \
-  Insertion.java \
-  Knuth.java \
-  LinkedBag.java \
-  LinkedQueue.java \
-  LinkedStack.java \
-  MaxPQ.java \
-  Merge.java \
-  MergeBU.java \
-  MergeX.java \
-  MinPQ.java \
-  Point2D.java \
-  Queue.java \
-  Quick.java \
-  Quick3way.java \
-  QuickFindUF.java \
-  QuickUnionUF.java \
-  QuickX.java \
-  ResizingArrayBag.java \
-  ResizingArrayQueue.java \
-  ResizingArrayStack.java \
-  Selection.java \
-  Shell.java \
-  ST.java \
-  Stack.java \
   ThreeSum.java \
-  ThreeSumFast.java \
-  UnorderedMaxPQ.java \
-  WeightedQuickUnionUF.java
+  Stopwatch.java
+# StdArrayIO.java \
+# StdDraw.java \
+# StdIn.java \
+# StdOut.java \
+# StdRandom.java \
+# StdStats.java \
+# Bag.java \
+# BinarySearch.java \
+# BouncingBalls.java \
+# BST.java \
+# Date.java \
+# EvaluatePostfix.java \
+# GrahamScan.java \
+# Heap.java \
+# Insertion.java \
+# Knuth.java \
+# LinkedBag.java \
+# LinkedQueue.java \
+# LinkedStack.java \
+# MaxPQ.java \
+# Merge.java \
+# MergeBU.java \
+# MergeX.java \
+# MinPQ.java \
+# Point2D.java \
+# Queue.java \
+# Quick.java \
+# Quick3way.java \
+# QuickFindUF.java \
+# QuickUnionUF.java \
+# QuickX.java \
+# ResizingArrayBag.java \
+# ResizingArrayQueue.java \
+# ResizingArrayStack.java \
+# Selection.java \
+# Shell.java \
+# ST.java \
+# Stack.java \
+# ThreeSumFast.java \
+# UnorderedMaxPQ.java \
+# WeightedQuickUnionUF.java
 
 # If needed, clear any default definitions for these targets
 .SUFFIXES: .java .class
@@ -61,14 +65,15 @@ SRCS = \
 # --------------------------------------------------------------
 # Targets
 
-run: $(MAIN).class
-	$(JVM) $(MAIN)
+run: $(MAIN).class 
+	$(JVM) $(MAIN) $(ARG)
 
 # 'class' is the suffix of the target file
 # 'java' is the suffix for the dependency file
 # i.e. If MAIN.java source changes, re-compile MAIN.class
 .java.class:
-	$(JC) $(JFLAGS) $*.java
+	$(JC) $(JFLAGS) $(SRCS)
+	#$(JC) $(JFLAGS) $*.java
 
 # Week 1 Programming Assignment 
 wk1: Percolation.class PercolationStats.class

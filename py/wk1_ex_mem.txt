@@ -1,0 +1,226 @@
+###########################################################################
+# WEEK 1
+# primative types
+#   1 boolean
+#   1 byte
+#   2 char
+#   4 int
+#   4 float
+#   8 long
+#   8 double
+#
+# 1-dimensional arrays
+#   2N + 24 char[]
+#   4N + 24 int[]
+#   8N + 24 double[]
+#
+# 16 Object overhead 
+#  8 Reference     
+###########################################################################
+(seed = 286698)
+public class MysteryBox {                     16
+    private final int x0, x1, x2;             12 4*3
+    private final boolean y0;                  1 1*1
+    private final double z0, z1, z2, z3;      32 8*4
+    private final long[] a = new long[152]; 1248 8*152 + 24 +  8
+                                               3 padding
+                                            1312
+
+
+(seed = 690587)
+public class MysteryBox {                          16 bytes object overhead
+    private final long x0, x1;                     16 8*2
+    private final double y0, y1, y2, y3;           32 8*4
+    private final int z0, z1;                       8 4*2
+    private final boolean[] a = new boolean[280]; 312 1*280 + 24   + 8
+                                                  384
+
+
+(seed = 309730)
+public class MysteryBox {                       //  16 bytes object overhead
+    private final int x0;                       //   4 = 4 bytes * 1
+    private final boolean y0, y1, y2;           //   3 = 1 byte  * 3
+    private final long z0, z1, z2, z3;          //  32 = 8 bytes * 4
+    private final double[] a = new double[248]; //2008 = 8 bytes * 248 + 24 + 8(ref to array)
+                                                  2063
+    ...                                              1(padding to round up to a multiple of 8)
+                                                  2072
+
+
+public class MysteryBox {                   //   16 byes object overhead
+    private boolean x0, x1;                 //    2 = 1 byte * 2 01:59
+    private long y0;                        //    8 = 8 bytes
+    private int z0, z1, z2;                 //   12 = 4 bytes * 3
+    private double[] a = new double[296];   // 2368 = 8 bytes * 296 + 24
+                                            //    2 Padding (Multiple of 8 bytes)
+                                            // 243$2
+    ...
+}
+
+Using the 64-bit memory cost model from lecture, how many bytes does each object of type MysteryBox use?
+
+The correct answer is: 2440
+
+public class MysteryBox {                     //   16 (object overhead)
+    private boolean x0, x1;                   //    2 (2 boolean)
+    private long y0;                          //    8 (1 long)
+    private int z0, z1, z2;                   //   12 (3 int)
+    private double[] a = new double[296];     //    8 (reference to array)
+                                              // 2392 (double array of size 296)
+    ...                                             2 (padding to round up to a multiple of 8)
+}                                                ----
+                                                 2440
+
+
+
+########################################################################
+(seed = 870774)
+Given the following definition of a MysteryBox object: 
+
+public class MysteryBox {            //   16 bytes object overhead
+    private long x0, x1;             //   16 = 8 bytes * 2
+    private boolean y0, y1, y2, y3;  //    4 = 1 byte  * 4
+    private double z0;               //    8 = 8 bytes
+    private int[] a = new int[48];   //  216 = 4 bytes * 48 + 24
+                                     //  260 TOTAL
+                                     //  264 = 260 + 4 padding
+
+    ...
+}
+
+Using the 64-bit memory cost model from lecture, how many bytes does each object of type MysteryBox use?
+The correct answer is: 272
+
+public class MysteryBox {                     //   16 (object overhead)
+    private long x0, x1;                      //   16 (2 long)
+    private boolean y0, y1, y2, y3;           //    4 (4 boolean)
+    private double z0;                        //    8 (1 double)
+    private int[] a = new int[48];            //    8 (reference to array)
+                                              //  216 (int array of size 48)
+    ...                                             4 (padding to round up to a multiple of 8)
+}                                                ----
+                                                  272
+
+
+########################################################################
+(seed = 627928)
+Given the following definition of a MysteryBox object: 
+
+public class MysteryBox {                    //   16 (object overhead)
+    private long x0, x1, x2, x3;             //   32 = 8 bytes * 4
+    private int y0, y1;                      //    8 = 4 bytes * 2
+    private double z0, z1, z2, z3;           //   32 = 8 bytes * 4
+    private boolean[] a = new boolean[56];   //    8 (reference to array)
+    ...                                      //   80 = 1 byte * 56 + 24
+                                             //  176 = TOTAL (Don't need padding)
+}
+YES!!!
+
+########################################################################
+(seed = 218604)
+Given the following definition of a MysteryBox object: 
+
+public class MysteryBox {                    //   16 (object overhead)
+    private int x0, x1, x2;                  //   12 = 4 bytes * 3
+    private double y0, y1, y2, y3;           //   32 = 8 bytes * 4
+    private long z0, z1, z2;                 //   24 = 8 bytes * 3
+    private boolean[] a = new boolean[152];  //    8 (reference to array)
+    ...                                      //  176 = 1 byte * 152 + 24
+                                             //  268 TOTAL
+                                             //    4 = 272 - 268 PADDING
+                                             //  272 TOTAL
+}
+
+
+###########################################################################
+# WEEK 2
+###########################################################################
+(seed = 866565)
+Consider an object of type GenericMysteryBox<Boolean> that stores N items of type Boolean
+in a generic singly-linked list of N nodes, referenced by first.
+
+public class GenericMysteryBox<Item> {        //       16 (object overhead)
+    private Node first;                       //        8 (reference)
+
+    private class Node {                      //       16 (object overhead)
+                                              //        8 (inner class overhead)
+        private Item item;                    //        8 (reference to Boolean)
+                                              //       24 (Boolean)
+        private Node next;                    //        8 (reference)
+    }                                             -------
+                                                 24 + 64N
+    ...
+}
+ANSWER: ~64N
+
+    public class GenericMysteryBox<Item> { // 16 bytes (object overhead)
+        private Node first;                !!  8 bytes (reference)
+
+        private class Node {               //  8 bytes (inner class Node overhead)
+            private Item item;             // 24 bytes Boolean wrapper 
+            private Node next;             //  8 bytes
+        }                                  // 56 bytes per MB Node
+
+        ...
+    }
+NO: 56n + 8
+
+#- seed = 584559 -------------------------------------------------
+
+    public class GenericMysteryBox<Item> { // 16 bytes (object overhead)
+        private Node first;                //  8 bytes (reference)
+
+        private class Node {               // 16 (object overhead)
+                                           //  8 (inner class Node overhead)
+            private Item item;             //  8 (ref to Double)
+                                           // 24 (Double)
+            private Node next;             //  8 (ref)
+            private Node prev;             //  8 (ref)
+        }
+ANSWER: ~ 72N
+
+        ...
+    }
+
+
+#- seed = 525707  -------------------------------------------------
+
+A correct answer matches the regular expression: \s*~?\s*40\s*N\s*
+ANSWER: ~ 40N
+Below is a detailed accounting:
+
+public class MysteryBox {                     //       16 (object overhead)
+    private Node first;                       //        8 (reference)
+
+    private static class Node {               //       16 (object overhead)
+        private double item;                  //        8 (double)
+        private Node next;                    //        8 (reference)
+        private Node prev;                    //        8 (reference)
+                                                        0 (padding to round up to a multiple of 8)
+    }                                             -------
+                                                 24 + 40N
+
+
+#- seed = 525707  -------------------------------------------------
+
+(seed = 68492)
+Consider an object of type GenericMysteryBox<Integer> that stores N items of type Integer
+in a generic doubly-linked list of N nodes, referenced by first.
+
+    public class GenericMysteryBox<Item> { // 16 OH
+        private Node first;                //  8 ref
+
+        private class Node {               // 16 OH
+                                           //  8 inner class Node OH
+            private Item item;             //  8 ref to Integer
+            private Node next;             //  8 ref
+            private Node prev;             //  8 ref
+        }
+Hint: an object of the wrapper type Integer uses 24 bytes.
+24 + 72N
+
+
+
+
+
+
