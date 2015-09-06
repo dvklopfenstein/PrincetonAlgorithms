@@ -71,6 +71,11 @@ class WeightedQuickUnionUF(BaseComp):
 #          QU + path compression N + M lg N
 # weighted QU + path compression N + M lg* N
 
+# Ex: 10^9 unions and finds w/10^9 objects
+#   * WQUPC reduces time from 30 years to 6 seconds
+#   * Supercomputer won't help much; good algorithm enables solution
+
+
 #--------------------------------------------------------------------------
 # Lecture Week 1 Union-Find: Dynamic Connectivity (10:22)
 #--------------------------------------------------------------------------
