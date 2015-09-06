@@ -16,7 +16,7 @@
 ```
 > python -c 'import QuickUnionUF as Q; Q.QuickUnionUF(10).wr_png_tree_statestr("6 1 6 6 0 6 1 5 0 5")'
 ```    
-This state would actually not be possible to create using unions because
+This state would actually not be possible to create using **unions** because
 the size of the tree rooted at parent of 6 < twice the size of the tree
 rooted at 6    
 ![QuickUnionUF state](./images/state_QuickUnionUF_6_1_6_6_0_6_1_5_0_5.png)
