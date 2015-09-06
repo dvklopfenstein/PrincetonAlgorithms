@@ -18,7 +18,7 @@
 ```    
 This state would actually not be possible to create using unions because
 the size of the tree rooted at parent of 6 < twice the size of the tree
-rooted at 6
+rooted at 6    
 ![QuickUnionUF state](./images/state_QuickUnionUF_6_1_6_6_0_6_1_5_0_5.png)
 
 
