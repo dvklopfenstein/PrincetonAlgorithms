@@ -320,9 +320,7 @@ def _less(v, w): return v < w
 
 # exchange a[i] and a[j]
 def _exch(a, i, j):
-  swap = a[i]
-  a[i] = a[j]
-  a[j] = swap
+  a[i], a[j] = a[j], a[i]
 
 
 #**********************************************************************
