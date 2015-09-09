@@ -7,8 +7,8 @@
 
 ## Example Table of Contents
   1. [Force the state of QuickUnion and visualize](#ex1)
-  2. [Recreate demo from Quick Union (7:50) lecture](#ex2)
-  3. [Recreate demo from Quick-Union Improvements (13:02) lecture](#ex3)
+  2. [Recreate demo from **Quick Union (7:50)** lecture](#ex2)
+  3. [Recreate demo from **Quick-Union Improvements (13:02)** lecture](#ex3)
 
 ## Example Contents
 ### [ex1](#example-contents)
@@ -23,7 +23,7 @@ rooted at 6
 
 
 ### [ex2](#example-contents)
-2. Recreate demo from Quick Union (7:50) lecture: From the cmdline...
+2. Recreate demo from **Quick Union (7:50)** lecture: From the cmdline...
 
 Runs these unions using QuickUnion with no speed improvements (Weighing, Path compression):
 ```
@@ -94,7 +94,7 @@ val:  1  8  1  8  3  0  5  1  8  8 union(7-3) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 
 ### [ex3](#example-contents)
-3. Recreate demo from Quick-Union Improvements (13:02) lecture
+3. Recreate demo from **Quick-Union Improvements (13:02)** lecture
 ```
 > python -c 'import test_WeightedQuickUnionUF as T; T.test_week1_lecture()'
 
