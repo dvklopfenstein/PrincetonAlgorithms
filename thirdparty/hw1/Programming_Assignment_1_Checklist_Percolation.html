@@ -34,20 +34,22 @@ configured and ready to go.
 If you prefer to use a different IDE (such as Eclipse), that's perfectly
 fine too—just be sure that you know how to do the following:
 </p><ul>
-<p></p><li>Add <tt>stdlib.jar</tt> and <tt>algs4.jar</tt> to your Java classpath.
+<p></p><li>Add <tt>algs4.jar</tt> to your Java classpath.
 <p></p></li><li>Enter command-line arguments.
 <p></p></li><li>Use standard input and standard output (and, ideally, redirect them to or from a file).
 </li></ul>
 
-<p><b>What are the input and output libraries?</b>
-We have designed a set of easy-to-use Java libraries in <tt>stdlib.jar</tt> for input and output
-that you are required to use in this course.
-Here are the <a href="http://algs4.cs.princeton.edu/code/index.php#stdlib">APIs</a><a>.
 
-</a></p><p><a><b>Where can I find the Java code for the algorithms and data structures
+
+<p><b>Where can I find the Java code and Javadoc for the algorithms and data structures
 from lecture and the textbook?</b>
 They are in <tt>algs4.jar</tt>.
-Here are the </a><a href="http://algs4.cs.princeton.edu/code/index.php">APIs</a><a>.
+Here are the <a href="http://algs4.cs.princeton.edu/code/index.php">APIs</a><a>.
+
+</a></p><p><a><b>Where can I find the Javadoc for the input and output libraries
+from lecture and the textbook?</b>
+They are in <tt>algs4.jar</tt>.
+Here are the </a><a href="http://algs4.cs.princeton.edu/code/index.php#stdlib">APIs</a><a>.
 
 </a></p><p><a><b>How can I classpath in the textbook libraries from the command line?</b>
 If you use our Mac OS X or Windows installer, then you can automatically classpath
@@ -142,7 +144,7 @@ add this method to test your code, but we will not call it unless we specify
 it in our API.
 
 </p><p><b>Can my Percolation data type assume the row and column
-indices are between 0 and N-1?</b>
+indices are between 0 and N−1?</b>
 No. The API specifies that valid row and column indices are between 1 and <em>N</em>.
 
 </p><p><b>Why is it so important to implement the prescribed API?</b>
@@ -202,7 +204,7 @@ part of the assignment (especially if you limit yourself to one union-find objec
 </p><p>
 </p><blockquote>
 <pre>&nbsp;&nbsp; % <b>java PercolationVisualizer input10.txt</b></pre>
-<img src="percolation-backwash.png" alt="Percolation backwash">
+<img src="./Programming_Assignment_1_Checklist_Percolation_files/percolation-backwash.png" alt="Percolation backwash">
 </blockquote>
 
 <p><b>How do I generate a site uniformly at random among all blocked sites
@@ -236,7 +238,7 @@ and <tt>StdStats.stddev()</tt>, respectively.
 
 
 </p><p><b>Style checker.</b>
-We recommend using <a href="http://checkstyle.sourceforge.net/">Checkstyle 5.5</a>
+We recommend using <a href="http://checkstyle.sourceforge.net/">Checkstyle 6.9</a>
 (and the configuration file
 <a href="http://algs4.cs.princeton.edu/mac/checkstyle.xml">checkstyle.xml</a>)
 to check the style of your Java programs.
@@ -327,15 +329,15 @@ when used with <a href="http://coursera.cs.princeton.edu/algs4/testing/percolati
 <table border="0" cellpadding="2" cellspacing="0">
 <tbody><tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</td><td><img src="percolation-50.png" alt="Percolation 50 sites">
+</td><td><img src="./Programming_Assignment_1_Checklist_Percolation_files/percolation-50.png" alt="Percolation 50 sites">
 <br><center><font size="-1"><em>50 open sites</em></font></center>
-</td><td><img src="percolation-100.png" alt="Percolation 100 sites">
+</td><td><img src="./Programming_Assignment_1_Checklist_Percolation_files/percolation-100.png" alt="Percolation 100 sites">
 <br><center><font size="-1"><em>100 open sites</em></font></center>
-</td><td><img src="percolation-150.png" alt="Percolation 150 sites">
+</td><td><img src="./Programming_Assignment_1_Checklist_Percolation_files/percolation-150.png" alt="Percolation 150 sites">
 <br><center><font size="-1"><em>150 open sites</em></font></center>
-</td><td><img src="percolation-204.png" alt="Percolation 204 sites">
+</td><td><img src="./Programming_Assignment_1_Checklist_Percolation_files/percolation-204.png" alt="Percolation 204 sites">
 <br><center><font size="-1"><em>204 open sites</em></font></center>
-</td><td><img src="percolation-250.png" alt="Percolation 250 sites">
+</td><td><img src="./Programming_Assignment_1_Checklist_Percolation_files/percolation-250.png" alt="Percolation 250 sites">
 <br><center><font size="-1"><em>250 open sites</em></font></center>
 </td></tr>
 </tbody></table>
@@ -416,43 +418,17 @@ main() function of Percolation.
 <p>
 
 </p><ol>
-	<p></p><li><b>Do not write your own Union-Find data structure. Use <tt>WeightedQuickUnionUF</tt> instead.</b> 
-	<p></p></li><li><b>Your <tt>Percolation</tt> class should use the <tt>WeightedQuickUnionUF</tt> class.</b> If you submit with the <tt>UF</tt> class, your code will fail the timing tests.
-	<p></p></li><li><b>It's ok to use an extra row and/or column to deal with the 1-based indexing of the percolation grid.</b> Though it is slightly inefficient, it's fine to use arrays or union-find objects that are slightly larger than strictly necessary. Doing this results in cleaner code at the cost of slightly greater memory usage.
+	<p></p><li><b>Do not write your own union–find data structure. Use <tt>WeightedQuickUnionUF</tt> instead.</b> 
+	<p></p></li><li><b>Your <tt>Percolation</tt> class must use 
+                  <a href="http://algs4.cs.princeton.edu/code/javadoc/edu/princeton/cs/algs4/WeightedQuickUnionUF.html"><tt>WeightedQuickUnionUF</tt></a>.</b>
+                  Otherwise, it will fail the timing tests, as the autograder intercepts and counts calls to methods in <tt>WeightedQuickUnionUF</tt>.
+	<p></p></li><li><b>It's OK to use an extra row and/or column to deal with the 1-based indexing of the
+                  percolation grid.</b> Though it is slightly inefficient, it's fine to use arrays or union-find objects that are slightly larger than strictly necessary. Doing this results in cleaner code at the cost
+                  of slightly greater memory usage.
 	<p></p></li><li><b>Each of the methods (except the constructor) in <tt>Percolation</tt> must use a constant number of union-find operations.</b> If you have a for-loop inside of one of your <tt>Percolation</tt> methods, you're probably doing it wrong. Don't forget about the virtual-top / virtual-bottom trick described in lecture.
 	
 </li></ol>
 
-<!--
-<TABLE BORDER = 0 CELLPADDING = 2 CELLSPACING = 0 WIDTH = 100%>
-<tr align = left>
-<td bgcolor = "000000">
-<font size = +0 face = "helvetica" color = "ffffff">
-<center><b>Possible Progress Steps</b></center>
-</table>
-<p>
-
-These are purely suggestions for how you might make progress.  You do
-not have to follow these steps.
-
-<ol>
-
-<p><li><b>Installing a Java programming environment.</b>
-Follow the instructions in the assignment.
-There are many files in <tt>stdlib.jar</tt> which you will use each
-week; this week you will use <tt>StdIn</tt>, <tt>StdOut</tt>,
-<tt>StdDraw</tt>, <tt>StdRandom</tt>, <tt>StdStats</tt>, and <tt>Stopwatch</tt>.
-There are many files in <tt>algs4.jar</tt> which you will use each
-week; this week you will use <tt>QuickFindUF.java</tt> and <tt>WeightedQuickUnionUF.java</tt>.
-
-<p><li> <b>Union-find.</b> 
-Review the slides from Lecture 1.
-Completing this assignment successfully requires a general idea
-of how union-find algorithms work, but <em>not</em> a detailed understanding of
-the analytic results.
-
-</ol>
--->
 
 
 

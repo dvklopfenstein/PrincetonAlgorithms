@@ -21,18 +21,21 @@ these step-by-step instructions for your operating system
 ·
 <a href="http://algs4.cs.princeton.edu/linux">Linux</a>
 ]. After following these instructions, the commands <tt>javac-algs4</tt> and <tt>java-algs4</tt>
-will classpath in both
-<a href="http://algs4.cs.princeton.edu/code/stdlib.jar">stdlib.jar</a>
-and  <a href="http://algs4.cs.princeton.edu/code/algs4.jar">algs4.jar</a>:
-the former contains libraries for reading data from <em>standard input</em>,
-writing data to <em>standard output</em>, 
-drawing results to <em>standard draw</em>, generating random numbers,
-computing statistics, and timing programs;
-the latter contains all of the algorithms in the textbook.
+will classpath in <a href="http://algs4.cs.princeton.edu/code/algs4.jar">algs4.jar</a>,
+which contains Java classes for I/O and all of the algorithms in the textbook.
 
+</p><p><em><font color="green">Note that, as of August 2015, you must use the 
+named package version of <tt>algs.jar</tt>. To access a class, you need an import
+statement, such as the ones below:</font></em><font color="green">
 
+</font></p><blockquote><font color="green">
+<pre>import edu.princeton.cs.algs4.StdRandom;
+import edu.princeton.cs.algs4.StdStats;
+import edu.princeton.cs.algs4.WeightedQuickUnionUF;
+</pre></font></blockquote><font color="green">
+</font>
 
-</p><p><b>Percolation.</b>
+<p><b>Percolation.</b>
 Given a composite systems comprised of randomly distributed insulating and metallic
 materials: what fraction of the materials need to be metallic so that the composite system is an 
 electrical conductor? Given a porous landscape with water on the surface (or oil below),
@@ -62,7 +65,7 @@ flowing from top to bottom.)
 
 </p><p>
 </p><center>
-<img src="percolates.png" alt="Percolates">
+<img src="./Programming_Assignment_1_Percolation_files/percolates.png" alt="Percolates">
 </center>
 
 
@@ -79,11 +82,11 @@ probability for 20-by-20 random grid (left) and 100-by-100 random grid (right).
 </p><p>
 
 </p><center>
-<img src="percolation-threshold20.png" alt="Percolation threshold for 20-by-20 grid">
+<img src="./Programming_Assignment_1_Percolation_files/percolation-threshold20.png" alt="Percolation threshold for 20-by-20 grid">
 &nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;
-<img src="percolation-threshold100.png" alt="Percolation threshold for 100-by-100 grid">
+<img src="./Programming_Assignment_1_Percolation_files/percolation-threshold100.png" alt="Percolation threshold for 100-by-100 grid">
 &nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;
 </center>
@@ -109,7 +112,7 @@ To model a percolation system, create a data type <tt>Percolation</tt> with the 
    <b>public boolean isFull(int i, int j)</b>     <font color="gray">// is site (row i, column j) full?</font>
    <b>public boolean percolates()</b>             <font color="gray">// does the system percolate?</font>
 
-   <b>public static void main(String[] args</b>   <font color="gray">// test client (optional)</font>
+   <b>public static void main(String[] args)</b>  <font color="gray">// test client (optional)</font>
 <b>}</b>
 </pre></blockquote>
 
@@ -156,13 +159,13 @@ percolates when the 204th site is opened.
 <table border="0" cellpadding="2" cellspacing="0">
 <tbody><tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</td><td><img src="percolation-50.png" alt="Percolation 50 sites">
+</td><td><img src="./Programming_Assignment_1_Percolation_files/percolation-50.png" alt="Percolation 50 sites">
 <br><center><font size="-1"><em>50 open sites</em></font></center>
-</td><td><img src="percolation-100.png" alt="Percolation 100 sites">
+</td><td><img src="./Programming_Assignment_1_Percolation_files/percolation-100.png" alt="Percolation 100 sites">
 <br><center><font size="-1"><em>100 open sites</em></font></center>
-</td><td><img src="percolation-150.png" alt="Percolation 150 sites">
+</td><td><img src="./Programming_Assignment_1_Percolation_files/percolation-150.png" alt="Percolation 150 sites">
 <br><center><font size="-1"><em>150 open sites</em></font></center>
-</td><td><img src="percolation-204.png" alt="Percolation 204 sites">
+</td><td><img src="./Programming_Assignment_1_Percolation_files/percolation-204.png" alt="Percolation 204 sites">
 <br><center><font size="-1"><em>204 open sites</em></font></center>
 <!--
 <td><IMG SRC="percolation-250.png" alt = "Percolation 250 sites">
@@ -180,7 +183,7 @@ the sample standard deviation σ measures the sharpness of the threshold.
 
 </p><p>
 </p><blockquote>
-<img src="percolation-stats.png" alt="Estimating the sample mean and variance">
+<img src="./Programming_Assignment_1_Percolation_files/percolation-stats.png" alt="Estimating the sample mean and variance">
 </blockquote>
 
 Assuming <em>T</em> is sufficiently large (say, at least 30), the following
@@ -188,7 +191,7 @@ provides a 95% confidence interval for the percolation threshold:
 
 <p>
 </p><blockquote>
-<img src="percolation-confidence.png" alt="95% confidence interval for percolation threshold">
+<img src="./Programming_Assignment_1_Percolation_files/percolation-confidence.png" alt="95% confidence interval for percolation threshold">
 </blockquote>
 
 <p>
@@ -215,10 +218,13 @@ Also, include a <tt>main()</tt> method
 that takes two <em>command-line arguments</em>
 <em>N</em> and <em>T</em>, performs <em>T</em> independent
 computational experiments (discussed above) on an <em>N</em>-by-<em>N</em> grid,
-and prints out the mean, standard deviation, and the 
+and prints the mean, standard deviation, and the 
 <em>95% confidence interval</em> for the percolation threshold.
-Use <em>standard random</em> from our standard libraries to generate random numbers;
-use <em>standard statistics</em> to compute the sample mean and standard deviation.
+Use
+<a href="http://algs4.cs.princeton.edu/code/javadoc/edu/princeton/cs/algs4/StdRandom.html"><tt>StdRandom</tt></a>
+to generate random numbers; use 
+<a href="http://algs4.cs.princeton.edu/code/javadoc/edu/princeton/cs/algs4/StdStats.html"><tt>StdStats</tt></a>
+to compute the sample mean and standard deviation.
 
 </p><blockquote>
 <pre>% <b>java PercolationStats 200 100</b>
@@ -247,13 +253,12 @@ stddev                  = 0.11775205263262094
 
 
 <p><b>Analysis of running time and memory usage (optional and not graded).</b>
-Implement the <tt>Percolation</tt> data type using the quick-find algorithm 
-<a href="http://algs4.cs.princeton.edu/15uf/QuickFindUF.java.html">QuickFindUF.java</a>
-from <tt>algs4.jar</tt>.
+Implement the <tt>Percolation</tt> data type using the quick find algorithm in
+<a href="http://algs4.cs.princeton.edu/code/javadoc/edu/princeton/cs/algs4/QuickFindUF.html"><tt>QuickFindUF</tt></a>.
 </p><ul>
 <p></p><li>
-Use the <em>stopwatch data type</em> from our standard library to 
-measure the total running time of <tt>PercolationStats</tt>.
+Use <a href="http://algs4.cs.princeton.edu/code/javadoc/edu/princeton/cs/algs4/Stopwatch.html"><tt>Stopwatch</tt></a>
+to measure the total running time of <tt>PercolationStats</tt>.
 How does doubling <em>N</em> affect the total running time?
 How does doubling <em>T</em> affect the total running time?
 Give a formula (using tilde notation) of the total running
@@ -270,18 +275,24 @@ Count all memory that is used, including memory for the union-find data structur
 
 
 <p>
-Now, implement the <tt>Percolation</tt> data type using the weighted quick-union algorithm
-<a href="http://algs4.cs.princeton.edu/15uf/WeightedQuickUnionUF.java.html">WeightedQuickUnionUF.java</a>
-from <tt>algs4.jar</tt>.
+Now, implement the <tt>Percolation</tt> data type using the weighted quick union algorithm in
+<a href="http://algs4.cs.princeton.edu/code/javadoc/edu/princeton/cs/algs4/WeightedQuickUnionUF.html"><tt>WeightedQuickUnionUF</tt></a>.
 Answer the questions in the previous paragraph.
 
 
 </p><p><b>Deliverables.</b>
-Submit only <tt>Percolation.java</tt> (using the weighted quick-union algorithm as implemented in the <tt>WeightedQuickUnionUF</tt> class)
+Submit only <tt>Percolation.java</tt> (using the weighted quick-union algorithm 
+from 
+<a href="http://algs4.cs.princeton.edu/code/javadoc/edu/princeton/cs/algs4/WeightedQuickUnionUF.html"><tt>WeightedQuickUnionUF</tt></a>)
 and <tt>PercolationStats.java</tt>.
-We will supply <tt>stdlib.jar</tt> and <tt>WeightedQuickUnionUF</tt>.
-Your submission may not call any library functions other than those in <tt>java.lang</tt>, <tt>stdlib.jar</tt>, and 
-<tt>WeightedQuickUnionUF</tt>.
+We will supply <tt>algs4.jar</tt>.
+Your submission may not call library functions except those in
+<a href="http://algs4.cs.princeton.edu/code/javadoc/edu/princeton/cs/algs4/StdIn.html"><tt>StdIn</tt></a>,
+<a href="http://algs4.cs.princeton.edu/code/javadoc/edu/princeton/cs/algs4/StdOut.html"><tt>StdOut</tt></a>,
+<a href="http://algs4.cs.princeton.edu/code/javadoc/edu/princeton/cs/algs4/StdRandom.html"><tt>StdRandom</tt></a>,
+<a href="http://algs4.cs.princeton.edu/code/javadoc/edu/princeton/cs/algs4/WeightedQuickUnionUF.html"><tt>WeightedQuickUnionUF</tt></a>,
+and
+<tt>java.lang</tt>.
 
 </p><p><b>For fun.</b>
 Create your own percolation input file and share it in the discussion forums.
