@@ -77,7 +77,10 @@ run: $(MAIN).class
 
 # Week 1 Programming Assignment 
 wk1: Percolation.class PercolationStats.class
-	$(JVM) $(JFLAGS) PercolationStats 10 2
+	$(JVM) PercolationStats 10 2
+
+wk1_chk:
+	$(CHK) Percolation.java PercolationStats.java
 
 wk1_zip:
 	zip percolation.zip Percolation.java PercolationStats.java
