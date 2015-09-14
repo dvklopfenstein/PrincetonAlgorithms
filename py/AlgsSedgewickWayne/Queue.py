@@ -1,5 +1,4 @@
 """Class Queue."""
-s
 
 class Queue(object):
   """Queue container class."""
