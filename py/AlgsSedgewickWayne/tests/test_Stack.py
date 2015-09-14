@@ -6,6 +6,22 @@ import sys
 from AlgsSedgewickWayne.Stack import Stack
 from AlgsSedgewickWayne.ArrayHistory import run
 
+def run_seq(seq, expected=None, prt=sys.stdout):
+  """Run a sequence of Stack commands."""
+  result = run(Stack(), seq, None)
+  if expected is not None:
+    pass_fail = "PASS" if result == expected else "FAIL"
+    prt.write("{}: EXP({}) ACTUAL({}) from seq: {}\n".format(
+      pass_fail, expected, result, seq))
+
+def test_Stack_lec_quiz(prt=sys.stdout):
+  """Run the quiz in Stats 1, Week 2 lecture, 'Stacks (16:24)'"""
+  expected = "5 4 3 2 1"
+  run_seq("1 2 3 4 5 - - - - -", expected, prt)
+  run_seq("1 2 5 - 3 4 - - - -", expected, prt)
+  run_seq("5 - 1 2 3 - 4 - - -", expected, prt)
+  run_seq("5 - 4 - 3 - 2 - 1 -", expected, prt)
+
 def test_wk2_ex_Stacks_489125(prt=sys.stdout):
   """(seed = 489125)"""
   # Suppose that an intermixed sequence of 10 push and 10 pop

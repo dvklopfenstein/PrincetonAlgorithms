@@ -26,17 +26,21 @@ def run(container, seqstr, prt=sys.stdout):
 
 def run_list(container, item_list, prt=sys.stdout):
   """Inserts items in a string into a container. Prints steps. Returns end state."""
-  prt.write("\nINPUT: {}\n".format(' '.join([str(item) for item in item_list])))
+  if prt is not None:
+    prt.write("\nINPUT: {}\n".format(' '.join([str(item) for item in item_list])))
   result = []
   for item in item_list:
     if item != "-":
       container.push(item)
-      prt.write("{:10}   PUSH {:10} +STACK: {}\n".format("", item, container))
+      if prt is not None:
+        prt.write("{:10}   PUSH {:10} +STACK: {}\n".format("", item, container))
     elif not container.isEmpty():
       popped = container.pop()
       result.append(popped)
-      prt.write("{:>10} <-POP  {:10} -STACK: {}\n".format(popped, item, container))
-  prt.write('({} left on stack)\n'.format(container.size()))
+      if prt is not None:
+        prt.write("{:>10} <-POP  {:10} -STACK: {}\n".format(popped, item, container))
+  if prt is not None:
+    prt.write('({} left on stack)\n'.format(container.size()))
   return ' '.join([str(item) for item in result])
 
 def run_Queue(container, seqstr, prt=sys.stdout):
