@@ -10,7 +10,7 @@ def run_seq(seq, expected=None, prt=sys.stdout):
   """Run a sequence of Stack commands."""
   result = run(Stack(), seq, None)
   if expected is not None:
-    pass_fail = "PASS" if result == expected else "FAIL"
+    pass_fail = "Pass" if result == expected else "FAIL"
     prt.write("{}: EXP({}) ACTUAL({}) from seq: {}\n".format(
       pass_fail, expected, result, seq))
 

@@ -16,6 +16,7 @@
 1. Run Stack lecture Quiz, **Stacks (16:24)**, at 05:17 
 ```
 > python -c 'import test_Stack as T; T.test_Stack_lec_quiz()'
+
 PASS: EXP(5 4 3 2 1) ACTUAL(5 4 3 2 1) from seq: 1 2 3 4 5 - - - - -
 PASS: EXP(5 4 3 2 1) ACTUAL(5 4 3 2 1) from seq: 1 2 5 - 3 4 - - - -
 FAIL: EXP(5 4 3 2 1) ACTUAL(5 3 4 2 1) from seq: 5 - 1 2 3 - 4 - - -
