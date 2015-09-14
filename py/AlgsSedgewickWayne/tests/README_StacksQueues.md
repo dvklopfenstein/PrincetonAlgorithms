@@ -7,8 +7,8 @@
   * [ResizingArrayQueue.py](../ResizingArrayQueue.py)
 
 ## Example Table of Contents
-  1. [Run Stack lecture Quiz]
-  2. [Run Queue](#ex1)
+  1. [Run Stack lecture Quiz](#ex1)
+  2. [Run Queue](#ex2)
   3. [Recreate demo from **Quick Union (7:50)** lecture](#ex2)
 
 ## Example Contents
@@ -26,9 +26,5 @@ PASS: EXP(5 4 3 2 1) ACTUAL(5 4 3 2 1) from seq: 5 - 4 - 3 - 2 - 1 -
 
 ### [ex2](#example-contents)
 2. Run Queue
-```    
-> python -c 'import test_QuickUnionUF as T; T.test_week1_lecture()
-
-```    
 
 
