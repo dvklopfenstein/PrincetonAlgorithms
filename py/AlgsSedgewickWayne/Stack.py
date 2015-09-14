@@ -1,5 +1,74 @@
 """Stack Class"""
 
+class Stack(object):
+  """Stack class: Linked list of Nodes."""
+  # Proposition: Every operation takes constant time in the worst case.
+
+  class _Node(object): # helper linked list class
+    """Node object. Nodes are stored in a Stack."""
+
+    def __init__(self, item, nxt):
+      self.Item = item # Type String Item
+      self.Next = nxt  # Type Node<Item>
+
+  def __init__(self):
+    self.first = None # Node<Item>
+    self.N = 0        # size of the stack
+
+  def isEmpty(self):
+    """Returns True if the Stack contains no nodes."""
+    return self.first is None
+
+  def push(self, item): # 05:27 Lecture Week 2 "Stacks" (16:24)
+    """Add a new item to the top of the Stack."""
+    oldfirst = self.first     # Save a link to the list
+    self.first = self._Node(item, oldfirst) # first points to most recent Node
+    self.N += 1
+
+  def pop(self): # 06:30 Lecture Week 2 "Stacks" (16:24)
+    """Returns the item most recently added."""
+    if self.isEmpty():
+      raise Exception("Stack underflow")
+    item = self.first.Item        # save item to return
+    self.first = self.first.Next  # delete last Node added
+    self.N -= 1
+    return item                   # return the saved item
+
+  def size(self):
+    """Returns the size of the Stack."""
+    return self.N # Number of items in the stack
+
+  def peek(self):
+    """Returns (but does not remove) the item most recently added to this stack."""
+    if self.isEmpty():
+      raise Exception("Stack underflow") # Nothing to peek at
+    return self.first.Item # most recently added item
+
+  def __str__(self):
+    """Returns string containing the sequence of items in the stack in LIFO order"""
+    return ' '.join([str(item) for item in self])
+
+  # Returns an iterator to this stack that iterates through the items in LIFO order.
+  # https://mail.python.org/pipermail/tutor/2006-January/044455.html
+  # https://www.inkling.com/read/learning-python-mark-lutz-4th/chapter-29/iterator-objects---iter---and--
+  def __iter__(self):
+    """Returns an iterator object."""
+    return self.ListIterator(self.first)
+
+  class ListIterator(object):
+    """Iterator Starts at the first item."""
+
+    def __init__(self, first):
+      self.current = first # Node<Item>
+
+    def next(self):
+      """Return Next item."""
+      if self.current is None:
+        raise StopIteration
+      item = self.current.Item
+      self.current = self.current.Next
+      return item
+
  #************************************************************************
  #  Compilation:  javac Stack.java
  #  Execution:    java Stack < input.txt
@@ -180,73 +249,3 @@
 # and enqueue to the back instead of vece versa). The array iterator will fail for two reasons:
 #   1) The items should be iterated over in the opposite order
 #   2) the items won't typically be stored in the array as entries 0 to N-1.
-
-class Stack(object):
-  """Stack class: Linked list of Nodes."""
-
-  class _Node(object): # helper linked list class
-    """Node object. Nodes are stored in a Stack."""
-
-    def __init__(self, item, nxt):
-      self.Item = item # Type String Item
-      self.Next = nxt  # Type Node<Item>
-
-  def __init__(self):
-    self.first = None # Node<Item>
-    self.N = 0        # size of the stack
-
-  def isEmpty(self):
-    """Returns True if the Stack contains no nodes."""
-    return self.first is None
-
-  def size(self):
-    """Returns the size of the Stack."""
-    return self.N # Number of items in the stack
-
-  def push(self, item): # 05:27 Lecture Week 2 "Stacks" (16:24)
-    """Add a new item to the top of the Stack."""
-    oldfirst = self.first     # Save a link to the list
-    self.first = self._Node(item, oldfirst)
-    self.N += 1
-
-  def pop(self): # 06:30 Lecture Week 2 "Stacks" (16:24)
-    """Returns the item most recently added."""
-    if self.isEmpty():
-      raise Exception("Stack underflow")
-    item = self.first.Item        # save item to return
-    self.first = self.first.Next  # delete first node
-    self.N -= 1
-    return item                   # return the saved item
-
-  def peek(self):
-    """Returns (but does not remove) the item most recently added to this stack."""
-    if self.isEmpty():
-      raise Exception("Stack underflow") # Nothing to peek at
-    return self.first.Item # most recently added item
-
-  def __str__(self):
-    """Returns string containing the sequence of items in the stack in LIFO order"""
-    return ' '.join([str(item) for item in self])
-
-  # Returns an iterator to this stack that iterates through the items in LIFO order.
-  # @return an iterator to this stack that iterates through the items in LIFO order.
-  # https://mail.python.org/pipermail/tutor/2006-January/044455.html
-  # https://www.inkling.com/read/learning-python-mark-lutz-4th/chapter-29/iterator-objects---iter---and--
-  def __iter__(self):
-    """Returns an iterator object."""
-    return self.ListIterator(self.first)
-
-  class ListIterator(object):
-    """Iterator Starts at the first item."""
-
-    def __init__(self, first):
-      self.current = first # Node<Item>
-
-    def next(self):
-      """Return Next item."""
-      if self.current is None:
-        raise StopIteration
-      item = self.current.Item
-      self.current = self.current.Next
-      return item
-
