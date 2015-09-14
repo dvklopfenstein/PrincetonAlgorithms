@@ -16,8 +16,8 @@ class ResizingArrayStack: #<Item> implements Iterable<Item>:
     """Adds the item to this stack."""
     # double size of array if necessary
     if self._N == len(self._a):
-      self._resize(2*len(self._a))
-    self._a[self._N] = item               # add item
+      self._resize(2*len(self._a)) # Repeated doubling
+    self._a[self._N] = item        # add item
     self._N += 1
 
   def pop(self):
@@ -40,9 +40,9 @@ class ResizingArrayStack: #<Item> implements Iterable<Item>:
     """resize the underlying array holding the elements."""
     assert capacity >= self._N
     temp = [None for i in range(capacity)] # type: Item[]
-    for i in range(self._N):
+    for i in range(self._N): # Copy items into new array
         temp[i] = self._a[i]
-    self._a = temp
+    self._a = temp # Return new bigger array
 
   def __str__(self): 
     return ' '.join([str(item) for item in self])

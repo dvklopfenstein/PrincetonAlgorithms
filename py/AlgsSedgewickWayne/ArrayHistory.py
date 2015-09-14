@@ -19,10 +19,21 @@
 
 import sys
 
-def run(container, seqstr, prt=sys.stdout):
-  """Inserts items in a string into a container."""
-  import AlgsSedgewickWayne.InputArgs as IA
-  return run_list(container, IA.get_seq__int_or_str(seqstr), prt)
+import AlgsSedgewickWayne.InputArgs as IA
+
+def run(container, seqstr, expected=None, prt=sys.stdout, details=sys.stdout):
+  """Run a sequence of Stack commands."""
+  lst = IA.get_seq__int_or_str(seqstr)
+  result = run_list(container, lst, details)
+  if expected is not None:
+    pf = result == expected
+    pass_fail = "   Pass" if pf else " **FAIL"
+    #prt.write("{}: EXP({}) ACTUAL({}) from seq: {}\n".format(
+    prt.write("{PF} GIVEN({SEQ}) -> ACTUAL({ACT})".format(
+      PF=pass_fail, EXP=expected, ACT=result, SEQ=seqstr))
+    if not pf:
+      prt.write(" EXPECTED({})".format(expected))
+    prt.write("\n")
 
 def run_list(container, item_list, prt=sys.stdout):
   """Inserts items in a string into a container. Prints steps. Returns end state."""
@@ -45,7 +56,6 @@ def run_list(container, item_list, prt=sys.stdout):
 
 def run_Queue(container, seqstr, prt=sys.stdout):
   """Inserts items in a string into a container."""
-  import AlgsSedgewickWayne.InputArgs as IA
   return run_Queue_list(container, IA.get_seq__int_or_str(seqstr), prt)
 
 def run_Queue_list(container, item_list, prt=sys.stdout):
