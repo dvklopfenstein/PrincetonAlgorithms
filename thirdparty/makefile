@@ -1,4 +1,5 @@
 
+N := 3
 MAIN := HelloWorld
 ARG := 1Kints.txt
 
@@ -73,9 +74,8 @@ run: $(MAIN).class
 # i.e. If MAIN.java source changes, re-compile MAIN.class
 .java.class:
 	$(JC) $(JFLAGS) $(SRCS)
-	#$(JC) $(JFLAGS) $*.java
 
-# Week 1 Programming Assignment 
+# Algs1 Week 1 Programming Assignment 
 wk1: Percolation.class PercolationStats.class
 	$(JVM) PercolationStats 10 2
 
@@ -85,9 +85,14 @@ wk1_chk:
 wk1_zip:
 	zip percolation.zip Percolation.java PercolationStats.java
 
+# Algs1 Week 2 Programming Assignment 
+wk2: Deque.class RandomizedQueue.class Subset.class
+	$(JVM) Subset $(N)
+
 wk2_zip:
 	zip queues.zip Deque.java RandomizedQueue.java Subset.java
 
+# Algs1 Week 3 Programming Assignment 
 wk3_zip:
 	zip collinear.zip Point.java Brute.java Fast.java
 
