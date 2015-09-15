@@ -7,3 +7,4 @@ run:
 
 clobber:
 	rm -f ./work/*.png
+	rm -f *.png
