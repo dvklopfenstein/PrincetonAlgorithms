@@ -11,8 +11,8 @@ class Queue(object):
 
   def __init__(self):
     self.N = 0        # number of elements on queue
-    self.first = None # Pointer to begining of queue
-    self.last = None  # Pointer to end of queue
+    self.first = None # Pointer to begining of queue (Remove items from beginning)
+    self.last = None  # Pointer to end of queue (Add items to end)
 
   def isEmpty(self):
     """True if Queue is empty."""
@@ -33,7 +33,7 @@ class Queue(object):
     """Remove old items from the front of the list."""
     if self.isEmpty():
       raise Exception("Queue underflow")
-    item = self.first.Item
+    item = self.first.Item # Save item that will be returned
     self.first = self.first.Next
     self.N -= 1
     if self.isEmpty():
