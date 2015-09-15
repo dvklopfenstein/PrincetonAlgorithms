@@ -17,7 +17,10 @@ JFLAGS := -cp ./algs4.jar
 SRCS = \
   HelloWorld.java \
   ThreeSum.java \
-  Stopwatch.java
+  Stopwatch.java \
+  Deque.java \
+  RandomizedQueue.java \
+  Subset.java
 # StdArrayIO.java \
 # StdDraw.java \
 # StdIn.java \
@@ -108,6 +111,14 @@ Percolation.class: $(ALGS4SRC)/Percolation.java
 PercolationStats.class: $(ALGS4SRC)/PercolationStats.java
 	$(JC) -d . $<
 
+Deque.class: $(ALGS4SRC)/Deque.java
+	$(JC) -d . $<
+
+RandomizedQueue.class: $(ALGS4SRC)/RandomizedQueue.java
+	$(JC) -d . $<
+
+Subset.class: $(ALGS4SRC)/Subset.java
+	$(JC) -d . $<
 clean:
 	rm -f *.class
 
