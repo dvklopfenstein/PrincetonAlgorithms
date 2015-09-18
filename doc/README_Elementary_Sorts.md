@@ -4,6 +4,7 @@
   * [Selection Sort](../py/AlgsSedgewickWayne/Selection.py)
   * [Insertion Sort](../py/AlgsSedgewickWayne/Insertion.py)
   * [Shell Sort](../py/AlgsSedgewickWayne/Shell.py)
+  * [Shuffling](../py/AlgsSedgewickWayne/Knuth.py) using the Knuth Shuffle
 
 ## Visualization Description
 There are two ways to view the progression of a sort:

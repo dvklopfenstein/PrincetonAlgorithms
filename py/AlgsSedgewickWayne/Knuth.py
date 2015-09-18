@@ -1,4 +1,18 @@
-#!/usr/bin/env python
+"""Shuffling using Knuth shuffle"""
+
+import random
+
+def shuffle(a):
+  """Rearranges an array, a, of objects in uniformly random order"""
+  N = len(a)
+  for i in range(1,N):
+    # Knuth shuffle (03:00) Linear-time shuffling algorithm
+    #   * In iteration i, pick integer r between 0 and i uniformly at random.
+    #   * Swap a[i] and a[r]
+    # COMMON BUG:      Choosing r between 0 and N-1 => Not Uniformly Random
+    # CORRECT VARIANT: Choosing r between i and N-1
+    r = random.randint(0, i-1) # random # between 0 and i
+    a[i], a[r] = a[r], a[i]
 
 
 # Alg1 Week 2 Lecture Shuffling
@@ -111,45 +125,4 @@
  #  @author Robert Sedgewick
  #  @author Kevin Wayne
  #/
-
-import random
-
-# Rearranges an array of objects in uniformly random order
-# (under the assumption that <tt>Math.random()</tt> generates independent
-# and uniformly distributed numbers between 0 and 1).
-# @param a the array to be shuffled
-# @see StdRandom
-def shuffle(a):
-    N = len(a)
-    for i in range(1,N):
-        # Knuth shuffle (03:00) Linear-time shuffling algorithm
-        #   * In iteration i, pick integer r between 0 and i uniformly at random.
-        #   * Swap a[i] and a[r]
-        # COMMON BUG:      Choosing r between 0 and N-1 => Not Uniformly Random
-        # CORRECT VARIANT: Choosing r between i and N-1
-        #r = random.randint(i, N-1)
-        r = random.randint(0, i-1)
-        a[i], a[r] = a[r], a[i]
-        #swap = a[r]
-        #a[r] = a[i]
-        #a[i] = swap
-
-# Reads in a sequence of strings from standard input, shuffles
-# them, and prints out the results.
-def main():
-    import InputArgs
-    import sys
-
-    # read in the data
-    a = InputArgs.getStrArray("a b c d e f")
-
-    # shuffle the array
-    shuffle(a)
-
-    # print results.
-    sys.stdout.write('{}\n'.format(' '.join(map(str, a))))
-
-
-if __name__ == '__main__':
-  main()
 

@@ -37,7 +37,7 @@ JP   – BinarySearch         binary search                    tinyW.txt tinyT.t
 ..   – RandomSeq            random numbers in a given range  –
 ..   – Average              average of a sequence of numbers –
 ..   – Cat                  concatenate files                in1.txt in2.txt
-J.   – Knuth                Knuth shuffle                    cards.txt
+JP   – Knuth                Knuth shuffle                    cards.txt
 ..   – Counter              counter                          –
 ..   – StaticSETofInts      set of integers                  –
 ..   – Whitelist            whitelist client                 tinyW.txt tinyT.txt largeW.txt largeT.txt
