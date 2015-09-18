@@ -3,7 +3,7 @@
 ## Code
   * [Selection Sort](../Selection.py)
   * [Insertion Sort](../Insertion.py)
-  * Shell Sort
+  * [Shell Sort](../Shell.py)
 
 ## Visualization Description
 There are two ways to view the progression of a sort:
@@ -25,6 +25,7 @@ This is the verbose, but descriptive way to see the progression of the sort.
 ## Example Table of Contents
   1. [Run Lecture Example from **Selection (6:59)**](#ex1)
   2. [Run Lecture Example from **Insertion (9:28)**](#ex2)
+  3. [Run Lecture Example from **Shellsort (10:48)**](#ex3)
 
 ## Example Contents
 ### [ex1](#example-contents)
@@ -427,3 +428,14 @@ SELECTION SORT
 21 INSERTION SORT: SEED 183182( 8):  10 *********
 
 ```
+
+### [ex3](#example-contents)
+3. [Run Lecture Example from **Shellsort (10:48)**](#ex3)
+```
+> python -c 'import test_Shell as T; T.test_wk2_lec()'
+```
+
+
+
+
+

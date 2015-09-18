@@ -1,4 +1,50 @@
-#!/usr/bin/env python
+"""Shell Sort"""
+
+def Sort(ARR, array_history=None):
+  """Rearranges the array, ARR, in ascending order, using the natural order."""
+  # array_history; Used in tests. When true prints ASCII Art demonstrating the sort
+  N = len(ARR)
+
+  # 3x+1 increment sequence:  1, 4, 13, 40, 121, 364, 1093, ...
+  ha = [1]
+  while (ha[-1] < N/3):
+    ha.append(3*ha[-1] + 1)
+
+  for h in reversed(ha):
+    # h-sort the array (insertion sort)
+    for i in range(h,N):
+      j = i
+      while j >= h and __lt__(ARR[j], ARR[j-h]):
+        if array_history is not None:
+          array_history.add_history(ARR, {j:'*', j-h:'*'} )
+        _exch(ARR, j, j-h)
+        j -= h
+    assert _isHsorted(ARR, h)
+  assert _isSorted(ARR)
+  if array_history is not None:
+    array_history.add_history(ARR, None)
+
+
+def __lt__(v, w): 
+  """is v < w ?"""
+  return v < w
+
+def _exch(a, i, j):
+  """exchange a[i] and a[j]"""
+  a[i], a[j] = a[j], a[i]
+
+def _isSorted(a):
+  for i in range(1,len(a)):
+    if __lt__(a[i], a[i-1]): 
+      return False
+  return True
+
+def _isHsorted(a, h):
+  """is the array h-sorted?"""
+  for i in range(h,len(a)):
+    if __lt__(a[i], a[i-h]): 
+      return False
+  return True
 
 ##########################################################################
 # Alg1 Week 2 Lecture Shellsort
@@ -148,71 +194,4 @@
 #  @author Robert Sedgewick
 #  @author Kevin Wayne
 #/
-
-# Rearranges the array in ascending order, using the natural order.
-# @param a the array to be sorted
-# @param array_history; Used in tests. When true prints ASCII Art demonstrating the sort
-def Sort(ARR, array_history=None):
-    N = len(ARR)
-
-    # 3x+1 increment sequence:  1, 4, 13, 40, 121, 364, 1093, ...
-    ha = [1]
-    while (ha[-1] < N/3):
-      ha.append(3*ha[-1] + 1)
-
-    for h in reversed(ha):
-        # h-sort the array (insertion sort)
-        for i in range(h,N):
-            j = i
-            while j >= h and __lt__(ARR[j], ARR[j-h]):
-                if array_history is not None:
-                  add_history(array_history, ARR, {j:'*', j-h:'*'} )
-                _exch(ARR, j, j-h)
-                j -= h
-        assert _isHsorted(ARR, h)
-    assert _isSorted(ARR)
-    if array_history is not None:
-      add_history(array_history, ARR, None )
-
-
-#**********************************************************************
-#  Helper sorting functions
-#**********************************************************************/
-
-# is v < w ?
-def __lt__(v, w): return v < w
-
-# exchange a[i] and a[j]
-def _exch(a, i, j):
-    a[i], a[j] = a[j], a[i]
-    #swap = a[i]
-    #a[i] = a[j]
-    #a[j] = swap
-
-#**********************************************************************
-#  Check if array is sorted - useful for debugging
-#**********************************************************************/
-def _isSorted(a):
-    for i in range(1,len(a)):
-        if __lt__(a[i], a[i-1]): return False
-    return True
-
-# is the array h-sorted?
-def _isHsorted(a, h):
-    for i in range(h,len(a)):
-        if __lt__(a[i], a[i-h]): return False
-    return True
-
-def add_history(ret, ARR, anno):
-  import ArrayHistory
-  ArrayHistory.add_history(ret, ARR, anno)
-
-
-# Reads in a sequence of strings from standard input; Shellsorts them;
-# and prints them to standard output in ascending order.
-#def main():
-#    String[] a = StdIn.readAllStrings();
-#    Shell.sort(a);
-#    show(a);
-
 
