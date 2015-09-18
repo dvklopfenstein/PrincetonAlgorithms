@@ -30,7 +30,7 @@ There are two ways to view the progression of a sort:
   2b. [Run Worst Case Example from **Insertion (9:28)**](#ex2b); Array is sorted in descending order   
   2c. [Run Paritally-sorted Example from **Insertion (9:28)**](#ex2c); 
       Array has inversions: a pair of keys out order (N)
-  3. [Run Lecture Example from **Shellsort (10:48)**](#ex3)    
+  3. [Run Lecture Example from **Shellsort (10:48)**](#ex3) (WC=O(N^(3/2), Avg~k*N?)   
 
 ## Example Contents
 ### [ex1](#stacks-and-queues)
