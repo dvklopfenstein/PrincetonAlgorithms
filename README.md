@@ -10,7 +10,7 @@ Implemented in Python 2.7.x by DV Klopfenstein is selected code from:
   [**book**](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1410217876&sr=1-1) or
   [**booksite**](http://algs4.cs.princeton.edu/home/) or
   [**coursera class**](https://www.coursera.org/course/algs4partI)
-* Additional code used for visualization to help me absorb the material
+* Additional code used for visualization to help absorb the material
 * Links to [Programming Assignment Specs](./thirdparty/README.md) (No programming solutions are on this site)
 
 [**TESTS**](py/AlgsSedgewickWayne/tests/README.md): 
