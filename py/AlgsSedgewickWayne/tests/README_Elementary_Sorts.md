@@ -5,9 +5,11 @@
 
 ## Visualization Description
 There are two ways to view the progression of a sort:
+
   1. The concise way: One print of the array state per iteration. It looks like this:    
      0: 7 10 5 3 8 4 2 9 6    
      1: 2 10 5 3 8 4 7 9 6    
+
   2. The verbose but visually pleasing way of viewing the sort progression.
 
 The second way of visualizing includes one "paragraph" for each
