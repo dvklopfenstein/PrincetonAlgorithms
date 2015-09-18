@@ -5,6 +5,9 @@
   * [Insertion Sort](../py/AlgsSedgewickWayne/Insertion.py)
   * [Shell Sort](../py/AlgsSedgewickWayne/Shell.py)
   * [Shuffling](../py/AlgsSedgewickWayne/Knuth.py) using the Knuth Shuffle
+  * **Convex Hull**, an application of sort
+    * Point2D, used by Graham scan
+    * Graham scan
 
 ## Visualization Description
 There are two ways to view the progression of a sort:

@@ -23,7 +23,7 @@
  #  @author Kevin Wayne
  #/
 
-import numpy as mp
+import numpy as np
 
 class Point2D: # implements Comparable<Point2D> {
 
@@ -221,41 +221,6 @@ class Point2D: # implements Comparable<Point2D> {
         StdDraw.line(self._x, self._y, that._x, that._y)
 
 
-# Unit tests the point data type.
-def main():
-    x0 = int(args[0])
-    y0 = int(args[1])
-    N  = int(args[2])
-
-    StdDraw.setCanvasSize(800, 800)
-    StdDraw.setXscale(0, 100)
-    StdDraw.setYscale(0, 100)
-    StdDraw.setPenRadius(.005)
-    Point2D[] points = new Point2D[N]
-    for i in range(N):
-        x = random.randint(100)
-        y = random.randint(100)
-        points[i] = Point2D(x, y)
-        points[i].draw()
-
-    # draw p = (x0, x1) in red
-    Point2D p = Point2D(x0, y0)
-    StdDraw.setPenColor(StdDraw.RED)
-    StdDraw.setPenRadius(.02)
-    p.draw()
-
-
-    # draw line segments from p to each point, one at a time, in polar order
-    StdDraw.setPenRadius()
-    StdDraw.setPenColor(StdDraw.BLUE)
-    Arrays.sort(points, p.POLAR_ORDER)
-    for i in range(N):
-        p.drawTo(points[i])
-        StdDraw.show(100)
-
-if __name__ == '__main__':
-  main()
-
-
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
+# Copyright (C) 2015, DV Klopfenstein (Pyth9on port)
 # Java Last updated: Tue Mar 25 20:35:33 EDT 2014.
