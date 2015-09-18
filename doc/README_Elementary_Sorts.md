@@ -439,6 +439,206 @@ SELECTION SORT
 3. Run Lecture Example from **Shellsort (10:48)**
 ```
 > python -c 'import test_Shell as T; T.test_wk2_lec()'
+
+SHELL SORT LEC EX RESULT: A E E L M O P R S T X
+
+ 0: M O L E E X A S P R T
+ 1: E O L E M X A S P R T
+ 2: E O A E M X L S P R T
+ 3: E O A E M R L S P X T
+ 4: E A O E M R L S P X T
+ 5: A E O E M R L S P X T
+ 6: A E E O M R L S P X T
+ 7: A E E M O R L S P X T
+ 8: A E E M O L R S P X T
+ 9: A E E M L O R S P X T
+10: A E E L M O R S P X T
+11: A E E L M O R P S X T
+12: A E E L M O P R S X T
+13: A E E L M O P R S T X
+
+ 0 SHELL SORT LEC EX: M O L E E X A S P R T
+ 0 SHELL SORT LEC EX( 0): *M  *****
+ 0 SHELL SORT LEC EX( 1):  O  ******
+ 0 SHELL SORT LEC EX( 2):  L  ****
+ 0 SHELL SORT LEC EX( 3):  E  ***
+ 0 SHELL SORT LEC EX( 4): *E  ***
+ 0 SHELL SORT LEC EX( 5):  X  ***********
+ 0 SHELL SORT LEC EX( 6):  A  *
+ 0 SHELL SORT LEC EX( 7):  S  *********
+ 0 SHELL SORT LEC EX( 8):  P  *******
+ 0 SHELL SORT LEC EX( 9):  R  ********
+ 0 SHELL SORT LEC EX(10):  T  **********
+
+ 1 SHELL SORT LEC EX: E O L E M X A S P R T
+ 1 SHELL SORT LEC EX( 0):  E  ***
+ 1 SHELL SORT LEC EX( 1):  O  ******
+ 1 SHELL SORT LEC EX( 2): *L  ****
+ 1 SHELL SORT LEC EX( 3):  E  ***
+ 1 SHELL SORT LEC EX( 4):  M  *****
+ 1 SHELL SORT LEC EX( 5):  X  ***********
+ 1 SHELL SORT LEC EX( 6): *A  *
+ 1 SHELL SORT LEC EX( 7):  S  *********
+ 1 SHELL SORT LEC EX( 8):  P  *******
+ 1 SHELL SORT LEC EX( 9):  R  ********
+ 1 SHELL SORT LEC EX(10):  T  **********
+
+ 2 SHELL SORT LEC EX: E O A E M X L S P R T
+ 2 SHELL SORT LEC EX( 0):  E  ***
+ 2 SHELL SORT LEC EX( 1):  O  ******
+ 2 SHELL SORT LEC EX( 2):  A  *
+ 2 SHELL SORT LEC EX( 3):  E  ***
+ 2 SHELL SORT LEC EX( 4):  M  *****
+ 2 SHELL SORT LEC EX( 5): *X  ***********
+ 2 SHELL SORT LEC EX( 6):  L  ****
+ 2 SHELL SORT LEC EX( 7):  S  *********
+ 2 SHELL SORT LEC EX( 8):  P  *******
+ 2 SHELL SORT LEC EX( 9): *R  ********
+ 2 SHELL SORT LEC EX(10):  T  **********
+
+ 3 SHELL SORT LEC EX: E O A E M R L S P X T
+ 3 SHELL SORT LEC EX( 0):  E  ***
+ 3 SHELL SORT LEC EX( 1): *O  ******
+ 3 SHELL SORT LEC EX( 2): *A  *
+ 3 SHELL SORT LEC EX( 3):  E  ***
+ 3 SHELL SORT LEC EX( 4):  M  *****
+ 3 SHELL SORT LEC EX( 5):  R  ********
+ 3 SHELL SORT LEC EX( 6):  L  ****
+ 3 SHELL SORT LEC EX( 7):  S  *********
+ 3 SHELL SORT LEC EX( 8):  P  *******
+ 3 SHELL SORT LEC EX( 9):  X  ***********
+ 3 SHELL SORT LEC EX(10):  T  **********
+
+ 4 SHELL SORT LEC EX: E A O E M R L S P X T
+ 4 SHELL SORT LEC EX( 0): *E  ***
+ 4 SHELL SORT LEC EX( 1): *A  *
+ 4 SHELL SORT LEC EX( 2):  O  ******
+ 4 SHELL SORT LEC EX( 3):  E  ***
+ 4 SHELL SORT LEC EX( 4):  M  *****
+ 4 SHELL SORT LEC EX( 5):  R  ********
+ 4 SHELL SORT LEC EX( 6):  L  ****
+ 4 SHELL SORT LEC EX( 7):  S  *********
+ 4 SHELL SORT LEC EX( 8):  P  *******
+ 4 SHELL SORT LEC EX( 9):  X  ***********
+ 4 SHELL SORT LEC EX(10):  T  **********
+
+ 5 SHELL SORT LEC EX: A E O E M R L S P X T
+ 5 SHELL SORT LEC EX( 0):  A  *
+ 5 SHELL SORT LEC EX( 1):  E  ***
+ 5 SHELL SORT LEC EX( 2): *O  ******
+ 5 SHELL SORT LEC EX( 3): *E  ***
+ 5 SHELL SORT LEC EX( 4):  M  *****
+ 5 SHELL SORT LEC EX( 5):  R  ********
+ 5 SHELL SORT LEC EX( 6):  L  ****
+ 5 SHELL SORT LEC EX( 7):  S  *********
+ 5 SHELL SORT LEC EX( 8):  P  *******
+ 5 SHELL SORT LEC EX( 9):  X  ***********
+ 5 SHELL SORT LEC EX(10):  T  **********
+
+ 6 SHELL SORT LEC EX: A E E O M R L S P X T
+ 6 SHELL SORT LEC EX( 0):  A  *
+ 6 SHELL SORT LEC EX( 1):  E  ***
+ 6 SHELL SORT LEC EX( 2):  E  ***
+ 6 SHELL SORT LEC EX( 3): *O  ******
+ 6 SHELL SORT LEC EX( 4): *M  *****
+ 6 SHELL SORT LEC EX( 5):  R  ********
+ 6 SHELL SORT LEC EX( 6):  L  ****
+ 6 SHELL SORT LEC EX( 7):  S  *********
+ 6 SHELL SORT LEC EX( 8):  P  *******
+ 6 SHELL SORT LEC EX( 9):  X  ***********
+ 6 SHELL SORT LEC EX(10):  T  **********
+
+ 7 SHELL SORT LEC EX: A E E M O R L S P X T
+ 7 SHELL SORT LEC EX( 0):  A  *
+ 7 SHELL SORT LEC EX( 1):  E  ***
+ 7 SHELL SORT LEC EX( 2):  E  ***
+ 7 SHELL SORT LEC EX( 3):  M  *****
+ 7 SHELL SORT LEC EX( 4):  O  ******
+ 7 SHELL SORT LEC EX( 5): *R  ********
+ 7 SHELL SORT LEC EX( 6): *L  ****
+ 7 SHELL SORT LEC EX( 7):  S  *********
+ 7 SHELL SORT LEC EX( 8):  P  *******
+ 7 SHELL SORT LEC EX( 9):  X  ***********
+ 7 SHELL SORT LEC EX(10):  T  **********
+
+ 8 SHELL SORT LEC EX: A E E M O L R S P X T
+ 8 SHELL SORT LEC EX( 0):  A  *
+ 8 SHELL SORT LEC EX( 1):  E  ***
+ 8 SHELL SORT LEC EX( 2):  E  ***
+ 8 SHELL SORT LEC EX( 3):  M  *****
+ 8 SHELL SORT LEC EX( 4): *O  ******
+ 8 SHELL SORT LEC EX( 5): *L  ****
+ 8 SHELL SORT LEC EX( 6):  R  ********
+ 8 SHELL SORT LEC EX( 7):  S  *********
+ 8 SHELL SORT LEC EX( 8):  P  *******
+ 8 SHELL SORT LEC EX( 9):  X  ***********
+ 8 SHELL SORT LEC EX(10):  T  **********
+
+ 9 SHELL SORT LEC EX: A E E M L O R S P X T
+ 9 SHELL SORT LEC EX( 0):  A  *
+ 9 SHELL SORT LEC EX( 1):  E  ***
+ 9 SHELL SORT LEC EX( 2):  E  ***
+ 9 SHELL SORT LEC EX( 3): *M  *****
+ 9 SHELL SORT LEC EX( 4): *L  ****
+ 9 SHELL SORT LEC EX( 5):  O  ******
+ 9 SHELL SORT LEC EX( 6):  R  ********
+ 9 SHELL SORT LEC EX( 7):  S  *********
+ 9 SHELL SORT LEC EX( 8):  P  *******
+ 9 SHELL SORT LEC EX( 9):  X  ***********
+ 9 SHELL SORT LEC EX(10):  T  **********
+
+10 SHELL SORT LEC EX: A E E L M O R S P X T
+10 SHELL SORT LEC EX( 0):  A  *
+10 SHELL SORT LEC EX( 1):  E  ***
+10 SHELL SORT LEC EX( 2):  E  ***
+10 SHELL SORT LEC EX( 3):  L  ****
+10 SHELL SORT LEC EX( 4):  M  *****
+10 SHELL SORT LEC EX( 5):  O  ******
+10 SHELL SORT LEC EX( 6):  R  ********
+10 SHELL SORT LEC EX( 7): *S  *********
+10 SHELL SORT LEC EX( 8): *P  *******
+10 SHELL SORT LEC EX( 9):  X  ***********
+10 SHELL SORT LEC EX(10):  T  **********
+
+11 SHELL SORT LEC EX: A E E L M O R P S X T
+11 SHELL SORT LEC EX( 0):  A  *
+11 SHELL SORT LEC EX( 1):  E  ***
+11 SHELL SORT LEC EX( 2):  E  ***
+11 SHELL SORT LEC EX( 3):  L  ****
+11 SHELL SORT LEC EX( 4):  M  *****
+11 SHELL SORT LEC EX( 5):  O  ******
+11 SHELL SORT LEC EX( 6): *R  ********
+11 SHELL SORT LEC EX( 7): *P  *******
+11 SHELL SORT LEC EX( 8):  S  *********
+11 SHELL SORT LEC EX( 9):  X  ***********
+11 SHELL SORT LEC EX(10):  T  **********
+
+12 SHELL SORT LEC EX: A E E L M O P R S X T
+12 SHELL SORT LEC EX( 0):  A  *
+12 SHELL SORT LEC EX( 1):  E  ***
+12 SHELL SORT LEC EX( 2):  E  ***
+12 SHELL SORT LEC EX( 3):  L  ****
+12 SHELL SORT LEC EX( 4):  M  *****
+12 SHELL SORT LEC EX( 5):  O  ******
+12 SHELL SORT LEC EX( 6):  P  *******
+12 SHELL SORT LEC EX( 7):  R  ********
+12 SHELL SORT LEC EX( 8):  S  *********
+12 SHELL SORT LEC EX( 9): *X  ***********
+12 SHELL SORT LEC EX(10): *T  **********
+
+13 SHELL SORT LEC EX: A E E L M O P R S T X
+13 SHELL SORT LEC EX( 0):  A  *
+13 SHELL SORT LEC EX( 1):  E  ***
+13 SHELL SORT LEC EX( 2):  E  ***
+13 SHELL SORT LEC EX( 3):  L  ****
+13 SHELL SORT LEC EX( 4):  M  *****
+13 SHELL SORT LEC EX( 5):  O  ******
+13 SHELL SORT LEC EX( 6):  P  *******
+13 SHELL SORT LEC EX( 7):  R  ********
+13 SHELL SORT LEC EX( 8):  S  *********
+13 SHELL SORT LEC EX( 9):  T  **********
+13 SHELL SORT LEC EX(10):  X  ***********
+
 ```
 
 
