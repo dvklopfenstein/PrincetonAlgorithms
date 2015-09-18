@@ -168,7 +168,8 @@ SELECTION SORT
 
 ### [ex2a](#stacks-and-queues)
 2a. Run Best Case Example from **Insertion (9:28)**; Array is already sorted    
-> python -c 'import test_Insertion as T; T.test_wk2_lec_best()'
+> python -c 'import test_Insertion as T; T.test_wk2_lec_best()'    
+
 ```
 INSERTION BEST SORT: RESULT A E E L M O P R S T X
  0: A E E L M O P R S T X
