@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+"""Selection Sort."""
 
 def Sort(ARR, array_history=None):
   """Rearranges the array, ARR, in ascending order, using the natural order."""
@@ -34,6 +34,11 @@ def _isSorted(a, lo=None, hi=None):
   for i in range(lo+1, hi+1):
       if __lt__(a[i], a[i-1]): return False
   return True
+
+def add_history(ret, ARR, anno):
+  """Visualization Code for learning."""
+  import ArrayHistory
+  ArrayHistory.add_history(ret, ARR, anno)
 
 # Alg1 Week 2 Lecture Selection Sort
 #************************************************************************
@@ -248,17 +253,3 @@ def _isSorted(a, lo=None, hi=None):
 #         if __lt__(c, a[i], a[i-1]): return False
 #     return True
 
-def add_history(ret, ARR, anno):
-  import ArrayHistory
-  ArrayHistory.add_history(ret, ARR, anno)
-
-# Reads in a sequence of strings from standard input selection Sorts them;
-# and prints them to standard output in ascending order.
-def main():
-    import InputArgs
-    a = InputArgs.getStrArray()
-    Sort(a)
-    print ' '.join(a)
-
-if __name__ == '__main__':
-  main()
