@@ -40,7 +40,8 @@ There are two ways to view the progression of a sort:
 1. Run Lecture Example from **Selection (6:59)**
 ```
 > python -c 'import test_Selection as T; T.test_wk2_lec()'
-
+```
+```
 SELECTION SORT
  0: 7 10 5 3 8 4 2 9 6
  1: 2 10 5 3 8 4 7 9 6
@@ -167,9 +168,11 @@ SELECTION SORT
 
 
 ### [ex2](#stacks-and-queues)
-2a. Run Lecture Example from **Insertion (9:28)**
+2. Run Lecture Example from **Insertion (9:28)**
 ```
 > python -c 'import test_Insertion as T; T.test_wk2_lec()'
+```
+```
  0: 7 10 5 3 8 4 2 9 6
  1: 7 5 10 3 8 4 2 9 6
  2: 5 7 10 3 8 4 2 9 6
@@ -442,7 +445,6 @@ SELECTION SORT
 ```
 > python -c 'import test_Insertion as T; T.test_wk2_lec_best()'    
 ```
-
 ```
 INSERTION BEST SORT: RESULT A E E L M O P R S T X
  0: A E E L M O P R S T X
@@ -467,7 +469,8 @@ INSERTION BEST SORT: RESULT A E E L M O P R S T X
 3. Run Lecture Example from **Shellsort (10:48)**
 ```
 > python -c 'import test_Shell as T; T.test_wk2_lec()'
-
+```
+```
 SHELL SORT LEC EX RESULT: A E E L M O P R S T X
 
  0: M O L E E X A S P R T
