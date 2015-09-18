@@ -7,18 +7,16 @@ def Sort(ARR, array_history=None):
   # Items from i to j-1 are Sorted
   # IN the ith iteration, find the smallest remaining Item above i
   for i in range(N): # MOVE pointer to the right
-    Min = i # Index of smallest element to the right
+    min_elem_idx = i # Index of smallest element to the right of pointer i
     # Identify index of min Item right of j
     for j in range(i+1,N):
-      if __lt__(ARR[j], ARR[Min]):  # COMPARE is counted toward cost
-        Min = j
-    if array_history is not None: 
-      array_history.add_history(ARR, {i:'*', Min:'*'})
-    _exch(ARR, i, Min)           # EXCHANGE is counted toward cost
+      if __lt__(ARR[j], ARR[min_elem_idx]):  # COMPARE is counted toward cost
+        min_elem_idx = j
+    if array_history is not None: array_history.add_history(ARR, {i:'*', min_elem_idx:'*'})
+    _exch(ARR, i, min_elem_idx)           # EXCHANGE is counted toward cost
     assert _isSorted(ARR, 0, i)
   assert _isSorted(ARR)
-  if array_history is not None: 
-    array_history.add_history(ARR, None)
+  if array_history is not None: array_history.add_history(ARR, None)
 
 def __lt__(v, w): 
   """is v < w ?"""
@@ -189,8 +187,6 @@ def _isSorted(a, lo=None, hi=None):
 # EXPLANATION: Transitivity is violated.
 # YOU MUST NOT INTRODUCE A FUDGE FACTOR WHEN COMPARING TWO
 # FLOATING_POINT NUMBERS IF YOU WANT TO IMPLEMENT THE Comparable INTERFACE.
-
-
 
 
 ########################################################

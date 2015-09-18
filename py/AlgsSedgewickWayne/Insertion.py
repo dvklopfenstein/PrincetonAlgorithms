@@ -1,7 +1,50 @@
-#!/usr/bin/env python
+"""Alg1 Week2 Lecture Insertion Sort"""
 
-# Alg1 Week2 Lecture Insertion Sort
+def Sort(ARR, array_history=None):
+  """Rearranges the array in ascending order, using the natural order."""
+  N = len(ARR)
+  # 00:57 Everything to the left is in acending order
+  #       Everything to the right, we have not seen at all
+  for i in range(N):
+    #for (int j = i; j > 0 && less(a[j], a[j-1]); j--):
+    j = i
+    # Exchange the curr Elem with every element to the left that is > 01:21
+    while j > 0 and __lt__(ARR[j], ARR[j-1]):
+      #if array_history is not None:
+      if array_history is not None: array_history.add_history(ARR, {j:'*', j-1:'*'})
+      _exch(ARR, j, j-1)
+      j -= 1
+    assert _isSorted(ARR, 0, i)
+  assert _isSorted(ARR);
+  if array_history is not None: array_history.add_history(ARR, None)
 
+def indexSort(ARR, array_history=None):
+  N = len(ARR)
+  index = range(N)
+  for i in range(N):
+    j = i
+    while j > 0 and __lt__(ARR[index[j]], ARR[index[j-1]]):
+      _exch(index, j, j-1)
+      if array_history is not None: array_history.add_history(ARR, {j:'*', j-1:'*'})
+      j -= 1
+  return index
+
+def __lt__(v, w):
+  """is v < w ?"""
+  return v < w
+
+def _exch(a, i, j):
+  """exchange a[i] and a[j]."""
+  a[i], a[j] = a[j], a[i]
+
+def _isSorted(a, lo=None, hi=None):
+  if lo is None and hi is None:
+    lo = 0
+    hi = len(a) - 1
+  # Is the array sorted from a[lo] to a[hi]?
+  for i in range(lo+1, hi+1):
+      if __lt__(a[i], a[i-1]): return False
+  return True
 
 #************************************************************************
 #  Compilation:  javac Insertion.java
@@ -125,25 +168,6 @@
 
 
 
- # @param a the array to be sorted
-def Sort(ARR, array_history=None):
-  """Rearranges the array in ascending order, using the natural order."""
-  N = len(ARR)
-  # 00:57 Everything to the left is in acending order
-  #       Everything to the right, we have not seen at all
-  for i in range(N):
-    #for (int j = i; j > 0 && less(a[j], a[j-1]); j--):
-    j = i
-    # Exchange the curr Elem with every element to the left that is > 01:21
-    while j > 0 and __lt__(ARR[j], ARR[j-1]):
-      #if array_history is not None:
-      if isinstance(array_history, list): add_history(array_history, ARR, {j:'*', j-1:'*'} )
-      _exch(ARR, j, j-1)
-      j -= 1
-    assert _isSorted(ARR, 0, i)
-  assert _isSorted(ARR);
-  if isinstance(array_history, list): add_history(array_history, ARR, None )
-
 #  #*
 #  # Rearranges the array in ascending order, using a comparator.
 #  # @param a the array
@@ -166,72 +190,4 @@ def Sort(ARR, array_history=None):
  # @return a permutation <tt>p[]</tt> such that <tt>a[p[0]]</tt>, <tt>a[p[1]]</tt>,
  #    ..., <tt>a[p[N-1]]</tt> are in ascending order
  #/
-def indexSort(ARR, array_history=None):
-  N = len(ARR)
-  index = [None]*N
-  for i in range(N):
-    index[i] = i
-
-  for i in range(N):
-    j = i
-    while j > 0 and __lt__(ARR[index[j]], ARR[index[j-1]]):
-      _exch(index, j, j-1)
-      if array_history is not None:
-        add_history(array_history, ARR, {j:'*', j-1:'*'} )
-      j -= 1
-  return index
-
-#**********************************************************************
-#  Helper sorting functions
-#**********************************************************************/
-
-def __lt__(v, w):
-  """is v < w ?"""
-  return v < w
-
-# # is v < w ?
-# def __lt__(c, v, w):
-#     return (c.compare(v, w) < 0);
-
-def _exch(a, i, j):
-  """exchange a[i] and a[j]."""
-  a[i], a[j] = a[j], a[i]
-
-#**********************************************************************
-#  Check if array is sorted - useful for debugging
-#**********************************************************************/
-def _isSorted(a, lo=None, hi=None):
-  if lo is None and hi is None:
-    lo = 0
-    hi = len(a) - 1
-  # is the array sorted from a[lo] to a[hi]
-  for i in range(lo+1, hi+1):
-      if __lt__(a[i], a[i-1]): return False
-  return True
-
-# def _isSorted(a, c):
-#     return _isSorted(a, c, 0, a.length - 1)
-#
-# # is the array sorted from a[lo] to a[hi]
-# def _isSorted(a, c, lo, hi):
-#     for i in range(lo+1,hi+1):
-#         if less(c, a[i], a[i-1]): return False
-#     return True
-
-def add_history(ret, ARR, anno):
-  import ArrayHistory
-  ArrayHistory.add_history(ret, ARR, anno)
-
-
-# Reads in a sequence of strings from standard input; insertion sorts them;
-# and prints them to standard output in ascending order.
-def main():
-  import InputArgs
-  data = InputArgs.getStrArray("6 3 7 2 0 1 9");
-  print "ORIG:", ' '.join(map(str,data))
-  Sort(data)
-  print "SORT:", ' '.join(map(str,data))
-
-if __name__ == '__main__':
-  main()
 
