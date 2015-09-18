@@ -19,6 +19,10 @@ def test_wk2_lec_best():
   """Best-case runtime is when array is already sorted."""
   run("A E E L M O P R S T X".split(), "INSERTION BEST SORT:")
 
+def test_wk2_lec_worst():
+  """Best-case runtime is when array is already sorted."""
+  run("X T S R P O M L E E A".split(), "INSERTION WORST SORT:")
+
 def test_1():
   run(map(int, "13 16 40 60 19 70 71 47 12 67".split()), "INSERTION SORT: SEED 183182")
 
