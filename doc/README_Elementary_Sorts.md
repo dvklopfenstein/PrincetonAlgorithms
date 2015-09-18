@@ -436,7 +436,7 @@ SELECTION SORT
 ```
 
 ### [ex3](#stacks-and-queues)
-3. [Run Lecture Example from **Shellsort (10:48)**](#ex3)
+3. Run Lecture Example from **Shellsort (10:48)**
 ```
 > python -c 'import test_Shell as T; T.test_wk2_lec()'
 ```
