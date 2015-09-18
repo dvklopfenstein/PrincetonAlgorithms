@@ -34,7 +34,7 @@ There are two ways to view the progression of a sort:
      > python -c 'import test_Shell as T; T.test_wk2_lec()'
 
 ## Example Contents
-### [ex1](#example-contents)
+### [ex1](#stacks-and-queues)
 1. Run Lecture Example from **Selection (6:59)**
 ```
 > python -c 'import test_Selection as T; T.test_wk2_lec()'
@@ -164,7 +164,7 @@ SELECTION SORT
 ```    
 
 
-### [ex2](#example-contents)
+### [ex2](#stacks-and-queues)
 2. Run Lecture Example from **Insertion (9:28)**
 ```
 > python -c 'import test_Insertion as T; T.test_wk2_lec()'
@@ -435,7 +435,7 @@ SELECTION SORT
 
 ```
 
-### [ex3](#example-contents)
+### [ex3](#stacks-and-queues)
 3. [Run Lecture Example from **Shellsort (10:48)**](#ex3)
 ```
 > python -c 'import test_Shell as T; T.test_wk2_lec()'
