@@ -28,6 +28,8 @@ There are two ways to view the progression of a sort:
   2. [Run Lecture Example from **Insertion (9:28)**](#ex2) (N^2/4)    
   2a. [Run Best Case Example from **Insertion (9:28)**](#ex2a); Array is already sorted (N)   
   2b. [Run Worst Case Example from **Insertion (9:28)**](#ex2b); Array is sorted in descending order   
+  2c. [Run Paritally-sorted Example from **Insertion (9:28)**](#ex2c); 
+      Array has inversions: a pair of keys out order
   3. [Run Lecture Example from **Shellsort (10:48)**](#ex3)    
 
 ## Example Contents
@@ -1236,6 +1238,115 @@ INSERTION WORST SORT: RESULT A E E L M O P R S T X
 54 INSERTION WORST SORT:( 8):  S  *********
 54 INSERTION WORST SORT:( 9):  T  **********
 54 INSERTION WORST SORT:(10):  X  ***********
+
+```
+
+### [ex2c](#stacks-and-queues)
+2c. Run Paritally-sorted Example from **Insertion (9:28)**
+    Array has inversions: a pair of keys out order
+```
+> python -c 'import test_Insertion as T; T.test_wk2_partial()'
+```
+```
+INSERTION PARTIAL SORT: RESULT A E E L M O P R S T X
+ 0: A E E L M O T R X P S
+ 1: A E E L M O R T X P S
+ 2: A E E L M O R T P X S
+ 3: A E E L M O R P T X S
+ 4: A E E L M O P R T X S
+ 5: A E E L M O P R T S X
+ 6: A E E L M O P R S T X
+
+ 0 INSERTION PARTIAL SORT:: A E E L M O T R X P S
+ 0 INSERTION PARTIAL SORT:( 0):  A  *
+ 0 INSERTION PARTIAL SORT:( 1):  E  ***
+ 0 INSERTION PARTIAL SORT:( 2):  E  ***
+ 0 INSERTION PARTIAL SORT:( 3):  L  ****
+ 0 INSERTION PARTIAL SORT:( 4):  M  *****
+ 0 INSERTION PARTIAL SORT:( 5):  O  ******
+ 0 INSERTION PARTIAL SORT:( 6): *T  **********
+ 0 INSERTION PARTIAL SORT:( 7): *R  ********
+ 0 INSERTION PARTIAL SORT:( 8):  X  ***********
+ 0 INSERTION PARTIAL SORT:( 9):  P  *******
+ 0 INSERTION PARTIAL SORT:(10):  S  *********
+
+ 1 INSERTION PARTIAL SORT:: A E E L M O R T X P S
+ 1 INSERTION PARTIAL SORT:( 0):  A  *
+ 1 INSERTION PARTIAL SORT:( 1):  E  ***
+ 1 INSERTION PARTIAL SORT:( 2):  E  ***
+ 1 INSERTION PARTIAL SORT:( 3):  L  ****
+ 1 INSERTION PARTIAL SORT:( 4):  M  *****
+ 1 INSERTION PARTIAL SORT:( 5):  O  ******
+ 1 INSERTION PARTIAL SORT:( 6):  R  ********
+ 1 INSERTION PARTIAL SORT:( 7):  T  **********
+ 1 INSERTION PARTIAL SORT:( 8): *X  ***********
+ 1 INSERTION PARTIAL SORT:( 9): *P  *******
+ 1 INSERTION PARTIAL SORT:(10):  S  *********
+
+ 2 INSERTION PARTIAL SORT:: A E E L M O R T P X S
+ 2 INSERTION PARTIAL SORT:( 0):  A  *
+ 2 INSERTION PARTIAL SORT:( 1):  E  ***
+ 2 INSERTION PARTIAL SORT:( 2):  E  ***
+ 2 INSERTION PARTIAL SORT:( 3):  L  ****
+ 2 INSERTION PARTIAL SORT:( 4):  M  *****
+ 2 INSERTION PARTIAL SORT:( 5):  O  ******
+ 2 INSERTION PARTIAL SORT:( 6):  R  ********
+ 2 INSERTION PARTIAL SORT:( 7): *T  **********
+ 2 INSERTION PARTIAL SORT:( 8): *P  *******
+ 2 INSERTION PARTIAL SORT:( 9):  X  ***********
+ 2 INSERTION PARTIAL SORT:(10):  S  *********
+
+ 3 INSERTION PARTIAL SORT:: A E E L M O R P T X S
+ 3 INSERTION PARTIAL SORT:( 0):  A  *
+ 3 INSERTION PARTIAL SORT:( 1):  E  ***
+ 3 INSERTION PARTIAL SORT:( 2):  E  ***
+ 3 INSERTION PARTIAL SORT:( 3):  L  ****
+ 3 INSERTION PARTIAL SORT:( 4):  M  *****
+ 3 INSERTION PARTIAL SORT:( 5):  O  ******
+ 3 INSERTION PARTIAL SORT:( 6): *R  ********
+ 3 INSERTION PARTIAL SORT:( 7): *P  *******
+ 3 INSERTION PARTIAL SORT:( 8):  T  **********
+ 3 INSERTION PARTIAL SORT:( 9):  X  ***********
+ 3 INSERTION PARTIAL SORT:(10):  S  *********
+
+ 4 INSERTION PARTIAL SORT:: A E E L M O P R T X S
+ 4 INSERTION PARTIAL SORT:( 0):  A  *
+ 4 INSERTION PARTIAL SORT:( 1):  E  ***
+ 4 INSERTION PARTIAL SORT:( 2):  E  ***
+ 4 INSERTION PARTIAL SORT:( 3):  L  ****
+ 4 INSERTION PARTIAL SORT:( 4):  M  *****
+ 4 INSERTION PARTIAL SORT:( 5):  O  ******
+ 4 INSERTION PARTIAL SORT:( 6):  P  *******
+ 4 INSERTION PARTIAL SORT:( 7):  R  ********
+ 4 INSERTION PARTIAL SORT:( 8):  T  **********
+ 4 INSERTION PARTIAL SORT:( 9): *X  ***********
+ 4 INSERTION PARTIAL SORT:(10): *S  *********
+
+ 5 INSERTION PARTIAL SORT:: A E E L M O P R T S X
+ 5 INSERTION PARTIAL SORT:( 0):  A  *
+ 5 INSERTION PARTIAL SORT:( 1):  E  ***
+ 5 INSERTION PARTIAL SORT:( 2):  E  ***
+ 5 INSERTION PARTIAL SORT:( 3):  L  ****
+ 5 INSERTION PARTIAL SORT:( 4):  M  *****
+ 5 INSERTION PARTIAL SORT:( 5):  O  ******
+ 5 INSERTION PARTIAL SORT:( 6):  P  *******
+ 5 INSERTION PARTIAL SORT:( 7):  R  ********
+ 5 INSERTION PARTIAL SORT:( 8): *T  **********
+ 5 INSERTION PARTIAL SORT:( 9): *S  *********
+ 5 INSERTION PARTIAL SORT:(10):  X  ***********
+
+ 6 INSERTION PARTIAL SORT:: A E E L M O P R S T X
+ 6 INSERTION PARTIAL SORT:( 0):  A  *
+ 6 INSERTION PARTIAL SORT:( 1):  E  ***
+ 6 INSERTION PARTIAL SORT:( 2):  E  ***
+ 6 INSERTION PARTIAL SORT:( 3):  L  ****
+ 6 INSERTION PARTIAL SORT:( 4):  M  *****
+ 6 INSERTION PARTIAL SORT:( 5):  O  ******
+ 6 INSERTION PARTIAL SORT:( 6):  P  *******
+ 6 INSERTION PARTIAL SORT:( 7):  R  ********
+ 6 INSERTION PARTIAL SORT:( 8):  S  *********
+ 6 INSERTION PARTIAL SORT:( 9):  T  **********
+ 6 INSERTION PARTIAL SORT:(10):  X  ***********
 
 ```
 
