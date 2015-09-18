@@ -11,21 +11,25 @@ There are two ways to view the progression of a sort:
   1. The concise way: One print of the array state per iteration. It looks like this:    
      0: 7 10 5 3 8 4 2 9 6    
      1: 2 10 5 3 8 4 7 9 6    
+     ...
 
   2. The verbose but visually pleasing way of viewing the sort progression.
 
-The second way of visualizing includes one "paragraph" for each
-iteration. There are horizontal "bars" made of '*'s showing 
-how large each element is. This helps dyslexics and tired people
-to not be confused as to which element is bigger when viewing a 
-ton of numbers or letters all at once. As we proceed through each paragragh,
-notice that the bars begin to lined up in smallest to biggest order.
-This is the verbose, but descriptive way to see the progression of the sort.
+     The second way of visualizing includes one "paragraph" for each
+     iteration. There are horizontal "bars" made of '*'s showing 
+     how large each element is. This helps dyslexics and tired people
+     to not be confused as to which element is bigger when viewing a 
+     ton of numbers or letters all at once. As we proceed through each paragragh,
+     notice that the bars begin to lined up in smallest to biggest order.
+     This is the verbose, but descriptive way to see the progression of the sort.
 
 ## Example Table of Contents
   1. [Run Lecture Example from **Selection (6:59)**](#ex1)
+     > python -c 'import test_Selection as T; T.test_wk2_lec()'
   2. [Run Lecture Example from **Insertion (9:28)**](#ex2)
+     > python -c 'import test_Insertion as T; T.test_wk2_lec()'
   3. [Run Lecture Example from **Shellsort (10:48)**](#ex3)
+     > python -c 'import test_Shell as T; T.test_wk2_lec()'
 
 ## Example Contents
 ### [ex1](#example-contents)
