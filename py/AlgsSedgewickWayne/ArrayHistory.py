@@ -86,9 +86,9 @@ def ex_stdin(container, prt=sys.stdout):
       result = ' '.join([result, container.pop()])
   prt.write('(%d left on stack) OUTPUT: %container\n'%(container.size(), result))
 
-#def chk(a, txt):
-#  b = txt.split()
-#  return arrays_equal(a, b)
+def chk(a, txt):
+  b = txt.split()
+  return arrays_equal(a, b)
 
 def prt_array_history(array_history):
   """ Prints array history with spaces between elements."""

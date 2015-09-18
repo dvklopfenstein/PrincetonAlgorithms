@@ -1,5 +1,40 @@
 #!/usr/bin/env python
 
+def Sort(ARR, array_history=None):
+  """Rearranges the array, ARR, in ascending order, using the natural order."""
+  # param array_history; Used in tests. When true prints ASCII Art demonstrating the sort
+  N = len(ARR)
+  # Items from i to j-1 are Sorted
+  # IN the ith iteration, find the smallest remaining Item above i
+  for i in range(N): # MOVE pointer to the right
+    Min = i # Index of smallest element to the right
+    # Identify index of min Item right of j
+    for j in range(i+1,N):
+      if __lt__(ARR[j], ARR[Min]):  # COMPARE is counted toward cost
+        Min = j
+    if array_history is not None: add_history(array_history, ARR, {i:'*', Min:'*'} )
+    _exch(ARR, i, Min)           # EXCHANGE is counted toward cost
+    assert _isSorted(ARR, 0, i)
+  assert _isSorted(ARR)
+  if array_history is not None: add_history(array_history, ARR, None )
+
+def __lt__(v, w): 
+  """is v < w ?"""
+  return v < w
+
+def _exch(a, i, j):
+  """exchange a[i] and a[j]"""
+  a[i], a[j] = a[j], a[i]
+
+def _isSorted(a, lo=None, hi=None):
+  """is the array Sorted from a[lo] to a[hi] inclusive of idx==lo and idx==hi"""
+  if lo is None and hi is None:
+    lo = 0
+    hi = len(a)-1
+  for i in range(lo+1, hi+1):
+      if __lt__(a[i], a[i-1]): return False
+  return True
+
 # Alg1 Week 2 Lecture Selection Sort
 #************************************************************************
 #  Compilation:  javac Selection.java
@@ -184,25 +219,6 @@
 #
 
 
-# Rearranges the array in ascending order, using the natural order.
-# @param a the array to be Sorted
-# @param array_history; Used in tests. When true prints ASCII Art demonstrating the sort
-def Sort(ARR, array_history=None):
-  N = len(ARR)
-  # Items from i to j-1 are Sorted
-  # IN the ith iteration, find the smallest remaining Item above i
-  for i in range(N): # MOVE pointer to the right
-    Min = i # Index of smallest element to the right
-    # Identify index of min Item right of j
-    for j in range(i+1,N):
-      if __lt__(ARR[j], ARR[Min]):  # COMPARE is counted toward cost
-        Min = j
-    if array_history is not None: add_history(array_history, ARR, {i:'*', Min:'*'} )
-    _exch(ARR, i, Min)           # EXCHANGE is counted toward cost
-    assert _isSorted(ARR, 0, i)
-  assert _isSorted(ARR)
-  if array_history is not None: add_history(array_history, ARR, None )
-
 ## Rearranges the array, a, in ascending order, using a comparator.
 ## @param a the array
 ## @param c the comparator specifying the order
@@ -220,30 +236,8 @@ def Sort(ARR, array_history=None):
 #  Helper Sorting functions
 #**********************************************************************/
 
-# is v < w ?
-def __lt__(v, w): return v < w
-
 ## is v < w ?
 #def __lt__C(c, v, w): return v < w
-
-# exchange a[i] and a[j]
-def _exch(a, i, j):
-    swap = a[i]
-    a[i] = a[j]
-    a[j] = swap
-
-#**********************************************************************
-#  Check if array is Sorted - useful for debugging
-#**********************************************************************/
-
-# is the array Sorted from a[lo] to a[hi] inclusive of idx==lo and idx==hi
-def _isSorted(a, lo=None, hi=None):
-    if lo is None and hi is None:
-      lo = 0
-      hi = len(a)-1
-    for i in range(lo+1, hi+1):
-        if __lt__(a[i], a[i-1]): return False
-    return True
 
 # # is the array a[] Sorted?
 # def _isSorted(a, c): return _isSorted(a, c, 0, a.length - 1)
