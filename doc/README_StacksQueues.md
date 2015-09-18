@@ -9,7 +9,6 @@
 ## Example Table of Contents
   1. [Run Stack lecture Quiz](#ex1)
   2. [Run Queue](#ex2)
-  3. [Recreate demo from **Quick Union (7:50)** lecture](#ex2)
 
 ## Example Contents
 ### [ex1](#example-contents)
