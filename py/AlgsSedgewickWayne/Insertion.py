@@ -18,17 +18,6 @@ def Sort(ARR, array_history=None):
   assert _isSorted(ARR);
   if array_history is not None: array_history.add_history(ARR, None)
 
-def indexSort(ARR, array_history=None):
-  N = len(ARR)
-  index = range(N)
-  for i in range(N):
-    j = i
-    while j > 0 and __lt__(ARR[index[j]], ARR[index[j-1]]):
-      _exch(index, j, j-1)
-      if array_history is not None: array_history.add_history(ARR, {j:'*', j-1:'*'})
-      j -= 1
-  return index
-
 def __lt__(v, w):
   """is v < w ?"""
   return v < w
@@ -45,6 +34,18 @@ def _isSorted(a, lo=None, hi=None):
   for i in range(lo+1, hi+1):
       if __lt__(a[i], a[i-1]): return False
   return True
+
+def indexSort(ARR, array_history=None):
+  """Do not change ARR, return a new sorted version of ARR."""
+  N = len(ARR)
+  index = range(N)
+  for i in range(N):
+    j = i
+    while j > 0 and __lt__(ARR[index[j]], ARR[index[j-1]]):
+      _exch(index, j, j-1)
+      if array_history is not None: array_history.add_history(ARR, {j:'*', j-1:'*'})
+      j -= 1
+  return index
 
 #************************************************************************
 #  Compilation:  javac Insertion.java
