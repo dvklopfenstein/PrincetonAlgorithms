@@ -25,6 +25,7 @@ def test_wk2_lec_worst():
 
 def test_wk2_lec_partial():
   """Array is partially sorted ad contains inversions."""
+  # 6 inversions T-R  T-P  T-S  R-P  X-P  X-S
   run("A E E L M O T R X P S".split(), "INSERTION PARTIAL SORT:")
 
 def test_1():
