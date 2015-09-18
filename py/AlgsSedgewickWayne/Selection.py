@@ -12,11 +12,13 @@ def Sort(ARR, array_history=None):
     for j in range(i+1,N):
       if __lt__(ARR[j], ARR[Min]):  # COMPARE is counted toward cost
         Min = j
-    if array_history is not None: add_history(array_history, ARR, {i:'*', Min:'*'} )
+    if array_history is not None: 
+      array_history.add_history(ARR, {i:'*', Min:'*'})
     _exch(ARR, i, Min)           # EXCHANGE is counted toward cost
     assert _isSorted(ARR, 0, i)
   assert _isSorted(ARR)
-  if array_history is not None: add_history(array_history, ARR, None )
+  if array_history is not None: 
+    array_history.add_history(ARR, None)
 
 def __lt__(v, w): 
   """is v < w ?"""
@@ -34,11 +36,6 @@ def _isSorted(a, lo=None, hi=None):
   for i in range(lo+1, hi+1):
       if __lt__(a[i], a[i-1]): return False
   return True
-
-def add_history(ret, ARR, anno):
-  """Visualization Code for learning."""
-  import ArrayHistory
-  ArrayHistory.add_history(ret, ARR, anno)
 
 # Alg1 Week 2 Lecture Selection Sort
 #************************************************************************

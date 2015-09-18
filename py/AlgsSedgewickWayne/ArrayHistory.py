@@ -18,6 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import sys
+import copy
 
 import AlgsSedgewickWayne.InputArgs as IA
 
@@ -90,24 +91,6 @@ def chk(a, txt):
   b = txt.split()
   return arrays_equal(a, b)
 
-def prt_array_history(array_history):
-  """ Prints array history with spaces between elements."""
-  for idx, A in enumerate(array_history):
-    sys.stdout.write('{:2d}: {}\n'.format(idx, ' '.join([str(item) for item in A[0]])))
-
-def show_array_history(desc, array_history):
-  """ Print array history plus histogram bars (viewed horizontally) to help visualize sort."""
-  if isinstance(array_history, list) and len(array_history) != 0:
-    elem2num = get_elem2num(array_history)
-    for incr, A in enumerate(array_history):
-      Astr = [str(item) for item in A[0]]
-      sys.stdout.write('{:2d} {}: {}\n'.format(incr, desc, ' '.join(Astr)))
-      for idx, elem in enumerate(A[0]):
-        anno = get_anno(idx, A[1])
-        sys.stdout.write('{:2d} {}({:2d}): {}{:2} {}\n'.format(
-            incr, desc, idx, anno, elem, ''.join(['*']*elem2num[get_keystr(elem)])))
-      sys.stdout.write('\n')
-
 def arrays_equal(a, b):
   """TBD: Remove?"""
   return len(a) == len(b) and len(a) == sum([1 for i, j in zip(a, b) if i == j])
@@ -145,10 +128,40 @@ def get_anno(idx, idx2sym):
     return ' '
   return idx2sym[idx]
 
-def add_history(ret, ARR, anno):
-  """TBD"""
-  import copy
-  if isinstance(ret, list):
-    ret.append([copy.deepcopy(ARR), anno])
+class ArrayHistory(object):
+  """Class to manage array history for visualization and learning."""
+
+  def __init__(self):
+    self.array_history = []
+
+  def add_history(self, ARR, anno):
+    """Add current arry state to array history."""
+    self.array_history.append([copy.deepcopy(ARR), anno])
+
+  def __iter__(self):
+    for array_state in self.array_history:
+      yield array_state
+
+  def prt(self):
+    """ Prints array history with spaces between elements."""
+    for idx, A in enumerate(self.array_history):
+      sys.stdout.write('{:2d}: {}\n'.format(idx, ' '.join([str(item) for item in A[0]])))
+  
+  def show(self, desc):
+    """ Print array history plus histogram bars (viewed horizontally) to help visualize sort."""
+    if isinstance(self.array_history, list) and len(self.array_history) != 0:
+      elem2num = get_elem2num(self.array_history)
+      for incr, A in enumerate(self.array_history):
+        Astr = [str(item) for item in A[0]]
+        sys.stdout.write('{:2d} {}: {}\n'.format(incr, desc, ' '.join(Astr)))
+        for idx, elem in enumerate(A[0]):
+          anno = get_anno(idx, A[1])
+          sys.stdout.write('{:2d} {}({:2d}): {}{:2} {}\n'.format(
+              incr, desc, idx, anno, elem, ''.join(['*']*elem2num[get_keystr(elem)])))
+        sys.stdout.write('\n')
+
+
+
+
 
 
