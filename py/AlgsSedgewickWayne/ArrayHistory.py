@@ -142,23 +142,24 @@ class ArrayHistory(object):
     for array_state in self.array_history:
       yield array_state
 
-  def prt(self):
+  def prt(self, prt=sys.stdout):
     """ Prints array history with spaces between elements."""
     for idx, A in enumerate(self.array_history):
-      sys.stdout.write('{:2d}: {}\n'.format(idx, ' '.join([str(item) for item in A[0]])))
+      prt.write('{:2d}: {}\n'.format(idx, ' '.join([str(item) for item in A[0]])))
+    prt.write("\n")
   
-  def show(self, desc):
+  def show(self, desc, prt=sys.stdout):
     """ Print array history plus histogram bars (viewed horizontally) to help visualize sort."""
     if isinstance(self.array_history, list) and len(self.array_history) != 0:
       elem2num = get_elem2num(self.array_history)
       for incr, A in enumerate(self.array_history):
         Astr = [str(item) for item in A[0]]
-        sys.stdout.write('{:2d} {}: {}\n'.format(incr, desc, ' '.join(Astr)))
+        prt.write('{:2d} {}: {}\n'.format(incr, desc, ' '.join(Astr)))
         for idx, elem in enumerate(A[0]):
           anno = get_anno(idx, A[1])
-          sys.stdout.write('{:2d} {}({:2d}): {}{:2} {}\n'.format(
+          prt.write('{:2d} {}({:2d}): {}{:2} {}\n'.format(
               incr, desc, idx, anno, elem, ''.join(['*']*elem2num[get_keystr(elem)])))
-        sys.stdout.write('\n')
+        prt.write('\n')
 
 
 

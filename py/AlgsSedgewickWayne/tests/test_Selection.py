@@ -6,6 +6,18 @@ from   AlgsSedgewickWayne.Selection    import Sort
 from   AlgsSedgewickWayne.ArrayHistory import chk 
 from   AlgsSedgewickWayne.ArrayHistory import ArrayHistory
 
+def test_wk2_lec(prt=sys.stdout):
+  """Example from week 2 lecture, "Selection Sort (6:59)" """
+  # Give the array that results after the first 4 exchanges when
+  # selection sorting the following array:
+  desc = 'SELECTION SORT'
+  prt.write("\n{TEST}\n".format(TEST=desc))
+  a = map(int, "7 10 5 3 8 4 2 9 6".split() )
+  array_history = ArrayHistory()
+  Sort(a, array_history)
+  array_history.prt()
+  array_history.show(desc)
+
 def test_wk2_ex_Selections_489125(prt=sys.stdout):
   # (seed = 183182)
   # Give the array that results after the first 4 exchanges when
@@ -42,6 +54,7 @@ def test_wk2_q2a(prt=sys.stdout):
 
 def run_all():
   """Run all tests."""
+  test_wk2_lec()
   test_wk2_ex_Selections_489125()
   test_wk2_q3()
   test_wk2_q2a()
