@@ -2,7 +2,7 @@
 
 def Sort(ARR, array_history=None):
   """Rearranges the array, ARR, in ascending order, using the natural order."""
-  # param array_history; Used in tests. When true prints ASCII Art demonstrating the sort
+  # param array_history; For visualization. When true prints ASCII Art demonstrating the sort
   N = len(ARR)
   # Items from i to j-1 are Sorted
   # IN the ith iteration, find the smallest remaining Item above i
