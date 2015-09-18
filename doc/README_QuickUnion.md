@@ -1,9 +1,9 @@
 # QuickUnion
 
 ## Code
-  * [QuickUnionUF](../QuickUnionUF.py)
-  * [WeightedQuickUnionUF](../WeightedQuickUnionUF.py) puts smaller tree under bigger tree (improvement #1)
-  * [WeightedQuickUnionPlusUF.py](../WeightedQuickUnionPlusUF.py) with path compression (improvement #2)
+  * [QuickUnionUF](../py/AlgsSedgewickWayne/QuickUnionUF.py)
+  * [WeightedQuickUnionUF](../py/AlgsSedgewickWayne/WeightedQuickUnionUF.py) puts smaller tree under bigger tree (improvement #1)
+  * [WeightedQuickUnionPlusUF.py](../py/AlgsSedgewickWayne/WeightedQuickUnionPlusUF.py) with path compression (improvement #2)
 
 ## Example Table of Contents
   1. [Force the state of QuickUnion and visualize](#ex1)

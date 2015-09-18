@@ -1,9 +1,9 @@
 # Stacks and Queues
 
 ## Code
-  * [Selection Sort](../Selection.py)
-  * [Insertion Sort](../Insertion.py)
-  * [Shell Sort](../Shell.py)
+  * [Selection Sort](../py/AlgsSedgewickWayne/Selection.py)
+  * [Insertion Sort](../py/AlgsSedgewickWayne/Insertion.py)
+  * [Shell Sort](../py/AlgsSedgewickWayne/Shell.py)
 
 ## Visualization Description
 There are two ways to view the progression of a sort:

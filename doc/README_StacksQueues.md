@@ -1,10 +1,10 @@
 # Stacks and Queues
 
 ## Code
-  * [Stack](../Stack.py)
-  * [ResizingArrayStack.py](../ResizingArrayStack.py)
-  * [Queue.py](../Queue.py)
-  * [ResizingArrayQueue.py](../ResizingArrayQueue.py)
+  * [Stack](../py/AlgsSedgewickWayne/Stack.py)
+  * [ResizingArrayStack.py](../py/AlgsSedgewickWayne/ResizingArrayStack.py)
+  * [Queue.py](../py/AlgsSedgewickWayne/Queue.py)
+  * [ResizingArrayQueue.py](../py/AlgsSedgewickWayne/ResizingArrayQueue.py)
 
 ## Example Table of Contents
   1. [Run Stack lecture Quiz](#ex1)

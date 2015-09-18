@@ -13,7 +13,7 @@ Implemented in Python 2.7.x by DV Klopfenstein is selected code from:
 * Additional code used for visualization to help absorb the material
 * Links to [Programming Assignment Specs](./thirdparty/README.md) (No programming solutions are on this site)
 
-[**TESTS**](py/AlgsSedgewickWayne/tests/README.md): 
+[**TESTS**](doc/README.md): 
  * **Python** tests are run from: [./py/AlgsSedgewickWayne/tests/](./py/AlgsSedgewickWayne/tests)
  * **Java** code is run from: [./thirdparty/](./thirdparty)
    * To download Sedgewick-Wayne Java programming environment: 
