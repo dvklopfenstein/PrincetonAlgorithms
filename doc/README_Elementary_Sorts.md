@@ -166,31 +166,9 @@ SELECTION SORT
 ```    
 
 
-### [ex2a](#stacks-and-queues)
-2a. Run Best Case Example from **Insertion (9:28)**; Array is already sorted    
+### [ex2](#stacks-and-queues)
+2a. Run Lecture Example from **Insertion (9:28)**
 ```
-> python -c 'import test_Insertion as T; T.test_wk2_lec_best()'    
-```
-
-```
-INSERTION BEST SORT: RESULT A E E L M O P R S T X
- 0: A E E L M O P R S T X
-
- 0 INSERTION BEST SORT:: A E E L M O P R S T X
- 0 INSERTION BEST SORT:( 0):  A  *
- 0 INSERTION BEST SORT:( 1):  E  ***
- 0 INSERTION BEST SORT:( 2):  E  ***
- 0 INSERTION BEST SORT:( 3):  L  ****
- 0 INSERTION BEST SORT:( 4):  M  *****
- 0 INSERTION BEST SORT:( 5):  O  ******
- 0 INSERTION BEST SORT:( 6):  P  *******
- 0 INSERTION BEST SORT:( 7):  R  ********
- 0 INSERTION BEST SORT:( 8):  S  *********
- 0 INSERTION BEST SORT:( 9):  T  **********
- 0 INSERTION BEST SORT:(10):  X  ***********
-
-```
-
 > python -c 'import test_Insertion as T; T.test_wk2_lec()'
  0: 7 10 5 3 8 4 2 9 6
  1: 7 5 10 3 8 4 2 9 6
@@ -460,11 +438,31 @@ INSERTION BEST SORT: RESULT A E E L M O P R S T X
 ```
 
 ### [ex2a](#stacks-and-queues)
-3. Run Lecture Best Case Example from **Shellsort (10:48)**
+2a. Run Best Case Example from **Insertion (9:28)**; Array is already sorted    
 ```
+> python -c 'import test_Insertion as T; T.test_wk2_lec_best()'    
 ```
 
-> python -c 'import test_Shell as T; T.test_wk2_lec()'
+```
+INSERTION BEST SORT: RESULT A E E L M O P R S T X
+ 0: A E E L M O P R S T X
+
+ 0 INSERTION BEST SORT:: A E E L M O P R S T X
+ 0 INSERTION BEST SORT:( 0):  A  *
+ 0 INSERTION BEST SORT:( 1):  E  ***
+ 0 INSERTION BEST SORT:( 2):  E  ***
+ 0 INSERTION BEST SORT:( 3):  L  ****
+ 0 INSERTION BEST SORT:( 4):  M  *****
+ 0 INSERTION BEST SORT:( 5):  O  ******
+ 0 INSERTION BEST SORT:( 6):  P  *******
+ 0 INSERTION BEST SORT:( 7):  R  ********
+ 0 INSERTION BEST SORT:( 8):  S  *********
+ 0 INSERTION BEST SORT:( 9):  T  **********
+ 0 INSERTION BEST SORT:(10):  X  ***********
+
+```
+
+
 ### [ex3](#stacks-and-queues)
 3. Run Lecture Example from **Shellsort (10:48)**
 ```
