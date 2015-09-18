@@ -11,7 +11,7 @@
 
 * **Week 2 Suggested Readings**: Section 1.3 and 2.1 in [*Algorithms, 4th edition*](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1441459738&sr=1-1&keywords=sedgewick&refinements=p_n_feature_browse-bin%3A2656020011&pebp=1441459739425&perid=0C83SQQ1YFJ62VWHF9C0)
   * [Stacks and Queues](README_StacksQueues.md)
-  * Elementary Sorts
+  * [Elementary Sorts](README_Elementary_Sorts.md)
   * Programming Assignment 2: [**Deques and Randomized Queues**](http://htmlpreview.github.com/?https://github.com/dvklopfenstein/PrincetonAlgorithms/blob/master/thirdparty/hw2/Programming_Assignment_2_Randomized_Queues_and_Deques.html)
   and
 [checklist](http://htmlpreview.github.com/?https://github.com/dvklopfenstein/PrincetonAlgorithms/blob/master/thirdparty/hw2/Programming_Assignment_2_Checklist_Randomized_Queues_and_Dequeues.html)

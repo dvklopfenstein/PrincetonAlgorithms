@@ -19,6 +19,7 @@ JFLAGS := -cp ./algs4.jar
 SRCS = \
   FileSorter.java \
   HelloWorld.java \
+  Selection.java \
   Stopwatch.java \
   ThreeSum.java  
 # StdArrayIO.java \
@@ -55,7 +56,6 @@ SRCS = \
 # ResizingArrayBag.java \
 # ResizingArrayQueue.java \
 # ResizingArrayStack.java \
-# Selection.java \
 # Shell.java \
 # ST.java \
 # Stack.java \

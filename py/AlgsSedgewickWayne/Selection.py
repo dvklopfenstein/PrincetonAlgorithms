@@ -137,11 +137,21 @@
 #       v     <   |   >
 #       x    <   |   >
 #       w           <   |   >
+#          ------>v w<------------- v<=w
+#          ->x          w<---------
+#               000000000011111111112222222222
+#               012345678901234567890123456789
+#                     <         a         >
+#            <          b         >
+#	     <        c         >
+# ---------->b                  a<---------- a>b
+# ---->c                b<------------------ b>c => a>b>c => a>c
+# ---->c                        a<---------- a:w
 #
 # ANSWER: Transitivity
 # EXPLANATION: Transitivity is violated.
 # YOU MUST NOT INTRODUCE A FUDGE FACTOR WHEN COMPARING TWO
-# FLOATINING_POINT NUMBERS IF YOU WANT TO IMPLEMENT THE Comparable INTERFACE.
+# FLOATING_POINT NUMBERS IF YOU WANT TO IMPLEMENT THE Comparable INTERFACE.
 
 
 
