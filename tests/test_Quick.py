@@ -2,7 +2,7 @@
 
 import unittest
 from AlgsSedgewickWayne.Quick import *
-from AlgsSedgewickWayne.ArrayHistory import *
+from AlgsSedgewickWayne.testcode.ArrayHistory import *
 
 import random
 

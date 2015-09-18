@@ -33,7 +33,7 @@ import AlgsSedgewickWayne.Selection as Selection
 import AlgsSedgewickWayne.Insertion as Insertion
 import AlgsSedgewickWayne.Shell     as Shell
 
-import AlgsSedgewickWayne.ArrayHistory as H
+import AlgsSedgewickWayne.testcode.ArrayHistory as H
 
 import unittest
 import copy

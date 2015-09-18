@@ -2,7 +2,7 @@
 """Tests for QuickUnion."""
 
 from AlgsSedgewickWayne.WeightedQuickUnionUF import WeightedQuickUnionUF
-from AlgsSedgewickWayne.tests.utils import run_unions
+from AlgsSedgewickWayne.testcode.utils import run_unions
 
 def test_wk1_ex_166199():
   """Week 1 Q3 Exercise Seed 166199."""

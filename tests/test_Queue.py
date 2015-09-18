@@ -2,7 +2,7 @@
 """ Tests Queue."""
 
 from AlgsSedgewickWayne.Queue import Queue
-from AlgsSedgewickWayne.ArrayHistory import run_Queue
+from AlgsSedgewickWayne.testcode.ArrayHistory import run_Queue
 
 
 def test_wk2_ex_Queues_608030():

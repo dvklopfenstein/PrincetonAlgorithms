@@ -3,8 +3,8 @@
 import sys
 
 from   AlgsSedgewickWayne.Selection    import Sort
-from   AlgsSedgewickWayne.ArrayHistory import chk 
-from   AlgsSedgewickWayne.ArrayHistory import ArrayHistory
+from   AlgsSedgewickWayne.testcode.ArrayHistory import chk 
+from   AlgsSedgewickWayne.testcode.ArrayHistory import ArrayHistory
 
 def test_wk2_lec(prt=sys.stdout):
   """Example from week 2 lecture, "Selection Sort (6:59)" """

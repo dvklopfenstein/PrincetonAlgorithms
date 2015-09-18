@@ -2,8 +2,8 @@
 """Tests for QuickUnion."""
 
 from AlgsSedgewickWayne.WeightedQuickUnionUF import WeightedQuickUnionUF
-from AlgsSedgewickWayne.tests.utils import chk_arrays
-from AlgsSedgewickWayne.tests.utils import run_unions
+from AlgsSedgewickWayne.testcode.utils import chk_arrays
+from AlgsSedgewickWayne.testcode.utils import run_unions
 
 def test_week1_lecture():
   """From Quick-Union Improvements (13:02) Lecture Example."""

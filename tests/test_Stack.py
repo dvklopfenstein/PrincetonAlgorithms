@@ -4,7 +4,7 @@
 import sys
 
 from AlgsSedgewickWayne.Stack import Stack
-from AlgsSedgewickWayne.ArrayHistory import run
+from AlgsSedgewickWayne.testcode.ArrayHistory import run
 
 def test_Stack_lec_quiz(prt=sys.stdout):
   """Run the quiz in Stats 1, Week 2 lecture, 'Stacks (16:24)'"""

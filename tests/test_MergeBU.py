@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from AlgsSedgewickWayne.MergeBU import *
-from AlgsSedgewickWayne.ArrayHistory import *
+from AlgsSedgewickWayne.testcode.ArrayHistory import *
 import unittest
 
 import random

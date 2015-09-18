@@ -3,7 +3,7 @@
 import sys
 
 from   AlgsSedgewickWayne.Insertion    import Sort
-from   AlgsSedgewickWayne.ArrayHistory import ArrayHistory
+from   AlgsSedgewickWayne.testcode.ArrayHistory import ArrayHistory
 
 def run(a, desc="INSERTION SORT", prt=sys.stdout):
   array_history = ArrayHistory()

@@ -4,8 +4,8 @@
 # Writtein by DV Klopfenstein
 
 from AlgsSedgewickWayne.QuickFindUF import QuickFindUF
-from AlgsSedgewickWayne.tests.utils import chk_arrays
-from AlgsSedgewickWayne.tests.utils import run_unions
+from AlgsSedgewickWayne.testcode.utils import chk_arrays
+from AlgsSedgewickWayne.testcode.utils import run_unions
 
 def test_1():
   """Test 1."""

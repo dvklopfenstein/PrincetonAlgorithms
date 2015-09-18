@@ -2,7 +2,7 @@
 
 import sys
 from AlgsSedgewickWayne.Shell import Sort
-from AlgsSedgewickWayne.ArrayHistory import ArrayHistory
+from AlgsSedgewickWayne.testcode.ArrayHistory import ArrayHistory
 
 import random
 
