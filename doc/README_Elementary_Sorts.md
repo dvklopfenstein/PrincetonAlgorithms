@@ -464,6 +464,7 @@ INSERTION BEST SORT: RESULT A E E L M O P R S T X
 ```
 python -c 'import test_Insertion as T; T.test_wk2_lec_worst()'
 ```
+```
 INSERTION WORST SORT: RESULT A E E L M O P R S T X
  0: X T S R P O M L E E A
  1: T X S R P O M L E E A
