@@ -1,16 +1,16 @@
 """Alg1 Week2 Lecture Insertion Sort"""
 
+from AlgsSedgewickWayne.utils import _isSorted, __lt__, _exch
+
 def Sort(ARR, array_history=None):
   """Rearranges the array in ascending order, using the natural order."""
   N = len(ARR)
   # 00:57 Everything to the left is in acending order
   #       Everything to the right, we have not seen at all
   for i in range(N):
-    #for (int j = i; j > 0 && less(a[j], a[j-1]); j--):
     j = i
     # Exchange the curr Elem with every element to the left that is > 01:21
     while j > 0 and __lt__(ARR[j], ARR[j-1]):
-      #if array_history is not None:
       if array_history is not None: array_history.add_history(ARR, {j:'*', j-1:'*'})
       _exch(ARR, j, j-1)
       j -= 1
@@ -18,22 +18,9 @@ def Sort(ARR, array_history=None):
   assert _isSorted(ARR);
   if array_history is not None: array_history.add_history(ARR, None)
 
-def __lt__(v, w):
-  """is v < w ?"""
-  return v < w
 
-def _exch(a, i, j):
-  """exchange a[i] and a[j]."""
-  a[i], a[j] = a[j], a[i]
 
-def _isSorted(a, lo=None, hi=None):
-  if lo is None and hi is None:
-    lo = 0
-    hi = len(a) - 1
-  # Is the array sorted from a[lo] to a[hi]?
-  for i in range(lo+1, hi+1):
-      if __lt__(a[i], a[i-1]): return False
-  return True
+
 
 def indexSort(ARR, array_history=None):
   """Do not change ARR, return a new sorted version of ARR."""

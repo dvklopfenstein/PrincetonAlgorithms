@@ -1,5 +1,7 @@
 """Shell Sort"""
 
+from AlgsSedgewickWayne.utils import _isSorted, __lt__, _exch
+
 def Sort(ARR, array_history=None):
   """Rearranges the array, ARR, in ascending order, using the natural order."""
   # array_history; Used in tests. When true prints ASCII Art demonstrating the sort
@@ -25,19 +27,6 @@ def Sort(ARR, array_history=None):
     array_history.add_history(ARR, None)
 
 
-def __lt__(v, w): 
-  """is v < w ?"""
-  return v < w
-
-def _exch(a, i, j):
-  """exchange a[i] and a[j]"""
-  a[i], a[j] = a[j], a[i]
-
-def _isSorted(a):
-  for i in range(1,len(a)):
-    if __lt__(a[i], a[i-1]): 
-      return False
-  return True
 
 def _isHsorted(a, h):
   """is the array h-sorted?"""

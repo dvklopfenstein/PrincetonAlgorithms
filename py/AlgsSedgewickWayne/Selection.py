@@ -1,5 +1,7 @@
 """Selection Sort."""
 
+from AlgsSedgewickWayne.utils import _isSorted, __lt__, _exch
+
 def Sort(ARR, array_history=None):
   """Rearranges the array, ARR, in ascending order, using the natural order."""
   # param array_history; For visualization. When true prints ASCII Art demonstrating the sort
@@ -18,22 +20,6 @@ def Sort(ARR, array_history=None):
   assert _isSorted(ARR)
   if array_history is not None: array_history.add_history(ARR, None)
 
-def __lt__(v, w): 
-  """is v < w ?"""
-  return v < w
-
-def _exch(a, i, j):
-  """exchange a[i] and a[j]"""
-  a[i], a[j] = a[j], a[i]
-
-def _isSorted(a, lo=None, hi=None):
-  """is the array Sorted from a[lo] to a[hi] inclusive of idx==lo and idx==hi"""
-  if lo is None and hi is None:
-    lo = 0
-    hi = len(a)-1
-  for i in range(lo+1, hi+1):
-      if __lt__(a[i], a[i-1]): return False
-  return True
 
 # Alg1 Week 2 Lecture Selection Sort
 #************************************************************************
