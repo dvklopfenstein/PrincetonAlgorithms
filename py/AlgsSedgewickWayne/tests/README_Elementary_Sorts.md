@@ -3,6 +3,7 @@
 ## Code
   * [Selection Sort](../Selection.py)
   * [Insertion Sort](../Insertion.py)
+  * Shell Sort
 
 ## Visualization Description
 There are two ways to view the progression of a sort:
