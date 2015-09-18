@@ -4,8 +4,7 @@ import random
 
 def shuffle(a):
   """Rearranges an array, a, of objects in uniformly random order"""
-  N = len(a)
-  for i in range(1,N):
+  for i in range(1, len(a)):
     # Knuth shuffle (03:00) Linear-time shuffling algorithm
     #   * In iteration i, pick integer r between 0 and i uniformly at random.
     #   * Swap a[i] and a[r]
