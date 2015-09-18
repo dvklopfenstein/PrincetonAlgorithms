@@ -1,5 +1,86 @@
 """ResizingArrayQueue class."""
 
+class ResizingArrayQueue: # <Item> implements Iterable<Item>:
+  """Queue stores its data in an array."""
+
+  def __init__(self):
+    self._q = [None, None]    # queue elements
+    self._N = 0     # number of elements on queue
+    self._first = 0 # index of first element of queue
+    self._last  = 0 # index of next available slot
+
+  def isEmpty(self): 
+    """Returns True if empty."""
+    return self._N == 0
+
+  def size(self): 
+    """Returns the number of items in this queue."""
+    return self._N
+
+  def _resize(self, maxval):
+    """resize the underlying array."""
+    assert maxval >= self._N
+    temp = [None for i in range(maxval)] # (Item[]) new [maxval] # Item[]
+    q_len = len(self._q)
+    for i in range(self._N):
+      temp[i] = self._q[(self._first + i) % q_len]
+    self._q = temp
+    self._first = 0
+    self._last  = self._N
+
+  def enqueue(self, item):
+    """"Adds the item to this queue."""
+    # double size of array if necessary and recopy to front of array
+    if self._N == len(self._q):
+      self._resize(2*len(self._q)) # double size of array if necessary
+    self._q[self._last] = item                        # add item
+    self._last += 1
+    if self._last == len(self._q):
+      self._last = 0          # wrap-around
+    self._N += 1
+
+  def dequeue(self):
+    """Removes and returns the item on this queue that was least recently added."""
+    if self.isEmpty():
+      raise Exception("Queue underflow")
+    item = self._q[self._first]
+    self._q[self._first] = None     # to avoid loitering
+    self._N     -= 1
+    self._first += 1
+    if self._first == len(self._q):
+      self._first = 0  # wrap-around
+    # shrink size of array if necessary
+    if self._N > 0 and self._N == len(self._q)/4:
+      self._resize(len(self._q)/2)
+    return item
+
+  def __str__(self): 
+    return ' '.join([str(item) for item in self])
+
+  def peek(self):
+    """Returns the item least recently added to this queue without removing it."""
+    if self.isEmpty(): 
+      raise Exception("Queue underflow")
+    return self._q[self._first]
+
+  def __iter__(self):
+    """Returns an iterator that iterates over the items in this queue in FIFO order."""
+    return self._ArrayIterator(self)
+
+  class _ArrayIterator: # implements Iterator<Item>:
+    """an iterator, doesn't implement remove() since it's optional."""
+    def __init__(self, Q):
+      self._Q = Q
+      self._i = 0
+    def hasNext(self): 
+      return self._i < self._Q._N
+    def next(self):
+      if not self.hasNext(): 
+        raise StopIteration
+      item = self._Q._q[(self._i + self._Q._first) % len(self._Q._q)]
+      self._i += 1
+      return item
+
 #************************************************************************
 #  Compilation:  javac ResizingArrayQueue.java
 #  Execution:    java ResizingArrayQueue < input.txt
@@ -128,86 +209,5 @@
 
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
 # Java last updated: Mon Oct 7 11:58:25 EDT 2013.
-
-class ResizingArrayQueue: # <Item> implements Iterable<Item>:
-  """Queue stores its data in an array."""
-
-  def __init__(self):
-    self._q = [None, None]    # queue elements
-    self._N = 0     # number of elements on queue
-    self._first = 0 # index of first element of queue
-    self._last  = 0 # index of next available slot
-
-  def isEmpty(self): 
-    """Returns True if empty."""
-    return self._N == 0
-
-  def size(self): 
-    """Returns the number of items in this queue."""
-    return self._N
-
-  def _resize(self, maxval):
-    """resize the underlying array."""
-    assert maxval >= self._N
-    temp = [None for i in range(maxval)] # (Item[]) new [maxval] # Item[]
-    q_len = len(self._q)
-    for i in range(self._N):
-      temp[i] = self._q[(self._first + i) % q_len]
-    self._q = temp
-    self._first = 0
-    self._last  = self._N
-
-  def enqueue(self, item):
-    """"Adds the item to this queue."""
-    # double size of array if necessary and recopy to front of array
-    if self._N == len(self._q):
-      self._resize(2*len(self._q)) # double size of array if necessary
-    self._q[self._last] = item                        # add item
-    self._last += 1
-    if self._last == len(self._q):
-      self._last = 0          # wrap-around
-    self._N += 1
-
-  def dequeue(self):
-    """Removes and returns the item on this queue that was least recently added."""
-    if self.isEmpty():
-      raise Exception("Queue underflow")
-    item = self._q[self._first]
-    self._q[self._first] = None     # to avoid loitering
-    self._N     -= 1
-    self._first += 1
-    if self._first == len(self._q):
-      self._first = 0  # wrap-around
-    # shrink size of array if necessary
-    if self._N > 0 and self._N == len(self._q)/4:
-      self._resize(len(self._q)/2)
-    return item
-
-  def __str__(self): 
-    return ' '.join([str(item) for item in self])
-
-  def peek(self):
-    """Returns the item least recently added to this queue without removing it."""
-    if self.isEmpty(): 
-      raise Exception("Queue underflow")
-    return self._q[self._first]
-
-  def __iter__(self):
-    """Returns an iterator that iterates over the items in this queue in FIFO order."""
-    return self._ArrayIterator(self)
-
-  class _ArrayIterator: # implements Iterator<Item>:
-    """an iterator, doesn't implement remove() since it's optional."""
-    def __init__(self, Q):
-      self._Q = Q
-      self._i = 0
-    def hasNext(self): 
-      return self._i < self._Q._N
-    def next(self):
-      if not self.hasNext(): 
-        raise StopIteration
-      item = self._Q._q[(self._i + self._Q._first) % len(self._Q._q)]
-      self._i += 1
-      return item
 
 # Copyright (C) 2014-2015, DV Klopfenstein ported Sedgewick-Wayne to Python

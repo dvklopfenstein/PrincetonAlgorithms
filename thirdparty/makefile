@@ -1,3 +1,5 @@
+# Examples:
+#  $ make MAIN=FileSorter ARG=. 
 
 N := 3
 MAIN := HelloWorld
@@ -15,12 +17,10 @@ JFLAGS := -cp ./algs4.jar
 .PHONY: clean
 
 SRCS = \
+  FileSorter.java \
   HelloWorld.java \
-  ThreeSum.java \
   Stopwatch.java \
-  Deque.java \
-  RandomizedQueue.java \
-  Subset.java
+  ThreeSum.java  
 # StdArrayIO.java \
 # StdDraw.java \
 # StdIn.java \
