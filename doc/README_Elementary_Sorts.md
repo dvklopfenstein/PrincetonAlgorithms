@@ -25,15 +25,9 @@ There are two ways to view the progression of a sort:
 
 ## Example Table of Contents
   1. [Run Lecture Example from **Selection (6:59)**](#ex1)    
-     > python -c 'import test_Selection as T; T.test_wk2_lec()'
-
   2. [Run Lecture Example from **Insertion (9:28)**](#ex2)    
-     > python -c 'import test_Insertion as T; T.test_wk2_lec()'
-
   2a. [Run Best Case Example from **Insertion (9:28)**](#ex2a); Array is already sorted    
-
   3. [Run Lecture Example from **Shellsort (10:48)**](#ex3)    
-     > python -c 'import test_Shell as T; T.test_wk2_lec()'
 
 ## Example Contents
 ### [ex1](#stacks-and-queues)
