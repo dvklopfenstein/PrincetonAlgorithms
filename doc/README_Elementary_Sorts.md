@@ -29,7 +29,7 @@ There are two ways to view the progression of a sort:
   2a. [Run Best Case Example from **Insertion (9:28)**](#ex2a); Array is already sorted (N)   
   2b. [Run Worst Case Example from **Insertion (9:28)**](#ex2b); Array is sorted in descending order   
   2c. [Run Paritally-sorted Example from **Insertion (9:28)**](#ex2c); 
-      Array has inversions: a pair of keys out order
+      Array has inversions: a pair of keys out order (N)
   3. [Run Lecture Example from **Shellsort (10:48)**](#ex3)    
 
 ## Example Contents
