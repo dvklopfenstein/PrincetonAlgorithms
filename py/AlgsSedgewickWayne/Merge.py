@@ -1,5 +1,7 @@
 """Merge Sort from Week 3 lecture."""
 
+from AlgsSedgewickWayne.utils import __lt__, _exch, _isSorted
+
 def Sort(a, array_history=None): # 09:30
   """Rearranges the array in ascending order, using the natural order."""
   # At most N lg N compares and 6 N lg N array accesses to sort any array of size N
@@ -7,7 +9,9 @@ def Sort(a, array_history=None): # 09:30
   _sort(a, aux, 0, len(a)-1)
   assert _isSorted(a)
 
+
 def merge(a, aux, lo, mid, hi): # 05:00-06:00
+  """Merge 2 sorted arrays into 1 sorted array."""
   assert _isSorted(a, lo, mid)    # precondition: a[lo .. mid]   are sorted subarrays
   assert _isSorted(a, mid+1, hi)  # precondition: a[mid+1 .. hi] are sorted subarrays
 
@@ -20,7 +24,7 @@ def merge(a, aux, lo, mid, hi): # 05:00-06:00
   for k in range(lo, hi+1): # k is current entry in the sorted result
       if   i > mid:               a[k] = aux[j]; j += 1 # this copying is unnecessary
       elif j > hi:                a[k] = aux[i]; i += 1 # j ptr is exhausted
-      elif _less(aux[j], aux[i]): a[k] = aux[j]; j += 1
+      elif __lt__(aux[j], aux[i]): a[k] = aux[j]; j += 1
       else:                       a[k] = aux[i]; i += 1
 
   assert _isSorted(a, lo, hi) # postcondition: a[lo .. hi] is sorted
@@ -292,28 +296,6 @@ def _sort(a, aux, lo, hi):
 #/
 
 # stably merge a[lo .. mid] with a[mid+1 ..hi] using aux[lo .. hi]
-#**********************************************************************
-#  Helper sorting functions
-#**********************************************************************/
-
-# is v < w ?
-def _less(v, w): return v < w
-
-# exchange a[i] and a[j]
-def _exch(a, i, j):
-  a[i], a[j] = a[j], a[i]
-
-
-#**********************************************************************
-#  Check if array is sorted - useful for debugging
-#**********************************************************************/
-def _isSorted(a, lo=None, hi=None):
-  if lo is None and hi is None:
-    lo = 0
-    hi = len(a) - 1
-  for i in range(lo + 1, hi+1):
-    if (_less(a[i], a[i-1])): return False
-  return True
 
 
 #**********************************************************************
@@ -340,7 +322,7 @@ def _merge_index(a, index, aux, lo, mid, hi):
     # If right-half list has been completely examined
     elif j > hi:                      index[k] = aux[i]; i += 1
     # If current value at right-half < current value at right-half, copy smaller val.
-    elif _less(a[aux[j]], a[aux[i]]): index[k] = aux[j]; j += 1
+    elif __lt__(a[aux[j]], a[aux[i]]): index[k] = aux[j]; j += 1
     else:                             index[k] = aux[i]; i += 1
 
 def _sort_index(a, index, aux, lo, hi):
@@ -364,20 +346,6 @@ def indexSort(a):
   aux = [None for i in range(N)]
   _sort_index(a, index, aux, 0, N-1)
   return index
-
-# mergesort a[lo..hi] using auxiliary array aux[lo..hi]
-# Reads in a sequence of strings from standard input; mergesorts them;
-# and prints them to standard output in ascending order.
-def main():
-  import InputArgs
-  a = InputArgs.getStrArray("S O R T E X A M P L E")
-  Sort(a)
-  print ' '.join(map(str,a))
-
-
-if __name__ == '__main__':
-  main()
-
 
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
 # Based on java which was Last updated: Fri Feb 14 17:45:37 EST 2014
