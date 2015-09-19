@@ -8,7 +8,7 @@
 
 ## Example Table of Contents
   1. [Run Stack lecture Quiz](#ex1)    
-  1a. [Confirm] "0 - 1 - 2 - 3 4 - - 5 6 - 7 8 9 - - - -" leaves "0 1 2 4 3 6 9 8 7 5"(ex1a)    
+  1a. [Confirm "0 - 1 - 2 - 3 4 - - 5 6 - 7 8 9 - - - -" leaves "0 1 2 4 3 6 9 8 7 5"](ex1a)    
   2. [Run Queue](#ex2)
 
 ## Example Contents
