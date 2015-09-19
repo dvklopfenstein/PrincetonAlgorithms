@@ -1,4 +1,4 @@
-# Tests 
+# Schedule
 
 ## Algorithms 1
 
