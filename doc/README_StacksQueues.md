@@ -12,7 +12,7 @@
   2. [Run Queue](#ex2)
 
 ## Example Contents
-### [ex1](#example-contents)
+### [ex1](#example-table-of-contents)
 1. Run Stack lecture Quiz, **Stacks (16:24)**, at 05:17 
 ```
 > python -c 'import test_Stack as T; T.test_Stack_lec_quiz()'
@@ -24,7 +24,7 @@
 
 ```    
 
-### [ex1a](#example-contents)
+### [ex1a](#example-table-of-contents)
 ```
 test_Stack.py "0 - 1 - 2 - 3 4 - - 5 6 - 7 8 9 - - - -"
 ```
