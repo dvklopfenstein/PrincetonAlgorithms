@@ -33,8 +33,8 @@ for (int i = 0; i < N*N; i++)
 [Answer 3](#oog3)
 
 ## [Memory Examples](#analysis-of-algorithms)
-  * Week 1
-  * Week 2
+  * [Week 1](#memory-examples-week-1)
+  * [Week 2](#memory-examples-week-2)
 
 ### Memory Examples, Week 1
 Given the following definition of a MysteryBox object.
