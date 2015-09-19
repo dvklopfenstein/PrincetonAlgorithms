@@ -36,7 +36,7 @@ for (int i = 0; i < N*N; i++)
   * [Week 1](#memory-examples-week-1)
   * [Week 2](#memory-examples-week-2)
 
-### Memory Examples, Week 1
+### [Memory Examples, Week 1](#memory-examples)
 Given the following definition of a MysteryBox object.
 Using the 64-bit memory cost model from lecture, how many bytes does
 each object of type MysteryBox use? Include all memory allocated when the
@@ -75,7 +75,7 @@ public class MysteryBox {
 ```
 [Answer 3](#mem3)
 
-### Memory Examples, Week 2
+### [Memory Examples, Week 2](#memory-examples)
 ```
 public class MysteryBox {
         private Node first;
