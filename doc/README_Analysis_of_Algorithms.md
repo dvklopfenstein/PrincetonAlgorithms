@@ -112,6 +112,7 @@ in a generic array items[] of length N.
         }
         ...
     }
+```
 [Week 2, Answer 3](#wk2_mem3)
 
 
