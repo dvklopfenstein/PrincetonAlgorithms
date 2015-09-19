@@ -109,4 +109,9 @@ def run_all():
   default_examples()
 
 if __name__ == '__main__':
-  run_all()
+  if len(sys.argv) == 1:
+    run_all()
+  else:
+    run(Stack(), sys.argv[1])
+
+
