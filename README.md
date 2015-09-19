@@ -1,4 +1,4 @@
-# Princeton University's "Algorithms and Clients"
+# [Princeton University's "Algorithms and Clients"](doc/README.md)
 ## by Kevin Wayne, Robert Sedgewick
   
 Implemented in Python 2.7.x by DV Klopfenstein is selected code from:
