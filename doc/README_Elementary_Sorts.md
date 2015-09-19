@@ -13,8 +13,12 @@
 There are two ways to view the progression of a sort:
 
   1. The concise way: One print of the array state per iteration. It looks like this:    
-     0: 7 10 5 3 8 4 2 9 6    
-     1: 2 10 5 3 8 4 7 9 6    
+
+     0: 33 49 51 64 92 71 70 42 63 59  # Initial state of array
+        .. .. .. .. XX XX .. .. .. ..  # Shows matches and mismatches between lines
+     1: 33 49 51 64 71 92 70 42 63 59  # 1st Exchange
+        .. .. .. .. .. XX XX .. .. ..
+     2: 33 49 51 64 71 70 91 42 63 59  # 2nd Exchange
      ...
 
   2. The verbose but visually pleasing way of viewing the sort progression.
@@ -45,14 +49,23 @@ There are two ways to view the progression of a sort:
 ```
 SELECTION SORT
  0: 7 10 5 3 8 4 2 9 6
+    X .. . . . . X . .
  1: 2 10 5 3 8 4 7 9 6
+    . X X XX . . . . .
  2: 2 3 5 10 8 4 7 9 6
+    . . X .. . X . . .
  3: 2 3 4 10 8 5 7 9 6
+    . . . X X XX . . .
  4: 2 3 4 5 8 10 7 9 6
+    . . . . X .. . . X
  5: 2 3 4 5 6 10 7 9 8
+    . . . . . X XX . .
  6: 2 3 4 5 6 7 10 9 8
+    . . . . . . X X XX
  7: 2 3 4 5 6 7 8 9 10
+    . . . . . . . . ..
  8: 2 3 4 5 6 7 8 9 10
+    . . . . . . . . ..
  9: 2 3 4 5 6 7 8 9 10
 
  0 SELECTION SORT: 7 10 5 3 8 4 2 9 6
@@ -175,26 +188,47 @@ SELECTION SORT
 ```
 ```
  0: 7 10 5 3 8 4 2 9 6
+    . X XX . . . . . .
  1: 7 5 10 3 8 4 2 9 6
+    X X .. . . . . . .
  2: 5 7 10 3 8 4 2 9 6
+    . . X XX . . . . .
  3: 5 7 3 10 8 4 2 9 6
+    . X X .. . . . . .
  4: 5 3 7 10 8 4 2 9 6
+    X X . .. . . . . .
  5: 3 5 7 10 8 4 2 9 6
+    . . . X XX . . . .
  6: 3 5 7 8 10 4 2 9 6
+    . . . . X XX . . .
  7: 3 5 7 8 4 10 2 9 6
+    . . . X X .. . . .
  8: 3 5 7 4 8 10 2 9 6
+    . . X X . .. . . .
  9: 3 5 4 7 8 10 2 9 6
+    . X X . . .. . . .
 10: 3 4 5 7 8 10 2 9 6
+    . . . . . X XX . .
 11: 3 4 5 7 8 2 10 9 6
+    . . . . X X .. . .
 12: 3 4 5 7 2 8 10 9 6
+    . . . X X . .. . .
 13: 3 4 5 2 7 8 10 9 6
+    . . X X . . .. . .
 14: 3 4 2 5 7 8 10 9 6
+    . X X . . . .. . .
 15: 3 2 4 5 7 8 10 9 6
+    X X . . . . .. . .
 16: 2 3 4 5 7 8 10 9 6
+    . . . . . . X XX .
 17: 2 3 4 5 7 8 9 10 6
+    . . . . . . . X XX
 18: 2 3 4 5 7 8 9 6 10
+    . . . . . . X X ..
 19: 2 3 4 5 7 8 6 9 10
+    . . . . . X X . ..
 20: 2 3 4 5 7 6 8 9 10
+    . . . . X X . . ..
 21: 2 3 4 5 6 7 8 9 10
 
  0 INSERTION SORT: SEED 183182: 7 10 5 3 8 4 2 9 6
@@ -473,59 +507,113 @@ python -c 'import test_Insertion as T; T.test_wk2_lec_worst()'
 ```
 INSERTION WORST SORT: RESULT A E E L M O P R S T X
  0: X T S R P O M L E E A
+    X X . . . . . . . . .
  1: T X S R P O M L E E A
+    . X X . . . . . . . .
  2: T S X R P O M L E E A
+    X X . . . . . . . . .
  3: S T X R P O M L E E A
+    . . X X . . . . . . .
  4: S T R X P O M L E E A
+    . X X . . . . . . . .
  5: S R T X P O M L E E A
+    X X . . . . . . . . .
  6: R S T X P O M L E E A
+    . . . X X . . . . . .
  7: R S T P X O M L E E A
+    . . X X . . . . . . .
  8: R S P T X O M L E E A
+    . X X . . . . . . . .
  9: R P S T X O M L E E A
+    X X . . . . . . . . .
 10: P R S T X O M L E E A
+    . . . . X X . . . . .
 11: P R S T O X M L E E A
+    . . . X X . . . . . .
 12: P R S O T X M L E E A
+    . . X X . . . . . . .
 13: P R O S T X M L E E A
+    . X X . . . . . . . .
 14: P O R S T X M L E E A
+    X X . . . . . . . . .
 15: O P R S T X M L E E A
+    . . . . . X X . . . .
 16: O P R S T M X L E E A
+    . . . . X X . . . . .
 17: O P R S M T X L E E A
+    . . . X X . . . . . .
 18: O P R M S T X L E E A
+    . . X X . . . . . . .
 19: O P M R S T X L E E A
+    . X X . . . . . . . .
 20: O M P R S T X L E E A
+    X X . . . . . . . . .
 21: M O P R S T X L E E A
+    . . . . . . X X . . .
 22: M O P R S T L X E E A
+    . . . . . X X . . . .
 23: M O P R S L T X E E A
+    . . . . X X . . . . .
 24: M O P R L S T X E E A
+    . . . X X . . . . . .
 25: M O P L R S T X E E A
+    . . X X . . . . . . .
 26: M O L P R S T X E E A
+    . X X . . . . . . . .
 27: M L O P R S T X E E A
+    X X . . . . . . . . .
 28: L M O P R S T X E E A
+    . . . . . . . X X . .
 29: L M O P R S T E X E A
+    . . . . . . X X . . .
 30: L M O P R S E T X E A
+    . . . . . X X . . . .
 31: L M O P R E S T X E A
+    . . . . X X . . . . .
 32: L M O P E R S T X E A
+    . . . X X . . . . . .
 33: L M O E P R S T X E A
+    . . X X . . . . . . .
 34: L M E O P R S T X E A
+    . X X . . . . . . . .
 35: L E M O P R S T X E A
+    X X . . . . . . . . .
 36: E L M O P R S T X E A
+    . . . . . . . . X X .
 37: E L M O P R S T E X A
+    . . . . . . . X X . .
 38: E L M O P R S E T X A
+    . . . . . . X X . . .
 39: E L M O P R E S T X A
+    . . . . . X X . . . .
 40: E L M O P E R S T X A
+    . . . . X X . . . . .
 41: E L M O E P R S T X A
+    . . . X X . . . . . .
 42: E L M E O P R S T X A
+    . . X X . . . . . . .
 43: E L E M O P R S T X A
+    . X X . . . . . . . .
 44: E E L M O P R S T X A
+    . . . . . . . . . X X
 45: E E L M O P R S T A X
+    . . . . . . . . X X .
 46: E E L M O P R S A T X
+    . . . . . . . X X . .
 47: E E L M O P R A S T X
+    . . . . . . X X . . .
 48: E E L M O P A R S T X
+    . . . . . X X . . . .
 49: E E L M O A P R S T X
+    . . . . X X . . . . .
 50: E E L M A O P R S T X
+    . . . X X . . . . . .
 51: E E L A M O P R S T X
+    . . X X . . . . . . .
 52: E E A L M O P R S T X
+    . X X . . . . . . . .
 53: E A E L M O P R S T X
+    X X . . . . . . . . .
 54: A E E L M O P R S T X
 
  0 INSERTION WORST SORT:: X T S R P O M L E E A
@@ -1249,16 +1337,22 @@ INSERTION WORST SORT: RESULT A E E L M O P R S T X
 2c. Run Paritally-sorted Example from **Insertion (9:28)**
     Array has inversions: a pair of keys out order
 ```
-> python -c 'import test_Insertion as T; T.test_wk2_partial()'
+> python -c 'import test_Insertion as T; T.test_wk2_lec_partial()'
 ```
 ```
 INSERTION PARTIAL SORT: RESULT A E E L M O P R S T X
  0: A E E L M O T R X P S
+    . . . . . . X X . . .
  1: A E E L M O R T X P S
+    . . . . . . . . X X .
  2: A E E L M O R T P X S
+    . . . . . . . X X . .
  3: A E E L M O R P T X S
+    . . . . . . X X . . .
  4: A E E L M O P R T X S
+    . . . . . . . . . X X
  5: A E E L M O P R T S X
+    . . . . . . . . X X .
  6: A E E L M O P R S T X
 
  0 INSERTION PARTIAL SORT:: A E E L M O T R X P S
@@ -1363,18 +1457,31 @@ INSERTION PARTIAL SORT: RESULT A E E L M O P R S T X
 SHELL SORT LEC EX RESULT: A E E L M O P R S T X
 
  0: M O L E E X A S P R T
+    X . . . X . . . . . .
  1: E O L E M X A S P R T
+    . . X . . . X . . . .
  2: E O A E M X L S P R T
+    . . . . . X . . . X .
  3: E O A E M R L S P X T
+    . X X . . . . . . . .
  4: E A O E M R L S P X T
+    X X . . . . . . . . .
  5: A E O E M R L S P X T
+    . . X X . . . . . . .
  6: A E E O M R L S P X T
+    . . . X X . . . . . .
  7: A E E M O R L S P X T
+    . . . . . X X . . . .
  8: A E E M O L R S P X T
+    . . . . X X . . . . .
  9: A E E M L O R S P X T
+    . . . X X . . . . . .
 10: A E E L M O R S P X T
+    . . . . . . . X X . .
 11: A E E L M O R P S X T
+    . . . . . . X X . . .
 12: A E E L M O P R S X T
+    . . . . . . . . . X X
 13: A E E L M O P R S T X
 
  0 SHELL SORT LEC EX: M O L E E X A S P R T

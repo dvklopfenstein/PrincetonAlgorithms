@@ -2,8 +2,9 @@
 
 import sys
 
-from   AlgsSedgewickWayne.Insertion    import Sort
-from   AlgsSedgewickWayne.testcode.ArrayHistory import ArrayHistory
+from AlgsSedgewickWayne.Insertion import Sort
+from AlgsSedgewickWayne.testcode.ArrayHistory import ArrayHistory
+from AlgsSedgewickWayne.InputArgs import get_seq__int_or_str
 
 def run(a, desc=None, prt=sys.stdout):
   array_history = ArrayHistory()
@@ -12,7 +13,7 @@ def run(a, desc=None, prt=sys.stdout):
     desc = "INSERTION SORT" 
   prt.write("{DESC} RESULT {A}\n".format(DESC=desc, A=' '.join(str(e) for e in a)))
   array_history.prt()
-  array_history.show(desc)
+  #array_history.show(desc)
 
 def test_wk2_lec():
   run(map(int, "7 10 5 3 8 4 2 9 6".split()), "INSERTION SORT: SEED 183182")
@@ -45,9 +46,6 @@ def test_4():
 def test_5():
   run(map(int, "34 38 69 83 93 68 37 28 85 99".split()), "INSERTION SORT: seed 329024")
 
-if __name__ == '__main__':
-  run(map(int, "34 38 69 83 93 68 37 28 85 99".split()), "INSERTION SORT: seed 329024")
-
 def run_all():
   """Run all tests."""
   test_1()
@@ -57,7 +55,12 @@ def run_all():
   test_5()
 
 if __name__ == '__main__':
-  if len(sys.argv) == 1:
+  N = len(sys.argv)
+  print N
+  if N == 1:
     run_all()
-  else:
-    run(Stack(), sys.argv[1])
+  elif N == 2:
+    run(get_seq__int_or_str(sys.argv[1]))
+
+
+
