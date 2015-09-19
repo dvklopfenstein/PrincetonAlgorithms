@@ -114,6 +114,10 @@ def _isHsorted(a, h):
 # There are ~ log_3 N passes because the increments go up by
 # (roughly) a factor of 3
 
+# QUESTION: The number of compares to Shellsort (with Knuth's 3x+1 increments) 
+# an array of length N depends only on N (and not on the items in the array).
+# ANSWER: False. The number of compares to Shellsort the array { 1, 2, 3 } is 2; 
+# the number of compares to Shellsort the array { 3, 2, 1 } is three.
 
 
 ########################################################

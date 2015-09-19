@@ -79,6 +79,9 @@ def Sort(ARR, array_history=None):
 # array is **already sorted**?
 # ANSWER: quadratic
 
+# Q: The number of compares to selection sort a reverse-sorted array of N distinct keys is ~ 1/2 N^2.
+# A: True. Selection sort uses N(N-1)/2 compares to sort any array of N keys.
+
 
 ########################################################
 # Lecture Alg 1 Week 2 "Sorting Introduction" (14:43)
@@ -174,6 +177,11 @@ def Sort(ARR, array_history=None):
 # YOU MUST NOT INTRODUCE A FUDGE FACTOR WHEN COMPARING TWO
 # FLOATING_POINT NUMBERS IF YOU WANT TO IMPLEMENT THE Comparable INTERFACE.
 
+# QUESTION: An exchange in selection sort can decrease the nubmer of
+# inversions by two (or more) 
+# ANSWER: True. Consider the array {3, 2, 1}, which has 3 inversions.
+# The first exchange results in the array {1, 2, 3}, which has 0 inversions.
+
 
 ########################################################
 ### Stability (Week 3 Lecture "Stability")
@@ -215,20 +223,4 @@ def Sort(ARR, array_history=None):
 #    _exch(a, i, Min)
 #    assert isSorted(a, c, 0, i)
 #  assert isSorted(a, c)
-
-#**********************************************************************
-#  Helper Sorting functions
-#**********************************************************************/
-
-## is v < w ?
-#def __lt__C(c, v, w): return v < w
-
-# # is the array a[] Sorted?
-# def _isSorted(a, c): return _isSorted(a, c, 0, a.length - 1)
-#
-# is the array Sorted from a[lo] to a[hi]
-# def _isSortedC(a, c, lo, hi):
-#     for i in rane(lo+1, hi+1):
-#         if __lt__(c, a[i], a[i-1]): return False
-#     return True
 

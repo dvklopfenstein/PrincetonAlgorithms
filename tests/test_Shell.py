@@ -3,30 +3,21 @@
 import sys
 from AlgsSedgewickWayne.Shell import Sort
 from AlgsSedgewickWayne.testcode.ArrayHistory import ArrayHistory
+from AlgsSedgewickWayne.InputArgs import get_seq__int_or_str
 
 import random
 
 def test_wk2_lec(prt=sys.stdout):
   """From Alg 1, week 2, lecture Shellsort (10:48)"""
-  desc = 'SHELL SORT LEC EX'
   a = "M O L E E X A S P R T".split()
-  array_history = ArrayHistory()
-  Sort(a, array_history)
-  prt.write("{DESC} RESULT: {ARRAY}\n\n".format(DESC=desc, ARRAY=' '.join(a)))
-  array_history.prt()
-  array_history.show(desc)
+  run(a, 'SHELL SORT LEC EX')
 
 def test_1(prt=sys.stdout):
   # (seed = 183182)
   # Give the array that results after the first 4 exchanges when
   # selection sorting the following array:
-  desc = 'SHELL SORT'
   a = map(int, "13 16 40 60 19 70 71 47 12 67".split() )
-  array_history = ArrayHistory()
-  Sort(a, array_history)
-  prt.write("{DESC} RESULT {ARRAY}\n".format(DESC=desc, ARRAY=a))
-  array_history.prt()
-  array_history.show(desc)
+  run(a, 'SHELL SORT')
 
 # This test did not work as hoped, but is based on this Week 2 Exercise question:
 # TBD: Make a test which demonstrates this idea...
@@ -49,16 +40,40 @@ def test_2():
 def test_3():
   # Keys are 'A' and 'B':
   a = map(int, "51 99 35 60 96 18 19 64 42 10".split())
+  run(a, "SHELL CUR")
+
+def test_q3a():
+  # Q: The number of compares to Shellsort (with Knuth's 3x+1 increments) 
+  # an array of length N depends only on N (and not on the items in the array).
+  # A: The number of compares to Shellsort the array { 1, 2, 3 } is 2; 
+  # the number of compares to Shellsort the array { 3, 2, 1 } is three.
+  run([1, 2, 3], "SHELL 2 COMPARES")
+  run([3, 2, 1], "SHELL 3 COMPARES")
+
+
+def run(a, desc=None, prt=sys.stdout):
   array_history = ArrayHistory()
   Sort(a, array_history)
-  array_history.show('SHELL CUR')
+  if desc is None:
+    desc = "SHELL SORT" 
+  prt.write("{DESC} RESULT {A}\n".format(DESC=desc, A=' '.join(str(e) for e in a)))
+  array_history.prt()
+  array_history.show(desc)
 
 def run_all():
   test_1()
   test_2()
   test_3()
+  test_q3a()
+
+def cli():
+  N = len(sys.argv)
+  if N == 1:
+    run_all()
+  elif N == 2:
+    run(get_seq__int_or_str(sys.argv[1]))
 
 if __name__ == '__main__':
-  run_all()
+  cli()
 
 
