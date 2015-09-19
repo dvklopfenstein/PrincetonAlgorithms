@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """ Tests Queue."""
 
+import sys
 from AlgsSedgewickWayne.Queue import Queue
 from AlgsSedgewickWayne.testcode.ArrayHistory import run_Queue
 
@@ -49,6 +50,7 @@ def run_all():
   test_wk2_ex_Queues_511394()
 
 if __name__ == '__main__':
-  run_all()
-
-
+  if len(sys.argv) == 1:
+    run_all()
+  else:
+    run_Queue(Queue(), sys.argv[1])

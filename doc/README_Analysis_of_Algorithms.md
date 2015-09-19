@@ -44,7 +44,6 @@ public class MysteryBox {
     private final boolean y0, y1, y2;
     private final long z0, z1, z2, z3;
     private final double[] a = new double[248];
-
     ...
 }
 ```
@@ -56,7 +55,6 @@ public class MysteryBox {
     private final double y0, y1, y2, y3;
     private final int z0, z1;
     private final boolean[] a = new boolean[280];
-
     ...
 }
 ```
@@ -68,11 +66,50 @@ public class MysteryBox {
     private final boolean y0;
     private final double z0, z1, z2, z3;
     private final long[] a = new long[152];
-
     ...
 }
 ```
 [Answer 3](#mem3)
+
+```
+public class MysteryBox {
+        private Node first;
+
+        private static class Node {
+            private long item;
+            private Node next;
+            private Node prev;
+        }
+        ...
+    }
+```
+[Week 2, Answer 1](#wk2_mem1)
+
+Consider an object of type GenericMysteryBox<Long> that stores N items of type Long
+in a generic array items[] of length N.    
+**Hint:** an object of the wrapper type Long uses 24 bytes.
+```
+    public class GenericMysteryBox<Item> {
+        private int N;
+        private Item[] items;
+        ...
+    }
+```
+[Week 2, Answer 2](#wk2_mem2)
+
+```
+    public class MysteryBox {
+        private Node first;
+
+        private static class Node {
+            private int item;
+            private Node next;
+        }
+        ...
+    }
+[Week 2, Answer 3](#wk2_mem3)
+
+
 
 ## [Order of Growth Example Answers](#order-of-growth-examples)
 
@@ -125,3 +162,46 @@ public class MysteryBox {                           //   16 (object overhead)
 }                                                      ----
                                                        1312
 ```
+
+### wk2_mem1
+```
+public class MysteryBox {                     //       16 (object overhead)
+    private Node first;                       //        8 (reference)
+
+    private static class Node {               //       16 (object overhead)
+        private long item;                    //        8 (long)
+        private Node next;                    //        8 (reference)
+        private Node prev;                    //        8 (reference)
+                                                        0 (padding to round up to a multiple of 8)
+    }                                             -------
+                                                 24 + 40N  ~ 40N
+```
+
+### wk2_mem2
+```
+public class GenericMysteryBox<Item> {        //       16 (object overhead)
+    private int N;                            //        4 (int)
+    private Item[] items;                     //        8 (reference to array)
+                                              //  8N + 24 (array of Long references)
+                                              //      24N (Long objects)
+    ...                                                 4 (padding to round up to a multiple of 8)
+}                                                 -------
+                                                 32N + 56  ~ 32N
+```
+Long is a wrapper type for long. Its size is:    
+16(overhead) + 8(long value) + 0(padding)
+
+
+### wk2_mem3
+```
+    public class MysteryBox {                 //       16 (object overhead)
+        private Node first;                   //        8 (reference)
+
+        private static class Node {           //       16 (object overhead)
+            private int item;                 //        4 (1 int)
+            private Node next;                //        8 (reference)
+        }                                     //        4 (padding)
+                                                  -------
+                                                 24 + 32N ~ 32N
+```
+
