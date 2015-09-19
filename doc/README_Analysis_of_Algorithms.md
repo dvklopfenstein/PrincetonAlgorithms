@@ -119,13 +119,13 @@ in a generic array items[] of length N.
 
 ## [Order of Growth Example Answers](#order-of-growth-examples)
 
-### oog1
+### [oog1](#order-of-growth-examples)
 log N => The i loops iterates ~ log_4 (N^1/2) ~ lg N times.
 
-### oog2
+### [oog2](#order-of-growth-examples)
 N^(1/2) => The body of inner loop is executed 1 + 2 + 4 + 8 + ... + sqrt(N) ~ 2 sqrt(N) times.
 
-### oog3
+### [oog3](#order-of-growth-examples)
 N^2 => The i loop iterates N^2 times; the body of the j loop executes only when i < N.
 
 ## [Memory Example Answers](#memory-examples)
