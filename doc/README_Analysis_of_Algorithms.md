@@ -74,7 +74,7 @@ public class MysteryBox {
 ```
 [Answer 3](#mem3)
 
-## [Order of Growth Answers](#order-of-growth-examples)
+## [Order of Growth Example Answers](#order-of-growth-examples)
 
 ### oog1
 log N => The i loops iterates ~ log_4 (N^1/2) ~ lg N times.
@@ -85,7 +85,7 @@ N^(1/2) => The body of inner loop is executed 1 + 2 + 4 + 8 + ... + sqrt(N) ~ 2 
 ### oog3
 N^2 => The i loop iterates N^2 times; the body of the j loop executes only when i < N.
 
-## [Memory Answers](#memory-examples)
+## [Memory Example Answers](#memory-examples)
 
 ### mem1
 ```
