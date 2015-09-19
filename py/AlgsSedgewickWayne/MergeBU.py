@@ -3,7 +3,7 @@
 from AlgsSedgewickWayne.utils import __lt__, _exch, _isSorted
 from AlgsSedgewickWayne.Merge import merge
 
-def Sort(a, array_history=None):
+def Sort(a, array_history=None): # N lg N
   """Rearranges the array, a, in ascending order, using the natural order."""
   N = len(a)
   aux = [None for i in range(N)]
@@ -93,7 +93,7 @@ def Sort(a, array_history=None):
 
 #------------------------------------------------------------------------------
 # QUESTION: How many passes (over the input array) does bottom-up mergesort make in the worst-case?
-# ANSWER:
+# ANSWER: logorithmic
 
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
 # Java version Last updated: Wed Dec 4 11:48:10 EST 2013.
