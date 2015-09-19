@@ -1,6 +1,4 @@
-
-
-/*************************************************************************
+/******************************************************************************
  *  Compilation:  javac MergeBU.java
  *  Execution:    java MergeBU < input.txt
  *  Dependencies: StdOut.java StdIn.java
@@ -22,7 +20,12 @@
  *  % java MergeBU < words3.txt
  *  all bad bed bug dad ... yes yet zoo    [ one string per line ]
  *
- *************************************************************************/
+ ******************************************************************************/
+
+package edu.princeton.cs.algs4;
+
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
 
 /**
  *  The <tt>MergeBU</tt> class provides static methods for sorting an
@@ -77,12 +80,12 @@ public class MergeBU {
     }
 
   /***********************************************************************
-    *  Helper sorting functions
-    ***********************************************************************/
+    *  Helper sorting functions.
+    ***************************************************************************/
     
     // is v < w ?
     private static boolean less(Comparable v, Comparable w) {
-        return (v.compareTo(w) < 0);
+        return v.compareTo(w) < 0;
     }
 
    // exchange a[i] and a[j]
@@ -93,9 +96,9 @@ public class MergeBU {
     }
 
 
-   /***********************************************************************
-    *  Check if array is sorted - useful for debugging
-    ***********************************************************************/
+   /***************************************************************************
+    *  Check if array is sorted - useful for debugging.
+    ***************************************************************************/
     private static boolean isSorted(Comparable[] a) {
         for (int i = 1; i < a.length; i++)
             if (less(a[i], a[i-1])) return false;
@@ -120,6 +123,28 @@ public class MergeBU {
     }
 }
 
+/******************************************************************************
+ *  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
+ *
+ *  This file is part of algs4.jar, which accompanies the textbook
+ *
+ *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
+ *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
+ *      http://algs4.cs.princeton.edu
+ *
+ *
+ *  algs4.jar is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  algs4.jar is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
+ ******************************************************************************/
 
-// Copyright (C) 2002–2010, Robert Sedgewick and Kevin Wayne. 
-// Last updated: Wed Dec 4 11:48:10 EST 2013.
+// Last updated: Fri Sep 18 10:26:51 EDT 2015.

@@ -1,4 +1,37 @@
-#!/usr/bin/env python
+"""Merge Sort from Week 3 lecture."""
+
+def Sort(a, array_history=None): # 09:30
+  """Rearranges the array in ascending order, using the natural order."""
+  # At most N lg N compares and 6 N lg N array accesses to sort any array of size N
+  aux = [None for i in range(len(a))] # Create aux outside _sort to avoid extensive costs.
+  _sort(a, aux, 0, len(a)-1)
+  assert _isSorted(a)
+
+def merge(a, aux, lo, mid, hi): # 05:00-06:00
+  assert _isSorted(a, lo, mid)    # precondition: a[lo .. mid]   are sorted subarrays
+  assert _isSorted(a, mid+1, hi)  # precondition: a[mid+1 .. hi] are sorted subarrays
+
+  for k in range(lo, hi+1): # copy to aux[]
+      aux[k] = a[k]
+
+  # merge back to a[] in sorted order
+  i = lo     # index of sorted a[lo .. mid]   ( left-half)
+  j = mid+1  # index of sorted a[mid+1 .. hi] (right-half)
+  for k in range(lo, hi+1): # k is current entry in the sorted result
+      if   i > mid:               a[k] = aux[j]; j += 1 # this copying is unnecessary
+      elif j > hi:                a[k] = aux[i]; i += 1 # j ptr is exhausted
+      elif _less(aux[j], aux[i]): a[k] = aux[j]; j += 1
+      else:                       a[k] = aux[i]; i += 1
+
+  assert _isSorted(a, lo, hi) # postcondition: a[lo .. hi] is sorted
+
+def _sort(a, aux, lo, hi):
+  """Recursive sort."""
+  if hi <= lo: return
+  mid = lo + (hi - lo) / 2;
+  _sort(a, aux, lo, mid)
+  _sort(a, aux, mid + 1, hi)
+  merge(a, aux, lo, mid, hi)
 
 
 #************************************************************************
@@ -259,58 +292,6 @@
 #/
 
 # stably merge a[lo .. mid] with a[mid+1 ..hi] using aux[lo .. hi]
-def _merge_init(a, aux, lo, mid, hi): # 05:00-06:00
-  # Expect that left-half is sorted.
-  # Expect that right-half is sorted.
-  assert _isSorted(a, lo, mid)    # precondition: a[lo .. mid]   are sorted subarrays
-  assert _isSorted(a, mid+1, hi)  # precondition: a[mid+1 .. hi] are sorted subarrays
-
-  # copy to aux[]
-  for k in range(lo, hi+1):
-      aux[k] = a[k]
-
-  # merge back to a[] in sorted order
-  i = lo     # index of sorted a[lo .. mid]   ( left-half)
-  j = mid+1  # index of sorted a[mid+1 .. hi] (right-half)
-  for k in range(lo, hi+1): # k is current entry in the sorted result
-      if   i > mid:               a[k] = aux[j]; j += 1 # this copying is unnecessary
-      elif j > hi:                a[k] = aux[i]; i += 1 # j ptr is exhausted
-      elif _less(aux[j], aux[i]): a[k] = aux[j]; j += 1
-      else:                       a[k] = aux[i]; i += 1
-
-  # Expect that now the entire list is sorted.
-  assert _isSorted(a, lo, hi) # postcondition: a[lo .. hi] is sorted
-
-
-# mergesort a[lo..hi] using auxiliary array aux[lo..hi]
-def _sort_init(a, aux, lo, hi): # 09:07-
-  # 20:47 MERGESORT PRACTICAL IMPROVEMENTS (**SEE MergeX.py for code containing improvements)
-  # * Mergesort is too complicated for tiny arrays)
-  # * Recursive nature of sort means that there will be lots of sub-arrays to be sorted.
-  if hi <= lo: return
-  #CUTOFF = 7
-  #if hi <= lo + CUTOFF - 1:
-  #  import Insertion
-  #  Insertion.Sort(a, lo, hi) # Simple and efficient for small sub-arrays
-  #  return
-
-  mid = lo + (hi - lo) / 2
-  _sort_init(a, aux, lo, mid)      # sort the 1st half (left)
-  _sort_init(a, aux, mid + 1, hi)  # sort the 2nd half (right)
-  # 21:51 IMPROVEMENT: Stop if already sorted
-  # if a[mid] <= a[mid+1]: return  TBD use "less"
-  _merge_init(a, aux, lo, mid, hi) # merge sorted halves together
-
-# Rearranges the array in ascending order, using the natural order.
-# @param a the array to be sorted
-def Sort(a, array_history=None): # 09:30
-  # NOTE: Do not create array in recursive _sort routine
-  # to avoid extensive cost of extra array production
-  aux = [None for i in range(len(a))]
-  _sort_init(a, aux, 0, len(a)-1)
-  assert _isSorted(a)
-
-
 #**********************************************************************
 #  Helper sorting functions
 #**********************************************************************/
@@ -339,7 +320,7 @@ def _isSorted(a, lo=None, hi=None):
 #  Index mergesort
 #**********************************************************************/
 # stably merge a[lo .. mid] with a[mid+1 .. hi] using aux[lo .. hi]
-def _merge(a, index, aux, lo, mid, hi):
+def _merge_index(a, index, aux, lo, mid, hi):
 
   # copy to aux[]
   for k in range(lo, hi+1):
@@ -362,6 +343,14 @@ def _merge(a, index, aux, lo, mid, hi):
     elif _less(a[aux[j]], a[aux[i]]): index[k] = aux[j]; j += 1
     else:                             index[k] = aux[i]; i += 1
 
+def _sort_index(a, index, aux, lo, hi):
+  """Recursive sort."""
+  if hi <= lo: return
+  mid = lo + (hi - lo) / 2;
+  _sort_index(a, index, aux, lo, mid)
+  _sort_index(a, index, aux, mid + 1, hi)
+  _merge_index(a, index, aux, lo, mid, hi)
+
 # Returns a permutation that gives the elements in the array in ascending order.
 # @param a the array
 # @return a permutation <tt>p[]</tt> such that <tt>a[p[0]]</tt>, <tt>a[p[1]]</tt>,
@@ -373,17 +362,10 @@ def indexSort(a):
       index[i] = i
 
   aux = [None for i in range(N)]
-  _sort(a, index, aux, 0, N-1)
+  _sort_index(a, index, aux, 0, N-1)
   return index
 
 # mergesort a[lo..hi] using auxiliary array aux[lo..hi]
-def _sort(a, index, aux, lo, hi):
-  if hi <= lo: return
-  mid = lo + (hi - lo) / 2;
-  _sort(a, index, aux, lo, mid)
-  _sort(a, index, aux, mid + 1, hi)
-  merge(a, index, aux, lo, mid, hi)
-
 # Reads in a sequence of strings from standard input; mergesorts them;
 # and prints them to standard output in ascending order.
 def main():

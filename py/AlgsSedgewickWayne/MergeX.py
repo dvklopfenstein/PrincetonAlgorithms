@@ -1,3 +1,8 @@
+"""MERGESORT WITH PRACTICAL IMPROVEMENTS.
+
+  * Mergesort is too complicated for tiny arrays)
+  * Recursive nature of sort means that there will be lots of sub-arrays to be sorted.
+"""
 
 #************************************************************************
  #  Compilation:  javac MergeX.java

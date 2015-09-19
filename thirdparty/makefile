@@ -9,16 +9,22 @@ ALGS4SRC ?= .
 
 # $ javac-algs4.bat -cp ./algs4.jar ThreeSum.java Stopwatch.java
 
-JC := javac-algs4.bat
+JC  := javac-algs4.bat
 JVM := java-algs4.bat
+#JC  := javac
+#JVM := java
 CHK := checkstyle-algs4.bat
 BUG := findbugs-algs4.bat
-JFLAGS := -cp ./algs4.jar
+#JFLAGS := -Xlint:unchecked -cp ./algs4.jar
+#JFLAGS := -cp ./algs4.jar
 .PHONY: clean
 
 SRCS = \
   FileSorter.java \
   HelloWorld.java \
+  Merge.java \
+  MergeBU.java \
+  MergeX.java \
   Selection.java \
   Stopwatch.java \
   ThreeSum.java  
@@ -42,9 +48,6 @@ SRCS = \
 # LinkedQueue.java \
 # LinkedStack.java \
 # MaxPQ.java \
-# Merge.java \
-# MergeBU.java \
-# MergeX.java \
 # MinPQ.java \
 # Point2D.java \
 # Queue.java \
@@ -69,8 +72,11 @@ SRCS = \
 # --------------------------------------------------------------
 # Targets
 
+runa: $(MAIN).class 
+	$(JVM) $(JFLAGS) $(MAIN) $(ARG)
+
 run: $(MAIN).class 
-	$(JVM) $(MAIN) $(ARG)
+	$(JVM) $(JFLAGS) $(MAIN) 
 
 # 'class' is the suffix of the target file
 # 'java' is the suffix for the dependency file

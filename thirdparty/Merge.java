@@ -1,5 +1,4 @@
-
-/*************************************************************************
+/******************************************************************************
  *  Compilation:  javac Merge.java
  *  Execution:    java Merge < input.txt
  *  Dependencies: StdOut.java StdIn.java
@@ -20,7 +19,12 @@
  *  % java Merge < words3.txt
  *  all bad bed bug dad ... yes yet zoo    [ one string per line ]
  *  
- *************************************************************************/
+ ******************************************************************************/
+
+package edu.princeton.cs.algs4;
+
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
 
 /**
  *  The <tt>Merge</tt> class provides static methods for sorting an
@@ -40,7 +44,6 @@ public class Merge {
 
     // stably merge a[lo .. mid] with a[mid+1 ..hi] using aux[lo .. hi]
     private static void merge(Comparable[] a, Comparable[] aux, int lo, int mid, int hi) {
-
         // precondition: a[lo .. mid] and a[mid+1 .. hi] are sorted subarrays
         assert isSorted(a, lo, mid);
         assert isSorted(a, mid+1, hi);
@@ -53,7 +56,7 @@ public class Merge {
         // merge back to a[]
         int i = lo, j = mid+1;
         for (int k = lo; k <= hi; k++) {
-            if      (i > mid)              a[k] = aux[j++];   // this copying is unnecessary
+            if      (i > mid)              a[k] = aux[j++];
             else if (j > hi)               a[k] = aux[i++];
             else if (less(aux[j], aux[i])) a[k] = aux[j++];
             else                           a[k] = aux[i++];
@@ -83,13 +86,13 @@ public class Merge {
     }
 
 
-   /***********************************************************************
-    *  Helper sorting functions
-    ***********************************************************************/
+   /***************************************************************************
+    *  Helper sorting functions.
+    ***************************************************************************/
     
     // is v < w ?
     private static boolean less(Comparable v, Comparable w) {
-        return (v.compareTo(w) < 0);
+        return v.compareTo(w) < 0;
     }
         
     // exchange a[i] and a[j]
@@ -100,9 +103,9 @@ public class Merge {
     }
 
 
-   /***********************************************************************
-    *  Check if array is sorted - useful for debugging
-    ***********************************************************************/
+   /***************************************************************************
+    *  Check if array is sorted - useful for debugging.
+    ***************************************************************************/
     private static boolean isSorted(Comparable[] a) {
         return isSorted(a, 0, a.length - 1);
     }
@@ -114,9 +117,9 @@ public class Merge {
     }
 
 
-   /***********************************************************************
-    *  Index mergesort
-    ***********************************************************************/
+   /***************************************************************************
+    *  Index mergesort.
+    ***************************************************************************/
     // stably merge a[lo .. mid] with a[mid+1 .. hi] using aux[lo .. hi]
     private static void merge(Comparable[] a, int[] index, int[] aux, int lo, int mid, int hi) {
 
@@ -179,6 +182,29 @@ public class Merge {
     }
 }
 
+/******************************************************************************
+ *  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
+ *
+ *  This file is part of algs4.jar, which accompanies the textbook
+ *
+ *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
+ *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
+ *      http://algs4.cs.princeton.edu
+ *
+ *
+ *  algs4.jar is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  algs4.jar is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
+ ******************************************************************************/
 
+// Last updated: Fri Sep 18 10:26:51 EDT 2015.
 // Copyright © 2002–2010, Robert Sedgewick and Kevin Wayne. 
-// Last updated: Fri Feb 14 17:45:37 EST 2014.

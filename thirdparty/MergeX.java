@@ -1,5 +1,4 @@
-
-/*************************************************************************
+/******************************************************************************
  *  Compilation:  javac MergeX.java
  *  Execution:    java MergeX < input.txt
  *  Dependencies: StdOut.java StdIn.java
@@ -21,7 +20,13 @@
  *  % java MergeX < words3.txt
  *  all bad bed bug dad ... yes yet zoo    [ one string per line ]
  *
- *************************************************************************/
+ ******************************************************************************/
+
+package edu.princeton.cs.algs4;
+
+import java.util.Comparator;
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
 
 /**
  *  The <tt>MergeX</tt> class provides static methods for sorting an
@@ -91,7 +96,6 @@ public class MergeX {
         assert isSorted(a);
     }
 
-
     // sort from a[lo] to a[hi] using insertion sort
     private static void insertionSort(Comparable[] a, int lo, int hi) {
         for (int i = lo; i <= hi; i++)
@@ -100,21 +104,91 @@ public class MergeX {
     }
 
 
+    /*******************************************************************
+     *  Utility methods.
+     *******************************************************************/
+
     // exchange a[i] and a[j]
-    private static void exch(Comparable[] a, int i, int j) {
-        Comparable swap = a[i];
+    private static void exch(Object[] a, int i, int j) {
+        Object swap = a[i];
         a[i] = a[j];
         a[j] = swap;
     }
 
     // is a[i] < a[j]?
     private static boolean less(Comparable a, Comparable b) {
-        return (a.compareTo(b) < 0);
+        return a.compareTo(b) < 0;
     }
 
-   /***********************************************************************
-    *  Check if array is sorted - useful for debugging
-    ***********************************************************************/
+    // is a[i] < a[j]?
+    private static boolean less(Object a, Object b, Comparator comparator) {
+        return comparator.compare(a, b) < 0;
+    }
+
+
+    /*******************************************************************
+     *  Version that takes Comparator as argument.
+     *******************************************************************/
+
+    /**
+     * Rearranges the array in ascending order, using the provided order.
+     * @param a the array to be sorted
+     */
+    public static void sort(Object[] a, Comparator comparator) {
+        Object[] aux = a.clone();
+        sort(aux, a, 0, a.length-1, comparator);
+        assert isSorted(a, comparator);
+    }
+
+    private static void merge(Object[] src, Object[] dst, int lo, int mid, int hi, Comparator comparator) {
+
+        // precondition: src[lo .. mid] and src[mid+1 .. hi] are sorted subarrays
+        assert isSorted(src, lo, mid, comparator);
+        assert isSorted(src, mid+1, hi, comparator);
+
+        int i = lo, j = mid+1;
+        for (int k = lo; k <= hi; k++) {
+            if      (i > mid)                          dst[k] = src[j++];
+            else if (j > hi)                           dst[k] = src[i++];
+            else if (less(src[j], src[i], comparator)) dst[k] = src[j++];
+            else                                       dst[k] = src[i++];
+        }
+
+        // postcondition: dst[lo .. hi] is sorted subarray
+        assert isSorted(dst, lo, hi, comparator);
+    }
+
+
+    private static void sort(Object[] src, Object[] dst, int lo, int hi, Comparator comparator) {
+        // if (hi <= lo) return;
+        if (hi <= lo + CUTOFF) { 
+            insertionSort(dst, lo, hi, comparator);
+            return;
+        }
+        int mid = lo + (hi - lo) / 2;
+        sort(dst, src, lo, mid, comparator);
+        sort(dst, src, mid+1, hi, comparator);
+
+        // using System.arraycopy() is a bit faster than the above loop
+        if (!less(src[mid+1], src[mid], comparator)) {
+            System.arraycopy(src, lo, dst, lo, hi - lo + 1);
+            return;
+        }
+
+        merge(src, dst, lo, mid, hi, comparator);
+    }
+
+    // sort from a[lo] to a[hi] using insertion sort
+    private static void insertionSort(Object[] a, int lo, int hi, Comparator comparator) {
+        for (int i = lo; i <= hi; i++)
+            for (int j = i; j > lo && less(a[j], a[j-1], comparator); j--)
+                exch(a, j, j-1);
+    }
+
+
+   /***************************************************************************
+    *  Check if array is sorted - useful for debugging.
+    ***************************************************************************/
     private static boolean isSorted(Comparable[] a) {
         return isSorted(a, 0, a.length - 1);
     }
@@ -125,8 +199,18 @@ public class MergeX {
         return true;
     }
 
+    private static boolean isSorted(Object[] a, Comparator comparator) {
+        return isSorted(a, 0, a.length - 1, comparator);
+    }
+
+    private static boolean isSorted(Object[] a, int lo, int hi, Comparator comparator) {
+        for (int i = lo + 1; i <= hi; i++)
+            if (less(a[i], a[i-1], comparator)) return false;
+        return true;
+    }
+
     // print array to standard output
-    private static void show(Comparable[] a) {
+    private static void show(Object[] a) {
         for (int i = 0; i < a.length; i++) {
             StdOut.println(a[i]);
         }
@@ -144,6 +228,28 @@ public class MergeX {
     }
 }
 
+/******************************************************************************
+ *  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
+ *
+ *  This file is part of algs4.jar, which accompanies the textbook
+ *
+ *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
+ *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
+ *      http://algs4.cs.princeton.edu
+ *
+ *
+ *  algs4.jar is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  algs4.jar is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
+ ******************************************************************************/
 
-// Copyright (C) 2002–2010, Robert Sedgewick and Kevin Wayne. 
-// Last updated: Fri Feb 14 17:45:37 EST 2014.
+// Last updated: Fri Sep 18 10:26:51 EDT 2015.
