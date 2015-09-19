@@ -14,12 +14,14 @@ There are two ways to view the progression of a sort:
 
   1. The concise way: One print of the array state per iteration. It looks like this:    
 
+```
      0: 33 49 51 64 92 71 70 42 63 59  # Initial state of array
         .. .. .. .. XX XX .. .. .. ..  # Shows matches and mismatches between lines
      1: 33 49 51 64 71 92 70 42 63 59  # 1st Exchange
         .. .. .. .. .. XX XX .. .. ..
      2: 33 49 51 64 71 70 91 42 63 59  # 2nd Exchange
      ...
+```
 
   2. The verbose but visually pleasing way of viewing the sort progression.
 
