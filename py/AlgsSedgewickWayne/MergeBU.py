@@ -1,4 +1,22 @@
-#!/usr/bin/env python
+"Bottom-up Mergesort"""
+
+from AlgsSedgewickWayne.utils import __lt__, _exch, _isSorted
+from AlgsSedgewickWayne.Merge import merge
+
+def Sort(a, array_history=None):
+  """Rearranges the array, a, in ascending order, using the natural order."""
+  N = len(a)
+  aux = [None for i in range(N)]
+  sarr_sz = 1
+  # First nested loop is "Size of the sub-array" executed only lg N times (lg N passes)
+  while sarr_sz < N: # i.e. for (int sz=1; sz<N; sz=sz+sz)
+      lo = 0
+      while lo < N-sarr_sz: # i.e. for (int lo = 0; lo < N-sz; lo += sz+sz)
+          merge(a, aux, lo=lo, mid=lo+sarr_sz-1, hi=min(lo+sarr_sz+sarr_sz-1, N-1))
+          lo += sarr_sz+sarr_sz
+      sarr_sz = sarr_sz+sarr_sz # Double the size of the sub-array until we get to N
+  assert _isSorted(a)
+
 
 #************************************************************************
  #  Compilation:  javac MergeBU.java
@@ -76,80 +94,6 @@
 #------------------------------------------------------------------------------
 # QUESTION: How many passes (over the input array) does bottom-up mergesort make in the worst-case?
 # ANSWER:
-
-
-# stably merge a[lo..mid] with a[mid+1..hi] using aux[lo..hi]
-# Same merge code as the original recursive Merge
-def _merge(a, aux, lo, mid, hi):
-
-    # copy to aux[]
-    for k in range(lo, hi+1):
-        aux[k] = a[k]
-
-    # merge back to a[]
-    i = lo
-    j = mid+1
-    for k in range(lo, hi+1):
-        if   i > mid:               a[k] = aux[j]; j += 1 # this copying is unneccessary
-        elif j > hi:                a[k] = aux[i]; i += 1
-        elif _less(aux[j], aux[i]): a[k] = aux[j]; j += 1
-        else:                       a[k] = aux[i]; i += 1
-
-
-#*
- # Rearranges the array in ascending order, using the natural order.
- # @param a the array to be sorted
- #/
-def Sort(a, array_history=None):
-    N = len(a)
-    aux = [None for i in range(N)]
-    n = 1
-    # First nested loop is "Size of the sub-array" executed only lg N times (lg N passes)
-    while n < N:
-        i = 0
-        while i < N-n:
-            lo = i
-            mi  = i+n-1
-            hi = min(i+n+n-1, N-1)
-            _merge(a, aux, lo, mi, hi)
-            i += n+n
-        # Outer Loop is executed lg N times because each time
-        # we double the size of the sub-array until we get to N
-        n = n+n
-    assert _isSorted(a)
-
-#**********************************************************************
-#  Helper sorting functions
-#**********************************************************************/
-
-# is v < w ?
-def _less(v, w): return v < w
-
-# exchange a[i] and a[j]
-def _exch(a, i, j):
-    swap = a[i]
-    a[i] = a[j]
-    a[j] = swap
-
-
-#**********************************************************************
-#  Check if array is sorted - useful for debugging
-#**********************************************************************/
-def _isSorted(a):
-    for i in range(1, len(a)):
-        if _less(a[i], a[i-1]): return False
-    return True
-
-# Reads in a sequence of strings from standard input; mergesorts them;
-# and prints them to standard output in ascending order.
-def main():
-  import InputArgs
-  a = InputArgs.getStrArray("S O R T E X A M P L E")
-  Sort(a)
-  print ' '.join(map(str,a))
-
-if __name__ == '__main__':
-  main()
 
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
 # Java version Last updated: Wed Dec 4 11:48:10 EST 2013.
