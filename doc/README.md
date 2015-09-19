@@ -3,7 +3,7 @@
 ## Algorithms 1
 
 * **Week 1 Suggested Readings**: Section 1.4 and 1.5 in [*Algorithms, 4th edition*](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1441459738&sr=1-1&keywords=sedgewick&refinements=p_n_feature_browse-bin%3A2656020011&pebp=1441459739425&perid=0C83SQQ1YFJ62VWHF9C0)
-  * [Union-Find](../py/AlgsSedgewickWayne/QuickFindUF.py)
+  * Union-Find [code](../py/AlgsSedgewickWayne/QuickFindUF.py)
   * [Quick-Union](README_QuickUnion.md)
   * [Analysis of Algorithms](README_Analysis_of_Algorithms.md)
   * Programming Assignment 1: [**Percolation**](http://htmlpreview.github.com/?https://github.com/dvklopfenstein/PrincetonAlgorithms/blob/master/thirdparty/hw1/Programming_Assignment_1_Percolation.html)
