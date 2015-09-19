@@ -5,9 +5,11 @@ import sys
 from   AlgsSedgewickWayne.Insertion    import Sort
 from   AlgsSedgewickWayne.testcode.ArrayHistory import ArrayHistory
 
-def run(a, desc="INSERTION SORT", prt=sys.stdout):
+def run(a, desc=None, prt=sys.stdout):
   array_history = ArrayHistory()
   Sort(a, array_history)
+  if desc is None:
+    desc = "INSERTION SORT" 
   prt.write("{DESC} RESULT {A}\n".format(DESC=desc, A=' '.join(str(e) for e in a)))
   array_history.prt()
   array_history.show(desc)
@@ -55,4 +57,7 @@ def run_all():
   test_5()
 
 if __name__ == '__main__':
-  run_all()
+  if len(sys.argv) == 1:
+    run_all()
+  else:
+    run(Stack(), sys.argv[1])
