@@ -36,7 +36,7 @@ def _isHsorted(a, h):
       return False
   return True
 
-def get_sort_seq(N, sort_seq):
+def get_sort_seq(N, sort_seq=None):
   """Get sort sequence."""
   if sort_seq is None:
     # Use 3x+1 increment sequence

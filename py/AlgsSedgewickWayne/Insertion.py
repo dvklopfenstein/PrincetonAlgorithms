@@ -128,6 +128,12 @@ def Sort(ARR, array_history=None):
 # Thus, the number of compares is ~ 1/4 N^2.
 # MY ANSWER: 33 compares on an actual run.
 
+# QUESTION: The number of compares to insertion sort an array of N/2 keys 
+# in strictly increasing order followed by the same N/2 keys in strictly 
+# decreasing order (e.g., 0 1 2 3 4 4 3 2 1 0) is ~1/4 N^2.
+# ANSWER: The number of inversions is 0 + 2 + 4 + 6 + ... + (N-2) ~ 1/4 N^2. 
+# Thus, the number of compares is ~ 1/4 N^2.
+# MY ANSWER: 29 compares on an actual run.
 
 
 

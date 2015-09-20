@@ -31,8 +31,30 @@ def test_849965():
 """
   blk_visualizer(block_str)
 
+def test_976184():
+  block_str = """
+    PINK   KISS   ACDC   BECK   ACDC   CAKE   ACDC   ACDC   
+    TACO   FIXX   BECK   DIDO   BECK   ACDC   BECK   BECK   
+    LIVE   LIVE   CAKE   JAYZ   DIDO   DIDO   CAKE   CAKE   
+    BECK   BECK   DEVO   LIVE   JAYZ   BECK   DEVO   DEVO   
+    TUFF   TUFF   DIDO   PINK   LIVE   KISS   DIDO   DIDO   
+    JAYZ   JAYZ   JAYZ   TACO   PINK   FIXX   DOOM   DOOM   
+    DIDO   DIDO   TUFF   TUFF   RUSH   DOOM   FIXX   FIXX   
+    UB40   UB40   UB40   UB40   TACO   DEVO   JAYZ   JAYZ   
+    RUSH   RUSH   RUSH   RUSH   TUFF   RUSH   RUSH   KISS   
+    ACDC   ACDC   PINK   ACDC   UB40   JAYZ   PINK   LIVE   
+    DOOM   DOOM   DOOM   DOOM   DOOM   LIVE   UB40   MOBY   
+    DEVO   DEVO   TACO   DEVO   DEVO   MOBY   TACO   PINK   
+    CAKE   CAKE   LIVE   CAKE   CAKE   TUFF   LIVE   RUSH   
+    KISS   PINK   KISS   KISS   KISS   PINK   KISS   TACO   
+    FIXX   TACO   FIXX   FIXX   FIXX   TACO   TUFF   TUFF   
+    MOBY   MOBY   MOBY   MOBY   MOBY   UB40   MOBY   UB40   
+"""
+  blk_visualizer(block_str)
+
 def run_all():
   test_849965()
+  test_976184()
 
 if __name__ == '__main__':
   run_all()
