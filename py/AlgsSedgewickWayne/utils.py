@@ -2,8 +2,10 @@
 
 # ------------------------------------------------------------
 # Used in Sort routines
-def __lt__(v, w): 
+def __lt__(v, w, prt=None): 
   """is v < w ?"""
+  if prt is not None:
+    prt.write("XXXX {V} < {W} = {LT}\n".format(V=v, W=w, LT=v<w))
   return v < w
 
 def _exch(a, i, j):
