@@ -182,6 +182,11 @@ def Sort(ARR, array_history=None):
 # ANSWER: True. Consider the array {3, 2, 1}, which has 3 inversions.
 # The first exchange results in the array {1, 2, 3}, which has 0 inversions.
 
+# QUESTION: Let a[] be an array containing N distinct keys with N >= 4. 
+# Then, exchanging two items can decrease the number of inversions by strictly more than N.
+# Answer: True. Consider the array { N, 2, 3, 4, ..., 1 }, which has 2N-3 inversions. 
+# Exchanging N and 1 results in the array { 1, 2, 3, ..., N }, which has zero inversions.
+
 
 ########################################################
 ### Stability (Week 3 Lecture "Stability")

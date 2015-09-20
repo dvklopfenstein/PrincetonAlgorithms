@@ -11,8 +11,8 @@ def Sort(ARR, array_history=None):
   for i in range(N):
     j = i
     # Exchange the curr Elem with every element to the left that is > 01:21
-    #while j > 0 and __lt__(ARR[j], ARR[j-1], sys.stdout): # Iterate from i back towards 0
-    while j > 0 and __lt__(ARR[j], ARR[j-1]): # Iterate from i back towards 0
+    while j > 0 and __lt__(ARR[j], ARR[j-1], sys.stdout): # Iterate from i back towards 0
+    #while j > 0 and __lt__(ARR[j], ARR[j-1]): # Iterate from i back towards 0
       if array_history is not None: array_history.add_history(ARR, {j:'*', j-1:'*'})
       _exch(ARR, j, j-1)
       j -= 1
@@ -92,7 +92,7 @@ def Sort(ARR, array_history=None):
 # QUESTION: How many compares does insertion sort make on an imput array that is already sorted?
 # ANSWER: linear
 #
-# QUESTION: True or False? The expected #of compares to insertion sort an array 
+# QUESTION: True or False? The expected # of compares to insertion sort an array 
 # containing N/2 0s and N/2 1s in uniformly random order is ~1/4 N^2.
 # ANSWER: False. Consider element i>0. How many of the items a[0], a[1], ..., a[i-1] is a[i] inverted with?
 # If a[i] == 1 (which happens with probability 1/2), then the number is 0.
@@ -122,6 +122,11 @@ def Sort(ARR, array_history=None):
 # Thus, the number of compares is ~ 1/8 N^2.
 # MY ANSWER: 23 compares on an actual run. 1/8 N^2=100/8=12.5 Anyone know why?
 
+# QUESTION: The number of compares to insertion sort an array of N/2 1s 
+# followed by N/2 0s (e.g., 1 1 1 1 1 0 0 0 0 0) is ~ 1/2 N^2.
+# ANSWER: False. The number of inversions is (N/2)*(N/2) = 1/4 N^2. 
+# Thus, the number of compares is ~ 1/4 N^2.
+# MY ANSWER: 33 compares on an actual run.
 
 
 

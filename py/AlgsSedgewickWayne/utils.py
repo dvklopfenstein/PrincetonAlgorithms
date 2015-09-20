@@ -21,4 +21,3 @@ def _isSorted(a, lo=None, hi=None):
       if __lt__(a[i], a[i-1]): return False
   return True
 
-# ------------------------------------------------------------

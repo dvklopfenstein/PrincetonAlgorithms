@@ -1,5 +1,6 @@
 """Shell Sort"""
 
+import sys
 from AlgsSedgewickWayne.utils import _isSorted, __lt__, _exch
 
 def Sort(ARR, array_history=None, sort_seq=None):
@@ -9,12 +10,14 @@ def Sort(ARR, array_history=None, sort_seq=None):
 
   # 3x+1 increment sequence:  [1, 4, 13, 40, 121, 364, 1093, ...
   ha = get_sort_seq(N, sort_seq)
+  print ha
 
   for h in reversed(ha):
     # h-sort the array (insertion sort)
     for i in range(h,N):
       j = i
-      while j >= h and __lt__(ARR[j], ARR[j-h]):
+      while j >= h and __lt__(ARR[j], ARR[j-h], sys.stdout):
+        print "XXXX", h
         if array_history is not None:
           array_history.add_history(ARR, {j:'*', j-h:'*'} )
         _exch(ARR, j, j-h)
@@ -126,6 +129,13 @@ def get_sort_seq(N, sort_seq):
 # an array of length N depends only on N (and not on the items in the array).
 # ANSWER: False. The number of compares to Shellsort the array { 1, 2, 3 } is 2; 
 # the number of compares to Shellsort the array { 3, 2, 1 } is three.
+
+# QUESTION: An array of N distinct keys that is both 2-sorted and 3-sorted 
+# can be 1-sorted in one insertion-sort pass, using only N compares.
+# ANSWER: True. Since the array is 2- and 3-sorted, it is also k-sorted 
+# for every k >= 2. Thus, while an item can be larger than the item to 
+# its immediate right, it cannot be larger than the item k to
+# its right for any k >= 2.
 
 
 ########################################################

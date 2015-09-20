@@ -55,6 +55,13 @@ def test_q3a():
   run([1, 2, 3], "SHELL N=3 => 2 COMPARES")
   run([3, 2, 1], "SHELL N=3 => 3 COMPARES")
 
+def test_q3b():
+  """Wk2 Ex Sorts Q3"""
+  # An array of N distinct keys that is both 2-sorted and 3-sorted 
+  # can be 1-sorted in one insertion-sort pass, using only N compares.
+  a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+  run(a, 'SHELL EX', sort_seq=[1, 2, 3])
+
 
 def run(a, desc=None, sort_seq=None, prt=sys.stdout):
   array_history = ArrayHistory()
