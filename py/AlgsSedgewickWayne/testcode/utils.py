@@ -29,4 +29,23 @@ def chk_arrays(actual, expected):
   sys.stdout.write("ACTUAL:   {ACT}\n".format(ACT=actual))
   raise Exception("TEST FAILED.")
 
+def blk_visualizer(blkstr, prt=sys.stdout):
+  """Used to help visualize arrays in columns for Algs 1, Week 2 Sort Q2."""
+  # Read block text into a list of row elements
+  blk = [row.split() for row in blkstr.split('\n') if row]
+  # Transpose blk to get a list of column elements
+  arrays = zip(*blk)
+  # Iterate through each array
+  for array_id, arr in enumerate(arrays):
+    # Get a number, starting with 1, based on the element's order in the sort
+    elem2num = {elem:idx for idx, elem in enumerate(sorted(arr), 1)}
+    # Iterate through the elements in the current array
+    for elem_position, elem in enumerate(arr):
+      # Print information about each element in the array
+      prt.write("{ARRAY_ID} {ELEM_IDX:>2} {ELEM} {STARS}\n".format(
+        ARRAY_ID=array_id, ELEM_IDX=elem_position, ELEM=elem, STARS='*'*elem2num[elem]))
+    prt.write('\n')
+
+  
+
 
