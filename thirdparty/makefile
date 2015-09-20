@@ -103,7 +103,7 @@ wk2_zip:
 
 # Algs1 Week 3 Programming Assignment 
 wk3_zip:
-	zip collinear.zip Point.java Brute.java Fast.java
+	zip collinear.zip Point.java BruteCollinearPoints.java FastCollinearPoints.java
 
 wk4_zip:
 	zip 8puzzle.zip Board.java Solver.java
@@ -125,6 +125,8 @@ RandomizedQueue.class: $(ALGS4SRC)/RandomizedQueue.java
 
 Subset.class: $(ALGS4SRC)/Subset.java
 	$(JC) -d . $<
+
 clean:
 	rm -f *.class
+	rm -f *.zip
 

@@ -1,9 +1,10 @@
 *.class
+*.zip
 Percolation.java
 PercolationStats.java
 Deque.java
 RandomizedQueue.java
 Subset.java
 Point.java
-Brute.java
-Fast.java
+BruteCollinearPoints.java
+FastCollinearPoints.java

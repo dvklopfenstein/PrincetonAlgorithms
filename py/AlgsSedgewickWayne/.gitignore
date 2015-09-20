@@ -4,7 +4,12 @@ tmp*
 Percolation.py
 PercolationStats.py
 
-# Algs 1, wk1
+# Algs 1, wk2
 Deque.py 
 RandomizedQueue.py 
 Subset.py
+
+# Algs 1, wk3
+Point.py
+BruteCollinearPoints.py
+FastCollinearPoints.py
