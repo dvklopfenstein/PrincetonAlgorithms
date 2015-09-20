@@ -2,15 +2,13 @@
 
 from AlgsSedgewickWayne.utils import _isSorted, __lt__, _exch
 
-def Sort(ARR, array_history=None):
+def Sort(ARR, array_history=None, sort_seq=None):
   """Rearranges the array, ARR, in ascending order, using the natural order."""
   # array_history; Used in tests. When true prints ASCII Art demonstrating the sort
   N = len(ARR)
 
-  # 3x+1 increment sequence:  1, 4, 13, 40, 121, 364, 1093, ...
-  ha = [1]
-  while (ha[-1] < N/3):
-    ha.append(3*ha[-1] + 1)
+  # 3x+1 increment sequence:  [1, 4, 13, 40, 121, 364, 1093, ...
+  ha = get_sort_seq(N, sort_seq)
 
   for h in reversed(ha):
     # h-sort the array (insertion sort)
@@ -34,6 +32,16 @@ def _isHsorted(a, h):
     if __lt__(a[i], a[i-h]): 
       return False
   return True
+
+def get_sort_seq(N, sort_seq):
+  """Get sort sequence."""
+  if sort_seq is None:
+    # Use 3x+1 increment sequence
+    ha = [1]
+    while (ha[-1] < N/3):
+      ha.append(3*ha[-1] + 1)
+    return ha
+  return sort_seq # Use user-provided sequence
 
 ##########################################################################
 # Alg1 Week 2 Lecture Shellsort

@@ -7,10 +7,15 @@ from AlgsSedgewickWayne.InputArgs import get_seq__int_or_str
 
 import random
 
-def test_wk2_lec(prt=sys.stdout):
-  """From Alg 1, week 2, lecture Shellsort (10:48)"""
-  a = "M O L E E X A S P R T".split()
+def test_wk2_lec_a(prt=sys.stdout):
+  """From Alg 1, week 2, lecture Shellsort (10:48) at 1:48"""
+  a = "S H E L L S O R T E X A M P L E".split()
   run(a, 'SHELL SORT LEC EX')
+
+def test_wk2_lec_b(prt=sys.stdout):
+  """From Alg 1, week 2, lecture Shellsort (10:48) at 2:02"""
+  a = "M O L E E X A S P R T".split()
+  run(a, 'SHELL SORT LEC EX', sort_seq=[1, 3, 7])
 
 def test_1(prt=sys.stdout):
   # (seed = 183182)
@@ -47,24 +52,26 @@ def test_q3a():
   # an array of length N depends only on N (and not on the items in the array).
   # A: The number of compares to Shellsort the array { 1, 2, 3 } is 2; 
   # the number of compares to Shellsort the array { 3, 2, 1 } is three.
-  run([1, 2, 3], "SHELL 2 COMPARES")
-  run([3, 2, 1], "SHELL 3 COMPARES")
+  run([1, 2, 3], "SHELL N=3 => 2 COMPARES")
+  run([3, 2, 1], "SHELL N=3 => 3 COMPARES")
 
 
-def run(a, desc=None, prt=sys.stdout):
+def run(a, desc=None, sort_seq=None, prt=sys.stdout):
   array_history = ArrayHistory()
-  Sort(a, array_history)
+  Sort(a, array_history, sort_seq)
   if desc is None:
     desc = "SHELL SORT" 
   prt.write("{DESC} RESULT {A}\n".format(DESC=desc, A=' '.join(str(e) for e in a)))
   array_history.prt()
   array_history.show(desc)
 
-def run_all():
-  test_1()
-  test_2()
-  test_3()
-  test_q3a()
+def run_all(prt=sys.stdout):
+  test_wk2_lec_a(prt)
+  test_wk2_lec_b(prt)
+  test_1(prt)
+  test_2(prt)
+  test_3(prt)
+  test_q3a(prt)
 
 def cli():
   N = len(sys.argv)
