@@ -40,26 +40,32 @@ def _prt_usage_msg(default_seq="a f b d g e c"):
 
 
 def get_list_from_args():
-  if len(sys.argv) > 1:
-    if os.path.isfile(sys.argv[1]):
-      return get_ints_from_file(arg)
-    return sys.argv[1:]
+  if len(sys.argv) == 2:
+    arg = sys.argv[1]
+    if os.path.isfile(arg):
+      return get_list_from_file(arg)
+    else:
+      return get_seq__int_or_str(arg)
+  else:
+    return conv_int(sys.argv[1:])
 
 def get_seq__int_or_str(seqstr):
   """Return a list of ints if string contains a sequence of ints."""
-  lst = seqstr.split()
-  intlist = [int(a) for a in lst if a.isdigit()]
-  return intlist if len(lst) == len(intlist) else lst
+  return conv_int(seqstr.split())
 
+def conv_int(lst):
+  """Converts a list element to an int if it is an int. Leaves it if not."""
+  get_val = lambda a: int(a) if a.isdigit() else a
+  return [get_val(a) for a in lst]
 
-
-def get_ints_from_file(fin):
+def get_list_from_file(fin):
   data = []
   with open(fin) as FIN:
     for line in FIN:
-      data.append(int(line))
+      line = line.rstrip()
+      val = int(line) if line.isdigit() else line
+      data.append(val)
   return data
-
 
 if __name__ == '__main__':
   print getStrArray("9 1 6 3 8 5 2")
