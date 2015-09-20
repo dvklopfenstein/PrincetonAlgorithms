@@ -102,6 +102,12 @@ wk2_zip:
 	zip queues.zip Deque.java RandomizedQueue.java Subset.java
 
 # Algs1 Week 3 Programming Assignment 
+wk3a: LineSegment.class Point.class BruteCollinearPoints.class FastCollinearPoints.class
+	$(JVM) BruteCollinearPoints $(N)
+
+wk3b: LineSegment.class Point.class BruteCollinearPoints.class FastCollinearPoints.class
+	$(JVM) FastCollinearPoints $(N)
+
 wk3_zip:
 	zip collinear.zip Point.java BruteCollinearPoints.java FastCollinearPoints.java
 
@@ -124,6 +130,18 @@ RandomizedQueue.class: $(ALGS4SRC)/RandomizedQueue.java
 	$(JC) -d . $<
 
 Subset.class: $(ALGS4SRC)/Subset.java
+	$(JC) -d . $<
+
+BruteCollinearPoints.class: $(ALGS4SRC)/BruteCollinearPoints.java
+	$(JC) -d . $<
+
+FastCollinearPoints.class: $(ALGS4SRC)/FastCollinearPoints.java
+	$(JC) -d . $<
+
+Point.class: $(ALGS4SRC)/Point.java
+	$(JC) -d . $<
+
+LineSegment.class: $(ALGS4SRC)/LineSegment.java
 	$(JC) -d . $<
 
 clean:
