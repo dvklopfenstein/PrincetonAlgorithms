@@ -21,34 +21,25 @@ Programming Assignment 3 Checklist: Pattern Recognition
 </font></td></tr></tbody></table>
 
 
-</p><p><b>Can the same point appear more than once as input to Brute or Fast?</b>
-You may assume the input to <tt>Brute</tt> and <tt>Fast</tt> are <em>N</em> distinct points.
-Nevertheless, the methods implemented as part of the <tt>Point</tt> data type
-must correctly handle the case when the points are not distinct:
-for the <tt>slopeTo()</tt> method, this requirement is explicitly stated in the API;
+</p><p><b>Can the same point appear more than once as input to methods in Point?</b>
+Yes.
+For the <tt>slopeTo()</tt> method, this requirement is explicitly stated in the API;
 for the comparison methods, this requirement is implict in the 
 contracts for <tt>Comparable</tt> and <tt>Comparator</tt>.
 
 
 </p><p><b>The reference solution outputs a line segment in the order
-<em>p</em>→<em>q</em>→<em>r</em>→<em>s</em>
+<em>p</em>→<em>q</em>
 but my solution outputs it in the reverse order
-<em>s</em>→<em>r</em>→<em>q</em>→<em>p</em>. Is that ok?</b>
+<em>q</em>→<em>p</em>. Is that ok?</b>
 Yes, there are two valid ways to output a line segment.
 
 </p><p><b>The reference solution outputs the line segments in a different order
-than my solution. Is that ok?</b>
+than my solution. Is that OK?</b>
 Yes, if there are <em>k</em> line segments, then there are <em>k</em>! different possible
 ways to output them.
 
-</p><p><b>Can I draw a line segment containing 4 (or more) points by drawing
-several subsegments?</b>
-No, you should draw one (and only one) line segment for each
-set of collinear points discovered: For example, you should draw the line segment
-<em>p</em>→<em>q</em>→<em>r</em>→<em>s</em>,
-with either <tt>p.drawTo(s)</tt> or <tt>s.drawTo(p)</tt>.
-
-</p><p><b>How do I sort a subarray?</b>
+</p><p><b>How do I sort a subarray in Java?</b>
  <tt>Arrays.sort(a, lo, hi)</tt> sorts the subarray
 from <tt>a[lo]</tt> to <tt>a[hi-1]</tt> according to the natural
 order of <tt>a[]</tt>. You can use a <tt>Comparator</tt> as the fourth
@@ -56,23 +47,16 @@ argument to sort according to an alternate order.
 
 </p><p><b>Where can I see examples of Comparable and Comparator?</b>
 See the lecture slides.
-We assume this is new Java material for most of you,
-so don't hesitate to ask for clarifications in the Discussion Forums.
-
-<!--
-, and go to precept.
-We assume this is new Java material for most of you,
-so don't hesitate to ask for clarifications on Piazza.
--->
 
 </p><p><b>My program fails only on (some) vertical line segments. What could be going wrong?</b>
-Are you dividing by zero? With integers, this produces a runtime
+Are you dividing by zero? With integers, this produces a run-time
 exception. With floating-point numbers, 1.0/0.0 is  positive infinity
 and -1.0/0.0 is negative infinity. You may also use the constants 
 <tt>Double.POSITIVE_INFINITY</tt> and <tt>Double.NEGATIVE_INFINITY</tt>.
 
 </p><p><b>What does it mean for slopeTo() to return positive zero?</b>
-Java (and the IEEE 754 floating-point standard) define two representations of zero: negative zero and positive zero.
+Java (and the IEEE 754 floating-point standard) define two representations of zero:
+negative zero and positive zero.
 </p><blockquote><pre>double a = 1.0;
 double x = (a - a) /  a;   // positive zero ( 0.0)
 double y = (a - a) / -a;   // negative zero (-0.0)
@@ -87,7 +71,7 @@ you probably will not notice any difference in behavior;
 but, if your program does cast to the wrapper type and fails only on (some) horizontal line segments, this may be
 the cause.
 
-<p><b>Is it ok to compare two floating-point numbers a and b for exactly equality?</b>
+<p><b>Is it OK to compare two floating-point numbers a and b for exactly equality?</b>
 In general, it is hazardous to compare a and b for equality if either is susceptible to
 floating-point roundoff error.
 However, in this case, you are computing b/a, where a and b are integers between -32,767 and 32,767.
@@ -97,20 +81,13 @@ it is guaranteed that <tt>(9.0/7.0 == 45.0/35.0)</tt>.
 In other words, it's sometimes OK to compare floating-point numbers for exact equality
 (but only when you know exactly what you are doing!)
 </p><p>
-Note also that it is possible to implement <tt>compare()</tt> and <tt>Fast</tt> using only integer arithmetic,
-though you are not required to do so.
+Note also that it is possible to implement <tt>compare()</tt> and <tt>FastCollinearPoints</tt>
+using only integer arithmetic (but you are not required to do so).
 
-</p><p><b>I'm having trouble avoiding subsegments 
-Fast.java when there are 5 or more points on a line
+</p><p><b>I'm having trouble avoiding subsegments  Fast.java when there are 5 or more points on a line
 segment. Any advice?</b>
 Not handling the 5-or-more case is a bit tricky,
 so don't kill yourself over it.
-
-<!--
-<p><b>Why are most of the line segments in the input files horizontal and vertical?</b>
-We generate most of the data sets at random. Since the points have integer coordinates
-in a small range, there are more opportunities to form horizontal and vertical lines.
--->
 
 </p><p><b>I created a nested Comparator class within Point. Within the nested Comparator class,
 the keyword <tt>this</tt> refers to the Comparator object. How do I refer to the Point instance
@@ -162,16 +139,7 @@ not have to follow these steps.
 
 <p></p><li><b>Getting started.</b>
 Download 
-<a href="http://coursera.cs.princeton.edu/algs4/testing/collinear/Point.java">Point.java</a>
-and 
-<a href="http://coursera.cs.princeton.edu/algs4/testing/collinear/PointPlotter.java">PointPlotter.java</a>.
-The latter takes a command-line argument, reads in a list of points
-from the file specified as a command-line argument (in the format specified)
-and plots the results using standard draw.
-
-To plot the points, type the following at the command line
-<blockquote><pre>% <b>java PointPlotter input56.txt</b>
-</pre></blockquote>
+<a href="http://coursera.cs.princeton.edu/algs4/testing/collinear/Point.java">Point.java</a>.
 
 
 <p></p></li><li> <b>Slope.</b> 
@@ -180,15 +148,14 @@ Be sure to consider a variety of corner cases, including horizontal, vertical,
 and degenerate line segments.
 
 <p></p></li><li> <b>Brute force algorithm.</b>
-Write code to iterate through all 4-tuples and check if the 4 points are
-collinear.
-To draw the line segment, you need to know the endpoints.
-One approach is to print out a line segment
+Write code to iterate through all 4-tuples and check if the 4 points are collinear.
+To form a line segment, you need to know its endpoints.
+One approach is to form a line segment
 only if the 4 points are in ascending order (say, relative to the natural order),
 in which case, the endpoints are the first and last points.
 
 <p>
-<em>Hint</em>: don't waste time micro-optimizing the brute-force solution. Though, if you really want to, there
+<em>Hint</em>: don't waste time micro-optimizing the brute-force solution. Though, there
 are two easy opportunities. First, you can iterate through all combinations of 4 points (N choose 4)
 instead of all 4 tuples (N^4), saving a factor of 4! = 24. Second, you don't need to consider whether
 4 points are collinear if you already know that the first 3 are not collinear;

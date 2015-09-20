@@ -12,6 +12,10 @@ Programming Assignment 3: Pattern Recognition Assignment
 <h2>Programming Assignment 3: Pattern Recognition</h2>
 
 <p>
+<font color="green"><em>The APIs have been revised substantially for the Fall 2015 offering.</em></font>
+<br>
+
+</p><p>
 <br>
 Write a program to recognize line patterns in a given set of points.
 
@@ -29,11 +33,11 @@ applications such as statistical data analysis.
 </p><p>
 <b>The problem.</b>
 Given a set of <em>N</em> distinct points in the plane, 
-draw every (maximal) line segment that connects a subset of 4 or more of the points.
+find every (maximal) line segment that connects a subset of 4 or more of the points.
 </p><p>
 
 </p><center>
-<img src="lines2.png" width="500" height="200" alt="Points and lines">
+<img src="./Programming_Assignment_3_Pattern_Recognition_Assignment_files/lines2.png" width="500" height="200" alt="Points and lines">
 </center>
 
 <p>
@@ -43,16 +47,15 @@ by implementing the following API:
 
 </p><blockquote>
 <pre><b>public class Point implements Comparable&lt;Point&gt; {</b>
-<b>   public final Comparator&lt;Point&gt; SLOPE_ORDER;</b>        <font color="gray">// compare points by slope to this point</font>
+<font color="gray">   public Point(int x, int y)                         // constructs the point (x, y)</font>
 
-<font color="gray">   public Point(int x, int y)                         // construct the point (x, y)</font>
-
-<font color="gray">   public   void draw()                               // draw this point</font>
-<font color="gray">   public   void drawTo(Point that)                   // draw the line segment from this point to that point</font>
+<font color="gray">   public   void draw()                               // draws this point</font>
+<font color="gray">   public   void drawTo(Point that)                   // draws the line segment from this point to that point</font>
 <font color="gray">   public String toString()                           // string representation</font>
 
-<b>   public    int compareTo(Point that)</b>                <font color="gray">// is this point lexicographically smaller than that point?</font>
-<b>   public double slopeTo(Point that)</b>                  <font color="gray">// the slope between this point and that point</font>
+<b>   public               int compareTo(Point that)</b>     <font color="gray">// compare two points by y-coordinates, breaking ties by x-coordinates</font>
+<b>   public            double slopeTo(Point that)</b>       <font color="gray">// the slope between this point and that point</font>
+<b>   public Comparator&lt;Point&gt; slopeOrder()</b>              <font color="gray">// compare two points by slopes they make with this point</font>
 <b>}</b>
 </pre>
 </blockquote>
@@ -84,8 +87,8 @@ Treat the slope of a horizontal line segment as positive zero;
 treat the slope of a vertical line segment as positive infinity;
 treat the slope of a degenerate line segment (between a point and itself) as negative infinity.
 
-<p></p></li><li> The <tt>SLOPE_ORDER</tt> comparator should compare points by the slopes they
-make with the invoking point (<em>x</em><sub>0</sub>, <em>y</em><sub>0</sub>).
+<p></p></li><li> The <tt>slopeOrder()</tt> method should return a comparator that compares its two argument
+points by the slopes they make with the invoking point (<em>x</em><sub>0</sub>, <em>y</em><sub>0</sub>).
 Formally, the point (<em>x</em><sub>1</sub>, <em>y</em><sub>1</sub>) is <em>less than</em>
 the point (<em>x</em><sub>2</sub>, <em>y</em><sub>2</sub>) if and only if the slope
 (<em>y</em><sub>1</sub> − <em>y</em><sub>0</sub>) / (<em>x</em><sub>1</sub> − <em>x</em><sub>0</sub>) 
@@ -95,21 +98,69 @@ Treat horizontal, vertical, and degenerate line segments as in the <tt>slopeTo()
 
 </li></ul>
 
+<p><em>Corner cases.</em> To avoid potential complications with integer overflow or floating-point precision,
+you may assume that the constructor arguments <tt>x</tt> and <tt>y</tt> are each between 0 and 32,767.
+
+</p><p>
+<b>Line segment data type.</b>
+To represent line segments in the plane, use the data type
+<a href="http://coursera.cs.princeton.edu/algs4/testing/collinear/LineSegment.java">LineSegment.java</a>,
+which has the following API:
+
+</p><blockquote>
+<pre><b>public class LineSegment {</b>
+<font color="gray">   public LineSegment(Point p, Point q)        // constructs the line segment between points p and q</font>
+<font color="gray">   public   void draw()                        // draws this line segment</font>
+<font color="gray">   public String toString()                    // string representation</font>
+<b>}</b>
+</pre>
+</blockquote>
+
 <p>
 <b>Brute force.</b>
-Write a program <tt>Brute.java</tt> that examines 4 
-points at a time and checks whether
-they all lie on the same line segment, printing out any such line
-segments to standard output and drawing them using standard drawing.
+Write a program <tt>BruteCollinearPoints.java</tt> that examines 4 
+points at a time and checks whether they all lie on the same line segment, returning all such line segments.
 To check whether the 4 points <em>p</em>, <em>q</em>, <em>r</em>, and <em>s</em> are collinear,
-check whether the slopes between <em>p</em> and <em>q</em>, 
+check whether the three slopes between <em>p</em> and <em>q</em>, 
 between <em>p</em> and <em>r</em>, and between <em>p</em> and <em>s</em>
 are all equal.
 
-</p><p>
+
+</p><blockquote>
+<pre><b>public class BruteCollinearPoints {</b>
+<b>   public BruteCollinearPoints(Point[] points)    </b><font color="gray">// finds all line segments containing 4 points</font>
+<b>   public           int numberOfSegments()        </b><font color="gray">// the number of line segments</font>
+<b>   public LineSegment[] segments()                </b><font color="gray">// the line segments</font>
+<b>}</b>
+</pre>
+</blockquote>
+
+
+<p>
+The method <tt>segments()</tt> should include each line segment containing 4 points exactly once.
+
+If 4 points appear on a line segment in the
+order <em>p</em>→<em>q</em>→<em>r</em>→<em>s</em>,
+then you should include either the line segment
+<em>p</em>→<em>s</em> or <em>s</em>→<em>p</em> (but not both)
+and you should not include <em>subsegments</em> such as <em>p</em>→<em>r</em> or
+<em>q</em>→<em>r</em>.
+For simplicity,
+we will not supply any input to <tt>BruteCollinearPoints</tt> that has 5 or more collinear points.
+
+</p><p><em>Corner cases.</em>
+Throw a <tt>java.lang.NullPointerException</tt> either the argument to the constructor
+is <tt>null</tt> or if any point in the array is <tt>null</tt>.
+Throw a <tt>java.lang.IllegalArgumentException</tt> if the argument to the constructor
+contains a repeated point.
+
+
+
+</p><p><em>Performance requirement.</em>
 The order of growth of the running time of your program should be
 <em>N</em><sup>4</sup> in the worst case and 
-it should use space proportional to <em>N</em>.
+it should use space proportional to <em>N</em> plus the number of line segments returned.
+
 
 </p><p>
 <b>A faster, sorting-based solution.</b>
@@ -136,37 +187,85 @@ The algorithm is fast because the bottleneck operation is sorting.
 <p>
 
 </p><center>
-<img src="lines1.png" alt="Points and slopes">
+<img src="./Programming_Assignment_3_Pattern_Recognition_Assignment_files/lines1.png" alt="Points and slopes">
 </center>
 <p>
-Write a program <tt>Fast.java</tt> that implements this algorithm.
-The order of growth of the running time of your program should be
-<em>N</em><sup>2</sup> log <em>N</em> in the worst case and 
-it should use space proportional to <em>N</em>.
-
-</p><p>
-<b>APIs.</b> 
-Each program should take the name of an input file as a command-line argument,
-read the input file (in the format specified below),
-print to standard output the line segments discovered (in the format specified below),
-and draw to standard draw the line segments discovered (in the format specified below).
-Here are the APIs.
+Write a program <tt>FastCollinearPoints.java</tt> that implements this algorithm.
 
 </p><blockquote>
-<pre><b>public class Brute {
-   public static void main(String[] args)
-}</b>
+<pre><b>public class FastCollinearPoints {</b>
+<b>   public FastCollinearPoints(Point[] points)     </b><font color="gray">// finds all line segments containing 4 or more points</font>
+<b>   public           int numberOfSegments()        </b><font color="gray">// the number of line segments</font>
+<b>   public LineSegment[] segments()                </b><font color="gray">// the line segments</font>
+<b>}</b>
+</pre>
+</blockquote>
 
-<b>public class Fast {
-   public static void main(String[] args)
-}</b>
+<p>
+The method <tt>segments()</tt> should include each <em>maximal</em> line segment
+containing 4 (or more) points exactly once.
+For example, if 5 points appear on a line segment in the
+order <em>p</em>→<em>q</em>→<em>r</em>→<em>s</em>→<em>t</em>,
+then do not include the subsegmnets <em>p</em>→<em>s</em> or <em>q</em>→<em>t</em>.
+
+
+</p><p><em>Corner cases.</em>
+Throw a <tt>java.lang.NullPointerException</tt> either the argument to the constructor
+is <tt>null</tt> or if any point in the array is <tt>null</tt>.
+Throw a <tt>java.lang.IllegalArgumentException</tt> if the argument to the constructor
+contains a repeated point.
+
+</p><p><em>Performance requirement.</em>
+The order of growth of the running time of your program should be
+<em>N</em><sup>2</sup> log <em>N</em> in the worst case and 
+it should use space proportional to <em>N</em> plus the number of line segments returned.
+<tt>FastCollinearPoints</tt> should work properly even if the input has 5 or more collinear points.
+
+
+</p><p>
+<b>Sample client.</b> 
+This client program takes the name of an input file as a command-line argument;
+read the input file (in the format specified below);
+prints to standard output the line segments that your program discovers, one per line;
+and draws to standard draw the line segments.
+
+</p><blockquote>
+<pre>public static void main(String[] args) {
+
+    <font color="gray">// read the N points from a file</font>
+    In in = new In(args[0]);
+    int N = in.readInt();
+    Point[] points = new Point[N];
+    for (int i = 0; i &lt; N; i++) {
+        int x = in.readInt();
+        int y = in.readInt();
+        points[i] = new Point(x, y);
+    }
+
+    <font color="gray">// draw the points</font>
+    StdDraw.show(0);
+    StdDraw.setYscale(0, 32768);
+    for (Point p : points) {
+        p.draw();
+    }
+    StdDraw.show();
+
+    <font color="gray">// print and draw the line segments</font>
+    BruteCollinearPoints collinear = new BruteCollinearPoints(points);
+    for (LineSegment segment : collinear.segments()) {
+        StdOut.println(segment);
+        segment.draw();
+    }
+}
 </pre>
 </blockquote>
 
 
+
 <p>
 <b>Input format.</b>
-Read the points from an input file in the following format:
+We supply several sample input files (suitable for use with the test client above)
+ in the following format:
 An integer <em>N</em>, followed by <em>N</em>
 pairs of integers (<em>x</em>, <em>y</em>), each between 0 and 32,767.
 Below are two examples.
@@ -186,74 +285,27 @@ Below are two examples.
 </blockquote>
 
 
-<p>
-<b>Output format.</b>
-Print to standard output the line segments that your program discovers, one per line.
-Print each line segment as an <em>ordered</em> sequence of its constituent points,
-separated by <tt>" -&gt; "</tt>.
+<blockquote><pre>% <b>java BruteCollinearPoints input8.txt</b>
+(10000, 0) -&gt; (0, 10000) 
+(3000, 4000) -&gt; (20000, 21000) 
 
-</p><blockquote><pre>% <b>java Brute input6.txt</b>
-(14000, 10000) -&gt; (18000, 10000) -&gt; (19000, 10000) -&gt; (21000, 10000)
-(14000, 10000) -&gt; (18000, 10000) -&gt; (19000, 10000) -&gt; (32000, 10000)
-(14000, 10000) -&gt; (18000, 10000) -&gt; (21000, 10000) -&gt; (32000, 10000)
-(14000, 10000) -&gt; (19000, 10000) -&gt; (21000, 10000) -&gt; (32000, 10000)
-(18000, 10000) -&gt; (19000, 10000) -&gt; (21000, 10000) -&gt; (32000, 10000)
+% <b>java FastCollinearPoints input8.txt</b>
+(3000, 4000) -&gt; (20000, 21000) 
+(0, 10000) -&gt; (10000, 0)
 
-% <b>java Brute input8.txt</b>
-(10000, 0) -&gt; (7000, 3000) -&gt; (3000, 7000) -&gt; (0, 10000) 
-(3000, 4000) -&gt; (6000, 7000) -&gt; (14000, 15000) -&gt; (20000, 21000) 
-
-% <b>java Fast input6.txt</b>
-(14000, 10000) -&gt; (18000, 10000) -&gt; (19000, 10000) -&gt; (21000, 10000) -&gt; (32000, 10000) 
-
-% <b>java Fast input8.txt</b>
-(10000, 0) -&gt; (7000, 3000) -&gt; (3000, 7000) -&gt; (0, 10000)
-(3000, 4000) -&gt; (6000, 7000) -&gt; (14000, 15000) -&gt; (20000, 21000)
+% <b>java FastCollinearPoints input6.txt</b>
+(14000, 10000) -&gt; (32000, 10000) 
 </pre>
 </blockquote>
 
-Also, draw the points using <tt>draw()</tt> and draw the line segments
-using <tt>drawTo()</tt>.
-Your programs should call <tt>draw()</tt> once for each point in the input file and
-it should call <tt>drawTo()</tt> once for each line segment discovered.
-Before drawing, use <tt>StdDraw.setXscale(0, 32768)</tt> and 
-<tt>StdDraw.setYscale(0, 32768)</tt> to rescale the coordinate system.
-<!--
-Do not change the pen color with <tt>setPenColor()</tt> or the 
-pen size with <tt>setPenRadius()</tt>.
--->
+
 
 <p>
-For full credit, do not print <em>permutations</em> of points on
-a line segment (e.g., if you output
-<em>p</em>→<em>q</em>→<em>r</em>→<em>s</em>,
-do not also output either
-<em>s</em>→<em>r</em>→<em>q</em>→<em>p</em> or
-<em>p</em>→<em>r</em>→<em>q</em>→<em>s</em>).
-Also, for full credit in <tt>Fast.java</tt>,
-do not print or plot <em>subsegments</em> of a line segment containing
-5 or more points (e.g., if you output 
-<em>p</em>→<em>q</em>→<em>r</em>→<em>s</em>→<em>t</em>,
-do not also output either
-<em>p</em>→<em>q</em>→<em>s</em>→<em>t</em> or
-<em>q</em>→<em>r</em>→<em>s</em>→<em>t</em>);
-you should print out such subsegments in <tt>Brute.java</tt>.
-
-
-<!--
-<p>
-<b>Analysis.</b>
-Estimate (using tilde notation) the running time (in seconds) of your
-two programs as a function of the number of points <em>N</em>.
-Provide empirical and mathematical evidence to justify your two hypotheses.
--->
-
-</p><p>
 <b>Deliverables.</b>
-Submit only <tt>Brute.java</tt>, <tt>Fast.java</tt>, and <tt>Point.java</tt>.
-We will supply <tt>stdlib.jar</tt> and <tt>algs4.jar</tt>.
-Your may not call any library functions other than 
-those in <tt>java.lang</tt>, <tt>java.util</tt>, <tt>stdlib.jar</tt>, and <tt>algs4.jar</tt>.
+Submit only <tt>BruteCollinearPoints.java</tt>, <tt>FastCollinearPoints.java</tt>, and <tt>Point.java</tt>.
+We will supply <tt>LineSegment.java</tt> and <tt>algs4.jar</tt>.
+You may not call any library functions other those in
+<tt>java.lang</tt>, <tt>java.util</tt>, and <tt>algs4.jar</tt>.
 
 
 
@@ -263,7 +315,6 @@ This assignment was developed by Kevin Wayne.
 <br>Copyright © 2005.
 </small>
 </address>
-
 
 
 
