@@ -1,5 +1,6 @@
 """Alg1 Week2 Lecture Insertion Sort"""
 
+import sys
 from AlgsSedgewickWayne.utils import _isSorted, __lt__, _exch
 
 def Sort(ARR, array_history=None):
@@ -10,7 +11,8 @@ def Sort(ARR, array_history=None):
   for i in range(N):
     j = i
     # Exchange the curr Elem with every element to the left that is > 01:21
-    while j > 0 and __lt__(ARR[j], ARR[j-1]):
+    #while j > 0 and __lt__(ARR[j], ARR[j-1], sys.stdout): # Iterate from i back towards 0
+    while j > 0 and __lt__(ARR[j], ARR[j-1]): # Iterate from i back towards 0
       if array_history is not None: array_history.add_history(ARR, {j:'*', j-1:'*'})
       _exch(ARR, j, j-1)
       j -= 1
@@ -19,29 +21,8 @@ def Sort(ARR, array_history=None):
   if array_history is not None: array_history.add_history(ARR, None)
 
 
-
-
-
-def indexSort(ARR, array_history=None):
-  """Do not change ARR, return a new sorted version of ARR."""
-  N = len(ARR)
-  index = range(N)
-  for i in range(N):
-    j = i
-    while j > 0 and __lt__(ARR[index[j]], ARR[index[j-1]]):
-      _exch(index, j, j-1)
-      if array_history is not None: array_history.add_history(ARR, {j:'*', j-1:'*'})
-      j -= 1
-  return index
-
 #************************************************************************
 #  Compilation:  javac Insertion.java
-#  Execution:    java Insertion < input.txt
-#  Dependencies: StdOut.java StdIn.java
-#  Data files:   http:#algs4.cs.princeton.edu/21sort/tiny.txt
-#                http:#algs4.cs.princeton.edu/21sort/words3.txt
-#
-#  Sorts a sequence of strings from standard input using insertion sort.
 #
 #  % more tiny.txt
 #  S O R T E X A M P L E
@@ -111,9 +92,9 @@ def indexSort(ARR, array_history=None):
 # QUESTION: How many compares does insertion sort make on an imput array that is already sorted?
 # ANSWER: linear
 #
-# QUESTION: True or False? The expected #of compares to insertion sort an array containint N/2 0s and N/2 1s
-# in uniformly random order is ~1/4 N^2.
-# ANSWER: False. Consider element i> 0. How many of the items a[0], a[1], ..., a[i-1] is a[i] inverted with?
+# QUESTION: True or False? The expected #of compares to insertion sort an array 
+# containing N/2 0s and N/2 1s in uniformly random order is ~1/4 N^2.
+# ANSWER: False. Consider element i>0. How many of the items a[0], a[1], ..., a[i-1] is a[i] inverted with?
 # If a[i] == 1 (which happens with probability 1/2), then the number is 0.
 # If a[i] == 0 (which happens with probability 1/2), then we expect half of the i previous
 # elements to be 1s, so the expected number is i/2.
@@ -124,6 +105,24 @@ def indexSort(ARR, array_history=None):
 # EXPLANATION: Let a[i] and a[j] be two entries in the unsorted array with i<j.
 # The entries a[i] and a[j] are compred no more than once during iteration j and they are not
 # compared during any other iteration.
+
+# When I actually run these and get a count of compares, I get a different
+# number of compares than what the answer says, but here is 'the answer':
+#
+# Seed: 962938
+# QUESTION: The number of compares to insertion sort an array of the form 
+# { 0, 5, 1, 6, 2, 7, 3, 8, 4, 9 } is ~ 1/4 N^2.
+# ANSWER: False. The number of inversions is 0 + 1 + ... + N/2 - 1 ~ 1/8 N^2. 
+# Thus, the number of compares is ~ 1/8 N^2.
+# MY ANSWER: 19 compares on an actual run. 1/8 N^2=100/8=12.5 Anyone know why?
+#
+# QUESTION: The number of compares to insertion sort an array of N/2 1s 
+# interleaved with N/2 0s (e.g., 1 0 1 0 1 0 1 0 1 0) is ~ 1/8 N^2.
+# ANSWER: True. The number of inversions is 1 + 2 + 3 + ... + N/2 ~ 1/8 N^2. 
+# Thus, the number of compares is ~ 1/8 N^2.
+# MY ANSWER: 23 compares on an actual run. 1/8 N^2=100/8=12.5 Anyone know why?
+
+
 
 
 
@@ -178,4 +177,16 @@ def indexSort(ARR, array_history=None):
  # @return a permutation <tt>p[]</tt> such that <tt>a[p[0]]</tt>, <tt>a[p[1]]</tt>,
  #    ..., <tt>a[p[N-1]]</tt> are in ascending order
  #/
+
+def indexSort(ARR, array_history=None):
+  """Do not change ARR, return a new sorted version of ARR."""
+  N = len(ARR)
+  index = range(N)
+  for i in range(N):
+    j = i
+    while j > 0 and __lt__(ARR[index[j]], ARR[index[j-1]]):
+      _exch(index, j, j-1)
+      if array_history is not None: array_history.add_history(ARR, {j:'*', j-1:'*'})
+      j -= 1
+  return index
 
