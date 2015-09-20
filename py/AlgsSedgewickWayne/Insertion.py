@@ -11,8 +11,7 @@ def Sort(ARR, array_history=None):
   for i in range(N):
     j = i
     # Exchange the curr Elem with every element to the left that is > 01:21
-    while j > 0 and __lt__(ARR[j], ARR[j-1], sys.stdout): # Iterate from i back towards 0
-    #while j > 0 and __lt__(ARR[j], ARR[j-1]): # Iterate from i back towards 0
+    while j > 0 and __lt__(ARR[j], ARR[j-1]): # Iterate from i back towards 0
       if array_history is not None: array_history.add_history(ARR, {j:'*', j-1:'*'})
       _exch(ARR, j, j-1)
       j -= 1

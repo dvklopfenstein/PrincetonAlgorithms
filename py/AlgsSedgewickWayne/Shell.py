@@ -16,8 +16,7 @@ def Sort(ARR, array_history=None, sort_seq=None):
     # h-sort the array (insertion sort)
     for i in range(h,N):
       j = i
-      while j >= h and __lt__(ARR[j], ARR[j-h], sys.stdout):
-        print "XXXX", h
+      while j >= h and __lt__(ARR[j], ARR[j-h]):
         if array_history is not None:
           array_history.add_history(ARR, {j:'*', j-h:'*'} )
         _exch(ARR, j, j-h)
