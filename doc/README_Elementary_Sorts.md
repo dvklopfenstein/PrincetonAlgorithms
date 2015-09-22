@@ -1677,7 +1677,7 @@ SHELL SORT LEC EX RESULT: A E E L M O P R S T X
 
 I found the rendition of intermediate states seen below in the block_str variable
 from various sorts difficult to visualize. It is a sea of letters and words and 
-hard to tell straight out which one is 'bigger', so I wrote some small visualizing code.
+hard to tell straight out which word is 'bigger', so I wrote some small visualizing code.
 ```
 def test_849965():
   """Visualize arrays in columns."""
