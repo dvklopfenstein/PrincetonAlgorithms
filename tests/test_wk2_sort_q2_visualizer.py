@@ -11,6 +11,8 @@ def test_849965():
   # insertion sort, selection sort, or shellsort (with different
   # columns potentially corresponding to different algorithms).
 
+  # Unsorted                                         Sorted
+  # col0   col1   col2   col3   col4   col5   col6   col7
   block_str = """
     slug   loon   crab   mule   carp   carp   carp   carp   
     crab   crab   hawk   crab   crab   crab   crab   crab   

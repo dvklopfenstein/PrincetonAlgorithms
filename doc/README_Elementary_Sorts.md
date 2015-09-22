@@ -1673,7 +1673,7 @@ SHELL SORT LEC EX RESULT: A E E L M O P R S T X
 
 
 ### [ex4](#stacks-and-queues)
-4. Visualize various intermediate states from various sorts [Selection, Insertion, and Shell
+4. Visualize various intermediate states from various sorts **Selection, Insertion, and Shell**
 
 I found the rendition of intermediate states seen below in the block_str variable
 from various sorts difficult to visualize. It is a sea of letters and words and 
@@ -1688,6 +1688,8 @@ def test_849965():
   # insertion sort, selection sort, or shellsort (with different
   # columns potentially corresponding to different algorithms).
 
+  # Unsorted                                         Sorted
+  # col0   col1   col2   col3   col4   col5   col6   col7
   block_str = """
     slug   loon   crab   mule   carp   carp   carp   carp   
     crab   crab   hawk   crab   crab   crab   crab   crab   
