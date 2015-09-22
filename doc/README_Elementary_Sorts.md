@@ -41,6 +41,7 @@ There are two ways to view the progression of a sort:
   2c. [Run Paritally-sorted Example from **Insertion (9:28)**](#ex2c); 
       Array has inversions: a pair of keys out order (N)
   3. [Run Lecture Example from **Shellsort (10:48)**](#ex3) (WC=O(N^(3/2), Avg~k*N?)   
+  4. [Visualize various intermediate states from various sorts [Selection, Insertion, and Shell](#ex4)
 
 ## Example Contents
 ### [ex1](#stacks-and-queues)
@@ -1671,6 +1672,182 @@ SHELL SORT LEC EX RESULT: A E E L M O P R S T X
 ```
 
 
+### [ex4](#stacks-and-queues)
+4. Visualize various intermediate states from various sorts [Selection, Insertion, and Shell
 
+I found the rendition of intermediate states seen below in the block_str variable
+from various sorts difficult to visualize. It is a sea of letters and words and 
+hard to tell straight out which one is 'bigger', so I wrote some small visualizing code.
+```
+def test_849965():
+  """Visualize arrays in columns."""
+	# The column on the left contains an input array of 16
+  # strings to be sorted; the column on the right contains the
+  # strings in sorted order; each of the other 6 columns
+  # contains the array at some intermediate step during either
+  # insertion sort, selection sort, or shellsort (with different
+  # columns potentially corresponding to different algorithms).
 
+  block_str = """
+    slug   loon   crab   mule   carp   carp   carp   carp   
+    crab   crab   hawk   crab   crab   crab   crab   crab   
+    lynx   carp   lynx   lynx   hawk   frog   frog   frog   
+    toad   frog   slug   toad   lynx   hawk   hawk   hawk   
+    wren   mule   toad   wren   slug   loon   loon   loon   
+    hawk   hawk   wren   hawk   toad   lynx   lynx   lynx   
+    carp   lynx   carp   carp   wolf   mink   mink   mink   
+    wolf   toad   wolf   wolf   wren   wolf   mule   mule   
+    loon   worm   loon   loon   loon   wren   wren   pony   
+    pony   pony   pony   pony   pony   pony   pony   slug   
+    swan   mink   swan   swan   swan   swan   swan   swan   
+    frog   tuna   frog   frog   frog   toad   toad   toad   
+    worm   wren   worm   worm   worm   worm   worm   tuna   
+    mule   slug   mule   slug   mule   mule   wolf   wolf   
+    mink   swan   mink   mink   mink   slug   slug   worm   
+    tuna   wolf   tuna   tuna   tuna   tuna   tuna   wren   
+"""
+  blk_visualizer(block_str)
+```
+
+```
+> python -c 'import test_wk2_sort_q2_visualizer as T; T.test_849965()'
+```
+```
+0  0 slug **********
+0  1 crab **
+0  2 lynx ******
+0  3 toad ************
+0  4 wren ****************
+0  5 hawk ****
+0  6 carp *
+0  7 wolf **************
+0  8 loon *****
+0  9 pony *********
+0 10 swan ***********
+0 11 frog ***
+0 12 worm ***************
+0 13 mule ********
+0 14 mink *******
+0 15 tuna *************
+
+1  0 loon *****
+1  1 crab **
+1  2 carp *
+1  3 frog ***
+1  4 mule ********
+1  5 hawk ****
+1  6 lynx ******
+1  7 toad ************
+1  8 worm ***************
+1  9 pony *********
+1 10 mink *******
+1 11 tuna *************
+1 12 wren ****************
+1 13 slug **********
+1 14 swan ***********
+1 15 wolf **************
+
+2  0 crab **
+2  1 hawk ****
+2  2 lynx ******
+2  3 slug **********
+2  4 toad ************
+2  5 wren ****************
+2  6 carp *
+2  7 wolf **************
+2  8 loon *****
+2  9 pony *********
+2 10 swan ***********
+2 11 frog ***
+2 12 worm ***************
+2 13 mule ********
+2 14 mink *******
+2 15 tuna *************
+
+3  0 mule ********
+3  1 crab **
+3  2 lynx ******
+3  3 toad ************
+3  4 wren ****************
+3  5 hawk ****
+3  6 carp *
+3  7 wolf **************
+3  8 loon *****
+3  9 pony *********
+3 10 swan ***********
+3 11 frog ***
+3 12 worm ***************
+3 13 slug **********
+3 14 mink *******
+3 15 tuna *************
+
+4  0 carp *
+4  1 crab **
+4  2 hawk ****
+4  3 lynx ******
+4  4 slug **********
+4  5 toad ************
+4  6 wolf **************
+4  7 wren ****************
+4  8 loon *****
+4  9 pony *********
+4 10 swan ***********
+4 11 frog ***
+4 12 worm ***************
+4 13 mule ********
+4 14 mink *******
+4 15 tuna *************
+
+5  0 carp *
+5  1 crab **
+5  2 frog ***
+5  3 hawk ****
+5  4 loon *****
+5  5 lynx ******
+5  6 mink *******
+5  7 wolf **************
+5  8 wren ****************
+5  9 pony *********
+5 10 swan ***********
+5 11 toad ************
+5 12 worm ***************
+5 13 mule ********
+5 14 slug **********
+5 15 tuna *************
+
+6  0 carp *
+6  1 crab **
+6  2 frog ***
+6  3 hawk ****
+6  4 loon *****
+6  5 lynx ******
+6  6 mink *******
+6  7 mule ********
+6  8 wren ****************
+6  9 pony *********
+6 10 swan ***********
+6 11 toad ************
+6 12 worm ***************
+6 13 wolf **************
+6 14 slug **********
+6 15 tuna *************
+
+7  0 carp *
+7  1 crab **
+7  2 frog ***
+7  3 hawk ****
+7  4 loon *****
+7  5 lynx ******
+7  6 mink *******
+7  7 mule ********
+7  8 pony *********
+7  9 slug **********
+7 10 swan ***********
+7 11 toad ************
+7 12 tuna *************
+7 13 wolf **************
+7 14 worm ***************
+7 15 wren ****************
+
+```
 
