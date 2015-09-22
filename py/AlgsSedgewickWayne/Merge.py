@@ -333,12 +333,32 @@ def _sort(a, aux, lo, hi):
 #
 #-------------------------------------------------------
 # 05:00 PROPOSITION: Merge operation IS STABLE.
+#   Stable:
+#     * Insertion sort
+#       We never move equal items past each other
+#     * Merge sort
+#   NOT Stable:
+#     * Selection sort
+#       Has a long distance exchange that might move an item past some equal item
+#     * Shell sort
+#       Long distance exchanges
+
+# QUESTION: Given an array of points, which of the following approaches would
+# be least useful for removing duplicate points? Assume the point data type has
+# the following three orders:
+#     * A natural order that compares the x-coordinate and breaks ties by y-coordinate
+#     * One comparator that compares by x-coordinate; another by y-coordinate.
+#  NO quicksort by natural order
+#  NO quicksort by x-coordinate; mergesort by y-coordinate
+# YES mergesort by x-coordinate; quicksort by y-coordinate
+#  NO mergesort by x-coordinate; mergesort by y-coordinate
+
 #
 # PROOF: Takes from left subarray if equal keys.
 #
 
 ########################################################
-### Duplicate Kes (Alg 1, Week 3 Lecture)
+### Duplicate Keys (Alg 1, Week 3 Lecture)
 ########################################################
 #
 # MERGESORT WITH DUPLICATE KEYS: Always between
