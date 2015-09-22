@@ -33,7 +33,7 @@ import AlgsSedgewickWayne.Selection as Selection
 import AlgsSedgewickWayne.Insertion as Insertion
 import AlgsSedgewickWayne.Shell     as Shell
 
-import AlgsSedgewickWayne.testcode.ArrayHistory as H
+from AlgsSedgewickWayne.testcode.ArrayHistory import ArrayHistory
 
 import unittest
 import copy
@@ -63,12 +63,12 @@ def get_sort_history(lst ):
   lst_Selection = copy.deepcopy( lst )
   lst_Insertion = copy.deepcopy( lst )
   lst_Shell     = copy.deepcopy( lst )
-  history_Selection = []
-  history_Insertion = []
-  history_Shell     = []
-  Selection.Sort( lst_Selection, history_Selection )
-  Insertion.Sort( lst_Insertion, history_Insertion )
-  Shell.Sort(     lst_Shell,     history_Shell )
+  history_Selection = ArrayHistory()
+  history_Insertion = ArrayHistory()
+  history_Shell     = ArrayHistory()
+  Selection.Sort( lst_Selection, array_history=history_Selection )
+  Insertion.Sort( lst_Insertion, array_history=history_Insertion )
+  Shell.Sort(     lst_Shell,     array_history=history_Shell )
   return [history_Selection, history_Insertion, history_Shell]
 
 def determine_sort( list_orig, data ):
@@ -78,6 +78,7 @@ def determine_sort( list_orig, data ):
   res = [0]
   # Determine sorts for test_data 1 to N-1
   for i,test_data in enumerate(data[1:-1]):
+    # TBD: Update...
     R = [H.history_contains( hInsertion, test_data ),
          H.history_contains( hSelection, test_data ),
          H.history_contains( hShell,     test_data )]

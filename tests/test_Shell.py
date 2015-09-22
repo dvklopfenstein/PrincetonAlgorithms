@@ -38,9 +38,9 @@ def test_1(prt=sys.stdout):
 def test_2():
   # Keys are 'A' and 'B':
   a = [  {'B':1}, {'B':2}, {'B':3}, {'B':4}, {'B':5}, {'A':1} ]
-  array_history = ArrayHistory()
-  Sort(a, array_history)
-  array_history.show('SHELL')
+  ah = ArrayHistory()
+  Sort(a, array_history=ah)
+  ah.show('SHELL')
 
 def test_3():
   # Keys are 'A' and 'B':
@@ -64,21 +64,21 @@ def test_q3b():
 
 
 def run(a, desc=None, sort_seq=None, prt=sys.stdout):
-  array_history = ArrayHistory()
-  Sort(a, array_history, sort_seq)
+  ah = ArrayHistory()
+  Sort(a, array_history=ah, sort_seq=sort_seq)
   if desc is None:
     desc = "SHELL SORT" 
   prt.write("{DESC} RESULT {A}\n".format(DESC=desc, A=' '.join(str(e) for e in a)))
-  array_history.prt()
-  array_history.show(desc)
+  ah.prt()
+  ah.show(desc)
 
 def run_all(prt=sys.stdout):
   test_wk2_lec_a(prt)
   test_wk2_lec_b(prt)
   test_1(prt)
-  test_2(prt)
-  test_3(prt)
-  test_q3a(prt)
+  test_2()
+  test_3()
+  test_q3a()
 
 def cli():
   N = len(sys.argv)

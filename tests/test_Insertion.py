@@ -7,13 +7,13 @@ from AlgsSedgewickWayne.testcode.ArrayHistory import ArrayHistory
 from AlgsSedgewickWayne.InputArgs import get_seq__int_or_str
 
 def run(a, desc=None, prt=sys.stdout):
-  array_history = ArrayHistory()
-  Sort(a, array_history)
+  ah = ArrayHistory()
+  Sort(a, array_history=ah)
   if desc is None:
     desc = "INSERTION SORT" 
   prt.write("{DESC} RESULT {A}\n".format(DESC=desc, A=' '.join(str(e) for e in a)))
-  array_history.prt()
-  array_history.show(desc)
+  ah.prt()
+  ah.show(desc)
 
 def test_wk2_lec():
   run(map(int, "7 10 5 3 8 4 2 9 6".split()), "INSERTION SORT: SEED 183182")

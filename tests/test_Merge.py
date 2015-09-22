@@ -10,8 +10,8 @@ import random
 
 
 def run(a, desc, prt=sys.stdout):
-  array_history = ArrayHistory()
-  Sort(a, array_history)
+  ah = ArrayHistory()
+  Sort(a, array_history=ah)
   prt.write("{DESC} RESULT: {A}\n".format(DESC=desc, A=a))
   # TBD: Implement array history visualization
   # prt_array_history(array_history)

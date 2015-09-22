@@ -262,6 +262,70 @@ def _sort(a, aux, lo, hi):
 # We note that the optimized version that checks whether a[mid] <= a[mod+1]
 # only requires ~N compares.
 
+########################################################
+### Sorting Complexity (9:05) Alg 1, Week 3
+########################################################
+# COMPUTATIONAL COMPLEXITY: Framework to study efficiency
+#   of algorithms for solving a particula problem X.
+# MODEL OF COMPUTATION: Allowable operations.
+# COST MODEL: Operation count(s).
+# UPPER BOUND: Cost guarantee provided by some algorithm for X.
+# LOWER BOUND: Proven limit on cost guarantee of all algorithms for X.
+# OPTIMAL ALGORITHM: Algorithm with best possible cost guarantee for X.
+#   lower bound ~ upper bound
+#
+# Example: sorting.
+#   MODEL OF COMPUTATION: Decision Tree (Only access info thru compares)
+#   COST MODEL: # compares.
+#   UPPER BOUND: ~ N lg N   for mergesort.
+#   LOWER BOUND: ~ N lg N (Proved w/decision tree below)
+#   OPTIMAL ALGORITHM: ?
+
+# Example: Decision tree (for 3 distinct items a, b, c) >= N! leafs
+#                   a<b
+#              +-----+-----+
+#       +------T           F----+
+#      b<c                     a<c
+#   +---+-------+           +---+-------+       
+#   T           F           T           F 
+#   |          a<c          |          b<c
+#             T   F                   T   F
+# a b c   a c b   c a b   b a c   b c a   c b a
+
+# COMPARE-BASED LOWER BOUND FOR SORTING (04:43)
+# PROPOSITION: Any compare-based sorting algorithm must use at least
+# lg(N!) ~ N lg N (Stirling's Approximation) compares in the worst-case
+#
+# PROOF:
+#  * Assume array consists of N distinct values a(1) thru a(n)
+#  * Worst case dictated by height h of decision tree.
+#  * Binary tree of height h has at most e^k leaves.
+#  * N! different orderings => at least N! leaves.
+# 
+#      2^h >=  # leaves >= N!
+#   =>   h >=   lg(N!)   ~ N lg N
+
+# COMPLEXITY RESULTS IN CONTEXT (07:47)
+#
+# COMPARES? Mergesort is optimal with respect to # compares
+# SPACE?    Mergesort is NOT oprimal with respect to space usage (ie Insertion sort better)
+#
+# LESSONS:
+#  ** Don't try to design sorting algorithm guaranteeing 1/2 N lg N compares
+#   * Design sorting algorithm that is both time/space optimal?
+#
+# Lower bound may not hold if the algorithm has information about 
+# (ie. other than compares):
+#  * The initial order of the input. e.g. partially sorted, sorted, 
+#  * The distribution of key values. e.g. A lot of equal keys (sort faster)
+#  * The representation of the keys. i.e. digit/chr compares instead of key cmp
+
+# QUESTION: Under which of the following scenarios does the N lg N
+# lower bound for sorting apply? Assume the keys are accessed only through 
+# the compareTo() method unless otherwise specified.
+# ANSWER: no two keys are equal
+
+
 
 ########################################################
 ### Stability (Alg 1Week 3 Lecture)

@@ -37,21 +37,21 @@ def test_wk2_q2a(prt=sys.stdout):
   prt.write("\n{TEST}\n".format(TEST=desc))
   exp = "BECK BUSH DEVO EVE6 HOLE JAYZ KORN MIMS VAIN RATT TOTO PINK SADE NOFX SOAD WHAM"
   a = "HOLE BUSH MIMS BECK WHAM SOAD NOFX TOTO VAIN RATT DEVO PINK SADE KORN JAYZ EVE6".split()
-  array_history = ArrayHistory()
-  Sort(a, array_history)
-  array_history.show(desc)
-  for idx, A in enumerate(array_history):
+  ah = ArrayHistory()
+  Sort(a, array_history=ah)
+  ah.show(desc)
+  for idx, A in enumerate(ah):
     if chk( A[0], exp ):
       prt.write("MATCH {I}\n".format(I=idx))
 
 def run(a, desc=None, prt=sys.stdout):
-  array_history = ArrayHistory()
-  Sort(a, array_history)
+  ah = ArrayHistory()
+  Sort(a, array_history=ah)
   if desc is None:
     desc = "INSERTION SORT" 
   prt.write("{DESC} RESULT {A}\n".format(DESC=desc, A=' '.join(str(e) for e in a)))
-  array_history.prt()
-  array_history.show(desc)
+  ah.prt()
+  ah.show(desc)
 
 def run_all():
   """Run all tests."""

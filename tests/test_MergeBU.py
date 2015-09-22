@@ -8,8 +8,8 @@ from AlgsSedgewickWayne.testcode.ArrayHistory import ArrayHistory
 import random
 
 def run(a, desc, prt=sys.stdout):
-  array_history = ArrayHistory()
-  Sort(a, array_history)
+  ah = ArrayHistory()
+  Sort(a, array_history=ah)
   a_txt = ' '.join(str(e) for e in a)
   prt.write("{DESC} RESULT: {A}\n".format(DESC=desc, A=a_txt))
   # TBD: Implement array history visualization
