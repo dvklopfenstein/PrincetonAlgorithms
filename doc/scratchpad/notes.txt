@@ -1,0 +1,10 @@
+# Which is more important if one wants to become a good programmer, algorithms or programming language principles?
+
+## Jeff Nelson, Invented Chromebook, #Xoogler
+My vote would be strongly toward the programming principles side.
+
+As discussed in a number of other answers, algorithms are nearly always implemented as part of libraries. Even if you are doing bleeding edge machine learning research, you are often using a pre-built
+library for the core algorithm and applying it to new problems.
+
+If you misunderstand basic programming principles, such as dependency management, scalability, re-usability, or minimizing side effects, it doesn't matter what algorithms you have in your head,
+because you'll never be able to write a decent piece of code.

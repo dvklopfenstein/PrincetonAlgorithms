@@ -1,5 +1,3 @@
-
-
  #************************************************************************
  #  Compilation:  javac Quick.java
  #  Execution:    java Quick < input.txt

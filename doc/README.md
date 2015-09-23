@@ -18,7 +18,7 @@
 
 * **Week 3 Suggested Readings**: Section 2.2 and 2.3 in [*Algorithms, 4th edition*](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1441459738&sr=1-1&keywords=sedgewick&refinements=p_n_feature_browse-bin%3A2656020011&pebp=1441459739425&perid=0C83SQQ1YFJ62VWHF9C0)
   * [Mergesort](README_Mergesort.md)
-  * Quicksort
+  * [Quicksort](README_Quicksort.md)
   * Programming Assignment 3: [**Collinear Points**](http://htmlpreview.github.com/?https://github.com/dvklopfenstein/PrincetonAlgorithms/blob/master/thirdparty/hw3/Programming_Assignment_3_Pattern_Recognition_Assignment.html)
   and [checklist](http://htmlpreview.github.com/?https://github.com/dvklopfenstein/PrincetonAlgorithms/blob/master/thirdparty/hw3/Programming_Assignment_3_Checklist_Pattern_Recognition.html)
 

@@ -358,10 +358,10 @@ def _sort(a, aux, lo, hi):
 #
 
 ########################################################
-### Duplicate Keys (Alg 1, Week 3 Lecture)
+### Duplicate Keys (Alg 1, Week 3 Lecture) (11:25)
 ########################################################
 #
-# MERGESORT WITH DUPLICATE KEYS: Always between
+# MERGESORT WITH DUPLICATE KEYS: Always between (01:29)
 #   * 1/2 N lg N and
 #   *     N lg N
 # compares.
