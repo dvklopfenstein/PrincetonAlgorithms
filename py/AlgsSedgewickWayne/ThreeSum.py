@@ -422,7 +422,7 @@
 
 
 
-import InputArgs
+from AlgsSedgewickWayne.testcode.InputArgs import get_ints_from_file
 import sys
 import itertools
 import timeit
@@ -496,7 +496,7 @@ def run_timed(a, cnt_fnc=count_enumerate):
 def run_timed_fin(fin, cnt_fnc=count_enumerate):
   """Run ThreeSum using integers stored in a column in a file."""
   sys.stdout.write('\nRunning ThreeSum on data in: {}\n'.format(fin))
-  run_timed(InputArgs.get_ints_from_file(fin), cnt_fnc)
+  run_timed(get_ints_from_file(fin), cnt_fnc)
 
 def run_timed_fins(fins):
   """Run ThreeSum on multiple files containing integers."""

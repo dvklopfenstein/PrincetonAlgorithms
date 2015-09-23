@@ -95,10 +95,9 @@
  #  @author Robert Sedgewick
  #  @author Kevin Wayne
  #/
-
 import random
 import sys
-import InputArgs
+from AlgsSedgewickWayne.testcode.InputArgs import get_ints_from_file
 import timeit
 import datetime
 import os
@@ -147,7 +146,7 @@ def run_timed(a):
 def run_timed_fin(fin):
   """Run BinarySearch using integers stored in a column in a file."""
   sys.stdout.write('\nRunning BinarySearch on data in: {}\n'.format(fin))
-  run_timed(InputArgs.get_ints_from_file(fin))
+  run_timed(get_ints_from_file(fin))
 
 def run_timed_fins(fins):
   """Run BinarySearch on multiple files containing integers."""

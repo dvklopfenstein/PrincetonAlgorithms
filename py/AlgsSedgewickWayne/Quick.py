@@ -1,30 +1,69 @@
- #************************************************************************
- #  Compilation:  javac Quick.java
- #  Execution:    java Quick < input.txt
- #  Dependencies: StdOut.java StdIn.java
- #  Data files:   http:#algs4.cs.princeton.edu/23quicksort/tiny.txt
- #                http:#algs4.cs.princeton.edu/23quicksort/words3.txt
- #
- #  Sorts a sequence of strings from standard input using quicksort.
- #
- #  % more tiny.txt
- #  S O R T E X A M P L E
- #
- #  % java Quick < tiny.txt
- #  A E E L M O P R S T X                 [ one string per line ]
- #
- #  % more words3.txt
- #  bed bug dad yes zoo ... all bad yet
- #
- #  % java Quick < words3.txt
- #  all bad bed bug dad ... yes yet zoo    [ one string per line ]
- #
- #
- #  Remark: For a type-safe version that uses static generics, see
- #
- #    http:#algs4.cs.princeton.edu/23quicksort/QuickPedantic.java
- #
- #************************************************************************/
+def Sort(a, array_history=None):
+  import random
+  random.shuffle(a)  # Needed to ensure performance will be good. 05:56
+  _sort(a, 0, len(a) - 1)
+
+def _sort(a, lo, hi):
+  """quicksort the subarray from a[lo] to a[hi]."""
+  if hi <= lo: return;
+  j = _partition(a, lo, hi)
+  _sort(a, lo, j-1)
+  _sort(a, j+1, hi)
+  assert _isSorted(a, lo, hi)
+
+def _partition(a, lo, hi):
+  """partition the subarray a[lo..hi] so that a[lo..j-1] <= a[j] <= a[j+1..hi]"""
+  # and return the index j.
+  i = lo
+  j = hi + 1
+  v = a[lo]
+  while True:
+
+      # find item on lo to swap
+      i += 1
+      while _less(a[i], v):
+          if i == hi: break
+          i += 1 # Increment i as long it is pointing to val < v
+
+      # find item on hi to swap
+      j -= 1
+      while _less(v, a[j]):
+          if j == lo: break   # redundant since a[lo] acts as sentinel
+          j -= 1 # Decrement j as long as it is pointing to va > v
+
+      # check if pointers cross
+      if i >= j: break;
+      _exch(a, i, j)
+
+  # put partitioning item v at a[j]
+  _exch(a, lo, j)
+
+  # now, a[lo .. j-1] <= a[j] <= a[j+1 .. hi]
+  # j now points to partitioning element, after it has moved to its new spot
+  return j
+
+#*
+# Rearranges the array so that a[k] contains the kth smallest key;
+# a[0] through a[k-1] are less than (or equal to) a[k]; and
+# a[k+1] through a[N-1] are greater than (or equal to) a[k].
+# @param a the array
+# @param k find the kth smallest
+#/
+def Select(a, k):
+  import random
+  if k < 0 and k >= len(a):
+      raise Exception("Selected element out of bounds")
+  random.shuffle(a)
+  lo = 0,
+  hi = len(a) - 1
+  while hi > lo:
+      i = _partition(a, lo, hi)
+      if   i > k: hi = i - 1
+      elif i < k: lo = i + 1
+      else: return a[i]
+  return a[lo]
+
+
 
 # 00:11
 # MERGESORT: ONE OF TWO CLASSIC SORTING ALGORITHMS
@@ -302,72 +341,6 @@
 
 # Rearranges the array in ascending order, using the natural order.
 # @param a the array to be sorted
-def Sort(a, array_history=None):
-  import random
-  random.shuffle(a)  # Needed to ensure performance will be good. 05:56
-  _sort(a, 0, len(a) - 1)
-
-# quicksort the subarray from a[lo] to a[hi]
-def _sort(a, lo, hi):
-  if hi <= lo: return;
-  j = _partition(a, lo, hi)
-  _sort(a, lo, j-1)
-  _sort(a, j+1, hi)
-  assert _isSorted(a, lo, hi)
-
-# partition the subarray a[lo..hi] so that a[lo..j-1] <= a[j] <= a[j+1..hi]
-# and return the index j.
-def _partition(a, lo, hi):
-  i = lo
-  j = hi + 1
-  v = a[lo]
-  while True:
-
-      # find item on lo to swap
-      i += 1
-      while _less(a[i], v):
-          if i == hi: break
-          i += 1 # Increment i as long it is pointing to val < v
-
-      # find item on hi to swap
-      j -= 1
-      while _less(v, a[j]):
-          if j == lo: break   # redundant since a[lo] acts as sentinel
-          j -= 1 # Decrement j as long as it is pointing to va > v
-
-      # check if pointers cross
-      if i >= j: break;
-      _exch(a, i, j)
-
-  # put partitioning item v at a[j]
-  _exch(a, lo, j)
-
-  # now, a[lo .. j-1] <= a[j] <= a[j+1 .. hi]
-  # j now points to partitioning element, after it has moved to its new spot
-  return j
-
-#*
-# Rearranges the array so that a[k] contains the kth smallest key;
-# a[0] through a[k-1] are less than (or equal to) a[k]; and
-# a[k+1] through a[N-1] are greater than (or equal to) a[k].
-# @param a the array
-# @param k find the kth smallest
-#/
-def Select(a, k):
-  import random
-  if k < 0 and k >= len(a):
-      raise Exception("Selected element out of bounds")
-  random.shuffle(a)
-  lo = 0,
-  hi = len(a) - 1
-  while hi > lo:
-      i = _partition(a, lo, hi)
-      if   i > k: hi = i - 1
-      elif i < k: lo = i + 1
-      else: return a[i]
-  return a[lo]
-
-
 
 #**********************************************************************
 #  Helper sorting functions
@@ -415,15 +388,15 @@ def _isSorted(a, lo=None, hi=None):
 
 # Reads in a sequence of strings from standard input; insertion sorts them;
 # and prints them to standard output in ascending order.
-def main():
-    import InputArgs
-    data = InputArgs.getStrArray("6 3 7 2 0 1 9");
-    print "ORIG:", ' '.join(map(str,data))
-    Sort(data)
-    print "SORT:", ' '.join(map(str,data))
-
-if __name__ == '__main__':
-  main()
+#def main():
+#    import InputArgs
+#    data = InputArgs.getStrArray("6 3 7 2 0 1 9");
+#    print "ORIG:", ' '.join(map(str,data))
+#    Sort(data)
+#    print "SORT:", ' '.join(map(str,data))
+#
+#if __name__ == '__main__':
+#  main()
 
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
 # Java Last updated: Thu Oct 10 11:43:17 EDT 2013

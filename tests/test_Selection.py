@@ -5,7 +5,7 @@ import sys
 from AlgsSedgewickWayne.Selection import Sort
 from AlgsSedgewickWayne.testcode.ArrayHistory import chk 
 from AlgsSedgewickWayne.testcode.ArrayHistory import ArrayHistory
-from AlgsSedgewickWayne.InputArgs import get_seq__int_or_str
+from AlgsSedgewickWayne.testcode.InputArgs import get_seq__int_or_str
 
 def test_wk2_lec(prt=sys.stdout):
   """Example from week 2 lecture, "Selection Sort (6:59)" """

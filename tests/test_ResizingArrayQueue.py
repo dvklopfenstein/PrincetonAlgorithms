@@ -2,7 +2,7 @@
 """Test ResizingArrayQueue.py."""
 
 from AlgsSedgewickWayne.ResizingArrayQueue import ResizingArrayQueue
-import AlgsSedgewickWayne.InputArgs as IA
+import AlgsSedgewickWayne.testcode.InputArgs as IA
 
 import sys
 

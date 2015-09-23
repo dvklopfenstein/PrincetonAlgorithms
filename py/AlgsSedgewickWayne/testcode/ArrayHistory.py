@@ -20,7 +20,7 @@
 import sys
 import copy
 
-import AlgsSedgewickWayne.InputArgs as IA
+import AlgsSedgewickWayne.testcode.InputArgs as IA
 
 def run(container, seqstr, expected=None, prt=sys.stdout, details=sys.stdout):
   """Run a sequence of Stack commands."""

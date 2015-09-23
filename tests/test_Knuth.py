@@ -2,7 +2,7 @@
 
 import sys
 from AlgsSedgewickWayne.Knuth import shuffle
-from AlgsSedgewickWayne.InputArgs import getStrArray
+from AlgsSedgewickWayne.testcode.InputArgs import getStrArray
 
 # Reads in a sequence of strings from standard input, shuffles
 # them, and prints out the results.

@@ -3,7 +3,7 @@
 import sys
 from AlgsSedgewickWayne.Shell import Sort
 from AlgsSedgewickWayne.testcode.ArrayHistory import ArrayHistory
-from AlgsSedgewickWayne.InputArgs import get_seq__int_or_str
+from AlgsSedgewickWayne.testcode.InputArgs import get_seq__int_or_str
 
 import random
 

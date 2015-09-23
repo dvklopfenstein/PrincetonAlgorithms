@@ -4,7 +4,7 @@ import sys
 
 from AlgsSedgewickWayne.Insertion import Sort
 from AlgsSedgewickWayne.testcode.ArrayHistory import ArrayHistory
-from AlgsSedgewickWayne.InputArgs import get_seq__int_or_str
+from AlgsSedgewickWayne.testcode.InputArgs import get_seq__int_or_str
 
 def run(a, desc=None, prt=sys.stdout):
   ah = ArrayHistory()
