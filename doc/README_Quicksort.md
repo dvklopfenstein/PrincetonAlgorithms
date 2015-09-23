@@ -2,7 +2,7 @@
 
 ## Code
   * [Quick](../py/AlgsSedgewickWayne/Quick.py)
-  * [Quick3way](../py/AlgsSedgewickWayne/Quick2way.py) 
+  * [Quick3way](../py/AlgsSedgewickWayne/Quick3way.py) 
     => Prevent 1/2 N^2 time with duplicate keys
 
 ## Example Table of Contents
