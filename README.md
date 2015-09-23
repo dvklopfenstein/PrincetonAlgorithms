@@ -7,7 +7,10 @@ Implemented in Python 2.7.x by DV Klopfenstein is selected code from:
 
 **Python implementations** contain:
 * Additional comments in the code that are based on material from the 
-  [**book**](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1410217876&sr=1-1) or
+  [**book**](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1410217876&sr=1-1)
+  or
+  [**book with lectures**](http://www.amazon.com/Algorithms-Deluxe-Book-24-part-Lecture/dp/0134384687/ref=sr_1_1?s=books&ie=UTF8&qid=1443006543&sr=1-1&keywords=algorithms+deluxe)
+  or
   [**booksite**](http://algs4.cs.princeton.edu/home/) or
   [**coursera class**](https://www.coursera.org/course/algs4partI)
 * Additional code used for visualization to help absorb the material
