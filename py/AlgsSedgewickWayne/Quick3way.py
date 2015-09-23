@@ -114,6 +114,8 @@ def _isSorted(a, lo=None, hi=None):
 # * Version 7 Unix (1979): quadratic time to sort organ-pipe arrays.
 # * BSD Unix (1983): quadratic time to sort random arrays of 0s and 1s.
 
+#  inplace stable worst   average    best   remarks
+#                 -----   -------    ----   --------------------
 # Selection   X   N^2/2     N^2/2    N^2/2  N exchanges
 # Insertion   X X N^2/2     N^2/4        N  use for small N or partially ordered
 # Shell       X       ?         ?        N  tight code, subquadratic
