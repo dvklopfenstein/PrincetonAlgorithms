@@ -1,0 +1,28 @@
+#############################################################################333333
+# Lecture Week 1 "Theory of Algorithms (11:35)
+#############################################################################333333
+
+# BEST CASE. Lower bound on cost.
+#   * Determined by "easiest" input.
+#   * Provides a goal for all inputs.
+# 
+# WORST CASE. Upper bound on cost.
+#   * Determined by "most difficult" input.
+#   * Provides a guarantee for all inputs.
+# 
+# AVERAGE CASE. Expected cost for random input.
+#   * Need a model for "random" input.
+#   * Provides a way to predict preformance.
+
+# 02:25 ACTUAL DATA MIGHY NOT MATCH INPUT MODEL?
+#   * Need to understand input to effectively process it.
+#   * Approach 1: design for the worst case.
+#   * Approach 2: randomize, depend on probabilistic guarantee.
+
+# 03:09 GOALS
+#   * Estabilsh "difficulty" of a problem.
+#   * Develop "optimal" algorithms.
+# 
+# APPROACH
+#   * Suppress details in analysis: analyze "to within a constant factor"
+#   * Eliminate variability in input model by focusing on the worst case.
