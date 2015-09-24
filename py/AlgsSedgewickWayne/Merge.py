@@ -1,13 +1,15 @@
 """Merge Sort from Week 3 lecture."""
 
 from AlgsSedgewickWayne.utils import __lt__, _exch, _isSorted
+import collections as cx
 
 def Sort(a, array_history=None): # 09:30
   """Rearranges the array in ascending order, using the natural order."""
   # At most N lg N compares and 6 N lg N array accesses to sort any array of size N
   aux = [None for i in range(len(a))] # Create aux outside _sort to avoid extensive costs.
-  _sort(a, aux, 0, len(a)-1)
+  _sort(a, aux, 0, len(a)-1, array_history)
   assert _isSorted(a)
+  if array_history is not None: array_history.add_history(a, None)
 
 
 def merge(a, aux, lo, mid, hi): # 05:00-06:00
@@ -16,25 +18,27 @@ def merge(a, aux, lo, mid, hi): # 05:00-06:00
   assert _isSorted(a, mid+1, hi)  # precondition: a[mid+1 .. hi] are sorted subarrays
 
   for k in range(lo, hi+1): # copy to aux[]
-      aux[k] = a[k]
+    aux[k] = a[k]
 
   # merge back to a[] in sorted order
   i = lo     # index of sorted a[lo .. mid]   ( left-half)
   j = mid+1  # index of sorted a[mid+1 .. hi] (right-half)
   for k in range(lo, hi+1): # k is current entry in the sorted result
-      if   i > mid:               a[k] = aux[j]; j += 1 # this copying is unnecessary
-      elif j > hi:                a[k] = aux[i]; i += 1 # j ptr is exhausted
-      elif __lt__(aux[j], aux[i]): a[k] = aux[j]; j += 1
-      else:                       a[k] = aux[i]; i += 1
+    if   i > mid:                a[k] = aux[j]; j += 1 # this copying is unnecessary
+    elif j > hi:                 a[k] = aux[i]; i += 1 # j ptr is exhausted
+    elif __lt__(aux[j], aux[i]): a[k] = aux[j]; j += 1
+    else:                        a[k] = aux[i]; i += 1
 
   assert _isSorted(a, lo, hi) # postcondition: a[lo .. hi] is sorted
 
-def _sort(a, aux, lo, hi):
+def _sort(a, aux, lo, hi, array_history):
   """Recursive sort."""
   if hi <= lo: return
   mid = lo + (hi - lo) / 2;
-  _sort(a, aux, lo, mid)
-  _sort(a, aux, mid + 1, hi)
+  if array_history is not None: # Visualize the sort as it occurs
+    array_history.add_history(a, cx.OrderedDict([(lo, '-'), (mid, '>'), (hi, '+')]))
+  _sort(a, aux, lo,     mid, array_history)
+  _sort(a, aux, mid + 1, hi, array_history)
   merge(a, aux, lo, mid, hi)
 
 
@@ -42,31 +46,6 @@ def _sort(a, aux, lo, hi):
 # Top-Down Mergesort
 #************************************************************************
 
-
-#************************************************************************
-#  Compilation:  javac Merge.java
-#  Execution:    java Merge < input.txt
-#  Dependencies: StdOut.java StdIn.java
-#  Data files:   http:#algs4.cs.princeton.edu/22mergesort/tiny.txt
-#                http:#algs4.cs.princeton.edu/22mergesort/words3.txt
-#
-#  Sorts a sequence of strings from standard input using mergesort.
-#
-#  % more tiny.txt
-#  S O R T E X A M P L E
-#
-#  % java Merge < tiny.txt
-#  A E E L M O P R S T X                 [ one string per line ]
-#
-#  % more words3.txt
-#  bed bug dad yes zoo ... all bad yet
-#
-#  % java Merge < words3.txt
-#  all bad bed bug dad ... yes yet zoo    [ one string per line ]
-#
-#************************************************************************/
-
-#------------------------------------------------------------------------------
 # 00:11
 # MERGESORT: ONE OF TWO CLASSIC SORTING ALGORITHMS
 # CRITICAL COMPONENTS IN THE WORLD'S COMPUTATIONAL INFRASTRUCTURE.A
@@ -82,9 +61,9 @@ def _sort(a, aux, lo, hi):
 #------------------------------------------------------------------------------
 # 01:27 MERGESORT
 # BASIC PLAN
-# * Divide array into two halves.
-# * **Recursively** sort each half.
-# * Merge two halves.
+#   1. Divide array into two halves.
+#   2. **Recursively** sort each half.
+#   3. Merge two halves.
 #
 # John von Neumann credited with the invention of Mergesort.
 

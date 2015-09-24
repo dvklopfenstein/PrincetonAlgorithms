@@ -13,23 +13,22 @@ def run(a, desc, prt=sys.stdout):
   ah = ArrayHistory()
   Sort(a, array_history=ah)
   prt.write("{DESC} RESULT: {A}\n".format(DESC=desc, A=a))
-  # TBD: Implement array history visualization
-  # prt_array_history(array_history)
-  # show_array_history(desc, array_history)
+  ah.prt()
+  ah.show(desc)
 
-def test_1(prt=sys.stdout):
+def test_2(prt=sys.stdout):
   # (seed = 183182)
   # Give the array that results after the first 4 exchanges when
   # selection sorting the following array:
   a = map(int, "13 16 40 60 19 70 71 47 12 67".split() )
   run(a, "MERGESORT 183182")
 
-def test_2(prt=sys.stdout):
+def test_1(prt=sys.stdout):
   # (seed = 183182)
   # Give the array that results after the first 4 exchanges when
   # selection sorting the following array:
-  a = "S O R T E X A M P L E".split()
-  run(a, "MERGESORT SORTEXAMPLE")
+  a = "M E R G E S O R T E X A M P L E".split()
+  run(a, "MERGE SORT EXAMPLE")
 
 def run_all():
   test_1()
