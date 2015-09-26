@@ -43,7 +43,7 @@ JP   – Knuth                Knuth shuffle                    cards.txt
 ..   – Whitelist            whitelist client                 tinyW.txt tinyT.txt largeW.txt largeT.txt
 ..   – Vector               Euclidean vector                 –
 J.   – Date                 date                             –
-..   – Transaction          transaction                      –
+J.   – Transaction          transaction                      –
 J.   – Point2D              point                            –
 ..   – Interval1D           1d interval                      –
 ..   – Interval2D           2d interval                      –
