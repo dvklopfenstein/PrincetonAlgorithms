@@ -1,7 +1,10 @@
 # Priority Queues
 
 ## Code
-  * TBD
+  * API and elementary implementations
+  * binary heaps
+  * heapsort
+  * event-driven simulation
 
 ## Example Table of Contents
   1. [Run Example](#ex1)
