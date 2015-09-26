@@ -1,20 +1,22 @@
-//https://class.coursera.org/algs4partI-005/lecture/24
-// Alg1 Week 2 Lecture: SORTING INTRODUCTION 11:29 p247
 
-/*************************************************************************
+/******************************************************************************
  *  Compilation:  javac Date.java
  *  Execution:    java Date
+ *  Dependencies: StdOut.java
  *
  *  An immutable data type for dates.
  *
- *************************************************************************/
+ ******************************************************************************/
+
+package edu.princeton.cs.algs4;
 
 /**
  *  The <tt>Date</tt> class is an immutable data type to encapsulate a
  *  date (day, month, and year).
  *  <p>
- *  For additional documentation, see <a href="/algs4/12oop">Section 1.2</a> of
- *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ *  For additional documentation, 
+ *  see <a href="http://algs4.cs.princeton.edu/12oop">Section 1.2</a> of 
+ *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne. 
  *
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
@@ -31,7 +33,7 @@ public class Date implements Comparable<Date> {
      * @param month the month (between 1 and 12)
      * @param day the day (between 1 and 28-31, depending on the month)
      * @param year the year
-     * @throws IllegalArgumentException if the date is invalid
+     * @throws IllegalArgumentException if this date is invalid
      */
     public Date(int month, int day, int year) {
         if (!isValid(month, day, year)) throw new IllegalArgumentException("Invalid date");
@@ -42,8 +44,8 @@ public class Date implements Comparable<Date> {
 
     /**
      * Initializes new date specified as a string in form MM/DD/YYYY.
-     * @param date the string representation of the date
-     * @throws IllegalArgumentException if the date is invalid
+     * @param date the string representation of this date
+     * @throws IllegalArgumentException if this date is invalid
      */
     public Date(String date) {
         String[] fields = date.split("/");
@@ -65,7 +67,7 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Return the day.
+     * Returns the day.
      * @return the day (an integer between 1 and 31)
      */
     public int day() {
@@ -73,7 +75,7 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Return the year.
+     * Returns the year.
      * @return the year
      */
     public int year() {
@@ -89,10 +91,7 @@ public class Date implements Comparable<Date> {
         return true;
     }
 
-    /**
-     * Is year y a leap year?
-     * @return true if y is a leap year; false otherwise
-     */
+    // is y a leap year?
     private static boolean isLeapYear(int y) {
         if (y % 400 == 0) return true;
         if (y % 100 == 0) return false;
@@ -101,6 +100,7 @@ public class Date implements Comparable<Date> {
 
     /**
      * Returns the next date in the calendar.
+     *
      * @return a date that represents the next day after this day
      */
     public Date next() {
@@ -110,26 +110,34 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Is this date after b?
-     * @return true if this date is after date b; false otherwise
+     * Compares two dates chronologically.
+     *
+     * @param  that the other date
+     * @return <tt>true</tt> if this date is after that date; <tt>false</tt> otherwise
      */
-    public boolean isAfter(Date b) {
-        return compareTo(b) > 0;
+    public boolean isAfter(Date that) {
+        return compareTo(that) > 0;
     }
 
     /**
-     * Is this date before b?
-     * @return true if this date is before date b; false otherwise
+     * Compares two dates chronologically.
+     *
+     * @param  that the other date
+     * @return <tt>true</tt> if this date is before that date; <tt>false</tt> otherwise
      */
-    public boolean isBefore(Date b) {
-        return compareTo(b) < 0;
+    public boolean isBefore(Date that) {
+        return compareTo(that) < 0;
     }
 
     /**
-     * Compare this date to that date.
-     * @return { a negative integer, zero, or a positive integer }, depending
-     *    on whether this date is { before, equal to, after } that date
+     * Compares two dates chronologically.
+     *
+     * @return the value <tt>0</tt> if the argument date is equal to this date;
+     *         a negative integer if this date is chronologically less than
+     *         the argument date; and a positive ineger if this date is chronologically
+     *         after the argument date
      */
+    @Override
     public int compareTo(Date that) {
         if (this.year  < that.year)  return -1;
         if (this.year  > that.year)  return +1;
@@ -141,29 +149,36 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Return a string representation of this date.
-     * @return the string representation in the foramt MM/DD/YYYY
+     * Returns a string representation of this date.
+     *
+     * @return the string representation in the format MM/DD/YYYY
      */
+    @Override
     public String toString() {
         return month + "/" + day + "/" + year;
     }
 
     /**
-     * Is this date equal to x?
-     * @return true if this date equals x; false otherwise
+     * Compares this date to the specified date.
+     *
+     * @param  other the other date
+     * @return <tt>true</tt> if this date equals <tt>other</tt>; <tt>false</tt> otherwise
      */
-    public boolean equals(Object x) {
-        if (x == this) return true;
-        if (x == null) return false;
-        if (x.getClass() != this.getClass()) return false;
-        Date that = (Date) x;
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) return true;
+        if (other == null) return false;
+        if (other.getClass() != this.getClass()) return false;
+        Date that = (Date) other;
         return (this.month == that.month) && (this.day == that.day) && (this.year == that.year);
     }
 
     /**
-     * Return a hash code.
+     * Returns an integer hash code for this date.
+     *
      * @return a hash code for this date
      */
+    @Override
     public int hashCode() {
         int hash = 17;
         hash = 31*hash + month;
@@ -173,7 +188,7 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Unit tests the date data type.
+     * Unit tests the <tt>Date</tt> data type.
      */
     public static void main(String[] args) {
         Date today = new Date(2, 25, 2004);
@@ -198,5 +213,28 @@ public class Date implements Comparable<Date> {
 
 }
 
+/******************************************************************************
+ *  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
+ *
+ *  This file is part of algs4.jar, which accompanies the textbook
+ *
+ *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
+ *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
+ *      http://algs4.cs.princeton.edu
+ *
+ *
+ *  algs4.jar is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  algs4.jar is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
+ ******************************************************************************/
 
-
+// Last updated: Thu Sep 24 14:16:15 EDT 2015.
