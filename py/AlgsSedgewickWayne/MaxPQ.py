@@ -1,4 +1,49 @@
-#!/usr/bin/env python
+"""Priority Queue, return maximum value."""
+
+# Binary Heap Implementation
+# * Very Simple
+# * Optimal representation of data
+# * Just a little arithmetic
+class MaxPQ: # <Key extends Comparable<Key>> # 15:01
+  """ Priority Queue implemented with a binary heap."""
+  """ Priority Queue implemented with a heap-ordered binary tree."""
+
+  def __init__(self, capacity):
+    self.pq = [None]*(capacity+1)
+    self.N = 0
+
+  def isEmpty(self): return self.N == 0
+
+  def insert(self, x): # 06:27
+    """insert a key into the priority queue."""
+    self.N += 1
+    self.pq[self.N] = x
+    self.swim(self.N)
+
+  def delMax(self): # 10:03
+    """Return and remove the largest key."""
+    maxKey = self.pq[1]
+    # Exchange root(maxKey) with node at end,
+    self.exch(1, self.N)
+    self.N -= 1
+    # then sink new root down to where it belongs.
+    self.sink(1)
+    # Prevent loitering by nulling out maxKey position
+    self.pq[self.N+1] = None
+    return maxKey
+
+  # INSERT: IMPROVE TO lg (lg N)
+  #
+  # TRUE: It is possible to use binary search to improve our
+  # binary heap implementation so that insert() takes ~ lg (lg N)
+  # compares per operation (in the worst case), where N is
+  # the number of keys in the data structure.
+  #
+  # EXPLANATION: Note that the keys on the path from a leaf to
+  # the root are in nondecreasing order. Thus, we can binary
+  # search to find how far up in the tree the inserted key will
+  # end up. This takes only ~ lg lg N compares, though it still
+  # takes ~ lg N exchanges (in the worst case).
 
 # Algorithms, Part 1 from Princeton University
 # by Kevin Wayne, Robert Sedgewick
@@ -141,49 +186,6 @@
 # * Safe to use as key in priority queue or symbol table +++++!!!!
 
 import math
-
-# Binary Heap Implementation
-# * Very Simple
-# * Optimal representation of data
-# * Just a little arithmetic
-class MaxPQ: # <Key extends Comparable<Key>> # 15:01
-  """ Priority Queue implemented with a binary heap."""
-  """ Priority Queue implemented with a heap-ordered binary tree."""
-
-  def __init__(self, capacity):
-    self.pq = [None]*(capacity+1)
-    self.N = 0
-
-  # PQ ops
-  def isEmpty(self): return self.N == 0
-
-  # INSERT: IMPROVE TO lg (lg N)
-  #
-  # TRUE: It is possible to use binary search to improve our
-  # binary heap implementation so that insert() takes ~ lg (lg N)
-  # compares per operation (in the worst case), where N is
-  # the number of keys in the data structure.
-  #
-  # EXPLANATION: Note that the keys on the path from a leaf to
-  # the root are in nondecreasing order. Thus, we can binary
-  # search to find how far up in the tree the inserted key will
-  # end up. This takes only ~ lg lg N compares, though it still
-  # takes ~ lg N exchanges (in the worst case).
-  def insert(self, x): # 06:27
-    self.N += 1
-    self.pq[self.N] = x
-    self.swim(self.N)
-
-  def delMax(self): # 10:03
-    maxKey = self.pq[1]
-    # Exchange root(maxKey) with node at end,
-    self.exch(1, self.N)
-    self.N -= 1
-    # then sink new root down to where it belongs.
-    self.sink(1)
-    # Prevent loitering by nulling out maxKey position
-    self.pq[self.N+1] = None
-    return maxKey
 
   def insert_array(self, ARR):
     for A in ARR:

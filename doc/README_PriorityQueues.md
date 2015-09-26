@@ -2,7 +2,7 @@
 Remove the **largest** (or **smallest**) item.
 
 ## Code
-  * API and elementary implementations
+  * API and elementary implementations    
     [MaxPQ.py](../py/AlgsSedgewickWayne/MaxPQ.py)
   * binary heaps
   * heapsort
