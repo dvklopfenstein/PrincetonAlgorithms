@@ -185,97 +185,97 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
 # * Simplifies concurren programming
 # * Safe to use as key in priority queue or symbol table +++++!!!!
 
-import math
-
-  def insert_array(self, ARR):
-    for A in ARR:
-      self.insert(A)
-
-  # From Lecture 8 - 3 Heapsort (14-29)
-  # First sorting algorithm that is BOTH in-place AND N log N worst-case
-  # Fine sort algorithm that is very little code
-  # Sort gets done while touching relatively few objects
-  # *** SEE NOTES From Heap.java
-
-  # FALSE: When heapsorting an array of N distinct keys, there
-  #   is at most one compare between the two keys x and y.
-  # EXP: Consider the array { -, 2, 1, 0 }. In the heap
-  #   construction phase, the two keys 0 and 1 are compared with
-  #   each other (when sinking 2). In the sortdown phase, the keys
-  #   0 and 1 are compared with each other when deleting 2.
-  def sort(self):
-    L = len(self.pq)
-    # HEAPSORT: HEAP CONSTRUCTION
-    # First pass. Build using bottom-up method
-    # Go backwards through the heap starting at L/2 because
-    # right-most
-    # half of array is little heaps of size 1
-    #
-    #             ______1______  for(int k=5; k>=1; k--)...
-    #            /             \
-    #         __2__           __3__
-    #        /     \         /     \
-    #       4       5       -       -
-    #      / \     / \
-    #     -   -   -   -
-    #
-    for k in range(L/2,0,-1): # Lecture 8 - 3 Heapsort 07:39
-      self.sink(k, L)
-    #
-    # HEAPSORT: SORTDOWN
-    # Second pass.
-    # * Remove the maximum, one at a time.
-    # * Leave in array, instead of nulling out.
-    while (L>1): # 8:26
-      self.exch(1, L)
-      L -= 1
-      self.sink(1, L)
-
-  # heap helper functions
-  def swim(self,k): # 05:15
-    while(k>1 and self.less(k/2, k)):
-      self.exch(k, k/2)
-      k = k/2
-  # The sink() method, as implemented in lecture, compares the
-  # two children to each other (before comparing the larger of
-  # the two children to the parent). -Kevin Wayne
-  def sink(self,k): # 8:52
-    while (2*k <= self.N):
-      j = 2*k
-      # Check if we are going off the end of the heap and which child is larger
-      if j < self.N and self.less(j, j+1):
-        j += 1
-      # If k is not less than either child, then we are done
-      if not self.less(k,j):
-        break
-      # If k is larger than a child, exchange
-      self.exch(k,j)
-      k = j
-
-  # array helper functions
-  # TBD: change less and exch functions to start at index 0 instead of index 1
-  # In this course, we use the term compare to mean a comparison between two keys,
-  # i.e., one call to compareTo().
-  def less(self, i, j): return self.pq[i] < self.pq[j]
-
-  def exch(self, i, j):
-    t = self.pq[i]
-    self.pq[i] = self.pq[j]
-    self.pq[j] = t
-
-  # Print functions
-  def __str__(self):
-    return "".join(["N=%-2d pq[%d]="%(self.N,len(self.pq)),  " ".join(map(str,self.pq))])
-  def __repr__(self): return __str__(self)
-  def __len__(self):  return len(self.pq)
-  def draw(self): # TBD: Finish this
-    # 0 1   2 3   4 5 6 7   8 9 ...
-    #   S   P R   N H O A   E I ...
-    #   1   2 2   3 3 3 3   4 4 ...
-    for i,E in enumerate(self.pq):
-      if i==0 or E is None: continue
-      level = int(math.log(i,2))
-      print ''.join(['-']*(level+1)), E
+##import math
+##
+##  def insert_array(self, ARR):
+##    for A in ARR:
+##      self.insert(A)
+##
+##  # From Lecture 8 - 3 Heapsort (14-29)
+##  # First sorting algorithm that is BOTH in-place AND N log N worst-case
+##  # Fine sort algorithm that is very little code
+##  # Sort gets done while touching relatively few objects
+##  # *** SEE NOTES From Heap.java
+##
+##  # FALSE: When heapsorting an array of N distinct keys, there
+##  #   is at most one compare between the two keys x and y.
+##  # EXP: Consider the array { -, 2, 1, 0 }. In the heap
+##  #   construction phase, the two keys 0 and 1 are compared with
+##  #   each other (when sinking 2). In the sortdown phase, the keys
+##  #   0 and 1 are compared with each other when deleting 2.
+##  def sort(self):
+##    L = len(self.pq)
+##    # HEAPSORT: HEAP CONSTRUCTION
+##    # First pass. Build using bottom-up method
+##    # Go backwards through the heap starting at L/2 because
+##    # right-most
+##    # half of array is little heaps of size 1
+##    #
+##    #             ______1______  for(int k=5; k>=1; k--)...
+##    #            /             \
+##    #         __2__           __3__
+##    #        /     \         /     \
+##    #       4       5       -       -
+##    #      / \     / \
+##    #     -   -   -   -
+##    #
+##    for k in range(L/2,0,-1): # Lecture 8 - 3 Heapsort 07:39
+##      self.sink(k, L)
+##    #
+##    # HEAPSORT: SORTDOWN
+##    # Second pass.
+##    # * Remove the maximum, one at a time.
+##    # * Leave in array, instead of nulling out.
+##    while (L>1): # 8:26
+##      self.exch(1, L)
+##      L -= 1
+##      self.sink(1, L)
+##
+##  # heap helper functions
+##  def swim(self,k): # 05:15
+##    while(k>1 and self.less(k/2, k)):
+##      self.exch(k, k/2)
+##      k = k/2
+##  # The sink() method, as implemented in lecture, compares the
+##  # two children to each other (before comparing the larger of
+##  # the two children to the parent). -Kevin Wayne
+##  def sink(self,k): # 8:52
+##    while (2*k <= self.N):
+##      j = 2*k
+##      # Check if we are going off the end of the heap and which child is larger
+##      if j < self.N and self.less(j, j+1):
+##        j += 1
+##      # If k is not less than either child, then we are done
+##      if not self.less(k,j):
+##        break
+##      # If k is larger than a child, exchange
+##      self.exch(k,j)
+##      k = j
+##
+##  # array helper functions
+##  # TBD: change less and exch functions to start at index 0 instead of index 1
+##  # In this course, we use the term compare to mean a comparison between two keys,
+##  # i.e., one call to compareTo().
+##  def less(self, i, j): return self.pq[i] < self.pq[j]
+##
+##  def exch(self, i, j):
+##    t = self.pq[i]
+##    self.pq[i] = self.pq[j]
+##    self.pq[j] = t
+##
+##  # Print functions
+##  def __str__(self):
+##    return "".join(["N=%-2d pq[%d]="%(self.N,len(self.pq)),  " ".join(map(str,self.pq))])
+##  def __repr__(self): return __str__(self)
+##  def __len__(self):  return len(self.pq)
+##  def draw(self): # TBD: Finish this
+##    # 0 1   2 3   4 5 6 7   8 9 ...
+##    #   S   P R   N H O A   E I ...
+##    #   1   2 2   3 3 3 3   4 4 ...
+##    for i,E in enumerate(self.pq):
+##      if i==0 or E is None: continue
+##      level = int(math.log(i,2))
+##      print ''.join(['-']*(level+1)), E
 
 
 # Which of the following statements about priority queues are
