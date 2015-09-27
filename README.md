@@ -14,7 +14,7 @@ Implemented in Python 2.7.x by DV Klopfenstein is selected code from:
   * [**coursera class**](https://www.coursera.org/course/algs4partI)    
 
 [**TESTS**](doc/README.md): 
- * **Python** tests are run from: [./py/AlgsSedgewickWayne/tests/](./py/AlgsSedgewickWayne/tests)
+ * **Python** tests are run from: [./tests/](./tests)
  * **Java** code is run from: [./thirdparty/](./thirdparty)
    * To download Sedgewick-Wayne Java programming environment: 
      [Linux](http://algs4.cs.princeton.edu/linux/),
