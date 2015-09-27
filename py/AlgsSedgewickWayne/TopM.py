@@ -2,18 +2,19 @@
 """Read seq. Print N largest items."""
 
 import sys
-from AlgsSedgewickWayne.MaxPQ import MaxPQ
+import fileinput
+from AlgsSedgewickWayne.MinPQ import MinPQ
+from AlgsSedgewickWayne.Transaction import Transaction
 
 def main(prt=sys.stdout):
   """Reads seq from stdin; takes args M; prints the M largest in decending order."""
   M = int(sys.argv[1]) if len(sys.argv) > 1 else 1
   prt.write("M({})\n".format(M))
-  #MinPQ<Transaction> pq = new MinPQ<Transaction>(M+1)
+  pq = MinPQ(M+1)
 
-  #while (StdIn.hasNextLine()):
-  #    # Create an entry from the next line and put on the PQ. 
-  #    String line = StdIn.readLine()
-  #    Transaction transaction = new Transaction(line)
+  for line in fileinput.input():
+    """Read stdin until ctrl-D is seen."""
+    transaction = Transaction(line.rstrip("\n\r"))
   #    pq.insert(transaction)
 
   #    # remove minimum if M+1 entries on the PQ
