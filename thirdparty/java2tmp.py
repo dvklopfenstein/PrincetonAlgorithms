@@ -41,6 +41,7 @@ def main():
       line = line.replace('Last updated', 'Java last updated')
       line = line.replace('++', ' += 1')
       line = line.replace('--', ' -= 1')
+      line = line.replace('StdOut.println', 'prt.write')
       FOUT.write(line)
 
   print 'READ ', fin
