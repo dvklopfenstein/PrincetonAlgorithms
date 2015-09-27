@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from AlgsSedgewickWayne.Transaction import Transaction
+
 import sys
 from operator import attrgetter
 

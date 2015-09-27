@@ -56,9 +56,9 @@ class Date(object):
   #  hash = 31*hash + year
   #  return hash
 
-  def _str_to_date(self, date):
+  def _str_to_date(self, date_str):
     """Get date from the string representation of this date."""
-    M = re.match('(\d{2}\d{2}\d{4}', date) # MM/DD/YYYY
+    M = re.match('(\d{1,2})/(\d{1,2})/(\d{4})', date_str) # MM/DD/YYYY
     if M:
       return date(int(M.group(3)), int(M.group(1)), int(M.group(2)))
     else:

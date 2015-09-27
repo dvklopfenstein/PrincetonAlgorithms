@@ -42,7 +42,7 @@ JP   – Knuth                Knuth shuffle                    cards.txt
 ..   – StaticSETofInts      set of integers                  –
 ..   – Whitelist            whitelist client                 tinyW.txt tinyT.txt largeW.txt largeT.txt
 ..   – Vector               Euclidean vector                 –
-J.   – Date                 date                             –
+JP   – Date                 date                             –
 J.   – Transaction          transaction                      –
 J.   – Point2D              point                            –
 ..   – Interval1D           1d interval                      –

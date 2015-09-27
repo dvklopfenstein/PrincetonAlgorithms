@@ -1,7 +1,6 @@
-# TBD: when:   Finish date object
 # TBD: amount: -0.0 check and Nan and Inf check
 
-from datetime import date
+from AlgsSedgewickWayne.Date import Date
 
 class Transaction(object):
   """encapsulate a commercial transaction with a customer name, date, and amount."""
@@ -10,12 +9,12 @@ class Transaction(object):
     if when is None and amount is None:
       who, when, amount = tr_who.split()
       amount = float(amount)
-    #if Double.isNaN(amount) or Double.isInfinite(amount))
-    #  raise new IllegalArgumentException("Amount cannot be NaN or infinite")
+    if amount == float('NaN') or amount == float('Inf'):
+      raise Exception("Amount cannot be NaN or infinite")
     #if amount == 0.0) this.amount = 0.0;  # to handle -0.0
-    self.who    = who    # customer (string)
-    self.when   = when   # date     (Date)
-    self.amount = amount # amount   (double)
+    self.who    = who        # customer (string)
+    self.when   = Date(when) # date     (Date)
+    self.amount = amount     # amount   (double)
 
   def __str__(self):
     return "{:<10} {:10} {:8.2f}".format(self.who, self.when, self.amount)
