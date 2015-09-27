@@ -16,19 +16,24 @@ def run(a, desc, prt=sys.stdout):
   ah.prt()
   ah.show(desc)
 
-def test_2(prt=sys.stdout):
+def test_3(prt=sys.stdout):
   # (seed = 183182)
   # Give the array that results after the first 4 exchanges when
   # selection sorting the following array:
   a = map(int, "13 16 40 60 19 70 71 47 12 67".split() )
   run(a, "MERGESORT 183182")
 
-def test_1(prt=sys.stdout):
+def test_2(prt=sys.stdout):
   # (seed = 183182)
   # Give the array that results after the first 4 exchanges when
   # selection sorting the following array:
   a = "M E R G E S O R T E X A M P L E".split()
   run(a, "MERGE SORT EXAMPLE")
+
+def test_1(prt=sys.stdout):
+  """Mergesort (23:54) Example at 02:19."""
+  a = "E E G M R A C R T".split()
+  run(a, "MERGE 1st Lec Ex")
 
 def run_all():
   test_1()
