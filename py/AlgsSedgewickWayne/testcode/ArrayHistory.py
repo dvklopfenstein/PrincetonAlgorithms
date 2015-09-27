@@ -19,6 +19,7 @@
 
 import sys
 import copy
+import collections as cx
 
 import AlgsSedgewickWayne.testcode.InputArgs as IA
 
@@ -104,7 +105,9 @@ def history_contains(array_history, potential_midpoint):
 
 def get_keystr(E):
   """TBD"""
-  if isinstance(E, dict):
+  if E is None:
+    return "."
+  elif isinstance(E, dict):
     if len(E) == 1:
       return str(E.keys()[0])
     else:
@@ -115,9 +118,9 @@ def get_keystr(E):
 def get_elem2num(array_history):
   """ 1 is assigned to smallest element.  len(arr)+1 is assigned to largest element."""
   # In array_history, last array should be the sorted arrayA
-  elem2num = {}
+  elem2num = {'.': 0} # '.' is a space-holder for an element being "None"
   num = 1
-  for elem in array_history[-1][0]:
+  for elem in array_history[-1][0]: # Loop on elements in last sorted array
     elem2num[get_keystr(elem)] = num
     num += 1
   return elem2num
@@ -145,41 +148,57 @@ class ArrayHistory(object):
   """Class to manage array history for visualization and learning."""
 
   def __init__(self):
-    self.array_history = []
+    self.array_histories = cx.defaultdict(list)
+    self.ah_names = []
 
-  def add_history(self, ARR, anno):
+  def add_history(self, ARR, anno, name='a'):
     """Add current arry state to array history."""
-    self.array_history.append([copy.deepcopy(ARR), anno])
+    if name not in self.ah_names:
+      self.ah_names.append(name)
+    self.array_histories[name].append([copy.deepcopy(ARR), anno])
+    for name in self.array_histories:
+      for state in self.array_histories[name]:
+        print "SSSS", name, state
 
   def __iter__(self):
-    for array_state in self.array_history:
-      yield array_state
+    for name in self.ah_names:
+      for array_state in self.array_histories[name]:
+        yield array_state
 
   def prt(self, prt=sys.stdout):
     """ Prints array history with spaces between elements."""
     txt_prev = None
     txt_curr = None
-    for idx, A in enumerate(self.array_history):
-      txt_prev = txt_curr
-      txt_curr = ' '.join([str(item) for item in A[0]])
-      if txt_prev is not None:
-        txt_mtch = xor_txt(txt_prev, txt_curr)
-        prt.write('    {}\n'.format(txt_mtch))
-      prt.write('{:2d}: {}\n'.format(idx, txt_curr))
-    prt.write("\n")
+    fnc = lambda item: str(item) if item is not None else "."
+    for name in self.ah_names:
+      for idx, A in enumerate(self.array_histories[name]):
+        txt_prev = txt_curr
+        txt_curr = ' '.join([fnc(item) for item in A[0]])
+        if txt_prev is not None:
+          txt_mtch = xor_txt(txt_prev, txt_curr)
+          prt.write('    {}\n'.format(txt_mtch))
+        prt.write('{IDX:2d}: {STATE} <= {NAME}\n'.format(IDX=idx, STATE=txt_curr, NAME=name))
+      prt.write("\n")
   
 
   def show(self, desc, prt=sys.stdout):
-    """ Print array history plus histogram bars (viewed horizontally) to help visualize sort."""
-    if isinstance(self.array_history, list) and len(self.array_history) != 0:
-      elem2num = get_elem2num(self.array_history)
-      for incr, A in enumerate(self.array_history):
+    """ Print array history plus horizontal histogram bars to help visualize sort."""
+    for name in self.ah_names:
+      ah = self.array_histories[name]
+      self.show_ah(ah, name, desc, prt)
+    # TBD: Put array histories side-by-side
+    #ahs = [self.array_histories[name] for name in self.ah_names]
+
+  def show_ah(self, ah, name, desc, prt):
+    if isinstance(ah, list) and len(ah) != 0:
+      elem2num = get_elem2num(ah)
+      for incr, A in enumerate(ah):
         Astr = [str(item) for item in A[0]]
-        prt.write('{:2d} {}: {}\n'.format(incr, desc, ' '.join(Astr)))
+        prt.write('{} {:2d} {}: {}\n'.format(name, incr, desc, ' '.join(Astr)))
         for idx, elem in enumerate(A[0]):
           anno = get_anno(idx, A[1])
-          prt.write('{:2d} {}({:2d}): {}{:2} {}\n'.format(
-              incr, desc, idx, anno, elem, ''.join(['*']*elem2num[get_keystr(elem)])))
+          prt.write('{} {:2d} {}({:2d}): {}{:2} {}\n'.format(
+              name, incr, desc, idx, anno, elem, ''.join(['*']*elem2num[get_keystr(elem)])))
         prt.write('\n')
 
 

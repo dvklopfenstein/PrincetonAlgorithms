@@ -9,7 +9,9 @@ def Sort(a, array_history=None): # 09:30
   aux = [None for i in range(len(a))] # Create aux outside _sort to avoid extensive costs.
   _sort(a, aux, 0, len(a)-1, array_history)
   assert _isSorted(a)
-  if array_history is not None: array_history.add_history(a, None)
+  if array_history is not None: 
+    array_history.add_history(a,   None, name="arr")
+    array_history.add_history(aux, None, name="aux")
 
 
 def merge(a, aux, lo, mid, hi): # 05:00-06:00
@@ -36,7 +38,9 @@ def _sort(a, aux, lo, hi, array_history):
   if hi <= lo: return
   mid = lo + (hi - lo) / 2;
   if array_history is not None: # Visualize the sort as it occurs
-    array_history.add_history(a, cx.OrderedDict([(lo, '-'), (mid, '>'), (hi, '+')]))
+    array_history.add_history(a, cx.OrderedDict([(lo, '-'), (hi, '+')]), name="arr")
+    #array_history.add_history(aux, cx.OrderedDict([(mid, '>')]), name="aux")
+    array_history.add_history(aux, {mid: '>'}, name="aux")
   _sort(a, aux, lo,     mid, array_history)
   _sort(a, aux, mid + 1, hi, array_history)
   merge(a, aux, lo, mid, hi)
