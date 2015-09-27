@@ -1,0 +1,32 @@
+# Lecture 10 - 1 - 2-3 Search Trees (16:55) at 1:05
+#
+# SYMBOL TABLE REVIEW
+# -------------+---------------------------+------------------------------+-----------+-----+
+#              | worst-case cost           | Average case                 | ordered   | key
+#  Imp.        | (after N inserts)         | (after N random inserts)     | iteration | i/f
+#              +--------+--------+---------+------------+--------+--------+ ?         |
+#              | search | insert | delete  | search hit | insert | delete |
+# 
+# seq. search      N        N        N          N/2         N        N/2      no    equals()
+# 
+# bin. search    lg(N)      N        N         lg(N)       N/2       N/2     yes   compareTo()
+# 
+# BST              N        N        N       1.39lg(N)  1.39lg(N)     ?      yes   compareTo()
+# 
+# goal          log(N)   log(N)   log(N)      log(N)      log(N)    log(N)   yes   compareTo()
+# 
+# CHALLENGE: Guarantee performance be proportional to lg(N)
+
+
+# Lecture 10 - 1 - 2-3 Search Trees (16:55) at 4:49
+# 2-3 trees, left-leaning red-black BSTs, B-trees
+# 
+# 2-3 tree 
+# 
+#              (M)
+#            /     \
+#          /         \
+#        /             \
+#      (E J)           (R)
+#     /  |  \         /   \
+# (A C) (H) (L)     (P) (S X)

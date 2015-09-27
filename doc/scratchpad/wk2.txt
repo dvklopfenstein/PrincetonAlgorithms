@@ -1,0 +1,46 @@
+###############################################################
+Alg1 Week 2 Lecture Sorting Introduction
+3 Different Clients:
+  01:16 Experiment  Double[]
+  01:30 Experiment  String[]
+  02:14 Experiment  File[]
+03:44 CALLBACK: compareTo() 06:11 return [-1,0,1] or Exception w/null or type mismatch
+07:45 Code using compareTo()
+08:12 TOTAL ORDER
+  Antisymmetry: If v <= w and w <= v, then v == x
+  Transitivity: If v <= w and w <= x, then v <= x
+  Totality:     either v <= w or w <= v or both
+  ** Rock-Paper-Siccors is INTRANSITIVE
+
+QUESTION: Which property of the "Comparable" Interface is violated?
+
+    public int compareTo(Temp B) {
+      double EPS = 0.1;
+      if (A.deg < B.deg - EPS ) return -1;
+      if (A.deg > B.deg + EPS ) return +1;
+      return 0;
+
+             A      B                A  B  C
+           b--------B
+
+             A      B 
+                    B--------b
+
+             B---------b
+             B      A
+
+                 A   
+                 B   
+ANSWER: Transitivity. Suppose:
+  a = 10.16            
+  b = 10.08
+  c = 10.00
+Then:
+  a.compareTo(b) <= 0
+  b.compareTo(c) <= 0
+  a.compareTo(c)  > 0
+
+
+
+
+
