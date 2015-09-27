@@ -1,4 +1,5 @@
 # Schedule
+There are no Progamming Assignment Solutions on this site.
 
 ## Algorithms 1
 
