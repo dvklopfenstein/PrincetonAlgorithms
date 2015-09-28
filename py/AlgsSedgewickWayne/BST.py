@@ -299,3 +299,8 @@ class BST(object):
 
 # 01:45 Different from a heap.  HEAPs had every node larger than its children.
 
+# QUESTION: Suppose that N distinct keys are inserted into a binary
+# search tree in random order. What is the expected number of 
+# compares to search for one of the N keys?
+# ANSWER: logorithmic.
+
