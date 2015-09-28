@@ -156,6 +156,7 @@ class ArrayHistory(object):
     if name not in self.ah_names:
       self.ah_names.append(name)
     self.array_histories[name].append([copy.deepcopy(ARR), anno])
+    # TBD: Remove
     for name in self.array_histories:
       for state in self.array_histories[name]:
         print "SSSS", name, state
@@ -187,7 +188,10 @@ class ArrayHistory(object):
       ah = self.array_histories[name]
       self.show_ah(ah, name, desc, prt)
     # TBD: Put array histories side-by-side
-    #ahs = [self.array_histories[name] for name in self.ah_names]
+    #ahs = cx.OrderedDict([(name, self.array_histories[name]) for name in self.ah_names])
+    #for name, ahs in ahs.items():
+    #  for ah in zip(*ahs):
+    #    print "LLLL", name, len(ah)
 
   def show_ah(self, ah, name, desc, prt):
     if isinstance(ah, list) and len(ah) != 0:

@@ -37,15 +37,19 @@ def blk_visualizer(blkstr, prt=sys.stdout):
   arrays = zip(*blk)
   # Iterate through each array
   for array_id, arr in enumerate(arrays):
-    # Get a number, starting with 1, based on the element's order in the sort
-    elem2num = {elem:idx for idx, elem in enumerate(sorted(arr), 1)}
-    # Iterate through the elements in the current array
-    for elem_position, elem in enumerate(arr):
-      # Print information about each element in the array
-      prt.write("{ARRAY_ID} {ELEM_IDX:>2} {ELEM} {STARS}\n".format(
-        ARRAY_ID=array_id, ELEM_IDX=elem_position, ELEM=elem, STARS='*'*elem2num[elem]))
-    prt.write('\n')
+    arr_vis(arr, array_id, 0, prt)
 
-  
+def arr_vis(arr, array_id=0, i0=0, prt=sys.stdout):
+  # Get a number, starting with 1, based on the element's order in the sort
+  elem2num = {elem:idx for idx, elem in enumerate(sorted(arr), 1)}
+  # Iterate through the elements in the current array
+  for elem_position, elem in enumerate(arr, i0):
+    # Print information about each element in the array
+    prt.write("{ARRAY_ID} {ELEM_IDX:>2} {ELEM} {STARS}\n".format(
+      ARRAY_ID=array_id, ELEM_IDX=elem_position, ELEM=elem, STARS='*'*elem2num[elem]))
+  prt.write('\n')
+
+def str_vis(str_arr, array_id=0, prt=sys.stdout):
+  arr_vis(str_arr.split(), array_id, prt)
 
 

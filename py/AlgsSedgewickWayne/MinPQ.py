@@ -2,27 +2,25 @@
 
 class MinPQ(object):
   """Priority Queue supporting insert and delete-the-minimum key."""
-  private Key[] pq;                    // store items at indices 1 to N
-  private int N;                       // number of items on priority queue
-  private Comparator<Key> comparator;  // optional comparator
 
   def __init__(initCapacity=None, **kwargs):
     if initCapacity is None:
       pass
     else:
-      self.pq = (Key[]) new Object[initCapacity + 1];
+      #self.pq = (Key[]) new Object[initCapacity + 1];
       self.pq = [None for i in range(initCapacity+1)]
-      self.N = 0
+      self.N = 0 # number of items on priority queue
+      self.comparator = None
 
   # Initializes an empty priority queue with the given initial capacity,
   # using the given comparator.
-  public MinPQ(int initCapacity, Comparator<Key> comparator) {
+  def MinPQ(int initCapacity, Comparator<Key> comparator) {
       this.comparator = comparator;
       pq = (Key[]) new Object[initCapacity + 1];
       N = 0;
 
   # Initializes an empty priority queue using the given comparator.
-  public MinPQ(Comparator<Key> comparator) {
+  def MinPQ(Comparator<Key> comparator) {
       this(1, comparator);
 
   # Initializes a priority queue from the array of keys.
@@ -70,36 +68,32 @@ class MinPQ(object):
     self._swim(N);
     assert self.isMinHeap();
 
-  /**
-   * Removes and returns a smallest key on this priority queue.
-   *
-   * @return a smallest key on this priority queue
-   * @throws NoSuchElementException if this priority queue is empty
-   */
-  public Key delMin() {
-      if (isEmpty()) throw new NoSuchElementException("Priority queue underflow");
-      exch(1, N);
-      Key min = pq[N--];
-      sink(1);
-      pq[N+1] = null;         // avoid loitering and help with garbage collection
-      if ((N > 0) && (N == (pq.length - 1) / 4)) resize(pq.length  / 2);
-      assert isMinHeap();
-      return min;
-  }
+  def delMin(self):
+    """Removes and returns a smallest key on this priority queue."""
+    if self.isEmpty(): raise Exception("Priority queue underflow")
+    self.exch(1, N)
+    min_key = pq[N]
+    N -= 1
+    self.sink(1)
+    pq[N+1] = None # avoid loitering and help with garbage collection
+    N += 1
+    if (N > 0) && (N == (pq.length - 1) / 4): 
+      self._resize(len(pq)/2)
+    assert self._isMinHeap()
+    return min_key;
 
-
-  #**************************************************************************
-  # Helper functions to restore the heap invariant.
-  #**************************************************************************
   def _swim(self, k):
-    while (k > 1 && greater(k/2, k)) {
-      exch(k, k/2);
-      k = k/2;
+    """Restore heap invariant by 'swimming' up large values."""
+    while k > 1 and k/2 > k:
+      self._exch(k, k/2)
+      k = k/2
 
   def _sink(self, k):
+    """Restore heap invariant by 'sinking' down small values."""
     while 2*k <= N:
       j = 2*k
-      if j < N && greater(j, j+1): j += 1
+      if j < N and j > j+1x):
+        j += 1
       if not k > j: 
         break
       self._exch(k, j)
@@ -108,7 +102,7 @@ class MinPQ(object):
   #***************************************************************************
   #* Helper functions for compares and swaps.
   #***************************************************************************
-  def _greater(self, i, j):
+  def __gt__(self, i, j):
     if self.comparator is None:
       return ((Comparable<Key>) pq[i]).compareTo(pq[j]) > 0;
     else:

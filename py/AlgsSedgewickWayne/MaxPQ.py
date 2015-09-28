@@ -1,4 +1,4 @@
-"""Priority Queue, return maximum value."""
+"""Priority Queue (unordered array implementation), return maximum value."""
 
 # Binary Heap Implementation
 # * Very Simple
@@ -17,8 +17,8 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
   def insert(self, x): # 06:27
     """insert a key into the priority queue."""
     self.N += 1
-    self.pq[self.N] = x
-    self.swim(self.N)
+    self.pq[self.N] = x # Insert at end
+    self.swim(self.N)   # swim up to proper position
 
   def delMax(self): # 10:03
     """Return and remove the largest key."""
@@ -31,6 +31,26 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
     # Prevent loitering by nulling out maxKey position
     self.pq[self.N+1] = None
     return maxKey
+
+  def swim(self,k): # 05:15
+    """Exchange smaller child w/larger parent up through the hierarchy."""
+    while k>1 and k/2 < k:
+      self.exch(k, k/2)
+      k = k/2
+
+  def sink(self, k): # 8:52
+    """Push node down one level at a time to order array."""
+    while 2*k <= self.N:
+      j = 2*k
+      # Check if we are going off the end of the heap and which child is larger
+      if j < self.N and self.less(j, j+1):
+        j += 1
+      # If k is not less than either child, then we are done
+      if not self.less(k,j):
+        break
+      # If k is larger than a child, exchange
+      self.exch(k,j)
+      k = j
 
   # INSERT: IMPROVE TO lg (lg N)
   #
@@ -230,28 +250,8 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
 ##      self.exch(1, L)
 ##      L -= 1
 ##      self.sink(1, L)
-##
-##  # heap helper functions
-##  def swim(self,k): # 05:15
-##    while(k>1 and self.less(k/2, k)):
-##      self.exch(k, k/2)
-##      k = k/2
-##  # The sink() method, as implemented in lecture, compares the
-##  # two children to each other (before comparing the larger of
-##  # the two children to the parent). -Kevin Wayne
-##  def sink(self,k): # 8:52
-##    while (2*k <= self.N):
-##      j = 2*k
-##      # Check if we are going off the end of the heap and which child is larger
-##      if j < self.N and self.less(j, j+1):
-##        j += 1
-##      # If k is not less than either child, then we are done
-##      if not self.less(k,j):
-##        break
-##      # If k is larger than a child, exchange
-##      self.exch(k,j)
-##      k = j
-##
+
+
 ##  # array helper functions
 ##  # TBD: change less and exch functions to start at index 0 instead of index 1
 ##  # In this course, we use the term compare to mean a comparison between two keys,
