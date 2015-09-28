@@ -2,7 +2,7 @@
 Use immutable objects, like [Date.py](../py/AlgsSedgewickWayne/Date.py) as keys
 
 ## Code
-  * **Symbol Table API**    
+  * **Symbol Table API**
     [ST.py](../py/AlgsSedgewickWayne/ST.py)
   * **Elementary Implementations**    
   * **Ordered Operations**    
