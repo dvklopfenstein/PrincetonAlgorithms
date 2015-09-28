@@ -17,31 +17,31 @@ class BST(object):
   def isEmpty(self): return self.Size() == 0
 
   # return number of key-value pairs in BST
-  def Size(self): return self._Size(self, root)
+  def Size(self): return self._Size(self.root)
 
-  # return number of key-value pairs in BST rooted at x
   def _Size(self, x): # Node
+    """return number of key-value pairs in BST rooted at x."""
     if x is None: return 0
     else: return x.N
 
   def contains(self, key):
     """does there exist a key-value pair with given key?"""
-    return self.get(self, key) is not None
+    return self.get(key) is not None
 
   def get(self, key):
     """return value associated with the given key, or None if no such key exists"""
-    return self._get(self, root, key)
+    return self._get(root, key)
 
   def _get(self, x, key):
     """Search for key. Return assc. value if found, return None if not found"""
     if x is None: return None
-    if   key < x.key: return self.get(self, x.left,  key)
-    elif key > x.key: return self.get(self, x.right, key)
+    if   key < x.key: return self.get(x.left,  key)
+    elif key > x.key: return self.get(x.right, key)
     else:             return x.val
 
   def put(self, key, val):
     """Insert key-value pair into BST. If key already exists, update with new value."""
-    if val is None: self.delete(self, key); return
+    if val is None: self.delete(key); return
     self.root = self._put(self.root, key, val)
     assert self._check()
 
@@ -54,13 +54,11 @@ class BST(object):
     x.N = 1 + self._Size(x.left) + self._Size(x.right)
     return x
 
-  #**********************************************************************
-  #  Delete
-  #**********************************************************************/
+  # Delete
   def deleteMin(self):
-      if self.isEmpty(self): raise Exception("deleteMin Symbol table underflow")
-      root = self.deleteMin(self, root)
-      assert self._check(self)
+      if self.isEmpty(): raise Exception("deleteMin Symbol table underflow")
+      root = self.deleteMin(root)
+      assert self._check()
 
   def _deleteMin(self, x):
       if x.left is None: return x.right
@@ -69,9 +67,9 @@ class BST(object):
       return x
 
   def deleteMax(self):
-      if self.isEmpty(self): raise Exception("deleteMax Symbol table underflow")
+      if self.isEmpty(): raise Exception("deleteMax Symbol table underflow")
       self.root = self.deleteMax(self.root)
-      assert self._check(self)
+      assert self._check()
 
   def _deleteMax(self, x):
       if x.right is None: return x.left
@@ -92,99 +90,93 @@ class BST(object):
           if x.right is None: return x.left
           if x.left  is None: return x.right
           t = x
-          x = self.Min(self, t.right)
-          x.right = self._deleteMin(self, t.right)
+          x = self.Min(t.right)
+          x.right = self._deleteMin(t.right)
           x.left = t.left
       x.N = self._Size(x.left) + self._Size(x.right) + 1
       return x
 
 
- #**********************************************************************
+  #**********************************************************************
   #  Min, Max, floor, and ceiling
   #**********************************************************************/
   def Min(self):
-      if self.isEmpty(): return None
-      return Min(root).key
+    if self.isEmpty(): return None
+    return self._Min(self.root).key
 
   def _Min(self, x):
-      if x.left is None: return x
-      else:              return self._Min(self, x.left)
+    if x.left is None: return x
+    else:              return self._Min(x.left)
 
   def Max(self):
-      if self.isEmpty(): return None
-      return self.Max(root).key
+    if self.isEmpty(): return None
+    return self._Max(self.root).key
 
   def _Max(self, x):
-      if x.right is None: return x
-      else:               return self._Max(self, x.right)
+    if x.right is None: return x
+    else:               return self._Max(x.right)
 
   def floor(self, key):
-      x = self._floor(self, root, key)
-      if x is None: return None
-      else: return x.key
+    x = self._floor(self.root, key)
+    if x is None: return None
+    else: return x.key
 
   def _floor(self, x, key):
-      if x is None: return None
-      #cmp = key.compareTo(x.key)
-      if key == x.key: return x
-      if key <  x.key: return self._floor(self, x.left, key)
-      t = self._floor(self, x.right, key)
-      if t is not None: return t
-      else: return x
+    if x is None: return None
+    #cmp = key.compareTo(x.key)
+    if key == x.key: return x
+    if key <  x.key: return self._floor(x.left, key)
+    t = self._floor(x.right, key)
+    if t is not None: return t
+    else: return x
 
   def ceiling(self, key):
-      x = self._ceiling(self, root, key)
-      if x is None: return None
-      else: return x.key
+    x = self._ceiling(self.root, key)
+    if x is None: return None
+    else: return x.key
 
   def _ceiling(self, x, key):
-      if x is None: return None
-      #cmp = key.compareTo(x.key)
-      if key == x.key: return x
-      if key <  x.key:
-          t = self._ceiling(self, x.left, key)
-          if t is not None: return t
-          else: return x
-      return self._ceiling(self, x.right, key)
+    if x is None: return None
+    if key == x.key: return x
+    if key <  x.key:
+      t = self._ceiling(x.left, key)
+      if t is not None: return t
+      else: return x
+    return self._ceiling(x.right, key)
 
-  #**********************************************************************
-  #  Rank and selection
-  #**********************************************************************/
+  # Rank and selection
   def select(self, k):
-    if k < 0 or k >= self.Size(self): return None
-    x = self._select(self, root, k)
+    if k < 0 or k >= self.Size(): return None
+    x = self._select(self.root, k)
     return x.key
 
-  # Return key of rank k.
   def _select(self, x, k):
+    """Return key of rank k."""
     if x is None: return None
-    t = self._Size(self, x.left)
-    if   t > k: return self._select(self, x.left,  k)
-    elif t < k: return self._select(self, x.right, k-t-1)
+    t = self._Size(x.left)
+    if   t > k: return self._select(x.left,  k)
+    elif t < k: return self._select(x.right, k-t-1)
     else:       return x
 
   def rank(self, key):
-    return self._rank(self, key, root)
+    return self._rank(key, self.root)
 
   def _rank(self, key, x):
     """Number of keys in the subtree less than key."""
     if x is None: return 0
-    #cmp = key.compareTo(x.key)
-    if   key < x.key: return self._rank(self, key, x.left)
-    elif key > x.key: return 1 + Size(x.left) + rank(key, x.right)
-    else:             return Size(x.left)
+    if   key < x.key: return self._rank(key, x.left)
+    elif key > x.key: return 1 + self._Size(x.left) + self._rank(key, x.right)
+    else:             return self._Size(x.left)
 
-  #**********************************************************************
-  #  Range count and range search.
-  #**********************************************************************/
+  # Range count and range search.
   def keys(self):
     return self.keys(self.Min(), self.Max())
 
-  def keys(self, lo, hi):
-    import Queue
-    queue = Queue()
-    self.keys(self, root, queue, lo, hi)
-    return queue
+  #def keys(self, lo, hi):
+  #  import Queue
+  #  queue = Queue()
+  #  self.keys(root, queue, lo, hi)
+  #  return queue
 
   def _keys(self, x, queue, lo, hi):
     if x is None: return
@@ -194,21 +186,20 @@ class BST(object):
     if cmplo <= 0 and cmphi >= 0: queue.enqueue(x.key)
     if cmphi > 0: keys(x.right, queue, lo, hi)
 
-  def Size(self, lo, hi):
-    if lo.compareTo(hi) > 0: return 0
-    if contains(hi):  return self.rank(self, hi) - self.rank(self, lo) + 1
-    else:             return self.rank(self, hi) - self.rank(self, lo)
+  #def Size(self, lo, hi):
+  #  if lo.compareTo(hi) > 0: return 0
+  #  if contains(hi):  return self.rank(self, hi) - self.rank(self, lo) + 1
+  #  else:             return self.rank(self, hi) - self.rank(self, lo)
 
 
-  # height of this BST (one-node tree has height 0)
-  def height(self, root): return self.height(self, root)
+  def height(self, root): return self.height(root)
   def _height(self, x):
+    """height of this BST (one-node tree has height 0)"""
     if x is None: return -1
-    return 1 + Math.Max(self.height(self, x.left), self.height(self, x.right))
+    return 1 + Math.Max(self.height(x.left), self.height(x.right))
 
-
-  # level order traversal
   def levelOrder():
+    """Property: Inorder transversal of BST yeilds keys in ascending order."""
     import Queue
     keys  = Queue() # new Queue<Key>()
     queue = Queue() # new Queue<Node>()
@@ -242,31 +233,34 @@ class BST(object):
     if x is None:
       x = self.root
     if x is None: return True
-    if Min is not None and x.key.compareTo(Min) <= 0: return False
-    if Max is not None and x.key.compareTo(Max) >= 0: return False
+    if Min is not None and x.key <= Min: return False
+    if Max is not None and x.key >= Max: return False
     return self._isBST(x.left, Min, x.key) and self._isBST(x.right, x.key, Max)
 
-  # are the Size fields correct?
-  def _isSizeConsistent(self): return self._isSizeConsistent(self.root)
-  def _isSizeConsistent(self, x):
-      if x is None: return True
-      if x.N != self.Size(x.left) + self.Size(x.right) + 1: return False
-      return self._isSizeConsistent(x.left) and self._isSizeConsistent(x.right)
+  def _isSizeConsistent(self, x=None):
+    """Check that the Size fields are correct."""
+    if x is None:
+      x = self.root
+    if x is None: return True
+    if x.N != (self._Size(x.left) + self._Size(x.right) + 1): return False
+    #return self._isSizeConsistent(x.left) and self._isSizeConsistent(x.right)
 
-  # check that ranks are consistent
-  def _isRankConsistent(self):
-      S = self.Size()
-      for i in range(S):
-          if i != self.rank(self.select(i)): return False
+  def _isRankConsistent(self, x=None):
+    """check that ranks are consistent."""
+    if x is None:
+      x = self.root
+    S = self.Size()
+    for i in range(S):
+        if i != self.rank(self.select(i)): return False
 
-      #for (Key key : keys())
-      #    if key.compareTo(select(rank(key))) != 0: return False
-      key_queue = self.keys()
-      for i in range(key_queue.size()):
-        key = key_queue[i]
-        if key != self.select( self.rank(key) ): return False
+    #for (Key key : keys())
+    #    if key.compareTo(select(rank(key))) != 0: return False
+    key_queue = self.keys()
+    for i in range(key_queue.size()):
+      key = key_queue[i]
+      if key != self.select( self.rank(key) ): return False
 
-      return True
+    return True
 
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
 # Java Last updated: Tue Nov 19 01:56:07 EST 2013.
