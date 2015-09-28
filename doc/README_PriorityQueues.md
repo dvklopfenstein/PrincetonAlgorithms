@@ -10,9 +10,9 @@ Remove the **largest** (or **smallest**) item.
       [Date.py](../py/AlgsSedgewickWayne/Date.py)
     * [UnorderedArrayMaxPQ.py](../py/AlgsSedgewickWayne/UnorderedArrayMaxPQ.py), 
       unordered array implementation    
-  * **binary heaps**    
-    [MaxPQ.py](../py/AlgsSedgewickWayne/MaxPQ.py), ordered array implementation    
-    [MinPQ.py](../py/AlgsSedgewickWayne/MinPQ.py), ordered array implementation    
+  * **binary heaps** with ordered array priority queue implentations    
+    [MaxPQ.py](../py/AlgsSedgewickWayne/MaxPQ.py)
+    [MinPQ.py](../py/AlgsSedgewickWayne/MinPQ.py)
   * **heapsort** with [Heap.py](../py/AlgsSedgewickWayne/Heap.py)   
   * **event-driven simulation**    
     [CollisionSystem.py](../py/AlgsSedgewickWayne/CollisionSystem.py)
