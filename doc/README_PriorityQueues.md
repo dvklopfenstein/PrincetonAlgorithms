@@ -15,6 +15,8 @@ Remove the **largest** (or **smallest**) item.
     [MinPQ.py](../py/AlgsSedgewickWayne/MinPQ.py), ordered array implementation    
   * **heapsort** with [Heap.py](../py/AlgsSedgewickWayne/Heap.py)   
   * **event-driven simulation**    
+    [CollisionSystem.py](../py/AlgsSedgewickWayne/CollisionSystem.py)
+    [Particle.py](../py/AlgsSedgewickWayne/Particle.py)
 
 ## Example Table of Contents
   1. [Run Example](#ex1)

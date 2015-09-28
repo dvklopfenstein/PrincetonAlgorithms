@@ -147,5 +147,9 @@ def _exch(pq, i, j):
 # heap      x   2 N lg N  2 N lg N  N lg N    N log N guarantee, in-place
 # ???       x x N lg N    N lg N    N lg N    Holy sorting grail
 
+# QUESTION: How many compares does bottom-up heap construction perform 
+# in the worst case when sorting an array of N keys?
+# ANSWER: Linear. The bottom-up version of heapsort makes ~2N compares in the worst case.
+
 
 # Java last updated: Sat Sep 26 08:34:31 EDT 2015.

@@ -183,8 +183,8 @@ Key   5 STRINGS      Description                         DATA
 
 Key  6 CONTEXT                Description                 DATA
 :- --: :--------------------- :-------------------------- :---------------------
-.. 6.1 CollisionSystem        collision system            brownian.txt diffusion.txt
-..   – Particle               particle                    –
+J. 6.1 CollisionSystem        collision system            brownian.txt diffusion.txt
+J.   – Particle               particle                    –
 .. 6.2 BTree                  B-tree                      –
 .. 6.3 SuffixArray            suffix array                abra.txt
 ..   – SuffixArrayX           suffix array                abra.txt
