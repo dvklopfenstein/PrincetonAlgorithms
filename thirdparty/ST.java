@@ -1,18 +1,19 @@
-
-/*************************************************************************
+/******************************************************************************
  *  Compilation:  javac ST.java
  *  Execution:    java ST
+ *  Dependencies: StdIn.java StdOut.java
  *  
  *  Sorted symbol table implementation using a java.util.TreeMap.
  *  Does not allow duplicates.
  *
  *  % java ST
  *
- *************************************************************************/
+ ******************************************************************************/
+
+package edu.princeton.cs.algs4;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.SortedMap;
 import java.util.TreeMap;
 
 /**
@@ -43,6 +44,12 @@ import java.util.TreeMap;
  *  <p>
  *  For additional documentation, see <a href="http://algs4.cs.princeton.edu/35applications">Section 3.5</a> of
  *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ *
+ *  @author Robert Sedgewick
+ *  @author Kevin Wayne
+ *
+ *  @param <Key> the generic type of keys in this symbol table
+ *  @param <Value> the generic type of values in this symbol table
  */
 public class ST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
 
@@ -58,9 +65,10 @@ public class ST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
 
     /**
      * Returns the value associated with the given key.
-     * @param key the key
-     * @return the value associated with the given key if the key is in the symbol table
-     *     and <tt>null</tt> if the key is not in the symbol table
+     *
+     * @param  key the key
+     * @return the value associated with the given key if the key is in the symbol table;
+     *         <tt>null</tt> if the key is not in the symbol table
      * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
      */
     public Value get(Key key) {
@@ -72,8 +80,9 @@ public class ST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
      * Inserts the key-value pair into the symbol table, overwriting the old value
      * with the new value if the key is already in the symbol table.
      * If the value is <tt>null</tt>, this effectively deletes the key from the symbol table.
-     * @param key the key
-     * @param val the value
+     *
+     * @param  key the key
+     * @param  val the value
      * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
      */
     public void put(Key key, Value val) {
@@ -83,9 +92,10 @@ public class ST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
     }
 
     /**
-     * Removes the key and associated value from the symbol table
-     * (if the key is in the symbol table).
-     * @param key the key
+     * Removes the key and associated value from this symbol table.
+     * (if the key is in this symbol table).
+     *
+     * @param  key the key
      * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
      */
     public void delete(Key key) {
@@ -94,10 +104,11 @@ public class ST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
     }
 
     /**
-     * Does this symbol table contain the given key?
-     * @param key the key
+     * Returns true if this symbol table contain the given key.
+     *
+     * @param  key the key
      * @return <tt>true</tt> if this symbol table contains <tt>key</tt> and
-     *     <tt>false</tt> otherwise
+     *         <tt>false</tt> otherwise
      * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
      */
     public boolean contains(Key key) {
@@ -107,6 +118,7 @@ public class ST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
 
     /**
      * Returns the number of key-value pairs in this symbol table.
+     *
      * @return the number of key-value pairs in this symbol table
      */
     public int size() {
@@ -114,7 +126,8 @@ public class ST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
     }
 
     /**
-     * Is this symbol table empty?
+     * Returns true if this symbol table is empty.
+     *
      * @return <tt>true</tt> if this symbol table is empty and <tt>false</tt> otherwise
      */
     public boolean isEmpty() {
@@ -122,32 +135,37 @@ public class ST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
     }
 
     /**
-     * Returns all keys in the symbol table as an <tt>Iterable</tt>.
+     * Returns all keys in this symbol table.
+     * <p>
      * To iterate over all of the keys in the symbol table named <tt>st</tt>,
      * use the foreach notation: <tt>for (Key key : st.keys())</tt>.
-     * @return all keys in the sybol table as an <tt>Iterable</tt>
+     *
+     * @return all keys in the symbol table
      */
     public Iterable<Key> keys() {
         return st.keySet();
     }
 
     /**
-     * Returns all of the keys in the symbol table as an iterator.
+     * Returns all of the keys in this symbol table.
      * To iterate over all of the keys in a symbol table named <tt>st</tt>, use the
      * foreach notation: <tt>for (Key key : st)</tt>.
-     * @deprecated Use {@link #keys} instead.
+     * <p>
      * This method is provided for backward compatibility with the version from
      * <em>Introduction to Programming in Java: An Interdisciplinary Approach.</em>
-     * @return an iterator to all of the keys in the symbol table
+     *
+     * @return     an iterator to all of the keys in the symbol table
+     * @deprecated Replaced by {@link #keys()}.
      */
     public Iterator<Key> iterator() {
         return st.keySet().iterator();
     }
 
     /**
-     * Returns the smallest key in the symbol table.
-     * @return the smallest key in the symbol table
-     * @throws NoSuchElementException if the symbol table is empty
+     * Returns the smallest key in this symbol table.
+     *
+     * @return the smallest key in this symbol table
+     * @throws NoSuchElementException if this symbol table is empty
      */
     public Key min() {
         if (isEmpty()) throw new NoSuchElementException("called min() with empty symbol table");
@@ -155,9 +173,10 @@ public class ST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
     }
 
     /**
-     * Returns the largest key in the symbol table.
-     * @return the largest key in the symbol table
-     * @throws NoSuchElementException if the symbol table is empty
+     * Returns the largest key in this symbol table.
+     *
+     * @return the largest key in this symbol table
+     * @throws NoSuchElementException if this symbol table is empty
      */
     public Key max() {
         if (isEmpty()) throw new NoSuchElementException("called max() with empty symbol table");
@@ -165,9 +184,10 @@ public class ST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
     }
 
     /**
-     * Returns the smallest key in the symbol table greater than or equal to <tt>key</tt>.
-     * @return the smallest key in the symbol table greater than or equal to <tt>key</tt>
-     * @param key the key
+     * Returns the smallest key in this symbol table greater than or equal to <tt>key</tt>.
+     *
+     * @param  key the key
+     * @return the smallest key in this symbol table greater than or equal to <tt>key</tt>
      * @throws NoSuchElementException if there is no such key
      * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
      */
@@ -179,9 +199,10 @@ public class ST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
     }
 
     /**
-     * Returns the largest key in the symbol table less than or equal to <tt>key</tt>.
-     * @return the largest key in the symbol table less than or equal to <tt>key</tt>
-     * @param key the key
+     * Returns the largest key in this symbol table less than or equal to <tt>key</tt>.
+     *
+     * @param  key the key
+     * @return the largest key in this symbol table less than or equal to <tt>key</tt>
      * @throws NoSuchElementException if there is no such key
      * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
      */
@@ -206,6 +227,28 @@ public class ST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
     }
 }
 
+/******************************************************************************
+ *  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
+ *
+ *  This file is part of algs4.jar, which accompanies the textbook
+ *
+ *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
+ *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
+ *      http://algs4.cs.princeton.edu
+ *
+ *
+ *  algs4.jar is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  algs4.jar is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
+ ******************************************************************************/
 
-// Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne. 
-// Java Last updated: Tue Nov 19 11:23:29 EST 2013.
+// Last updated: Mon Sep 28 11:49:54 EDT 2015.

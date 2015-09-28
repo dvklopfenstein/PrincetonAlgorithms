@@ -185,4 +185,10 @@ class CollisionSystem(object):
  #  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
  #*****************************************************************************/
 
+# QUESTION: How many priority queue operations are performed for each collision
+# in the worst case?
+# ANSWER: linear. In the worst case, each of the two colliding particles might
+# be predicted to collide with each other of the other particles (and two walls).
+# In practice, the number of priority queue operations will be much much smaller.
+
 # Java last updated: Mon Sep 28 11:36:16 EDT 2015.
