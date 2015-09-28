@@ -1,11 +1,7 @@
 """Priority Queue (unordered array implementation), return maximum value."""
+# TBD: FINISH PYTHON PORT
 
-# Binary Heap Implementation
-# * Very Simple
-# * Optimal representation of data
-# * Just a little arithmetic
 class MaxPQ: # <Key extends Comparable<Key>> # 15:01
-  """ Priority Queue implemented with a binary heap."""
   """ Priority Queue implemented with a heap-ordered binary tree."""
 
   def __init__(self, capacity):
@@ -51,6 +47,11 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
       # If k is larger than a child, exchange
       self.exch(k,j)
       k = j
+
+# Binary Heap Implementation
+# * Very Simple
+# * Optimal representation of data
+# * Just a little arithmetic
 
   # INSERT: IMPROVE TO lg (lg N)
   #
