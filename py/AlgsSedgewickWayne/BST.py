@@ -1,5 +1,5 @@
 """Binary Search Tree."""
-# TBD: DO PYTHON PORT
+# TBD: FINISH PYTHON PORT
 
 class BST(object):
 
@@ -46,10 +46,11 @@ class BST(object):
     assert self._check()
 
   def _put(self, x, key, val):
+    """Recursive put which returns node."""
     if x is None: return self._Node(key, val, 1)
     if   key < x.key:  x.left  = self.put(x.left,  key, val)
     elif key > x.key:  x.right = self.put(x.right, key, val)
-    else:              x.val   = val
+    else:              x.val   = val # Reset value of already existing node
     x.N = 1 + self._Size(x.left) + self._Size(x.right)
     return x
 

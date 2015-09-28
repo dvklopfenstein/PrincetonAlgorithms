@@ -3,8 +3,8 @@ Use immutable objects, like [Date.py](../py/AlgsSedgewickWayne/Date.py) as keys
 
 ## Code
   * **Symbol Table API** =>
-    [FrequencyCounter.py](../py/AlgsSedgewickWayne/FrequencyCounter.py) uses
-    [ST.py](../py/AlgsSedgewickWayne/ST.py)
+    [FrequencyCounter.java](../thirdparty/FrequencyCounter.java) uses
+    [ST.java](../thirdparty/ST.java)
   * **Elementary Implementations** =>
     [SequentialSearchST.java](../thirdparty/SequentialSearchST.java),
     [BinarySearchST.java](../thirdparty/BinarySearchST.java),
