@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# TBD: FINISH PORT TO PYTHON
 """Read seq. Print N largest items."""
 
 import sys

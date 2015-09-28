@@ -4,6 +4,7 @@ Remove the **largest** (or **smallest**) item.
 ## Code
   * **API and elementary implementations**    
     *TopM.py*, a client that prints the top M elements, uses
+      [MinPQ.py](../py/AlgsSedgewickWayne/MinPQ.py] and
       [Transaction.py](../py/AlgsSedgewickWayne/Transaction.py] and
       [Date.py](../py/AlgsSedgewickWayne/Date.py] and
     *UnorderedMaxPQ.py*, unordered array implementation    
