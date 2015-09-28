@@ -9,13 +9,13 @@ class Date(object):
   def __init__(self, str_month, day=None, year=None):
     """Initializes new date specified as a string in form MM/DD/YYYY."""
     if day is None and year is None:
-      self.date = self._str_to_date(str_month)
+      self.date = self._init_w_str(str_month)
     else:
-      self.date = self._init_date(year, str_month, day)
+      self.date = self._init_w_ints(year, str_month, day)
 
   def month(self): return self.date.month
-  def day(self): return self.date.day
-  def year(self): return self.date.year
+  def day(self):   return self.date.day
+  def year(self):  return self.date.year
 
   @staticmethod
   def isLeapYear(y):
@@ -56,7 +56,7 @@ class Date(object):
   #  hash = 31*hash + year
   #  return hash
 
-  def _str_to_date(self, date_str):
+  def _init_w_str(self, date_str):
     """Get date from the string representation of this date."""
     M = re.match('(\d{1,2})/(\d{1,2})/(\d{4})', date_str) # MM/DD/YYYY
     if M:
@@ -64,7 +64,7 @@ class Date(object):
     else:
       raise Exception("Invalid date. Expected MM/DD/YYYY")
  
-  def _init_date(self, year, month, day):
+  def _init_w_ints(self, year, month, day):
     """Init date object from int values."""
     try:
       return date(year, month, day)
