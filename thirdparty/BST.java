@@ -1,5 +1,4 @@
-
-/*************************************************************************
+/******************************************************************************
  *  Compilation:  javac BST.java
  *  Execution:    java BST
  *  Dependencies: StdIn.java StdOut.java Queue.java
@@ -22,10 +21,44 @@
  *  S 0
  *  X 7
  *
- *************************************************************************/
+ ******************************************************************************/
 
 import java.util.NoSuchElementException;
 
+/**
+ *  The <tt>BST</tt> class represents an ordered symbol table of generic
+ *  key-value pairs.
+ *  It supports the usual <em>put</em>, <em>get</em>, <em>contains</em>,
+ *  <em>delete</em>, <em>size</em>, and <em>is-empty</em> methods.
+ *  It also provides ordered methods for finding the <em>minimum</em>,
+ *  <em>maximum</em>, <em>floor</em>, <em>select</em>, <em>ceiling</em>.
+ *  It also provides a <em>keys</em> method for iterating over all of the keys.
+ *  A symbol table implements the <em>associative array</em> abstraction:
+ *  when associating a value with a key that is already in the symbol table,
+ *  the convention is to replace the old value with the new value.
+ *  Unlike {@link java.util.Map}, this class uses the convention that
+ *  values cannot be <tt>null</tt>&mdash;setting the
+ *  value associated with a key to <tt>null</tt> is equivalent to deleting the key
+ *  from the symbol table.
+ *  <p>
+ *  This implementation uses an (unbalanced) binary search tree. It requires that
+ *  the key type implements the <tt>Comparable</tt> interface and calls the
+ *  <tt>compareTo()</tt> and method to compare two keys. It does not call either
+ *  <tt>equals()</tt> or <tt>hashCode()</tt>.
+ *  The <em>put</em>, <em>contains</em>, <em>remove</em>, <em>minimum</em>,
+ *  <em>maximum</em>, <em>ceiling</em>, <em>floor</em>, <em>select</em>, and
+ *  <em>rank</em>  operations each take
+ *  linear time in the worst case, if the tree becomes unbalanced.
+ *  The <em>size</em>, and <em>is-empty</em> operations take constant time.
+ *  Construction takes constant time.
+ *  <p>
+ *  For additional documentation, see <a href="http://algs4.cs.princeton.edu/32bst">Section 3.2</a> of
+ *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ *  For other implementations, see {@link ST}, {@link BinarySearchST},
+ *  {@link SequentialSearchST}, {@link RedBlackBST},
+ *  {@link SeparateChainingHashST}, and {@link LinearProbingHashST},
+ *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ */
 public class BST<Key extends Comparable<Key>, Value> {
     private Node root;             // root of BST
 
@@ -42,12 +75,24 @@ public class BST<Key extends Comparable<Key>, Value> {
         }
     }
 
-    // is the symbol table empty?
+    /**
+     * Initializes an empty symbol table.
+     */
+    public BST() {
+    }
+
+    /**
+     * Returns true if this symbol table is empty.
+     * @return <tt>true</tt> if this symbol table is empty; <tt>false</tt> otherwise
+     */
     public boolean isEmpty() {
         return size() == 0;
     }
 
-    // return number of key-value pairs in BST
+    /**
+     * Returns the number of key-value pairs in this symbol table.
+     * @return the number of key-value pairs in this symbol table
+     */
     public int size() {
         return size(root);
     }
@@ -58,16 +103,26 @@ public class BST<Key extends Comparable<Key>, Value> {
         else return x.N;
     }
 
-   /***********************************************************************
-    *  Search BST for given key, and return associated value if found,
-    *  return null if not found
-    ***********************************************************************/
-    // does there exist a key-value pair with given key?
+    /**
+     * Does this symbol table contain the given key?
+     *
+     * @param  key the key
+     * @return <tt>true</tt> if this symbol table contains <tt>key</tt> and
+     *         <tt>false</tt> otherwise
+     * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
+     */
     public boolean contains(Key key) {
         return get(key) != null;
     }
 
-    // return value associated with the given key, or null if no such key exists
+    /**
+     * Returns the value associated with the given key.
+     *
+     * @param  key the key
+     * @return the value associated with the given key if the key is in the symbol table
+     *         and <tt>null</tt> if the key is not in the symbol table
+     * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
+     */
     public Value get(Key key) {
         return get(root, key);
     }
@@ -80,12 +135,20 @@ public class BST<Key extends Comparable<Key>, Value> {
         else              return x.val;
     }
 
-   /***********************************************************************
-    *  Insert key-value pair into BST
-    *  If key already exists, update with new value
-    ***********************************************************************/
+    /**
+     * Inserts the key-value pair into the symbol table, overwriting the old value
+     * with the new value if the key is already in the symbol table.
+     * If the value is <tt>null</tt>, this effectively deletes the key from the symbol table.
+     *
+     * @param  key the key
+     * @param  val the value
+     * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
+     */
     public void put(Key key, Value val) {
-        if (val == null) { delete(key); return; }
+        if (val == null) {
+            delete(key);
+            return;
+        }
         root = put(root, key, val);
         assert check();
     }
@@ -100,10 +163,12 @@ public class BST<Key extends Comparable<Key>, Value> {
         return x;
     }
 
-   /***********************************************************************
-    *  Delete
-    ***********************************************************************/
 
+    /**
+     * Removes the smallest key and associated value from the symbol table.
+     *
+     * @throws NoSuchElementException if the symbol table is empty
+     */
     public void deleteMin() {
         if (isEmpty()) throw new NoSuchElementException("Symbol table underflow");
         root = deleteMin(root);
@@ -117,6 +182,11 @@ public class BST<Key extends Comparable<Key>, Value> {
         return x;
     }
 
+    /**
+     * Removes the largest key and associated value from the symbol table.
+     *
+     * @throws NoSuchElementException if the symbol table is empty
+     */
     public void deleteMax() {
         if (isEmpty()) throw new NoSuchElementException("Symbol table underflow");
         root = deleteMax(root);
@@ -130,6 +200,13 @@ public class BST<Key extends Comparable<Key>, Value> {
         return x;
     }
 
+    /**
+     * Removes the key and associated value from the symbol table
+     * (if the key is in the symbol table).
+     *
+     * @param  key the key
+     * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
+     */
     public void delete(Key key) {
         root = delete(root, key);
         assert check();
@@ -153,11 +230,14 @@ public class BST<Key extends Comparable<Key>, Value> {
     } 
 
 
-   /***********************************************************************
-    *  Min, max, floor, and ceiling
-    ***********************************************************************/
+    /**
+     * Returns the smallest key in the symbol table.
+     *
+     * @return the smallest key in the symbol table
+     * @throws NoSuchElementException if the symbol table is empty
+     */
     public Key min() {
-        if (isEmpty()) return null;
+        if (isEmpty()) throw new NoSuchElementException("called min() with empty symbol table");
         return min(root).key;
     } 
 
@@ -166,17 +246,32 @@ public class BST<Key extends Comparable<Key>, Value> {
         else                return min(x.left); 
     } 
 
+    /**
+     * Returns the largest key in the symbol table.
+     *
+     * @return the largest key in the symbol table
+     * @throws NoSuchElementException if the symbol table is empty
+     */
     public Key max() {
-        if (isEmpty()) return null;
+        if (isEmpty()) throw new NoSuchElementException("called max() with empty symbol table");
         return max(root).key;
     } 
 
-    private Node max(Node x) { 
+    private Node max(Node x) {
         if (x.right == null) return x; 
         else                 return max(x.right); 
     } 
 
+    /**
+     * Returns the largest key in the symbol table less than or equal to <tt>key</tt>.
+     *
+     * @param  key the key
+     * @return the largest key in the symbol table less than or equal to <tt>key</tt>
+     * @throws NoSuchElementException if there is no such key
+     * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
+     */
     public Key floor(Key key) {
+        if (isEmpty()) throw new NoSuchElementException("called floor() with empty symbol table");
         Node x = floor(root, key);
         if (x == null) return null;
         else return x.key;
@@ -192,7 +287,16 @@ public class BST<Key extends Comparable<Key>, Value> {
         else return x; 
     } 
 
+    /**
+     * Returns the smallest key in the symbol table greater than or equal to <tt>key</tt>.
+     *
+     * @param  key the key
+     * @return the smallest key in the symbol table greater than or equal to <tt>key</tt>
+     * @throws NoSuchElementException if there is no such key
+     * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
+     */
     public Key ceiling(Key key) {
+        if (isEmpty()) throw new NoSuchElementException("called ceiling() with empty symbol table");
         Node x = ceiling(root, key);
         if (x == null) return null;
         else return x.key;
@@ -210,11 +314,16 @@ public class BST<Key extends Comparable<Key>, Value> {
         return ceiling(x.right, key); 
     } 
 
-   /***********************************************************************
-    *  Rank and selection
-    ***********************************************************************/
+    /**
+     * Return the kth smallest key in the symbol table.
+     *
+     * @param  k the order statistic
+     * @return the kth smallest key in the symbol table
+     * @throws IllegalArgumentException unless <tt>k</tt> is between 0 and
+     *        <em>N</em> &minus; 1
+     */
     public Key select(int k) {
-        if (k < 0 || k >= size())  return null;
+        if (k < 0 || k >= size()) throw new IllegalArgumentException();
         Node x = select(root, k);
         return x.key;
     }
@@ -228,6 +337,13 @@ public class BST<Key extends Comparable<Key>, Value> {
         else            return x; 
     } 
 
+    /**
+     * Return the number of keys in the symbol table strictly less than <tt>key</tt>.
+     *
+     * @param  key the key
+     * @return the number of keys in the symbol table strictly less than <tt>key</tt>
+     * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
+     */
     public int rank(Key key) {
         return rank(key, root);
     } 
@@ -241,13 +357,26 @@ public class BST<Key extends Comparable<Key>, Value> {
         else              return size(x.left); 
     } 
 
-   /***********************************************************************
-    *  Range count and range search.
-    ***********************************************************************/
+    /**
+     * Returns all keys in the symbol table as an <tt>Iterable</tt>.
+     * To iterate over all of the keys in the symbol table named <tt>st</tt>,
+     * use the foreach notation: <tt>for (Key key : st.keys())</tt>.
+     *
+     * @return all keys in the symbol table
+     */
     public Iterable<Key> keys() {
         return keys(min(), max());
     }
 
+    /**
+     * Returns all keys in the symbol table in the given range,
+     * as an <tt>Iterable</tt>.
+     *
+     * @return all keys in the sybol table between <tt>lo</tt> 
+     *         (inclusive) and <tt>hi</tt> (exclusive)
+     * @throws NullPointerException if either <tt>lo</tt> or <tt>hi</tt>
+     *         is <tt>null</tt>
+     */
     public Iterable<Key> keys(Key lo, Key hi) {
         Queue<Key> queue = new Queue<Key>();
         keys(root, queue, lo, hi);
@@ -263,22 +392,38 @@ public class BST<Key extends Comparable<Key>, Value> {
         if (cmphi > 0) keys(x.right, queue, lo, hi); 
     } 
 
+    /**
+     * Returns the number of keys in the symbol table in the given range.
+     *
+     * @return the number of keys in the sybol table between <tt>lo</tt> 
+     *         (inclusive) and <tt>hi</tt> (exclusive)
+     * @throws NullPointerException if either <tt>lo</tt> or <tt>hi</tt>
+     *         is <tt>null</tt>
+     */
     public int size(Key lo, Key hi) {
         if (lo.compareTo(hi) > 0) return 0;
         if (contains(hi)) return rank(hi) - rank(lo) + 1;
         else              return rank(hi) - rank(lo);
     }
 
-
-    // height of this BST (one-node tree has height 0)
-    public int height() { return height(root); }
+    /**
+     * Returns the height of the BST (for debugging).
+     *
+     * @return the height of the BST (a 1-node tree has height 0)
+     */
+    public int height() {
+        return height(root);
+    }
     private int height(Node x) {
         if (x == null) return -1;
         return 1 + Math.max(height(x.left), height(x.right));
     }
 
-
-    // level order traversal
+    /**
+     * Returns the keys in the BST in level order (for debugging).
+     *
+     * @return the keys in the BST in level order traversal
+     */
     public Iterable<Key> levelOrder() {
         Queue<Key> keys = new Queue<Key>();
         Queue<Node> queue = new Queue<Node>();
@@ -294,8 +439,8 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
 
   /*************************************************************************
-    *  Check integrity of BST data structure
-    *************************************************************************/
+    *  Check integrity of BST data structure.
+    ***************************************************************************/
     private boolean check() {
         if (!isBST())            StdOut.println("Not in symmetric order");
         if (!isSizeConsistent()) StdOut.println("Subtree counts not consistent");
@@ -337,9 +482,9 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
 
 
-   /*****************************************************************************
-    *  Test client
-    *****************************************************************************/
+    /**
+     * Unit tests the <tt>BST</tt> data type.
+     */
     public static void main(String[] args) { 
         BST<String, Integer> st = new BST<String, Integer>();
         for (int i = 0; !StdIn.isEmpty(); i++) {
@@ -357,6 +502,5 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
 }
 
-
-// Copyright © 2002–2010, Robert Sedgewick and Kevin Wayne. 
-// Last updated: Tue Nov 19 01:56:07 EST 2013.
+// Copyright (C) 2002–2010, Robert Sedgewick and Kevin Wayne. 
+// Last updated: Wed Aug 26 05:30:12 EDT 2015.

@@ -94,9 +94,9 @@ JP 2.7 Heap        heapsort                          tiny.txt words3.txt
 
 Key  3 SEARCHING              Description                  DATA
 :- --: ---------------------- :--------------------------  :-------------
-..   – FrequencyCounter       frequency counter            tinyTale.txt tale.txt leipzig1M.txt
-.. 3.1 SequentialSearchST     sequential search            tinyST.txt
-.. 3.2 BinarySearchST         binary search                tinyST.txt
+J.   – FrequencyCounter       frequency counter            tinyTale.txt tale.txt leipzig1M.txt
+J. 3.1 SequentialSearchST     sequential search            tinyST.txt
+J. 3.2 BinarySearchST         binary search                tinyST.txt
 J. 3.3 BST binary             search tree                  tinyST.txt
 .. 3.4 RedBlackBST red-black  tree                         tinyST.txt
 .. 3.5 SeparateChainingHashST separate chaining hash table –
