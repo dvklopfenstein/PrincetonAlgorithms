@@ -5,9 +5,9 @@ Use immutable objects, like [Date.py](../py/AlgsSedgewickWayne/Date.py) as keys
   * **Symbol Table API** =>
     [FrequencyCounter.py](../py/AlgsSedgewickWayne/FrequencyCounter.py) uses
     [ST.py](../py/AlgsSedgewickWayne/ST.py)
-  * **Elementary Implementations**    
-    [SequentialSearchST.java](../thirdparty/SequentialSearchST.java)
-    [BinarySearchST.java](../thirdparty/BinarySearchST.java)
+  * **Elementary Implementations** =>
+    [SequentialSearchST.java](../thirdparty/SequentialSearchST.java),
+    [BinarySearchST.java](../thirdparty/BinarySearchST.java),
     [BST.java](../thirdparty/BST.java)
   * **Ordered Operations**    
   * **Binary Search Trees**    
