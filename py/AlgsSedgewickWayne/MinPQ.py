@@ -8,7 +8,7 @@ class MinPQ(object):
       pass
     else:
       #self.pq = (Key[]) new Object[initCapacity + 1];
-      self.pq = [None for i in range(initCapacity+1)]
+      self.pq = [None for i in range(initCapacity+2)] # Pos 0 not used
       self.N = 0 # number of items on priority queue
       self.comparator = None
 
