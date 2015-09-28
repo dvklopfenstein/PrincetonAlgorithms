@@ -13,7 +13,7 @@ Remove the **largest** (or **smallest**) item.
   * **binary heaps**    
     [MaxPQ.py](../py/AlgsSedgewickWayne/MaxPQ.py), ordered array implementation    
     [MinPQ.py](../py/AlgsSedgewickWayne/MinPQ.py), ordered array implementation    
-  * **heapsort**    
+  * **heapsort** with [Heap.py](../py/AlgsSedgewickWayne/Heap.py)   
   * **event-driven simulation**    
 
 ## Example Table of Contents

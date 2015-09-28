@@ -89,7 +89,7 @@ J.   – MinPQ       min heap priority queue           tinyPQ.txt
 ..   – IndexMinPQ  index min heap priority queue     –
 ..   – IndexMaxPQ  index max heap priority queue     –
 ..   – Multiway    multiway merge                    m1.txt m2.txt m3.txt
-J. 2.7 Heap        heapsort                          tiny.txt words3.txt
+JP 2.7 Heap        heapsort                          tiny.txt words3.txt
 
 
 Key  3 SEARCHING              Description                  DATA
