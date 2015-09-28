@@ -2,14 +2,14 @@
 Remove the **largest** (or **smallest**) item.
 
 ## Code
-  * API and elementary implementations    
-    **TopM.py**, a client that prints the top M elements    
-    **UnorderedMaxPQ.py**, unordered array implementation    
-  * binary heaps    
+  * **API and elementary implementations**    
+    *TopM.py*, a client that prints the top M elements    
+    *UnorderedMaxPQ.py*, unordered array implementation    
+  * **binary heaps**    
     [MaxPQ.py](../py/AlgsSedgewickWayne/MaxPQ.py), ordered array implementation    
     [MinPQ.py](../py/AlgsSedgewickWayne/MinPQ.py), ordered array implementation    
-  * heapsort
-  * event-driven simulation
+  * **heapsort**    
+  * **event-driven simulation**    
 
 ## Example Table of Contents
   1. [Run Example](#ex1)
