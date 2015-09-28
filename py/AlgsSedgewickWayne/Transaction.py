@@ -1,4 +1,4 @@
-# TBD: amount: -0.0 check and Nan and Inf check
+# TBD: amount: -0.0 check
 
 from AlgsSedgewickWayne.Date import Date
 
