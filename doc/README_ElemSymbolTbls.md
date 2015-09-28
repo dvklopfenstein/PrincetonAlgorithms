@@ -9,7 +9,7 @@ Use immutable objects, like [Date.py](../py/AlgsSedgewickWayne/Date.py) as keys
     [SequentialSearchST.java](../thirdparty/SequentialSearchST.java),
     [BinarySearchST.java](../thirdparty/BinarySearchST.java),
     [BST.java](../thirdparty/BST.java)
-  * **Ordered Operations**    
+  * **Ordered Operations** => [ST.java](./thirdparty/ST.java)
   * **Binary Search Trees**    
   * **Ordered Operations in BSTs**    
   * **Deletion in BSTs**    
