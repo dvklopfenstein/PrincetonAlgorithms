@@ -2,7 +2,8 @@
 Use immutable objects, like [Date.py](../py/AlgsSedgewickWayne/Date.py) as keys
 
 ## Code
-  * **Symbol Table API**
+  * **Symbol Table API** =>
+    [FrequencyCounter.py](../py/AlgsSedgewickWayne/FrequencyCounter.py) uses
     [ST.py](../py/AlgsSedgewickWayne/ST.py)
   * **Elementary Implementations**    
   * **Ordered Operations**    

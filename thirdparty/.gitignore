@@ -8,3 +8,7 @@ Subset.java
 Point.java
 BruteCollinearPoints.java
 FastCollinearPoints.java
+
+# These files are too big:
+tale.txt
+leipzig1M.txt
