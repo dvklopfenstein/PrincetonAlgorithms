@@ -43,7 +43,7 @@ class Date(object):
 
   def __eq__(self, other):
     """return True if this date equals other; False otherwise."""
-    if other == self: return True
+    if other is self: return True
     if other is None: return False
     if type(other).__name__ != self(self).__name__: return False
     return self.date == other.date

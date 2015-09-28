@@ -11,9 +11,10 @@ def main(prt=sys.stdout):
       today = today.next()
       prt.write("{} {}\n".format(i, today))
 
-  assert (today > today.next()) == False
-  assert (today > today) == False
-  assert (today.next() > today) == True
+  assert not today > today.next()
+  assert not today > today
+  assert today.next() > today
+  assert today == today
 
   birthday = Date(10, 16, 1971)
   prt.write("{}\n".format(birthday))
