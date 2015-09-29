@@ -5,9 +5,9 @@
   * [Quick3way](../py/AlgsSedgewickWayne/Quick3way.py) 
     => Prevent 1/2 N^2 time with duplicate keys
 
-## Example Table of Contents
+## Table of Contents for Examples
   1. [Run Quicksort](#ex1)
 
-## Example Contents
+## Contents for Examples
 ### [ex1](#example-contents)
 1. Run Quicksort

@@ -33,7 +33,7 @@ There are two ways to view the progression of a sort:
      notice that the bars begin to lined up in smallest to biggest order.
      This is the verbose, but descriptive way to see the progression of the sort.
 
-## Example Table of Contents
+## Table of Contents for Exmples
   1. [Run Lecture Example from **Selection (6:59)**](#ex1) (N^2)     
   2. [Run Lecture Example from **Insertion (9:28)**](#ex2) (N^2/4)    
   2a. [Run Best Case Example from **Insertion (9:28)**](#ex2a); Array is already sorted (N)   
@@ -43,7 +43,7 @@ There are two ways to view the progression of a sort:
   3. [Run Lecture Example from **Shellsort (10:48)**](#ex3) (WC=O(N^(3/2), Avg~k*N?)   
   4. [Visualize various intermediate states from various sorts: **Selection, Insertion, and Shell**](#ex4)
 
-## Example Contents
+## Contents for Examples
 ### [ex1](#stacks-and-queues)
 1. Run Lecture Example from **Selection (6:59)**
 ```

@@ -17,9 +17,9 @@ Remove the **largest** (or **smallest**) item.
     [CollisionSystem.py](../py/AlgsSedgewickWayne/CollisionSystem.py) of 
     [Particle.py](../py/AlgsSedgewickWayne/Particle.py)
 
-## Example Table of Contents
+## Table of Contents for Examples
   1. [Run Example](#ex1)
 
-## Example Contents
+## Contents for Examples
 ### [ex1](#example-contents)
 1. Run Example

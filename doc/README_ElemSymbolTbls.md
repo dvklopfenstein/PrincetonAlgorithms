@@ -16,9 +16,9 @@ Use immutable objects, like [Date.py](../py/AlgsSedgewickWayne/Date.py) as keys
     * **Ordered Operations in BSTs**    
     * **Deletion in BSTs**    
 
-## Example Table of Contents
+## Table of Contents for Examples
   1. [Run Example](#ex1)
 
-## Example Contents
+## Examples 
 ### [ex1](#example-contents)
 1. Run Example
