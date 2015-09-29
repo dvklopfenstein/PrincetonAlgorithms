@@ -36,7 +36,7 @@ vonNeumann 3/26/2002   4121.85
 ```
 
 ### [ex2](#table-of-contents-for-examples)
-2. Visualize binary heap violation: child value exceeds parent value.
+2. Visualize binary heap violation: child value exceeds parent value.    
 Child, I, is greater than parent, H:
 ```
 python -c 'import AlgsSedgewickWayne.testcode.binary_heaps as E; E.wr_png("V S N H G F D E I B")'
