@@ -10,8 +10,8 @@ Remove the **largest** (or **smallest**) item.
     * [UnorderedArrayMaxPQ.py](../py/AlgsSedgewickWayne/UnorderedArrayMaxPQ.py) is a 
       simple unordered array implementation of priority queue.   
   * The **binary heap** data structure is used to implement ordered array priority queues:    
-    [MaxPQ.py](../py/AlgsSedgewickWayne/MaxPQ.py)    
-    [MinPQ.py](../py/AlgsSedgewickWayne/MinPQ.py)    
+    * [MaxPQ.py](../py/AlgsSedgewickWayne/MaxPQ.py)    
+    * [MinPQ.py](../py/AlgsSedgewickWayne/MinPQ.py)    
   * **heapsort** is an efficient sorting algorithm: [Heap.py](../py/AlgsSedgewickWayne/Heap.py)   
   * **event-driven simulation** of N particles subject to the laws of elastic collision:     
     [CollisionSystem.py](../py/AlgsSedgewickWayne/CollisionSystem.py) of 
