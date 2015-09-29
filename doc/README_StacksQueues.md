@@ -11,7 +11,7 @@
   1a. [Confirm **"0 - 1 - 2 - 3 4 - - 5 6 - 7 8 9 - - - -"** leaves **"0 1 2 4 3 6 9 8 7 5"**](#ex1a)    
   2. [Run Queue](#ex2)
 
-## Contents for Examples
+## Examples
 ### [ex1](#example-table-of-contents)
 1. Run Stack lecture Quiz, **Stacks (16:24)**, at 05:17 
 ```

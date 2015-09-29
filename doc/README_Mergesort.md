@@ -7,6 +7,6 @@
 ## Table of Contents for Examples
   1. [Run Mergesort](#ex1)
 
-## Contents for Examples
+## Examples
 ### [ex1](#example-contents)
 1. Run Mergesort

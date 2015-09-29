@@ -20,6 +20,6 @@ Remove the **largest** (or **smallest**) item.
 ## Table of Contents for Examples
   1. [Run Example](#ex1)
 
-## Contents for Examples
+## Examples
 ### [ex1](#example-contents)
 1. Run Example

@@ -8,6 +8,6 @@
 ## Table of Contents for Examples
   1. [Run Quicksort](#ex1)
 
-## Contents for Examples
+## Examples
 ### [ex1](#example-contents)
 1. Run Quicksort
