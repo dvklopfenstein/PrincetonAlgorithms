@@ -22,7 +22,7 @@ Remove the **largest** (or **smallest**) item.
 
 ## Examples
 ### [ex1](#table-of-contents-for-examples)
-1. API example from lecture, "APIs and Elementary Implementations (12:52)" at 05:40
+1. API example from lecture, *APIs and Elementary Implementations (12:52)*, at 05:40
 ```
 $ TopM.py 5 < ../../thirdparty/tinyBatch.txt
 ```
