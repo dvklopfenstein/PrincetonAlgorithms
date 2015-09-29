@@ -37,10 +37,6 @@ class MinPQ(object):
   def _resize(self, capacity):
     """helper function to double the size of the heap array."""
     assert capacity > self.N
-    #temp = [None for i in range(capacity)]
-    #for i, pq_elem in enumerate(self.pq):
-    #  temp[i] = pq_elem
-    #self.pq = temp
     self.pq = [pq_elem for pq_elem in self.pq] + [None for i in range(capacity-len(self.pq))]
 
   def insert(self, x):
