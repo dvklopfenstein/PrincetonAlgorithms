@@ -8,5 +8,5 @@
   1. [Run Mergesort](#ex1)
 
 ## Examples
-### [ex1](#example-contents)
+### [ex1](#table-of-contents-for-examples)
 1. Run Mergesort

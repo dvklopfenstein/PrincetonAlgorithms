@@ -21,7 +21,7 @@ Remove the **largest** (or **smallest**) item.
   1. API example from lecture [TopM.py 5 < tinyBatch.txt](#ex1)
 
 ## Examples
-### [ex1](#example-contents)
+### [ex1](#table-of-contents-for-examples)
 1. API example from lecture [TopM.py 5 < tinyBatch.txt](#ex1)
 ```
 $ TopM.py 5 < ../../thirdparty/tinyBatch.txt

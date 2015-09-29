@@ -20,5 +20,5 @@ Use immutable objects, like [Date.py](../py/AlgsSedgewickWayne/Date.py) as keys
   1. [Run Example](#ex1)
 
 ## Examples 
-### [ex1](#example-contents)
+### [ex1](#table-of-contents-for-examples)
 1. Run Example

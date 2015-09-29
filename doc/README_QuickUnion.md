@@ -11,7 +11,7 @@
   3. [Recreate demo from **Quick-Union Improvements (13:02)** lecture](#ex3)
 
 ## Examples
-### [ex1](#example-contents)
+### [ex1](#table-of-contents-for-examples)
 1. Force the state of QuickUnion and visualize: From the cmdline...   
 ```
 > python -c 'import QuickUnionUF as Q; Q.QuickUnionUF(10).wr_png_tree_statestr("6 1 6 6 0 6 1 5 0 5")'
@@ -22,7 +22,7 @@ rooted at 6
 ![QuickUnionUF state](./images/state_QuickUnionUF_6_1_6_6_0_6_1_5_0_5.png)
 
 
-### [ex2](#example-contents)
+### [ex2](#table-of-contents-for-examples)
 2. Recreate demo from **Quick Union (7:50)** lecture: From the cmdline...
 
 Runs these unions using QuickUnion with no speed improvements (Weighing, Path compression):
@@ -93,7 +93,7 @@ val:  1  8  1  8  3  0  5  1  8  8 union(7-3) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 ![QU](./images/QU_demo_step9.png)    
 
 
-### [ex3](#example-contents)
+### [ex3](#table-of-contents-for-examples)
 3. Recreate demo from **Quick-Union Improvements (13:02)** lecture
 ```
 > python -c 'import test_WeightedQuickUnionUF as T; T.test_week1_lecture()'

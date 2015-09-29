@@ -53,7 +53,7 @@ INPUT: 0 - 1 - 2 - 3 4 - - 5 6 - 7 8 9 - - - -
 (0 left on stack)
 ```
 
-### [ex2](#example-contents)
+### [ex2](#table-of-contents-for-examples)
 2. Run Queue
 
 
