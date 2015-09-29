@@ -157,9 +157,9 @@ class ArrayHistory(object):
       self.ah_names.append(name)
     self.array_histories[name].append([copy.deepcopy(ARR), anno])
     # TBD: Remove
-    for name in self.array_histories:
-      for state in self.array_histories[name]:
-        print "SSSS", name, state
+    #for name in self.array_histories:
+    #  for state in self.array_histories[name]:
+    #    print "SSSS", name, state
 
   def __iter__(self):
     for name in self.ah_names:
