@@ -3,8 +3,7 @@ Remove the **largest** (or **smallest**) item.
 
 ## Code
   * **API and elementary implementations**    
-    * [TopM.py](../py/AlgsSedgewickWayne/TopM.py)
-      is a client that prints the top M elements.     
+    * Client, [TopM.py](../py/AlgsSedgewickWayne/TopM.py), prints the top M elements.     
       It uses a priority queue, [MinPQ.py](../py/AlgsSedgewickWayne/MinPQ.py), of 
       [Transaction.py](../py/AlgsSedgewickWayne/Transaction.py) elements, which contain a
       [Date.py](../py/AlgsSedgewickWayne/Date.py) data member
@@ -14,7 +13,7 @@ Remove the **largest** (or **smallest**) item.
     [MaxPQ.py](../py/AlgsSedgewickWayne/MaxPQ.py)
     [MinPQ.py](../py/AlgsSedgewickWayne/MinPQ.py)
   * **heapsort** with [Heap.py](../py/AlgsSedgewickWayne/Heap.py)   
-  * **event-driven simulation**    
+  * **event-driven simulation** of N particles subject to the laws of elastic collision:   
     [CollisionSystem.py](../py/AlgsSedgewickWayne/CollisionSystem.py)
     [Particle.py](../py/AlgsSedgewickWayne/Particle.py)
 
