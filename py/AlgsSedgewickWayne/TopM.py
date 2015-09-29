@@ -1,34 +1,31 @@
 #!/usr/bin/env python
-# TBD: FINISH PORT TO PYTHON
 """Read seq. Print N largest items."""
 
 import sys
 import fileinput
-from AlgsSedgewickWayne.MinPQ import MinPQ
 from AlgsSedgewickWayne.Transaction import Transaction
+from AlgsSedgewickWayne.MinPQ import MinPQ
+from AlgsSedgewickWayne.Stack import Stack
 
 def main(prt=sys.stdout):
   """Reads seq from stdin; takes args M; prints the M largest in decending order."""
-  M = int(sys.argv[1]) if len(sys.argv) > 1 else 1
-  prt.write("M({})\n".format(M))
+  M = int(sys.argv[1]) # The max # of elems to be stored at one time.
   pq = MinPQ(M+1)
 
-  for line in fileinput.input():
+  for line in fileinput.input(sys.argv[2:]):
     """Read stdin until ctrl-D is seen."""
-    transaction = Transaction(line.rstrip("\n\r"))
-  #    pq.insert(transaction)
+    pq.insert(Transaction(line.rstrip("\n\r")))
 
-  #    # remove minimum if M+1 entries on the PQ
-  #    if pq.size() > M) 
-  #        pq.delMin()
-  #}   # top M entries are on the PQ
+    # remove minimum if M+1 entries on the PQ
+    if pq.size() > M: 
+      pq.delMin()
 
-  ## print entries on PQ in reverse order
-  #Stack<Transaction> stack = new Stack<Transaction>()
-  #for (Transaction transaction : pq)
-  #    stack.push(transaction)
-  #for (Transaction transaction : stack)
-  #    StdOut.println(transaction)
+  # print entries on PQ in reverse order
+  stack = Stack()
+  for transaction in pq:
+    stack.push(transaction)
+  for transaction in stack:
+    prt.write("{}\n".format(transaction))
 
 if __name__ == '__main__':
   main()

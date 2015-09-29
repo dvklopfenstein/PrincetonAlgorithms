@@ -18,8 +18,18 @@ Remove the **largest** (or **smallest**) item.
     [Particle.py](../py/AlgsSedgewickWayne/Particle.py)
 
 ## Table of Contents for Examples
-  1. [Run Example](#ex1)
+  1. API example from lecture [TopM.py 5 < tinyBatch.txt](#ex1)
 
 ## Examples
 ### [ex1](#example-contents)
-1. Run Example
+1. API example from lecture [TopM.py 5 < tinyBatch.txt](#ex1)
+```
+$ TopM.py 5 < ../../thirdparty/tinyBatch.txt
+```
+```
+Thompson   2/27/2000   4747.08
+vonNeumann 2/12/1994   4732.35
+vonNeumann 1/11/1999   4409.74
+Hoare      8/18/1992   4381.21
+vonNeumann 3/26/2002   4121.85
+```

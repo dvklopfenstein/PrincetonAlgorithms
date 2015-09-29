@@ -14,7 +14,7 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
     """insert a key into the priority queue."""
     self.N += 1
     self.pq[self.N] = x # Insert at end
-    self.swim(self.N)   # swim up to proper position
+    self._swim(self.N)   # swim up to proper position
 
   def delMax(self): # 10:03
     """Return and remove the largest key."""
@@ -23,18 +23,18 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
     self.exch(1, self.N)
     self.N -= 1
     # then sink new root down to where it belongs.
-    self.sink(1)
+    self._sink(1)
     # Prevent loitering by nulling out maxKey position
     self.pq[self.N+1] = None
     return maxKey
 
-  def swim(self,k): # 05:15
+  def _swim(self,k): # 05:15
     """Exchange smaller child w/larger parent up through the hierarchy."""
     while k>1 and k/2 < k:
       self.exch(k, k/2)
       k = k/2
 
-  def sink(self, k): # 8:52
+  def _sink(self, k): # 8:52
     """Push node down one level at a time to order array."""
     while 2*k <= self.N:
       j = 2*k

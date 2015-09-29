@@ -20,10 +20,10 @@ class Transaction(object):
     return "{:<10} {:10} {:8.2f}".format(self.who, self.when, self.amount)
 
   def __lt__(self, that):
-    return this.amount < that.amount
+    return self.amount < that.amount
 
   def __gt__(self, that):
-    return this.amount > that.amount
+    return self.amount > that.amount
 
   # @return { a negative integer, zero, a positive integer}, depending
   #         on whether the amount of this transaction is { less than,
@@ -35,10 +35,10 @@ class Transaction(object):
   def __eq__(self, other):
     if other is self: return True
     if other is None: return False
-    if type(other).__name__ != type(this).__name__: return False
-    return ((this.amount == that.amount) and 
-            (this.who    == that.who)    and 
-            (this.when   == that.when))
+    if type(other).__name__ != type(self).__name__: return False
+    return ((self.amount == that.amount) and 
+            (self.who    == that.who)    and 
+            (self.when   == that.when))
 
   #def hashCode():
   #  """Returns a hash code for this transaction."""
