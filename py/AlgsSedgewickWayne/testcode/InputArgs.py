@@ -53,6 +53,14 @@ def get_seq__int_or_str(seqstr):
   """Return a list of ints if string contains a sequence of ints."""
   return conv_int(seqstr.split())
 
+def get_array(arg):
+  if isinstance(arg, str):
+    return get_seq__int_or_str(arg)
+  elif os.isfile(arg):
+    raise Exception("TIME TO IMPLEMENT READING SEQUENCE FROM FILE")
+  else:
+    return arg # arg is assumed to be an array
+
 def conv_int(lst):
   """Converts a list element to an int if it is an int. Leaves it if not."""
   get_val = lambda a: int(a) if a.isdigit() else a

@@ -48,6 +48,16 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
       self.exch(k,j)
       k = j
 
+# APIS AND ELEMENTARY IMPLEMENTATIONS (12:52)
+#
+# QUESTION: what is the expected number of array accesses and compares, respectively,
+# to insert a random key into an ordered array implementation of a priority queue?
+# ANSWER: linear and logorithmic.
+# We can use binary search to find the insertion point in logorithmic time.
+# On average, the key to be inserted must be places in the middle of the
+# array--to keep the array in order, we must shift over all larger keys.
+
+
 # Binary Heap Implementation
 # * Very Simple
 # * Optimal representation of data

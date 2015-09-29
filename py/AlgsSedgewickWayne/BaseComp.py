@@ -4,6 +4,7 @@
 
 import collections as cx
 import sys
+from AlgsSedgewickWayne.testcode.utils import get_png_label
 
 class BaseComp(object):
   """ Holds an index of Nodes which can be combined into components."""
@@ -39,7 +40,7 @@ class BaseComp(object):
   def wr_png(self, fout_png="components.png", prt=sys.stdout, **kwargs):
     """Make a png showing a diagram of the connected components."""
     import pydot
-    label = self.get_label(kwargs)
+    label = get_png_label(self.ID, kwargs)
     # 1. Create/initialize Graph
     G = pydot.Dot(label=label, graph_type='digraph') # Directed Graph
     # 2. Create Nodes
@@ -67,16 +68,6 @@ class BaseComp(object):
     if fout_png is not None:
       label_pat = "union({u0}, {u1}) -> {{STATE}}".format(u0=u0, u1=u1)
       self.wr_png(fout_png, label_pat=label_pat)
-
-  def get_label(self, kwargs):
-    """Return label to be used in image."""
-    if 'label' in kwargs:
-      return kwargs['label']
-    pat = "{STATE}"
-    state_str = " ".join([str(e) for e in self.ID])
-    if 'label_pat' in kwargs:
-      pat = kwargs['label_pat']
-    return pat.format(STATE=state_str)
 
   def get_png(self):
     """Generate a png filename."""

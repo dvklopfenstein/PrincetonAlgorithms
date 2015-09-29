@@ -19,6 +19,7 @@ Remove the **largest** (or **smallest**) item.
 
 ## Table of Contents for Examples
   1. API example from lecture: [**$ TopM.py 5 < tinyBatch.txt**](#ex1)
+  2. Visualize binary heap violation: [child value exceeds parent value](#ex2)
 
 ## Examples
 ### [ex1](#table-of-contents-for-examples)
@@ -33,3 +34,11 @@ vonNeumann 1/11/1999   4409.74
 Hoare      8/18/1992   4381.21
 vonNeumann 3/26/2002   4121.85
 ```
+
+### [ex2](#table-of-contents-for-examples)
+2. Visualize binary heap violation: child value exceeds parent value.
+Child, I, is greater than parent, H:
+```
+python -c 'import AlgsSedgewickWayne.testcode.binary_heaps as E; E.wr_png("V S N H G F D E I B")'
+```
+![binary_heap_V_S_N_H_G_F_D_E_I_B.png](./images/binary_heap_V_S_N_H_G_F_D_E_I_B.png)

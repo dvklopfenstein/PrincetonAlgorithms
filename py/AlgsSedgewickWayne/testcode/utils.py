@@ -52,4 +52,14 @@ def arr_vis(arr, array_id=0, i0=0, prt=sys.stdout):
 def str_vis(str_arr, array_id=0, prt=sys.stdout):
   arr_vis(str_arr.split(), array_id, prt)
 
+def get_png_label(arr, kwargs):
+  """Return label to be used in image."""
+  if 'label' in kwargs:
+    return kwargs['label']
+  pat = "{STATE}"
+  if 'label_pat' in kwargs:
+    pat = kwargs['label_pat']
+  state_str = " ".join([str(e) for e in arr])
+  return pat.format(STATE=state_str)
+
 
