@@ -9,8 +9,8 @@ Remove the **largest** (or **smallest**) item.
       [Transaction.py](../py/AlgsSedgewickWayne/Transaction.py) elements, which contain a
       [Date.py](../py/AlgsSedgewickWayne/Date.py) data member
     * [UnorderedArrayMaxPQ.py](../py/AlgsSedgewickWayne/UnorderedArrayMaxPQ.py) is a 
-      simple unordered array implementation    
-  * **binary heaps** with ordered array priority queue implentations    
+      simple unordered array implementation of priority queue.   
+  * The **binary heap** data structure is used to implement ordered array priority queues:
     [MaxPQ.py](../py/AlgsSedgewickWayne/MaxPQ.py)
     [MinPQ.py](../py/AlgsSedgewickWayne/MinPQ.py)
   * **heapsort** with [Heap.py](../py/AlgsSedgewickWayne/Heap.py)   
