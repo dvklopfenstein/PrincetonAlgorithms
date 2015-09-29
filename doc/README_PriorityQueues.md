@@ -3,13 +3,13 @@ Remove the **largest** (or **smallest**) item.
 
 ## Code
   * **API and elementary implementations**    
-    * [TopM.py](../py/AlgsSedgewickWayne/TopM.py), 
-      a client that prints the top M elements.     
-      Uses a priority queue, [MinPQ.py](../py/AlgsSedgewickWayne/MinPQ.py), of 
+    * [TopM.py](../py/AlgsSedgewickWayne/TopM.py)
+      is a client that prints the top M elements.     
+      It uses a priority queue, [MinPQ.py](../py/AlgsSedgewickWayne/MinPQ.py), of 
       [Transaction.py](../py/AlgsSedgewickWayne/Transaction.py) elements, which contain a
       [Date.py](../py/AlgsSedgewickWayne/Date.py) data member
-    * [UnorderedArrayMaxPQ.py](../py/AlgsSedgewickWayne/UnorderedArrayMaxPQ.py), 
-      unordered array implementation    
+    * [UnorderedArrayMaxPQ.py](../py/AlgsSedgewickWayne/UnorderedArrayMaxPQ.py) is a 
+      simple unordered array implementation    
   * **binary heaps** with ordered array priority queue implentations    
     [MaxPQ.py](../py/AlgsSedgewickWayne/MaxPQ.py)
     [MinPQ.py](../py/AlgsSedgewickWayne/MinPQ.py)
