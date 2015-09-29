@@ -13,8 +13,8 @@ Use immutable objects, like [Date.py](../py/AlgsSedgewickWayne/Date.py) as keys
   * **Binary Search Trees** => [BST.java](../thirdparty/BST.java)    
     A classic data structure that enables us to provide efficient 
     implementations of Symbol Table algorithms
-  * **Ordered Operations in BSTs**    
-  * **Deletion in BSTs**    
+    * **Ordered Operations in BSTs**    
+    * **Deletion in BSTs**    
 
 ## Example Table of Contents
   1. [Run Example](#ex1)
