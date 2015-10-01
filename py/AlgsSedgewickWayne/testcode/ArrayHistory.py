@@ -144,10 +144,16 @@ def xor_txt(txt_prev, txt_curr):
       lst.append('X')
   return ''.join(lst)
 
+def get_array_str(array_st):
+  """Given: ['E', 'G', None, None], return "E G _ _"."""
+  fnc = lambda item: str(item) if item is not None else "_"
+  return ' '.join([fnc(item) for item in array_st])
+
 class ArrayHistory(object):
   """Class to manage array history for visualization and learning."""
 
   def __init__(self):
+    self.NtArr = cx.namedtuple("NtArr", "array_st anno")
     self.array_histories = cx.defaultdict(list)
     self.ah_names = []
 
@@ -155,7 +161,7 @@ class ArrayHistory(object):
     """Add current arry state to array history."""
     if name not in self.ah_names:
       self.ah_names.append(name)
-    self.array_histories[name].append([copy.deepcopy(ARR), anno])
+    self.array_histories[name].append(self.NtArr._make([copy.deepcopy(ARR), anno]))
     # TBD: Remove
     #for name in self.array_histories:
     #  for state in self.array_histories[name]:
@@ -174,13 +180,30 @@ class ArrayHistory(object):
     for name in self.ah_names:
       for idx, A in enumerate(self.array_histories[name]):
         txt_prev = txt_curr
-        txt_curr = ' '.join([fnc(item) for item in A[0]])
+        txt_curr = get_array_str(A.array_st)
         if txt_prev is not None:
           txt_mtch = xor_txt(txt_prev, txt_curr)
           prt.write('    {}\n'.format(txt_mtch))
         prt.write('{IDX:2d}: {STATE} <= {NAME}\n'.format(IDX=idx, STATE=txt_curr, NAME=name))
       prt.write("\n")
   
+  def prt_intlvd(self, prt=sys.stdout):
+    """ Prints array history with spaces between elements."""
+    ah_names = self.ah_names
+    txt_prev = {name:None for name in ah_names}
+    txt_curr = {name:None for name in ah_names}
+    fnc = lambda item: str(item) if item is not None else "_"
+    arrs = [self.array_histories[name] for name in ah_names]
+    for incr, ntarrs in enumerate(zip(*arrs)):
+      for name, ntarr in zip(ah_names, ntarrs):
+        #print incr, name, ntarr, get_array_str(ntarr.array_st)
+        txt_prev[name] = txt_curr[name]
+        txt_curr[name] = get_array_str(ntarr.array_st)
+        if txt_prev[name] is not None:
+          txt_mtch = xor_txt(txt_prev[name], txt_curr[name])
+          prt.write('    {}\n'.format(txt_mtch))
+        prt.write('{IDX:2d}: {STATE} <= {NAME}\n'.format(IDX=incr, STATE=txt_curr[name], NAME=name))
+      prt.write("\n")
 
   def show(self, desc, prt=sys.stdout):
     """ Print array history plus horizontal histogram bars to help visualize sort."""
@@ -197,16 +220,11 @@ class ArrayHistory(object):
     if isinstance(ah, list) and len(ah) != 0:
       elem2num = get_elem2num(ah)
       for incr, A in enumerate(ah):
-        Astr = [str(item) for item in A[0]]
+        Astr = [str(item) for item in A.array_st]
         prt.write('{} {:2d} {}: {}\n'.format(name, incr, desc, ' '.join(Astr)))
-        for idx, elem in enumerate(A[0]):
-          anno = get_anno(idx, A[1])
+        for idx, elem in enumerate(A.array_st):
+          anno = get_anno(idx, A.anno)
           prt.write('{} {:2d} {}({:2d}): {}{:2} {}\n'.format(
               name, incr, desc, idx, anno, elem, ''.join(['*']*elem2num[get_keystr(elem)])))
         prt.write('\n')
-
-
-
-
-
 

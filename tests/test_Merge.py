@@ -14,6 +14,7 @@ def run(a, desc, prt=sys.stdout):
   Sort(a, array_history=ah)
   prt.write("{DESC} RESULT: {A}\n".format(DESC=desc, A=a))
   ah.prt()
+  ah.prt_intlvd()
   #ah.show(desc)
 
 def test_14238(prt=sys.stdout):
