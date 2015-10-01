@@ -170,7 +170,7 @@ class ArrayHistory(object):
     """ Prints array history with spaces between elements."""
     txt_prev = None
     txt_curr = None
-    fnc = lambda item: str(item) if item is not None else "."
+    fnc = lambda item: str(item) if item is not None else "_"
     for name in self.ah_names:
       for idx, A in enumerate(self.array_histories[name]):
         txt_prev = txt_curr

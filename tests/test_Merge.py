@@ -14,7 +14,11 @@ def run(a, desc, prt=sys.stdout):
   Sort(a, array_history=ah)
   prt.write("{DESC} RESULT: {A}\n".format(DESC=desc, A=a))
   ah.prt()
-  ah.show(desc)
+  #ah.show(desc)
+
+def test_14238(prt=sys.stdout):
+  a = map(int, "80 97 50 29 23 83 66 67 43 47 41 42".split())
+  run(a, "14238")
 
 def test_3(prt=sys.stdout):
   # (seed = 183182)
