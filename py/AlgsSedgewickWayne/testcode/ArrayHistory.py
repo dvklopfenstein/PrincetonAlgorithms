@@ -149,6 +149,15 @@ def get_array_str(array_st):
   fnc = lambda item: str(item) if item is not None else "_"
   return ' '.join([fnc(item) for item in array_st])
 
+def get_anno_str(ntarr):
+  """Given an NtArr, return symbols above indices."""
+  getval = lambda i: '.'  if i not in ntarr.anno else ntarr.anno[i]
+  valarr = ["{}".format(getval(i)) for i in range(len(ntarr.array_st))]
+  return ' '.join(valarr)
+
+def get_anno_val_str(ntarr):
+  return ", ".join(["({} {})".format(i, s) for i, s in ntarr.anno.items()])
+
 class ArrayHistory(object):
   """Class to manage array history for visualization and learning."""
 
@@ -199,9 +208,12 @@ class ArrayHistory(object):
         #print incr, name, ntarr, get_array_str(ntarr.array_st)
         txt_prev[name] = txt_curr[name]
         txt_curr[name] = get_array_str(ntarr.array_st)
+        if ntarr.anno is not None:
+          prt.write('{IDX:2d}: {ANNO} <= {NAME} {DICT}\n'.format(
+            IDX=incr, ANNO=get_anno_str(ntarr), NAME=name, DICT=get_anno_val_str(ntarr)))
         if txt_prev[name] is not None:
           txt_mtch = xor_txt(txt_prev[name], txt_curr[name])
-          prt.write('    {}\n'.format(txt_mtch))
+          prt.write('    {DIFF} <= {NAME} compare\n'.format(DIFF=txt_mtch, NAME=name))
         prt.write('{IDX:2d}: {STATE} <= {NAME}\n'.format(IDX=incr, STATE=txt_curr[name], NAME=name))
       prt.write("\n")
 

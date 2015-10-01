@@ -13,8 +13,7 @@ def run(a, desc, prt=sys.stdout):
   ah = ArrayHistory()
   Sort(a, array_history=ah)
   prt.write("{DESC} RESULT: {A}\n".format(DESC=desc, A=a))
-  ah.prt()
-  ah.prt_intlvd()
+  ah.prt_intlvd() # After each merge, print the state of both a and aux
   #ah.show(desc)
 
 def test_14238(prt=sys.stdout):

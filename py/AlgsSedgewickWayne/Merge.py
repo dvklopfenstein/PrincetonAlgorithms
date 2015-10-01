@@ -25,15 +25,14 @@ def merge(a, aux, lo, mid, hi): # 05:00-06:00
     elif j > hi:                 a[k] = aux[i]; i += 1 # j ptr is exhausted
     elif __lt__(aux[j], aux[i]): a[k] = aux[j]; j += 1
     else:                        a[k] = aux[i]; i += 1
-  _vis_merge(a, aux, lo, mid, hi)
+  #_vis_merge(a, aux, lo, mid, hi)
   assert _isSorted(a, lo, hi) # postcondition: a[lo .. hi] is sorted
 
 def _sort(a, aux, lo, hi, array_history):
   """Recursive sort."""
   if hi <= lo: return
   mid = lo + (hi - lo) / 2;
-  print "{:>2} to {:>2} => sort({:>2} {:>2}), sort({:>2} {:>2})".format(
-    lo, hi, lo, mid, mid+1, hi)
+  print "{:>2} to {:>2} => sort({:>2} {:>2}), sort({:>2} {:>2})".format(lo, hi, lo, mid, mid+1, hi)
   _sort(a, aux, lo,     mid, array_history)
   _sort(a, aux, mid + 1, hi, array_history)
   merge(a, aux, lo, mid, hi)
@@ -42,25 +41,25 @@ def _sort(a, aux, lo, hi, array_history):
 
 
 
-def _vis_merge(a, aux, lo, mid, hi, prt=sys.stdout):
-  """For visualizing Merge results."""
-  txt = "MERGE({:>2} {:>2} {:>2})   ".format(lo, mid, hi)
-  #print txt, ' '.join(["{:>2}".format(e) for e in a])
-  fno = lambda e: '__' if e is None else e
-  dsy = {lo:'> ', mid:'|', hi:' <'}
-  prt.write("{} {}\n".format(txt, ' '.join(["{:>2}".format(dsy.get(i, '..')) for i in range(len(a))])))
-  prt.write("{} {}\n".format(txt, ' '.join(["{:>2}".format(e) for e in a])))
-  prt.write("{} {}\n".format(txt, ' '.join(["{:>2}".format(fno(e)) for e in aux])))
-  prt.write("MERGE\n")
-
 def _add_history(array_history, a, aux, lo=None, hi=None, mid=None):
   """For visualizing array history."""
   if array_history is not None: 
     te = lo is not None
-    anno_a = cx.OrderedDict([(lo, '-'), (hi, '+')]) if te else None
-    anno_b = {mid: '>'}                             if te else None
+    anno_a = cx.OrderedDict([(lo, '-'), (hi, '+'), (mid,'*')]) if te else None
     array_history.add_history(a,   anno_a, name="arr")
-    array_history.add_history(aux, anno_b, name="aux")
+    array_history.add_history(aux, None, name="aux")
+
+# TBD: Delete
+#def _vis_merge(a, aux, lo, mid, hi, prt=sys.stdout):
+#  """For visualizing Merge results."""
+#  txt = "MERGE({:>2} {:>2} {:>2})   ".format(lo, mid, hi)
+#  #print txt, ' '.join(["{:>2}".format(e) for e in a])
+#  fno = lambda e: '__' if e is None else e
+#  dsy = {lo:'> ', mid:'|', hi:' <'}
+#  prt.write("{} {}\n".format(txt, ' '.join(["{:>2}".format(dsy.get(i, '..')) for i in range(len(a))])))
+#  prt.write("{} {}\n".format(txt, ' '.join(["{:>2}".format(e) for e in a])))
+#  prt.write("{} {}\n".format(txt, ' '.join(["{:>2}".format(fno(e)) for e in aux])))
+#  prt.write("MERGE\n")
 
 #************************************************************************
 # Top-Down Mergesort
