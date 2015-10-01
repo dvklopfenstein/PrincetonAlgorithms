@@ -10,6 +10,16 @@ def Sort(a, array_history=None): # 09:30
   _sort(a, aux, lo=0, hi=len(a)-1, array_history=array_history)
   assert _isSorted(a)
 
+def _sort(a, aux, lo, hi, array_history):
+  """Recursive sort."""
+  if hi <= lo: return
+  mid = lo + (hi - lo) / 2;
+  #print "{:>2} to {:>2} => sort({:>2} {:>2}), sort({:>2} {:>2})".format(lo, hi, lo, mid, mid+1, hi)
+  _sort(a, aux, lo,     mid, array_history)
+  _sort(a, aux, mid + 1, hi, array_history)
+  merge(a, aux, lo, mid, hi)
+  _add_history(array_history, a, aux, lo, hi, mid)
+
 def merge(a, aux, lo, mid, hi): # 05:00-06:00
   """Merge 2 sorted arrays into 1 sorted array."""
   assert _isSorted(a, lo, mid)    # precondition: a[lo .. mid]   are sorted subarrays
@@ -25,17 +35,6 @@ def merge(a, aux, lo, mid, hi): # 05:00-06:00
     else:                        a[k] = aux[i]; i += 1
   #_vis_merge(a, aux, lo, mid, hi)
   assert _isSorted(a, lo, hi) # postcondition: a[lo .. hi] is sorted
-
-def _sort(a, aux, lo, hi, array_history):
-  """Recursive sort."""
-  if hi <= lo: return
-  mid = lo + (hi - lo) / 2;
-  #print "{:>2} to {:>2} => sort({:>2} {:>2}), sort({:>2} {:>2})".format(lo, hi, lo, mid, mid+1, hi)
-  _sort(a, aux, lo,     mid, array_history)
-  _sort(a, aux, mid + 1, hi, array_history)
-  merge(a, aux, lo, mid, hi)
-  _add_history(array_history, a, aux, lo, hi, mid)
-
 
 
 
