@@ -1,8 +1,6 @@
 """Merge Sort (Top Down) from Week 3 lecture."""
 
 from AlgsSedgewickWayne.utils import __lt__, _exch, _isSorted
-import collections as cx
-import sys
 
 def Sort(a, array_history=None): # 09:30
   """Rearranges the array in ascending order, using the natural order."""
@@ -32,7 +30,7 @@ def _sort(a, aux, lo, hi, array_history):
   """Recursive sort."""
   if hi <= lo: return
   mid = lo + (hi - lo) / 2;
-  print "{:>2} to {:>2} => sort({:>2} {:>2}), sort({:>2} {:>2})".format(lo, hi, lo, mid, mid+1, hi)
+  #print "{:>2} to {:>2} => sort({:>2} {:>2}), sort({:>2} {:>2})".format(lo, hi, lo, mid, mid+1, hi)
   _sort(a, aux, lo,     mid, array_history)
   _sort(a, aux, mid + 1, hi, array_history)
   merge(a, aux, lo, mid, hi)
