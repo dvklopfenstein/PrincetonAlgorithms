@@ -1,7 +1,7 @@
 # Mergesort
 
 ## Code
-  * [Merge](../py/AlgsSedgewickWayne/Merge.py)
+  * [Merge](../py/AlgsSedgewickWayne/Merge.py) => Top-down Mergesort
   * MergeX => Top-down Mergesort with practical improvements
   * [MergeBU](../py/AlgsSedgewickWayne/MergeBU.py) => Bottom-up Mergesort (no recursion)
 
