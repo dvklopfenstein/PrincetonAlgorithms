@@ -1,4 +1,4 @@
-# Schedule
+# [Coursera Course](https://www.coursera.org/course/algs4partI)  Schedule
 Note: There are no Progamming Assignment Solutions on this site.
 
 ## Algorithms 1
