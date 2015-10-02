@@ -22,8 +22,8 @@ Implemented in Python 2.7.x by DV Klopfenstein is selected code from:
      [Windows](http://algs4.cs.princeton.edu/windows/),
      [Mac OS X](http://algs4.cs.princeton.edu/mac/)
 
-**PREREQUISITES**: python, numpy, pylab, matplotlib, math, sys, os.
-*NOTE*: Most Python modules in this repository do not use matplotlib or pylab.
+**PREREQUISITES**: python, numpy, pylab, math, sys, os.
+*NOTE*: Most Python modules in this repository do not use pylab.
 
 **PYTHONPATH**: Add the directory: \<your_directory\>/PrincetonAlgorithms/py/AlgsSedgewickWayne/
 
