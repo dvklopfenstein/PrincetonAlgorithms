@@ -1712,7 +1712,7 @@ def test_849965():
 ```
 
 ```
-> python -c 'import test_wk2_sort_q2_visualizer as T; T.test_849965()'
+> python -c 'import visualize_blktxt as T; T.test_849965()'
 ```
 ```
 0  0 slug **********

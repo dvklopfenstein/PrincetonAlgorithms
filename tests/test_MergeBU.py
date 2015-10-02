@@ -29,8 +29,16 @@ def test_1(prt=sys.stdout):
 
 def run_all(prt=sys.stdout):
   test_1(prt)
+  test_193860(prt)
+
+def run_seq(prt=sys.stdout):
+  a = map(int, sys.argv[1].split() )
+  run(a, "MERGESORT")
+
 
 if __name__ == '__main__':
-  run_all()
-
+  if len(sys.argv) == 1:
+    run_all()
+  else:
+    run_seq()
 

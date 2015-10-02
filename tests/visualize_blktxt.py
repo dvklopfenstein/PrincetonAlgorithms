@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+"""Visualize the sizes of strings in columns from exercises (algs1:wk2/wk3)."""
 
 from AlgsSedgewickWayne.testcode.utils import blk_visualizer
 
@@ -54,9 +55,27 @@ def test_976184():
 """
   blk_visualizer(block_str)
 
+def test_131507():
+  block_str = """
+    moth   gnat   boar   boar   boar   bear   
+    gnat   moth   calf   calf   calf   boar   
+    deer   calf   deer   deer   deer   calf   
+    calf   deer   gnat   gnat   duck   crow   
+    lamb   boar   lamb   lamb   gnat   deer   
+    boar   lamb   moth   moth   hare   duck   
+    hare   duck   duck   duck   lamb   erne   
+    duck   hare   erne   erne   moth   gnat   
+    erne   bear   hare   hare   bear   hake   
+    bear   erne   bear   bear   crow   hare   
+    hake   crow   hake   crow   erne   lamb   
+    crow   hake   crow   hake   hake   moth   
+"""
+  blk_visualizer(block_str)
+
 def run_all():
   test_849965()
   test_976184()
+  test_131507()
 
 if __name__ == '__main__':
   run_all()

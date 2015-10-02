@@ -364,20 +364,40 @@ def _add_history(array_history, a, aux, anno=None):
 #   *     N lg N
 # compares.
 
-########################################################
-#*
-#  The <tt>Merge</tt> class provides static methods for sorting an
-#  array using mergesort.
-#  <p>
-#  For additional documentation, see <a href="http:#algs4.cs.princeton.edu/22mergesort">Section 2.2</a> of
-#  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
-#  For an optimized version, see {@link MergeX}.
-#
-#  @author Robert Sedgewick
-#  @author Kevin Wayne
-#/
-
 # stably merge a[lo .. mid] with a[mid+1 ..hi] using aux[lo .. hi]
+
+# F: Mergesort is faster than quicksort in practice because it uses
+#    fewer compares than quicksort.
+#    EXPLANATION: Mergesort is typically slower tha quicksort in 
+#    practice even though it makes fewer compares. Other factors
+#    (including array accesses and cache) outweigh the advantage
+#    in the number of compares.
+
+# T: For any array of N distinct keys with N a power of 2, top-down
+#    mergesort and bottom-up mergesort compare exactly the same pairs
+#    of keys (but possibly in a different order).
+#    EXPLANATION: This can be proved by induction - in either version
+#    of mergesort, all of the subarray sizes are powers of 2.
+
+# T: Any two items are compared with one another no more than once
+#    during bottom-up mergesort.
+#    EXPLANATION: Once two items are compared, they are merged into
+#    the same subarray. Only items in different subarraus can be compared.
+
+# F: Mergesort is faster in practice than insertion sort regardless
+#    of the number of items N in the array.
+#    EXPLANATION: Insertion sort is faster for small values of N; 
+#    this explains why we can imporive mergesort by cutting off 
+#    to insertion sort for small values of N.
+
+# F: For any array of N distinct keys, top-down mergesort and bottom-up
+#    mergesort compare exactly the same pairs of keys (but possibly in a 
+#    different order)
+#    EXPLANATION: The compares can be different if N is not a power of 2.
+#    for example, consider the array 0 1 2 3 4. Top-down mergesort makes the compares:
+#      {0-1, 0-2, 1-2, 3-4, 0-3, 1-3, 2-3} 
+#    while bottom-up mergesort makes the compares 
+#      {0-1, 2-3, 0-2, 1-2, 0-4, 1-4, 2-4, 3-4}
 
 
 #**********************************************************************
