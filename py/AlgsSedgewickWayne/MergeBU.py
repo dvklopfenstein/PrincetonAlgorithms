@@ -1,57 +1,25 @@
 "Bottom-up Mergesort"""
 
 from AlgsSedgewickWayne.utils import __lt__, _exch, _isSorted
-from AlgsSedgewickWayne.Merge import merge
+from AlgsSedgewickWayne.Merge import merge, _add_history
 
 def Sort(a, array_history=None): # N lg N
   """Rearranges the array, a, in ascending order, using the natural order."""
   N = len(a)
   aux = [None for i in range(N)]
+  _add_history(array_history, a, aux) # Record initial state of arrays
   sarr_sz = 1
   # First nested loop is "Size of the sub-array" executed only lg N times (lg N passes)
   while sarr_sz < N: # i.e. for (int sz=1; sz<N; sz=sz+sz)
-      lo = 0
-      while lo < N-sarr_sz: # i.e. for (int lo = 0; lo < N-sz; lo += sz+sz)
-          merge(a, aux, lo=lo, mid=lo+sarr_sz-1, hi=min(lo+sarr_sz+sarr_sz-1, N-1))
-          lo += sarr_sz+sarr_sz
-      sarr_sz = sarr_sz+sarr_sz # Double the size of the sub-array until we get to N
+    lo = 0
+    while lo < N-sarr_sz: # i.e. for (int lo = 0; lo < N-sz; lo += sz+sz)
+      mid = lo + sarr_sz - 1
+      hi  = min(lo + sarr_sz + sarr_sz - 1, N-1)
+      merge(a, aux, lo, mid, hi)
+      _add_history(array_history, a, aux, (lo, hi, mid))
+      lo += sarr_sz+sarr_sz
+    sarr_sz = sarr_sz+sarr_sz # Double the size of the sub-array until we get to N
   assert _isSorted(a)
-
-
-#************************************************************************
- #  Compilation:  javac MergeBU.java
- #  Execution:    java MergeBU < input.txt
- #  Dependencies: StdOut.java StdIn.java
- #  Data files:   http://algs4.cs.princeton.edu/22mergesort/tiny.txt
- #                http://algs4.cs.princeton.edu/22mergesort/words3.txt
- #
- #  Sorts a sequence of strings from standard input using
- #  bottom-up mergesort.
- #
- #  % more tiny.txt
- #  S O R T E X A M P L E
- #
- #  % java MergeBU < tiny.txt
- #  A E E L M O P R S T X                 [ one string per line ]
- #
- #  % more words3.txt
- #  bed bug dad yes zoo ... all bad yet
- #
- #  % java MergeBU < words3.txt
- #  all bad bed bug dad ... yes yet zoo    [ one string per line ]
- #
- #************************************************************************/
-
-#*
- #  The <tt>MergeBU</tt> class provides static methods for sorting an
- #  array using bottom-up mergesort.
- #  <p>
- #  For additional documentation, see <a href="http://algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
- #  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- #
- #  @author Robert Sedgewick
- #  @author Kevin Wayne
- #/
 
 #------------------------------------------------------------------------------
 # 00:34 BOTTOM-UP MERGESORT: TRACE MERGE RESULTS FOR TOP-DOWN MERGESORT

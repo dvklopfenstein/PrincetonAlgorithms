@@ -1,6 +1,7 @@
 """Merge Sort (Top Down) from Week 3 lecture."""
 
 from AlgsSedgewickWayne.utils import __lt__, _exch, _isSorted
+import collections as cx
 
 def Sort(a, array_history=None): # 09:30
   """Rearranges the array in ascending order, using the natural order."""
@@ -18,7 +19,7 @@ def _sort(a, aux, lo, hi, array_history):
   _sort(a, aux, lo,     mid, array_history)
   _sort(a, aux, mid + 1, hi, array_history)
   merge(a, aux, lo, mid, hi)
-  _add_history(array_history, a, aux, lo, hi, mid)
+  _add_history(array_history, a, aux, (lo, hi, mid))
 
 def merge(a, aux, lo, mid, hi): # 05:00-06:00
   """Merge 2 sorted arrays into 1 sorted array."""
@@ -38,11 +39,13 @@ def merge(a, aux, lo, mid, hi): # 05:00-06:00
 
 
 
-def _add_history(array_history, a, aux, lo=None, hi=None, mid=None):
+def _add_history(array_history, a, aux, anno=None):
   """For visualizing array history."""
   if array_history is not None: 
-    te = lo is not None
-    anno_a = cx.OrderedDict([(lo, '-'), (hi, '+'), (mid,'*')]) if te else None
+    anno_a = None
+    if anno is not None:
+      lo, hi, mid = anno
+      anno_a = cx.OrderedDict([(lo, '-'), (hi, '+'), (mid,'*')])
     array_history.add_history(a,   anno_a, name="arr")
     array_history.add_history(aux, None, name="aux")
 

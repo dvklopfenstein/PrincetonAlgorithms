@@ -5,16 +5,12 @@ import sys
 from AlgsSedgewickWayne.MergeBU import Sort
 from AlgsSedgewickWayne.testcode.ArrayHistory import ArrayHistory
 
-import random
-
 def run(a, desc, prt=sys.stdout):
   ah = ArrayHistory()
   Sort(a, array_history=ah)
-  a_txt = ' '.join(str(e) for e in a)
-  prt.write("{DESC} RESULT: {A}\n".format(DESC=desc, A=a_txt))
-  # TBD: Implement array history visualization
-  # prt_array_history(array_history)
-  # show_array_history(desc, array_history)
+  prt.write("{DESC} RESULT: {A}\n".format(DESC=desc, A=a))
+  ah.prt_intlvd() # After each merge, print the state of both a and aux
+  #ah.show(desc)
 
 def test_1(prt=sys.stdout):
   """(seed = 183182)."""
@@ -23,8 +19,8 @@ def test_1(prt=sys.stdout):
   a = map(int, "13 16 40 60 19 70 71 47 12 67".split() )
   run(a, 'BOTTOM-UP MERGESORT')
 
-def run_all():
-  test_1()
+def run_all(prt=sys.stdout):
+  test_1(prt)
 
 if __name__ == '__main__':
   run_all()

@@ -144,20 +144,6 @@ def xor_txt(txt_prev, txt_curr):
       lst.append('X')
   return ''.join(lst)
 
-def get_array_str(array_st):
-  """Given: ['E', 'G', None, None], return "E G _ _"."""
-  fnc = lambda item: str(item) if item is not None else "_"
-  return ' '.join([fnc(item) for item in array_st])
-
-def get_anno_str(ntarr):
-  """Given an NtArr, return symbols above indices."""
-  getval = lambda i: '.'  if i not in ntarr.anno else ntarr.anno[i]
-  valarr = ["{}".format(getval(i)) for i in range(len(ntarr.array_st))]
-  return ' '.join(valarr)
-
-def get_anno_val_str(ntarr):
-  return ", ".join(["({} {})".format(i, s) for i, s in ntarr.anno.items()])
-
 class ArrayHistory(object):
   """Class to manage array history for visualization and learning."""
 
@@ -165,6 +151,7 @@ class ArrayHistory(object):
     self.NtArr = cx.namedtuple("NtArr", "array_st anno")
     self.array_histories = cx.defaultdict(list)
     self.ah_names = []
+    self.w = None # Width for printing each array element
 
   def add_history(self, ARR, anno, name='a'):
     """Add current arry state to array history."""
@@ -185,11 +172,11 @@ class ArrayHistory(object):
     """ Prints array history with spaces between elements."""
     txt_prev = None
     txt_curr = None
-    fnc = lambda item: str(item) if item is not None else "_"
+    self._set_elem_width()
     for name in self.ah_names:
       for idx, A in enumerate(self.array_histories[name]):
         txt_prev = txt_curr
-        txt_curr = get_array_str(A.array_st)
+        txt_curr = self.get_array_str(A.array_st)
         if txt_prev is not None:
           txt_mtch = xor_txt(txt_prev, txt_curr)
           prt.write('    {}\n'.format(txt_mtch))
@@ -201,16 +188,16 @@ class ArrayHistory(object):
     ah_names = self.ah_names
     txt_prev = {name:None for name in ah_names}
     txt_curr = {name:None for name in ah_names}
-    fnc = lambda item: str(item) if item is not None else "_"
+    self._set_elem_width()
     arrs = [self.array_histories[name] for name in ah_names]
     for incr, ntarrs in enumerate(zip(*arrs)):
       for name, ntarr in zip(ah_names, ntarrs):
         #print incr, name, ntarr, get_array_str(ntarr.array_st)
         txt_prev[name] = txt_curr[name]
-        txt_curr[name] = get_array_str(ntarr.array_st)
+        txt_curr[name] = self.get_array_str(ntarr.array_st)
         if ntarr.anno is not None:
           prt.write('{IDX:2d}: {ANNO} <= {NAME} {DICT}\n'.format(
-            IDX=incr, ANNO=get_anno_str(ntarr), NAME=name, DICT=get_anno_val_str(ntarr)))
+            IDX=incr, ANNO=self.get_anno_str(ntarr), NAME=name, DICT=self.get_anno_val_str(ntarr)))
         if txt_prev[name] is not None:
           txt_mtch = xor_txt(txt_prev[name], txt_curr[name])
           prt.write('    {DIFF} <= {NAME} compare\n'.format(DIFF=txt_mtch, NAME=name))
@@ -239,4 +226,34 @@ class ArrayHistory(object):
           prt.write('{} {:2d} {}({:2d}): {}{:2} {}\n'.format(
               name, incr, desc, idx, anno, elem, ''.join(['*']*elem2num[get_keystr(elem)])))
         prt.write('\n')
+
+  def _set_elem_width(self):
+    """Set elem width to str length of largest elem.""" 
+    if self.w is not None:
+      return
+    w = 1
+    for hist_lst in self.array_histories.values():
+      for ntarr in hist_lst:
+        for elem in ntarr.array_st:
+          if elem is not None:
+            w = max(w, len(str(elem)))
+    self.w = w
+
+  def get_array_str(self, array_st):
+    """Given: ['E', 'G', None, None], return "E G _ _"."""
+    fnc = lambda item: str(item) if item is not None else "_"*self.w
+    # Each element is self.w wide
+    return ' '.join(["{:{}}".format(fnc(item), self.w) for item in array_st])
+
+  def get_anno_str(self, ntarr):
+    """Given an NtArr, return symbols above indices."""
+    getval = lambda i: '.'*self.w  if i not in ntarr.anno else ntarr.anno[i]
+    valarr = ["{:{}}".format(getval(i), self.w) for i in range(len(ntarr.array_st))]
+    return ' '.join(valarr)
+
+  def get_anno_val_str(self, ntarr):
+    return ", ".join(["({} {})".format(i, s) for i, s in ntarr.anno.items()])
+
+
+
 
