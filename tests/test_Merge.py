@@ -12,9 +12,9 @@ import random
 def run(a, desc, prt=sys.stdout):
   ah = ArrayHistory()
   Sort(a, array_history=ah)
-  prt.write("{DESC} RESULT: {A}\n".format(DESC=desc, A=a))
   ah.prt_intlvd() # After each merge, print the state of both a and aux
   #ah.show(desc)
+  prt.write("{DESC} RESULT: {A}\n".format(DESC=desc, A=a))
 
 def test_14238(prt=sys.stdout):
   a = map(int, "80 97 50 29 23 83 66 67 43 47 41 42".split())

@@ -8,9 +8,17 @@ from AlgsSedgewickWayne.testcode.ArrayHistory import ArrayHistory
 def run(a, desc, prt=sys.stdout):
   ah = ArrayHistory()
   Sort(a, array_history=ah)
-  prt.write("{DESC} RESULT: {A}\n".format(DESC=desc, A=a))
   ah.prt_intlvd() # After each merge, print the state of both a and aux
   #ah.show(desc)
+  prt.write("{DESC} RESULT: {A}\n".format(DESC=desc, A=a))
+
+def test_193860(prt=sys.stdout):
+  """ seed = 193860 """
+  # Give the array that results immediately after the 7th call (and return)
+  # from merge() when bottom-up mergesorting the following array:
+  a = map(int, "25 94 79 41 19 84 66 67 90 37".split())
+  run(a, 'BOTTOM-UP MERGESORT')
+
 
 def test_1(prt=sys.stdout):
   """(seed = 183182)."""
