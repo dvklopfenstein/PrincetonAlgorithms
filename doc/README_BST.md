@@ -1,7 +1,8 @@
 # [Binary Search Trees](http://algs4.cs.princeton.edu/32bst/)
 
 ## Code
-  * **Search Trees**
+  * **[Search Trees](http://algs4.cs.princeton.edu/33balanced/)**:
+    RedBlackBST.py(2-3 version)
   * **Red-Black BSTs**: RedBlackBST.py
   * **B-Trees**: Btree.py    
 
