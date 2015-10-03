@@ -4,6 +4,14 @@
 
 import sys
 import os
+import fileinput
+from AlgsSedgewickWayne.RedBlackBST import RedBlackBST
+
+def main():
+  st = RedBlackBST()
+  for line in fileinput.input(sys.argv[2:]):
+    """Read stdin until ctrl-D is seen."""
+    st.input(Transaction(line.rstrip("\n\r")))
 
 def run_tinyST():
  #  % java RedBlackBST < tinyST.txt
@@ -20,7 +28,7 @@ def run_tinyST():
   pass
 
 def run_all():
-  pass
+  main()
 
 if __name__ == '__main__':
   N = len(sys.argv)

@@ -33,7 +33,7 @@
  #/
 
 class RedBlackBST(object):
-  """An ordered symbol table of generic key-value pairs."""
+  """2-3 tree implements balanced trees in guaranteed lgN time."""
 
   RED   = True
   BLACK = False
@@ -41,10 +41,9 @@ class RedBlackBST(object):
   def __init__(self):
     self._root;     # self._root of the BST
 
-  class _helper:
-    """BST helper node data type."""
+  class _Node:
 
-    def __init__(key, val, color, N):
+    def __init__(self, key, val, color, N):
       self.key = key       # key
       self.val = val       # associated data
       self.left  = None    # links to the left and right subtrees
@@ -56,11 +55,11 @@ class RedBlackBST(object):
   #**************************************************************************
   #  Node helper methods.
   #**************************************************************************/
-  def _isRed(self.x):
+  def _isRed(self, x):
     """is node x red; False if x is None ?"""
-    return x is not None and x == RED
+    return x is not None and x.color == RED
 
-  def _size(self.x):
+  def _size(self, x):
     """number of node in subtree rooted at x; 0 if x is None"""
     return x.N if x is not None else 0
 
@@ -82,160 +81,140 @@ class RedBlackBST(object):
   def _get(self, x, key):
     """value associated with the given key in subtree rooted at x; None if no such key"""
     while x is not None:
-      cmp = key.compareTo(x.key)
-      if      cmp < 0) x = x.left
-      elif (cmp > 0) x = x.right
+      cmp_keys = compareTo_keys(key, x.key)
+      if   cmp_keys < 0: x = x.left
+      elif cmp_keys > 0: x = x.right
       else:              return x.val
     return None
 
-  #*
-   # Does this symbol table contain the given key?
-   # @param key the key
-   # @return <tt>true</tt> if this symbol table contains <tt>key</tt> and
-   #     <tt>false</tt> otherwise
-   # @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
-   #/
-  def contains( key):
-      return get(key) != None
+  @staticmethod
+  def compareTo_keys(keya, keyb): return ((keya > keyb) - (keya < keyb))
+
+  def contains(self, key):
+    """Does this symbol table contain the given key?"""
+    return self._get(key) is not None
 
  #**************************************************************************
   #  Red-black tree insertion.
   #**************************************************************************/
 
-  #*
-   # Inserts the key-value pair into the symbol table, overwriting the old value
-   # with the new value if the key is already in the symbol table.
-   # If the value is <tt>null</tt>, this effectively deletes the key from the symbol table.
-   # @param key the key
-   # @param val the value
-   # @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
-   #/
-  def put( key, Value val):
-      self._root = put(self._root, key, val)
-      self._root.color = BLACK
-      # assert check()
+  # Inserts the key-value pair into the symbol table, overwriting the old value
+  # with the new value if the key is already in the symbol table.
+  # If the value is <tt>null</tt>, this effectively deletes the key from the symbol table.
+  def put(key, val):
+    self._root = put(self._root, key, val)
+    self._root.color = BLACK
+    # assert check()
 
-  # insert the key-value pair in the subtree rooted at h
-  private  put( h,  key, Value val): 
-      if h == None) return new (key, val, RED, 1)
+  def _put(self, h, key, val): 
+    """insert the key-value pair in the subtree rooted at h"""
+    if h is None: return self._Node(key, val, RED, 1)
 
-      cmp = key.compareTo(h.key)
-      if      cmp < 0) h.left  = put(h.left,  key, val)
-      elif (cmp > 0) h.right = put(h.right, key, val)
-      else              h.val   = val
+    cmp_keys = compareTo_keys(key, x.key)
+    if   cmp_keys < 0: h.left  = self._put(h.left,  key, val)
+    elif cmp_keys > 0: h.right = self._put(h.right, key, val)
+    else               h.val   = val
 
-      # fix-up any right-leaning links
-      if isRed(h.right) and !isRed(h.left))      h = rotateLeft(h)
-      if isRed(h.left)  and  isRed(h.left.left)) h = rotateRight(h)
-      if isRed(h.left)  and  isRed(h.right))     flipColors(h)
-      h.N = size(h.left) + size(h.right) + 1
+    # fix-up any right-leaning links
+    if self._isRed(h.right) and  not self._isRed(h.left):      h = self._rotateLeft(h)
+    if self._isRed(h.left)  and      self._isRed(h.left.left): h = self._rotateRight(h)
+    if self._isRed(h.left)  and      self._isRed(h.right):     flipColors(h)
+    h.N = size(h.left) + size(h.right) + 1
 
-      return h
+    return h
 
  #**************************************************************************
   #  Red-black tree deletion.
   #**************************************************************************/
 
-  #*
-   # Removes the smallest key and associated value from the symbol table.
-   # @throws NoSuchElementException if the symbol table is empty
-   #/
-  def deleteMin():
-      if isEmpty()) raise new NoSuchElementException("BST underflow")
+  def deleteMin(self):
+    """Removes the smallest key and associated value from the symbol table."""
+    if self.isEmpty(): raise Exception("BST underflow")
 
-      # if both children of self._root are black, set self._root to red
-      if !isRed(self._root.left) and !isRed(self._root.right))
-          self._root.color = RED
+    # if both children of self._root are black, set self._root to red
+    if not self._isRed(self._root.left) and not self._isRed(self._root.right):
+      self._root.color = RED
 
-      self._root = deleteMin(self._root)
-      if !isEmpty()) self._root.color = BLACK
-      # assert check()
+    self._root = self._deleteMin(self._root)
+    if not isEmpty(): self._root.color = BLACK
+    # assert check()
 
-  # delete the key-value pair with the minimum key rooted at h
-  private  deleteMin( h): 
-      if h.left == None)
-          return None
+  def _deleteMin(self, h): 
+    """delete the key-value pair with the minimum key rooted at h."""
+    if h.left is None:
+      return None
 
-      if !isRed(h.left) and !isRed(h.left.left))
-          h = moveRedLeft(h)
+    if not self._isRed(h.left) and not self._isRed(h.left.left):
+      h = self._moveRedLeft(h)
 
-      h.left = deleteMin(h.left)
-      return balance(h)
+    h.left = self._deleteMin(h.left)
+    return self._balance(h)
 
+  def deleteMax(self):
+    """Removes the largest key and associated value from the symbol table."""
+    if self.isEmpty(): raise Exception("BST underflow")
 
-  #*
-   # Removes the largest key and associated value from the symbol table.
-   # @throws NoSuchElementException if the symbol table is empty
-   #/
-  def deleteMax():
-      if isEmpty()) raise new NoSuchElementException("BST underflow")
+    # if both children of self._root are black, set self._root to red
+    if not self._isRed(self._root.left) and not self._isRed(self._root.right):
+        self._root.color = RED
 
-      # if both children of self._root are black, set self._root to red
-      if !isRed(self._root.left) and !isRed(self._root.right))
-          self._root.color = RED
+    self._root = self._deleteMax(self._root)
+    if !isEmpty()) self._root.color = BLACK
+    # assert check()
 
-      self._root = deleteMax(self._root)
-      if !isEmpty()) self._root.color = BLACK
-      # assert check()
+  def _deleteMax(self, h): 
+    """delete the key-value pair with the maximum key rooted at h."""
+    if self._isRed(h.left):
+        h = self._rotateRight(h)
 
-  # delete the key-value pair with the maximum key rooted at h
-  private  deleteMax( h): 
-      if isRed(h.left))
-          h = rotateRight(h)
+    if h.right is None:
+        return None
 
-      if h.right == None)
-          return None
+    if not self._isRed(h.right) and not self._isRed(h.right.left):
+        h = self._moveRedRight(h)
 
-      if !isRed(h.right) and !isRed(h.right.left))
-          h = moveRedRight(h)
+    h.right = self._deleteMax(h.right)
 
-      h.right = deleteMax(h.right)
+    return self._balance(h)
 
-      return balance(h)
+  def delete(self, key): 
+    """Removes the key and associated value from the symbol table."""
+    if not self.contains(key):
+      sys.stdout.write("symbol table does not contain {KEY|\n".format(key))
+      return
 
-  #*
-   # Removes the key and associated value from the symbol table
-   # (if the key is in the symbol table).
-   # @param key the key
-   # @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
-   #/
-  def delete( key): 
-      if !contains(key)):
-          System.err.println("symbol table does not contain " + key)
-          return
+    # if both children of self._root are black, set self._root to red
+    if not self._isRed(self._root.left) and not self._isRed(self._root.right))
+      self._root.color = RED
 
-      # if both children of self._root are black, set self._root to red
-      if !isRed(self._root.left) and !isRed(self._root.right))
-          self._root.color = RED
+    self._root = self._delete(self._root, key)
+    if not self.isEmpty(): self._root.color = BLACK
+    # assert check()
 
-      self._root = delete(self._root, key)
-      if !isEmpty()) self._root.color = BLACK
-      # assert check()
+  def _delete(self, h, key): 
+    """delete the key-value pair with the given key rooted at h."""
+    # assert get(h, key) != None
 
-  # delete the key-value pair with the given key rooted at h
-  private  delete( h,  key): 
-      # assert get(h, key) != None
-
-      if key.compareTo(h.key) < 0):
-          if !isRed(h.left) and !isRed(h.left.left))
-              h = moveRedLeft(h)
-          h.left = delete(h.left, key)
-      else:
-          if isRed(h.left))
-              h = rotateRight(h)
-          if key.compareTo(h.key) == 0 and (h.right == None))
-              return None
-          if !isRed(h.right) and !isRed(h.right.left))
-              h = moveRedRight(h)
-          if key.compareTo(h.key) == 0):
-               x = min(h.right)
-              h.key = x.key
-              h.val = x.val
-              # h.val = get(h.right, min(h.right).key)
-              # h.key = min(h.right).key
-              h.right = deleteMin(h.right)
-          else h.right = delete(h.right, key)
-      return balance(h)
+    if key < h.key:
+      if not self._isRed(h.left) and not self._isRed(h.left.left):
+        h = self._moveRedLeft(h)
+      h.left = self._delete(h.left, key)
+    else:
+      if self._isRed(h.left):
+        h = self._rotateRight(h)
+      if key == h.key and h.right is None:
+        return None
+      if not self._isRed(h.right) and not self._isRed(h.right.left):
+        h = self._moveRedRight(h)
+      if key == h.key:
+        x = min(h.right)
+        h.key = x.key
+        h.val = x.val
+        # h.val = get(h.right, min(h.right).key)
+        # h.key = min(h.right).key
+        h.right = deleteMin(h.right)
+      else: h.right = delete(h.right, key)
+    return balance(h)
 
  #**************************************************************************
   #  Red-black tree helper functions.
@@ -253,179 +232,146 @@ class RedBlackBST(object):
       h.N = size(h.left) + size(h.right) + 1
       return x
 
-  # make a right-leaning link lean to the left
-  private  rotateLeft( h):
-      # assert (h != None) and isRed(h.right)
-       x = h.right
-      h.right = x.left
-      x.left = h
-      x.color = x.left.color
-      x.left.color = RED
-      x.N = h.N
-      h.N = size(h.left) + size(h.right) + 1
-      return x
+  def _rotateLeft(self, h):
+    """make a right-leaning link lean to the left."""
+    # assert (h != None) and isRed(h.right)
+    x = h.right
+    h.right = x.left
+    x.left = h
+    x.color = x.left.color
+    x.left.color = RED
+    x.N = h.N
+    h.N = self._size(h.left) + self._size(h.right) + 1
+    return x
 
-  # flip the colors of a node and its two children
-  def _flipColors( h):
-      # h must have opposite color of its two children
-      # assert (h != None) and (h.left != None) and (h.right != None)
-      # assert (!isRed(h) and  isRed(h.left) and  isRed(h.right))
-      #    or (isRed(h)  and !isRed(h.left) and !isRed(h.right))
-      h.color = !h.color
-      h.left.color = !h.left.color
-      h.right.color = !h.right.color
+  def _flipColors(self, h):
+    """flip the colors of a node and its two children."""
+    # h must have opposite color of its two children
+    # assert (h != None) and (h.left != None) and (h.right != None)
+    # assert (!isRed(h) and  isRed(h.left) and  isRed(h.right))
+    #    or (isRed(h)  and !isRed(h.left) and !isRed(h.right))
+    h.color =  not h.color
+    h.left.color = not h.left.color
+    h.right.color = not h.right.color
 
   # Assuming that h is red and both h.left and h.left.left
   # are black, make h.left or one of its children red.
-  private  moveRedLeft( h):
-      # assert (h != None)
-      # assert isRed(h) and !isRed(h.left) and !isRed(h.left.left)
-
-      flipColors(h)
-      if isRed(h.right.left)): 
-          h.right = rotateRight(h.right)
-          h = rotateLeft(h)
-          flipColors(h)
-      return h
+  def _moveRedLeft(self, h):
+    # assert (h is not None)
+    # assert isRed(h) and !isRed(h.left) and !isRed(h.left.left)
+    self._flipColors(h)
+    if self._isRed(h.right.left): 
+      h.right = self._rotateRight(h.right)
+      h = self._rotateLeft(h)
+      self._flipColors(h)
+    return h
 
   # Assuming that h is red and both h.right and h.right.left
   # are black, make h.right or one of its children red.
-  private  moveRedRight( h):
-      # assert (h != None)
-      # assert isRed(h) and !isRed(h.right) and !isRed(h.right.left)
-      flipColors(h)
-      if isRed(h.left.left)): 
-          h = rotateRight(h)
-          flipColors(h)
-      return h
+  def _moveRedRight(self, h):
+    # assert h is not None
+    # assert isRed(h) and !isRed(h.right) and !isRed(h.right.left)
+    self._flipColors(h)
+    if self._isRed(h.left.left): 
+      h = self._rotateRight(h)
+      self._flipColors(h)
+    return h
 
-  # restore red-black tree invariant
-  private  balance( h):
-      # assert (h != None)
-
-      if isRed(h.right))                      h = rotateLeft(h)
-      if isRed(h.left) and isRed(h.left.left)) h = rotateRight(h)
-      if isRed(h.left) and isRed(h.right))     flipColors(h)
-
-      h.N = size(h.left) + size(h.right) + 1
-      return h
+  def _balance(self, h):
+    """restore red-black tree invariant"""
+    # assert (h != None)
+    if self._isRed(h.right):                             h = self._rotateLeft(h)
+    if self._isRed(h.left) and self._isRed(h.left.left): h = rotateRight(h)
+    if self._isRed(h.left) and self._isRed(h.right):     flipColors(h)
+    h.N = size(h.left) + size(h.right) + 1
+    return h
 
 
- #**************************************************************************
+  #**************************************************************************
   #  Utility functions.
   #**************************************************************************/
+  def height(self):
+     """Returns the height of the BST (for debugging)."""
+    return self._height(self._root)
 
-  #*
-   # Returns the height of the BST (for debugging).
-   # @return the height of the BST (a 1-node tree has height 0)
-   #/
-  def height():
-      return height(self._root)
-  def _height( x):
-      if x == None) return -1
-      return 1 + Math.max(height(x.left), height(x.right))
+  def _height(self, x):
+    """return the height of the BST (a 1-node tree has height 0)."""
+    if x is None: return -1
+    return 1 + max(height(x.left), height(x.right))
 
- #**************************************************************************
+  #**************************************************************************
   #  Ordered symbol table methods.
   #**************************************************************************/
+  def min_key(self):
+    """Returns the smallest key in the symbol table."""
+    if self.isEmpty(): raise Exception("called min() with empty symbol table")
+    return min(self._root).key
 
-  #*
-   # Returns the smallest key in the symbol table.
-   # @return the smallest key in the symbol table
-   # @throws NoSuchElementException if the symbol table is empty
-   #/
-  public  min():
-      if isEmpty()) raise new NoSuchElementException("called min() with empty symbol table")
-      return min(self._root).key
+  def _min_key(self, x): 
+    """the smallest key in subtree rooted at x; None if no such key"""
+    # assert x != None
+    if x.left is None: return x
+    else:              return self._min_key(x.left)
 
-  # the smallest key in subtree rooted at x; None if no such key
-  private  min( x): 
-      # assert x != None
-      if x.left == None) return x
-      else:                return min(x.left)
+  def max_key(self):
+    """Returns the largest key in the symbol table."""
+    if self.isEmpty(): raise new Exception("called max() with empty symbol table")
+    return self._max_key(self._root).key
 
-  #*
-   # Returns the largest key in the symbol table.
-   # @return the largest key in the symbol table
-   # @throws NoSuchElementException if the symbol table is empty
-   #/
-  public  max():
-      if isEmpty()) raise new NoSuchElementException("called max() with empty symbol table")
-      return max(self._root).key
+  def _max_key(self, x): 
+    """the largest key in the subtree rooted at x; None if no such key"""
+    # assert x != None
+    if x.right is None: return x
+    else:               return self._max_key(x.right)
 
-  # the largest key in the subtree rooted at x; None if no such key
-  private  max( x): 
-      # assert x != None
-      if x.right == None) return x
-      else:                 return max(x.right)
+   def floor(self, key):
+     """Returns the largest key in the symbol table less than or equal to key."""
+    if self.isEmpty(): raise Exception("called floor() with empty symbol table")
+    x = self._floor(self._root, key)
+    if x is None: return None
+    else:         return x.key
 
+  def _floor(self x, key):
+    """the largest key in the subtree rooted at x less than or equal to the given key"""
+    if x is None: return None
+    cmp_key = compareTo_key(key, x.key)
+    if cmp_key == 0: return x
+    if cmp_key < 0:  return self._floor(x.left, key)
+     t = self._floor(x.right, key)
+    if t is not None: return t
+    else:             return x
 
-  #*
-   # Returns the largest key in the symbol table less than or equal to <tt>key</tt>.
-   # @param key the key
-   # @return the largest key in the symbol table less than or equal to <tt>key</tt>
-   # @throws NoSuchElementException if there is no such key
-   # @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
-   #/
-  public  floor( key):
-      if isEmpty()) raise new NoSuchElementException("called floor() with empty symbol table")
-       x = floor(self._root, key)
-      if x == None) return None
-      else:           return x.key
+  def ceiling(self, key):  
+    """Returns the smallest key in the symbol table greater than or equal to key."""
+    if self.isEmpty(): raise Exception("called ceiling() with empty symbol table")
+    x = self._ceiling(self._root, key)
+    if x is None: return None
+    else:         return x.key
 
-  # the largest key in the subtree rooted at x less than or equal to the given key
-  private  floor( x,  key):
-      if x == None) return None
-      cmp = key.compareTo(x.key)
-      if cmp == 0) return x
-      if cmp < 0)  return floor(x.left, key)
-       t = floor(x.right, key)
-      if t != None) return t
-      else:           return x
+  def _ceiling(self, x, key):  
+    """the smallest key in the subtree rooted at x greater than or equal to the given key"""
+    if x is None: return None
+    cmp_key = compareTo_keys(key, x.key)
+    if cmp_key == 0: return x
+    if cmp_key > 0:  return self._ceiling(x.right, key)
+     t = ceiling(x.left, key)
+    if t is not None: return t
+    else:             return x
 
-  #*
-   # Returns the smallest key in the symbol table greater than or equal to <tt>key</tt>.
-   # @param key the key
-   # @return the smallest key in the symbol table greater than or equal to <tt>key</tt>
-   # @throws NoSuchElementException if there is no such key
-   # @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
-   #/
-  public  ceiling( key):  
-      if isEmpty()) raise new NoSuchElementException("called ceiling() with empty symbol table")
-       x = ceiling(self._root, key)
-      if x == None) return None
-      else:           return x.key
+  def select(self, k):
+    """Return the kth smallest key in the symbol table."""
+    if k < 0 or k >= size(): raise Exception("BAD k IN select")
+    x = self._select(self._root, k)
+    return x.key
 
-  # the smallest key in the subtree rooted at x greater than or equal to the given key
-  private  ceiling( x,  key):  
-      if x == None) return None
-      cmp = key.compareTo(x.key)
-      if cmp == 0) return x
-      if cmp > 0)  return ceiling(x.right, key)
-       t = ceiling(x.left, key)
-      if t != None) return t
-      else:           return x
-
-  #*
-   # Return the kth smallest key in the symbol table.
-   # @param k the order statistic
-   # @return the kth smallest key in the symbol table
-   # @throws IllegalArgumentException unless <tt>k</tt> is between 0 and
-   #     <em>N</em> &minus; 1
-   #/
-  public  select(int k):
-      if k < 0 or k >= size()) raise new IllegalArgumentException()
-       x = select(self._root, k)
-      return x.key
-
-  # the key of rank k in the subtree rooted at x
-  private  select( x, k):
-      # assert x != None
-      # assert k >= 0 and k < size(x)
-      t = size(x.left)
-      if      t > k) return select(x.left,  k)
-      elif (t < k) return select(x.right, k-t-1)
-      else:            return x
+  def select(self, x, k):
+    """the key of rank k in the subtree rooted at x."""
+    # assert x != None
+    # assert k >= 0 and k < size(x)
+    t = size(x.left)
+    if   t > k: return self._select(x.left,  k)
+    elif t < k: return self._select(x.right, k-t-1)
+    else:       return x
 
   #*
    # Return the number of keys in the symbol table strictly less than <tt>key</tt>.
@@ -433,91 +379,75 @@ class RedBlackBST(object):
    # @return the number of keys in the symbol table strictly less than <tt>key</tt>
    # @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
    #/
-  def rank( key):
-      return rank(key, self._root)
+  def rank(self, key):
+    return self._rank(key, self._root)
 
-  # number of keys less than key in the subtree rooted at x
-  def _rank( key,  x):
-      if x == None) return 0
-      cmp = key.compareTo(x.key)
-      if      cmp < 0) return rank(key, x.left)
-      elif (cmp > 0) return 1 + size(x.left) + rank(key, x.right)
-      else:              return size(x.left)
+  def _rank(self, key, x):
+    """number of keys less than key in the subtree rooted at x."""
+    if x is None: return 0
+    cmp_key = self.compareTo_keys(key, x.key)
+    if   cmp_key < 0: return self._rank(key, x.left)
+    elif cmp_key > 0: return 1 + self._size(x.left) + self._rank(key, x.right)
+    else:             return self._size(x.left)
 
- #**************************************************************************
+  #**************************************************************************
   #  Range count and range search.
   #**************************************************************************/
+  def keys(self):
+    """Returns all keys in the symbol table as an Iterable."""
+    return self.keys_lh(self.min_key(), self.max_key())
 
-  #*
-   # Returns all keys in the symbol table as an <tt>Iterable</tt>.
-   # To iterate over all of the keys in the symbol table named <tt>st</tt>,
-   # use the foreach notation: <tt>for (Key key : st.keys())</tt>.
-   # @return all keys in the sybol table as an <tt>Iterable</tt>
-   #/
-  def keys():
-      return keys(min(), max())
+  def keys_lh(self, lo, hi):
+    """Returns all keys in the symbol table in the given range as an Iterable"""
+    queue = Queue()
+    # if (isEmpty() or lo.compareTo(hi) > 0) return queue
+    keys(self._root, queue, lo, hi)
+    return queue
 
-  #*
-   # Returns all keys in the symbol table in the given range,
-   # as an <tt>Iterable</tt>.
-   # @return all keys in the sybol table between <tt>lo</tt> 
-   #    (inclusive) and <tt>hi</tt> (exclusive) as an <tt>Iterable</tt>
-   # @throws NullPointerException if either <tt>lo</tt> or <tt>hi</tt>
-   #    is <tt>null</tt>
-   #/
-  def keys( lo,  hi):
-      Queue<> queue = new Queue<>()
-      # if (isEmpty() or lo.compareTo(hi) > 0) return queue
-      keys(self._root, queue, lo, hi)
-      return queue
+  def _keys(self, x, queue, lo, hi): 
+    """add the keys between lo and hi in the subtree rooted at x to the queue."""
+    if x is None: return
+    cmplo = compareTo_keys(lo, x.key)
+    cmphi = compareTo_keys(hi, x.key)
+    if cmplo < 0: self._keys(x.left, queue, lo, hi)
+    if cmplo <= 0 and cmphi >= 0: queue.enqueue(x.key)
+    if cmphi > 0: self._keys(x.right, queue, lo, hi)
 
-  # add the keys between lo and hi in the subtree rooted at x
-  # to the queue
-  def _keys( x, Queue<> queue,  lo,  hi): 
-      if x == None) return
-      cmplo = lo.compareTo(x.key)
-      cmphi = hi.compareTo(x.key)
-      if cmplo < 0) keys(x.left, queue, lo, hi)
-      if cmplo <= 0 and cmphi >= 0) queue.enqueue(x.key)
-      if cmphi > 0) keys(x.right, queue, lo, hi)
-
-  #*
-   # Returns the number of keys in the symbol table in the given range.
-   # @return the number of keys in the sybol table between <tt>lo</tt> 
-   #    (inclusive) and <tt>hi</tt> (exclusive)
-   # @throws NullPointerException if either <tt>lo</tt> or <tt>hi</tt>
-   #    is <tt>null</tt>
-   #/
-  def size( lo,  hi):
-      if lo.compareTo(hi) > 0) return 0
-      if contains(hi)) return rank(hi) - rank(lo) + 1
-      else:              return rank(hi) - rank(lo)
+  def size_lh(self, lo, hi):
+    """Returns the number of keys in the symbol table in the given range."""
+    if lo > hi: return 0
+    if self.contains(hi): return self.rank(hi) - self.rank(lo) + 1
+    else:                 return self.rank(hi) - self.rank(lo)
 
 
- #**************************************************************************
+  #**************************************************************************
   #  Check integrity of red-black tree data structure.
   #**************************************************************************/
-  def _check():
-      if !isBST())            prt.write("Not in symmetric order")
-      if !isSizeConsistent()) prt.write("Subtree counts not consistent")
-      if !isRankConsistent()) prt.write("Ranks not consistent")
-      if !is23())             prt.write("Not a 2-3 tree")
-      if !isBalanced())       prt.write("Not balanced")
-      return isBST() and isSizeConsistent() and isRankConsistent() and is23() and isBalanced()
+  def _check(self, prt=sys.stdout):
+      if not self.isBST())            prt.write("Not in symmetric order")
+      if not self.isSizeConsistent()) prt.write("Subtree counts not consistent")
+      if not self.isRankConsistent()) prt.write("Ranks not consistent")
+      if not self.is23())             prt.write("Not a 2-3 tree")
+      if not self.isBalanced())       prt.write("Not balanced")
+      return self.isBST() and 
+             self.isSizeConsistent() and 
+             self.isRankConsistent() and 
+             self.is23() and 
+             self.isBalanced()
 
-  # does this binary tree satisfy symmetric order?
-  # Note: this test also ensures that data structure is a binary tree since order is strict
-  def _isBST():
-      return isBST(self._root, None, None)
+  def _isBST(self):
+    """does this binary tree satisfy symmetric order?"""
+    # Note: this test also ensures that data structure is a binary tree since order is strict
+    return self._isBST(self._root, None, None)
 
-  # is the tree rooted at x a BST with all keys strictly between min and max
   # (if min or max is None, treat as empty constraint)
   # Credit: Bob Dondero's elegant solution
-  def _isBST( x,  min,  max):
-      if x == None) return True
-      if min != None and x.key.compareTo(min) <= 0) return False
-      if max != None and x.key.compareTo(max) >= 0) return False
-      return isBST(x.left, min, x.key) and isBST(x.right, x.key, max)
+  def _isBST(self, x, min_key, max_key):
+    """is the tree rooted at x a BST with all keys strictly between min and max"""
+    if x is None: return True
+    if min_key is not None and x.key <= min_key: return False
+    if max_key is not None and x.key >= max_key: return False
+    return self._isBST(x.left, min_key, x.key) and self._isBST(x.right, x.key, max_key)
 
   # are the size fields correct?
   def _isSizeConsistent(self._root); }
@@ -571,6 +501,15 @@ class RedBlackBST(object):
       for (String s : st.keys())
           prt.write(s + " " + st.get(s))
       prt.write()
+
+# QUESTION: Suppose that you are inserting a new key into a 2-3 tree.
+# Under which one of the following scenarios must the height of i
+# the 2-3 tree increase by one?
+# ANSWER: When every node on the search path from the root is a 3-node.
+# EXPLANATION: The height of a 2-3 tree increases onlyl when the root splits,
+# and this happens only when every node on the search path from the root
+# to the leaf where the new key should be inserted is a 3-node.
+
 
 # Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015, DV Klopfenstein, Python implementation

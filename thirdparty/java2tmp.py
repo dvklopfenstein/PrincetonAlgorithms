@@ -15,6 +15,8 @@ def main():
       if chk_com(FOUT, r'^(\s*)\*(.*)$',   line): continue
       if chk_end(FOUT, line): continue
       line = chk_if(FOUT, line)
+      line = line.replace('== null', 'is None')
+      line = line.replace('!= null', 'is not None')
       line = line.replace('true',  'True')
       line = line.replace('false', 'False')
       line = line.replace('Comparable[] ', '')
