@@ -111,17 +111,22 @@ wk3b: LineSegment.class Point.class BruteCollinearPoints.class FastCollinearPoin
 wk3_zip:
 	zip collinear.zip Point.java BruteCollinearPoints.java FastCollinearPoints.java
 
+wk4: Board.class Solver.class
+	$(JVM) Solver
+
 wk4_zip:
 	zip 8puzzle.zip Board.java Solver.java
 
 wk5_zip:
 	zip kdtree.zip PointSET.java KdTree.java
 
+
 Percolation.class: $(ALGS4SRC)/Percolation.java
 	$(JC) -d . $<
 
 PercolationStats.class: $(ALGS4SRC)/PercolationStats.java
 	$(JC) -d . $<
+
 
 Deque.class: $(ALGS4SRC)/Deque.java
 	$(JC) -d . $<
@@ -132,17 +137,33 @@ RandomizedQueue.class: $(ALGS4SRC)/RandomizedQueue.java
 Subset.class: $(ALGS4SRC)/Subset.java
 	$(JC) -d . $<
 
+
+Point.class: $(ALGS4SRC)/Point.java
+	$(JC) -d . $<
+
 BruteCollinearPoints.class: $(ALGS4SRC)/BruteCollinearPoints.java
 	$(JC) -d . $<
 
 FastCollinearPoints.class: $(ALGS4SRC)/FastCollinearPoints.java
 	$(JC) -d . $<
 
-Point.class: $(ALGS4SRC)/Point.java
-	$(JC) -d . $<
 
 LineSegment.class: $(ALGS4SRC)/LineSegment.java
 	$(JC) -d . $<
+
+Board.class: $(ALGS4SRC)/Board.java
+	$(JC) -d . $<
+
+Solver.class: $(ALGS4SRC)/Solver.java
+	$(JC) -d . $<
+
+
+PointSET.class: $(ALGS4SRC)/PointSET.java
+	$(JC) -d . $<
+
+KdTree.class: $(ALGS4SRC)/KdTree.java
+	$(JC) -d . $<
+
 
 clean:
 	rm -f *.class

@@ -1,13 +1,28 @@
 *.class
 *.zip
+
+# Algs 1, week 1
 Percolation.java
 PercolationStats.java
+
+# Algs 1, week 2
 Deque.java
 RandomizedQueue.java
 Subset.java
+
+# Algs 1, week 3
 Point.java
 BruteCollinearPoints.java
 FastCollinearPoints.java
+
+# Algs 1, week 4
+Board.java
+Solver.java
+
+# Algs 1, week 5
+PointSET.java
+KdTree.java
+
 
 # These files are too big:
 tale.txt

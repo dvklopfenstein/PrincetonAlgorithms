@@ -13,3 +13,12 @@ Subset.py
 Point.py
 BruteCollinearPoints.py
 FastCollinearPoints.py
+
+# Algs 1, week 4
+Board.py
+Solver.py
+
+# Algs 1, week 5
+PointSET.py
+KdTree.py
+

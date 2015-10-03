@@ -30,8 +30,8 @@ Note: There are no Progamming Assignment Solutions on this site.
   and [checklist](http://htmlpreview.github.com/?https://github.com/dvklopfenstein/PrincetonAlgorithms/blob/master/thirdparty/hw4/Programming_Assignment_4_Checklist_8_Puzzle.html)
 
 * **Week 5 Suggested Readings**: Section 3.3 in [*Algorithms, 4th edition*](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1441459738&sr=1-1&keywords=sedgewick&refinements=p_n_feature_browse-bin%3A2656020011&pebp=1441459739425&perid=0C83SQQ1YFJ62VWHF9C0)
-  * Balanced Search Trees
-  * Geometric Applications of BSTs
+  * [Balanced Search Trees](README_BSTs.md)
+  * [Geometric Applications of BSTs](README_BST_geom.md)
   * Programming Assignment 5: [**Kd-Trees**](http://htmlpreview.github.com/?https://github.com/dvklopfenstein/PrincetonAlgorithms/blob/master/thirdparty/hw5/Programming_Assignment_5_Kd-Trees.html)
 
 * **Week 6 Suggested Readings**: Section 3.4 in [*Algorithms, 4th edition*](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1441459738&sr=1-1&keywords=sedgewick&refinements=p_n_feature_browse-bin%3A2656020011&pebp=1441459739425&perid=0C83SQQ1YFJ62VWHF9C0)
