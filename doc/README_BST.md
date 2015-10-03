@@ -2,8 +2,8 @@
 
 ## Code
   * **Search Trees**
-  * **Red-Black BSTs**
-  * **B-Trees**
+  * **Red-Black BSTs**: RedBlackBST.py
+  * **B-Trees**: Btree.py    
 
 ## Table of Contents for Examples
   1. [Run Example](#ex1)

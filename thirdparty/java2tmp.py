@@ -6,7 +6,7 @@ import re
 
 def main():
   fin  = get_fin()
-  fout = get_fout( fin )
+  fout = get_fout(fin)
   FOUT = sys.stdout if fout is None else open(fout, 'w')
   FOUT.write("#!/usr/bin/env python")
   with open(fin) as FIN:
@@ -104,7 +104,8 @@ def chk_com(FOUT, pat, line):
 
 
 def get_foutname(fin):
-  return os.path.join("../py/AlgsSedgewickWayne/", fin.replace(".java", ".py"))
+  fout_py = os.path.basename(fin).replace(".java", ".py")
+  return os.path.join("../py/AlgsSedgewickWayne/", fout_py)
 
 def get_fout(fin):
   fout = get_foutname(fin)
