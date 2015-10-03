@@ -65,7 +65,7 @@ class RedBlackBST(object):
 
   def size(self):
     """Returns the number of key-value pairs in this symbol table."""
-    return self.size(self._root)
+    return self._size(self._root)
 
   def isEmpty(): return self._root is None
 
@@ -119,7 +119,7 @@ class RedBlackBST(object):
     if self._isRed(h.right) and  not self._isRed(h.left):      h = self._rotateLeft(h)
     if self._isRed(h.left)  and      self._isRed(h.left.left): h = self._rotateRight(h)
     if self._isRed(h.left)  and      self._isRed(h.right):     flipColors(h)
-    h.N = size(h.left) + size(h.right) + 1
+    h.N = self._size(h.left) + self._size(h.right) + 1
 
     return h
 
@@ -193,7 +193,7 @@ class RedBlackBST(object):
 
   def _delete(self, h, key): 
     """delete the key-value pair with the given key rooted at h."""
-    # assert get(h, key) != None
+    # assert get(h, key) is not None
 
     if key < h.key:
       if not self._isRed(h.left) and not self._isRed(h.left.left):
@@ -216,25 +216,24 @@ class RedBlackBST(object):
       else: h.right = delete(h.right, key)
     return balance(h)
 
- #**************************************************************************
+  #**************************************************************************
   #  Red-black tree helper functions.
-  #**************************************************************************/
 
-  # make a left-leaning link lean to the right
-  private  rotateRight( h):
-      # assert (h != None) and isRed(h.left)
-       x = h.left
-      h.left = x.right
-      x.right = h
-      x.color = x.right.color
-      x.right.color = RED
-      x.N = h.N
-      h.N = size(h.left) + size(h.right) + 1
-      return x
+  def _rotateRight(self, h):
+    """make a left-leaning link lean to the right."""
+    # assert h is not None and self._isRed(h.left)
+    x = h.left
+    h.left = x.right
+    x.right = h
+    x.color = x.right.color
+    x.right.color = RED
+    x.N = h.N
+    h.N = self._size(h.left) + self._size(h.right) + 1
+    return x
 
   def _rotateLeft(self, h):
     """make a right-leaning link lean to the left."""
-    # assert (h != None) and isRed(h.right)
+    # assert h is not None and self._isRed(h.right)
     x = h.right
     h.right = x.left
     x.left = h
@@ -247,7 +246,7 @@ class RedBlackBST(object):
   def _flipColors(self, h):
     """flip the colors of a node and its two children."""
     # h must have opposite color of its two children
-    # assert (h != None) and (h.left != None) and (h.right != None)
+    # assert h is not None and h.left is not None and h.right is not None
     # assert (!isRed(h) and  isRed(h.left) and  isRed(h.right))
     #    or (isRed(h)  and !isRed(h.left) and !isRed(h.right))
     h.color =  not h.color
@@ -279,11 +278,11 @@ class RedBlackBST(object):
 
   def _balance(self, h):
     """restore red-black tree invariant"""
-    # assert (h != None)
+    # assert (h is not None)
     if self._isRed(h.right):                             h = self._rotateLeft(h)
     if self._isRed(h.left) and self._isRed(h.left.left): h = rotateRight(h)
     if self._isRed(h.left) and self._isRed(h.right):     flipColors(h)
-    h.N = size(h.left) + size(h.right) + 1
+    h.N = self._size(h.left) + self._size(h.right) + 1
     return h
 
 
@@ -309,7 +308,7 @@ class RedBlackBST(object):
 
   def _min_key(self, x): 
     """the smallest key in subtree rooted at x; None if no such key"""
-    # assert x != None
+    # assert x is not None
     if x.left is None: return x
     else:              return self._min_key(x.left)
 
@@ -320,7 +319,7 @@ class RedBlackBST(object):
 
   def _max_key(self, x): 
     """the largest key in the subtree rooted at x; None if no such key"""
-    # assert x != None
+    # assert x is not None
     if x.right is None: return x
     else:               return self._max_key(x.right)
 
@@ -360,15 +359,15 @@ class RedBlackBST(object):
 
   def select(self, k):
     """Return the kth smallest key in the symbol table."""
-    if k < 0 or k >= size(): raise Exception("BAD k IN select")
+    if k < 0 or k >= self.size(): raise Exception("BAD k IN select")
     x = self._select(self._root, k)
     return x.key
 
   def select(self, x, k):
     """the key of rank k in the subtree rooted at x."""
-    # assert x != None
-    # assert k >= 0 and k < size(x)
-    t = size(x.left)
+    # assert x is not None
+    # assert k >= 0 and k < self._size(x)
+    t = self._size(x.left)
     if   t > k: return self._select(x.left,  k)
     elif t < k: return self._select(x.right, k-t-1)
     else:       return x
@@ -451,43 +450,42 @@ class RedBlackBST(object):
 
   # are the size fields correct?
   def _isSizeConsistent(self._root); }
-  def _isSizeConsistent( x):
-      if x == None) return True
-      if x.N != size(x.left) + size(x.right) + 1) return False
+  def _isSizeConsistent(self, x):
+      if x is None) return True
+      if x.N != self._size(x.left) + self._size(x.right) + 1) return False
       return isSizeConsistent(x.left) and isSizeConsistent(x.right)
 
-  # check that ranks are consistent
-  def _isRankConsistent():
-      for (int i = 0; i < size(); i += 1)
-          if i != rank(select(i))) return False
-      for ( key : keys())
-          if key.compareTo(select(rank(key))) != 0) return False
-      return True
+  def _isRankConsistent(self):
+    """check that ranks are consistent"""
+    for i in self.size():
+      if i != rank(select(i)): return False
+    for ( key : keys())
+        if key.compareTo(select(rank(key))) != 0) return False
+    return True
 
-  # Does the tree have no red right links, and at most one (left)
-  # red links in a row on any path?
-  private boolean is23(): return is23(self._root); }
-  private boolean is23( x):
-      if x == None) return True
-      if isRed(x.right)) return False
-      if x != self._root and isRed(x) and isRed(x.left))
-          return False
-      return is23(x.left) and is23(x.right)
+  def _is23(self): return is23(self._root)
+  def _is23_x(self, x):
+    """No red right links, and at most one (left) red links in a row on any path?"""
+    if x is None: return True
+    if self._isRed(x.right): return False
+    if x != self._root and self._isRed(x) and self._isRed(x.left):
+      return False
+    return self._is23_x(x.left) and self._is23_x(x.right)
 
-  # do all paths from self._root to leaf have same number of black edges?
-  def _isBalanced(): 
-      black = 0;     # number of black links on path from self._root to min
-       x = self._root
-      while (x != None):
-          if !isRed(x)) black += 1
-          x = x.left
-      return isBalanced(self._root, black)
+  def _isBalanced(self): 
+    """do all paths from self._root to leaf have same number of black edges?"""
+    black = 0     # number of black links on path from self._root to min
+    x = self._root
+    while x is not None:
+      if not self._isRed(x): black += 1
+      x = x.left
+    return self._isBalanced(self._root, black)
 
-  # does every path from the self._root to a leaf have the given number of black links?
-  def _isBalanced( x, black):
-      if x == None) return black == 0
-      if !isRed(x)) black -= 1
-      return isBalanced(x.left, black) and isBalanced(x.right, black)
+  def _isBalanced(self, x, black):
+    """does every path from the self._root to a leaf have the given number of black links?"""
+    if x is None: return black == 0
+    if not self._isRed(x): black -= 1
+    return self._isBalanced(x.left, black) and self._isBalanced(x.right, black)
 
 
   #*
@@ -509,6 +507,10 @@ class RedBlackBST(object):
 # EXPLANATION: The height of a 2-3 tree increases onlyl when the root splits,
 # and this happens only when every node on the search path from the root
 # to the leaf where the new key should be inserted is a 3-node.
+
+# QUESTION: Suppose that you insert N keys in ascending order into a red-black BST.
+# What is the height of the resulting tree?
+# ANSWER: logorithmic
 
 
 # Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
