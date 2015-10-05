@@ -7,6 +7,8 @@ public class test_RandomizedQueue {
     public static void main(String[] argv) {
         RandomizedQueue<String> rq = new RandomizedQueue<String>();
         rq.enqueue("A");  
+        rq.dequeue();  
+        rq.enqueue("A");  
         rq.enqueue("B");  
         for (String outerItem : rq) {  
             for(String innerItem :rq) {  
