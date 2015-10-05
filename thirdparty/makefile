@@ -95,8 +95,11 @@ wk1_zip:
 	zip percolation.zip Percolation.java PercolationStats.java
 
 # Algs1 Week 2 Programming Assignment 
-wk2: Deque.class RandomizedQueue.class Subset.class
+wk2: Deque.class RandomizedQueue.class Subset.class 
 	$(JVM) Subset $(N)
+
+wk2a: RandomizedQueue.class test_RandomizedQueue.class
+	$(JVM) test_RandomizedQueue $(N)
 
 wk2_zip:
 	zip queues.zip Deque.java RandomizedQueue.java Subset.java
@@ -132,6 +135,9 @@ Deque.class: $(ALGS4SRC)/Deque.java
 	$(JC) -d . $<
 
 RandomizedQueue.class: $(ALGS4SRC)/RandomizedQueue.java
+	$(JC) -d . $<
+
+test_RandomizedQueue.class: test_RandomizedQueue.java
 	$(JC) -d . $<
 
 Subset.class: $(ALGS4SRC)/Subset.java
