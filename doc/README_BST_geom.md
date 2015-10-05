@@ -1,8 +1,12 @@
 # Geometric Applications of BSTs
 
 ## Code
-  * **1d Range Search**
-  * **Line Segment Intersection**
+  * **1d Range Search**    
+    Get *1d range count* using **size** function:    
+    * BinarySearchST.py
+    * BST.py
+    * RedBlackBST.py
+  * **Line Segment Intersection** using *line-sweep*
   * **Kd-Trees**
   * **Interval Search Trees**
   * **Rectangle Intersection**
