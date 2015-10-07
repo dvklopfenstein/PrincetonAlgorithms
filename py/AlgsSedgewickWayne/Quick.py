@@ -107,6 +107,9 @@ def Select(a, k):
 #   Sir Charles Antony Richard Hoare, 1980 Turing Award
 #
 #-------------------------------------------------------
+# INVARIANT: Nothing to the left  of i is greater than a[lo] (partitioning element)
+# INVARIANT: Nothing to the right of j is greater than a[lo] (partitioning element)
+#-------------------------------------------------------
 # QUICKSORT:
 # A recursive method, like Mergesort.
 # Quicksort does the recursion AFTER  it does the work.
@@ -315,6 +318,9 @@ def Select(a, k):
 # QUESTION: What is the expected running time of randomized quicksort
 #   when the input is already sorted?
 # ANSWER: linearithmic
+# EXPLANATIN: Without the shuffle, quicksorting an array of N distict
+# keys is quadratic.  That's one reason why it's important to 
+# shuffle the array.
 
 
 ########################################################
