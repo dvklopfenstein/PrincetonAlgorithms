@@ -2,6 +2,7 @@
 
 import sys
 import fileinput
+import copy
 from AlgsSedgewickWayne.RandomizedQueue import RandomizedQueue
 
 def test_4a(prt=sys.stdout):
@@ -23,10 +24,28 @@ def test_4a(prt=sys.stdout):
   rq.dequeue()
   prt.write("{}\n".format(str(rq)))
   for e in rq: 
-    print "E  ", e
+    prt.write("E  {}\n".format(e))
     for f in rq:
-      print "  F", f
+      prt.write("F  {}\n".format(e))
   #prt.write("{:>5} sample\n".format(rq.sample()))
+
+def test_nested_iterator(prt=sys.stdout):
+  prt.write("\nTEST TWO NESTED ITERATORS:\n")
+  rq = RandomizedQueue()
+  for num in range(200, 207): rq.enqueue(num)
+
+  # Nested iterators can look like this in C++:
+  #   for (vector<type>::iterator i = list.begin(); i != list.end(); ++i) {
+  #     for (vector<type>::iterator j = i; j != list.end(); ++j) {
+
+  it_a = rq.__iter__()
+  for elem_a in it_a:
+    prt.write("A    {}\n".format(elem_a))
+    #it_b = rq.__iter__(it_a)
+    it_b = copy.deepcopy(it_a)
+    for elem_b in it_b:
+      prt.write("  B  {}\n".format(elem_b))
+
 
 def main(prt=sys.stdout): # unit testing
   q = RandomizedQueue()
@@ -40,7 +59,8 @@ def main(prt=sys.stdout): # unit testing
   prt.write("({SZ} left on queue)\n".format(SZ=q.size()))
 
 def run_all(prt=sys.stdout):
-  test_4a(prt)
+  #test_4a(prt)
+  test_nested_iterator(prt)
 
 def cli(prt=sys.stdout):
   if len(sys.argv) > 1:

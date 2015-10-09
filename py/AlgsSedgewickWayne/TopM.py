@@ -12,15 +12,13 @@ def main(prt=sys.stdout):
   M = int(sys.argv[1]) # The max # of elems to be stored at one time.
   pq = MinPQ(M+1)
 
+  # Read stdin until ctrl-D is seen.
   for line in fileinput.input(sys.argv[2:]):
-    """Read stdin until ctrl-D is seen."""
     pq.insert(Transaction(line.rstrip("\n\r")))
-
-    # remove minimum if M+1 entries on the PQ
-    if pq.size() > M: 
+    if pq.size() > M: # rm min if M+1 entries on the PQ
       pq.delMin()
 
-  # print entries on PQ in reverse order
+  # Print entries on PQ in reverse order
   stack = Stack()
   for transaction in pq:
     stack.push(transaction)

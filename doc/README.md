@@ -15,7 +15,9 @@ Note: There are no Progamming Assignment Solutions on this site.
   * [Elementary Sorts](README_Elementary_Sorts.md)
   * Programming Assignment 2: [**Deques and Randomized Queues**](http://htmlpreview.github.com/?https://github.com/dvklopfenstein/PrincetonAlgorithms/blob/master/thirdparty/hw2/Programming_Assignment_2_Randomized_Queues_and_Deques.html)
   and
-[checklist](http://htmlpreview.github.com/?https://github.com/dvklopfenstein/PrincetonAlgorithms/blob/master/thirdparty/hw2/Programming_Assignment_2_Checklist_Randomized_Queues_and_Dequeues.html)
+[checklist](http://htmlpreview.github.com/?https://github.com/dvklopfenstein/PrincetonAlgorithms/blob/master/thirdparty/hw2/Programming_Assignment_2_Checklist_Randomized_Queues_and_Dequeues.html) and
+[FAQ](http://www.cs.princeton.edu/courses/archive/fall11/cos226/checklist/queues.html)
+
 
 * **Week 3 Suggested Readings**: Section 2.2 and 2.3 in [*Algorithms, 4th edition*](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1441459738&sr=1-1&keywords=sedgewick&refinements=p_n_feature_browse-bin%3A2656020011&pebp=1441459739425&perid=0C83SQQ1YFJ62VWHF9C0)
   * [Mergesort](README_Mergesort.md)
