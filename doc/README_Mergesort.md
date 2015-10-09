@@ -6,12 +6,12 @@
   * [MergeBU](../py/AlgsSedgewickWayne/MergeBU.py) => Bottom-up Mergesort (no recursion)
 
 ## Table of Contents for Examples
-  1. [Run Mergesort (Top-Down) seed = 14238](#ex1)
-  2. [Run Mergesort (Bottom-Up) seed = 193860](#ex2)
+  1. [Run Mergesort (Top-Down) (#ex1)
+  2. [Run Mergesort (Bottom-Up) (#ex2)
 
 ## Examples
 ### [ex1](#table-of-contents-for-examples)
-1. Run Mergesort seed = 14238
+1. Run Mergesort example
 ```
 python -c 'import test_Merge as T; T.test_14238()'
 ```
@@ -89,7 +89,7 @@ python -c 'import test_Merge as T; T.test_14238()'
 ```
 
 ### [ex2](#table-of-contents-for-examples)
-2. Run Mergesort (Bottom-Up) seed = 193860
+2. Run Mergesort (Bottom-Up) 
 ```
 $ python -c 'import test_MergeBU as T; T.test_193860()'
 ```
