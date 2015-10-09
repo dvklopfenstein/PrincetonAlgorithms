@@ -6,18 +6,45 @@ public class test_RandomizedQueue {
 
     public static void main(String[] argv) {
         RandomizedQueue<String> rq = new RandomizedQueue<String>();
+        rq.prt();
         rq.enqueue("A");  
+        rq.prt();
         rq.dequeue();  
+        rq.prt();
         rq.enqueue("A");  
+        rq.prt();
         rq.enqueue("B");  
+        rq.prt();
+        rq.dequeue();  
+        rq.prt();
         rq.enqueue("C");  
+        rq.prt();
         rq.enqueue("D");  
+        rq.prt();
         rq.enqueue("E");  
+        rq.prt();
         for (String outerItem : rq) {  
-            for(String innerItem :rq) {  
-                System.out.println(outerItem + innerItem);  
-            }  
+            for(String innerItem :rq) {  System.out.println(outerItem + innerItem);  }  
         }
+        System.out.println("START");
+        rq.prt();
+        System.out.println(rq.dequeue());
+
+        for(String item :rq) {  System.out.println(item);  }  
+        System.out.println("DEQUEUE");
+        System.out.println(rq.dequeue());
+        rq.prt();
+        for(String item :rq) {  System.out.println(item);  }  
+
+        System.out.println("DEQUEUE");
+        System.out.println(rq.dequeue());
+        rq.prt();
+        for(String item :rq) {  System.out.println(item);  }  
+
+        System.out.println("DEQUEUE");
+        System.out.println(rq.dequeue());
+        rq.prt();
+        for(String item :rq) {  System.out.println(item);  }  
     }
 
 }
