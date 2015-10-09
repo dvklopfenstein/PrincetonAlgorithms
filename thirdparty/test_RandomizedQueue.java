@@ -10,6 +10,9 @@ public class test_RandomizedQueue {
         rq.dequeue();  
         rq.enqueue("A");  
         rq.enqueue("B");  
+        rq.enqueue("C");  
+        rq.enqueue("D");  
+        rq.enqueue("E");  
         for (String outerItem : rq) {  
             for(String innerItem :rq) {  
                 System.out.println(outerItem + innerItem);  
