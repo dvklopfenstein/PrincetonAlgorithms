@@ -13,9 +13,10 @@
 There are two ways to view the progression of a sort:
 
   1. The concise way: One print of the array state per iteration.     
-
-| X | There is a difference between the last state and the current state    
-| . | There is NO difference between the last state and the current state     
+| Key | Description
+| --- | --------------------------------------------------------------
+|   X | There is a difference between the last state and the current state    
+|   . | There is NO difference between the last state and the current state     
 
 It looks like this:    
 
