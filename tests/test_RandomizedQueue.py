@@ -62,7 +62,7 @@ def main(prt=sys.stdout): # unit testing
 def run_all(prt=sys.stdout):
   #test_4a(prt)
   #test_ed(prt)
-  test_red(1000, prt)
+  test_red(10, prt)
 
 def cli(prt=sys.stdout):
   if len(sys.argv) > 1:
