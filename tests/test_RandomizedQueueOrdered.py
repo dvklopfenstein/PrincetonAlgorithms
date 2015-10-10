@@ -2,23 +2,23 @@
 
 import sys
 import fileinput
+import copy
 from AlgsSedgewickWayne.RandomizedQueue import RandomizedQueue
-import numpy as np
 
 def test_4a(prt=sys.stdout):
   rq = RandomizedQueue()
-  rq.enqueue(0)
+  rq.enqueue(58)
   prt.write("{}\n".format(str(rq)))
   prt.write("{:>5} sample\n".format(rq.sample())) #  ==> 58
   prt.write("{:>5} isEmpty()\n".format(rq.isEmpty()))   #  ==> false
   prt.write("{:>5} deque()\n".format(rq.dequeue()))   #  ==> 58
   prt.write("{}\n".format(str(rq)))
-  rq.enqueue(1)
+  rq.enqueue(194)
   prt.write("{:>5} sample\n".format(rq.sample())) #  ==> 58
-  rq.enqueue(2)
-  rq.enqueue(3)
-  rq.enqueue(4)
-  rq.enqueue(5)
+  rq.enqueue(200)
+  rq.enqueue(201)
+  rq.enqueue(202)
+  rq.enqueue(203)
   prt.write("{}\n".format(str(rq)))
   rq.dequeue()
   rq.dequeue()
@@ -27,25 +27,24 @@ def test_4a(prt=sys.stdout):
     prt.write("E  {}\n".format(e))
     for f in rq:
       prt.write("F  {}\n".format(e))
+  #prt.write("{:>5} sample\n".format(rq.sample()))
 
-def test_ed(prt=sys.stdout):
+def test_nested_iterator(prt=sys.stdout):
+  prt.write("\nTEST TWO NESTED ITERATORS:\n")
   rq = RandomizedQueue()
-  for e in range(16): rq.enqueue(e)
-  for e in range(16): rq.dequeue()
+  for num in range(200, 207): rq.enqueue(num)
 
-def test_red(N=20, prt=sys.stdout):
-  rq = RandomizedQueue()
-  cmds = [
-    lambda e: rq.enqueue(e), 
-    lambda e: rq.size() if rq.isEmpty() else rq.dequeue()]
-  C = len(cmds)
-  for e in range(N):
-    cmds[np.random.randint(0, C)](e)
-  prt.write("PRINTING {} ITEMS:\n".format(rq.size()))
-  rq.prt(">>")
-  for e in rq:
-    prt.write("{}\n".format(e))
+  # Nested iterators can look like this in C++:
+  #   for (vector<type>::iterator i = list.begin(); i != list.end(); ++i) {
+  #     for (vector<type>::iterator j = i; j != list.end(); ++j) {
 
+  it_a = rq.__iter__()
+  for elem_a in it_a:
+    prt.write("A    {}\n".format(elem_a))
+    #it_b = rq.__iter__(it_a)
+    it_b = copy.deepcopy(it_a)
+    for elem_b in it_b:
+      prt.write("  B  {}\n".format(elem_b))
 
 
 def main(prt=sys.stdout): # unit testing
@@ -61,8 +60,7 @@ def main(prt=sys.stdout): # unit testing
 
 def run_all(prt=sys.stdout):
   #test_4a(prt)
-  #test_ed(prt)
-  test_red(1000, prt)
+  test_nested_iterator(prt)
 
 def cli(prt=sys.stdout):
   if len(sys.argv) > 1:
