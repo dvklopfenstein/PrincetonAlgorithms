@@ -1,6 +1,6 @@
 # Implementations Summary
 
-## ST implementations
+## ST(Search Tree) implementations
 
 | implementation                | WC search | WC insert | WC delete | AC search hit | AC insert | AC delete | ordered it? | key i/f
 | --------------                | --------- | --------- | --------- | ------------- | --------- | --------- | ----------- | -------

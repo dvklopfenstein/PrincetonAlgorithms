@@ -5,7 +5,7 @@ from AlgsSedgewickWayne.Transaction import Transaction
 import sys
 from operator import attrgetter
 
-def main(prt=sys.stdout):
+def test_sortbys(prt=sys.stdout):
   """Unit tests the <tt>Transaction</tt> data type."""
   a = [
     Transaction("Turing   6/17/1990  644.08"),
@@ -29,5 +29,18 @@ def main(prt=sys.stdout):
   for tr in sorted(a, key=attrgetter("amount")):
     prt.write("{}\n".format(tr))
 
+def test_hash(prt=sys.stdout):
+  trs = [
+    Transaction("Turing   6/17/1990  644.08"),
+    Transaction("Tarjan   3/26/2002 4121.85"),
+    Transaction("Knuth    6/14/1999  288.34"),
+    Transaction("Dijkstra 8/22/2007 2678.40")]
+  for tr in trs:
+    prt.write("{} {}\n".format(tr, tr.hashCode()))
+
+def run_all():
+  #test_sortbys()
+  test_hash()
+
 if __name__ == '__main__':
-  main()
+  run_all()

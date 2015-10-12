@@ -2,9 +2,12 @@
 
 ## Code
   * **hash functions**
-  * **separate chaining**
-  * **linear probing**
+    Example hash implementation in [Transaction.py](../py/AlgsSedgewickWayne/Transaction.py)
+  * Two collision resolution methods:
+    * **separate chaining** SeparateChainingHashST.py
+    * **linear probing** LinearProbingHashST.py
   * **context**
+
 
 ## Table of Contents for Examples
   1. [Run Example](#ex1)

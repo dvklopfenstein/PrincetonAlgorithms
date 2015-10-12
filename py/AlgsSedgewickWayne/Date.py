@@ -56,6 +56,14 @@ class Date(object):
   #  hash = 31*hash + year
   #  return hash
 
+  def java_string_hashcode(s):
+    """Returns same result as java's String.hashCode()"""
+    # From: https://gist.github.com/hanleybrand/5224673#file-java_string_hashcode-py
+    h = 0
+    for c in s:
+      h = (31 * h + ord(c)) & 0xFFFFFFFF
+    return ((h + 0x80000000) & 0xFFFFFFFF) - 0x80000000
+
   def _init_w_str(self, date_str):
     """Get date from the string representation of this date."""
     M = re.match('(\d{1,2})/(\d{1,2})/(\d{4})', date_str) # MM/DD/YYYY
