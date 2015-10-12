@@ -1,5 +1,6 @@
 
 from AlgsSedgewickWayne.Queue import Queue
+from AlgsSedgewickWayne.SequentialSearchST import SequentialSearchST
 
 class SeparateChainingHashST(object):
   _INIT_CAPACITY = 4
@@ -14,20 +15,13 @@ class SeparateChainingHashST(object):
   # }
   def __init__(self, M=None):
     M = self._INIT_CAPACITY if M is None else M # hash table size
-    self.N    # number of key-value pairs
-    self.M =  M # hash table size
-    self.st = for i in range(M) # SequentialSearchST<, Value>[] st  # array of linked-list symbol tables
+    self.N = 0 # number of key-value pairs
+    self.M = M # hash table size
+    self.st = [SequentialSearchST() for i in range(M)] # SequentialSearchST<, Value>[] st # array of linked-list symbol tables
 
-   # Initializes an empty symbol table with <tt>M</tt> chains.
-   # @param M the initial number of chains
-  def SeparateChainingHashST(self, M):
-    st = (SequentialSearchST<, Value>[]) new SequentialSearchST[M]
-    for i in range(M): # (int i = 0 i < M i += 1)
-      self.st[i] = SequentialSearchST<, Value>()
-
-  # resize the hash table to have the given number of chains b rehashing all of the keys
-  def _resize(self, int chains):
-    SeparateChainingHashST<, Value> temp = new SeparateChainingHashST<, Value>(chains)
+  def _resize(self, chains):
+    """resize the hash table to have the given number of chains b rehashing all of the keys."""
+    temp = SeparateChainingHashST(chains)
     for i in range(M):
       for key in st[i].keys():
         temp.put(key, self.st[i].get(key))
@@ -35,9 +29,9 @@ class SeparateChainingHashST(object):
     self.N  = temp.N
     self.st = temp.st
 
-  # hash value between 0 and M-1
   def _hash(self, key):
-      return (key.hashCode() & 0x7fffffff) % M
+    """hash value between 0 and M-1."""
+    return (hash(key) & 0x7fffffffffffffff) % self.M
 
   def size(self): return self.N
   def isEmpty(self): return self.size() == 0
@@ -45,7 +39,7 @@ class SeparateChainingHashST(object):
 
   def get(self, key):
     """Returns the value associated with the given key."""
-    i = hash(key)
+    i = self._hash(key)
     return self.st[i].get(key)
 
   def put(self, key, val):
@@ -55,15 +49,15 @@ class SeparateChainingHashST(object):
       return
 
     # double table size if average length of list >= 10
-    if self.N >= 10*M: self.resize(2*M)
+    if self.N >= 10*self.M: self.resize(2*self.M)
 
-    i = hash(key)
-    if !self.st[i].contains(key)) self.N += 1
+    i = self._hash(key)
+    if not self.st[i].contains(key): self.N += 1
     self.st[i].put(key, val)
 
   def delete(self, key):
     """Removes the key and associated value from the symbol table, if the key is in the symbol tbl."""
-    i = hash(key)
+    i = self._hash(key)
     if self.st[i].contains(key): self.N -= 1
     self.st[i].delete(key)
 
@@ -74,22 +68,9 @@ class SeparateChainingHashST(object):
     """return keys in symbol table as an Iterable."""
     queue = Queue()
     for i in range(self.M):
-      for key in st[i].keys():
+      for key in self.st[i].keys():
         queue.enqueue(key)
     return queue
-
-
-  #def main(String[] args): 
-  #    SeparateChainingHashST<String, Integer> st = new SeparateChainingHashST<String, Integer>()
-  #    for (int i = 0 !StdIn.isEmpty() i += 1):
-  #        String key = StdIn.readString()
-  #        st.put(key, i)
-
-  #    # print keys
-  #    for (String s : st.keys()) 
-  #        prt.write(s + " " + st.get(s))
-
-
 
 #  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 #  Copyright 2014-2015, Python Implementation, DV Klopfenstein
