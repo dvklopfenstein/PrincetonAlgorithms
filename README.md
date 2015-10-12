@@ -75,7 +75,7 @@ Key  1 FUNDAMENTALS         Description                      DATA
  .   - UF                   union-by-rank with path halving  tinyUF.txt mediumUF.txt largeUF.txt
 
 
- ey  2 SORTING     Description                       DATA
+Key  2 SORTING     Description                       DATA
  - --: :---------- :-----------------------------    :-------------
  P 2.1 Insertion   insertion sort tiny.txt           words3.txt
  .   – InsertionX  optimized insertion               sort tiny.txt words3.txt
@@ -96,15 +96,15 @@ Key  1 FUNDAMENTALS         Description                      DATA
  P 2.7 Heap        heapsort                          tiny.txt words3.txt
 
 
- ey  3 SEARCHING              Description                  DATA
+Key  3 SEARCHING              Description                  DATA
  - --: ---------------------- :--------------------------  :-------------
  .   – FrequencyCounter       frequency counter            tinyTale.txt tale.txt leipzig1M.txt
- . 3.1 SequentialSearchST     sequential search            tinyST.txt
+ P 3.1 SequentialSearchST     sequential search            tinyST.txt
  . 3.2 BinarySearchST         binary search                tinyST.txt
  . 3.3 BST binary             search tree                  tinyST.txt
  . 3.4 RedBlackBST red-black  tree                         tinyST.txt
- . 3.5 SeparateChainingHashST separate chaining hash table –
- . 3.6 LinearProbingHashST    linear probing hash table    –
+ P 3.5 SeparateChainingHashST separate chaining hash table –
+ P 3.6 LinearProbingHashST    linear probing hash table    –
  .   – ST                     ordered symbol table         –
  .   – SET                    ordered set                  –
  .   – DeDup                  remove duplicates            tinyTale.txt
@@ -116,7 +116,7 @@ Key  1 FUNDAMENTALS         Description                      DATA
  .   – SparseVector           sparse vector                –
 
 
- ey   4 GRAPHS                    Description                         DATA
+Key   4 GRAPHS                    Description                         DATA
  - ---: :------------------------ :---------------------------------- :---------------------
  .    – Graph                     undirected graph                    tinyG.txt mediumG.txt
  .    – GraphGenerator            generate random graphs              –

@@ -4,8 +4,8 @@
   * **hash functions**
     Example hash implementation in [Transaction.py](../py/AlgsSedgewickWayne/Transaction.py)
   * Two collision resolution methods:
-    * **separate chaining** SeparateChainingHashST.py
-    * **linear probing** LinearProbingHashST.py
+    * **separate chaining**: SeparateChainingHashST.py
+    * **linear probing**: LinearProbingHashST.py
   * **context**
 
 
