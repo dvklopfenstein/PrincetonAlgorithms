@@ -298,3 +298,9 @@ class BST(object):
 # compares to search for one of the N keys?
 # ANSWER: logorithmic.
 
+# From comments in the Discussion from a student who worked on the exercises for
+# level-order traversal of a BST:
+#   Each node has a key and every node’s key is:
+#     * Larger than all keys in its left subtree.
+#     * Smaller than all keys in its right subtree.
+
