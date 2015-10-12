@@ -2,6 +2,7 @@
 
 ## ST implementations
 
+|                   | worst-case cost          | average-case cost                  |             |         
 | implementation    | search | insert | delete | search hit | insert    | delete    | ordered it? | key i/f
 | --------------    | ------ | ------ | ------ | ---------- | ------    | --------- | ----------- | -------
 | sequential search |   N    |   N    |   N    |    N/2     |   N       |    N/2    |     no      | equals()
