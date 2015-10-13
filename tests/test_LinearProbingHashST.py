@@ -1,25 +1,24 @@
 #!/usr/bin/env python
 
-from AlgsSedgewickWayne.SeparateChainingHashST import SeparateChainingHashST
-from AlgsSedgewickWayne.testcode.chaining_table import prt_chaining_symtbl
+from AlgsSedgewickWayne.LinearProbingHashST import LinearProbingHashST
 import fileinput
 import sys
 
 def test_stdin(prt=sys.stdout):
-  """echo "a b c d e f" | test_SeparateChainingHashST.py"""
-  # 1. Create and fill SeparateChainingHashST
+  """echo "a b c d e f" | test_LinearProbingHashST.py"""
+  # 1. Create and fill LinearProbingHashST
   M, keys = cli()
-  st = SeparateChainingHashST(M) # Initialize empty chaining-hash
+  st = LinearProbingHashST(M) # Initialize empty chaining-hash
   for i, key in enumerate(keys):
     st.put(key, i)
 
-  # 2. Print SeparateChainingHashST
+  # 2. Print LinearProbingHashST
   prt.write("\n")
   for s in st.keys():
     prt.write("{} {}\n".format(s, st.get(s)))
 
-  # 3. Print innards of SeparateChainingHashST
-  st.prt_chaining_symtbl(prt)
+  # 3. Print innards of LinearProbingHashST
+  #st.prt_chaining_symtbl(prt)
 
 def cli():
   """Command-line interface: reads data from stdin, stream, or files."""

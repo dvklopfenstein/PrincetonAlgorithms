@@ -1,6 +1,7 @@
 
 from AlgsSedgewickWayne.Queue import Queue
 from AlgsSedgewickWayne.SequentialSearchST import SequentialSearchST
+import sys
 
 class SeparateChainingHashST(object):
   _INIT_CAPACITY = 4
@@ -17,7 +18,7 @@ class SeparateChainingHashST(object):
     M = self._INIT_CAPACITY if M is None else M # hash table size
     self.N = 0 # number of key-value pairs
     self.M = M # hash table size
-    self.st = [SequentialSearchST() for i in range(M)] # SequentialSearchST<, Value>[] st # array of linked-list symbol tables
+    self.st = [SequentialSearchST() for i in range(M)] # array of linked-list symbol tables
 
   def _resize(self, chains):
     """resize the hash table to have the given number of chains b rehashing all of the keys."""
@@ -30,7 +31,7 @@ class SeparateChainingHashST(object):
     self.st = temp.st
 
   def _hash(self, key):
-    """hash value between 0 and M-1."""
+    """hash value between 0 and M-1.""" 
     return (hash(key) & 0x7fffffffffffffff) % self.M
 
   def size(self): return self.N
@@ -71,6 +72,32 @@ class SeparateChainingHashST(object):
       for key in self.st[i].keys():
         queue.enqueue(key)
     return queue
+
+  def prt_chaining_symtbl(self, prt=sys.stdout):
+    prt.write("INNARDS OF SEPARATE CHAINING SYMBOL TABLE:\n")
+    for idx, linkedlist in enumerate(self.st):
+      prt.write("  st[{I}]:\n".format(I=idx))
+      for chnum, chain_elem in enumerate(linkedlist):
+        prt.write("    chain_elem[{I}] {ST}\n".format(I=chnum, ST=chain_elem))
+
+# Algs 1, Week 6 Lecture: Separate Chaining (7:28)
+
+# COLLISIONS:
+# COLLISION: Two distinct keys hashing to same index
+#  * Birthday problem => can't avoid collisions unless you have 
+#    a ridiculous (quadratic) amount of memory
+#  * Coupon collector + load balancing => 
+#    collisions will be evenly distributed.
+
+# PROPOSITION: 05:33
+# Under uniform hashing assumption, prob. that the number of
+# keys in a list is within a constant factor of N/M is extremely close t0 1.
+# Divided search cost, which would be N, by M. Give us constant-time searches.
+
+# QUESTION: What is the average running time of a random search miss
+# in a separate chaining hash table? Assume that your hash function satisfies
+# the uniform hashing assumption and that there are M = N/8.
+# ANSWER: constant.
 
 #  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 #  Copyright 2014-2015, Python Implementation, DV Klopfenstein

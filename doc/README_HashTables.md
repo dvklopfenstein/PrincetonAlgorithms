@@ -5,7 +5,7 @@
     Example hash implementation in [Transaction.py](../py/AlgsSedgewickWayne/Transaction.py)
   * Two collision resolution methods:
     * **separate chaining**: [SeparateChainingHashST.py](../py/AlgsSedgewickWayne/SeparateChainingHashST.py)
-    * **linear probing**: LinearProbingHashST.py
+    * **linear probing**: [LinearProbingHashST.py](../py/AlgsSedgewickWayne/LinearProbingHashST)
   * **context**
 
 

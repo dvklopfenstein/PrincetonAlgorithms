@@ -66,5 +66,12 @@ class SequentialSearchST(object):
       x = x._next
     return queue
 
+  def __iter__(self):
+    curr = self._first
+    while curr is not None:
+      key_val = (curr._key, curr._val)
+      curr = curr._next
+      yield key_val
+
 #  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 #  Copyright 2015-201r6 Python Implementation, DV Klopfenstein

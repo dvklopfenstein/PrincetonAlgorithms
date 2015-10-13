@@ -1,248 +1,120 @@
-#!/usr/bin/env python#*****************************************************************************
- #  Compilation:  javac LinearProbingHashST.java
- #  Execution:    java LinearProbingHashST
- #  Dependencies: StdIn.java StdOut.java
- #  
- #  Symbol table implementation with linear probing hash table.
- #
- #  % java LinearProbingHashST
- #  128.112.136.11
- #  208.216.181.15
- #  null
- #
- #
- #*****************************************************************************/
+"""Avoiding collision through linear probing."""
 
-package edu.princeton.cs.algs4
+import sys
+from AlgsSedgewickWayne.Queue import Queue
 
-#*
- #  The <tt>LinearProbingHashST</tt> class represents a symbol table of generic
- #  key-value pairs.
- #  It supports the usual <em>put</em>, <em>get</em>, <em>contains</em>,
- #  <em>delete</em>, <em>size</em>, and <em>is-empty</em> methods.
- #  It also provides a <em>keys</em> method for iterating over all of the keys.
- #  A symbol table implements the <em>associative array</em> abstraction:
- #  when associating a value with a key that is already in the symbol table,
- #  the convention is to replace the old value with the new value.
- #  Unlike {@link java.util.Map}, this class uses the convention that
- #  values cannot be <tt>null</tt>&mdash;setting the
- #  value associated with a key to <tt>null</tt> is equivalent to deleting the key
- #  from the symbol table.
- #  <p>
- #  This implementation uses a linear probing hash table. It requires that
- #  the key type overrides the <tt>equals()</tt> and <tt>hashCode()</tt> methods.
- #  The expected time per <em>put</em>, <em>contains</em>, or <em>remove</em>
- #  operation is constant, subject to the uniform hashing assumption.
- #  The <em>size</em>, and <em>is-empty</em> operations take constant time.
- #  Construction takes constant time.
- #  <p>
- #  For additional documentation, see <a href="http://algs4.cs.princeton.edu/34hash">Section 3.4</a> of
- #  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- #  For other implementations, see {@link ST}, {@link BinarySearchST},
- #  {@link SequentialSearchST}, {@link BST}, {@link RedBlackBST}, and
- #  {@link SeparateChainingHashST},
- #  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- #/
-public class LinearProbingHashST<, Value>:
-    private static final INIT_CAPACITY = 4
+class LinearProbingHashST(object):
+  INIT_CAPACITY = 4
 
-    private N;           # number of key-value pairs in the symbol table
-    private M;           # size of linear probing table
-    private keys;      # the keys
-    private Value[] vals;    # the values
+  def __init__(self, capacity=None):
+    if capacity is None:
+      capacity = self.INIT_CAPACITY
+    self._N = 0  # number of key-value pairs in the symbol table
+    self._M = capacity # size of linear probing table
+    self._keys = [None for i in range(self._M)] # the keys
+    self._vals = [None for i in range(self._M)] # the values
 
+  def size(self): return self._N
+  def isEmpty(self): return self.size() == 0
+  def contains(self, key): return self.get(key) is not None
 
-    #*
-     # Initializes an empty symbol table.
-     #/
-    public LinearProbingHashST():
-        this(INIT_CAPACITY)
+  def _hash(self, key):
+    """hash function for keys - returns value between 0 and self._M-1."""
+    return (hash(key) & 0x7fffffffffffffff) % self._M
 
-    #*
-     # Initializes an empty symbol table of given initial capacity.
-     # @param capacity the initial capacity
-     #/
-    public LinearProbingHashST(int capacity):
-        M = capacity
-        keys = ([])   new [M]
-        vals = (Value[]) new [M]
+  def _resize(self, capacity):
+    """resize the hash table to the given capacity by re-hashing all of the self._keys"""
+    temp = LinearProbingHashST(capacity)
+    for i in range(self._M):
+      if self._keys[i] is not None:
+        temp.put(self._keys[i], self._vals[i])
+    self._keys = temp._keys
+    self._vals = temp._vals
+    self._M    = temp._M
 
-    #*
-     # Returns the number of key-value pairs in this symbol table.
-     # @return the number of key-value pairs in this symbol table
-     #/
-    def size():
-        return N
+  def put(self, key, val):
+    """Inserts the key-val pair into the sym tbl, overwriting the old val, if needed"""
+    if val is None:
+      self.delete(key)
+      return
 
-    #*
-     # Is this symbol table empty?
-     # @return <tt>true</tt> if this symbol table is empty and <tt>false</tt> otherwise
-     #/
-    def isEmpty():
-        return size() == 0
+    # double table size if 50% full
+    if self._N >= self._M/2: self._resize(2*self._M)
 
-    #*
-     # Does this symbol table contain the given key?
-     # @param key the key
-     # @return <tt>true</tt> if this symbol table contains <tt>key</tt> and
-     #     <tt>false</tt> otherwise
-     # @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
-     #/
-    def contains( key):
-        return get(key) is not None
+    i = self._hash(key)
+    while self._keys[i] is not None:
+      if self._keys[i] == key:
+        self._vals[i] = val
+        return
+      i = (i + 1) % self._M
+    self._keys[i] = key
+    self._vals[i] = val
+    self._N += 1
 
-    # hash function for keys - returns value between 0 and M-1
-    def _hash( key):
-        return (key.hashCode() & 0x7fffffff) % M
+  def get(self, key):
+    """Returns the value associated with the given key."""
+    i = self._hash(key)
+    while self._keys[i] is not None:
+      if self._keys[i] == key:
+        return self._vals[i]
+      i = (i + 1) % self._M
+    return None
 
-    # resize the hash table to the given capacity by re-hashing all of the keys
-    def _resize(int capacity):
-        LinearProbingHashST<, Value> temp = new LinearProbingHashST<, Value>(capacity)
-        for (int i = 0; i < M; i += 1):
-            if keys[i] is not None):
-                temp.put(keys[i], vals[i])
-        keys = temp.keys
-        vals = temp.vals
-        M    = temp.M
+  def delete(self, key):
+    """Removes the key and associated value from the symbol table."""
+    if not contains(key): return
 
-    #*
-     # Inserts the key-value pair into the symbol table, overwriting the old value
-     # with the new value if the key is already in the symbol table.
-     # If the value is <tt>null</tt>, this effectively deletes the key from the symbol table.
-     # @param key the key
-     # @param val the value
-     # @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
-     #/
-    def put( key, Value val):
-        if val is None):
-            delete(key)
-            return
+    # find position i of key
+    i = self._hash(key)
+    while not key == self._keys[i]:
+      i = (i + 1) % self._M
 
-        # double table size if 50% full
-        if N >= M/2) resize(2*M)
+    # delete key and associated value
+    self._keys[i] = None
+    self._vals[i] = None
 
-        i
-        for (i = hash(key); keys[i] is not None; i = (i + 1) % M):
-            if keys[i].equals(key)):
-                vals[i] = val
-                return
-        keys[i] = key
-        vals[i] = val
-        N += 1
+    # rehash all self._keys in same cluster
+    i = (i + 1) % self._M
+    while self._keys[i] is not None:
+      # delete self._keys[i] an self._vals[i] and reinsert
+      keyToRehash = self._keys[i]
+      valToRehash = self._vals[i]
+      self._keys[i] = None
+      self._vals[i] = None
+      self._N -= 1
+      self.put(keyToRehash, valToRehash)
+      i = (i + 1) % self._M
 
-    #*
-     # Returns the value associated with the given key.
-     # @param key the key
-     # @return the value associated with the given key if the key is in the symbol table
-     #     and <tt>null</tt> if the key is not in the symbol table
-     # @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
-     #/
-    def get( key):
-        for (int i = hash(key); keys[i] is not None; i = (i + 1) % M) 
-            if keys[i].equals(key))
-                return vals[i]
-        return None
+    self._N -= 1
 
-    #*
-     # Removes the key and associated value from the symbol table
-     # (if the key is in the symbol table).
-     # @param key the key
-     # @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
-     #/
-    def delete( key):
-        if !contains(key)) return
-
-        # find position i of key
-        i = hash(key)
-        while (!key.equals(keys[i])):
-            i = (i + 1) % M
-
-        # delete key and associated value
-        keys[i] = None
-        vals[i] = None
-
-        # rehash all keys in same cluster
-        i = (i + 1) % M
-        while (keys[i] is not None):
-            # delete keys[i] an vals[i] and reinsert
-               keyToRehash = keys[i]
-            Value valToRehash = vals[i]
-            keys[i] = None
-            vals[i] = None
-            N -= 1
-            put(keyToRehash, valToRehash)
-            i = (i + 1) % M
-
-        N -= 1
-
-        # halves size of array if it's 12.5% full or less
-        if N > 0 and N <= M/8) resize(M/2)
-
-        assert check()
-
-    #*
-     # Returns all keys in the symbol table as an <tt>Iterable</tt>.
-     # To iterate over all of the keys in the symbol table named <tt>st</tt>,
-     # use the foreach notation: <tt>for (Key key : st.keys())</tt>.
-     # @return all keys in the sybol table as an <tt>Iterable</tt>
-     #/
-    def keys():
-        Queue<> queue = new Queue<>()
-        for (int i = 0; i < M; i += 1)
-            if keys[i] is not None) queue.enqueue(keys[i])
-        return queue
-
-    # integrity check - don't check after each put() because
-    # integrity not maintained during a delete()
-    def _check():
-
-        # check that hash table is at most 50% full
-        if M < 2*N):
-            System.err.println("Hash table size M = " + M + "; array size N = " + N)
-            return False
-
-        # check that each key in table can be found by get()
-        for (int i = 0; i < M; i += 1):
-            if keys[i] is None) continue
-            elif (get(keys[i]) != vals[i]):
-                System.err.println("get[" + keys[i] + "] = " + get(keys[i]) + "; vals[i] = " + vals[i])
-                return False
-        return True
+    # halves size of array if it's 12.5% full or less
+    if self._N > 0 and self._N <= self._M/8: self._resize(self._M/2)
+    assert self._check()
 
 
-    #*
-     # Unit tests the <tt>LinearProbingHashST</tt> data type.
-     #/
-    def main(String[] args): 
-        LinearProbingHashST<String, Integer> st = new LinearProbingHashST<String, Integer>()
-        for (int i = 0; !StdIn.isEmpty(); i += 1):
-            String key = StdIn.readString()
-            st.put(key, i)
+  def keys(self):
+    """Returns all self._keys in the symbol table as an Iterable."""
+    queue = Queue()
+    for i in range(self._M):
+      if self._keys[i] is not None: queue.enqueue(self._keys[i])
+    return queue
 
-        # print keys
-        for (String s : st.keys()) 
-            prt.write(s + " " + st.get(s))
+  def _check(self, prt=sys.stdout):
+    """check - don't check after each put() - integrity not maintained during a delete()"""
 
-#*****************************************************************************
- #  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
- #
- #  This file is part of algs4.jar, which accompanies the textbook
- #
- #      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- #      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- #      http://algs4.cs.princeton.edu
- #
- #
- #  algs4.jar is free software: you can redistribute it and/or modify
- #  it under the terms of the GNU General Public License as published by
- #  the Free Software Foundation, either version 3 of the License, or
- #  (at your option) any later version.
- #
- #  algs4.jar is distributed in the hope that it will be useful,
- #  but WITHOUT ANY WARRANTY; without even the implied warranty of
- #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- #  GNU General Public License for more details.
- #
- #  You should have received a copy of the GNU General Public License
- #  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- #*****************************************************************************/
+    # check that hash table is at most 50% full
+    if self._M < 2*self._N:
+      prt.write("Hash table size self._M = {} array size self._N = {}\n".format(self._M, self._N))
+      return False
+
+    # check that each key in table can be found by get()
+    for i in range(self._M):
+      if self._keys[i] is None: continue
+      elif self.get(self._keys[i]) != self._vals[i]:
+        prt.write("get[{}] = {} self._vals[i] = {}\n".format(
+          self._keys[i], self.get(self._keys[i]), self._vals[i]))
+        return False
+    return True
+
+#  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
+#  Copyright 2014-2015, DV Klopfenstein, Python implementation.
