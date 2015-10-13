@@ -10,7 +10,7 @@
   * Symbol Table Applications:
     * **Sets**: SET.py, WhiteList.py
     * **Dictionary Clients**: LookupCSV.py
-    * **Indexing Clients**
+    * **Indexing Clients**: FileIndex.py
     * **Sparse Vectors**
 
 

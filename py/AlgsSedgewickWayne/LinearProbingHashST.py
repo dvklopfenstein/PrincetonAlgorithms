@@ -221,6 +221,18 @@ class LinearProbingHashST(object):
 # the intersection takes extra space proportional to the size of 
 # the intersection.
 
+# QUESTION: Among the following symbol table implementatins, which
+# would be most suitable for use in the Lookup CSV client? Assume
+# that the Key type overrides the compareTo(), equals() and hashCode() methods
+# ANSWER: linear probing hash table
+# EXPLANATION: Ordered operations (such as rank and ordered iteratio)
+# are not needed, so a hash table is probably most suitable. An 
+# unordered array has slow lookup; an ordered linked list has slow lookup
+# (since you can't binary search in a linked list); an unbalanced BST has
+# both slow inser and lookup if the keys are in sorted order (which is
+# a common situation in such an application).
+
+
 
 #  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 #  Copyright 2014-2015, DV Klopfenstein, Python implementation.
