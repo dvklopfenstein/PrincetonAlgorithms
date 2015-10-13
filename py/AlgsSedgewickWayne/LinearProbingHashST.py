@@ -116,5 +116,40 @@ class LinearProbingHashST(object):
         return False
     return True
 
+# Algs 1, week 6 Lecture: Linear Probing (14:37)
+
+# LINEAR PROBING HASH TABLE SUMMARY
+#   HASH: Map key to integet i between 0 and M-1.
+#   INSERT: Put at table index i if free; if not try i+1, i+2, etc.
+#   SEARCH: Search table index i; if occupied but no match, try i+1, i+2, etc.
+# NOTE: Array size M MUST BE greater than number of key-value pairs N.
+# A good idea to ensure it stays half full. (3/2 for a hit, 5/2 for a miss)
+
+# KNUTH'S PARKING PROBLEM:
+# MODEL: Cars arrive at one-way street with M parking spaces.
+# Each desires a random space: i if space i is taken, try i+1, i+2, etc.
+# Q: What is the mean displacement of a car? 
+#
+# If every car starts looking for a parking place at a random time (hashing fnc),
+# how far do they have to go to look for a place?
+# 
+# HALF-FULL. With M/2 cars, mean displacement is ~3/2
+# FULL. With M cars, mean displacement is ~sqrt(pi*M/8)
+
+# QUESTION: What is the average running time of delete in a linear-probing hash table?
+# Assumt that your hash function satidfies the uniform hashing assumption and that the 
+# hash table is at most 50% full.
+# ANSWER: linear
+# EXPLANATION: The easiest way to implement delete is to find and remove the
+# key-value pair and then to reinsert all of the key-value pairs in the same
+# cluster that appear after the deleted key-value pair. If the hash table
+# doesn't get too full, the expected number of key-value pairs to reinsert 
+# will be a small constant.
+#
+# An alternative is to flag the deleted linear probing talbe entry so that it is 
+# skipped over during a search but is used for an insertion. If there are too
+# many flagged entries, create a new hash table and rehash all key-value pairs.
+
+
 #  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 #  Copyright 2014-2015, DV Klopfenstein, Python implementation.

@@ -8,7 +8,8 @@
 | binary search (ordered array) |  lg N     |      N    |      N    |      lg N     |  N/2      |    N/2    |    yes      | compareTo()
 | BST                           |   N       |      N    |      N    |    1.38 ln N  | 1.38 lg N |     ?     |    yes      | compareTo()
 | red-black BST                 | 2 lg N    |    2 lg N |    2 lg N |    1.00 ln N  | 1.00 lg N | 1.00 lg N |    yes      | compareTo()
-| separaate chaining            |   lg N    |      lg N |      lg N |    3 - 5*     | 3 - 5*    | 3 - 5*    |     no      | equals()
+| separate chaining             |   lg N    |      lg N |      lg N |    3 - 5*     | 3 - 5*    | 3 - 5*    |     no      | equals()
+| linear probing                |   lg N    |      lg N |      lg N |    3 - 5*     | 3 - 5*    | 3 - 5*    |     no      | equals()
 
 * **WC** => worst-case cost (after N inserts)
 * **AC** => average-case cost (after N random inserts)
