@@ -106,11 +106,11 @@ Key  3 SEARCHING              Description                  DATA
  P 3.5 SeparateChainingHashST separate chaining hash table –
  P 3.6 LinearProbingHashST    linear probing hash table    –
  .   – ST                     ordered symbol table         –
- .   – SET                    ordered set                  –
+ p   – SET                    ordered set                  –
  .   – DeDup                  remove duplicates            tinyTale.txt
- .   – WhiteFilter            whitelist filter             list.txt tinyTale.txt
+ p   – WhiteFilter            whitelist filter             list.txt tinyTale.txt
  .   – BlackFilter            blacklist filter             list.txt tinyTale.txt
- .   – LookupCSV              dictionary lookup            ip.csv  DJIA.csv  amino.csv  UPC.csv
+ p   – LookupCSV              dictionary lookup            ip.csv  DJIA.csv  amino.csv  UPC.csv
  .   – LookupIndex            index and inverted index     aminoI.csv movies.txt
  .   – FileIndex              file indexing                ex1.txt ex2.txt ex3.txt ex4.txt
  .   – SparseVector           sparse vector                –

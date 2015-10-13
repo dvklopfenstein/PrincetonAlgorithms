@@ -206,6 +206,21 @@ class LinearProbingHashST(object):
 # QUESTION: What is the main reason to use a hash table instead of a red-black BST?
 # ANSWER: Better performance in practice on typical inputs.
 
+# QUESTION: Suppose that you implement a set using a red-black BST. Which
+# of the following opertions cannot be implemented in logarithmic time
+# (or better) in the worst case?
+# ANSWER:
+#    Add an element to the set (if it is not already in the set)
+#    Does the set contain a given element?
+# -> return the set of all elements contained in two given sets.
+#    remomve an element from the set (if it is in the set)
+# EXPLANATION: Computing the intersection of two sets takes time
+# proportional to the size of the smaller set (since we need to 
+# iterate over all elements in the smaller set and check whether 
+# they are contained in the large set). Note also that computing
+# the intersection takes extra space proportional to the size of 
+# the intersection.
+
 
 #  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 #  Copyright 2014-2015, DV Klopfenstein, Python implementation.

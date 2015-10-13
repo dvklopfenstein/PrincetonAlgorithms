@@ -7,6 +7,11 @@
     * **separate chaining**: [SeparateChainingHashST.py](../py/AlgsSedgewickWayne/SeparateChainingHashST.py)
     * **linear probing**: [LinearProbingHashST.py](../py/AlgsSedgewickWayne/LinearProbingHashST.py)
   * **context**
+  * Symbol Table Applications:
+    * **Sets**: SET.py, WhiteList.py
+    * **Dictionary Clients**: LookupCSV.py
+    * **Indexing Clients**
+    * **Sparse Vectors**
 
 
 ## Table of Contents for Examples
