@@ -151,5 +151,61 @@ class LinearProbingHashST(object):
 # many flagged entries, create a new hash table and rehash all key-value pairs.
 
 
+# Algs 1, week 6 Lecture: Hash Table Context (10:09)
+
+# Q. Is the uniform hashing assumption important in practice?
+# A. Obvious situations: aircraft control, nuclear reactor, pacemaker.
+# A. Surprising situations: denial-of-service attacks.
+#    Malicious adversary learns your hash function (e.g. by reading Java API)
+#    and causes a big pile-up in single slot that grinds performance to a halt.
+#    Harder to do if using a red-black tree because RB-tree has guaranteed performance.
+
+# DIVERSION: ONE-WAY HASH FUNCTIONS 05:41
+# ONE-WAY HASH FUNCTION: "Hard" to find a key that will hash to a desired value
+# (or two keys that hash to same value).
+#
+#     |<- not secure ----->|
+# Ex. MD4, MD5, SHA-0, SHA-1, SHA-2, WHIRLPOOL, RIPEMD-160, ...
+#
+# APPLICATIONS: Digital fingerprint, message digest, storing passwords.
+# CAVEAT: Too expensive for use in ST implementations.
+
+# SEPARATE CHAINING vs. LINEAR PROBING 06:15
+#
+# SEPARATE CHAINING:
+#   * Easier to implement delete.
+#   * Performacne degrades gracefully.
+#   * Clustering less sensitive to poorly-designed hash function
+#
+# LINEAR PROBING:
+#   * Less wasted space
+#   * Better cache performance.
+
+# IMPROVEMENTS: 8:00
+#   TWO-PROBE HASHING
+#   DOUBLE-HASHING
+#   CUCKOO HASHING.
+
+# HASH TABLES vs. BALANCED SEARCH TREES 08:50
+#
+# HASH TABLES:
+#   * Simpler to code.
+#   * No effective alternative for unordered keys.
+#   * Faster for simple keys (a fre rithmetic ops versus log N compares)
+#   * Better system support in Java for strings (e.g., cached hash code)
+#
+# BALANCED SEARCH TREES:
+#   * Stronger performance guarantee.
+#   * Support for ordered ST operations.
+#   * Easier to implement compareTo() correctly than equals() and hashCode()
+#
+# JAVA SYSTEM INCLUDES BOTH:
+#   * Red-black BSTs: java.util.Treemap, java.util.TreeSet
+#   * Hash tables: java.util.HashMap, java.util.IdentityHashMap
+
+# QUESTION: What is the main reason to use a hash table instead of a red-black BST?
+# ANSWER: Better performance in practice on typical inputs.
+
+
 #  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 #  Copyright 2014-2015, DV Klopfenstein, Python implementation.
