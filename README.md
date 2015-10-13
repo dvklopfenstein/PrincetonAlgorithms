@@ -113,7 +113,7 @@ Key  3 SEARCHING              Description                  DATA
  p   – LookupCSV              dictionary lookup            ip.csv  DJIA.csv  amino.csv  UPC.csv
  .   – LookupIndex            index and inverted index     aminoI.csv movies.txt
  .   – FileIndex              file indexing                ex1.txt ex2.txt ex3.txt ex4.txt
- .   – SparseVector           sparse vector                –
+ p   – SparseVector           sparse vector                –
 
 
 Key   4 GRAPHS                    Description                         DATA

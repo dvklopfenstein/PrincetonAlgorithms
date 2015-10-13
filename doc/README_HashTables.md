@@ -11,7 +11,7 @@
     * **Sets**: SET.py, WhiteList.py
     * **Dictionary Clients**: LookupCSV.py
     * **Indexing Clients**: FileIndex.py
-    * **Sparse Vectors**
+    * **Sparse Vectors**: SparseVector.py
 
 
 ## Table of Contents for Examples
