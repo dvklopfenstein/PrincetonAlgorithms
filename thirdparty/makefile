@@ -104,6 +104,7 @@ wk2a: RandomizedQueue.class test_RandomizedQueue.class
 wk2_zip:
 	zip queues.zip Deque.java RandomizedQueue.java Subset.java
 
+
 # Algs1 Week 3 Programming Assignment 
 wk3a: LineSegment.class Point.class BruteCollinearPoints.class FastCollinearPoints.class
 	$(JVM) BruteCollinearPoints $(N)
@@ -114,11 +115,13 @@ wk3b: LineSegment.class Point.class BruteCollinearPoints.class FastCollinearPoin
 wk3_zip:
 	zip collinear.zip Point.java BruteCollinearPoints.java FastCollinearPoints.java
 
+
 wk4: Board.class Solver.class
 	$(JVM) Solver
 
 wk4_zip:
 	zip 8puzzle.zip Board.java Solver.java
+
 
 wk5_zip:
 	zip kdtree.zip PointSET.java KdTree.java
