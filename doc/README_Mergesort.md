@@ -6,8 +6,8 @@
   * [MergeBU](../py/AlgsSedgewickWayne/MergeBU.py) => Bottom-up Mergesort (no recursion)
 
 ## Table of Contents for Examples
-  1. [Run Mergesort (Top-Down) (#ex1)
-  2. [Run Mergesort (Bottom-Up) (#ex2)
+  1. [Run Mergesort (Top-Down)](#ex1)
+  2. [Run Mergesort (Bottom-Up)](#ex2)
 
 ## Examples
 ### [ex1](#table-of-contents-for-examples)
