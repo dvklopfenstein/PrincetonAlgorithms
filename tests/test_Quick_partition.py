@@ -1,16 +1,16 @@
 #!/usr/bin/env python
 
-from AlgsSedgewickWayne.Quick import Sort
+from AlgsSedgewickWayne.Quick import _partition, _add_history
 from AlgsSedgewickWayne.testcode.ArrayHistory import ArrayHistory
 from AlgsSedgewickWayne.testcode.InputArgs import cli_get_array
 
 def run(a):
-  desc = 'QUICKSORT'
+  desc = 'QUICKSORT PARTITION'
   ah = ArrayHistory()
-  Sort(a, array_history=ah)
+  j = _partition(a, lo=0, hi=len(a)-1, array_history=ah)
   ah.prt()
-  ah.show(desc)
-  print desc, "RESULT:", a
+  #ah.show(desc)
+  print desc, "RESULT:", ' '.join(str(e) for e in a)
 
 
 if __name__ == '__main__':

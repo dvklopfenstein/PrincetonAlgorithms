@@ -118,9 +118,10 @@ def get_keystr(E):
 def get_elem2num(array_history):
   """ 1 is assigned to smallest element.  len(arr)+1 is assigned to largest element."""
   # In array_history, last array should be the sorted arrayA
+  array_sorted = sorted(array_history[-1][0])
   elem2num = {'.': 0} # '.' is a space-holder for an element being "None"
   num = 1
-  for elem in array_history[-1][0]: # Loop on elements in last sorted array
+  for elem in array_sorted: # Loop on elements in last sorted array
     elem2num[get_keystr(elem)] = num
     num += 1
   return elem2num

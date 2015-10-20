@@ -7,11 +7,12 @@ import re
 
 def cli_get_array(seqstr=None):
   """Command-line interface: reads data from arg, stdin, stream, or files."""
-  if seqstr is not None:
+  L = len(sys.argv)
+  if seqstr is not None and L == 1:
     return arr_int_str(seqstr.split(" "))
   # >>> [file.py] "A B C D E F"
   # >>> [file.py] "1 2 3 4 5 6"
-  if len(sys.argv) == 2 and not os.path.isfile(sys.argv[1]):
+  if L == 2 and not os.path.isfile(sys.argv[1]):
     a = arr_int_str(sys.argv[1].split(" "))
     if a is not None:
       return a

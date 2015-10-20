@@ -1,17 +1,23 @@
-def Sort(a, array_history=None):
-  import random
-  random.shuffle(a)  # Needed to ensure performance will be good. 05:56
-  _sort(a, 0, len(a) - 1)
+"""Quicksort"""
 
-def _sort(a, lo, hi):
+import random
+import collections as cx
+
+def Sort(a, array_history=None):
+  _add_history(array_history, a) # Record initial state of array
+  random.shuffle(a)  # Needed to ensure performance will be good. 05:56
+  _sort(a, 0, len(a) - 1, array_history)
+
+def _sort(a, lo, hi, array_history):
   """quicksort the subarray from a[lo] to a[hi]."""
   if hi <= lo: return;
   j = _partition(a, lo, hi)
-  _sort(a, lo, j-1)
-  _sort(a, j+1, hi)
+  _add_history(array_history, a, (lo, hi))
+  _sort(a, lo, j-1, array_history)
+  _sort(a, j+1, hi, array_history)
   assert _isSorted(a, lo, hi)
 
-def _partition(a, lo, hi):
+def _partition(a, lo, hi, array_history=None):
   """partition the subarray a[lo..hi] so that a[lo..j-1] <= a[j] <= a[j+1..hi]"""
   # and return the index j.
   i = lo
@@ -33,10 +39,13 @@ def _partition(a, lo, hi):
 
       # check if pointers cross
       if i >= j: break;
+      if array_history is not None: _add_history(array_history, a, (i, j))
       _exch(a, i, j)
 
   # put partitioning item v at a[j]
+  if array_history is not None: _add_history(array_history, a, (i, j))
   _exch(a, lo, j)
+  if array_history is not None: _add_history(array_history, a, (i, j))
 
   # now, a[lo .. j-1] <= a[j] <= a[j+1 .. hi]
   # j now points to partitioning element, after it has moved to its new spot
@@ -64,6 +73,16 @@ def Select(a, k):
   return a[lo]
 
 
+
+
+def _add_history(array_history, a, anno=None):
+  """For visualizing array history."""
+  if array_history is not None: 
+    anno_a = None
+    if anno is not None:
+      lo, hi = anno
+      anno_a = cx.OrderedDict([(lo, '-'), (hi, '+')])
+    array_history.add_history(a,   anno_a, name="arr")
 
 # 00:11
 # MERGESORT: ONE OF TWO CLASSIC SORTING ALGORITHMS
