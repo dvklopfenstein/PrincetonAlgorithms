@@ -3,7 +3,7 @@
 import sys
 from AlgsSedgewickWayne.Shell import Sort
 from AlgsSedgewickWayne.testcode.ArrayHistory import ArrayHistory
-from AlgsSedgewickWayne.testcode.InputArgs import get_seq__int_or_str
+from AlgsSedgewickWayne.testcode.InputArgs import cli_get_array
 
 import random
 
@@ -85,7 +85,7 @@ def cli():
   if N == 1:
     run_all()
   elif N == 2:
-    run(get_seq__int_or_str(sys.argv[1]))
+    run(cli_get_array())
 
 if __name__ == '__main__':
   cli()

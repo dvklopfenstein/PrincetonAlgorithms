@@ -21,11 +21,11 @@ import sys
 import copy
 import collections as cx
 
-import AlgsSedgewickWayne.testcode.InputArgs as IA
+from AlgsSedgewickWayne.testcode.InputArgs import cli_get_array
 
 def run(container, seqstr, expected=None, prt=sys.stdout, details=sys.stdout):
   """Run a sequence of Stack commands."""
-  lst = IA.get_seq__int_or_str(seqstr)
+  lst = cli_get_array(seqstr)
   result = run_list(container, lst, details)
   if expected is not None:
     pf = result == expected
@@ -58,7 +58,7 @@ def run_list(container, item_list, prt=sys.stdout):
 
 def run_Queue(container, seqstr, prt=sys.stdout):
   """Inserts items in a string into a container."""
-  return run_Queue_list(container, IA.get_seq__int_or_str(seqstr), prt)
+  return run_Queue_list(container, cli_get_array(seqstr), prt)
 
 def run_Queue_list(container, item_list, prt=sys.stdout):
   """Inserts items in a string into a container. Prints steps. Returns end state."""

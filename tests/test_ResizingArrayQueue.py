@@ -2,7 +2,7 @@
 """Test ResizingArrayQueue.py."""
 
 from AlgsSedgewickWayne.ResizingArrayQueue import ResizingArrayQueue
-import AlgsSedgewickWayne.testcode.InputArgs as IA
+from AlgsSedgewickWayne.testcode.InputArgs import cli_get_array
 
 import sys
 
@@ -18,8 +18,8 @@ def run(item_list):
 
 def default_example():
   """Run simple example."""
-  run(IA.get_seq__int_or_str("a b c d - - e f - - g h i -"))
-  run(IA.get_seq__int_or_str("a - b - c d - - e f - - g h i -"))
+  run(cli_get_array("a b c d - - e f - - g h i -"))
+  run(cli_get_array("a - b - c d - - e f - - g h i -"))
 
 
 if __name__ == '__main__':
@@ -28,4 +28,4 @@ if __name__ == '__main__':
     default_example()
   # If user provided a sequence in the runtime arguments.
   else:
-    run(IA.get_list_from_args())
+    run(cli_get_array())

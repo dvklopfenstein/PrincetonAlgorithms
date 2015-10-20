@@ -1,11 +1,11 @@
 """Utilities for Binary Heaps."""
 
 import sys
-from AlgsSedgewickWayne.testcode.InputArgs import get_seq__int_or_str
+from AlgsSedgewickWayne.testcode.InputArgs import cli_get_array
 from AlgsSedgewickWayne.testcode.utils import get_png_label
 
 def wr_png(bh_arrstr, **kwargs):
-  wr_png_array(get_seq__int_or_str(bh_arrstr), kwargs)
+  wr_png_array(cli_get_array(bh_arrstr), kwargs)
   
 def wr_png_array(bh_st, kwargs):
   """Given an array for a binary heap, draw tree."""

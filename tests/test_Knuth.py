@@ -2,14 +2,14 @@
 
 import sys
 from AlgsSedgewickWayne.Knuth import shuffle
-from AlgsSedgewickWayne.testcode.InputArgs import getStrArray
+from AlgsSedgewickWayne.testcode.InputArgs import cli_get_array
 
 # Reads in a sequence of strings from standard input, shuffles
 # them, and prints out the results.
 def main():
 
   # read in the data
-  a = getStrArray("a b c d e f")
+  a = cli_get_array("a b c d e f")
 
   # shuffle the array
   shuffle(a)

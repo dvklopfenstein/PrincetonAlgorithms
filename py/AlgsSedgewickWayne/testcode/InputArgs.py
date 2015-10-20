@@ -2,27 +2,43 @@
 
 import sys
 import os
+import fileinput
+import re
 
-def getStrArray(default_seq=None):
-  argv_len = len(sys.argv)
+def cli_get_array(seqstr=None):
+  """Command-line interface: reads data from arg, stdin, stream, or files."""
+  if seqstr is not None:
+    return arr_int_str(seqstr.split(" "))
+  # >>> [file.py] "A B C D E F"
+  # >>> [file.py] "1 2 3 4 5 6"
+  if len(sys.argv) == 2 and not os.path.isfile(sys.argv[1]):
+    a = arr_int_str(sys.argv[1].split(" "))
+    if a is not None:
+      return a
+  # >>> echo "A B C D E F" | [file.py]
+  # >>> echo "1 2 3 4 5 6" | [file.py]
+  # >>> [file.py] # And then enter elems 1 at a time on stdin. End with two ctrl-Ds
+  a = [w.strip(" \n\r") for t in fileinput.input() for w in t.splitlines()]
+  if len(a) == 1 and re.search(r'[(\S+\s+)]+', a[0]):
+    return arr_int_str(a[0].split(" "))
+  # >>> test_Quick.py ../thirdparty/1Kints.txt
+  if a is not None:
+    return arr_int_str(a)
 
-  # If user provides an argument at runtime, it will either be:
-  #   1. The name of a file whilc contains a sequence of ints (one per line)
-  #   2. A string which is a sequence of either strings or ints
-  if argv_len > 1:
-    return get_list_from_args()
+def arr_int_str(a):
+  """Return an array of ints or strs."""
+  isdigit = True 
+  for elem in a:
+    M = re.search(r'^([0-9.\-eE ]+)$', elem)
+    if not M:
+      isdigit = False
+      break
+  if not isdigit:
+    return a
+  if isdigit:
+    return [int(e) for e in a]
 
-  # If the user provided a default example embedded in the code and
-  # did not provide a sequence at runtime using command line arguments.
-  if default_seq is not None:
-    # Returns a sequence containing either ints (if all items are ints) or strings
-    _prt_usage_msg(default_seq)
-    print "DFLT:", default_seq
-    return get_seq__int_or_str(default_seq)
-  else:
-    _prt_usage_msg()
 
-  return []
 
 
 def _prt_usage_msg(default_seq="a f b d g e c"):
@@ -39,41 +55,6 @@ def _prt_usage_msg(default_seq="a f b d g e c"):
   """.format(CMD=mod.__file__, SEQ=default_seq)
 
 
-def get_list_from_args():
-  if len(sys.argv) == 2:
-    arg = sys.argv[1]
-    if os.path.isfile(arg):
-      return get_list_from_file(arg)
-    else:
-      return get_seq__int_or_str(arg)
-  else:
-    return conv_int(sys.argv[1:])
-
-def get_seq__int_or_str(seqstr):
-  """Return a list of ints if string contains a sequence of ints."""
-  return conv_int(seqstr.split())
-
-def get_array(arg):
-  if isinstance(arg, str):
-    return get_seq__int_or_str(arg)
-  elif os.isfile(arg):
-    raise Exception("TIME TO IMPLEMENT READING SEQUENCE FROM FILE")
-  else:
-    return arg # arg is assumed to be an array
-
-def conv_int(lst):
-  """Converts a list element to an int if it is an int. Leaves it if not."""
-  get_val = lambda a: int(a) if a.isdigit() else a
-  return [get_val(a) for a in lst]
-
-def get_list_from_file(fin):
-  data = []
-  with open(fin) as FIN:
-    for line in FIN:
-      line = line.rstrip()
-      val = int(line) if line.isdigit() else line
-      data.append(val)
-  return data
 
 if __name__ == '__main__':
-  print getStrArray("9 1 6 3 8 5 2")
+  print cli_get_array("9 1 6 3 8 5 2")
