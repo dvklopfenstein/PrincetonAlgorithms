@@ -11,7 +11,7 @@
 
 ## Examples
 ### [ex1](#table-of-contents-for-examples)
-1. Run Top-Down Mergesort example
+**1. Run Top-Down Mergesort example**
 ```
 python -c 'import test_Merge as T; T.test_14238()'
 ```
@@ -89,7 +89,7 @@ python -c 'import test_Merge as T; T.test_14238()'
 ```
 
 ### [ex2](#table-of-contents-for-examples)
-2. Run Bottom-Up Mergesort (Bottom-Up) 
+**2. Run Bottom-Up Mergesort (Bottom-Up)**
 ```
 $ python -c 'import test_MergeBU as T; T.test_193860()'
 ```
