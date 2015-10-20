@@ -424,4 +424,5 @@ def _isSorted(a, lo=None, hi=None):
 #  main()
 
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
+# Copyright (C) 2015, DV Klopfenstein, Python implementation and visualization
 # Java Last updated: Thu Oct 10 11:43:17 EDT 2013
