@@ -6,7 +6,7 @@
     => Prevent 1/2 N^2 time with duplicate keys
 
 ## Table of Contents for Examples
-  1. [Run Lecture Example from **Quicksort (19:33)]**(#ex1)
+  1. [Run Lecture Example from **Quicksort (19:33)**](#ex1)
 
 ## Examples
 ### [ex1](#table-of-contents-for-examples)
