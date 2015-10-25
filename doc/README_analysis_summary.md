@@ -1,5 +1,18 @@
 # Implementations Summary
 
+
+## Sorting Summary
+
+| Sort       |I|S|worst | average|   best | remarks
+| ---------- |-|-|----- | -------|   ---- | --------------------
+| Selection  |X| |N^2/2 |   N^2/2|   N^2/2| N exchanges
+| Insertion  |X|X|N^2/2 |   N^2/4|       N| use for small N or partially ordered
+| Shell      |X| |    ? |       ?|       N| tight code, subquadratic
+| Merge      | |X|N lg N|  N lg N|  N lg N| N lg N guarantee, stable
+| Quick      |X| |N^2/2 | 2N ln N|  N lg N| N lg N probabilistic guarantee, fastest in practice
+| 3-way quick|X| |N^2/2 | 2N ln N|       N| better w/duplicate keys
+| ???        |X|X|N lg N|  N lg N|  N lg N| holy sorting grail
+
 ## ST(Search Tree) implementations
 
 | implementation                | WC search | WC insert | WC delete | AC search hit | AC insert | AC delete | ordered it? | key i/f

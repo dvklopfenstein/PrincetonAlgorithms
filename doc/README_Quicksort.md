@@ -7,6 +7,7 @@
 
 ## Table of Contents for Examples
   1. [Run **Partitioning** Example from the Lecture, **Quicksort (19:33)**](#ex1)
+  2. [Run **Partitioning** Example from the Lecture, **Duplicate Keys (11:25)**](#ex2)
 
 ## Examples
 ### [ex1](#table-of-contents-for-examples)
@@ -26,4 +27,11 @@
  4: E C A I E K L P U T M Q R X O S <= arr
 
 QUICKSORT PARTITION RESULT: E C A I E K L P U T M Q R X O S
+```
+
+
+### [ex2](#table-of-contents-for-examples)
+2. Run **Partitioning** Example from the Lecture, **Duplicate Keys (11:25)**    
+```
+>>> test_Quick3way.py "P A B X W P P V P D P C Y Z"
 ```
