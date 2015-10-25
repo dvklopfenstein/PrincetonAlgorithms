@@ -1,5 +1,7 @@
 # Implementations Summary
 
+  * [**Sorting Summary**](#sorting-summary)
+  * [**ST(Search Tree) implementations**](#stsearch-tree-implementations)
 
 ## Sorting Summary    
 
