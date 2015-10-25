@@ -11,7 +11,7 @@ def run(a, prt=sys.stdout):
   # Do not shuffle so that we may better visualize _sort actions
   Sort(a, array_history=ah, shuffle=False)
   ah.prt()
-  ah.show(desc)
+  #ah.show(desc)
   prt.write("{DESC} RESULT: {A}\n".format(
     DESC=desc, A=' '.join([str(e) for e in a])))
 
