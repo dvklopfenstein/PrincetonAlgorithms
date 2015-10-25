@@ -200,5 +200,23 @@ def _add_history(array_history, a, anno=None):
 # 3-way quick X   N^2/2   2N ln N        N  better w/duplicate keys
 # ???         X X N lg N   N lg N   N lg N  holy sorting grail
 
+# TRUE: Given an array of N items and a parititoning item, it is straightforward 
+# to *stably* 3-way partition the array using only a linear number of compares 
+# and an auxiliary array of length N.
+# EXPLANATION: Copy the items to the auxiliary array; count the number of items 
+# { less than, equal to, greater than } the partitioning item; scan through 
+# the array from left-to-right, and copy the items back to the original array 
+# using the counts to identify their locations.
+# ???WHY STABLE???
+
+# TRUE: The number of compares to 3-way quicksort an array of N equal keys is ~ N.
+# EXPLANATION: The sort is complete after the first partitioning step.
+
+# TRUE: The primary advantage of 3-way quicksort (over standard quicksort) 
+# is improved performance when the array has many items with equal keys.
+# EXPLANTION: 3-way quicksort makes a linear number of compares in cases 
+# where the standard version of quicksort makes a linearithmic number 
+# of compares ,e.g., N equal keys.
+
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
 # Last updated: Tue Sep 24 11:52:34 EDT 2013.

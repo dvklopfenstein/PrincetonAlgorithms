@@ -392,7 +392,6 @@ def _isSorted(a, lo=None, hi=None):
       if _less(a[i], a[i-1]): return False
   return True
 
-
 # Reads in a sequence of strings from standard input; quicksorts them;
 # and prints them to standard output in ascending order.
 # Shuffles the array and then prints the strings again to
@@ -411,17 +410,20 @@ def _isSorted(a, lo=None, hi=None):
 #  print
 #  print ' '.join(ARR)
 
-# Reads in a sequence of strings from standard input; insertion sorts them;
-# and prints them to standard output in ascending order.
-#def main():
-#    import InputArgs
-#    data = InputArgs.getStrArray("6 3 7 2 0 1 9");
-#    print "ORIG:", ' '.join(map(str,data))
-#    Sort(data)
-#    print "SORT:", ' '.join(map(str,data))
-#
-#if __name__ == '__main__':
-#  main()
+# TRUE: The maximum number of times that any one item is involved in a 
+# compare when quicksorting an array of N items is linear.
+# EXPLANATION: When an item is the partitioning item, it is
+# involved in no more than N+1 compares, at which point it
+# is never compared again. When an item is not the
+# partitioning item, it can be compared to a partitioning
+# item no more than twice (to the partitioning item), at
+# which point the partitioning item is fixed (and never
+# compared against the item again).
+
+# FALSE: The expected number of compares to find a median of an array 
+# of N distinct keys using quickselect is ~ 2N.
+# EXPLANATION: The expected number of compares is ~ (2 + 2 ln 2) N. 
+# In fact, no compare-based algorithm can find a median using fewer than 2N compares.
 
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
 # Copyright (C) 2015, DV Klopfenstein, Python implementation and visualization
