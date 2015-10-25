@@ -4,6 +4,7 @@
 Implemented in Python 2.7.x by DV Klopfenstein is selected code from:
 
   * http://algs4.cs.princeton.edu/code/
+  * [Kevin Wayne's Github Java Code](https://github.com/kevin-wayne/algs4/tree/master/src/main/java/edu/princeton/cs/algs4)
 
 [**Python implementations**](./py/AlgsSedgewickWayne/) contain:
 * Additional code used for visualization to help absorb the material

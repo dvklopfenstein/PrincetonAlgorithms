@@ -11,7 +11,7 @@
 
 ## Examples
 ### [ex1](#table-of-contents-for-examples)
-1. Run Lecture Example from **Quicksort (19:33)]**
+1. Run Lecture Example from **Quicksort (19:33)**
 ```
 >>> test_Quick_partition.py "K R A T E L E P U I M Q C X O S"
 ```
