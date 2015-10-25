@@ -4,7 +4,7 @@
 ## Sorting Summary    
 
 | Sort        | I | S | worst  | average | best    | remarks
-| ----------- | - | - | ------ | ------- | ------- | --------------------
+| ----------- |---|---| ------ | ------- | ------- | --------------------
 | Selection   | Y |   | N^2/2  |   N^2/2 |   N^2/2 | N exchanges
 | Insertion   | Y | Y | N^2/2  |   N^2/4 |       N | use for small N or partially ordered
 | Shell       | Y |   |     ?  |       ? |       N | tight code, subquadratic
