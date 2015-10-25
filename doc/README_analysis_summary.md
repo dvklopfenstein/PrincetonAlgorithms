@@ -2,7 +2,7 @@
 
 
 ## Sorting Summary    
-    
+
 | Sort        | I | S | worst  | average | best    | remarks    
 | ----------- | - | - | ------ | ------- | ------- | --------------------    
 | Selection   | Y |   | N^2/2  |   N^2/2 |   N^2/2 | N exchanges    
@@ -12,7 +12,7 @@
 | Quick       | Y |   | N^2/2  | 2N ln N |  N lg N | N lg N probabilistic guarantee, fastest in practice     
 | 3-way quick | Y |   | N^2/2  | 2N ln N |       N | better w/duplicate keys    
 | ???         | Y | Y | N lg N |  N lg N |  N lg N | holy sorting grail     
-    
+
 * **I** => Inplace
 * **S** => Stable
 
