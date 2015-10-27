@@ -97,7 +97,7 @@ class UnorderedArrayMaxPQ:
 # Order-of-growth of running time for priority queue with N items
 #
 # Implementation | insert | del max | find max
-#  -= 1 -= 1 -= 1 -= 1 -= 1 -= 1 -= 1-+ -= 1 -= 1 -= 1 -= 1+ -= 1 -= 1 -= 1 -= 1-+ -= 1 -= 1-
+# ---------------|--------|---------|----------
 # unordered array|    1   |    N    |  N
 # ordered array  |    N   |    1    |  1
 # GOAL           | log N  |  log N  | log N
