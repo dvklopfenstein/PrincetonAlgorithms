@@ -1,5 +1,26 @@
 #!/usr/bin/env python
 
+class UnorderedMaxPQ(object): # <Key extends Comparable<Key>> # 10:38
+
+  def __init__(self, capacity):
+    self._pq = [None for i in range(capacity)]
+    self._N = 0
+
+  def isEmpty(self): return self._N == 0
+
+  def insert(self, key): 
+    self._pq[self._N] = key # Insert at end
+    self._N += 1
+
+  def delMax(self):
+    int max_idx = 0
+    # Must examine each elem, since unordered
+    for i in range(self._N):
+      if less(max_idx, i): max_idx = i
+    exch(max_idx, self._N-1) # Exchange from end
+    self._N -= 1
+    return pq[self._N]
+ 
 # 8 - 1 - APIs and Elementary Implementations (12-52)
 # 
 # * API and elementary implementations (00:15)
@@ -68,31 +89,6 @@
 #   best in theory |    N    |  M
  
 # A fine implementation if priority is going to be tiny all the time:
-public class UnorderedMaxPQ<Key extends Comparable<Key>> # 10:38
-{
-  private Key[] pq;
-  private int N;
-
-  public UnorderedMaxPQ(int capacity)
-  { pq = (key[]) new Comparable[capacity]; }
-
-  public boolean isEmpty()
-  { return N == 0; }
-
-  public void insert(Key x)
-  { pq[n++] = x; } # Insert at end
-
-  public Key delMax()
-  {
-    int max = 0;
-    # Must examine each elem, since unordered
-    for(int i = 1; i < N; i++)
-      if (less(max, i)) max = i;
-    exch(max, N-1); # Exchange from end
-    return pq[--N];
-  }
-}
-
 # CHALLENGE: Implement ALL operations efficiently
 #
 # Order-of-growth of running time for priority queue with N items

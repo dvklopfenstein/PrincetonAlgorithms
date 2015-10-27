@@ -9,7 +9,7 @@ Remove the **largest** (or **smallest**) item.
       [Date.py](../py/AlgsSedgewickWayne/Date.py) data member
     * [UnorderedArrayMaxPQ.py](../py/AlgsSedgewickWayne/UnorderedArrayMaxPQ.py) is a 
       simple unordered array implementation of priority queue.   
-  * The **binary heap** data structure is used to implement ordered array priority queues:    
+  * The **binary heap** data structure is used to implement ordered array priority queues (key must be comparable):    
     * [MaxPQ.py](../py/AlgsSedgewickWayne/MaxPQ.py)    
     * [MinPQ.py](../py/AlgsSedgewickWayne/MinPQ.py)    
   * **heapsort** is an efficient sorting algorithm: [Heap.py](../py/AlgsSedgewickWayne/Heap.py)   
