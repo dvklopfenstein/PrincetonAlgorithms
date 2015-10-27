@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Read seq. Print N largest items."""
+"""Find the largest M items in a stream of N items."""
 
 import sys
 import fileinput

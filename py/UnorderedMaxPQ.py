@@ -84,7 +84,7 @@ class UnorderedMaxPQ(object): # <Key extends Comparable<Key>> # 10:38
 #   implementation |  time   | space
 #   ---------------+---------+-------
 #   sort           | N log N |  N
-#   elem PQ        |  M * N  |  M
+#   elementary PQ  |  M * N  |  M
 #   binary heap    | N log M |  M <- Close to best in theory
 #   best in theory |    N    |  M
  

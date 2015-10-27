@@ -5,11 +5,8 @@ class UnorderedArrayMaxPQ:
     self.pq = [None for i in range(capacity)] # elements
     self.N = 0 #  Number of elements
 
-  def isEmpty(self): 
-    return self.N == 0
-
-  def size(self): 
-    return self.N
+  def isEmpty(self): return self.N == 0
+  def size(self): return self.N
 
   def insert(self, x): 
     self.pq[self.N] = x
@@ -25,12 +22,8 @@ class UnorderedArrayMaxPQ:
     return self.pq[self.N]
 
   # Helper functions.
-  def _less(self, i, j): 
-    return self.pq[i] < self.pq[j]
-
-  def _exch(self, i, j): 
-    pq = self.pq
-    pq[i], pq[j] = pq[j], pq[i]
+  def _less(self, i, j): return self.pq[i] < self.pq[j]
+  def _exch(self, i, j): self.pq[i], self.pq[j] = self.pq[j], self.pq[i]
 
 # 8 - 1 - APIs and Elementary Implementations (12-52)
 # 
@@ -108,6 +101,16 @@ class UnorderedArrayMaxPQ:
 # unordered array|    1   |    N    |  N
 # ordered array  |    N   |    1    |  1
 # GOAL           | log N  |  log N  | log N
+
+# QUESTION: What is the expected nuber of array acesses and compares, 
+# respectively, to insert a random key into an ordered array 
+# implementation of a priority queue?
+# ANSWER: linear and logarithmic
+# EXPLANATION: We can use binary search to find the insertion point in
+# logarithmic time. On average, the key to be inserted must be placed
+# in the middle of the array -- to keep the array in order, we must shift over
+# all larger keys.
+
 
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
 # Copyright (C) 2015, Python Implementation, DV Klopfenstein
