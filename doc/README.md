@@ -1,6 +1,9 @@
 # Schedule
 Note: There are no Progamming Assignment Solutions on this site.
 
+  * [Algorithms I on Coursera](#algorithms-i-on-coursera)
+  * [Algorithms II on Coursera](#algorithms-ii-on-coursera)
+
 ## [Algorithms I on Coursera](https://www.coursera.org/course/algs4partI)
 
 * **Week 1 Suggested Readings**: Section 1.4 and 1.5 in [*Algorithms, 4th edition*](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1441459738&sr=1-1&keywords=sedgewick&refinements=p_n_feature_browse-bin%3A2656020011&pebp=1441459739425&perid=0C83SQQ1YFJ62VWHF9C0)
@@ -40,5 +43,38 @@ Note: There are no Progamming Assignment Solutions on this site.
   * [Hash Tables](README_HashTables.md)
 
 
+## [Algorithms II on Coursera](https://www.coursera.org/course/algs4partII)
+
+* **Week 1 Suggested Readings**: Section 4.1 and 4.2 in [*Algorithms, 4th edition*](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1441459738&sr=1-1&keywords=sedgewick&refinements=p_n_feature_browse-bin%3A2656020011&pebp=1441459739425&perid=0C83SQQ1YFJ62VWHF9C0)
+  * Undirected Graphs
+  * Directed Graphs
+  * Programming Assignment 1: **WordNet**
+
+* **Week 2 Suggested Readings**: Section 4.3 and 4.4 in [*Algorithms, 4th edition*](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1441459738&sr=1-1&keywords=sedgewick&refinements=p_n_feature_browse-bin%3A2656020011&pebp=1441459739425&perid=0C83SQQ1YFJ62VWHF9C0)
+  * Minimum Spanning Trees
+  * Shortest Paths
+  * Programming Assignment 2: **Content-Aware Resizing**
+
+* **Week 3 Suggested Readings**: Section 6.4 (pp. 886-902) and 5.1 in [*Algorithms, 4th edition*](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1441459738&sr=1-1&keywords=sedgewick&refinements=p_n_feature_browse-bin%3A2656020011&pebp=1441459739425&perid=0C83SQQ1YFJ62VWHF9C0)
+  * Maximum Flow and Minimum Cut
+  * Radix Sorts
+  * Programming Assignment 3: **Baseball Elimination**
+
+* **Week 4**: Break
+
+* **Week 5 Suggested Readings**: Section 5.2 and 5.3 in [*Algorithms, 4th edition*](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1441459738&sr=1-1&keywords=sedgewick&refinements=p_n_feature_browse-bin%3A2656020011&pebp=1441459739425&perid=0C83SQQ1YFJ62VWHF9C0)
+  * Tries
+  * Substring Search
+  * Programming Assignment 4: **Boggle**
+
+* **Week 6 Suggested Readings**: Section 5.4 and 5.5 in [*Algorithms, 4th edition*](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1441459738&sr=1-1&keywords=sedgewick&refinements=p_n_feature_browse-bin%3A2656020011&pebp=1441459739425&perid=0C83SQQ1YFJ62VWHF9C0)
+  * Regular Expressions
+  * Data Compression
+  * Programming Assignment 5: **Burrows-Wheeler algorithm**
+
+* **Week 7 Suggested Readings**: Section 6.5 (pp 903-910) and 6.6 (910-921) in [*Algorithms, 4th edition*](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1441459738&sr=1-1&keywords=sedgewick&refinements=p_n_feature_browse-bin%3A2656020011&pebp=1441459739425&perid=0C83SQQ1YFJ62VWHF9C0)
+  * Reductions
+  * Linear Programming
+  * Intractabillity
 
 
