@@ -84,6 +84,27 @@ run: $(MAIN).class
 .java.class:
 	$(JC) $(JFLAGS) $(SRCS)
 
+
+# WordNet
+algs2_1: 
+	echo "WordNet"
+
+# Content-Aware Resizing
+algs2_2: 
+	echo "Content-Aware Resizing"
+
+# Baseball Elimination
+algs2_3: 
+	echo "Baseball Elimination"
+
+# Boggle
+algs2_4: 
+	echo "Boggle"
+
+# Burrows-Wheeler algorithm
+algs2_5: 
+	echo "Burrows-Wheeler algorithm"
+
 # Algs1 Week 1 Programming Assignment 
 wk1: Percolation.class PercolationStats.class
 	$(JVM) PercolationStats 10 2
