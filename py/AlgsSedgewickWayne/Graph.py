@@ -12,9 +12,9 @@ class Graph(object):
 
   def _init_empty(self, V):
     if V < 0: raise Exception("Number of vertices must be nonnegative")
-    self.V = V
-    self.E = 0
-    self.adj = [set() for v in range(V)]
+    self._V = V
+    self._E = 0
+    self._adj = [set() for v in range(V)]
 
   def _init(self, a):
     """Initializes a graph from an input stream."""
@@ -26,43 +26,43 @@ class Graph(object):
     for v, w in a[2:]:
       self.addEdge(v, w)
 
-  def V(self): return self.V # Returns the number of vertices in self graph.
-  def E(self): return self.E # Returns the number of edges in self graph.
+  def V(self): return self._V # Returns the number of vertices in self graph.
+  def E(self): return self._E # Returns the number of edges in self graph.
 
   def addEdge(self, v, w):
     """Adds the undirected edge v-w to self graph."""
     self._validateVertex(v)
     self._validateVertex(w)
-    self.E += 1
-    self.adj[v].add(w)
-    self.adj[w].add(v)
+    self._E += 1
+    self._adj[v].add(w)
+    self._adj[w].add(v)
 
   def adj(self, v):
     """Returns the vertices adjacent to vertex v."""
     self._validateVertex(v)
-    return self.adj[v]
+    return self._adj[v]
 
   def degree(self, v):
     """Returns the degree of vertex v."""
     self._validateVertex(v)
-    return self.adj[v].size()
+    return self._adj[v].size()
 
   def _validateVertex(self, v):
     """raise an IndexOutOfBoundsException unless 0 <= v < V."""
-    if v < 0 or v >= self.V:
-        raise Exception("vertex {} is not between 0 and {}".format(v, self.V-1))
+    if v < 0 or v >= self._V:
+        raise Exception("vertex {} is not between 0 and {}".format(v, self._V-1))
 
   def __str__(self):
-    s = [(("{V} vertices, {E} edges\n").format(V=self.V, E=self.E))]
-    for v in range(self.V):
+    s = [(("{V} vertices, {E} edges\n").format(V=self._V, E=self._E))]
+    for v in range(self._V):
       s.append("{v}: ".format(v=v))
-      for w in self.adj[v]:
+      for w in self._adj[v]:
         s.append("{w} ".format(w=w))
       s.append("\n")
     return ''.join(s)
 
   def __iter__(self): # Makes Graph an iterable.
-    return iter(self.adj) # returns an iterator.
+    return iter(self._adj) # returns an iterator.
 
  #*****************************************************************************/
  #  % Graph.py ../thirdparty/tinyG.txt
