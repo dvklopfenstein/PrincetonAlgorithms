@@ -1,7 +1,5 @@
 """A undirected graph, implemented using an array of sets. Parallel edges and self-loops allowed."""
 
-from AlgsSedgewickWayne.Bag import Bag
-
 class Graph(object):
 
   def __init__(self, a):
@@ -16,7 +14,7 @@ class Graph(object):
     if V < 0: raise Exception("Number of vertices must be nonnegative")
     self.V = V
     self.E = 0
-    self.adj = [Bag() for v in range(V)]
+    self.adj = [set() for v in range(V)]
 
   def _init(self, a):
     """Initializes a graph from an input stream."""
@@ -63,6 +61,8 @@ class Graph(object):
       s.append("\n")
     return ''.join(s)
 
+  def __iter__(self): 
+    return iter(self.adj)
 
  #*****************************************************************************/
  #  % Graph.py ../thirdparty/tinyG.txt

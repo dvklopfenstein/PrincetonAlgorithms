@@ -9,4 +9,4 @@ def run(a, prt=sys.stdout):
   prt.write("{}\n".format(g))
 
 if __name__ == '__main__':
-  run(cli_get_array(5))
+  run(cli_get_array("../thirdparty/tinyG.txt"))

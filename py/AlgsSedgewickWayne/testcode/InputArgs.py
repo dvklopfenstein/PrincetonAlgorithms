@@ -9,7 +9,10 @@ def cli_get_array(seqstr=None):
   """Command-line interface: reads data from arg, stdin, stream, or files."""
   L = len(sys.argv)
   if seqstr is not None and L == 1:
-    return arr_int_str(seqstr.split(" "))
+    if isinstance(seqstr, int):
+      return seqstr
+    else:
+      return arr_int_str(seqstr.split(" "))
   # >>> [file.py] "A B C D E F"
   # >>> [file.py] "1 2 3 4 5 6"
   if L == 2 and not os.path.isfile(sys.argv[1]):
