@@ -29,5 +29,5 @@ test_Graph.py ../thirdparty/tinyG.txt
 12: 11 9
 ```
 
-Copyright (C) 2002-2015 Robert Sedgewick and Kevin Wayne.  All rights reserved.
+Copyright (C) 2002-2015 Robert Sedgewick and Kevin Wayne.  All rights reserved.    
 Copyright (C) 2014-2015 DV Klopfenstein. All rights reserved. Python translation.
