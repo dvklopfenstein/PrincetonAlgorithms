@@ -4,11 +4,11 @@
   * [Graph.py](../py/AlgsSedgewickWayne/Graph.py) (adj uses [Bag.py](../py/AlgsSedgewickWayne/Bag.py))    
 
 ## Table of Contents for Examples
-  1. [Run Example](#ex1)
+  1. [Run Example](#ex1) on [tinG.txt](../thirdparty/tinyG.txt)
 
 ## Examples 
 ### [ex1](#table-of-contents-for-examples)
-1. Run Example
+1. Run Example on [tinyG.txt](../thirdparty/tinyG.txt)
 ```
 test_Graph.py ../thirdparty/tinyG.txt
 ```
