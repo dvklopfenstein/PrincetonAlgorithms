@@ -11,6 +11,8 @@ def main(prt=sys.stdout):
   s = 0
   dfs = DepthFirstPaths(G, s)
 
+  prt.write("{}\n".format(G))
+
   for v in range(G.V()):
     if dfs.hasPathTo(v):
       prt.write("{SRC} to {V}:  ".format(SRC=s, V=v))

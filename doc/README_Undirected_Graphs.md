@@ -5,7 +5,7 @@
   * [DepthFirstPaths.py](../py/AlgsSedgewickWayne/DepthFirstPaths.py)    
 
 ## Table of Contents for Examples
-  1. [Run Example](#ex1) on [tinG.txt](../thirdparty/tinyG.txt)
+  1. [Run Example](#ex1) on [tinyG.txt](../thirdparty/tinyG.txt)
 
 ## Examples 
 ### [ex1](#table-of-contents-for-examples)
