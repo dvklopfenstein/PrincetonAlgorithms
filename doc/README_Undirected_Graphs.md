@@ -1,8 +1,7 @@
 # Undirected Graphs
 
 ## Code
-  * **Code**: 
-    [Graph.py](../py/AlgsSedgewickWayne/Graph.py) (adj uses [Bag.py](../py/AlgsSedgewickWayne/Bag.py)    
+  * [Graph.py](../py/AlgsSedgewickWayne/Graph.py) (adj uses [Bag.py](../py/AlgsSedgewickWayne/Bag.py))    
 
 ## Table of Contents for Examples
   1. [Run Example](#ex1)
