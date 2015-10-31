@@ -22,7 +22,7 @@ class Graph(object):
     """Initializes a graph from an input stream."""
     # The format is the number of vertices V, followed by the number of edges E,
     # followed by E pairs of vertices, with each entry separated by whitespace.
-    self._init_empty(a[0]) # init V, and empty adj
+    self._init_empty(a[0]) # init V, and the empty adj list
     E = a[1]
     if E < 0: raise Exception("Number of edges must be nonnegative")
     for v, w in a[2:]:
@@ -55,13 +55,11 @@ class Graph(object):
         raise Exception("vertex {} is not between 0 and {}".format(v, self.V-1))
 
   def __str__(self):
-    """Returns a string representation of self graph."""
-    s = []
-    s.append(("{V} vertices, {E} edges\n").format(V=self.V, E=self.E))
+    s = [(("{V} vertices, {E} edges\n").format(V=self.V, E=self.E))]
     for v in range(self.V):
       s.append("{v}: ".format(v=v))
       for w in self.adj[v]:
-          s.append("{w} ".format(w=w))
+        s.append("{w} ".format(w=w))
       s.append("\n")
     return ''.join(s)
 
