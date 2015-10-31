@@ -8,12 +8,12 @@ def main():
   fin  = get_fin()
   fout = get_fout(fin)
   FOUT = sys.stdout if fout is None else open(fout, 'w')
-  FOUT.write("#!/usr/bin/env python")
+  #FOUT.write("#!/usr/bin/env python\n")
   with open(fin) as FIN:
     for line in FIN:
       if chk_com(FOUT, r'^(\s*)\/\*(.*)$', line): continue
       if chk_com(FOUT, r'^(\s*)\*(.*)$',   line): continue
-      if chk_end(FOUT, line): continue
+      if chk_end(line): continue
       if line[:4] == "    ": line = line[2:]
       line = chk_if(line)
       line = line.replace('== null', 'is None')
@@ -45,7 +45,7 @@ def main():
       line = line.replace('++', ' += 1')
       line = line.replace('--', ' -= 1')
       line = line.replace('StdOut.println', 'prt.write')
-      line = chk_def(line):
+      line = chk_def(line)
       FOUT.write(line)
 
   print 'READ ', fin
@@ -54,11 +54,12 @@ def main():
     FOUT.close()
     print 'WROTE', fout
   else:
-    print "VIEW ", get_foutname( fin )
+    print "VIEW ", get_foutname(fin)
 
 def chk_def(line):
   if "def " in line:
     pass
+  return line
 
 def chk_else(line):
  A = re.search(r'^(\s*)else(\s+)(return\s+.*)$', line)

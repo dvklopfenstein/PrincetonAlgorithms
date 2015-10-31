@@ -37,10 +37,19 @@ def arr_int_str(a):
   if not isdigit:
     return a
   if isdigit:
-    return [int(e) for e in a]
+    return conv_int(a)
 
-
-
+def conv_int(arr):
+  #  GET: ['13', '13', '0 5', '4 3', ...
+  #  RET: [ 13,   13,  [0, 5], [4, 3], ...
+  ints = []
+  for elem in arr:
+    elem = elem.strip() # strip leading/trailing whitespace
+    if ' ' not in elem:
+      ints.append(int(elem))
+    else:
+      ints.append([int(e) for e in elem.split(' ')])
+  return ints
 
 def _prt_usage_msg(default_seq="a f b d g e c"):
   import inspect
