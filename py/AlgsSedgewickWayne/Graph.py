@@ -61,8 +61,8 @@ class Graph(object):
       s.append("\n")
     return ''.join(s)
 
-  def __iter__(self): 
-    return iter(self.adj)
+  def __iter__(self): # Makes Graph an iterable.
+    return iter(self.adj) # returns an iterator.
 
  #*****************************************************************************/
  #  % Graph.py ../thirdparty/tinyG.txt
