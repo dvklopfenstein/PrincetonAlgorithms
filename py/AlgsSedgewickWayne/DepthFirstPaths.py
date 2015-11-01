@@ -47,6 +47,11 @@ class DepthFirstPaths(object):
 # ANSWER: The sum of the degrees of the vertices in the connected component
 # containing s
 
+# QUESTION: The critical data structures used in depth-first search and
+# breadth-first search are _____ and ____, respectively.
+# ANSWER: DFS->Stack BFS->Queue
+# EXPLANATION: With DFS, it is either an explicit stack(w/ nonrecursive version)
+# or the function-call stack (w/a recursive version)
 
 # Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python implementation
