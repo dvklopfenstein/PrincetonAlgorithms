@@ -7,11 +7,11 @@
 
 ## Table of Contents for Examples
   1. [Run Graph Example](#ex1) on [tinyG.txt](../thirdparty/tinyG.txt)
-  2. [Run BreadthFirstPaths(#ex2) on [tinyG.txt](../thirdparty/tinyG.txt)
+  2. [Run BreadthFirstPaths](#ex2) on [tinyG.txt](../thirdparty/tinyG.txt)
 
 ## Examples 
 ### [ex1](#table-of-contents-for-examples)
-1. Run Graph Example on [tinyG.txt](../thirdparty/tinyG.txt)
+Run Graph Example on [tinyG.txt](../thirdparty/tinyG.txt)
 ```
 test_Graph.py ../thirdparty/tinyG.txt
 ```
@@ -33,7 +33,7 @@ test_Graph.py ../thirdparty/tinyG.txt
 ```
 
 ### [ex2](#table-of-contents-for-examples)
-2. Run BreadthFirstPaths on [tinyG.txt](../thirdparty/tinyG.txt)
+Run BreadthFirstPaths on [tinyG.txt](../thirdparty/tinyG.txt)
 ```
 test_BreadthFirstPaths.py ../thirdparty/tinyCG.txt 0
 ```
