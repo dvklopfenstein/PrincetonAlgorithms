@@ -3,6 +3,7 @@
 ## Code
   * [Graph.py](../py/AlgsSedgewickWayne/Graph.py)    
   * [DepthFirstPaths.py](../py/AlgsSedgewickWayne/DepthFirstPaths.py)    
+  * [BreadthFirstPaths.py](../py/AlgsSedgewickWayne/BreadthFirstPaths.py)    
 
 ## Table of Contents for Examples
   1. [Run Example](#ex1) on [tinyG.txt](../thirdparty/tinyG.txt)

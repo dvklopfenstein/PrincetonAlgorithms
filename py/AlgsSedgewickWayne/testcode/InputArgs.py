@@ -29,6 +29,15 @@ def cli_get_array(seqstr=None):
   if a is not None:
     return arr_int_str(a)
 
+def cli_get_fin(fin):
+  with open(fin) as ifstrm:
+    a = []
+    for line in ifstrm:
+      line = line.strip(" \n\r")
+      l = arr_int_str(line.split(" "))
+      a.append(l[0] if len(l) == 1 else l)
+  return a
+
 def arr_int_str(a):
   """Return an array of ints or strs."""
   isdigit = True 
