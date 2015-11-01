@@ -17,7 +17,7 @@ def main(prt=sys.stdout):
   for v in range(G.V()):
     if bfs.hasPathTo(v):
       prt.write("{} to {} ({}):  ".format(s, v, bfs.distTo(v)))
-      for x in  bfs.pathTo(v):
+      for x in reversed(bfs.pathTo(v)):
         if x == s: prt.write(str(x))
         else:      prt.write("-{}".format(x))
       prt.write("\n")
