@@ -15,6 +15,7 @@ Run Graph Example on [tinyG.txt](../thirdparty/tinyG.txt)
 ```
 test_Graph.py ../thirdparty/tinyG.txt
 ```
+![Graph_tinyG.png](images/Graph_tinyG.png)    
 ```
 13 vertices, 13 edges
 0: 6 2 1 5

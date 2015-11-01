@@ -1,5 +1,7 @@
 """A undirected graph, implemented using an array of sets. Parallel edges and self-loops allowed."""
 
+import sys
+
 class Graph(object):
 
   def __init__(self, a):
@@ -14,6 +16,7 @@ class Graph(object):
     if V < 0: raise Exception("Number of vertices must be nonnegative")
     self._V = V
     self._E = 0
+    print "VVVV", V
     self._adj = [set() for v in range(V)]
 
   def _init(self, a):
@@ -63,6 +66,32 @@ class Graph(object):
 
   def __iter__(self): # Makes Graph an iterable.
     return iter(self._adj) # returns an iterator.
+
+  def wr_png(self, fout_png="Graph.png", prt=sys.stdout, **kwargs):
+    """Make a png showing a diagram of the connected components."""
+    import pydot
+    from AlgsSedgewickWayne.testcode.utils import get_png_label
+    # 1. Create/initialize Graph
+    G = pydot.Dot(graph_type='graph') # Undirected Graph
+    # 2. Create Nodes
+    nodes = [pydot.Node(str(idx)) for idx in range(len(self._adj))]
+    # 3. Add nodes to Graph
+    for node in nodes:
+      G.add_node(node)
+    # 4. Add Edges between Nodes to Graph
+    for v, w in self.get_edges():
+      if v != w: # Print only edges from one node to another (not to self)
+        G.add_edge(pydot.Edge(v, w))
+    # 5. Write Graph to png file
+    G.write_png(fout_png)
+    prt.write("  WROTE: {}\n".format(fout_png))
+
+  def get_edges(self):
+    edges = set()
+    for v, ws in enumerate(self._adj):
+      for w in ws:
+        edges.add(tuple(sorted([v, w]))) 
+    return edges
 
  #*****************************************************************************/
  #  % Graph.py ../thirdparty/tinyG.txt
