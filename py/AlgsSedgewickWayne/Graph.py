@@ -16,7 +16,6 @@ class Graph(object):
     if V < 0: raise Exception("Number of vertices must be nonnegative")
     self._V = V
     self._E = 0
-    print "VVVV", V
     self._adj = [set() for v in range(V)]
 
   def _init(self, a):

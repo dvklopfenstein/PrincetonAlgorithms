@@ -4,6 +4,7 @@
   * [Graph.py](../py/AlgsSedgewickWayne/Graph.py)    
   * [DepthFirstPaths.py](../py/AlgsSedgewickWayne/DepthFirstPaths.py)    
   * [BreadthFirstPaths.py](../py/AlgsSedgewickWayne/BreadthFirstPaths.py)    
+  * [CC.py](../py/AlgsSedgewickWayne/CC.py) for Connected Components    
 
 ## Table of Contents for Examples
   1. [Run Graph Example](#ex1) on [tinyG.txt](../thirdparty/tinyG.txt)
