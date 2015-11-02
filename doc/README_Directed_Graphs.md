@@ -1,7 +1,7 @@
-# Directed Graphs
+# [Directed Graphs](http://algs4.cs.princeton.edu/42digraph)
 
 ## Code
-  * **Code**: code.py
+  * [Digraph.py](../py/AlgsSedgewickWayne/Digraph.py)
 
 ## Table of Contents for Examples
   1. [Run Example](#ex1)

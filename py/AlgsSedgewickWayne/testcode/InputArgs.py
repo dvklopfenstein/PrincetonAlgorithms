@@ -34,7 +34,9 @@ def cli_get_fin(fin):
     a = []
     for line in ifstrm:
       line = line.strip(" \n\r")
-      l = arr_int_str(line.split(" "))
+      #flds = line.split(" ")
+      flds = re.findall(r'(\S+)', line)
+      l = arr_int_str(flds)
       a.append(l[0] if len(l) == 1 else l)
   return a
 

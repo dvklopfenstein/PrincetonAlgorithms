@@ -123,13 +123,13 @@ Key   4 GRAPHS                    Description                         DATA
  .    – GraphGenerator            generate random graphs              –
  .    – DepthFirstSearch          depth-first search in a graph       tinyG.txt mediumG.txt
  P  4.1 DepthFirstPaths           paths in a graph (DFS)              tinyCG.txt mediumG.txt largeG.txt
- .  4.2 BreadthFirstPaths         paths in a graph (BFS)              tinyCG.txt mediumG.txt largeG.txt
+ P  4.2 BreadthFirstPaths         paths in a graph (BFS)              tinyCG.txt mediumG.txt largeG.txt
  .  4.3 CC                        connected components of a graph     tinyG.txt mediumG.txt largeG.txt
  .    – Bipartite                 bipartite or odd cycle              –
  .    – Cycle                     cycle in a graph                    tinyG.txt mediumG.txt largeG.txt
  .    – SymbolGraph               symbol graph                        routes.txt movies.txt
  .    – DegreesOfSeparation       degrees of separation               routes.txt movies.txt
- .    – Digraph                   directed graph                      tinyDG.txt
+ P    – Digraph                   directed graph                      tinyDG.txt
  .    – DigraphGenerator          generate random digraphs            –
  .  4.4 DirectedDFS               depth-first search in a digraph     tinyDG.txt
  .    – DepthFirstDirectedPaths   paths in a digraph (DFS)            tinyDG.txt mediumDG.txt
