@@ -2,6 +2,8 @@
 
 ## Code
   * [Digraph.py](../py/AlgsSedgewickWayne/Digraph.py)
+  * [DepthFirstDirectedPaths.py](../py/AlgsSedgewickWayne/DepthFirstDirectedPaths.py)
+
 
 ## Table of Contents for Examples
   1. [Run Example](#ex1)
