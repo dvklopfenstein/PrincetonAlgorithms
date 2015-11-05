@@ -1,7 +1,5 @@
 """Computes a path between source vertex, s, and every other vertex in undirected graph G."""
 
-from AlgsSedgewickWayne.Stack import Stack
-
 class DepthFirstPaths(object):
   """This implementation uses depth-first search."""
 
@@ -26,12 +24,12 @@ class DepthFirstPaths(object):
   def pathTo(self, v):
     """Returns a path between the source vertex s and vertex v, or None"""
     if not self.hasPathTo(v): return None
-    path = Stack()
+    path = [] # Stack()
     x = v
     while x != self.s:
-      path.push(x)
+      path.append(x) # push(x)
       x = self.edgeTo[x]
-    path.push(self.s)
+    path.append(self.s) # push(self.s)
     return path # seq of vertices on path between vertices, s and v
 
 # DEPTH-FIRST SEARCH PROPERTIES
