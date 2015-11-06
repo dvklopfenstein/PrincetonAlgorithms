@@ -51,5 +51,9 @@ class DepthFirstDirectedPaths(object):
 # EXPLANATION: With DFS, it is either an explicit stack(w/ nonrecursive version)
 # or the function-call stack (w/a recursive version)
 
+# QUESTION: Suppose that during an execution of depth-first search in a digraph G,
+# dfs(v) is called after dfs(w) is called but before dfs(w) returns. Which 
+# of the following must be true of graph G?
+
 # Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python implementation

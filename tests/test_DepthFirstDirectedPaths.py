@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 
 import sys
-from AlgsSedgewickWayne.Graph import Graph
-from AlgsSedgewickWayne.DepthFirstPaths import DepthFirstPaths
+from AlgsSedgewickWayne.Digraph import Digraph
+from AlgsSedgewickWayne.DepthFirstDirectedPaths import DepthFirstDirectedPaths
 from AlgsSedgewickWayne.testcode.InputArgs import cli_get_array
 
 def main(prt=sys.stdout):
   a = cli_get_array()
-  G = Graph(a)
+  G = Digraph(a)
   s = 0
-  dfs = DepthFirstPaths(G, s)
+  dfs = DepthFirstDirectedPaths(G, s)
 
   prt.write("{}\n".format(G))
 

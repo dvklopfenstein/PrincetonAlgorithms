@@ -46,7 +46,7 @@ class Digraph(object):
   def adj(self, v):
     """Returns the vertices adjacent from vertex v in self digraph."""
     self._validateVertex(v)
-    return self_adj[v]
+    return self._adj[v]
 
   def outdegree(self, v):
     """Returns the number of directed edges incident from vertex v."""

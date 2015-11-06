@@ -62,7 +62,7 @@ def conv_int(arr):
     if ' ' not in elem:
       ints.append(int(elem))
     else:
-      ints.append([int(e) for e in elem.split(' ')])
+      ints.append([int(e) for e in re.findall(r'(\S+)', elem)])
   return ints
 
 def _prt_usage_msg(default_seq="a f b d g e c"):
