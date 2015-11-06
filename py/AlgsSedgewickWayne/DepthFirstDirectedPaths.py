@@ -54,6 +54,9 @@ class DepthFirstDirectedPaths(object):
 # QUESTION: Suppose that during an execution of depth-first search in a digraph G,
 # dfs(v) is called after dfs(w) is called but before dfs(w) returns. Which 
 # of the following must be true of graph G?
+# ANSWER: There exists a directed path from w to v.
+# EXPLANATION: The function call stack bwtween when w and v are called contains a 
+# directed path from w to v.
 
 # Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python implementation
