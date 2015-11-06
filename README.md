@@ -132,16 +132,16 @@ Key   4 GRAPHS                    Description                         DATA
  P    – Digraph                   directed graph                      tinyDG.txt
  .    – DigraphGenerator          generate random digraphs            –
  .  4.4 DirectedDFS               depth-first search in a digraph     tinyDG.txt
- .    – DepthFirstDirectedPaths   paths in a digraph (DFS)            tinyDG.txt mediumDG.txt
+ p    – DepthFirstDirectedPaths   paths in a digraph (DFS)            tinyDG.txt mediumDG.txt
  .    – DirectedCycle             cycle in a digraph                  tinyDG.txt tinyDAG.txt
  .    – DepthFirstOrder           depth-first order in a digraph      tinyDG.txt tinyDAG.txt
- .  4.5 Topological               topological order in a DAG          jobs.txt
+ p  4.5 Topological               topological order in a DAG          jobs.txt
  .    – BreadthFirstDirectedPaths paths in a digraph (BFS)            tinyDG.txt mediumDG.txt
  .    – TransitiveClosure         transitive closure                  tinyDG.txt
  .    – SymbolDigraph             symbol digraph                      –
- .  4.6 KosarajuSharirSCC         strong components (Kosaraju-Sharir) tinyDG.txt mediumDG.txt largeDG.txt
- .    – TarjanSCC                 strong components (Tarjan)          tinyDG.txt mediumDG.txt largeDG.txt
- .    – GabowSCC                  strong components (Gabow)           tinyDG.txt mediumDG.txt largeDG.txt
+ p  4.6 KosarajuSharirSCC         strong components (Kosaraju-Sharir) tinyDG.txt mediumDG.txt largeDG.txt
+ p    – TarjanSCC                 strong components (Tarjan)          tinyDG.txt mediumDG.txt largeDG.txt
+ p    – GabowSCC                  strong components (Gabow)           tinyDG.txt mediumDG.txt largeDG.txt
  .    – EdgeWeightedGraph         edge-weighted graph                 –
  .    – Edge                      weighted edge                       –
  .    – LazyPrimMST               MST (lazy Prim)                     tinyEWG.txt mediumEWG.txt largeEWG.txt
