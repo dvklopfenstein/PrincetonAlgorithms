@@ -6,7 +6,7 @@
   * Topological.py TopologicalX.py
   * **Strong Components**:    
     * 1972: TarjanSCC.py    
-    * 1980s: KosarajuSharirSCC.py    
+    * 1980s: **KosarajuSharirSCC.py**    
     * 1990s: GabowSCC.py
     * 1990s: Cheriyan-Mehlhorn: needed one-pass algorithm for LEDA.
 
