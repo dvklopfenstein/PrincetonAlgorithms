@@ -225,34 +225,22 @@ class KosarajuSharirSCC(object):
   # Returns true if vertices v and w are in the same connected component.
   def areConnected(self, v, w): return self._id(v) == self._id(w)
 
-# Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
-# Copyright 2015-2016, DV Klopfenstein, Python implementation
+
 # Strong Components
 
 # 1980s: easy two-pass linear-time algorithm (Kosaraju-Sharir)
 #   * Forgot notes for lecture; developed algorithm in order to teach it!
 #   * Later found in Russion scientific lieterature (1972)
 
-#*****************************************************************************
- #  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
- #
- #  This file is part of algs4.jar, which accompanies the textbook
- #
- #      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- #      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- #      http://algs4.cs.princeton.edu
- #
- #
- #  algs4.jar is free software: you can redistribute it and/or modify
- #  it under the terms of the GNU General Public License as published by
- #  the Free Software Foundation, either version 3 of the License, or
- #  (at your option) any later version.
- #
- #  algs4.jar is distributed in the hope that it will be useful,
- #  but WITHOUT ANY WARRANTY; without even the implied warranty of
- #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- #  GNU General Public License for more details.
- #
- #  You should have received a copy of the GNU General Public License
- #  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- #*****************************************************************************/
+# QUESTION: The Kosaraju-Sharir algorithm runs DFS in G^R followed by DFS in G.
+# Which of the following modifications will not find the strong components?
+# --> Run BFS in G^R followed by DFS in G
+#     Run DFS in G^R followed by BFS in G
+#     Run DFS in G   followed by BFS in G^R
+#     Run DFS in G   followed by DFS in G^R
+# EXPLANATION: The DFS in the 1st phase (to compute the reverse postorder) is crucial;
+# in the 2nd phase, any algorithm that marks the set of vertices reachable from
+# a given vertex will do.
+
+# Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
+# Copyright 2015-2016, DV Klopfenstein, Python implementation
