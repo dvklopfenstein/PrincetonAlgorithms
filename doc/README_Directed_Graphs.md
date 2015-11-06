@@ -4,7 +4,7 @@
   * [Digraph.py](../py/AlgsSedgewickWayne/Digraph.py)
   * [DepthFirstDirectedPaths.py](../py/AlgsSedgewickWayne/DepthFirstDirectedPaths.py)
   * Topological.py TopologicalX.py
-  * **Strong Components**    
+  * **Strong Components**:    
     * 1972: TarjanSCC.py    
     * 1980s: KosarajuSharirSCC.py    
     * 1990s: GabowSCC.py
