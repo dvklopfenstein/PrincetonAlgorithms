@@ -58,5 +58,18 @@ class DepthFirstDirectedPaths(object):
 # EXPLANATION: The function call stack bwtween when w and v are called contains a 
 # directed path from w to v.
 
+# QUESTION from Topological Sort (12:54): 
+# Let G be a directed acyclic graph (DAG) containing an edge v->w.
+# Suppose that dfs(v) is called during an execution of depth-first search.
+# Which one of the following is impossible?
+#     dfs(w) has not yet been called.
+#     dfs(w) will be the next recursive call after dfs(v)
+# --> dfs(w) has already been called but not yet returned
+#     dfs(w) has already been called and returned
+# EXPLANATION: If dfs(v) is called before dfs(w) returns, then the function
+# call-stack contains a directed path from w to v (as in the previous in-video
+# quiz). Combining this path with the edge v->w yeilds a directed cycle, which 
+# is impossible since G is acylic.
+
 # Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python implementation

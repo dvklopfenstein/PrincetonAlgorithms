@@ -1,13 +1,12 @@
+"""Compute topological ordering of a DAG or edge-weighted DAG. Runs in O(E + V) time."""
+
 #*****************************************************************************
- #  Compilation:  javac Topoological.java
  #  Execution:    java  Topological filename.txt separator
  #  Dependencies: Digraph.java DepthFirstOrder.java DirectedCycle.java
  #                EdgeWeightedDigraph.java EdgeWeightedDirectedCycle.java
  #                SymbolDigraph.java
  #  Data files:   http://algs4.cs.princeton.edu/42digraph/jobs.txt
  #
- #  Compute topological ordering of a DAG or edge-weighted DAG.
- #  Runs in O(E + V) time.
  #
  #  % java Topological jobs.txt "/"
  #  Calculus
@@ -26,9 +25,6 @@
  #
  #
  #*****************************************************************************/
-
-package edu.princeton.cs.algs4
-
 #*
  #  The <tt>Topological</tt> class represents a data type for 
  #  determining a topological order of a directed acyclic graph (DAG).
@@ -56,73 +52,46 @@ package edu.princeton.cs.algs4
  #
  #  @author Robert Sedgewick
  #  @author Kevin Wayne
- #/
-public class Topological:
+
+class Topological(object):
+  """Determines if digraph G has a topological order and, if so, finds topological order."""
   private Iterable<Integer> order;  # topological order
   private int[] rank;               # rank[v] = position of vertex v in topological order
 
-    #*
-     # Determines whether the digraph <tt>G</tt> has a topological order and, if so,
-     # finds such a topological order.
-     # @param G the digraph
-     #/
-  public Topological(Digraph G):
-      DirectedCycle finder = new DirectedCycle(G)
-      if !finder.hasCycle()):
-          DepthFirstOrder dfs = new DepthFirstOrder(G)
-          order = dfs.reversePost()
-          rank = new int[G.V()]
-          i = 0
-          for (int v : order)
-              rank[v] = i += 1
+  def __init__(self, G): # G is Digraph
+    DirectedCycle finder = new DirectedCycle(G)
+    if not finder.hasCycle()):
+        DepthFirstOrder dfs = new DepthFirstOrder(G)
+        self._order = dfs.reversePost()
+        self._rank = new int[G.V()]
+        i = 0
+        for (int v : order)
+            rank[v] = i += 1
 
-    #*
-     # Determines whether the edge-weighted digraph <tt>G</tt> has a topological
-     # order and, if so, finds such an order.
-     # @param G the edge-weighted digraph
-     #/
-  public Topological(EdgeWeightedDigraph G):
-      EdgeWeightedDirectedCycle finder = new EdgeWeightedDirectedCycle(G)
-      if !finder.hasCycle()):
-          DepthFirstOrder dfs = new DepthFirstOrder(G)
-          order = dfs.reversePost()
+  def Topological(EdgeWeightedDigraph G): # EdgeWeightedDigraph
+    """Determines if digraph G has a topological order and, if so, finds topological order."""
+    EdgeWeightedDirectedCycle finder = new EdgeWeightedDirectedCycle(G)
+    if not finder.hasCycle():
+        DepthFirstOrder dfs = new DepthFirstOrder(G)
+        order = dfs.reversePost()
 
-    #*
-     # Returns a topological order if the digraph has a topologial order,
-     # and <tt>null</tt> otherwise.
-     # @return a topological order of the vertices (as an interable) if the
-     #    digraph has a topological order (or equivalently, if the digraph is a DAG),
-     #    and <tt>null</tt> otherwise
-     #/
-  def order():
-      return order
+  # Returns a topological order if the digraph has a topologial order, None otherwise
+  def order(self): return self._order
 
-    #*
-     # Does the digraph have a topological order?
-     # @return <tt>true</tt> if the digraph has a topological order (or equivalently,
-     #    if the digraph is a DAG), and <tt>false</tt> otherwise
-     #/
-  def hasOrder():
-      return order is not None
+  # Does the digraph have a topological order?
+  def hasOrder(self): return self.order is not None
 
-    #*
-     # The the rank of vertex <tt>v</tt> in the topological order;
-     # -1 if the digraph is not a DAG
-     # @return the position of vertex <tt>v</tt> in a topological order
-     #    of the digraph; -1 if the digraph is not a DAG
-     # @throws IndexOutOfBoundsException unless <tt>v</tt> is between 0 and
-     #    <em>V</em> &minus; 1
-     #/
-  def rank(int v):
-      validateVertex(v)
-      if hasOrder()) return rank[v]
-      else:            return -1
+  def rank(self, v):
+    """The the rank of vertex v in the topological order; -1 if the digraph is not a DAG."""
+    self._validateVertex(v)
+    if hasOrder()) return rank[v]
+    else:            return -1
 
-  # raise an IndexOutOfBoundsException unless 0 <= v < V
-  def _validateVertex(int v):
-      V = len(rank)
-      if v < 0 or v >= V)
-          raise new IndexOutOfBoundsException("vertex " + v + " is not between 0 and " + (V-1))
+  def _validateVertex(self, v):
+    """raise an IndexOutOfBoundsException unless 0 <= v < V."""
+    V = len(rank)
+    if v < 0 or v >= V:
+        raise Exception("vertex {} is not between 0 and {}".format(v, (V-1))
 
     #*
      # Unit tests the <tt>Topological</tt> data type.
@@ -136,26 +105,5 @@ public class Topological:
           prt.write(sg.name(v))
 
 
-#*****************************************************************************
- #  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
- #
- #  This file is part of algs4.jar, which accompanies the textbook
- #
- #      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- #      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- #      http://algs4.cs.princeton.edu
- #
- #
- #  algs4.jar is free software: you can redistribute it and/or modify
- #  it under the terms of the GNU General Public License as published by
- #  the Free Software Foundation, either version 3 of the License, or
- #  (at your option) any later version.
- #
- #  algs4.jar is distributed in the hope that it will be useful,
- #  but WITHOUT ANY WARRANTY; without even the implied warranty of
- #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- #  GNU General Public License for more details.
- #
- #  You should have received a copy of the GNU General Public License
- #  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- #*****************************************************************************/
+# Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
+# Copyright 2002-2015, DV Klopfenstein, Python port
