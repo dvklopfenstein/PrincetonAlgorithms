@@ -35,24 +35,23 @@ class KruskalMST(object):
   private Queue<Edge> mst = new Queue<Edge>();  # edges in MST
 
   def __init__(self, G):
-      # more efficient to build heap by passing array of edges
-      MinPQ<Edge> pq = new MinPQ<Edge>()
-      for (Edge e : G.edges()):
-          pq.insert(e)
+    # more efficient to build heap by passing array of edges
+    MinPQ<Edge> pq = new MinPQ<Edge>()
+    for (Edge e : G.edges()):
+        pq.insert(e)
 
-      # run greedy algorithm
-      UF uf = new UF(G.V())
-      while (!pq.isEmpty() and mst.size() < G.V() - 1):
-          Edge e = pq.delMin()
-          v = e.either()
-          w = e.other(v)
-          if !uf.connected(v, w)): # v-w does not create a cycle
-              uf.union(v, w);  # merge v and w components
-              self._mst.enqueue(e);  # add edge e to mst
-              self._weight += e.weight()
+    # run greedy algorithm
+    UF uf = new UF(G.V())
+    while not pq.isEmpty() and mst.size() < G.V() - 1):
+        Edge e = pq.delMin()
+        v = e.either()
+        w = e.other(v)
+        if !uf.connected(v, w)): # v-w does not create a cycle
+            uf.union(v, w);  # merge v and w components
+            self._mst.enqueue(e);  # add edge e to mst
+            self._weight += e.weight()
 
-      # check optimality conditions
-      assert check(G)
+    assert self._check(G) # check optimality conditions
 
   # Returns the edges in a minimum spanning tree (or forest).
   def edges(self): return self._mst

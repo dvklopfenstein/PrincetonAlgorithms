@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 import sys
-from EdgeWeightedGraph import EdgeWeightedGraph
+from AlgsSedgewickWayne.EdgeWeightedGraph import EdgeWeightedGraph
+from AlgsSedgewickWayne.testcode.InputArgs import cli_get_array
 
  #*
   # Unit tests the <tt>EdgeWeightedGraph</tt> data type.
@@ -18,9 +19,9 @@ from EdgeWeightedGraph import EdgeWeightedGraph
  #  7: 2-7 0.34000  1-7 0.19000  0-7 0.16000  5-7 0.28000  4-7 0.37000
 
 def main(prt=sys.stdout):
-  In in = new In(args[0])
-  G = EdgeWeightedGraph(in)
-  prt.write(G)
+  a = cli_get_array()
+  G = EdgeWeightedGraph(a)
+  prt.write(str(G))
 
 if __name__ == '__main__':
   main()

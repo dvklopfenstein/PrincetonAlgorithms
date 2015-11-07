@@ -51,19 +51,20 @@ def arr_int_str(a):
   if not isdigit:
     return a
   if isdigit:
-    return conv_int(a)
+    return conv_num(a)
 
-def conv_int(arr):
+def conv_num(arr):
   #  GET: ['13', '13', '0 5', '4 3', ...
   #  RET: [ 13,   13,  [0, 5], [4, 3], ...
-  ints = []
+  nums = []
+  conv = lambda s: float(s) if "." in s or 'e' in s.lower() else int(s)
   for elem in arr:
     elem = elem.strip() # strip leading/trailing whitespace
     if ' ' not in elem:
-      ints.append(int(elem))
+      nums.append(conv(elem))
     else:
-      ints.append([int(e) for e in re.findall(r'(\S+)', elem)])
-  return ints
+      nums.append([conv(e) for e in re.findall(r'(\S+)', elem)])
+  return nums
 
 def _prt_usage_msg(default_seq="a f b d g e c"):
   import inspect
