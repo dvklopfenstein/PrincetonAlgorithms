@@ -3,18 +3,15 @@
 class Edge(object):
 
   def __init__(self, v, w, weight):
-      if v < 0: raise Exception("Vertex name must be a nonnegative integer")
-      if w < 0: raise Exception("Vertex name must be a nonnegative integer")
-      if not isinstance(weight, float): raise Exception("Weight is NaN")
-      self._v = v
-      self._w = w
-      self._weight = weight
+    if v < 0: raise Exception("Vertex name must be a nonnegative integer")
+    if w < 0: raise Exception("Vertex name must be a nonnegative integer")
+    if not isinstance(weight, float): raise Exception("Weight is NaN")
+    self._v = v
+    self._w = w
+    self._weight = weight
 
-  # Returns the weight of self edge.
-  def weight(self): return self._weight
-
-  # Returns either endpoint of self edge.
-  def either(self): return self._v
+  def weight(self): return self._weight # Returns the weight of self edge.
+  def either(self): return self._v # Returns either endpoint of self edge.
 
   def other(self, vertex):
     """Returns the endpoint of self edge that is different from the given vertex."""
