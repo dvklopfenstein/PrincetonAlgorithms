@@ -1,4 +1,4 @@
- """Compute a minimum spanning forest using Kruskal's algorithm."""
+"""Compute a minimum spanning forest using Kruskal's algorithm."""
 
 #*
  #  The <tt>KruskalMST</tt> class represents a data type for computing a
@@ -28,8 +28,9 @@
  #  @author Kevin Wayne
  #/
 
+from AlgsSedgewickWayne.QuickUnionUF import QuickUnionUF
 from heapq import heappush, heappop
-import collections as cx
+import sys
 
 class KruskalMST(object):
   """Compute a minimum spanning tree (or forest) of an edge-weighted graph."""
@@ -38,25 +39,23 @@ class KruskalMST(object):
 
   def __init__(self, G):
     self._weight = 0.0     # weight of MST
-    self._mst = cx.deque() # new Queue<Edge>();  # edges in MST
+    self._mst = [] # new Queue<Edge>();  # edges in MST
     # more efficient to build heap by passing array of edges
     pq = [] # new MinPQ<Edge>()
-    data = [(e.weight(), e) for e in G.edges()]
-    for item in data:
+    for item in [(e.weight(), e) for e in G.edges()]:
       heappush(pq, item) # insert(e)
 
     # run greedy algorithm
-    uf = new UF(G.V())
+    uf = QuickUnionUF(G.V())
     while not pq and len(self._mst) < (G.V() - 1):
-      e = heappop(pq) # .delMin()
-      v = e.either()
-      w = e.other(v)
-      if !uf.connected(v, w)): # v-w does not create a cycle
-        uf.union(v, w);  # merge v and w components
-        self._mst.append(e) # enqueue(e);  # add edge e to mst
-        self._weight += e.weight()
+      edge_cur = heappop(pq) # .delMin()
+      v, w = edge_cur.get_vw()
+      if not uf.connected(v, w): # v-w does not create a cycle
+        uf.union(v, w)  # merge v and w components
+        self._mst.append(edge_cur) # enqueue(e);  # add edge e to mst
+        self._weight += edge_cur.weight()
 
-    assert self._check(G) # check optimality conditions
+    #assert self._check(G) # check optimality conditions
 
   # Returns the edges in a minimum spanning tree (or forest).
   def edges(self): return self._mst
@@ -71,44 +70,42 @@ class KruskalMST(object):
     total = 0.0
     for e in self.edges():
       total += e.weight()
-    if Math.abs(total - self.weight()) > FLOATING_POINT_EPSILON):
-        System.err.printf("Weight of edges does not equal weight(): %f vs. %f\n", total, weight())
-        return False
+    if abs(total - self.weight()) > self.FLOATING_POINT_EPSILON:
+      sys.stderr.write("Weight of edges does not equal weight(): {} vs. {}\n".format(
+        total, weight()))
+      return False
 
     # check that it is acyclic
-    UF uf = new UF(G.V())
-    for (Edge e : edges()):
-        v = e.either(), w = e.other(v)
-        if uf.connected(v, w)):
-            System.err.println("Not a forest")
-            return False
-        uf.union(v, w)
+    uf = QuickUnionUF(G.V())
+    for e in self.edges():
+      v, w = e.get_vw() 
+      if uf.connected(v, w):
+        sys.stderr.write("Not a forest\n")
+        return False
+      uf.union(v, w)
 
     # check that it is a spanning forest
-    for (Edge e : G.edges()):
-        v = e.either(), w = e.other(v)
-        if !uf.connected(v, w)):
-            System.err.println("Not a spanning forest")
-            return False
+    for e in G.edges():
+      v, w = e.get_vw() 
+      if not uf.connected(v, w):
+        sys.stderr.write("Not a spanning forest\n")
+        return False
 
     # check that it is a minimal spanning forest (cut optimality conditions)
-    for (Edge e : edges()):
-
-        # all edges in MST except e
-        uf = new UF(G.V())
-        for (Edge f : mst):
-            x = f.either(), y = f.other(x)
-            if f != e) uf.union(x, y)
-        
-        # check that e is min weight edge in crossing cut
-        for (Edge f : G.edges()):
-            x = f.either(), y = f.other(x)
-            if !uf.connected(x, y)):
-                if f.weight() < e.weight()):
-                    System.err.println("Edge " + f + " violates cut optimality conditions")
-                    return False
-
-
+    for e in edges():
+      # all edges in MST except e
+      uf = QuickUnionUF(G.V())
+      for f in self._mst:
+        v, w = e.get_vw() 
+        if f != e: uf.union(x, y)
+      
+      # check that e is min weight edge in crossing cut
+      for f in G.edges():
+        x, y = f.get_vw() 
+        if not uf.connected(x, y):
+          if f.weight() < e.weight():
+            sys.stderr.write("Edge {} violates cut optimality conditions\n".format(f))
+            return False
       return True
 
 # Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.

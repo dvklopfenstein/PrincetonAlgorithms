@@ -12,6 +12,7 @@ class Edge(object):
 
   def weight(self): return self._weight # Returns the weight of self edge.
   def either(self): return self._v # Returns either endpoint of self edge.
+  def get_vw(self): return [self._v, self._w]
 
   def other(self, vertex):
     """Returns the endpoint of self edge that is different from the given vertex."""

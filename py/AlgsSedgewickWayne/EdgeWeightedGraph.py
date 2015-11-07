@@ -85,11 +85,11 @@ class EdgeWeightedGraph(object):
     bag = set()
     for v in range(self._V):
       selfLoops = 0
-      for e in self._adj(v):
-        if e.other(v) > self._v:
+      for e in self._adj[v]:
+        if e.other(v) > v:
           bag.add(e)
         # only add one copy of each self loop (self loops will be consecutive)
-        elif e.other(v) == self._v:
+        elif e.other(v) == v:
           if selfLoops % 2 == 0: bag.add(e)
           selfLoops += 1
     return bag
