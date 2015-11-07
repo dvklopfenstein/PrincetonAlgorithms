@@ -1,4 +1,4 @@
-# Minimum Spanning Trees
+# [Minimum Spanning Trees](http://algs4.cs.princeton.edu/43mst)
 
 ## Code
   * **Greedy Algorithm**
