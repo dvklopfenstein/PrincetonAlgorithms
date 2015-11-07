@@ -51,8 +51,8 @@ Note: There are no Progamming Assignment Solutions on this site.
   * Programming Assignment 1: **WordNet**    
 
 * **Week 2 Suggested Readings**: Section 4.3 and 4.4 in [*Algorithms, 4th edition*](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1441459738&sr=1-1&keywords=sedgewick&refinements=p_n_feature_browse-bin%3A2656020011&pebp=1441459739425&perid=0C83SQQ1YFJ62VWHF9C0)
-  * [Minimum Spanning Trees](../../doc/README_Minimum_Spanning_Trees.md)
-  * [Shortest Paths](../../doc/README_Shortest_Paths.md)
+  * [Minimum Spanning Trees](README_Minimum_Spanning_Trees.md)
+  * [Shortest Paths](README_Shortest_Paths.md)
   * Programming Assignment 2: **Content-Aware Resizing**
 
 * **Week 3 Suggested Readings**: Section 6.4 (pp. 886-902) and 5.1 in [*Algorithms, 4th edition*](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1441459738&sr=1-1&keywords=sedgewick&refinements=p_n_feature_browse-bin%3A2656020011&pebp=1441459739425&perid=0C83SQQ1YFJ62VWHF9C0)
