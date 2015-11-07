@@ -143,7 +143,7 @@ Key   4 GRAPHS                    Description                         DATA
  p    – TarjanSCC                 strong components (Tarjan)          tinyDG.txt mediumDG.txt largeDG.txt
  p    – GabowSCC                  strong components (Gabow)           tinyDG.txt mediumDG.txt largeDG.txt
  .    – EdgeWeightedGraph         edge-weighted graph                 –
- .    – Edge                      weighted edge                       –
+ P    – Edge                      weighted edge                       –
  .    – LazyPrimMST               MST (lazy Prim)                     tinyEWG.txt mediumEWG.txt largeEWG.txt
  .  4.7 PrimMST                   MST (Prim)                          tinyEWG.txt mediumEWG.txt largeEWG.txt
  .  4.8 KruskalMST                MST (Kruskal)                       tinyEWG.txt mediumEWG.txt largeEWG.txt
