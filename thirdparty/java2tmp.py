@@ -28,6 +28,7 @@ def main():
       line = line.replace('Key', '')
       line = line.replace('Node[] ', '')
       line = line.replace('Node', '')
+      line = line.replace('this', 'self')
       line = line.replace(r'//', '#')
       line = line.replace(r'&&', 'and')
       line = line.replace(r'||', 'or')
