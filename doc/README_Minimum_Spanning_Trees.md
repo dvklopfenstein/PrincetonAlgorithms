@@ -5,7 +5,7 @@
   * **Edge-Weighted Graph API**: 
     [Edge.py](../py/AlgsSedgewickWayne/Edge.py), 
     [EdgeWeightedGraph.py](../py/AlgsSedgewickWayne/EdgeWeightedGraph.py)
-  * **Kruskal's Algorithm**: [KruskalMST.py](../py/AlgsSedgewickWayne/KruskalMST.py)
+  * **Kruskal's Algorithm**: KruskalMST.py
   * **Prim's Algorithm**: 
     PrimMST.py and 
     LazyPrimMST.py
