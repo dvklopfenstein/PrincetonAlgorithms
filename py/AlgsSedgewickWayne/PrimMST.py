@@ -30,74 +30,59 @@
  #  @author Robert Sedgewick
  #  @author Kevin Wayne
  #/
-public class PrimMST:
-  private static final double FLOATING_POINT_EPSILON = 1E-12
+class PrimMST(object):
+  """Compute a minimum spanning tree (or forest) of an edge-weighted graph."""
+  FLOATING_POINT_EPSILON = 1E-12
 
-  private Edge[] edgeTo;        # edgeTo[v] = shortest edge from tree vertex to non-tree vertex
-  private double[] distTo;      # distTo[v] = weight of shortest such edge
-  private boolean[] marked;     # marked[v] = True if v on tree, False otherwise
-  private IndexMinPQ<Double> pq
+  def __init__(self, G): # G is an edge-weighted graph
+      self._edgeTo = new Edge[G.V()] # edgeTo[v] = shortest edge from tree vertex to non-tree vertex
+      self._distTo = new double[G.V()] # distTo[v] = weight of shortest such edge
+      self._marked = [False for i in range(G.V())] # marked[v] = True if v on tree, False otherwise
+      self._pq = IndexMinPQ(G.V())
+      for v in range(G.V()):
+        self._distTo[v] = float('Inf')
 
-    #*
-     # Compute a minimum spanning tree (or forest) of an edge-weighted graph.
-     # @param G the edge-weighted graph
-     #/
-  public PrimMST(EdgeWeightedGraph G):
-      edgeTo = new Edge[G.V()]
-      distTo = new double[G.V()]
-      marked = new boolean[G.V()]
-      pq = new IndexMinPQ<Double>(G.V())
-      for (int v = 0; v < G.V(); v += 1)
-          distTo[v] = Double.POSITIVE_INFINITY
-
-      for (int v = 0; v < G.V(); v += 1)      # run from each vertex to find
-          if !marked[v]) prim(G, v);      # minimum spanning forest
+      for v in range(G.V()):              # run from each vertex to find
+        if not self._marked[v]: self._prim(G, v)      # minimum spanning forest
 
       # check optimality conditions
-      assert check(G)
+      assert _check(G)
 
-  # run Prim's algorithm in graph G, starting from vertex s
-  def _prim(EdgeWeightedGraph G, s):
-      distTo[s] = 0.0
-      pq.insert(s, distTo[s])
-      while (!pq.isEmpty()):
-          v = pq.delMin()
-          scan(G, v)
+  def _prim(self, G, s):
+    """run Prim's algorithm in graph G, starting from vertex s"""
+    self._distTo[s] = 0.0
+    pq.insert(s, self._distTo[s])
+    while pq:
+      v = pq.delMin()
+      self._scan(G, v)
 
-  # scan vertex v
-  def _scan(EdgeWeightedGraph G, v):
-      marked[v] = True
-      for (Edge e : G.adj(v)):
-          w = e.other(v)
-          if marked[w]) continue;         # v-w is obsolete edge
-          if e.weight() < distTo[w]):
-              distTo[w] = e.weight()
-              edgeTo[w] = e
-              if pq.contains(w)) pq.decrease(w, distTo[w])
-              else                pq.insert(w, distTo[w])
+  def _scan(self, G, v):
+    """scan vertex v"""
+    self._marked[v] = True
+    for e in G.adj(v):
+      w = e.other(v)
+      if self._marked[w]: continue;         # v-w is obsolete edge
+      if e.weight() < distTo[w]:
+        self._distTo[w] = e.weight()
+        self._edgeTo[w] = e
+        if pq.contains(w): pq.decrease(w, distTo[w])
+        else               pq.insert(w, distTo[w])
 
-    #*
-     # Returns the edges in a minimum spanning tree (or forest).
-     # @return the edges in a minimum spanning tree (or forest) as
-     #    an iterable of edges
-     #/
-  def edges():
-      Queue<Edge> mst = new Queue<Edge>()
-      for (int v = 0; v < len(edgeTo); v += 1):
-          Edge e = edgeTo[v]
-          if e is not None):
-              mst.enqueue(e)
-      return mst
+  def edges(self):
+    """Returns the edges in a minimum spanning tree (or forest)."""
+    mst = [] # new Queue<Edge>()
+    for v in len(self._edgeTo):
+      e = self._edgeTo[v]
+      if e is not None:
+          mst.append(e) # .enqueue(e)
+    return mst
 
-    #*
-     # Returns the sum of the edge weights in a minimum spanning tree (or forest).
-     # @return the sum of the edge weights in a minimum spanning tree (or forest)
-     #/
-  def weight():
-      double weight = 0.0
-      for (Edge e : edges())
-          weight += e.weight()
-      return weight
+  def weight(self):
+    """Returns the sum of the edge weights in a minimum spanning tree (or forest)."""
+    weight = 0.0
+    for e in self.edges():
+      weight += e.weight()
+    return weight
 
 
   # check optimality conditions (takes time proportional to E V lg* V)
@@ -146,6 +131,28 @@ public class PrimMST:
 
 
       return True
+
+# PRIM'S ALGORITHM (33:15)
+
+# PRIM'S ALGORITHM EAGER IMPLEMENTATION 20:01
+#
+# CHALLENGE: Find min weight edge with exactly one endpoint in T.
+#
+# EAGER SOLUTION: Maintain a PQ of **vertices** connected by an edge to T,
+# where priority of vertex v = weight of shortest edge connecting v to T.
+#  * Delete min vertex v and add its associated edge e = v-w to T.
+#  * Update PQ by considering all edges e = v-x incident to v
+#    - ignore if x is already in T
+#    - add x to PQ if not already on it
+#    - decrease priority of x if v-x becomes shortest edge connecting x to T
+
+# EXPLANATION: For each non-tree vertex v, the eadter version of Prim's algorithm
+# maintains at most one entry in the priority queue (with key equal to the 
+# weight og the cheapet edge from v to the tree 20:15
+
+# QUESTION: What is the order of growth of the worst-case running time of
+# Prim's algorithm using a binary heap?
+# ANSWER: E log V
 
 # Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python port.
