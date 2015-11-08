@@ -11,6 +11,8 @@ def cli_get_array(seqstr=None):
   if seqstr is not None and L == 1:
     if isinstance(seqstr, int):
       return seqstr
+    elif os.path.isfile(seqstr):
+      return cli_get_fin(seqstr)
     else:
       return arr_int_str(seqstr.split(" "))
   # >>> [file.py] "A B C D E F"

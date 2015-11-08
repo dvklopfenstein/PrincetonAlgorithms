@@ -1,3 +1,6 @@
+from AlgsSedgewickWayne.QuickUnionUF import QuickUnionUF
+import sys
+
 def _check(MST, G):
   """check optimality conditions (takes time proportional to E V lg* V)"""
 
@@ -7,7 +10,7 @@ def _check(MST, G):
     total += e.weight()
   if abs(total - MST.weight()) > MST.FLOATING_POINT_EPSILON:
     sys.stderr.write("Weight of edges does not equal weight(): {} vs. {}\n".format(
-      total, weight()))
+      total, MST.weight()))
     return False
 
   # check that it is acyclic
@@ -21,7 +24,7 @@ def _check(MST, G):
 
   # check that it is a spanning forest
   for e in G.edges():
-    v, w = e.get_vw() 
+    print v, w
     if not uf.connected(v, w):
       sys.stderr.write("Not a spanning forest\n")
       return False

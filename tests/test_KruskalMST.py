@@ -33,9 +33,6 @@
  #  10-123  0.00886
  #  ...
  #  10.46351
-   #*
-     # Unit tests the <tt>KruskalMST</tt> data type.
-     #/
 
 from AlgsSedgewickWayne.EdgeWeightedGraph import EdgeWeightedGraph
 from AlgsSedgewickWayne.KruskalMST import KruskalMST

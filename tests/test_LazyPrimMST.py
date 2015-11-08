@@ -42,16 +42,18 @@
  #*****************************************************************************/
 
 
-    #*
-     # Unit tests the <tt>LazyPrimMST</tt> data type.
-     #/
-  def main(String[] args):
-      In in = new In(args[0])
-      EdgeWeightedGraph G = new EdgeWeightedGraph(in)
-      LazyPrimMST mst = new LazyPrimMST(G)
-      for (Edge e : mst.edges()):
-          prt.write(e)
-      StdOut.printf("%.5f\n", mst.weight())
+from AlgsSedgewickWayne.EdgeWeightedGraph import EdgeWeightedGraph
+from AlgsSedgewickWayne.LazyPrimMST import LazyPrimMST
+from AlgsSedgewickWayne.testcode.InputArgs import cli_get_array
+import sys
+
+def main(fin_G, prt=sys.stdout):
+  a = cli_get_array(fin_G)
+  G = EdgeWeightedGraph(a)
+  mst = LazyPrimMST(G)
+  for e in mst.edges():
+    prt.write(e)
+  prt.write("{:.5f}\n".format(mst.weight()))
 
 if __name__ == '__main__':
-  main()
+  main("../thirdparty/tinyEWG.txt")
