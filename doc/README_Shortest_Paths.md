@@ -1,7 +1,7 @@
 # Shortest Paths
 
 ## Code
-  * **Shortest Paths APIs**: code.py
+  * **Shortest Paths APIs**: [DirectedEdge.py](../py/AlgsSedgewickWayne/DirectedEdge.py]
   * **Shortest Path Properties**: code.py
   * **Dijkstra's Algorithm**: code.py
   * **Edge-Weighted DAGs**: code.py
