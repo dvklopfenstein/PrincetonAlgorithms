@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 
 from AlgsSedgewickWayne.DirectedEdge import DirectedEdge
 import sys
