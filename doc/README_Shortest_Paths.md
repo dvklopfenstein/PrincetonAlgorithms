@@ -2,10 +2,10 @@
 
 ## Code
   * **Shortest Paths APIs**:
-    [DirectedEdge.py](../py/AlgsSedgewickWayne/DirectedEdge.py),
-    [EdgeWeightedDigraph.py](../py/AlgsSedgewickWayne/EdgeWeightedDigraph.py), and
-    AcyclicSP.py
-  * **Shortest Path Properties**: code.py
+    [DirectedEdge.py](../py/AlgsSedgewickWayne/DirectedEdge.py) and
+    [EdgeWeightedDigraph.py](../py/AlgsSedgewickWayne/EdgeWeightedDigraph.py)    
+  * **Shortest Path Properties**:
+    [AcyclicSP.py](../py/AlgsSedgewickWayne/AcyclicSP.py)
   * **Dijkstra's Algorithm**: code.py
   * **Edge-Weighted DAGs**: code.py
   * **Negative Weights**: code.py
