@@ -149,7 +149,7 @@ Key   4 GRAPHS                    Description                         DATA
  p  4.8 KruskalMST                MST (Kruskal)                       tinyEWG.txt mediumEWG.txt largeEWG.txt
  .    – BoruvkaMST                MST (Boruvka)                       tinyEWG.txt mediumEWG.txt largeEWG.txt
  .    – EdgeWeightedDigraph       edge-weighted digraph               tinyEWD.txt
- .    – DirectedEdge              weighted, directed edge             –
+ p    – DirectedEdge              weighted, directed edge             –
  .  4.9 DijkstraSP                shortest paths (Dijkstra)           tinyEWD.txt mediumEWD.txt largeEWD.txt
  .    – DijkstraAllPairsSP        all-pairs shortest paths            tinyEWD.txt mediumEWD.txt
  . 4.10 AcyclicSP                 shortest paths in a DAG             tinyEWDAG.txt

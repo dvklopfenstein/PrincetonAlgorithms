@@ -1,15 +1,12 @@
 """Immutable weighted directed edge."""
 
- #  For additional documentation, see <a href="http://algs4.cs.princeton.edu/44sp">Section 4.4</a> of
- #  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
-
 class DirectedEdge(object): 
   """a directed edge from vertex v to vertex w with the given weight"""
 
   def __init__(self, v, w, weight):
     if v < 0: raise Exception("Vertex names must be nonnegative integers")
     if w < 0: raise Exception("Vertex names must be nonnegative integers")
-    if Double.isNaN(weight): raise new IllegalArgumentException("Weight is NaN")
+    if isinstance(weight, float): raise Exception("Weight is NaN")
     self._v = v # the tail vertex
     self._w = w # the head vertex
     self._weight = weight # the weight of the directed edge
