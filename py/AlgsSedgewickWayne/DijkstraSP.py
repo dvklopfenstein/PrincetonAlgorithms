@@ -12,7 +12,7 @@ class DijkstraSP(object):
         raise Exception("edge {} has negative weight".format(e))
 
     self._distTo = [self.Inf for i in range(G.V())] # distTo[v] = distance  of shortest s->v path
-    self._edgeTo = new DirectedEdge[G.V()] # edgeTo[v] = last edge on shortest s->v path
+    self._edgeTo = [None for i in range(G.V())]     # edgeTo[v] = last edge on shortest s->v path
     self._distTo[s] = 0.0
 
     # relax vertices in order of distance from s
@@ -32,7 +32,7 @@ class DijkstraSP(object):
     if self._distTo[w] > (self._distTo[v] + e.weight()):
        self._distTo[w] =  self._distTo[v] + e.weight()
        self._edgeTo[w] = e
-       if pq.contains(w): pq.decrease(w, self._distTo[w])
+       if pq.contains(w): pq.decreaseKey(w, self._distTo[w])
        else               pq.insert(w, self._distTo[w])
 
   def distTo(self, v): # O(k)
@@ -93,6 +93,33 @@ class DijkstraSP(object):
               System.err.println("edge " + e + " on shortest path not tight")
               return False
       return True
+
+# Dijkstra's Algorithm (18:58)
+#
+# PQ implementation insert    delete-min decrease-key total
+# ----------------- ------    ---------- ------------ -----
+# unordered array      1           V          1         V^2
+# binary heap        log V       log V      log V     E log V
+# d-way heap       d log_d V   d log_d V   log_d V   E log_E/V V
+# Fibonacci heap       1         log V        1      E + V log V
+#
+# BOTTOM LINE:
+#   * Array implementation optiomal for dense graphs
+#   * Binary heap faster for sparse graphs.
+#   * 4-way heap wort the trouble in preformance-critical situations
+#   * Fibonacci heap best in theory, but not worht implementing.
+
+# QUESTION: What is the order of growth of the running time of Dijkstra's 
+# algorithm using a binary heap: Assume that all vertices are reachable 
+# from the source.
+# ANSWER: E log V
+# EXPLANATION: The bottleneck is the hap operations. There are at most
+# V insert, V delete-min, and E decrease-key operations. Each operation
+# is logarithmic in the size of the binary heap, which is at most V.
+
+
+
+
 
 
 # Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
