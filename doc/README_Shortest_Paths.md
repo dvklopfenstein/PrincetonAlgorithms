@@ -1,4 +1,4 @@
-# Shortest Paths
+# [Shortest Paths](http://algs4.cs.princeton.edu/44sp)
 
 ## Code
   * **Shortest Paths APIs**: [DirectedEdge.py](../py/AlgsSedgewickWayne/DirectedEdge.py)
