@@ -7,8 +7,8 @@
     [EdgeWeightedGraph.py](../py/AlgsSedgewickWayne/EdgeWeightedGraph.py)
   * **Kruskal's Algorithm**: [KruskalMST.py](../py/AlgsSedgewickWayne/KruskalMST.py)
   * **Prim's Algorithm**:
-    [LazyPrimMST.py](../py/AlgsSedgewickWayne/LazyPrimMST.py)
-    PrimMST.py and 
+    [LazyPrimMST.py](../py/AlgsSedgewickWayne/LazyPrimMST.py) and
+    PrimMST.py
   * **MST Context**
 
 ## Table of Contents for Examples
