@@ -13,6 +13,7 @@ class DirectedEdge(object):
 
   def get_from(self): return self._v # Returns the tail vertex of the directed edge.
   def get_to(self): return self._w # Returns the head vertex of the directed edge.
+  def get_from_to(self): return [self._v, self._w]
   def get_weight(self): return self._weight # Returns the weight of the directed edge.
   def __str__(self):
     return "{v} -> {w} {wt:5.2f}".format(v=self._v, w=self._w, wt=self._weight)
