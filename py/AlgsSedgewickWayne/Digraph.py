@@ -22,8 +22,8 @@ class Digraph(object):
     # The format is the number of vertices V, followed by the number of edges E,
     # followed by E pairs of vertices, with each entry separated by whitespace.
     self._init_empty(a[0]) # init V, and the empty adj list
-    E = a[1]
-    if E < 0: raise Exception("Number of edges must be nonnegative")
+    self._E = a[1]
+    if self._E < 0: raise Exception("Number of edges must be nonnegative")
     for v, w in a[2:]:
       self.addEdge(v, w)
 
