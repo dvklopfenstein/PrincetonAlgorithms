@@ -9,10 +9,8 @@ class AcyclicSP(object):
   Inf = float('Inf')
 
   def __init__(self, G, s): # G=DAG, v=source vertex O(V+E)
-    self._distTo = [0.0 for i in range(G.V())]  # distance  of shortest s->v path
+    self._distTo = [self.Inf for i in range(G.V())]  # distance  of shortest s->v path
     self._edgeTo = [None for i in range(G.V())] # last edge on shortest s->v path
-    for v in range(G.V()):
-      self._distTo[v] = self.Inf
     self._distTo[s] = 0.0
 
     # visit vertices in toplogical order
@@ -30,7 +28,7 @@ class AcyclicSP(object):
        self._distTo[w] =  self._distTo[v] + e.weight() # New shorter dist
        self._edgeTo[w] = e # Set better way to get to w
 
-  def self.distTo(self, v): # O(K)
+  def distTo(self, v): # O(K)
     """Returns the length of a shortest path from the source vertex s to vertex v."""
     return self._distTo[v]
 

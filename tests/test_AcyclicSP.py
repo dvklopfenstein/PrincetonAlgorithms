@@ -21,23 +21,26 @@
  #
  #*****************************************************************************/
 
-from AlgsSedgewickWayne import EdgeWeightedDigraph
+import sys
+from AlgsSedgewickWayne.AcyclicSP import AcyclicSP
+from AlgsSedgewickWayne.EdgeWeightedDigraph import EdgeWeightedDigraph
+from AlgsSedgewickWayne.testcode.InputArgs import cli_get_array
 
-def main():
-  In in = new In(args[0])
-  s = Integer.parseInt(args[1])
-  G = EdgeWeightedDigraph(in)
+def main(s=0, prt=sys.stdout):
+  a = cli_get_array()
+  G = EdgeWeightedGraph(a)
+  prt.write(str(G))
 
   # find shortest path from s to each other vertex in DAG
-  AcyclicSP sp = new AcyclicSP(G, s)
-  for (int v = 0; v < G.V(); v += 1):
-      if sp.hasPathTo(v)):
-          StdOut.printf("%d to %d (%.2f)  ", s, v, sp.self._distTo(v))
-          for (DirectedEdge e : sp.pathTo(v)):
-              StdOut.print(e + "   ")
-          prt.write()
-      else:
-          StdOut.printf("%d to %d         no path\n", s, v)
+  sp = AcyclicSP(G, s)
+  for v in range(G.V()):
+    if sp.hasPathTo(v):
+      prt.write("{} to {} ({:.2f})  ".format(s, v, sp.distTo(v)))
+      for e in sp.pathTo(v):
+        prt.write("{}   ".format(e))
+      prt.write("\n")
+    else:
+      prt.write("{} to {}         no path\n".format(s, v))
 
 if __name__ == '__main__':
   main()
