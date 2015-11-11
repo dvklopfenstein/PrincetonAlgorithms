@@ -10,7 +10,8 @@
     DijkstraSP.py
   * **Edge-Weighted DAGs**:
     [AcyclicSP.py](../py/AlgsSedgewickWayne/AcyclicSP.py),
-    AcyclicLP.py
+    AcyclicLP.py, and
+    CPM.py (Critical path method)
   * **Negative Weights**: code.py
 
 ## Table of Contents for Examples
