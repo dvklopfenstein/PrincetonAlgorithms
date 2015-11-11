@@ -9,7 +9,8 @@
   * **Dijkstras Algorithm**:
     DijkstraSP.py
   * **Edge-Weighted DAGs**:
-    [AcyclicSP.py](../py/AlgsSedgewickWayne/AcyclicSP.py)
+    [AcyclicSP.py](../py/AlgsSedgewickWayne/AcyclicSP.py),
+    AcyclicLP.py
   * **Negative Weights**: code.py
 
 ## Table of Contents for Examples
