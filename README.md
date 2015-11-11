@@ -152,7 +152,7 @@ Key   4 GRAPHS                    Description                         DATA
  p    – DirectedEdge              weighted, directed edge             –
  .  4.9 DijkstraSP                shortest paths (Dijkstra)           tinyEWD.txt mediumEWD.txt largeEWD.txt
  .    – DijkstraAllPairsSP        all-pairs shortest paths            tinyEWD.txt mediumEWD.txt
- . 4.10 AcyclicSP                 shortest paths in a DAG             tinyEWDAG.txt
+ p 4.10 AcyclicSP                 shortest paths in a DAG             tinyEWDAG.txt
  .    – AcyclicLP                 longest paths in a DAG              tinyEWDAG.txt
  .    – CPM                       critical path method                jobsPC.txt
  . 4.11 BellmanFordSP             shortest paths (Bellman-Ford)       tinyEWDn.txt tinyEWDnc.txt
