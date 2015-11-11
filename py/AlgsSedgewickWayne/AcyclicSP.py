@@ -73,5 +73,11 @@ class AcyclicSP(object):
 # will have no effect since in Java (and IEEE floating point), Inf + x = Inf
 # unless x is -Inf or Nan.
 
+# QUESTION: The topological sort algorithm computes the shortest-paths tree in 
+# an edge-weighted DAG in time proportional to ...
+# ANSWER: E + V
+# EXPLANATION: It process the V vertices in topological order;
+# It relaxes each of teh E edges exactly once.
+
 # Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python port
