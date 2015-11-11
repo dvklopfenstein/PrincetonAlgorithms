@@ -6,8 +6,9 @@
     [EdgeWeightedDigraph.py](../py/AlgsSedgewickWayne/EdgeWeightedDigraph.py)    
   * **Shortest Path Properties**:
     [AcyclicSP.py](../py/AlgsSedgewickWayne/AcyclicSP.py)
-  * **Dijkstra's Algorithm**: code.py
-  * **Edge-Weighted DAGs**: 
+  * **Dijkstras Algorithm**:
+    DijkstraSP.py
+  * **Edge-Weighted DAGs**: code.py
     [AcyclicSP.py](../py/AlgsSedgewickWayne/AcyclicSP.py)
   * **Negative Weights**: code.py
 
