@@ -1,7 +1,8 @@
 # [Minimum Spanning Trees](http://algs4.cs.princeton.edu/43mst)
 
 ## Code
-  * **Introduction to MSTs** [Applications](https://www.ics.uci.edu/~eppstein/gina/mst.html)
+  * **Introduction to MSTs** 
+    [Applications using MSTs](https://www.ics.uci.edu/~eppstein/gina/mst.html)
   * **Greedy Algorithm**
   * **Edge-Weighted Graph API**: 
     [Edge.py](../py/AlgsSedgewickWayne/Edge.py), 
