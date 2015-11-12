@@ -153,5 +153,13 @@ class BellmanFordSP(object):
 # ANSWER: EV
 # EXPLANATION: There are V passes; each passes relaxes each of teh E edges.
 
+# BELLMAN-FORD is NOT a greedy algorithm (so can do negative edges)
+#
+# FUNDAMENTAL IDEA BEHIND BELLMAN-FORD:
+#  * THERE CAN BE AT MOST |V|-1 edges in a path starting from the starting node
+#    to any other node in the graph.
+#  * |V| or more edges in a path -> repeated vertex -> cycle
+
+
 # Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python port

@@ -52,9 +52,9 @@
 * **Remark 2.** Negative weights make the problem harder
 * **Remark 3.** Negative cycles makes the problem intractable
 
- cg | nw | nc |
- -- | -- | -- |
-  N |  Y |  x |
-  Y |  N |  x |
-  Y |  Y |  N |
-  Y |  Y |  N |
+| cg | nw | nc |
+| -- | -- | -- |
+|  N |  Y |  x |
+|  Y |  N |  N |
+|  Y |  Y |  N |
+|  Y |  Y |  N |

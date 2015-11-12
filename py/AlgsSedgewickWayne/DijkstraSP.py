@@ -117,6 +117,7 @@ class DijkstraSP(object):
 # V insert, V delete-min, and E decrease-key operations. Each operation
 # is logarithmic in the size of the binary heap, which is at most V.
 
+# DIJKSTRA'S Algorithm is GREEDY (so cannot do negative edges)
 
 
 

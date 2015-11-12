@@ -35,6 +35,22 @@ class KruskalMST(object):
 
   # Returns the sum of the edge weights in a minimum spanning tree (or forest).
   def weight(self): return self._weight # t ~ K
+
+# INTRODUCTION TO MSTS (4:04)
+
+# MST IS FUNDAMENTAL PROBLEM WITH DIVERSE APPLICATIONS 3:33
+#  * Dithering (removing the fuzziness in images)
+#  * Cluster Analysis
+#  * Max bottleneck paths
+#  * Real-time face verification
+#  * LDPC codes for error correction
+#  * Image registration with Renyl entropy
+#  * Find road networks in satellite and aerial imagery
+#  * Reducing data storage in sequencing amino acids in a protein.
+#  * Model locality of particle interactions in turbulent fluid flows.
+#  * Autoconfig protocol for Ethernet bridging to avoid cycles in a network.
+#  * Approximation algorithms for NP-hard problems (eg, TSP, Steiner tree)
+#  * Network design (communication, electrical, hydraulic, computer, road)
   
 # Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python port
