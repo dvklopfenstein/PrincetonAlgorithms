@@ -43,10 +43,10 @@ class BellmanFordSP(object):
       self._cost += 1
 
   # Is there a negative cycle reachable from the source vertex <tt>s</tt>?
-  def hasNegativeCycle(self): return cycle is not None # O(k)
+  def hasNegativeCycle(self): return self._cycle is not None # O(k)
 
   # Returns a negative cycle reachable from the src s, or None if there is no such cycle.
-  def negativeCycle(self): return cycle # O(# edges returned)
+  def negativeCycle(self): return self._cycle # O(# edges returned)
 
   def _findNegativeCycle(self):
     """by finding a cycle in predecessor graph"""
@@ -57,7 +57,7 @@ class BellmanFordSP(object):
          spt.addEdge(self._edgeTo[v])
 
     finder = EdgeWeightedDirectedCycle(spt)
-    cycle = finder.cycle()
+    self._cycle = finder.cycle()
 
   def distTo(self, v): # O(k)
     """Returns the length of a shortest path from the source vertex s to vertex v."""
