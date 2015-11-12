@@ -39,8 +39,8 @@
 
 | algorithm                 | cg | nw | nc | restriction        | typical | worst   | extra space
 | ------------------------- | -- | -- | -- | ------------------ | ------- | ------- | -----------
-| topological sort          |  N |  Y |  ? | no directed cycles | E + V   | E + V   | V
-| Dijkstra (binary heap)    |  Y |  N |  ? | no neg. weights    | E log V | E log V | V
+| topological sort          |  N |  Y |  x | no directed cycles | E + V   | E + V   | V
+| Dijkstra (binary heap)    |  Y |  N |  x | no neg. weights    | E log V | E log V | V
 | Bellman-Ford              |  Y |  Y |  N | no neg. cycles     | E V     | E V     | V
 | Bellman-Ford (queue-based)|  Y |  Y |  N | no neg. cycles     | E + V   | E + V   | V
 
