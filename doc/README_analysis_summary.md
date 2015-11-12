@@ -37,12 +37,12 @@
 
 ## Single source shortest-paths implementations
 
-| algorithm                 | cg | nw | nc | restriction        | typical | worst   | extra space
-| ------------------------- | -- | -- | -- | ------------------ | ------- | ------- | -----------
-| topological sort          |  N |  Y |  x | no directed cycles | E + V   | E + V   | V
-| Dijkstra (binary heap)    |  Y |  N |  x | no neg. weights    | E log V | E log V | V
-| Bellman-Ford              |  Y |  Y |  N | no neg. cycles     | E V     | E V     | V
-| Bellman-Ford (queue-based)|  Y |  Y |  N | no neg. cycles     | E + V   | E + V   | V
+| algorithm                 | restriction        | typical | worst   | extra space
+| ------------------------- | ------------------ | ------- | ------- | -----------
+| topological sort          | no directed cycles | E + V   | E + V   | V
+| Dijkstra (binary heap)    | no neg. weights    | E log V | E log V | V
+| Bellman-Ford              | no neg. cycles     | E V     | E V     | V
+| Bellman-Ford (queue-based)| no neg. cycles     | E + V   | E + V   | V
 
 * **cg**: Works with a graph which has cycles
 * **nw**: Works with a graph which has negative weights
@@ -52,3 +52,9 @@
 * **Remark 2.** Negative weights make the problem harder
 * **Remark 3.** Negative cycles makes the problem intractable
 
+ cg | nw | nc |
+ -- | -- | -- |
+  N |  Y |  x |
+  Y |  N |  x |
+  Y |  Y |  N |
+  Y |  Y |  N |
