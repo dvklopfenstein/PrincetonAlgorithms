@@ -155,7 +155,7 @@ Key   4 GRAPHS                    Description                         DATA
  p 4.10 AcyclicSP                 shortest paths in a DAG             tinyEWDAG.txt
  .    – AcyclicLP                 longest paths in a DAG              tinyEWDAG.txt
  .    – CPM                       critical path method                jobsPC.txt
- . 4.11 BellmanFordSP             shortest paths (Bellman-Ford)       tinyEWDn.txt tinyEWDnc.txt
+ p 4.11 BellmanFordSP             shortest paths (Bellman-Ford)       tinyEWDn.txt tinyEWDnc.txt
  .    – EdgeWeightedDirectedCycle cycle in an edge-weighted digraph   –
  .    – Arbitrage                 arbitrage detection                 rates.txt
  .    – FloydWarshall             all-pairs shortest paths (dense)    tinyEWD.txt mediumEWD.txt

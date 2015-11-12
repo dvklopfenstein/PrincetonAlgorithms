@@ -12,7 +12,7 @@
     [AcyclicSP.py](../py/AlgsSedgewickWayne/AcyclicSP.py),
     AcyclicLP.py, and
     CPM.py (Critical path method)
-  * **Negative Weights**: code.py
+  * **Negative Weights**: BellmanFordSP
 
 ## Table of Contents for Examples
   1. [Run Example](#ex1)
