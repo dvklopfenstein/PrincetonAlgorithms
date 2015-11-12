@@ -42,7 +42,7 @@
 | topological sort          |  N |  Y |  ? | no directed cycles | E + V   | E + V   | V
 | Dijkstra (binary heap)    |  Y |  N |  ? | no neg. weights    | E log V | E log V | V
 | Bellman-Ford              |  Y |  Y |  N | no neg. cycles     | E V     | E V     | V
-| Bellman-Ford (queue-based)|    |  Y |  N | no neg. cycles     | E + V   | E + V   | V
+| Bellman-Ford (queue-based)|  Y |  Y |  N | no neg. cycles     | E + V   | E + V   | V
 
 * **cg**: Works with a graph which has cycles    
 * **nw**: Works with a graph which has negative weights    
