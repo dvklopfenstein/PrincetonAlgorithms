@@ -1,6 +1,6 @@
 # [Shortest Paths](http://algs4.cs.princeton.edu/44sp)
 
-## Code
+## Code [summary](README_analysis_summary.md#single-source-shortest-paths-implementations)
   * **Shortest Paths APIs**:
     [DirectedEdge.py](../py/AlgsSedgewickWayne/DirectedEdge.py) and
     [EdgeWeightedDigraph.py](../py/AlgsSedgewickWayne/EdgeWeightedDigraph.py)    
