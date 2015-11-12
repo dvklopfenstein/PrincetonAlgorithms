@@ -148,5 +148,10 @@ class BellmanFordSP(object):
 #  * The running time is still proportional to E*V in worst case
 #  * But much faster than that in practice
 
+# QUESTION: The dynamic programming algorithm computes a shortest-paths tree in
+# edge-weighter digraph with no negative cycles in time proportional to ...
+# ANSWER: EV
+# EXPLANATION: There are V passes; each passes relaxes each of teh E edges.
+
 # Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python port
