@@ -44,11 +44,11 @@
 | Bellman-Ford              |  Y |  Y |  N | no neg. cycles     | E V     | E V     | V
 | Bellman-Ford (queue-based)|  Y |  Y |  N | no neg. cycles     | E + V   | E + V   | V
 
-* **cg**: Works with a graph which has cycles    
-* **nw**: Works with a graph which has negative weights    
-* **nc**: works with a graph which has negative cycles    
+* **cg**: Works with a graph which has cycles
+* **nw**: Works with a graph which has negative weights
+* **nc**: works with a graph which has negative cycles
 
-* **Remark 1.** Directed cycles make the problem harder    
+* **Remark 1.** Directed cycles make the problem harder
 * **Remark 2.** Negative weights make the problem harder
 * **Remark 3.** Negative cycles makes the problem intractable
 
