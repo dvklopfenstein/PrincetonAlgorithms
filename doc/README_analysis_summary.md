@@ -33,3 +33,18 @@
 * **AC** => average-case cost (after N random inserts)
 * **ordered it** => ordered iterator
 * * => under uniform hashing assumption
+
+
+## Single source shortest-paths implementations
+
+| algorithm                 | restriction        | typical | worst   | extra space
+| ------------------------- | ------------------ | ------- | ------- | -----------
+| topological sort          | no directed cycles | E + V   | E + V   | V
+| Dijkstra (binary heap)    | no neg. weights    | E log V | E log V | V
+| Bellman-Ford              | no neg. cycles     | E V     | E V     | V
+| Bellman-Ford (queue-based)| no neg. cycles     | E + V   | E + V   | V
+
+* **Remark 1.** Directed cycles make the problem harder
+* **Remark 2.** Negative weights make the problem harder
+* **Remark 3.** Negative cycles makes the problem harder
+

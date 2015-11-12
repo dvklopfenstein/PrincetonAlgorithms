@@ -1,28 +1,5 @@
-"""Bellman-Ford shortest path algorithm."""
+"""Bellman-Ford shortest path algorithm in Graphs w/no neg. cycles."""
 # TBD: Finish Python port
-
- #  The <tt>BellmanFordSP</tt> class represents a data type for solving the
- #  single-source shortest paths problem in edge-weighted digraphs with
- #  no negative cycles. 
- #  The edge weights can be positive, negative, or zero.
- #  This class finds either a shortest path from the source vertex <em>s</em>
- #  to every other vertex or a negative cycle reachable from the source vertex.
- #  <p>
- #  This implementation uses the Bellman-Ford-Moore algorithm.
- #  The constructor takes time proportional to <em>V</em> (<em>V</em> + <em>E</em>)
- #  in the worst case, where <em>V</em> is the number of vertices and <em>E</em>
- #  is the number of edges.
- #  Afterwards, the <tt>distTo()</tt>, <tt>hasPathTo()</tt>, and <tt>hasNegativeCycle()</tt>
- #  methods take constant time; the <tt>pathTo()</tt> and <tt>negativeCycle()</tt>
- #  method takes time proportional to the number of edges returned.
- #  <p>
- #  For additional documentation,    
- #  see <a href="http://algs4.cs.princeton.edu/44sp">Section 4.4</a> of    
- #  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne. 
- #
- #  @author Robert Sedgewick
- #  @author Kevin Wayne
- #/
 
 import collections as cx
 from AlgsSedgewickWayne.EdgeWeightedDigraph import EdgeWeightedDigraph
@@ -30,85 +7,77 @@ from AlgsSedgewickWayne.EdgeWeightedDirectedCycle import EdgeWeightedDirectedCyc
 
 class BellmanFordSP(object):
   """Gets SP tree in edge-wt'd digraph from src s, or finds a neg. cost cycle reachable from s."""
-
   Inf = float('Inf')
-  def _relax()
-  def _cycle(or None if no such cycle)
 
-    #*
-     # Computes a shortest paths tree from <tt>s</tt> to every other vertex in
-     # the edge-weighted digraph <tt>G</tt>.
-     # @param G the acyclic digraph
-     # @param s the source vertex
-     # @throws IllegalArgumentException unless 0 &le; <tt>s</tt> &le; <tt>V</tt> - 1
-     #/
-  def __init__(self, G, s): # G:EdgeWeightedDigraph
+  def __init__(self, G, s): # G:EdgeWeightedDigraph O(V+E) wc
     self._distTo  = [self.Inf for i in range(G.V())] # distTo[v] = distance  of shortest s->v path
-    self._edgeTo  = new DirectedEdge[G.V()] # edgeTo[v] = last edge on shortest s->v path
-    self._onQueue = new boolean[G.V()] # onQueue[v] = is v currently on the queue?
     self._distTo[s] = 0.0
+    self._edgeTo  = [None for i in range(G.V())] # edgeTo[v] = last edge on shortest s->v path
+    self._onQueue = [False for i in range(G.V())] # onQueue[v] = is v currently on the queue?
+    self._cost = 0    # number of calls to relax()
+    self._cycle = None # Iterable<DirectedEdge> negative cycle (or null if no such cycle)
 
     # Bellman-Ford algorithm
-    queue = cx.deque # new Queue<Integer>() # queue of vertices to relax
-    queue.enqueue(s)
+    self._queue = cx.deque() # new Queue<Integer>() # queue of vertices to relax
+    self._queue.append(s) # enqueue(s)
     self._onQueue[s] = True
-    while queue and not self.hasNegativeCycle():
-      v = queue.dequeue()
+    while self._queue and not self.hasNegativeCycle():
+      v = self._queue.popleft() # dequeue()
       self._onQueue[v] = False
       self._relax(G, v)
-
-    assert check(G, s)
+    assert _check(G, s)
 
   def _relax(self, G, v):
     """relax vertex v and put other endpoints on queue if changed"""
     for e in G.adj(v):
-      w = e.to()
+      w = e.get_to()
       if self._distTo[w] > self._distTo[v] + e.weight()):
-        self._distTo[w] = self._distTo[v] + e.weight()
-        self._[w] = e
-        if not self._onQueue[w]:
-          queue.enqueue(w)
-          self._onQueue[w] = True
-      if cost += 1 % G.V() == 0):
+         self._distTo[w] = self._distTo[v] + e.weight()
+         self._edgeTo[w] = e
+         if not self._onQueue[w]:
+           self_queue.append(w) # enqueue(w)
+           self._onQueue[w] = True
+      if self._cost%G.V() == 0:
         self.findNegativeCycle()
         if self.hasNegativeCycle(): return  # found a negative cycle
+      self._cost += 1
 
   # Is there a negative cycle reachable from the source vertex <tt>s</tt>?
-  def hasNegativeCycle(self): return cycle is not None
+  def hasNegativeCycle(self): return cycle is not None # O(k)
 
   # Returns a negative cycle reachable from the src s, or None if there is no such cycle.
-  def negativeCycle(self): return cycle
+  def negativeCycle(self): return cycle # O(# edges returned)
 
   def _findNegativeCycle(self):
     """by finding a cycle in predecessor graph"""
-    V = len(self._)
+    V = len(self._edgeTo)
     spt = EdgeWeightedDigraph(V)
     for v in range(V):
-      if self._[v] is not None:
-         spt.addEdge(self._[v])
+      if self._edgeTo[v] is not None:
+         spt.addEdge(self._edgeTo[v])
 
-    EdgeWeightedDirectedCycle finder = new EdgeWeightedDirectedCycle(spt)
+    finder = EdgeWeightedDirectedCycle(spt)
     cycle = finder.cycle()
 
-  def distTo(self, v):
+  def distTo(self, v): # O(k)
     """Returns the length of a shortest path from the source vertex s to vertex v."""
     if self.hasNegativeCycle():
       raise Exception("Negative cost cycle exists")
     return self._distTo[v]
 
   # Is there a path from the source <tt>s</tt> to vertex <tt>v</tt>?
-  def hasPathTo(self, v): return self._distTo[v] < sel.Inf
+  def hasPathTo(self, v): return self._distTo[v] < sel.Inf # O(k)
 
-  def pathTo(self, v):
+  def pathTo(self, v): # O(# edges returned)
     """Returns a shortest path from the source s to vertex v."""
     if self.hasNegativeCycle():
         raise Exception("Negative cost cycle exists")
-    if not hasPathTo(v): return None
+    if not self.hasPathTo(v): return None
     path = [] # new Stack<DirectedEdge>()
-    e = self._[v]
+    e = self._edgeTo[v]
     while e is not None: 
       path.append(e) # push(e)
-      e = self._[e.from()]
+      e = self._edgeTo[e.get_from()]
     return path
 
   # check optimality conditions: either 
@@ -161,6 +130,23 @@ class BellmanFordSP(object):
       prt.write("Satisfies optimality conditions")
       prt.write()
       return True
+
+# NEGATIVE WEIGHTS (21:01)
+
+# PROPOSITION: Dynamic programming algorithm computes SPT in any 
+# edge-weighted digraph with no negative cycles in time proportional to E*V
+#
+# PROOF IDEA: After pass, i, found shortest path containing at most i edges. (In book)
+
+# OBSERVATION: If distTo[v] does not change during pass i, no need to relax any 
+# edge pointing from v in pass i+1.
+#
+# FIFO IMPLEMENTATION: Maintain QUEUE of vertices whose distTo[] changed
+# ***Be careful to keep at most one copy of each vertex on queue (why?)
+#
+# OVERALL EFFECT:
+#  * The running time is still proportional to E*V in worst case
+#  * But much faster than that in practice
 
 # Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python port
