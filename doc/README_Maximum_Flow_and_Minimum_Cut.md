@@ -1,8 +1,8 @@
-# Maximum Flow and Minimum Cut
+# [Maximum Flow and Minimum Cut](http://algs4.cs.princeton.edu/64maxflow)
 
 ## Code
-  * **Introduction to Maxflow**: code.py
-  * **Ford-Fulkerson Algorithm**: code.py
+  * **Introduction to Mincut and Maxflow**    
+  * **Ford-Fulkerson Algorithm**: FordFulkerson.py uses FlowEdge.py and FlowNetwork.py
   * **Maxflow-mincut Theorem**: code.py
   * **Running Time Analysis**: code.py
   * **Java Implementation**: code.py
@@ -15,5 +15,5 @@
 ### [ex1](#table-of-contents-for-examples)
 1. Run Example
 
-Copyright (C) 2002-2015 Robert Sedgewick and Kevin Wayne.  All rights reserved.
+Copyright (C) 2002-2015 Robert Sedgewick and Kevin Wayne.  All rights reserved.    
 Copyright (C) 2014-2015 DV Klopfenstein. All rights reserved. Python translation.

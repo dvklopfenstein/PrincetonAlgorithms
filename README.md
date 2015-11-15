@@ -196,9 +196,9 @@ Key   4 GRAPHS                    Description                         DATA
  .   – LRS                    longest repeated substring  tinyTale.txt mobydick.txt
  .   – KWIK                   keyword in context          tale.txt
  .   – LongestCommonSubstring longest common substring    tale.txt mobydick.txt
- . 6.4 FordFulkerson          max flow / min cut          tinyFN.txt
- .   – FlowNetwork            capacitated network         –
- .   – FlowEdge               capacitated edge with flow  –
+ p 6.4 FordFulkerson          max flow / min cut          tinyFN.txt
+ p   – FlowNetwork            capacitated network         –
+ p   – FlowEdge               capacitated edge with flow  –
  .   – BipartiteMatching      bipartite matching          –
  .   – AssignmentProblem      weighted bipartite matching –
  .   – Simplex                simplex method              –
