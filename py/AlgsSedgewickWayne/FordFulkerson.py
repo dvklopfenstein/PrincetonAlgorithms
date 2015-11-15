@@ -170,5 +170,25 @@ class FordFulkerson(object):
       return True
 
 
+# MAXFLOW PROBLEM
+# 
+# DEF: An **st-flow (flow)** is an assignment of values to the edges such that:
+#   * Capacity constaint: 0 <= edge's flow <= edge's capacity
+#   * Local equilibrium: inflow = outflow at every vertex (except s and t).
+#
+# DEF: The **value** of a flow is the inflow at t.
+#   (We assume no edge points to s or from t)
+#
+# MAXIMUM ST-FLOW (MAXFLOW) PROBLEM. Find a flow of maximum value.
+
+# SUMMARY
+# 
+# INPUT: Aweighted digraph, source vertex s, and target vertex t.
+# MINCUT PROBLEM: Find a cut of minimum capacity.
+# MAXFLOW PROBLEM: Find a flow of maximum value.
+#
+# REMARKABLE FACT: These two problems are dual!:
+# If you solve one problem, you solve the other
+
 # Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python port
