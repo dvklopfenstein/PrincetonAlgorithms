@@ -1,7 +1,12 @@
 # Maximum Flow and Minimum Cut
 
 ## Code
-  * **Code**: code.py
+  * **Introduction to Maxflow**: code.py
+  * **Ford-Fulkerson Algorithm**: code.py
+  * **Maxflow-mincut Theorem**: code.py
+  * **Running Time Analysis**: code.py
+  * **Java Implementation**: code.py
+  * **Maxflow Applications**: code.py
 
 ## Table of Contents for Examples
   1. [Run Example](#ex1)

@@ -10,6 +10,7 @@ def main():
   FOUT = sys.stdout if fout is None else open(fout, 'w')
   #FOUT.write("#!/usr/bin/env python\n")
   with open(fin) as FIN:
+    FIN.write("\n# TBD Finish Python port\n\n")
     for line in FIN:
       if chk_com(FOUT, r'^(\s*)\/\*(.*)$', line): continue
       if chk_com(FOUT, r'^(\s*)\*(.*)$',   line): continue

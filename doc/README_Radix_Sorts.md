@@ -1,7 +1,12 @@
 # Radix Sorts
 
 ## Code
-  * **Code**: code.py
+  * **Strings in Java**: code.py
+  * **Key-Indexed Counting**: code.py
+  * **LSD Radix Sort**: code.py
+  * **MSD Radix Sort**: code.py
+  * **3-way Radix Quicksort**: code.py
+  * **Suffic Arrays**: code.py
 
 ## Table of Contents for Examples
   1. [Run Example](#ex1)
