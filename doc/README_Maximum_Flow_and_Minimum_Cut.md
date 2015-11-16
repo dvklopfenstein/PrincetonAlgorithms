@@ -2,12 +2,13 @@
 
 ## Code
   * **Introduction to Mincut and Maxflow**    
-  * **Ford-Fulkerson Algorithm**: FordFulkerson.py uses FlowEdge.py and FlowNetwork.py
+  * **Ford-Fulkerson Algorithm**
   * **Maxflow-mincut Theorem**
   * **Running Time Analysis**
-  * **Java Implementation**:
+  * **Python Implementation**:
     [FlowEdge.py](../py/AlgsSedgewickWayne/FlowEdge.py), 
-    FlowNetwork.py
+    FlowNetwork.py, and
+    FordFulkerson.py
   * **Maxflow Applications**: code.py
 
 ## Table of Contents for Examples

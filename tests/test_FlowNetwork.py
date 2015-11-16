@@ -4,7 +4,7 @@ import sys
 from AlgsSedgewickWayne.FlowNetwork import FlowNetwork
 
 def main(prt=sys.stdout):
-  # Unit tests the FlowNetwork data type.
+  """Unit tests the FlowNetwork data type."""
   a = new In(args[0])
   G = FlowNetwork(a)
   prt.write(G)

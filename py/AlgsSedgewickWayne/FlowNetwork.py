@@ -15,54 +15,39 @@
  #  All operations take constant time (in the worst case) except
  #  iterating over the edges incident to a given vertex, which takes
  #  time proportional to the number of such edges.
+
+from AlgsSedgewickWayne.FlowEdge import FlowEdge
+import random
+
 class FlowNetwork(object):
-  private static final String NEWLINE = System.getProperty("line.separator")
 
-  private final V
-  private E
-  private Bag<FlowEdge>[] adj
-  
-     # Initializes an empty flow network with <tt>V</tt> vertices and 0 edges.
-     # param V the number of vertices
-  public FlowNetwork(int V):
-      if V < 0) raise new IllegalArgumentException("Number of vertices in a Graph must be nonnegative")
-      self.V = V
-      self.E = 0
-      adj = (Bag<FlowEdge>[]) new Bag[V]
-      for (int v = 0; v < V; v += 1)
-          adj[v] = new Bag<FlowEdge>()
+  def _init_V(self, V):
+    """Initializes an empty flow network with V vertices and 0 edges."""
+    if V < 0: raise Exception("Number of vertices in a Graph must be nonnegative")
+    self._V = V
+    self._E = 0
+    self._adj = [set() for v in range(V)]
 
-     # Initializes a random flow network with <tt>V</tt> vertices and <em>E</em> edges.
-     # The capacities are integers between 0 and 99 and the flow values are zero.
-     # param V the number of vertices
-     # param E the number of edges
-  public FlowNetwork(int V, E):
-      self(V)
-      if E < 0) raise new IllegalArgumentException("Number of edges must be nonnegative")
-      for (int i = 0; i < E; i += 1):
-          v = StdRandom.uniform(V)
-          w = StdRandom.uniform(V)
-          double capacity = StdRandom.uniform(100)
-          addEdge(new FlowEdge(v, w, capacity))
+  # Initializes a random flow network with <tt>V</tt> vertices and <em>E</em> edges.
+  # The capacities are integers between 0 and 99 and the flow values are zero.
+  def _init_VE(self, V, E):
+    self._init_V(V)
+    if E < 0: raise Exception("Number of edges must be nonnegative")
+    for i in range(E):
+      v = StdRandom.uniform(V)
+      w = StdRandom.uniform(V)
+      capacity = StdRandom.uniform(100)
+      self.addEdge(FlowEdge(v, w, capacity))
 
-     # Initializes a flow network from an input stream.
-     # The format is the number of vertices <em>V</em>,
-     # followed by the number of edges <em>E</em>,
-     # followed by <em>E</em> pairs of vertices and edge capacities,
-     # with each entry separated by whitespace.
-     # @param in the input stream
-  public FlowNetwork(In in):
-      self(in.readInt())
-      E = in.readInt()
-      if E < 0) raise new IllegalArgumentException("Number of edges must be nonnegative")
-      for (int i = 0; i < E; i += 1):
-          v = in.readInt()
-          w = in.readInt()
-          if v < 0 or v >= V) raise new IndexOutOfBoundsException("vertex " + v + " is not between 0 and " + (V-1))
-          if w < 0 or w >= V) raise new IndexOutOfBoundsException("vertex " + w + " is not between 0 and " + (V-1))
-          double capacity = in.readDouble()
-          addEdge(new FlowEdge(v, w, capacity))
-
+  def _init_arr(arr):
+    """Inits from an array structure representing a FlowNetwork."""
+    self._init_V(arr[0])
+    self._E = arr[1]
+    if E < 0: raise Exception("Number of edges must be nonnegative")
+    for v, w, capacity in arr[2:]:
+      if v < 0 or v >= self._V: raise Exception("vertex {} is not between 0 and {}".format(v, (V-1)))
+      if w < 0 or w >= self._V: raise Exception("vertex {} is not between 0 and {}".format(w, (V-1)))
+      self.addEdge(FlowEdge(v, w, capacity))
 
   def V(self): return self._V # Returns the number of vertices in the edge-weighted graph.
   def E(self): return self._E # Returns the number of edges in the edge-weighted graph.
@@ -96,7 +81,6 @@ class FlowNetwork(object):
           bag.add(e)
     return bag
 
-
   def __str__(self):
     s = ["{} {}\n".format(self._V, self_E)]
     for v in range(self._V):
@@ -105,14 +89,6 @@ class FlowNetwork(object):
         if e.get_to() != v: s.append("{}  ".format(e))
       s.append("\n")
     return ''.join(s)
-
-    #*
-     # Unit tests the <tt>FlowNetwork</tt> data type.
-     #/
-  def main(String[] args):
-      In in = new In(args[0])
-      FlowNetwork G = new FlowNetwork(in)
-      prt.write(G)
 
 # Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python port

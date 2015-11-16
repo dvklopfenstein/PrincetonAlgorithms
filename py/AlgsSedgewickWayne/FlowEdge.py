@@ -1,5 +1,4 @@
 """Capacitated edge with a flow in a flow network."""
-# TBD Finish Python port
 
 class FlowEdge(object):
 

@@ -73,34 +73,33 @@ class FordFulkerson(object):
     if v < 0 or v >= V:
       raise Exception("vertex {} is not between 0 and {}\n".format(v, V-1))
 
-
   # is there an augmenting path? 
   # if so, upon termination edgeTo[] will contain a parent-link representation of such a path
   # self implementation finds a shortest augmenting path (fewest number of edges),
   # which performs well both in theory and in practice
-  def _hasAugmentingPath(FlowNetwork G, s, t):
-    edgeTo = new FlowEdge[G.V()]
-    marked = new boolean[G.V()]
+  def _hasAugmentingPath(self, G, s, t): # G id FlowNetwork
+    edgeTo = [None for i in rante(G.V())] # Will contain FlowEdges
+    marked = [False for i in range(G.V())]
 
-    # breadth-first search
-    Queue<Integer> queue = new Queue<Integer>()
-    queue.enqueue(s)
+    # breadth-first search (note: Can also use other search algorithms can also be adapted)
+    queue = cx.deque() # Queue
+    queue.append(s) # enqueue(s)
     marked[s] = True
-    while (!queue.isEmpty() and !marked[t]):
-      v = queue.dequeue()
+    while queue and not marked[t]:
+      v = queue.popleft() # dequeue()
 
       for e in G.adj(v): # Loop thru FLowEdges
         w = e.other(v)
 
         # if residual capacity from v to w
-        if e.residualCapacityTo(w) > 0:
-            if not self._marked[w]:
-                self._edgeTo[w] = e
-                self._marked[w] = True
-                queue.enqueue(w)
+        if e.residualCapacityTo(w) > 0: # Have a way to get to w
+          if not self._marked[w]: # Have not been there yet
+            edgeTo[w] = e
+            marked[w] = True
+            queue.append(w) # enqueue(w)
 
     # is there an augmenting path?
-    return self._marked[t]
+    return marked[t] # Is t reachable from s in residual network?
 
 
 
@@ -223,6 +222,18 @@ class FordFulkerson(object):
 # EXPLANATION: The integrality theorem asserts that there exists a maxflow in which 
 # the flow on each edge is an integer. This impolies that the value of the
 # maxflow is an integer.
+
+#-----------------------------------------------------------------------
+# JAVA IMPLEMENTATION (14:29)
+
+# QUESTION: Suppose that Edge e is an edge returned by G.adj(v), with w = e.other(v) and
+# e.residualCapacityTo(w) > 0. Which of the following myst be true?
+#     e = v -> w is a forward edge that is not full
+#     e = v -> w is a backward edge that is not empty
+# YES e = v -> w is either a forward edge that is not full or a backward edge that is not empty.
+#     None of the above
+# EXPLANATION: e = v -> w is an edge in the residual graph, which means that either it is
+# a forward edge that is not full or a backward edge that is not empty.
 
 
 # Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
