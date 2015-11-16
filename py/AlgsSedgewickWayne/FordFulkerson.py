@@ -235,6 +235,22 @@ class FordFulkerson(object):
 # EXPLANATION: e = v -> w is an edge in the residual graph, which means that either it is
 # a forward edge that is not full or a backward edge that is not empty.
 
+#-----------------------------------------------------------------------
+# MAXFLOW AND MINCUT APPLICATIONS (22:20)
+#  * Data mining
+#  * Open-pit mining
+#  * Bipartite matching
+#  * Network reliability
+#  * Baseball elimination
+#  * Image segmentation
+#  * Betwork connectivity
+#  * Distributed computing
+#  * Egaltarian stable matching
+#  * Security of statistical data.
+#  * Mutli-camera scene reconstruction
+#  * Sensor placment for homeland security
+#  ...
+
 
 # Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python port
