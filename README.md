@@ -197,7 +197,7 @@ Key   4 GRAPHS                    Description                         DATA
  .   – KWIK                   keyword in context          tale.txt
  .   – LongestCommonSubstring longest common substring    tale.txt mobydick.txt
  p 6.4 FordFulkerson          max flow / min cut          tinyFN.txt
- p   – FlowNetwork            capacitated network         –
+ P   – FlowNetwork            capacitated network         –
  p   – FlowEdge               capacitated edge with flow  –
  .   – BipartiteMatching      bipartite matching          –
  .   – AssignmentProblem      weighted bipartite matching –

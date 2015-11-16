@@ -170,6 +170,7 @@ class FordFulkerson(object):
       return True
 
 
+#-----------------------------------------------------------------------
 # MAXFLOW PROBLEM
 # 
 # DEF: An **st-flow (flow)** is an assignment of values to the edges such that:
@@ -189,6 +190,40 @@ class FordFulkerson(object):
 #
 # REMARKABLE FACT: These two problems are dual!:
 # If you solve one problem, you solve the other
+
+#-----------------------------------------------------------------------
+# RUNNING TIME ANALYSIS (8:49)
+
+# FORD-FULKERSON ALGORITHM
+# 1. Start with 0 flow.
+# 2. While there exists an augmenting path:
+#    * find an augmenting path
+#    * compute bottleneck capacity
+#    * increase flow on that path by bottleneck capcity
+#
+# QUESTIONS:
+#   * How to compute a mincut? EASY.
+#   * How to find an augmenting path? BFS WORKS WELL. (Many ways, though)
+#   * If FF terminates, does it always compute a maxflow? YES
+#   * Does DD always terminate?
+#     => yes, provided edge capacities are integers (or augmenting paths are chosen carefully)
+#     * If so, after how many augmentations?
+#       -> requires clever analysis
+
+# FF W/INTEGER CAPACITIES 02:05
+# IMPORTANT SPECIAL CASE: Edge capacities are integers betwen 1 and U.
+# INVARIANT: The flow is **integer-values** throughout FF.
+# ...
+# INTEGRALITY THEOREM: There exists an integer-valued maxflow (and FF finds one!).
+#   * important for some applications (stay tuned)
+# ...
+
+# QUESTION: If all the edge capacities are integers, the value of the maxflow is:
+# ANSWER: integer (not rational number, real number, imaginary number)
+# EXPLANATION: The integrality theorem asserts that there exists a maxflow in which 
+# the flow on each edge is an integer. This impolies that the value of the
+# maxflow is an integer.
+
 
 # Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python port
