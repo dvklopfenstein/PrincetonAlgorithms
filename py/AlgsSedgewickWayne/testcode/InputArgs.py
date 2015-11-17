@@ -8,6 +8,7 @@ import re
 def cli_get_array(seqstr=None):
   """Command-line interface: reads data from arg, stdin, stream, or files."""
   L = len(sys.argv)
+  print seqstr
   if seqstr is not None and L == 1:
     if isinstance(seqstr, int):
       return seqstr

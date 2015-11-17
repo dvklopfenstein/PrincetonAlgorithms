@@ -2,6 +2,7 @@
 
   * [**Sorting Summary**](#sorting-summary)
   * [**ST(Search Tree) implementations**](#stsearch-tree-implementations)
+  * [Time complexity for Python structures](https://wiki.python.org/moin/TimeComplexity)
 
 ## Sorting Summary    
 

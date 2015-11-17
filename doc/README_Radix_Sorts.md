@@ -1,10 +1,10 @@
-# Radix Sorts
+# [Radix Sorts](http://algs4.cs.princeton.edu/51radix)
 
 ## Code
-  * **Strings in Java**: code.py
-  * **Key-Indexed Counting**: code.py
-  * **LSD Radix Sort**: code.py
-  * **MSD Radix Sort**: code.py
+  * **Strings in Java**
+  * **Key-Indexed Counting**
+  * **LSD Radix Sort**: LSD.py
+  * **MSD Radix Sort**: MSD.py
   * **3-way Radix Quicksort**: code.py
   * **Suffic Arrays**: code.py
 

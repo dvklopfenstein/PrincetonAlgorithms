@@ -166,8 +166,8 @@ Key   4 GRAPHS                    Description                         DATA
  - ---: :----------- :---------------------------------- :---------------------
  .    – Alphabet     alphabet                            –
  .    – Count        alphabet client                     abra.txt pi.txt
- .  5.1 LSD          LSD radix sort                      words3.txt
- .  5.2 MSD          MSD radix sort                      shells.txt
+ p  5.1 LSD          LSD radix sort                      words3.txt
+ p  5.2 MSD          MSD radix sort                      shells.txt
  .  5.3 Quick3string 3-way string quicksort              shells.txt
  .  5.4 TrieST       multiway trie symbol table          shellsST.txt
  .    – TrieSET      multiway trie set                   shellsST.txt
