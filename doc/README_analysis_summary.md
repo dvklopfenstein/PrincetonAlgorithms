@@ -13,6 +13,7 @@
 | Merge       |   | Y | N lg N |  N lg N |  N lg N |   N  | N lg N guarantee, stable
 | Quick       | Y |   | N^2/2  | 2N ln N |  N lg N |c lg N| N lg N probabilistic guarantee, fastest in practice
 | 3-way quick | Y |   | N^2/2  | 2N ln N |       N |      | better w/duplicate keys
+| heapsort    | ? | N |2N lg N | 2N ln N |       N |   1  | 
 | ???         | Y | Y | N lg N |  N lg N |  N lg N |      | holy sorting grail
 
 * **I** => Inplace
