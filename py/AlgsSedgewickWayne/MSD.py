@@ -145,6 +145,23 @@
       a[i] = a[j]
       a[j] = temp
 
+# -------------------------------------------------------
+# MSD RADIX SORT (13:41)
+#
+# DISADVANTAGES OF MSD STRING SORT
+#   * Accesses memory "randomly" (cache inefficient).
+#   * Inner loop has a lot of instructions.
+#   * Extra space for count[]
+#   * Extra space for aux[]
+
+# QUESTION: What is the primary reason NOT to use the MSD radix sort
+# implementation given when sorting an array of strings?
+# ANSWER: Uses too much space for count[] arrays.
+# EXPLANATION: The main defect with the given MSD radix sort implementation
+# is that it uses too much space to store all of the count[] arrays.
+# Our MSD radix sort implementation is stable; handles variable-length strings;
+# and reuses the aux[] array between recursive calls.
+
 
 # Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python port
