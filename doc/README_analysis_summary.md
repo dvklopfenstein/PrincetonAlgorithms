@@ -21,6 +21,8 @@
 
 * **I** => Inplace
 * **S** => Stable
+* **D** => function-call stack depth (length of longest prefix match)
+* **W** => Number of keys
 
 TBD: Quicksort worst/avg = 1.39 N lg N ?
 TBD: lg or ln?
