@@ -15,6 +15,8 @@
 | Quick       | Y |   | N^2/2  | 2N ln N |  N lg N |c lg N| N lg N probabilistic guarantee, fastest in practice
 | 3-way quick | Y |   | N^2/2  | 2N ln N |       N |      | better w/duplicate keys
 | heapsort    | ? | N |2N lg N | 2N lg N |       N |   1  | 
+| LSD         | ? | Y |  2 N W |  2 N W  |       ? | N+R  | 
+| MSD         | ? | Y |  2 N W |N log_R N|       ? |N+ D R| 
 | ???         | Y | Y | N lg N |  N lg N |  N lg N |      | holy sorting grail
 
 * **I** => Inplace
