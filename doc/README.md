@@ -1,5 +1,5 @@
 # Schedule
-Note: There are no Progamming Assignment Solutions on this site.
+Note: There are no Programming Assignment Solutions on this site.
 
   * [Algorithms I on Coursera](#algorithms-i-on-coursera)
   * [Algorithms II on Coursera](#algorithms-ii-on-coursera)
