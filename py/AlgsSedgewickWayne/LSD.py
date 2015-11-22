@@ -4,7 +4,7 @@
 import collections as cx
 import numpy as np
 
-def sort(a):
+def key_idx_cnt(a):
   """Rearranges the array of W-character strings in ascending order."""
   N = len(a)
   R = 256   # extend ASCII alphabet size

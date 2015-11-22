@@ -48,17 +48,17 @@ Note: There are no Progamming Assignment Solutions on this site.
 * **Week 1 Suggested Readings**: Section 4.1 and 4.2 in [*Algorithms, 4th edition*](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1441459738&sr=1-1&keywords=sedgewick&refinements=p_n_feature_browse-bin%3A2656020011&pebp=1441459739425&perid=0C83SQQ1YFJ62VWHF9C0)
   * [Undirected Graphs](README_Undirected_Graphs.md)     
   * [Directed Graphs](README_Directed_Graphs.md)    
-  * Programming Assignment 1: **WordNet**    
+  * Programming Assignment 1: [**WordNet**](http://htmlpreview.github.com/?https://github.com/dvklopfenstein/PrincetonAlgorithms/blob/master/thirdparty/a2_hw1/COS_226_Programming_Assignment_1_WordNet.html)    
 
 * **Week 2 Suggested Readings**: Section 4.3 and 4.4 in [*Algorithms, 4th edition*](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1441459738&sr=1-1&keywords=sedgewick&refinements=p_n_feature_browse-bin%3A2656020011&pebp=1441459739425&perid=0C83SQQ1YFJ62VWHF9C0)
   * [Minimum Spanning Trees](README_Minimum_Spanning_Trees.md)
   * [Shortest Paths](README_Shortest_Paths.md)
-  * Programming Assignment 2: **Content-Aware Resizing**
+  * Programming Assignment 2: [**Content-Aware Resizing**](http://htmlpreview.github.com/?https://github.com/dvklopfenstein/PrincetonAlgorithms/blob/master/thirdparty/a2_hw2/Programming_Assignment_2_Seam_Carving.html)
 
 * **Week 3 Suggested Readings**: Section 6.4 (pp. 886-902) and 5.1 in [*Algorithms, 4th edition*](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1441459738&sr=1-1&keywords=sedgewick&refinements=p_n_feature_browse-bin%3A2656020011&pebp=1441459739425&perid=0C83SQQ1YFJ62VWHF9C0)
   * [Maximum Flow and Minimum Cut](README_Maximum_Flow_and_Minimum_Cut.md)
   * [Radix Sorts](README_Radix_Sorts.md)
-  * Programming Assignment 3: **Baseball Elimination**
+  * Programming Assignment 3: [**Baseball Elimination**](http://htmlpreview.github.com/?https://github.com/dvklopfenstein/PrincetonAlgorithms/blob/master/thirdparty/a2_hw3/Programming_Assignment_3_Baseball_Elimination.html)
 
 * **Week 4**: Break
 

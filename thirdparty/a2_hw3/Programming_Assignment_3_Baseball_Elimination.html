@@ -1,0 +1,362 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!-- saved from url=(0064)http://coursera.cs.princeton.edu/algs4/assignments/baseball.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>
+Programming Assignment 3: Baseball Elimination
+</title></head>
+
+<body>
+<h2>Programming Assignment 3: Baseball Elimination</h2>
+
+<p>
+Given the standings in a sports division at some point during the season,
+determine which teams have been mathematically eliminated from
+winning their division.
+
+</p><p>
+<strong>The baseball elimination problem.</strong>
+&nbsp;
+In the
+<a href="http://riot.ieor.berkeley.edu/~baseball/">baseball elimination problem</a>,
+there is a division consisting of <em>N</em> teams.
+At some point during the season, team <em>i</em> has
+<tt>w[i]</tt> wins, <tt>l[i]</tt> losses, <tt>r[i]</tt> remaining games,
+and <tt>g[i][j]</tt> games left to play against team <em>j</em>.
+A team is mathematically eliminated if it cannot possibly finish the
+season in (or tied for) first place.
+The goal is to determine exactly which teams are mathematically eliminated.
+For simplicity, we assume that no games end in a tie (as is the case in Major League Baseball)
+and that there are no rainouts (i.e., every scheduled game is played).
+
+</p><p>
+The problem is not as easy as many sports writers would have you
+believe, in part because the answer depends not only on the
+number of games won and left to play, but also on the
+schedule of remaining games. To see the complication,
+consider the following scenario:
+
+</p><p>
+</p><blockquote><pre> 
+                w[i] l[i] r[i]        g[i][j]
+i  team         wins loss left   Atl Phi NY  Mon
+------------------------------------------------
+0  Atlanta       83   71    8     -   1   6   1
+1  Philadelphia  80   79    3     1   -   0   2
+2  New York      78   78    6     6   0   -   0
+3  Montreal      77   82    3     1   2   0   -
+</pre></blockquote>
+
+<p>
+Montreal is mathematically
+eliminated since it can finish with at most 80 wins and
+Atlanta already has 83 wins. This is the simplest reason
+for elimination. However, there can be more complicated
+reasons. For example, Philadelphia is also mathematically
+eliminated. It can finish the season with as many as 83 wins,
+which appears to be enough to tie Atlanta. But this would
+require Atlanta to lose all of its remaining games, including
+the 6 against New York, in which 
+case New York would finish with 84 wins.
+We note that New York is not yet mathematically eliminated
+despite the fact that it has fewer wins than Philadelphia.
+
+</p><p>
+It is sometimes not so easy for a sports writer to explain why
+a particular team is mathematically eliminated.
+Consider the following scenario from the
+American League East on August 30, 1996:
+
+
+</p><p>
+</p><blockquote><pre>
+                w[i] l[i] r[i]          g[i][j]
+i  team         wins loss left   NY Bal Bos Tor Det
+---------------------------------------------------
+0  New York      75   59   28     -   3   8   7   3
+1  Baltimore     71   63   28     3   -   2   7   7
+2  Boston        69   66   27     8   2   -   0   3
+3  Toronto       63   72   27     7   7   0   -   3
+4  Detroit       49   86   27     3   7   3   3   -
+</pre></blockquote>
+<p>
+
+It might appear that Detroit has a remote chance
+of catching New York and winning
+the division because Detroit can finish with as many as 76 wins if
+they go on a 27-game winning steak, which
+is one more than New York would have if they go on a 28-game losing streak.
+Try to convince yourself that Detroit is already mathematically eliminated.
+Here's one <a href="http://riot.ieor.berkeley.edu/~baseball/detroit.html">
+ad hoc explanation</a>; we will present a simpler explanation below.
+
+
+</p><p>
+<strong>A maxflow formulation.</strong>
+&nbsp;
+We now solve the baseball elimination problem by reducing it to the
+maxflow problem. To check whether 
+team <em>x</em> is eliminated, we consider two cases.
+
+</p><ul>
+<p></p><li><em>Trivial elimination.</em>
+If the maximum number of games team <em>x</em> can win is less than
+the number of wins of some other team <em>i</em>, then
+team <em>x</em> is trivially eliminated (as is Montreal in the example above).
+That is, if <tt>w[x]</tt> + <tt>r[x]</tt> &lt; <tt>w[i]</tt>, then
+team <em>x</em> is mathematically eliminated.
+
+<p></p></li><li><em>Nontrivial elimination.</em>
+Otherwise, we create a flow network and solve a maxflow problem in it.
+In the network, feasible integral
+flows correspond to outcomes of the remaining schedule.
+There are vertices corresponding to teams (other than team <em>x</em>) and to
+remaining divisional games (not involving team <em>x</em>).
+Intuitively, each unit of flow in the network corresponds to a remaining 
+game. As it flows through the network from <em>s</em> to <em>t</em>,
+it passes from a game vertex,
+say between teams <em>i</em> and <em>j</em>, then through one of the
+team vertices <em>i</em> or <em>j</em>, classifying this game as
+being won by that team.
+
+<p>
+
+More precisely, the flow network includes the following edges and capacities.
+</p><ul>
+<p></p><li>
+We connect an artificial source vertex <em>s</em> to
+each game vertex <em>i</em>-<em>j</em> and set its capacity to <tt>g[i][j]</tt>.
+If a flow uses all <tt>g[i][j]</tt> units of capacity on this edge,
+then we interpret this as playing all of these games, with the wins distributed
+between the team vertices <em>i</em> and <em>j</em>.
+
+<p></p></li><li>
+We connect each game vertex <em>i</em>-<em>j</em> with the two
+opposing team vertices to ensure that one of the two teams earns a win.
+We do not need to restrict the amount of flow on such edges.
+
+<p></p></li><li>
+Finally, we connect each team vertex to an artificial sink vertex <em>t</em>.
+We want to know if there is some way of completing all the games so that team 
+<em>x</em> ends up winning at least as many games as team <em>i</em>. Since
+team <em>x</em> can win as many as <tt>w[x] + r[x]</tt> games, we prevent
+team <em>i</em> from winning more than that many games in total, by 
+including an edge from team vertex <em>i</em> to the 
+sink vertex with capacity <tt>w[x] + r[x] - w[i]</tt>.
+</li></ul>
+
+<p>
+If all edges in the maxflow that are pointing from <em>s</em> are full,
+then this corresponds to assigning winners to all of
+the remaining games in such a way that no team wins more games than <em>x</em>.
+If some edges pointing from <em>s</em> are not full,
+then there is no scenario in which team <em>x</em> can win the division.
+In the flow network below Detroit is team <em>x = 4</em>.
+
+</p><center>
+<img src="baseball.png">
+</center>
+
+<p>
+<strong>What the min cut tells us.</strong>
+&nbsp;
+By solving a maxflow problem, we can determine whether a given team
+is mathematically eliminated. We would also like to 
+<em>explain</em> the reason for the team's elimination to a friend 
+in nontechnical terms (using only grade-school arithmetic).
+Here's such an explanation for Detroit's
+elimination in the American League East example above.
+With the best possible luck, Detroit finishes the season with
+49 + 27 = 76 wins.
+Consider the subset of teams <em>R</em> = { New York, Baltimore, Boston, Toronto }.
+Collectively, they already have 75 + 71 + 69 + 63 = 278 wins; there are also 
+3 + 8 + 7 + 2 + 7  = 27 remaining games among them, so these four teams
+must win at least an additional 27 games.
+Thus, on average, the teams in <em>R</em> win at least 305 / 4 = 76.25 games.
+Regardless of the outcome, one team in <em>R</em> will win at least
+77 games, thereby eliminating Detroit.
+
+</p></li></ul>
+<p>
+
+In fact, when a team is mathematically eliminated
+there always exists such a convincing
+<em>certificate of elimination</em>,
+where <em>R</em> is some subset of the other teams in the division.
+Moreover, you can always find such a subset <em>R</em> by choosing the
+team vertices on the source side of a min <em>s</em>-<em>t</em> cut in the 
+baseball elimination network.
+Note that although we solved a maxflow/mincut problem to find the subset <em>R</em>,
+once we have it, the argument for a team's elimination involves only grade-school algebra.
+
+</p><p>
+<strong>Your assignment.</strong>
+&nbsp;
+Write an immutable data type <tt>BaseballElimination</tt> that represents a sports division and determines
+which teams are mathematically eliminated by implementing the following API:
+
+</p><blockquote>
+<pre><b>public BaseballElimination(String filename)                    </b><font color="gray">// create a baseball division from given filename in format specified below</font>
+<b>public              int numberOfTeams()                        </b><font color="gray">// number of teams</font>
+<b>public Iterable&lt;String&gt; teams()                                </b><font color="gray">// all teams</font>
+<b>public              int wins(String team)                      </b><font color="gray">// number of wins for given team</font>
+<b>public              int losses(String team)                    </b><font color="gray">// number of losses for given team</font>
+<b>public              int remaining(String team)                 </b><font color="gray">// number of remaining games for given team</font>
+<b>public              int against(String team1, String team2)    </b><font color="gray">// number of remaining games between team1 and team2</font>
+<b>public          boolean isEliminated(String team)              </b><font color="gray">// is given team eliminated?</font>
+<b>public Iterable&lt;String&gt; certificateOfElimination(String team)  </b><font color="gray">// subset R of teams that eliminates given team; null if not eliminated</font>
+</pre>
+</blockquote>
+
+
+<p>
+The last six methods should throw a <tt>java.lang.IllegalArgumentException</tt>
+if one (or both) of the input arguments are invalid teams.
+
+
+</p><p>
+<strong>Input format.</strong>
+&nbsp;
+The input format is the number of teams in the division <em>N</em> followed by one line for each team.
+Each line contains the team name (with no internal whitespace characters), the number of wins, the number
+of losses, the number of remaining games, and the number of remaining games against each
+team in the division.
+
+For example, the input files
+<a href="http://coursera.cs.princeton.edu/algs4/testing/baseball/teams4.txt">teams4.txt</a>
+and
+<a href="http://coursera.cs.princeton.edu/algs4/testing/baseball/teams5.txt">teams5.txt</a>
+correspond to the two examples discussed above.
+
+</p><p>
+</p><blockquote><pre>% <b>more teams4.txt</b>
+4
+Atlanta       83 71  8  0 1 6 1
+Philadelphia  80 79  3  1 0 0 2
+New_York      78 78  6  6 0 0 0
+Montreal      77 82  3  1 2 0 0
+
+% <b>more teams5.txt</b>
+5
+New_York    75 59 28   0 3 8 7 3
+Baltimore   71 63 28   3 0 2 7 7
+Boston      69 66 27   8 2 0 0 3
+Toronto     63 72 27   7 7 0 0 3
+Detroit     49 86 27   3 7 3 3 0
+</pre></blockquote>
+
+You may assume that <em>N</em> ≥ 1 and that the input files
+are in the specified format and internally consistent.
+Note that a team's number of remaining games
+does not necessarily equal the sum of the remaining games against teams in its division
+because a team may play opponents outside its division.
+
+<p>
+<strong>Output format.</strong>
+&nbsp;
+Use the following <tt>main()</tt> function, which reads in a sports division
+from an input file and prints out whether each team
+is mathematically eliminated and a certificate of elimination for
+each team that is eliminated:
+
+</p><blockquote>
+<pre>public static void main(String[] args) {
+    BaseballElimination division = new BaseballElimination(args[0]);
+    for (String team : division.teams()) {
+        if (division.isEliminated(team)) {
+            StdOut.print(team + " is eliminated by the subset R = { ");
+            for (String t : division.certificateOfElimination(team)) {
+                StdOut.print(t + " ");
+            }
+            StdOut.println("}");
+        }
+        else {
+            StdOut.println(team + " is not eliminated");
+        }
+    }
+}
+</pre>
+</blockquote>
+
+Below is the desired output:
+
+<p>
+</p><blockquote><pre>% <b>java BaseballElimination teams4.txt</b>
+Atlanta is not eliminated
+Philadelphia is eliminated by the subset R = { Atlanta New_York }
+New_York is not eliminated
+Montreal is eliminated by the subset R = { Atlanta }
+
+% <b>java BaseballElimination teams5.txt</b>
+New_York is not eliminated
+Baltimore is not eliminated
+Boston is not eliminated
+Toronto is not eliminated
+Detroit is eliminated by the subset R = { New_York Baltimore Boston Toronto }
+
+</pre></blockquote>
+
+
+<p>
+<strong>Analysis (optional and ungraded).</strong>
+&nbsp;
+
+Analyze the worst-case memory usage and running time of your algorithm.
+
+</p><ul>
+
+<p></p><li> What is the order of growth of the amount of memory (in the worst case)
+that your program uses to determine whether <em>one</em> team is eliminated?
+In particular, how many vertices and edges are in the flow network
+as a function of the number of teams <em>N</em>?
+
+<p></p></li><li> What is the order of growth of the running time (in the worst case)
+of your program to determine whether <em>one</em> team is eliminated
+as a function of the number of teams <em>N</em>?
+In your calculation, assume that the order of growth of the running time 
+(in the worst case) to compute a maxflow in a network
+with <em>V</em> vertices and <em>E</em> edges is 
+<em>V</em> <em>E</em><sup>2</sup>.
+
+</li></ul>
+
+Also, use the output of your program to answer the following question:
+<ul>
+
+<p></p><li> Consider the sports division defined in
+<a href="http://coursera.cs.princeton.edu/algs4/testing/baseball/teams12.txt">teams12.txt</a>.
+Explain in nontechnical terms (using the results of certificate of 
+elimination and grade-school arithmetic) why Japan is mathematically 
+eliminated.
+</li></ul>
+
+
+<!--
+<p>
+<strong>Extra credit.</strong>
+&nbsp;
+Create and submit an interesting test input file 
+(in the specified format) and name it <tt>teams.txt</tt>.
+Your input file should contain one or more teams whose elimination
+would not be obvious to a sports writer.
+Ideally, your input file should be based on real-world data.
+-->
+
+<p>
+<strong>Submission.</strong>
+&nbsp;
+Submit <tt>BaseballElimination.java</tt> and any other supporting files
+(excluding those in <tt>algs4.jar</tt>).
+Your may not call any library functions other than those in <tt>java.lang</tt>,
+<tt>java.util</tt>, and <tt>algs4.jar</tt>.
+
+
+
+</p><address><small>
+This assignment was developed by Kevin Wayne.
+<br>Copyright © 2003.
+</small>
+</address>
+
+
+</body></html>

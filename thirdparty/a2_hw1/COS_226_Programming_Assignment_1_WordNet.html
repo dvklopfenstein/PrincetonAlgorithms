@@ -1,0 +1,402 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!-- saved from url=(0063)http://coursera.cs.princeton.edu/algs4/assignments/wordnet.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>
+COS 226 
+Programming Assignment 1: WordNet
+</title></head>
+
+<body>
+<h2>Programming Assignment 1: WordNet</h2>
+
+
+<p><em><font color="green">Note that, as of Fall 2015, you must use the 
+named package version of <tt>algs.jar</tt>. To access a class, you need an import
+statement, such as the ones below:</font></em><font color="green">
+
+</font></p><blockquote><font color="green">
+<pre>import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.Digraph;
+import edu.princeton.cs.algs4.StdIn;
+</pre></font></blockquote><font color="green">
+</font>
+
+
+<p> <a href="http://wordnet.princeton.edu/">WordNet</a> is a semantic lexicon for the
+English language that is used extensively by computational linguists
+and cognitive scientists; for example, it was a key component in IBM's
+<a href="http://en.wikipedia.org/wiki/Watson_(computer)">Watson</a>.
+WordNet groups words into sets of synonyms called <em>synsets</em> and 
+describes semantic relationships between them.
+One such relationship is the <em>is-a</em> relationship, which connects a <em>hyponym</em>
+(more specific synset) to a <em>hypernym</em> (more general synset).
+For example, a <em>plant organ</em> is a hypernym of <em>carrot</em>
+and <em>plant organ</em> is a hypernym of <em>plant root</em>.
+
+</p><p><b>The WordNet digraph.</b>
+Your first task is to build the wordnet digraph: each vertex <em>v</em> 
+is an integer that represents a synset, and each directed edge <em>v→w</em> 
+represents that <em>w</em> is a hypernym of <em>v</em>.
+The wordnet digraph is a <em>rooted DAG</em>: it is acyclic and has one vertex—the root—that
+is an ancestor of every other vertex.
+However, it is not necessarily a tree because a synset can have more than one
+hypernym. A small subgraph of the wordnet digraph is illustrated below.
+
+</p><p>
+</p><div style="text-align:center;"><img src="wordnet-fig1.png"></div>
+
+
+<p><b>The WordNet input file formats.</b>
+We now describe the two data files that you will use to create the wordnet digraph.
+The files are in <em>CSV format</em>: each line contains a sequence of fields,
+separated by commas.
+
+</p><ul>
+<li><em>List of noun synsets.</em>
+The file <tt>synsets.txt</tt> 
+lists all the (noun) synsets in WordNet.
+The first field is the <em>synset id</em> (an integer),
+the second field is the synonym set (or <em>synset</em>), and the
+third field is its dictionary definition (or <em>gloss</em>).
+For example, the line
+
+
+<p>
+</p><blockquote><pre>36,AND_circuit AND_gate,a circuit in a computer that fires only when all of its inputs fire  
+</pre></blockquote>
+
+means that the synset { <tt>AND_circuit</tt>, <tt>AND_gate</tt> }
+has an id number of 36 and it's gloss is
+<tt>a circuit in a computer that fires only when all of its inputs fire</tt>.
+The individual nouns that comprise a synset are separated
+by spaces (and a synset element is not permitted to contain a space).
+The <em>S</em> synset ids are numbered 0 through <em>S</em> − 1;
+the id numbers will appear consecutively in the synset file.
+
+</li>
+
+
+<p></p><li><em>List of hypernyms.</em>
+The file <tt>hypernyms.txt</tt> contains the hypernym relationships:
+The first field is a synset id; subsequent fields are the id numbers
+of the synset's hypernyms. For example, the following line
+
+<p></p><blockquote><pre>164,21012,56099
+</pre></blockquote>
+
+<p>
+
+means that the the synset <tt>164</tt> (<tt>"Actifed"</tt>) has two hypernyms:
+<tt>21012</tt> (<tt>"antihistamine"</tt>) and
+<tt>56099</tt> (<tt>"nasal_decongestant"</tt>),
+representing that Actifed is both an antihistamine and a nasal decongestant.
+The synsets are obtained from the corresponding lines in the file <tt>synsets.txt</tt>.
+
+</p><p></p><blockquote><pre>164,Actifed,trade name for a drug containing an antihistamine and a decongestant...
+21012,antihistamine,a medicine used to treat allergies...
+56099,nasal_decongestant,a decongestant that provides temporary relief of nasal...
+</pre></blockquote>
+
+
+
+</li></ul>
+
+
+<p><b>WordNet data type.</b>
+Implement an immutable data type <tt>WordNet</tt> with the following API:
+
+</p><blockquote>
+<pre><b>public class WordNet {</b>
+
+   <font color="gray">// constructor takes the name of the two input files</font>
+   <b>public WordNet(String synsets, String hypernyms)</b>
+
+   <font color="gray">// returns all WordNet nouns</font>
+   <b>public Iterable&lt;String&gt; nouns()</b>
+
+   <font color="gray">// is the word a WordNet noun?</font>
+   <b>public boolean isNoun(String word)</b>
+
+   <font color="gray">// distance between nounA and nounB (defined below)</font>
+   <b>public int distance(String nounA, String nounB)</b>
+
+   <font color="gray">// a synset (second field of synsets.txt) that is the common ancestor of nounA and nounB</font>
+   <font color="gray">// in a shortest ancestral path (defined below)</font>
+   <b>public String sap(String nounA, String nounB)</b>
+
+   <font color="gray">// do unit testing of this class</font>
+   <b>public static void main(String[] args)</b>
+<b>}</b>
+</pre></blockquote>
+
+<em>Corner cases.&nbsp;</em>
+All methods and the constructor should throw a  
+<tt>java.lang.NullPointerException</tt> if any argument is null.
+The constructor should throw a <tt>java.lang.IllegalArgumentException</tt>
+if the input does not correspond to a rooted DAG.
+The <tt>distance()</tt> and <tt>sap()</tt> methods
+should throw a <tt>java.lang.IllegalArgumentException</tt>
+unless both of the noun arguments are WordNet nouns.
+
+<p>
+<em>Performance requirements.&nbsp;</em>
+Your data type should use space linear in the input size
+(size of synsets and hypernyms files).
+The constructor should take time linearithmic (or better) in the input size.
+The method <tt>isNoun()</tt> should run in time logarithmic (or better) in
+the number of nouns.
+<!--
+The method <tt>glosses()</tt> should run in time logarithmic (or better) in
+the number of synsets and nouns, per gloss returned.
+-->
+The methods <tt>distance()</tt> and <tt>sap()</tt> should run in time linear in the
+size of the WordNet digraph.
+For the analysis, assume that the number of nouns per synset
+is bounded by a constant.
+
+
+</p><p><b>Shortest ancestral path.</b>
+An <em>ancestral path</em> between two vertices
+<em>v</em> and <em>w</em> in a digraph is a directed path from
+<em>v</em> to a common ancestor <em>x</em>, together with
+a directed path from <em>w</em> to the same ancestor <em>x</em>. 
+<!-- The two paths <code>v --&#62 x</code> and <code> w --&#62 x</code>
+do not share a vertex other than their common ancestor <code>x</code>.
+-->
+A <em>shortest ancestral path</em> is an ancestral path of minimum total length.
+For example, in the digraph at left
+(<a href="http://coursera.cs.princeton.edu/algs4/testing/wordnet/digraph1.txt">digraph1.txt</a>),
+the shortest ancestral path between
+3 and 11 has length 4 (with common ancestor 1).
+In the digraph at right (<a href="http://coursera.cs.princeton.edu/algs4/testing/wordnet/digraph2.txt">digraph2.txt</a>),
+one ancestral path between 1 and 5 has length 4
+(with common ancestor 5), but the shortest ancestral path has length 2
+(with common ancestor 0).
+
+</p><div style="text-align:center;"><img src="wordnet-sap.png"></div>
+
+
+<p><br><b>SAP data type.</b>
+Implement an immutable data type <tt>SAP</tt> with the following API:
+
+</p><blockquote><pre><b>public class SAP {</b>
+
+   <font color="gray">// constructor takes a digraph (not necessarily a DAG)</font>
+   <b>public SAP(Digraph G)</b>
+
+   <font color="gray">// length of shortest ancestral path between v and w; -1 if no such path</font>
+   <b>public int length(int v, int w)</b>
+
+   <font color="gray">// a common ancestor of v and w that participates in a shortest ancestral path; -1 if no such path</font>
+   <b>public int ancestor(int v, int w)</b>
+
+   <font color="gray">// length of shortest ancestral path between any vertex in v and any vertex in w; -1 if no such path</font>
+   <b>public int length(Iterable&lt;Integer&gt; v, Iterable&lt;Integer&gt; w)</b>
+
+   <font color="gray">// a common ancestor that participates in shortest ancestral path; -1 if no such path</font>
+   <b>public int ancestor(Iterable&lt;Integer&gt; v, Iterable&lt;Integer&gt; w)</b>
+
+   <font color="gray">// do unit testing of this class</font>
+   <b>public static void main(String[] args)</b>
+<b>}</b>
+
+</pre></blockquote>
+
+<p>
+<em>Corner cases.&nbsp;</em>
+All methods should throw a <tt>java.lang.NullPointerException</tt> if any argument is null.
+All methods should throw a <tt>java.lang.IndexOutOfBoundsException</tt> if any argument 
+vertex is invalid—not between <tt>0</tt> and <tt>G.V() - 1</tt>. 
+<!-- You may assume that the iterable arguments contain at least one integer. -->
+
+</p><p>
+<em>Performance requirements.&nbsp;</em>
+All methods (and the constructor) should take time at most
+proportional to <em>E</em> + <em>V</em>
+in the worst case, where <em>E</em> and <em>V</em> are the number of edges and vertices
+in the digraph, respectively.
+Your data type should use space proportional to <em>E</em> + <em>V</em>.
+
+</p><p><b>Test client.</b>
+The following test client takes the name of a digraph input file as
+as a command-line argument, constructs the digraph,
+reads in vertex pairs from standard input,
+and prints out the length of the shortest ancestral path between the two vertices
+and a common ancestor that participates in that path:
+
+</p><blockquote><pre>public static void main(String[] args) {
+    In in = new In(args[0]);
+    Digraph G = new Digraph(in);
+    SAP sap = new SAP(G);
+    while (!StdIn.isEmpty()) {
+        int v = StdIn.readInt();
+        int w = StdIn.readInt();
+        int length   = sap.length(v, w);
+        int ancestor = sap.ancestor(v, w);
+        StdOut.printf("length = %d, ancestor = %d\n", length, ancestor);
+    }
+}
+</pre></blockquote>
+
+Here is a sample execution:
+
+<blockquote><pre>% <b>more digraph1.txt</b>             % <b>java SAP digraph1.txt</b>
+13                              <b>3 11</b>
+11                              length = 4, ancestor = 1
+ 7  3                            
+ 8  3                           <b>9 12</b>
+ 3  1                           length = 3, ancestor = 5
+ 4  1
+ 5  1                           <b>7 2</b>
+ 9  5                           length = 4, ancestor = 0
+10  5
+11 10                           <b>1 6</b>
+12 10                           length = -1, ancestor = -1
+ 1  0
+ 2  0
+</pre></blockquote><p><b>Measuring the semantic relatedness of two nouns</b>.
+Semantic relatedness refers to the degree to which two concepts are related. Measuring 
+semantic relatedness is a challenging problem. For example, most of us agree that 
+<em>George Bush</em> and <em>John Kennedy</em> (two U.S. presidents)
+are more related than are <em>George Bush</em>
+and <em>chimpanzee</em> (two primates). However, not most of us agree that <em>George Bush</em> 
+and <em>Eric Arthur Blair</em> are related concepts. But if one is aware that <em>George 
+Bush</em> and <em>Eric Arthur Blair</em> (aka George Orwell) are both communicators, then it becomes clear 
+that the two concepts might be related.
+
+</p><p>
+We define the semantic relatedness
+of two wordnet nouns <em>A</em> and <em>B</em> as follows:
+
+
+</p><ul>
+
+<li> <em>distance(A, B)</em> = 
+distance is the minimum length of any ancestral path between
+any synset <em>v</em> of <em>A</em> and any synset <em>w</em> of <em>B</em>.
+
+</li></ul><p>
+This is the notion of distance that you will use to implement the
+<tt>distance()</tt> and <tt>sap()</tt> methods in the <tt>WordNet</tt> data type.
+
+
+
+</p><p><b>Outcast detection.</b>
+Given a list of wordnet nouns <em>A</em><sub>1</sub>, <em>A</em><sub>2</sub>,
+..., <em>A</em><sub><em>n</em></sub>, which noun
+is the least related to the others? To identify <em>an outcast</em>,
+<!-- compute the sum of the squares of the distance between each noun and every other one: -->
+compute the sum of the distances between each noun and every other one:
+
+<!--
+<blockquote>
+(<em>d</em><sub><em>i</em></sub>)<sup>2</sup> =
+(dist(<em>A</em><sub>i</sub>, <em>A</em><sub>1</sub>))<sup>2</sup> +
+(dist(<em>A</em><sub>i</sub>, <em>A</em><sub>2</sub>))<sup>2</sup> + ... + 
+(dist(<em>A</em><sub>i</sub>, <em>A</em><sub>n</sub>))<sup>2</sup>
+</blockquote>
+-->
+
+</p><blockquote>
+<em>d</em><sub><em>i</em></sub> &nbsp; = &nbsp;
+dist(<em>A</em><sub><em>i</em></sub>, <em>A</em><sub>1</sub>) &nbsp; + &nbsp;
+dist(<em>A</em><sub><em>i</em></sub>, <em>A</em><sub>2</sub>) &nbsp; + &nbsp; ... &nbsp; + &nbsp; 
+dist(<em>A</em><sub><em>i</em></sub>, <em>A</em><sub><em>n</em></sub>)
+</blockquote>
+
+and return a noun <em>A</em><sub><em>t</em></sub>
+for which <em>d</em><sub><em>t</em></sub> is maximum.
+
+<p>
+
+Implement an immutable data type <tt>Outcast</tt> with the following API:
+
+</p><blockquote><pre><b>public class Outcast {</b>
+   <b>public Outcast(WordNet wordnet)</b>         <font color="gray">// constructor takes a WordNet object</font>
+   <b>public String outcast(String[] nouns)</b>   <font color="gray">// given an array of WordNet nouns, return an outcast</font>
+   <b>public static void main(String[] args)</b>  <font color="gray">// see test client below</font>
+<b>}</b>
+</pre></blockquote>
+
+
+Assume that argument to <tt>outcast()</tt> contains only valid wordnet
+nouns (and that it contains at least two such nouns).
+
+<p>
+The following test client takes from the command line the 
+name of a synset file, the name of a hypernym file, followed by the
+names of outcast files, and prints out an outcast in each file:
+
+</p><blockquote><pre>public static void main(String[] args) {
+    WordNet wordnet = new WordNet(args[0], args[1]);
+    Outcast outcast = new Outcast(wordnet);
+    for (int t = 2; t &lt; args.length; t++) {
+        In in = new In(args[t]);
+        String[] nouns = in.readAllStrings();
+        StdOut.println(args[t] + ": " + outcast.outcast(nouns));
+    }
+}
+</pre></blockquote>
+
+Here is a sample execution:
+
+<blockquote><pre>% <b>more outcast5.txt</b>
+horse zebra cat bear table
+
+% <b>more outcast8.txt</b>
+water soda bed orange_juice milk apple_juice tea coffee
+
+% <b>more outcast11.txt</b>
+apple pear peach banana lime lemon blueberry strawberry mango watermelon potato
+
+
+% <b>java Outcast synsets.txt hypernyms.txt outcast5.txt outcast8.txt outcast11.txt</b>
+outcast5.txt: table
+outcast8.txt: bed
+outcast11.txt: potato
+</pre></blockquote><p><b>Analysis of running time (optional).</b>
+Analyze the effectiveness of your approach to this problem by giving estimates of 
+its time requirements. 
+
+</p><ul>
+
+<p></p><li>Give the order of growth of the <em>worst-case</em>
+running time of the <tt>length()</tt> and <tt>ancestor()</tt> methods
+in <tt>SAP</tt> as a function of the number of
+vertices <em>V</em> and the number of edges <em>E</em> in the digraph.
+
+<p></p></li><li> Give the order of growth of the <em>best-case</em> running time of
+the same methods.
+
+</li></ul><p>
+<b>Deliverables.</b>
+Submit <tt>WordNet.java</tt>, <tt>SAP.java</tt>, <tt>Outcast.java</tt>,
+any other supporting files (excluding those in <tt>algs4.jar</tt>).
+You may not call any library functions other those in
+<tt>java.lang</tt>, <tt>java.util</tt>, and <tt>algs4.jar</tt>.
+
+</p><p><br>
+
+
+
+</p><hr><small><i> This assignment was created by Alina Ene and Kevin Wayne.
+</i></small><address><small>Copyright © 2006
+</small>
+</address><table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</table></body></html>
