@@ -1,5 +1,7 @@
 
 import sys
+import re
+import collections as cx
 
 def run_unions(alg, union_txt, msg, pngbase=None, prt=sys.stdout):
   """Test user-created sets of union instructions."""
@@ -61,5 +63,22 @@ def get_png_label(arr, kwargs):
     pat = kwargs['label_pat']
   state_str = " ".join([str(e) for e in arr])
   return pat.format(STATE=state_str)
+
+# -------------------------------------------------------------
+# Adjacency-list utilities
+
+def adjtxtblk2arr(txtblk):
+  """Convert a text-block representing an adjacency list into an array."""
+  return cx.OrderedDict([_adjstr2arr(L) for L in txtblk.splitlines() if L])
+
+def _adjstr2arr(adjstr):
+  """Convert "A:  F B E" to ('A', ('F', 'B', 'E'))."""
+  M = re.search(r'^(\S+)\s*:\s*(\S.*)$', adjstr.strip())
+  if M:
+    return (M.group(1), M.group(2).split())
+  raise Exception("NO ADJACENCY LIST FOUND IN: {}".format(adjstr))
+
+
+
 
 
