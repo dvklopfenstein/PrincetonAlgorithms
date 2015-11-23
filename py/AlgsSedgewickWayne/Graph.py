@@ -12,6 +12,7 @@ class Graph(object):
     else:
       self._init(a)
     self.i2v = i2v # Names of vertices (optional)
+    self.get_name = self.get_name_lambda()
 
   def _init_empty(self, V):
     if V < 0: raise Exception("Number of vertices must be nonnegative")

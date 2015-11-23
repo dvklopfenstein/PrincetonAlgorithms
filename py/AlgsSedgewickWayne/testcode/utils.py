@@ -73,7 +73,12 @@ def adjtxtblk2arr_ud(txtblk):
 
 def adjtxtblk2OrderedDict(txtblk):
   """Convert a text-block representing an adjacency list into an array."""
-  return cx.OrderedDict([_adjstr2arr(L) for L in txtblk.splitlines() if L])
+  lst = []
+  for line in txtblk.splitlines():
+    line = line.strip()
+    if line:
+      lst.append(_adjstr2arr(line))
+  return cx.OrderedDict(lst)
 
 def adjOrderedDict2VEpairs_ud(od):
   """For Undirected Graph: Convert an adj list into an array of fmt: [V, E, pairs] & names."""
@@ -87,10 +92,10 @@ def adjOrderedDict2VEpairs_ud(od):
 
 def _adjstr2arr(adjstr):
   """Convert "A:  F B E" to ('A', ('F', 'B', 'E'))."""
-  M = re.search(r'^(\S+)\s*:\s*(\S.*)$', adjstr.strip())
+  M = re.search(r'^(\S+)\s*:\s*(\S.*)$', adjstr)
   if M:
     return (M.group(1), M.group(2).split())
-  raise Exception("NO ADJACENCY LIST FOUND IN: {}".format(adjstr))
+  raise Exception("NO ADJACENCY LIST FOUND IN({})".format(adjstr))
 
 
 

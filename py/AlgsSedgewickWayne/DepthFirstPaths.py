@@ -3,15 +3,16 @@
 class DepthFirstPaths(object):
   """This implementation uses depth-first search."""
 
-  def __init__(self, G, s):
+  def __init__(self, G, s, prt=None):
     self.s = s # source vertex
     self.edgeTo = [None for i in range(G.V())] # edgeTo[v] = last edge on s-v path
     self.marked = [False for i in range(G.V())] # marked[v] = is there an s-v path?
+    self.prt = prt
     self._dfs(G, s)
 
   def _dfs(self, G, v):
     """depth first search from v"""
-    self.marked[v] = True
+    self._set_mark(v, G)
     for w in G.adj(v):
       if not self.marked[w]:
         self.edgeTo[w] = v
@@ -31,6 +32,11 @@ class DepthFirstPaths(object):
       x = self.edgeTo[x]
     path.append(self.s) # push(self.s)
     return path # seq of vertices on path between vertices, s and v
+
+  def _set_mark(self, v, G):
+    self.marked[v] = True 
+    if self.prt is not None: 
+      self.prt.write("{} ".format(G.get_name(v)))
 
 # DEPTH-FIRST SEARCH PROPERTIES
 #
