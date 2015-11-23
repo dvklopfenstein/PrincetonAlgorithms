@@ -111,5 +111,32 @@ class Graph(object):
  #  
  #*****************************************************************************/
 
+# -----------------------------------------------------------------------------
+# INTRODUCTION TO GRAPHS (9:32)
+
+
+# SOME GRAPH-PROCESSING PROBLEMS 08:14
+#
+# PATH: Is there a path between s and t?
+# SHORTEST PATH: What is the shortest path between s and t?
+#
+# CYCLE: Is there a cycle in the graph?
+# EULER TOUR: Is there a cycle that uses each edge exactly once?
+# HAMILTON TOUR: Is there a cycle that uses each vertex exactly once?
+#
+# CONNECTIVITY: Is there a awy to connect all of the vertices?
+# MST: What is the best way to connect all of the vertices?
+# BICONNECTIVITY: Is there a vertex whose removeal disconnects the graph?
+#
+# PLANARITY: Can you draw the graph in the plane with no crossing edges?
+# GRAPH ISOMORPHISM: Do two adjacency lists represent the same graph?
+# 
+# CHALLENGE: Whinc of these problems are easy? difficult? intractable?
+
+
+
+# QUESTION: A cycle that uses eachedge of a graph exactly once is called
+# ANSWER: An Euler tour
+
 #  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 #  Copyright 2015-2016, DV Klopfenstein, Python implementation
