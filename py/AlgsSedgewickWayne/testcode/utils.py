@@ -67,9 +67,23 @@ def get_png_label(arr, kwargs):
 # -------------------------------------------------------------
 # Adjacency-list utilities
 
-def adjtxtblk2arr(txtblk):
+def adjtxtblk2arr_ud(txtblk):
+  """Convert an adjacency block into an array for an undirected graph."""
+  return adjOrderedDict2VEpairs_ud(adjtxtblk2OrderedDict(txtblk))
+
+def adjtxtblk2OrderedDict(txtblk):
   """Convert a text-block representing an adjacency list into an array."""
   return cx.OrderedDict([_adjstr2arr(L) for L in txtblk.splitlines() if L])
+
+def adjOrderedDict2VEpairs_ud(od):
+  """For Undirected Graph: Convert an adj list into an array of fmt: [V, E, pairs] & names."""
+  # Note: the format, "V E pairs" is seen in tinyG.txt
+  V = len(od)
+  v2i = {v:i for i, v in enumerate(od.keys())} # Vertex name to index
+  i2v = {i:v for v, i in v2i.items()}
+  edges = set([tuple(sorted([v2i[a], v2i[b]])) for a, bs in od.items() for b in bs])
+  a = [V, len(edges)] + list(edges)
+  return a, i2v
 
 def _adjstr2arr(adjstr):
   """Convert "A:  F B E" to ('A', ('F', 'B', 'E'))."""

@@ -4,13 +4,14 @@ import sys
 
 class Graph(object):
 
-  def __init__(self, a):
+  def __init__(self, a, i2v=None):
     if isinstance(a, int):
       self._init_empty(a)
     elif len(a) == 1:
       self._init_empty(a[0])
     else:
       self._init(a)
+    self.i2v = i2v # Names of vertices (optional)
 
   def _init_empty(self, V):
     if V < 0: raise Exception("Number of vertices must be nonnegative")
@@ -56,10 +57,11 @@ class Graph(object):
 
   def __str__(self):
     s = [(("{V} vertices, {E} edges\n").format(V=self._V, E=self._E))]
+    nm = self.get_name_lambda()
     for v in range(self._V):
-      s.append("{v}: ".format(v=v))
+      s.append("{v}: ".format(v=nm(v)))
       for w in self._adj[v]:
-        s.append("{w} ".format(w=w))
+        s.append("{w} ".format(w=nm(w)))
       s.append("\n")
     return ''.join(s)
 
@@ -73,7 +75,8 @@ class Graph(object):
     # 1. Create/initialize Graph
     G = pydot.Dot(graph_type='graph') # Undirected Graph
     # 2. Create Nodes
-    nodes = [pydot.Node(str(idx)) for idx in range(len(self._adj))]
+    nm = self.get_name_lambda()
+    nodes = [pydot.Node(idx, label=nm(idx)) for idx in range(len(self._adj))]
     # 3. Add nodes to Graph
     for node in nodes:
       G.add_node(node)
@@ -84,6 +87,11 @@ class Graph(object):
     # 5. Write Graph to png file
     G.write_png(fout_png)
     prt.write("  WROTE: {}\n".format(fout_png))
+
+  def get_name_lambda(self):
+    if self.i2v is None:
+      return lambda idx: str(idx)
+    return lambda idx: self.i2v[idx]
 
   def get_edges(self):
     edges = set()
