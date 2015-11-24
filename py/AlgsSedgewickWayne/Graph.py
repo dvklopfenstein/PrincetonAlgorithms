@@ -1,18 +1,24 @@
 """A undirected graph, implemented using an array of sets. Parallel edges and self-loops allowed."""
 
 import sys
+from AlgsSedgewickWayne.testcode.utils import adjtxtblk2OrderedDict
 
 class Graph(object):
 
-  def __init__(self, a, i2v=None):
-    if isinstance(a, int):
-      self._init_empty(a)
-    elif len(a) == 1:
-      self._init_empty(a[0])
-    else:
-      self._init(a)
-    self.i2v = i2v # Names of vertices (optional)
-    self.get_name = self.get_name_lambda()
+  def __init__(self, a=None, **kwargs):
+    if a is not None:
+      if isinstance(a, int):
+        self._init_empty(a)
+      elif len(a) == 1:
+        self._init_empty(a[0])
+      else:
+        self._init(a)
+      self.keys = range(self._V)
+    elif 'adjtxt' in kwargs:
+      self._adj = adjtxtblk2OrderedDict(kwargs['adjtxt'])
+      self._V = len(self._adj)
+      self._E = len(set([tuple(sorted([v, w])) for v, ws in self._adj.items() for w in ws]))
+      self.keys = self._adj.keys()
 
   def _init_empty(self, V):
     if V < 0: raise Exception("Number of vertices must be nonnegative")
@@ -35,34 +41,33 @@ class Graph(object):
 
   def addEdge(self, v, w):
     """Adds the undirected edge v-w to self graph."""
-    self._validateVertex(v)
-    self._validateVertex(w)
+    #self._validateVertex(v)
+    #self._validateVertex(w)
     self._E += 1
     self._adj[v].add(w)
     self._adj[w].add(v)
 
   def adj(self, v):
     """Returns the vertices adjacent to vertex v."""
-    self._validateVertex(v)
+    #self._validateVertex(v)
     return self._adj[v]
 
   def degree(self, v):
     """Returns the degree of vertex v."""
-    self._validateVertex(v)
+    #self._validateVertex(v)
     return self._adj[v].size()
 
-  def _validateVertex(self, v):
-    """raise an IndexOutOfBoundsException unless 0 <= v < V."""
-    if v < 0 or v >= self._V:
-        raise Exception("vertex {} is not between 0 and {}".format(v, self._V-1))
+  #def _validateVertex(self, v):
+  #  """raise an IndexOutOfBoundsException unless 0 <= v < V."""
+  #  if v < 0 or v >= self._V or v not in self._adj:
+  #    raise Exception("vertex {} is not between 0 and {} or in {}".format(v, self._V-1, self._adj))
 
   def __str__(self):
     s = [(("{V} vertices, {E} edges\n").format(V=self._V, E=self._E))]
-    nm = self.get_name_lambda()
-    for v in range(self._V):
-      s.append("{v}: ".format(v=nm(v)))
+    for v in self._adj:
+      s.append("{v}: ".format(v=v))
       for w in self._adj[v]:
-        s.append("{w} ".format(w=nm(w)))
+        s.append("{w} ".format(w=w))
       s.append("\n")
     return ''.join(s)
 
@@ -76,8 +81,7 @@ class Graph(object):
     # 1. Create/initialize Graph
     G = pydot.Dot(graph_type='graph') # Undirected Graph
     # 2. Create Nodes
-    nm = self.get_name_lambda()
-    nodes = [pydot.Node(idx, label=nm(idx)) for idx in range(len(self._adj))]
+    nodes = [pydot.Node(v) for v in self._adj]
     # 3. Add nodes to Graph
     for node in nodes:
       G.add_node(node)
@@ -89,15 +93,10 @@ class Graph(object):
     G.write_png(fout_png)
     prt.write("  WROTE: {}\n".format(fout_png))
 
-  def get_name_lambda(self):
-    if self.i2v is None:
-      return lambda idx: str(idx)
-    return lambda idx: self.i2v[idx]
-
   def get_edges(self):
     edges = set()
-    for v, ws in enumerate(self._adj):
-      for w in ws:
+    for v in self._adj:
+      for w in self._adj[v]:
         edges.add(tuple(sorted([v, w]))) 
     return edges
 

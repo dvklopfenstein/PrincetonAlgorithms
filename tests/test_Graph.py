@@ -2,7 +2,6 @@
 
 from AlgsSedgewickWayne.Graph import Graph
 from AlgsSedgewickWayne.testcode.InputArgs import cli_get_fin
-from AlgsSedgewickWayne.testcode.utils import adjtxtblk2arr_ud
 
 import sys
 
@@ -25,8 +24,7 @@ def test_1(prt=sys.stdout):
     G:  D H F 
     H:  G D """
   # Convert adjacency list in text block to array, fmt=[V, E, edge_pairs]
-  a, i2v = adjtxtblk2arr_ud(adjtxtblk)
-  g = Graph(a, i2v)
+  g = Graph(adjtxt=adjtxtblk)
   prt.write("{}\n".format(g))
   g.wr_png("Graph_test_1.png")
 

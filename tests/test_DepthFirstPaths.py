@@ -16,10 +16,9 @@ def test_0(prt=sys.stdout):
     G:  F C D 
     H:  D 
   """
-  adj, i2v = adjtxtblk2adj(txtblk)
-  G = Graph(adj, i2v)
-  dfs = DepthFirstPaths(G, 0, prt)
-  prt.write("{}\n".format(G))
+  G = Graph(adjtxt=txtblk)
+  dfs = DepthFirstPaths(G, 'A', prt)
+  prt.write("\n{}\n".format(G))
   
 
 if __name__ == '__main__':

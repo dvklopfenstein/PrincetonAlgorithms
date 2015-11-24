@@ -1,12 +1,14 @@
 """Computes a path between source vertex, s, and every other vertex in undirected graph G."""
 
+import collections as cx
+
 class DepthFirstPaths(object):
   """This implementation uses depth-first search."""
 
   def __init__(self, G, s, prt=None):
     self.s = s # source vertex
-    self.edgeTo = [None for i in range(G.V())] # edgeTo[v] = last edge on s-v path
-    self.marked = [False for i in range(G.V())] # marked[v] = is there an s-v path?
+    self.edgeTo = cx.OrderedDict([(v, None)  for v in G.keys]) # edgeTo[v] = last edge on s-v path
+    self.marked = cx.OrderedDict([(v, False) for v in G.keys]) # marked[v] = is there an s-v path?
     self.prt = prt
     self._dfs(G, s)
 
@@ -34,9 +36,10 @@ class DepthFirstPaths(object):
     return path # seq of vertices on path between vertices, s and v
 
   def _set_mark(self, v, G):
+    """Set mark and print which mark was set, if desired."""
     self.marked[v] = True 
     if self.prt is not None: 
-      self.prt.write("{} ".format(G.get_name(v)))
+      self.prt.write("{} ".format(v))
 
 # DEPTH-FIRST SEARCH PROPERTIES
 #
