@@ -64,7 +64,7 @@ class Graph(object):
 
   def __str__(self):
     s = [(("{V} vertices, {E} edges\n").format(V=self._V, E=self._E))]
-    for v in self._adj:
+    for v in self.keys:
       s.append("{v}: ".format(v=v))
       for w in self._adj[v]:
         s.append("{w} ".format(w=w))

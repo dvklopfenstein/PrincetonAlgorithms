@@ -2,19 +2,20 @@
 
 from collections import deque
 import sys
+import collections as cx
 
 class BreadthFirstPaths(object):
   """Run breadth first search on an undirected graph."""
   Inf = float("inf")
 
-  def __init__(self, G, s):
-    self._marked = [False]*G.V() # marked[v] = is there an s-v path
-    self._edgeTo = [self.Inf]*G.V() # edgeTo[v] = previous edge on shortest s-v path
-    self._distTo = [self.Inf]*G.V() # distTo[v] = number of edges shortest s-v path
-    self._bfs(G, s)
+  def __init__(self, G, s, prt=None):
+    self._marked = cx.OrderedDict([(v, False)    for v in G.keys]) # marked[v] = is there an s-v path
+    self._edgeTo = cx.OrderedDict([(v, self.Inf) for v in G.keys]) # edgeTo[v] = last edge on s-v path
+    self._distTo = cx.OrderedDict([(v, self.Inf) for v in G.keys]) # distTo[v] = number of edges shortest s-v path
+    self._bfs(G, s, prt)
     assert self._check(G, s)
 
-  def _bfs(self, G, sources):
+  def _bfs(self, G, sources, prt):
     """breadth-first search from multiple sources."""
     q = deque() # Queue
     if isinstance(sources, int):
@@ -24,7 +25,7 @@ class BreadthFirstPaths(object):
       self._distTo[s] = 0
       q.append(s) # enqueue
     while q:
-      v = q.popleft() # dequeue()
+      v = self.deque(q, prt)
       for w in G.adj(v):
         if not self._marked[w]:
           self._edgeTo[w] = v
@@ -46,6 +47,12 @@ class BreadthFirstPaths(object):
     path.append(x) # push
     return path
 
+  def deque(self, q, prt):
+    """Deque and print dequed value if user requests."""
+    v = q.popleft() # dequeue()
+    if prt is not None:
+      prt.write("{} ".format(v))
+    return v
 
   def _check(self, G, s, prt=sys.stdout):
     """check optimality conditions for single source."""
@@ -57,7 +64,7 @@ class BreadthFirstPaths(object):
 
     # check that for each edge v-w dist[w] <= dist[v] + 1
     # provided v is reachable from s
-    for v in range(G.V()):
+    for v in G.keys:
       for w in G.adj(v):
         if self.hasPathTo(v) != self.hasPathTo(w):
           prt.write("edge {}-{}".format(v, w))
@@ -72,7 +79,7 @@ class BreadthFirstPaths(object):
 
     # check that v = edgeTo[w] satisfies distTo[w] + distTo[v] + 1
     # provided v is reachable from s
-    for w in range(G.V()):
+    for w in G.keys:
       if not self.hasPathTo(w) or w == s: continue
       v = self._edgeTo[w]
       if self._distTo[w] != self._distTo[v] + 1:
