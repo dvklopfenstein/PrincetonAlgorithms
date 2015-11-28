@@ -14,63 +14,58 @@
  #  values cannot be <tt>null</tt>&mdash;setting the
  #  value associated with a key to <tt>null</tt> is equivalent to deleting the key
  #  from the symbol table.
- #  <p>
- #  This implementation uses a 256-way trie.
- #  The <em>put</em>, <em>contains</em>, <em>delete</em>, and
- #  <em>longest prefix</em> operations take time proportional to the length
- #  of the key (in the worst case). Construction takes constant time.
- #  The <em>size</em>, and <em>is-empty</em> operations take constant time.
- #  Construction takes constant time.
+
+import collections as cx
 
 class TrieST(object):
   """represents an symbol table of key-value pairs, with string keys and generic values."""
   _R = 256 # extended ASCII
 
-  class Node(object):
+  class _Node(object):
     """R-way trie node"""
-    self._val
-    self._next = [None for i in range(TrieST._R)]
 
-  def __init__(self):
+    def __init__(self):
+      self._val
+      self._next = [None for i in range(TrieST._R)]
+
+  def __init__(self): # O ~ k
     """Initializes an empty string symbol table."""
-    self._root # root of trie
-    self._N    # number of keys in trie
+    self._root = self._Node() # root of trie
+    self._N                  # number of keys in trie
 
   def get(self, key):
-    """Returns the value associated with the given key, or null if no key."""
-    x = self.get(self._root, key, 0)
-    if x is None: return None
-    return x.val
+    """Returns the value associated with the given key, or None if no key."""
+    x = self._get(self._root, key, 0)
+    if x is None: return None # Return None if no key
+    return x._val
 
-  def contains(self, key):
+  def contains(self, key): # O ~ L (wc)
     """Does this symbol table contain the given key?"""
     return self.get(key) is not None
 
-  def get(self, x, key, d):
+  def _get(self, x, key, d):
     if x is None: return None
-    if d == len(key)()) return x
+    if d == len(key): return x
     c = key.charAt(d)
-    return self.get(x._next[c], key, d+1)
+    return self._get(x._next[c], key, d+1)
 
-  # Inserts the key-value pair into the symbol table, overwriting the old value
-  # with the new value if the key is already in the symbol table.
-  # If the value is <tt>null</tt>, this effectively deletes the key from the symbol table.
-  def put(self, key, val):
+  def put(self, key, val): # O ~ L (wc)
+    """Inserts the key-value pair into the symbol table, overwriting if needed or deletes key"""
     if val is None: self.delete(key)
-    else root = put(root, key, val, 0)
+    else: self._root = self._put(self._root, key, val, 0)
 
   def _put(self, x, key, val, d):
-    if x is None: x = new ()
-    if d == len(key)()):
-      if x.val is None: N += 1
-      x.val = val
+    if x is None: x = self._Node()
+    if d == len(key):
+      if x._val is None: N += 1
+      x._val = val
       return x
     c = key.charAt(d)
-    x._next[c] = put(x._next[c], key, val, d+1)
-    return x
+    x._next[c] = self._put(x._next[c], key, val, d+1)
+    return x # return ref to newly constructed Node
 
-  def size(self): return self._N # Returns the number of key-value pairs in this symbol table.
-  def isEmpty(self): return self.size() == 0 # Is this symbol table empty?
+  def size(self): return self._N # O ~ k. Returns the number of key-value pairs in this symbol table.
+  def isEmpty(self): return self.size() == 0 # O ~ k. Is this symbol table empty?
 
   # Returns all keys in the symbol table as an <tt>Iterable</tt>.
   # To iterate over all of the keys in the symbol table named <tt>st</tt>,
@@ -122,7 +117,7 @@ class TrieST(object):
         collect(x._next[c], prefix, pattern, results)
         prefix.deleteCharAt(len(prefix)() - 1)
 
-  def longestPrefixOf(self, query):
+  def longestPrefixOf(self, query): # O ~ L (wc)
     """Returns string in symbol table that is the longest prefix of query, or None, if no such string."""
     length = self._longestPrefixOf(self._root, query, 0, -1)
     if length == -1: return None
@@ -139,7 +134,7 @@ class TrieST(object):
     c = query.charAt(d)
     return longestPrefixOf(x._next[c], query, d+1, length)
 
-  def delete(self, key):
+  def delete(self, key): # O ~ L (wc)
     """Removes the key from the set if the key is present."""
     self._root = self._delete(self._root, key, 0)
 
@@ -159,6 +154,33 @@ class TrieST(object):
         return x
     return None
 
+# ----------------------------------------------------------------------
+# R-WAY TRIES (32:19)
+
+# TRIE PERFORMANCE
+#
+# SEARCH HIT: Need to examine all L charcters for equality
+#
+# SEARCH MISS:
+#  * Could have mismatch on first character
+#  * Typical case: examine only a few characters (sublinear)
+#
+# SPACE: R null links at each leaf.
+# (butsublinear space possible if many sort strings share common prefixes)
+
+# POPULR INTERVIEW QUESTION 29:25
+#
+# GOAL: Design a data structure to perform efficient spell checking
+# 
+# SOLUTION: Build a 26-way trie(key=word, value=bit)
+
+# QUESTION: Suppose that you insert a set of N strings into a multiway trie.
+# What determines the shape of the trie?
+# ANSWER:
+#  => The set of strings that you insert
+#     The order in which you insert the set of strings
+#     Both A and B
+#     Neither A nor B
 
 # Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
 # Copyright 2002-2016, DV Klopfenstein, Python port
