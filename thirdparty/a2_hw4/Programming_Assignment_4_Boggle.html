@@ -1,0 +1,365 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!-- saved from url=(0062)http://coursera.cs.princeton.edu/algs4/assignments/boggle.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>
+Programming Assignment 4: Boggle
+</title></head>
+
+<body>
+<h2>Programming Assignment 4: Boggle</h2>
+
+<p>
+Write a program to play the word game Boggle<sup>®</sup>.
+
+</p><p>
+<b>The Boggle game.</b> Boggle is a word game designed by Allan Turoff and distributed by Hasbro.
+It involves a board made up of 16 cubic dice, where each die has a letter printed on each
+of its sides.
+At the beginning of the game, the 16 dice are shaken and randomly
+distributed into a 4-by-4 tray, with only the top sides of the dice visible.
+The players compete to accumulate points by building <em>valid</em> words out of the dice
+according to the following rules:
+</p><ul>
+<p></p><li>A valid word must be composed by following a sequence of <em>adjacent dice</em>—two
+dice are adjacent if they are horizontal, vertical, or diagonal neighbors.
+<p></p></li><li>A valid word can use each die at most once.
+<p></p></li><li>A valid word must contain at least 3 letters.
+<p></p></li><li>A valid word must be in the dictionary (which typically does not contain proper nouns).
+</li></ul>
+Here are some examples of valid and invalid words:
+
+<p>
+<table class="image" align="center">
+<tbody><tr><td><img src="pins.png" width="220" alt="pins" title="pins" align="center"></td>
+<td>&nbsp;&nbsp;&nbsp;</td>
+    <td><img src="pines.png" width="220" alt="pines" title="pines" align="center"></td>
+<td>&nbsp;&nbsp;&nbsp;</td>
+    <td><img src="dates.png" width="220" alt="dates" title="dates" align="center"></td></tr>
+<tr><td class="caption" align="center"><tt>PINS</tt><br>(<em>valid</em>)</td>
+<td>&nbsp;&nbsp;&nbsp;</td>
+    <td class="caption" align="center"><tt>PINES</tt><br>(<em>valid</em>)</td>
+<td>&nbsp;&nbsp;&nbsp;</td>
+    <td class="caption" align="center"><tt>DATES</tt><br>(<em>invalid—dice not adjacent</em>)</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><img src="pint.png" width="220" alt="pint" title="pint" align="center"></td>
+<td>&nbsp;&nbsp;&nbsp;</td>
+    <td><img src="tepee.png" width="220" alt="tepee" title="tepee" align="center"></td>
+<td>&nbsp;&nbsp;&nbsp;</td>
+    <td><img src="sid.png" width="220" alt="sid" title="sid" align="center"></td></tr>
+<tr><td class="caption" align="center"><tt>PINT</tt><br>(<em>invalid—path not sequential</em>)</td>
+<td>&nbsp;&nbsp;&nbsp;</td>
+    <td class="caption" align="center"><tt>TEPEE</tt><br>(<em>invalid—die used more than once</em>)</td>
+<td>&nbsp;&nbsp;&nbsp;</td>
+    <td class="caption" align="center"><tt>SID</tt><br>(<em>invalid—word not in dictionary</em>)</td></tr>
+</tbody></table>
+
+</p><p><br><b>Scoring.</b>
+Words are scored according to their length, using this table:
+</p><p>
+<table align="center" cellspacing="1" border="0">
+<tbody><tr bgcolor="#444444"><td align="center">&nbsp;&nbsp;<em><font color="white">word length</font></em>&nbsp;&nbsp;</td>
+    <td align="center">&nbsp;&nbsp;<em><font color="white">points</font></em>&nbsp;&nbsp;</td></tr>
+<tr bgcolor="#DDDDDD"><td align="center">0–2</td>
+    <td align="center">0</td></tr>
+<tr bgcolor="#DDDDDD"><td align="center">3–4</td>
+    <td align="center">1</td></tr>
+<tr bgcolor="#DDDDDD"><td align="center">5</td>
+    <td align="center">2</td></tr>
+<tr bgcolor="#DDDDDD"><td align="center">6</td>
+    <td align="center">3</td></tr>
+<tr bgcolor="#DDDDDD"><td align="center">7</td>
+    <td align="center">5</td></tr>
+<tr bgcolor="#DDDDDD"><td align="center">&nbsp;&nbsp;8+</td>
+    <td align="center">11</td></tr>
+</tbody></table>
+</p><p>
+
+</p><p>
+<b>The <i>Qu</i> special case.</b>
+In the English language, the letter <tt>Q</tt> is almost always followed by the letter
+<tt>U</tt>.
+Consequently, the side of one die is printed with the two-letter sequence <tt>Qu</tt>
+instead of <tt>Q</tt> (and this two-letter sequence must be used together when forming words).
+When scoring, <tt>Qu</tt> counts as two letters; for example, the word <tt>QuEUE</tt>
+scores as a 5-letter word even though it is formed by following a sequence of 4 dice.
+
+</p><p>
+</p><center>
+<img src="Qu.png" width="60" height="60" alt="Qu" title="Qu">
+</center>
+
+
+<p><br>
+<b>Your task.</b> 
+Your challenge is to write a Boggle solver that finds <em>all</em> valid words in a given Boggle board, using
+a given dictionary.
+Implement an immutable data type <tt>BoggleSolver</tt> with the following API:
+
+</p><pre><blockquote>
+<b>public class BoggleSolver
+{</b>
+    <font color="gray">// Initializes the data structure using the given array of strings as the dictionary.
+    // (You can assume each word in the dictionary contains only the uppercase letters A through Z.)</font>
+    <b>public BoggleSolver(String[] dictionary)</b>
+
+    <font color="gray">// Returns the set of all valid words in the given Boggle board, as an Iterable.</font>
+    <b>public Iterable&lt;String&gt; getAllValidWords(BoggleBoard board)</b>
+
+    <font color="gray">// Returns the score of the given word if it is in the dictionary, zero otherwise.
+    // (You can assume the word contains only the uppercase letters A through Z.)</font>
+    <b>public int scoreOf(String word)</b>
+<b>}</b>
+</blockquote>
+</pre>
+
+It is up to you how you search for and store the words contained in the board,
+as well as the dictionary used to check them.
+If you need help getting started, some hints are available
+on the <a href="http://coursera.cs.princeton.edu/algs4/checklists/boggle.html">checklist</a>.
+
+<p><br>
+<b>The board data type.</b>
+We provide an immutable data type
+<a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/BoggleBoard.java">BoggleBoard.java</a> for
+representing Boggle boards.
+It includes constructors for creating
+Boggle boards from either the 16 Hasbro dice, the distribution of letters in
+the English language, a file, or a character array; methods for accessing
+the individual letters; and a method to print out the board for debugging.
+Here is the full API:
+
+</p><pre><blockquote>
+<b>public class BoggleBoard
+{</b>
+    <font color="gray">// Initializes a random 4-by-4 Boggle board.
+    // (by rolling the Hasbro dice)</font>
+    <b>public BoggleBoard()</b>
+
+    <font color="gray">// Initializes a random M-by-N Boggle board.
+    // (using the frequency of letters in the English language)</font>
+    <b>public BoggleBoard(int M, int N)</b>
+
+    <font color="gray">// Initializes a Boggle board from the specified filename.</font>
+    <b>public BoggleBoard(String filename)</b>
+
+    <font color="gray">// Initializes a Boggle board from the 2d char array.
+    // (with 'Q' representing the two-letter sequence "Qu")</font>
+    <b>public BoggleBoard(char[][] a)</b>
+
+    <font color="gray">// Returns the number of rows.</font>
+    <b>public int rows()</b>
+
+    <font color="gray">// Returns the number of columns.</font>
+    <b>public int cols()</b>
+
+    <font color="gray">// Returns the letter in row i and column j.
+    // (with 'Q' representing the two-letter sequence "Qu")</font>
+    <b>public char getLetter(int i, int j)</b>
+
+    <font color="gray">// Returns a string representation of the board.</font>
+    <b>public String toString()
+}</b>
+</blockquote>
+</pre>
+
+
+<p><b>Testing.</b> 
+We provide a number of <a href="http://coursera.cs.princeton.edu/algs4/testing/boggle-testing.zip">dictionary and board files</a>
+for testing.
+
+</p><ul>
+<p></p><li><em>Dictionaries.</em>
+A dictionary consists of a sequence of words, separated by whitespace, in alphabetical order.
+You can assume that each word contains only the uppercase letters <tt>A</tt> through <tt>Z</tt>.
+For example, here are the two files
+<a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/dictionary-algs4.txt">dictionary-algs4.txt</a> and
+<a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/dictionary-yawl.txt">dictionary-yawl.txt</a>:
+
+<pre><blockquote>
+% <b>more dictionary-algs4.txt</b>        % <b>more dictionary-yawl.txt</b>
+ABACUS                             AA
+ABANDON                            AAH
+ABANDONED                          AAHED
+ABBREVIATE                         AAHING
+...                                ...
+QUEUE                              PNEUMONOULTRAMICROSCOPICSILICOVOLCANOCONIOSIS
+...                                ...
+ZOOLOGY                            ZYZZYVAS
+</blockquote>
+</pre>
+
+The former is a list of 6,013 words that appear in <em>Algorithms 4/e</em>; the latter is a comprehensive
+list of 264,061 English words (known as <em>Yet Another Word List</em>) that is widely used in word-game competitions.
+
+<p></p></li><li><em>Boggle boards.</em>
+A boggle board consists of two integers <em>M</em> and <em>N</em>, followed by the
+<em>M</em> × <em>N</em> characters in the board, with the integers and
+characters separated by whitespace.
+You can assume the integers are nonnegative and that the 
+characters are uppercase letters <tt>A</tt> through <tt>Z</tt>
+(with the two-letter sequence <tt>Qu</tt> represented as either <tt>Q</tt> or <tt>Qu</tt>).
+For example, here are the files <a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/board4x4.txt">board4x4.txt</a>
+and <a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/board-q.txt">board-q.txt</a>:
+
+<pre><blockquote>
+% <b>more board4x4.txt</b>        % <b>more board-q.txt</b>
+4 4                        4 4
+A  T  E  E                 S  N  R  T
+A  P  Y  O                 O  I  E  L
+T  I  N  U                 E  Qu T  T
+E  D  S  E                 R  S  A  T
+</blockquote>
+</pre>
+
+</li></ul>
+
+
+
+The following test client takes the filename of a dictionary and the filename 
+of a Boggle board as command-line arguments and prints out all valid words for
+the given board using the given dictionary.
+
+<pre><blockquote>
+public static void main(String[] args)
+{
+    In in = new In(args[0]);
+    String[] dictionary = in.readAllStrings();
+    BoggleSolver solver = new BoggleSolver(dictionary);
+    BoggleBoard board = new BoggleBoard(args[1]);
+    int score = 0;
+    for (String word : solver.getAllValidWords(board))
+    {
+        StdOut.println(word);
+        score += solver.scoreOf(word);
+    }
+    StdOut.println("Score = " + score);
+}
+</blockquote>
+</pre>
+
+Here are two sample executions:
+
+<pre><blockquote>
+% <b>java BoggleSolver dictionary-algs4.txt board4x4.txt</b>     % <b>java BoggleSolver dictionary-algs4.txt board-q.txt</b>
+AID                                                       EQUATION
+DIE                                                       EQUATIONS
+END                                                       ...
+ENDS                                                      QUERIES
+...                                                       QUESTION
+YOU                                                       QUESTIONS
+Score = 33                                                ...
+                                                          TRIES
+                                                          Score = 84
+</blockquote>
+</pre>
+
+<p><b>Performance.</b> If you choose your data structures and algorithms judiciously, your program
+can preprocess the dictionary and find all valid words in a random Hasbro board
+(or even a random 10-by-10 board) in a fraction of a second.
+To stress test the performance of your implementation, create one <tt>BoggleSolver</tt>
+object (from a given dictionary); then, repeatedly generate and
+solve random Hasbro boards. How many random Hasbro boards can you solve per second?
+<em>For full credit, your program must be able to solve thousands of
+random Hasbro boards per second.</em>
+The goal on this assignment is raw speed—for example, it's fine to use 10× more memory if
+the program is 10× faster.
+
+</p><p><b>Interactive game (optional, but fun and no extra work).</b>
+Once you have a working version of <tt>BoggleSolver.java</tt>,
+download, compile, and run <a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/BoggleGame.java">BoggleGame.java</a>
+to play Boggle against a computer opponent.
+To enter a word, either type it in the text box
+or click the corresponding sequence of dice on the board.
+The computer opponent has various levels of difficulty, ranging from finding 
+only words from popular nursery rhymes (easy) to words that appear in <em>Algorithms 4/e</em> (medium)
+to finding every valid word (humbling).
+
+</p><p>
+</p><center>
+<img src="boggle-gui.png" width="650" alt="Boggle GUI" title="Boggle GUI">
+</center>
+
+
+<p><b>Challenge for the bored.</b> Here are some challenges:
+</p><ul>
+<p></p><li> Find a maximum scoring 4-by-4 Hasbro board.
+Here is the <a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/board-points4540.txt">best known board</a> (4540 points),
+which was discovered by Robert McAnany in connection with this Coursera course.
+
+<p></p></li><li> Find a maximum scoring 4-by-4 Hasbro board using the
+<a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/dictionary-zingarelli2005.txt">Zinga</a> list
+of 584,983 Italian words.
+
+<p></p></li><li> Find a minimum scoring 4-by-4 Hasbro board.
+
+
+<p></p></li><li> Find a maximum scoring 5-by-5 Deluxe Boggle board.
+
+<p></p></li><li> Find a maximum scoring <em>N</em>-by-<em>N</em> board (not necessarily
+using the Hasbro dice) for different values of <em>N</em>.
+
+<p></p></li><li> Find a board with the most words (or the most words that are 8 letters or longer).
+
+<p></p></li><li> Find a 4-by-4 Hasbro board that scores <em>exactly</em> 2,500, 3,000, 3,500, or 4,000 points.
+
+<p></p></li><li> Design an algorithm to determine whether a given 4-by-4 board can be generated
+by rolling the 16 Hasbro dice.
+
+<p></p></li><li>
+How many words in the dictionary appear in no 4-by-4 Hasbro boards?
+
+<p></p></li><li>
+Add new features to <a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/BoggleGame.java">BoggleGame.java</a>.
+
+<p></p></li><li>
+Extend your program to handle arbitrary Unicode letters and dictionaries. You may need to consider
+alternate algorithms and data structures.
+
+<p></p></li><li>
+Extend your program to handle arbitrary strings on the faces of the dice, generalizing your hack for
+dealing with the two-letter sequence <tt>Qu</tt>.
+
+</li></ul>
+
+Unless otherwise stated, use the <a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/dictionary-yawl.txt">dictionary-yawl.txt</a> dictionary.
+If you discover interesting boards,
+you are encouraged to share and describe them in the Discussion Forums.
+
+<!--
+<p>
+Hint: Brute force will not work efficiently because there are 6^16 outcomes of the
+16 dice and 16! ways to assign the dice to positions in the 4-by-4 tray, which leads to 
+6^16 &times; 16! &ge; 2^85.
+(Actually, there are quite a bit less if you consider the 8-fold symmetry of a 4-by-4 board
+and the fact that many of the 6^16 &times; 16! assignments lead to the same boards.)
+Even so, there are way too many possiblities to try them all.
+Think about what kind of enhancements would improve the running time by excluding boards 
+that can't be maximum scoring board. For example, the maximum scoring board is not going to
+contain a <tt>Qu</tt>, <tt>Z</tt>, or <tt>X</tt>.
+-->
+
+
+<p><b>Deliverables.</b> Submit <tt>BoggleSolver.java</tt> and any
+other supporting files (excluding <tt>BoggleBoard.java</tt> and <tt>algs4.jar</tt>).
+You may not call any library functions other those in
+<tt>java.lang</tt>, <tt>java.util</tt>, and <tt>algs4.jar</tt>.
+
+
+
+
+
+</p><address><small>
+This assignment was developed by Matthew Drabick and Kevin Wayne, inspired by 
+Todd Feldman and Julie Zelenski's classic
+<a href="http://sunburn.stanford.edu/~zelenski/boggle/">Nifty Boggle</a>
+assignment from Stanford.
+
+<br>Copyright © 2013.
+</small>
+</address>
+
+
+
+
+</body></html>
