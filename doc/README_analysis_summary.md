@@ -37,6 +37,7 @@ TBD: lg or ln?
 | red-black BST                 | 2 lg N    |    2 lg N |    2 lg N |    1.00 ln N  | 1.00 lg N | 1.00 lg N |    yes      | compareTo()
 | separate chaining             |   lg N    |      lg N |      lg N |    3 - 5*     | 3 - 5*    | 3 - 5*    |     no      | equals()
 | linear probing                |   lg N    |      lg N |      lg N |    3 - 5*     | 3 - 5*    | 3 - 5*    |     no      | equals()
+| hash table                    |    ...    |    ...    |    ...    |      1        |    1      |    1      |     no      | equals(), hashCode()
 
 * **WC** => worst-case cost (after N inserts)
 * **AC** => average-case cost (after N random inserts)
