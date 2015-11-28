@@ -1,7 +1,7 @@
-# Tries
+# [Tries](http://algs4.cs.princeton.edu/52trie)
 
 ## Code
-  * **R-way Tries**    
+  * **R-way Tries**: TrieSt.py    
   * **Ternary Search Tries**    
   * **Character-Based Operations**    
 
