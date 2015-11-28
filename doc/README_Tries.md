@@ -3,7 +3,7 @@
 ## Code
   * **R-way Tries**    
   * **Ternary Search Tries**    
-  * **Charachter-Based Operations**    
+  * **Character-Based Operations**    
 
 ## Table of Contents for Examples
   1. [Run Example](#ex1)
