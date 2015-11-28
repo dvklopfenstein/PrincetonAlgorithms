@@ -3,7 +3,10 @@
 ## Code
   * **R-way Tries**: TrieSt.py    
   * **Ternary Search Tries**: TST.py    
-  * **Character-Based Operations**    
+  * **Character-Based Operations** including:
+    * keysWithPrefix    
+    * keysThatMatch    
+    * longestPrexifOf   
 
 ## Table of Contents for Examples
   1. [Run Example](#ex1)
