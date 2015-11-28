@@ -1,7 +1,11 @@
 # Substring Search
 
 ## Code
-  * **Code**: code.py
+  * **Introduction to Substring Search**
+  * **Brute-Force Substring Search**
+  * **Knuth-Morris-Pratt**
+  * **Boyer-Moore**
+  * **Rabin-Karp**
 
 ## Table of Contents for Examples
   1. [Run Example](#ex1)
@@ -10,5 +14,5 @@
 ### [ex1](#table-of-contents-for-examples)
 1. Run Example
 
-Copyright (C) 2002-2015 Robert Sedgewick and Kevin Wayne.  All rights reserved.
-Copyright (C) 2014-2015 DV Klopfenstein. All rights reserved. Python translation.
+Copyright (C) 2002-2016 Robert Sedgewick and Kevin Wayne.  All rights reserved.    
+Copyright (C) 2014-2016 DV Klopfenstein. All rights reserved. Python translation.
