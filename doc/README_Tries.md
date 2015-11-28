@@ -2,7 +2,7 @@
 
 ## Code
   * **R-way Tries**: TrieSt.py    
-  * **Ternary Search Tries**    
+  * **Ternary Search Tries**: TST.py    
   * **Character-Based Operations**    
 
 ## Table of Contents for Examples
