@@ -3,7 +3,7 @@
   
 Implemented in Python 2.7.x by DV Klopfenstein is selected code from:
 
-  * http://algs4.cs.princeton.edu/code/ (scroll down a little to see links to code)
+  * http://algs4.cs.princeton.edu/code/ (scroll down to see links to code)
   * [Java Code in Kevin Wayne's github repository](https://github.com/kevin-wayne/algs4/tree/master/src/main/java/edu/princeton/cs/algs4)
 
 [**Python implementations**](./py/AlgsSedgewickWayne/) contain:
