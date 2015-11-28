@@ -148,6 +148,20 @@ wk5_zip:
 	zip kdtree.zip PointSET.java KdTree.java
 
 
+wordnet.zip: SAP.java WordNet.java Outcast.java
+	zip $@ $<
+
+seamCarving.zip: SeamCarver.java
+	zip $@ $<
+
+baseball.zip: BaseballElimination.java 
+	zip $@ $<
+
+# A4 BoggleSolver.java, along with any other supporting files (excluding BoggleBoard.java and algs4.jar).
+boggle.zip: BoggleSolver.java
+	zip $@ $<
+
+
 Percolation.class: $(ALGS4SRC)/Percolation.java
 	$(JC) -d . $<
 
