@@ -7,6 +7,8 @@
     * keysWithPrefix    
     * keysThatMatch    
     * longestPrexifOf   
+  * **Character-Based Operations** PatriciaST.py, Suffix Tree
+  
 
 ## Table of Contents for Examples
   1. [Run Example](#ex1)

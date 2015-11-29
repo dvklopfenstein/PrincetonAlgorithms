@@ -40,14 +40,16 @@
 
 import sys
 from AlgsSedgewickWayne.TST import TST
+from AlgsSedgewickWayne.testcode.InputArgs import cli_get_array
 
-def main(prt=sys.stdout):
+def main(fin, prt=sys.stdout):
   """Unit tests the TST data type."""
 
   # build symbol table from standard input
+  arr = cli_get_array(fin)
+  print arr
   st = TST()
-  for (int i = 0; !StdIn.isEmpty(); i += 1):
-    String key = StdIn.readString()
+  for i, key in enumerate(arr):
     st.put(key, i)
 
   # print results
@@ -67,9 +69,9 @@ def main(prt=sys.stdout):
   prt.write("\n")
 
   prt.write('keysThatMatch(".he.l."):')
-  for (String s : st.keysThatMatch(".he.l."))
+  for s in st.keysThatMatch(".he.l."):
     prt.write(s)
 
 
 if __name__ == '__main__':
-  main()
+  main("../thirdparty/shellsST.txt")

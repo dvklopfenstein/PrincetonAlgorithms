@@ -16,26 +16,31 @@
  #  values cannot be <tt>null</tt>&mdash;setting the
  #  value associated with a key to <tt>null</tt> is equivalent to deleting the key
  #  from the symbol table.
+
+import collections as cx
+
 class TST(object):
 
   class _Node(object):
 
-    def __init__(self):
-      self._c     = None            # character
-      # left, middle, and right subtries
+    def __init__(self, c):
+      self._c     = c # character
       self._left  = None
       self._mid   = None
       self._right = None
       self._val   = None             # value associated with string
 
+    def __str__(self):
+      p = lambda n: '-' if n is None else n._c
+      return ''.join(["{}:{} (".format(self._c, '-' if self._val is None else self._val),
+        p(self._left), p(self._mid), p(self._right), ')'])
+
   def __init__(self):
-    self._N              # size
-    self._root   # root of TST
+    self._N = 0       # size
+    self._root = None # root of TST
 
   def size(self): return self._N # number of key-value pairs in symbol table.
-
-  # Does this symbol table contain the given key?
-  def contains(self, key): return self.get(key) is not None
+  def contains(self, key): return self.get(key) is not None # symbol table contain the given key?
 
   # Returns the value associated with the given key.
   # @param key the key
@@ -46,35 +51,36 @@ class TST(object):
     if len(key) == 0: raise Exception("key must have length >= 1")
     x = self._get(self._root, key, 0)
     if x is None: return None
-    return x.val
+    return x._val
 
   def _get(self, x, key, d):
     """return subtrie corresponding to given key"""
     if key is None: raise Exception("NullPointerException")
     if len(key) == 0: raise Exception("key must have length >= 1")
     if x is None: return None
-    c = key.charAt(d)
-    if   c < x.c:          return self._get(x.left,  key, d)
-    elif c > x.c:          return self._get(x.right, key, d)
-    elif d < len(key) - 1: return self._get(x.mid,   key, d+1)
-    else:                           return x
+    c = key[d]
+    if   c < x._c:         return self._get(x._left,  key, d)
+    elif c > x._c:         return self._get(x._right, key, d)
+    elif d < len(key) - 1: return self._get(x._mid,   key, d+1)
+    else:                  return x
 
   # Inserts the key-value pair into the symbol table, overwriting the old value
   # with the new value if the key is already in the symbol table.
   # If the value is <tt>null</tt>, this effectively deletes the key from the symbol table.
   def put(self, key, val):
-    if not self.contains(key): N += 1
+    if not self.contains(key): self._N += 1
+    print "{} KEY({})".format(val, key)
     self._root = self._put(self._root, key, val, 0)
 
-  def _put(self, x, fkey, val, d):
-    c = key.charAt(d)
+  def _put(self, x, key, val, d):
+    c = key[d]
+    print "{} {} {} key({})".format(val, key, d, c)
     if x is None:
-      x = self._Node()
-      x._c = c
-    if   c < x._c:          x._left  = self._put(x._left,  key, val, d)
-    elif c > x._c:          x._right = self._put(x._right, key, val, d)
-    elif d < len(key) - 1:  x._mid   = self._put(x._mid,   key, val, d+1)
-    else:                   x._val   = val
+      x = self._Node(c)
+    if   c < x._c:         x._left  = self._put(x._left,  key, val, d)
+    elif c > x._c:         x._right = self._put(x._right, key, val, d)
+    elif d < len(key) - 1: x._mid   = self._put(x._mid,   key, val, d+1)
+    else:                  x._val   = val
     return x
 
   # Returns the string in the symbol table that is the longest prefix of <tt>query</tt>,
@@ -83,74 +89,64 @@ class TST(object):
   # @return the string in the symbol table that is the longest prefix of <tt>query</tt>,
   #     or <tt>null</tt> if no such string
   def longestPrefixOf(self, query):
-    if query is None or len(query) == 0: return None
+    if query is None or not query: return None
     length = 0
     x = self._root
     i = 0
-    while (x is not None and i < len(query)()):
-      char c = query.charAt(i)
-      if      c < x.c) x = x.left
-      elif (c > x.c) x = x.right
+    while x is not None and i < len(query):
+      c = query[i]
+      if   c < x._c: x = x._left
+      elif c > x._c: x = x._right
       else:
-          i += 1
-          if x.val is not None) length = i
-          x = x.mid
+        i += 1
+        if x._val is not None: length = i
+        x = x._mid
     return query.substring(0, length)
 
-    #*
-     # Returns all keys in the symbol table as an <tt>Iterable</tt>.
-     # To iterate over all of the keys in the symbol table named <tt>st</tt>,
-     # use the foreach notation: <tt>for (Key key : st.keys())</tt>.
-     # @return all keys in the sybol table as an <tt>Iterable</tt>
-     #/
-  def keys():
-      Queue<String> queue = new Queue<String>()
-      collect(root, new StringBuilder(), queue)
-      return queue
-
-    #*
-     # Returns all of the keys in the set that start with <tt>prefix</tt>.
-     # @param prefix the prefix
-     # @return all of the keys in the set that start with <tt>prefix</tt>,
-     #     as an iterable
-     #/
-  def keysWithPrefix(String prefix):
-      Queue<String> queue = new Queue<String>()
-      <Value> x = get(root, prefix, 0)
-      if x is None) return queue
-      if x.val is not None) queue.enqueue(prefix)
-      collect(x.mid, new StringBuilder(prefix), queue)
-      return queue
-
-  # all keys in subtrie rooted at x with given prefix
-  def _collect(<Value> x, StringBuilder prefix, Queue<String> queue):
-      if x is None) return
-      collect(x.left,  prefix, queue)
-      if x.val is not None) queue.enqueue(prefix.toString() + x.c)
-      collect(x.mid,   prefix.append(x.c), queue)
-      prefix.deleteCharAt(len(prefix)() - 1)
-      collect(x.right, prefix, queue)
-
-     # Returns all of the keys in the symbol table that match <tt>pattern</tt>,
-     # where . symbol is treated as a wildcard character.
-     # @param pattern the pattern
-     # @return all of the keys in the symbol table that match <tt>pattern</tt>,
-     #     as an iterable, where . is treated as a wildcard character.
-  def keysThatMatch(self, pattern):
+  def keys(self):
+    """Returns all keys in the symbol table as an Iterable."""
     queue = cx.deque() # new Queue<String>()
-    self._collect(self._root, new StringBuilder(), 0, pattern, queue)
+    prefix = []
+    self.collect("R", self._root, prefix, queue)
+    return queue
+
+  def collect(self, name, x, prefix, queue):
+    """all keys in subtrie rooted at x with given prefix"""
+    print "\nVVVV", name, x, prefix, queue
+    if x is None: return
+    print "WWWW", name, x, prefix, queue
+    self.collect("L", x._left,  prefix, queue)
+    print "XXXX", name, x, prefix, queue
+    if x._val is not None: queue.append(''.join([str(prefix), x._c])) # enqueue(str(prefix) + x.c)
+    self.collect("M", x._mid,   prefix.append(x._c), queue)
+    prefix.pop()
+    self.collect("R", x._right, prefix, queue)
+
+  def _collect(self, x, prefix, i, pattern, queue):
+    if x is None: return
+    c = pattern.charAt(i)
+    if c == '.' or c  < x._c: self._collect(x._left, prefix, i, pattern, queue)
+    if c == '.' or c == x._c:
+      if i == len(pattern) - 1 and x.val is not None: queue.append(prefix.toString() + x.c)
+      if i <  len(pattern) - 1:
+        self._collect(x._mid, prefix.append(x._c), i+1, pattern, queue)
+        prefix.deleteCharAt(len(prefix) - 1)
+    if c == '.' or c > x._c: self._collect(x.right, prefix, i, pattern, queue)
+
+  def keysThatMatch(self, pattern):
+    """Returns all of the keys in the symbol table that match pattern; . symbol is a wildcard"""
+    queue = cx.deque() # new Queue<String>()
+    self._collect(self._root, [], 0, pattern, queue)
     return queue
  
-  def _collect(<Value> x, StringBuilder prefix, i, String pattern, Queue<String> queue):
-      if x is None) return
-      char c = pattern.charAt(i)
-      if c == '.' or c < x.c) collect(x.left, prefix, i, pattern, queue)
-      if c == '.' or c == x.c):
-          if i == len(pattern)() - 1 and x.val is not None) queue.enqueue(prefix.toString() + x.c)
-          if i < len(pattern)() - 1):
-              collect(x.mid, prefix.append(x.c), i+1, pattern, queue)
-              prefix.deleteCharAt(len(prefix)() - 1)
-      if c == '.' or c > x.c) collect(x.right, prefix, i, pattern, queue)
+  def keysWithPrefix(self, prefix):
+    """Returns all of the keys in the set that start with prefix."""
+    queue = cx.deque() # new Queue<String>()
+    x = self._get(self._root, prefix, 0)
+    if x is None: return queue
+    if x._val is not None: queue.append(prefix) # enqueue(prefix)
+    self.collect(x._mid, [prefix], queue)
+    return queue
 
 # -----------------------------------------------------------------------------
 # TERNARY SEARCH TRIES (22:42)

@@ -41,6 +41,9 @@ def cli_get_fin(fin):
       flds = re.findall(r'(\S+)', line)
       l = arr_int_str(flds)
       a.append(l[0] if len(l) == 1 else l)
+    # If all input is on one line...
+    if len(a) == 1: # Ex: [['she', 'sells', 'sea', 'shells', ...]]
+      return a[0] # Return ['she', 'sells', 'sea', 'shells', ...]
   return a
 
 def arr_int_str(a):

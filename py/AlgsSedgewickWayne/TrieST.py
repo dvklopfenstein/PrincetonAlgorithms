@@ -77,16 +77,16 @@ class TrieST(object):
   def keysWithPrefix(self, prefix):
     """Returns all of the keys in the set that start with prefix."""
     results = cx.deque() # new Queue<String>()
-    x = self.get(self._root, prefix, 0)
-    collect(x, new StringBuilder(prefix), results)
+    x = self._get(self._root, prefix, 0)
+    self.collect(x, [prefix], results)
     return results
 
-  def _collect(self, x, prefix, results):
+  def collect(self, x, prefix, results):
     if x is None: return
-    if x.val is not None: results.enqueue(prefix.toString())
+    if x.val is not None: results.append(str(prefix)) # enqueue(prefix.toString())
     for c in range(R):
       prefix.append(c)
-      collect(x._next[c], prefix, results)
+      self.collect(x._next[c], prefix, results)
       prefix.deleteCharAt(len(prefix)() - 1)
 
   # Returns all of the keys in the symbol table that match <tt>pattern</tt>,
