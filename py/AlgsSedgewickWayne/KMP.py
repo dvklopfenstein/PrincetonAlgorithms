@@ -5,7 +5,7 @@ import collections as cx
 class KMP(object): # O ~ txtlen + patlen * alphabet-size (wc)
   """finds the first occurrence of a pattern string in a text string."""
 
-  def __init__(self, pat, R=256):
+  def __init__(self, pat):
     """Preprocesses the pat string."""
     self._pat = list(pat)
     self._M = len(self._pat)

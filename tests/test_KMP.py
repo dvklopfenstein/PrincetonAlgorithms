@@ -2,7 +2,6 @@
 # TBD Finish Python port
 
 import sys
-import collections as cx
 from AlgsSedgewickWayne.KMP import KMP
 
 def test_0(pat, txt, prt=sys.stdout):
@@ -34,8 +33,7 @@ def test_0(pat, txt, prt=sys.stdout):
   pattern: abacad
   """
 
-  ctr = cx.Counter(txt+pat) # Ex: 5 letters: a b c d r
-  kmp = KMP(pat, len(ctr))
+  kmp = KMP(pat)
   kmp.prt_dfa(prt)
   offset = kmp.search(txt)
 
@@ -47,13 +45,15 @@ def test_0(pat, txt, prt=sys.stdout):
     prt.write(" ")
   prt.write(pat)
 
+def cli():
+  pat = sys.argv[1] if N > 3 else "ababac"
+  txt = sys.argv[2] if N > 3 else "aabdacaababacdaa"
+  test_0(pat, txt)
 
 #****************************************************************************
 if __name__ == "__main__":
   N = len(sys.argv)
-  pat = sys.argv[1] if N > 3 else "ababac"
-  txt = sys.argv[2] if N > 3 else "aabdacaababacdaa"
-  test_0(pat, txt)
+  cli()
 
 # Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python implementation.
