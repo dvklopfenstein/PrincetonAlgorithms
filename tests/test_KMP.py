@@ -2,65 +2,58 @@
 # TBD Finish Python port
 
 import sys
+import collections as cx
 from AlgsSedgewickWayne.KMP import KMP
 
-#****************************************************************************
-# Compilation:  javac KMP.java
-# Execution:    java KMP pattern text
-# Dependencies: StdOut.java
-#
-# Reads in two strings, the pattern and the input text, and
-# searches for the pattern in the input text using the
-# KMP algorithm.
-#
-# % java KMP abracadabra abacadabrabracabracadabrabrabracad
-# text:    abacadabrabracabracadabrabrabracad 
-# pattern:               abracadabra          
-#
-# % java KMP rab abacadabrabracabracadabrabrabracad
-# text:    abacadabrabracabracadabrabrabracad 
-# pattern:         rab
-#
-# % java KMP bcara abacadabrabracabracadabrabrabracad
-# text:    abacadabrabracabracadabrabrabracad 
-# pattern:                                   bcara
-#
-# % java KMP rabrabracad abacadabrabracabracadabrabrabracad 
-# text:    abacadabrabracabracadabrabrabracad
-# pattern:                        rabrabracad
-#
-# % java KMP abacad abacadabrabracabracadabrabrabracad
-# text:    abacadabrabracabracadabrabrabracad
-# pattern: abacad
-#
-def test_0(prt=sys.stdout):
-      String pat = args[0]
-      String txt = args[1]
-      char[] pattern = pat.toCharArray()
-      char[] text    = txt.toCharArray()
+def test_0(pat, txt, prt=sys.stdout):
+  """Searches for the pattern in the text; prints the 1st occurrence.
+  Execution:    test_KMP.py pattern text
+  
+  Reads in two strings, the pattern and the input text, and
+  searches for the pattern in the input text using the
+  KMP algorithm.
+  
+  >>> test_0("abracadabra", "abacadabrabracabracadabrabrabracad")
+  text:    abacadabrabracabracadabrabrabracad 
+  pattern:               abracadabra          
+  
+  >>> test_0("rab", "abacadabrabracabracadabrabrabracad")
+  text:    abacadabrabracabracadabrabrabracad 
+  pattern:         rab
+  
+  >>> test_0("bcara", "abacadabrabracabracadabrabrabracad")
+  text:    abacadabrabracabracadabrabrabracad 
+  pattern:                                   bcara
+  
+  >>> test_0("rabrabracad", "abacadabrabracabracadabrabrabracad ")
+  text:    abacadabrabracabracadabrabrabracad
+  pattern:                        rabrabracad
+  
+  >>> test_0("abacad", "abacadabrabracabracadabrabrabracad")
+  text:    abacadabrabracabracadabrabrabracad
+  pattern: abacad
+  """
 
-      KMP kmp1 = new KMP(pat)
-      offset1 = kmp1.search(txt)
+  ctr = cx.Counter(txt+pat) # Ex: 5 letters: a b c d r
+  kmp = KMP(pat, len(ctr))
+  kmp.prt_dfa(prt)
+  offset = kmp.search(txt)
 
-      KMP kmp2 = new KMP(pattern, 256)
-      offset2 = kmp2.search(text)
+  # print results
+  prt.write("text:    {}\n".format(txt))
 
-      # print results
-      prt.write("text:    " + txt)
+  prt.write("pattern: ")
+  for i in range(offset):
+    prt.write(" ")
+  prt.write(pat)
 
-      StdOut.print("pattern: ")
-      for (int i = 0; i < offset1; i += 1)
-          StdOut.print(" ")
-      prt.write(pat)
-
-      StdOut.print("pattern: ")
-      for (int i = 0; i < offset2; i += 1)
-          StdOut.print(" ")
-      prt.write(pat)
 
 #****************************************************************************
 if __name__ == "__main__":
-  test_0()
+  N = len(sys.argv)
+  pat = sys.argv[1] if N > 3 else "ababac"
+  txt = sys.argv[2] if N > 3 else "aabdacaababacdaa"
+  test_0(pat, txt)
 
 # Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python implementation.

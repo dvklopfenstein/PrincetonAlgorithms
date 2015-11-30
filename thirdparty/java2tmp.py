@@ -70,6 +70,7 @@ def main(prt=sys.stdout):
       line = line.replace('++', ' += 1')
       line = line.replace('--', ' -= 1')
       line = line.replace('StdOut.println', 'prt.write')
+      line = line.replace('StdOut.print', 'prt.write')
       line = chk_def(line)
       if loc == "body":
         if FOUT: FOUT.write(line)
