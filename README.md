@@ -169,12 +169,12 @@ Key   4 GRAPHS                    Description                         DATA
  p  5.1 LSD          LSD radix sort                      words3.txt
  p  5.2 MSD          MSD radix sort                      shells.txt
  .  5.3 Quick3string 3-way string quicksort              shells.txt
- .  5.4 TrieST       multiway trie symbol table          shellsST.txt
+ p  5.4 TrieST       multiway trie symbol table          shellsST.txt
  .    – TrieSET      multiway trie set                   shellsST.txt
- .  5.5 TST          ternary search trie                 shellsST.txt
- .  5.6 KMP          Knuth-Morris-Pratt substring search –
- .  5.7 BoyerMoore   Boyer-Moore substring search        –
- .  5.8 RabinKarp    Rabin-Karp substring search         –
+ p  5.5 TST          ternary search trie                 shellsST.txt
+ p  5.6 KMP          Knuth-Morris-Pratt substring search –
+ p  5.7 BoyerMoore   Boyer-Moore substring search        –
+ p  5.8 RabinKarp    Rabin-Karp substring search         –
  .  5.9 NFA          NFA for regular expressions         –
  .    – GREP         grep                                –
  .    – BinaryDump   binary dump                         abra.txt

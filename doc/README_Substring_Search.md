@@ -1,11 +1,11 @@
-# Substring Search
+# [Substring Search](http://algs4.cs.princeton.edu/53substring)
 
 ## Code
   * **Introduction to Substring Search**
   * **Brute-Force Substring Search**
-  * **Knuth-Morris-Pratt**
-  * **Boyer-Moore**
-  * **Rabin-Karp**
+  * **Knuth-Morris-Pratt**: KMP.py
+  * **Boyer-Moore**: BoyerMoore.py
+  * **Rabin-Karp**: RabinKarp.py
 
 ## Table of Contents for Examples
   1. [Run Example](#ex1)
