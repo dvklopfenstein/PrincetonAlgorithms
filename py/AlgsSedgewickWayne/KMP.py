@@ -1,4 +1,4 @@
-"""Finds the 1st  occurrence of a pattern string in a text string without backing-up."""
+"""Knuth-Morris-Pratt finds the 1st occurrence of a pattern in a text string wo/backing-up."""
 
 import collections as cx
 
@@ -11,9 +11,9 @@ class KMP(object): # O ~ txtlen + patlen * alphabet-size (wc)
     self._M = len(self._pat)
     self._miss = [0 for i in range(self._M)]
 
-    # build DFA(Deterministic finite state automatom) from pat
-    self._dfa = cx.OrderedDict([(c, [0 for m in range(self._M)]) for c in sorted(set(self._pat))])
-    self._dfa[pat[0]][0] = 1
+    # build DFA (Deterministic finite state automatom) from pat
+    self._dfa = cx.defaultdict(lambda: [0 for i in range(self._M)])
+    self._dfa[self._pat[0]][0] = 1
     X = 0
     for j in range(1, self._M):
       for c in self._dfa.keys():
@@ -35,10 +35,10 @@ class KMP(object): # O ~ txtlen + patlen * alphabet-size (wc)
     return N                # not found, return text size
 
   def prt_dfa(self, prt):
-    """Print DFA(Deterministic finite state automatom) from pat."""
+    """Print DFA (Deterministic finite state automatom) from pat."""
     prt.write("     {}\n".format(' '.join(self._pat)))
     prt.write("     {} <- Current State\n".format(' '.join(str(i) for i in range(self._M))))
-    for pat_letter, state_nxt in self._dfa.items(): 
+    for pat_letter, state_nxt in sorted(self._dfa.items()): 
       prt.write("{} -> {}\n".format(pat_letter, ' '.join(str(s) for s in state_nxt)))
 
 # Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
