@@ -3,7 +3,7 @@
 ## Code
   * **Introduction to Substring Search**
   * **Brute-Force Substring Search**
-  * **Knuth-Morris-Pratt**: [KMP.py](../AlgsSedgewickWayne/KMP.py)
+  * **Knuth-Morris-Pratt**: [KMP.py](../py/AlgsSedgewickWayne/KMP.py)
   * **Boyer-Moore**: BoyerMoore.py
   * **Rabin-Karp**: RabinKarp.py
 
@@ -12,17 +12,16 @@
 
 ## Examples 
 ### [ex1](#table-of-contents-for-examples)
-1. KMP Example
-Running a pattern match
+1. Run KMP: 
 ```
 >>> test_KMP.py ababac aabdacaababacdaa
 ```
-Shows the 1st occurance of the pattern in the text
+Shows the 1st occurance of the pattern(ababac) in the text(aabdacaababacdaa)
 ```
 text:    aabdacaababacdaa
 pattern:        ababac
 ```
-And prints the DFA(Deterministic finite state automatom) created using the pattern
+And prints the DFA (Deterministic finite state automatom) created using the pattern
 ```
      a b a b a c
      0 1 2 3 4 5 <- Current State
