@@ -1,22 +1,24 @@
 """Compute connected components using depth first search."""
 
+import collections as cx
+
 class CC(object):
   """Computes the connected components of the undirected graph G in constant time."""
 
   def __init__(self, G): #  O(E + V)
-    self._marked = [False]*G.V() # marked[v] = has vertex v been marked?
-    self._id = [None]*G.V()   # id[v] = id of connected component containing v
+    self._marked = cx.OrderedDict((v, False) for v in G.keys)
+    self._id = cx.OrderedDict((v, None) for v in G.keys)
     self._count = 0        # number of connected components
     self._size = [0]*G.V() # size[id] = number of vertices in given component
-    for v in range(G.V()):
+    for v in G.keys:
       if not self._marked[v]:
         self._dfs(G, v)
         self._count += 1
 
   def _dfs(self, G, v):
     """depth-first search"""
-    self._marked[v] = True
-    self._id[v] = self._count
+    self._marked[v] = True    # marked[v] = has vertex v been marked?
+    self._id[v] = self._count # id[v] = id of connected component containing v
     self._size[self._count] += 1
     for w in G.adj(v):
       if not self._marked[w]:
@@ -33,6 +35,11 @@ class CC(object):
 
   # Returns true if vertices v and w are in the same connected component.
   def connected(self, v, w): return self._id(v) == self._id(w)
+
+  def prt_ids(self, prt):
+    """Print Vertex names on line 1 and vertex component ids on line 2."""
+    prt.write("id[v] = {}\n".format(' '.join(self._id.keys())))
+    prt.write("id[v] = {}\n".format(' '.join(str(i) for i in self._id.values())))
 
 #------------------------------------------------------------------------------
 # CONNECTED COMPONENTS (18:56)
