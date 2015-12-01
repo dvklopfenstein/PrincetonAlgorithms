@@ -260,3 +260,5 @@ any and all other warranties, whether express or implied, including,
 without limitation, any implied warranties of merchantability or
 fitness for a particular purpose.
 
+[Web Page](http://dvklopfenstein.github.io/PrincetonAlgorithms)
+[github pages](https://help.github.com/pages)
