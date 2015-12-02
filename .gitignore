@@ -37,7 +37,7 @@ thirdparty/KdTree.java
 py/AlgsSedgewickWayne/PointSET.py
 py/AlgsSedgewickWayne/KdTree.py
 
-# Programming Assignment 2.1
+# Programming Assignment 2.1: WordNet
 thirdparty/wordnet.zip
 thirdparty/SAP.java
 thirdparty/WordNet.java
@@ -46,16 +46,20 @@ py/AlgsSedgewickWayne/SAP.py
 py/AlgsSedgewickWayne/WordNet.py
 py/AlgsSedgewickWayne/Outcast.py
 
-# Programming Assignment 2.2
+# Programming Assignment 2.2: Content-Aware Resizing
 thirdparty/seamCarving.zip
 thirdparty/SeamCarver.java
 py/AlgsSedgewickWayne/SeamCarver.py
 
-# Programming Assignment 2.3
+# Programming Assignment 2.3: Baseball Elimination
 thirdparty/baseball.zip
 thirdparty/BaseballElimination.java
 py/AlgsSedgewickWayne/BaseballElimination.py
 
+# Programming Assignment 2.4: Boggle
+thirdparty/boggle.zip
+thirdparty/BoggleSolver.java
+py/AlgsSedgewickWayne/BoggleSolver.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
