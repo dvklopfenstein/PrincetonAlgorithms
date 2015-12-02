@@ -15,11 +15,11 @@ class KMP(object): # O ~ txtlen + patlen * alphabet-size (wc)
     self._dfa = cx.defaultdict(lambda: [0 for i in range(self._M)])
     self._dfa[self._pat[0]][0] = 1
     X = 0
-    for j in range(1, self._M):
+    for j, letter in enumerate(self._pat[1:], 1):
       for c in self._dfa.keys():
         self._dfa[c][j] = self._dfa[c][X] # Copy mismatch cases. 
-      self._dfa[self._pat[j]][j] = j+1      # Set match case. 
-      X = self._dfa[self._pat[j]][X]        # Update restart state. 
+      self._dfa[letter][j] = j+1      # Set match case. 
+      X = self._dfa[letter][X]        # Update restart state. 
 
   def search(self, txt):
     """Returns the idx of the 1st occurrrence of the pattern string in the text string."""

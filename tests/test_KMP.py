@@ -13,8 +13,8 @@ def test_0(pat, txt, prt=sys.stdout):
   KMP algorithm.
   
   >>> test_0("abracadabra", "abacadabrabracabracadabrabrabracad")
-  text:    abacadabrabracabracadabrabrabracad 
-  pattern:               abracadabra          
+  text:    abacadabrabracabracadabrabrabracad
+  pattern:               abracadabra
   
   >>> test_0("rab", "abacadabrabracabracadabrabrabracad")
   text:    abacadabrabracabracadabrabrabracad 
@@ -38,21 +38,25 @@ def test_0(pat, txt, prt=sys.stdout):
   offset = kmp.search(txt)
 
   # print results
-  prt.write("text:    {}\n".format(txt))
+  ret = ["text:    {}\n".format(txt)]
 
-  prt.write("pattern: ")
+  ret.append("pattern: ")
   for i in range(offset):
-    prt.write(" ")
-  prt.write(pat)
+    ret.append(" ")
+  ret.append("{}\n".format(pat))
+  prt.write("{}\n".format(''.join(ret)))
+  return ''.join(ret)
+
 
 def cli():
-  pat = sys.argv[1] if N > 3 else "ababac"
-  txt = sys.argv[2] if N > 3 else "aabdacaababacdaa"
-  test_0(pat, txt)
+  N = len(sys.argv)
+  if N == 3:
+    test_0(pat=sys.argv[1], txt=sys.argv[2], prt=sys.stdout)
+  else:
+    test_0(pat="ababac", txt="aabdacaababacdaa", prt=sys.stdout)
 
 #****************************************************************************
 if __name__ == "__main__":
-  N = len(sys.argv)
   cli()
 
 # Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
