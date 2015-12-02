@@ -24,7 +24,7 @@ class KMP(object): # O ~ txtlen + patlen * alphabet-size (wc)
   def search(self, txt):
     """Returns the idx of the 1st occurrrence of the pattern string in the text string."""
     # simulate operation of DFA on text
-    M = len(self._pat)
+    M = self._M
     N = len(txt)
     i = 0
     j = 0
