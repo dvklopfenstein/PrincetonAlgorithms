@@ -48,7 +48,7 @@ def test_1(prt=sys.stdout):
   cc.prt_ids(prt)
   prt.write("\n{}\n".format(G))
 
-if __name__ == '__main__':
+def cli():
   N = len(sys.argv)
   if N == 1:
     test_0()
@@ -62,3 +62,6 @@ if __name__ == '__main__':
     else:
       raise Exception("{} NOT PRESENT IN: {}".format(
         fnc_to_run, ' '.join(name2fnc.keys())))
+
+if __name__ == '__main__':
+  cli()

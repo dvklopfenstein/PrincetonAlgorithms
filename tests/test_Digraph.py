@@ -10,5 +10,18 @@ def main(prt=sys.stdout):
   G = Digraph(g)
   prt.write("{}\n".format(G))
 
+def test_lecture(prt=sys.stdout):
+  """Plot tinyDG2.txt from 'Diagraph Search' Coursera Algs2 lecture."""
+  g = cli_get_fin("../thirdparty/tinyDG2.txt")
+  G = Digraph(g)
+  prt.write("{}\n".format(G))
+  G.wr_png("Digraph_lecture.png", prt)
+
+def run_all(prt=sys.stdout):
+  main(prt)
+  test_lecture(prt)
+
+
 if __name__ == '__main__':
-  main()
+  #run_all()
+  test_lecture()

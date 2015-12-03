@@ -81,7 +81,7 @@ class Graph(object):
     # 1. Create/initialize Graph
     G = pydot.Dot(graph_type='graph') # Undirected Graph
     # 2. Create Nodes
-    nodes = [pydot.Node(v) for v in self._adj]
+    nodes = [pydot.Node(v) for v in self.keys]
     # 3. Add nodes to Graph
     for node in nodes:
       G.add_node(node)
@@ -95,7 +95,7 @@ class Graph(object):
 
   def get_edges(self):
     edges = set()
-    for v in self._adj:
+    for v in self.keys:
       for w in self._adj[v]:
         edges.add(tuple(sorted([v, w]))) 
     return edges

@@ -1,61 +1,66 @@
 """A graph, implemented using an array of lists. Parallel edges and self-loops are permitted."""
 
+import sys
+from AlgsSedgewickWayne.testcode.utils import adjtxtblk2OrderedDict
+
 class Digraph(object):
-  
-  def __init__(self, a):
-    if isinstance(a, int):
-      self._init_empty(a)
-    elif len(a) == 1:
-      self._init_empty(a[0])
-    else:
-      self._init(a)
+
+  def __init__(self, a=None, **kwargs):
+    if a is not None:
+      if isinstance(a, int):
+        self._init_empty(a)
+      elif len(a) == 1:
+        self._init_empty(a[0])
+      else:
+        self._init(a)
+      self.keys = range(self._V)
+    elif 'adjtxt' in kwargs:
+      self._adj = adjtxtblk2OrderedDict(kwargs['adjtxt'])
+      self._V = len(self._adj)
+      self._E = len(set([tuple(sorted([v, w])) for v, ws in self._adj.items() for w in ws]))
+      self.keys = self._adj.keys()
 
   def _init_empty(self, V):
-    if V < 0: raise Exception("Number of vertices in a Digraph must be nonnegative")
-    self._V = V # number of vertices in self digraph
-    self._E = 0 # number of edges in self digraph
+    if V < 0: raise Exception("Number of vertices must be nonnegative")
+    self._V = V # number of vertices 
+    self._E = 0 # number of edges
+    self._adj = [set() for v in range(V)]
     self._indegree = [0]*V # indegree[v] = indegree of vertex v
-    self._adj = [set() for v in range(V)] # adj[v] = adjacency list for vertex v
 
   def _init(self, a):
     """Initializes a graph from an input stream."""
     # The format is the number of vertices V, followed by the number of edges E,
     # followed by E pairs of vertices, with each entry separated by whitespace.
     self._init_empty(a[0]) # init V, and the empty adj list
-    self._E = a[1]
-    if self._E < 0: raise Exception("Number of edges must be nonnegative")
+    E = a[1]
+    if E < 0: raise Exception("Number of edges must be nonnegative")
     for v, w in a[2:]:
       self.addEdge(v, w)
 
-  def V(self): return self._V # Returns the number of vertices in self digraph.
-  def E(self): return self._E # Returns the number of edges in self digraph.
-
-  def _validateVertex(self, v):
-    """raise an IndexOutOfBoundsException unless 0 <= v < V"""
-    if v < 0 or v >= self._V:
-      raise Exception("vertex {} is not between 0 and {}".format(v, V-1))
+  def V(self): return self._V # Returns the number of vertices in self graph.
+  def E(self): return self._E # Returns the number of edges in self graph.
 
   def addEdge(self, v, w):
-    """Adds the directed edge v->w to self digraph."""
-    self._validateVertex(v)
-    self._validateVertex(w)
+    """Adds the undirected edge v-w to self graph."""
+    #self._validateVertex(v)
+    #self._validateVertex(w)
+    self._E += 1
     self._adj[v].add(w)
     self._indegree[w] += 1
-    self._E += 1
 
   def adj(self, v):
-    """Returns the vertices adjacent from vertex v in self digraph."""
-    self._validateVertex(v)
+    """Returns the vertices adjacent to vertex v."""
+    #self._validateVertex(v)
     return self._adj[v]
 
   def outdegree(self, v):
     """Returns the number of directed edges incident from vertex v."""
-    self._validateVertex(v)
+    #self._validateVertex(v)
     return self._adj[v].size()
 
   def indegree(self, v):
     """Returns the number of directed edges incident to vertex v."""
-    self._validateVertex(v)
+    #self._validateVertex(v)
     return self.indegree[v]
 
   def reverse(self):
@@ -66,48 +71,94 @@ class Digraph(object):
         R.addEdge(w, v)
     return R
 
+  #def _validateVertex(self, v):
+  #  """raise an IndexOutOfBoundsException unless 0 <= v < V."""
+  #  if v < 0 or v >= self._V or v not in self._adj:
+  #    raise Exception("vertex {} is not between 0 and {} or in {}".format(v, self._V-1, self._adj))
+
   def __str__(self):
-    s = ["{V} vertices, {E} edges \n".format(V=self._V, E=self._E)]
-    for v in range(self._V):
-      s.append("{}: ".format(v))
+    s = [(("{V} vertices, {E} edges\n").format(V=self._V, E=self._E))]
+    for v in self.keys:
+      s.append("{v}: ".format(v=v))
       for w in self._adj[v]:
-        s.append("{} ".format(w))
+        s.append("{w} ".format(w=w))
       s.append("\n")
     return ''.join(s)
 
- #  % java Digraph tinyDG.txt
- #  13 vertices, 22 edges
- #  0: 5 1 
- #  1: 
- #  2: 0 3 
- #  3: 5 2 
- #  4: 3 2 
- #  5: 4 
- #  6: 9 4 8 0 
- #  7: 6 9
- #  8: 6 
- #  9: 11 10 
- #  10: 12 
- #  11: 4 12 
- #  12: 9 
+  def __iter__(self): # Makes Graph an iterable.
+    return iter(self._adj) # returns an iterator.
 
-# ------------------------------------------------------------------
-# INTRODUCTION TO DIGRAPHS (8:30)
+  def wr_png(self, fout_png="Digraph.png", prt=sys.stdout, **kwargs):
+    """Make a png showing a diagram of the connected components."""
+    import pydot
+    from AlgsSedgewickWayne.testcode.utils import get_png_label
+    # 1. Create/initialize Graph
+    G = pydot.Dot(graph_type='digraph') # Undirected Graph
+    # 2. Create Nodes
+    nodes = [pydot.Node(v) for v in self.keys]
+    # 3. Add nodes to Graph
+    for node in nodes:
+      G.add_node(node)
+    # 4. Add Edges between Nodes to Graph
+    for v, w in self.get_edges():
+      if v != w: # Print only edges from one node to another (not to self)
+        G.add_edge(pydot.Edge(v, w))
+    # 5. Write Graph to png file
+    G.write_png(fout_png)
+    prt.write("  WROTE: {}\n".format(fout_png))
 
-# SOME DIGRAPH PROBLEMS 07:30
+  def get_edges(self):
+    edges = set()
+    for v in self.keys:
+      for w in self._adj[v]:
+        edges.add(tuple(sorted([v, w]))) 
+    return edges
+
+ #*****************************************************************************/
+ #  % Graph.py ../thirdparty/tinyG.txt
+ #  13 vertices, 13 edges 
+ #  0: 6 2 1 5 
+ #  1: 0 
+ #  2: 0 
+ #  3: 5 4 
+ #  4: 5 6 3 
+ #  5: 3 4 0 
+ #  6: 0 4 
+ #  7: 8 
+ #  8: 7 
+ #  9: 11 10 12 
+ #  10: 9 
+ #  11: 9 12 
+ #  12: 11 9 
+ #  
+ #*****************************************************************************/
+
+# -----------------------------------------------------------------------------
+# INTRODUCTION TO GRAPHS (9:32)
+
+
+# SOME GRAPH-PROCESSING PROBLEMS 08:14
 #
-# PATH: Is there a directed path from s to t?
-# SHORTEST PATH: What is the shortest directed path from s to t?
-# TOPOLOGICAL SORT: Can you draw a digraph so that all edges so that all edges point upwards?
-# STRONG CONNECTIVITY: Is there a directed path between all pairs of vertices?
-# TRANSITIVE CLOSURE: For which vertices v and w is there a path from v to w?
-# PAGERANK: What is the importance of a web page?
+# PATH: Is there a path between s and t?
+# SHORTEST PATH: What is the shortest path between s and t?
 #
-# QUESTION: How many different digraphs are there on V vertices?
-# Allow self-loops but do not allow parallel edges.
-# ANSWER: 2^(V^2)
-# EXPLANATION: There are V^2 possible edges. Each edge is either in 
-# the digrpah or not.
+# CYCLE: Is there a cycle in the graph?
+# EULER TOUR: Is there a cycle that uses each edge exactly once?
+# HAMILTON TOUR: Is there a cycle that uses each vertex exactly once?
+#
+# CONNECTIVITY: Is there a awy to connect all of the vertices?
+# MST: What is the best way to connect all of the vertices?
+# BICONNECTIVITY: Is there a vertex whose removeal disconnects the graph?
+#
+# PLANARITY: Can you draw the graph in the plane with no crossing edges?
+# GRAPH ISOMORPHISM: Do two adjacency lists represent the same graph?
+# 
+# CHALLENGE: Whinc of these problems are easy? difficult? intractable?
 
-# Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
-# Copyright 2015-2015, DV Klopfenstein, Python implementation
+
+
+# QUESTION: A cycle that uses eachedge of a graph exactly once is called
+# ANSWER: An Euler tour
+
+#  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
+#  Copyright 2015-2016, DV Klopfenstein, Python implementation
