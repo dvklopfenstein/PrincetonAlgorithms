@@ -67,8 +67,8 @@ Note: There are no Programming Assignment Solutions on this site.
   * [Substring Search](README_Substring_Search.md)
   * Programming Assignment 4: [**Boggle**](http://htmlpreview.github.com/?https://github.com/dvklopfenstein/PrincetonAlgorithms/blob/master/thirdparty/a2_hw4/Programming_Assignment_4_Boggle.html)
 * **Week 6 Suggested Readings**: Section 5.4 and 5.5 in [*Algorithms, 4th edition*](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1441459738&sr=1-1&keywords=sedgewick&refinements=p_n_feature_browse-bin%3A2656020011&pebp=1441459739425&perid=0C83SQQ1YFJ62VWHF9C0)
-  * Regular Expressions
-  * Data Compression
+  * [Regular Expressions](README_Regular_Expressions.md)
+  * [Data Compression](README_Data_Compression.md)
   * Programming Assignment 5: **Burrows-Wheeler algorithm**
 
 * **Week 7 Suggested Readings**: Section 6.5 (pp 903-910) and 6.6 (910-921) in [*Algorithms, 4th edition*](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1441459738&sr=1-1&keywords=sedgewick&refinements=p_n_feature_browse-bin%3A2656020011&pebp=1441459739425&perid=0C83SQQ1YFJ62VWHF9C0)
