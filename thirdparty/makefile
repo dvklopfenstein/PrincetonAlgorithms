@@ -161,6 +161,9 @@ baseball.zip: BaseballElimination.java
 boggle.zip: BoggleSolver.java
 	zip $@ $<
 
+burrows.zip: MoveToFront.java BurrowsWheeler.java CircularSuffixArray.java
+	zip $@ $<
+
 
 Percolation.class: $(ALGS4SRC)/Percolation.java
 	$(JC) -d . $<

@@ -1,0 +1,235 @@
+
+<!-- saved from url=(0062)http://coursera.cs.princeton.edu/algs4/checklists/burrows.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>
+Programming Assignment Checklist: Burrows-Wheeler Data Compression 
+</title>
+</head>
+
+<body>
+<h3>Programming Assignment Checklist: Burrows-Wheeler Data Compression</h3>
+
+
+<table border="0" cellpadding="2" cellspacing="0" width="100%"> <tbody><tr align="left"> <td bgcolor="000000"> <font size="+0" face="helvetica" color="ffffff"> 
+<center>Frequently Asked Questions</center> </font></td></tr></tbody></table>
+
+<p><b>What program should I use for reading and writing the data?</b> You must use 
+<tt>BinaryStdIn.java</tt> and <tt>BinaryStdOut.java</tt>. These read and write sequences 
+of bytes, whereas <tt>StdIn.java</tt> and <tt>StdOut.java</tt>
+read and write sequences of Unicode 
+characters. These are in <a href="http://introcs.cs.princeton.edu/stdlib/stdlib.jar">stdlib.jar</a>.
+
+</p><p><b>My programs work from the command line but the autograder complains that that it can't read in the input.
+Any ideas?</b>
+The autograder calls <tt>main()</tt> more than once. So, be sure that any static variables get reset
+appropriately (or, better yet, don't use static variables).
+
+</p><p><b>My programs don't work properly with binary data. Why not?</b> Be absolutely sure 
+that you use only <tt>BinaryStdIn.java</tt> and <tt>BinaryStdOut.java</tt> for input 
+and output. Also, be sure that you call <tt>BinaryStdOut.flush()</tt> or 
+<tt>BinaryStdOut.close()</tt> after you are done writing—see <tt>Huffman.expand()</tt>
+for an example.
+
+</p><p><b>Why does <tt>BinaryStdIn</tt> return the 8-bits as a (16-bit unsigned) <tt>char</tt> 
+instead of as an (8-bit signed) <tt>byte</tt></b>? The primitive type <tt>byte</tt> is annoying
+to use in Java. When you operate on a <tt>byte</tt>, it is typically promoted to an 
+<tt>int</tt> and you must be careful because the byte is signed.
+For example, to convert a <tt>byte b</tt> to a <tt>char c</tt>, you must write 
+<tt>c = (char) (b &amp; 0xff)</tt> instead of <tt>c = (char) b</tt>. By using <tt>char</tt>, 
+we avoid the hassle.
+
+</p><p><b>For the Burrows-Wheeler encoder, in which order do I sort the suffixes?</b>
+The input is a sequence of extended ASCII characters (00 to FF), which you can read in with 
+<tt>BinaryStdIn.readString()</tt>. You should sort the suffixes according to
+extended ASCII order, which is the natural order of the <tt>String</tt> data type.
+
+</p><p><b>For the Burrows-Wheeler decoder, does <tt>next[0]</tt> always equal first?
+And wouldn't this mean that the index <tt>first</tt> is redundant?</b>
+No, this is just a coincidence with the input string <tt>"ABRACADABRA!"</tt>.
+Consider any two input strings that are cyclic rotations of one another,
+e.g., <tt>"ABRACADABRA!"</tt> and <tt>"CADABRA!ABRA"</tt>. They will have the same
+sorted suffixes and <tt>t[]</tt> array—their only difference will be in
+the index <tt>first</tt>.
+
+</p><p><b>Can I assume that the decode() method in BurrowsWheeler receives only
+valid inputs (that were created by a call to the encode() method)?</b>
+Yes.
+
+</p><p><b>How can I view the contents of a binary file and determine its size?</b>
+Use
+<a href="http://algs4.cs.princeton.edu/55compression/HexDump.java.html">HexDump.java</a>,
+as in the assignment.
+The command-line argument specifies the number of bytes per line to print; if the argument is
+0, all output except for the number of bits will be suppressed.
+
+<!-- <p><b>I have a difference of one character when I combine all three encoders (even 
+though when I run each encoder separately I have no differences). Is this a Windows 
+curiosity?</b> Yes, we think so. Try running on hats. -->
+
+</p><p><b>How much memory can my program consume?</b> The Burrows-Wheeler encoder may use 
+quite a bit, so you may need to use the <tt>-Xmx</tt> option when executing. You must use 
+space linear in the input size <em>N</em> and alphabet size <em>R</em>.
+(Industrial strength Burrows-Wheeler compression 
+algorithms typically use a fixed block size, and encode the message in these smaller 
+chunks. This reduces the memory requirements, at the expense of some loss in compression 
+ratio.)
+Therefore, depending on your operating system and configuration 
+there may be some very large files for which your program will not have 
+enough memory even with the <tt>-Xmx</tt> option.
+
+</p><p><b>I'm running out of memory in the Burrows-Wheeler encoder. Any ideas?</b>
+Watch out for creating new strings via <tt>substring()</tt> or string concatenation.
+Remember, that, as of Java 7u6, 
+substring extraction no longer takes constant time or space!
+
+</p><p><b>What is meant by "typical English text inputs"?</b>
+Inputs such as <tt>aesop.txt</tt>, <tt>moby.txt</tt>, or your most recent essay.
+We do not mean files such as <tt>aesop3copies.txt</tt> or random sequences of characters.
+
+</p><p><b>How do I use gzip and bzip2 on Windows?</b> It's fine to use pkzip or
+<a href="http://www.7-zip.org/">7-zip</a> instead.
+
+</p><p><b>I'm curious. What compression algorithm is used in PKZIP? In gzip? In bzip2?</b> 
+PKZIP uses LZW compression followed by Shannon-Fano (an entropy encoder similar
+to Huffman). The Unix utility gzip uses a variation of LZ77 (similar 
+to LZW) followed by Huffman coding. The program bzip2 combines the
+Burrows-Wheeler transform, Huffman coding, and a (fancier) move-to-front style rule.
+
+</p><p>
+
+<table border="0" cellpadding="2" cellspacing="0" width="100%"> <tbody><tr align="left"> <td bgcolor="000000"> <font size="+0" face="helvetica" color="ffffff"> <center>Testing</center> </font></td></tr></tbody></table>
+
+</p><p><b>Input.</b> Here are some <a href="http://coursera.cs.princeton.edu/algs4/testing/textfiles">sample input files</a>.
+For convenience, <a href="http://coursera.cs.princeton.edu/algs4/testing/textfiles-testing.zip">textfiles-testing.zip</a>
+contains all of these files bundled together.
+To fully test 
+your program, you should also try to compress and uncompress binary files (e.g., .class or 
+.jpg files).
+Be careful to download them as binary files—some browsers will corrupt them
+if you view the file and use File -&gt; Save.
+Do not edit them in a text editor—some editors will corrupt them
+by inserting bogus newline characters.
+
+
+
+</p><p><b>Reference solutions.</b> For reference, we have provided the output of compressing 
+<tt>aesop.txt</tt> and <tt>us.gif</tt>. We have also provided the results of applying each 
+of the three encoding algorithms in isolation. Note that the .gif file is a binary file and 
+is already compressed.
+
+</p><p>
+To compare the contents of two files, you can use the following commands:
+
+</p><ul>
+<p></p><li><em>Mac OS X or Linux:</em> <tt>diff file1 file2</tt>
+<p></p></li><li><em>Windows:</em> <tt>fc file1 file2</tt>
+</li></ul>
+
+
+<p><b>Timing your program.</b> 
+
+</p><ul>
+<p></p><li><em>Mac OS X or Linux.</em>
+Use the following command:
+    <pre>% time java BurrowsWheeler - &lt; mobydick.txt | java MoveToFront - | java Huffman - &gt; mobyDickOutputFileName</pre>
+You want to record the "real" value.
+
+<p></p></li><li><em>Windows.</em>
+We recommend using a simple batch file. The
+process for creating and running a batch file is as follows:
+
+<ol>
+    <p></p><li> Create a file called <tt>timeTest.bat</tt> in the same directory as your Burrows wheeler assignment. 
+    This is known as a "batch file". </li>
+    <p></p><li> Inside that file, put the following text (using Notepad or a similar text editor):
+
+    <pre>    echo %time%
+    java BurrowsWheeler - &lt; mobydick.txt | java MoveToFront - | java Huffman - &gt; mobyDickOutputFileName
+    echo %time%
+    </pre>
+
+    <p></p></li><li>Execute <tt>timeTest.bat</tt> by navigating a terminal window so that it's
+           in the same directory as <tt>timeTest.bat</tt> and your .java files and
+           type <tt>timeTest</tt>.
+       </li>
+
+</ol>
+
+<p>
+Make sure you name the batch file <tt>timeTest.bat</tt> instead of
+<tt>timeTest.bat.txt</tt>.
+Note that you can test multiple files by adding more lines to the batch file.
+
+</p></li></ul>
+
+<p><b>Timing using gzip, bzip2, 7zip, etc.</b></p>
+
+<ul>
+<p></p><li><em>Mac OS X or Linux.</em> Use the <tt>time</tt> command as above, but
+with <tt>gzip</tt> or <tt>bzip2</tt>.
+ 
+<p></p></li><li><em>Windows.</em> There is no built-in data compression program (such as gzip or bzip2).
+We recommend downloading the free
+<a href="http://www.7-zip.org/">7-zip</a> program.
+After installing 7-zip, create a new batch file (any filename ending in <tt>.bat</tt>)
+with the following text:
+
+<pre>    echo %time%
+    7za a -tzip mobyDickOutputFileName.zip mobydick.txt
+    echo %time%
+</pre>
+<p>This creates a file in .zip format (the same used natively by Windows for compression). To test unzipping time, use the following:
+
+</p><pre>    echo %time%
+    7za e mobyDickOutputFileName.zip 
+    echo %time%
+</pre>
+</li></ul>
+
+<p>If you're interested in testing against other compression formats, then see <a href="http://www.dotnetperls.com/7-zip-examples">this page</a>.
+
+
+
+
+
+</p><p>
+
+<table border="0" cellpadding="2" cellspacing="0" width="100%"> <tbody><tr align="left"> <td bgcolor="000000"> <font size="+0" face="helvetica" color="ffffff"> <center>Possible 
+Progress Steps</center> </font></td></tr></tbody></table> </p><p>
+
+These are purely suggestions for how you might make progress.  You do not have to follow 
+these steps.
+
+</p><ul> <li> Download the directory
+<a href="http://coursera.cs.princeton.edu/algs4/testing/burrows"> <tt>burrows</tt></a> to your system.
+It contains some sample input files and reference solutions.
+For convenience, <a href="http://coursera.cs.princeton.edu/algs4/testing/burrows-testing.zip">burrows-testing.zip</a>
+contains all of these files bundled together.
+
+
+<p></p></li><li> Implement the <tt>CircularSuffixArray</tt>. Be sure not to create
+explicit copies of the string (e.g., via the <tt>substring()</tt> method in Java's <tt>String</tt> data type)
+when you sort the suffixes. That would take quadratic space.
+Instead for each suffix, you only need to keep an index that indicates which character is the beginning of the suffix.
+This way you can build the <em>N</em> suffixes in linear time and space.
+Then sort this array of indices. It's just like sorting an array of references.
+
+<p></p></li><li> Implement the Burrows-Wheeler transform, using the <tt>CircularSuffixArray</tt> class.
+
+<p></p></li><li> The Burrows-Wheeler decoding is the trickiest part, but it is very little code 
+once you understand how it works. (Not including declarations and input, our solution is
+about 10 lines of code.) You may find the key-indexed counting algorithm from the string 
+sorting lecture to be useful.
+
+<p></p></li><li> Implement the move-to-front encoding and decoding algorithms. Not including 
+comments and declarations, our solutions are about 10 lines of code each. If yours is 
+significantly longer, try to simplify it.
+
+</li></ul>
+
+
+
+
+ 
+
+</body></html>

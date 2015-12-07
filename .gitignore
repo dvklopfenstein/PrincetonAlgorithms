@@ -61,6 +61,16 @@ thirdparty/boggle.zip
 thirdparty/BoggleSolver.java
 py/AlgsSedgewickWayne/BoggleSolver.py
 
+# Programming Assignment 2.5: BurrowsWheeler
+thirdparty/burrows.zip
+thirdparty/MoveToFront.java
+thirdparty/BurrowsWheeler.java
+thirdparty/CircularSuffixArrag.java
+py/AlgsSedgewickWayne/MoveToFront.py
+py/AlgsSedgewickWayne/BurrowsWheeler.py
+py/AlgsSedgewickWayne/CircularSuffixArrag.py
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
