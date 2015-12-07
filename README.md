@@ -131,7 +131,7 @@ Key   4 GRAPHS                    Description                         DATA
  .    – DegreesOfSeparation       degrees of separation               routes.txt movies.txt
  P    – Digraph                   directed graph                      tinyDG.txt
  .    – DigraphGenerator          generate random digraphs            –
- .  4.4 DirectedDFS               depth-first search in a digraph     tinyDG.txt
+ p  4.4 DirectedDFS               depth-first search in a digraph     tinyDG.txt
  p    – DepthFirstDirectedPaths   paths in a digraph (DFS)            tinyDG.txt mediumDG.txt
  .    – DirectedCycle             cycle in a digraph                  tinyDG.txt tinyDAG.txt
  .    – DepthFirstOrder           depth-first order in a digraph      tinyDG.txt tinyDAG.txt

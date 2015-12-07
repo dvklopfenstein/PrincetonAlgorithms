@@ -69,6 +69,7 @@ def main(prt=sys.stdout):
       line = line.replace('Last updated', 'Java last updated')
       line = line.replace('++', ' += 1')
       line = line.replace('--', ' -= 1')
+      line = line.replace('!', 'not ')
       line = line.replace('StdOut.println', 'prt.write')
       line = line.replace('StdOut.print', 'prt.write')
       line = chk_def(line)
