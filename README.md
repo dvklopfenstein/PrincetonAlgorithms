@@ -176,7 +176,7 @@ Key   4 GRAPHS                    Description                         DATA
  p  5.7 BoyerMoore   Boyer-Moore substring search        –
  p  5.8 RabinKarp    Rabin-Karp substring search         –
  p  5.9 NFA          NFA for regular expressions         –
- .    – GREP         grep                                –
+ p    – GREP         grep                                –
  .    – BinaryDump   binary dump                         abra.txt
  .    – HexDump      hex dump                            abra.txt
  .    – PictureDump  picture dump                        abra.txt

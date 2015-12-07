@@ -7,7 +7,7 @@
     NFA.py, 
     [DirectedDFS.py](../py/AlgsSedgewickWayne/DepthFirstPaths.py)
   * **NFA Construction**
-  * **Regular Expression Applications**
+  * **Regular Expression Applications**: GREP.py
 
 ## Table of Contents for Examples
   1. [Run Example](#ex1)
