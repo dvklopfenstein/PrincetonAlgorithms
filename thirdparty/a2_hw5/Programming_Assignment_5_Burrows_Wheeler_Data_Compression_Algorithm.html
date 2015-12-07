@@ -1,0 +1,540 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!-- saved from url=(0063)http://coursera.cs.princeton.edu/algs4/assignments/burrows.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>
+Programming Assignment 5: Burrows-Wheeler Data Compression Algorithm
+</title></head>
+
+<body>
+<h2>Programming Assignment 5: Burrows-Wheeler Data Compression</h2>
+
+<p>
+
+Implement the
+Burrows-Wheeler data compression algorithm.
+This revolutionary algorithm outcompresses gzip and PKZIP,
+is relatively easy to implement, and is not protected
+by any patents. It forms the basis of the Unix compression utility 
+<a href="http://www.bzip.org/">bzip2</a>.
+
+</p><p>
+The Burrows-Wheeler compression algorithm consists of three
+algorithmic components, which are applied in succession:
+</p><ol>
+<p></p><li>
+<em>Burrows-Wheeler transform.</em>
+Given a typical English text file, transform it into a text file in which
+sequences of the same character occur near each other many times.
+
+<p></p></li><li>
+<em>Move-to-front encoding.</em>
+Given a text file in which sequences of the same character occur near each other
+many times,
+convert it into a text file in which certain characters appear more 
+frequently than others.
+
+<p></p></li><li>
+<em>Huffman compression.</em>
+Given a text file in which certain characters appear more frequently than
+others, compress it by encoding
+frequently occurring characters with short codewords and rare ones with long codewords.
+
+</li></ol>
+
+Step 3 is the one that compresses the message: it 
+is particularly effective because Steps 1 and 2 steps result in a text file in which 
+certain characters appear much more frequently than others.
+To expand a message, apply the inverse operations in reverse order: first
+apply the Huffman expansion, then the move-to-front decoding, and finally
+the inverse Burrows-Wheeler transform. Your task is to implement 
+Burrows-Wheeler and move-to-front components efficiently.
+
+
+<p><b>Binary input and binary output.</b>
+To enable your programs to work with binary data, you will use
+<a href="http://algs4.cs.princeton.edu/code/javadoc/edu/princeton/cs/algs4/BinaryStdIn.html">BinaryStdIn</a> and
+<a href="http://algs4.cs.princeton.edu/code/javadoc/edu/princeton/cs/algs4/BinaryStdOut.html">BinaryStdOut</a>, 
+which are described in <em>Algorithms, 4th edition</em> and part of <tt>algs4.jar</tt>.
+To display the binary output when debugging, you can use
+<a href="http://algs4.cs.princeton.edu/code/javadoc/edu/princeton/cs/algs4/HexDump.html">HexDump</a>,
+which takes a command-line argument <em>N</em>,
+reads bytes from standard input and writes them to standard
+output in hexadecimal, <em>N</em> per line.
+
+</p><blockquote><pre>% <b>more abra.txt</b>
+ABRACADABRA!
+
+% <b>java HexDump 16 &lt; abra.txt</b>
+41 42 52 41 43 41 44 41 42 52 41 21
+96 bits
+</pre></blockquote>
+
+Note that in ASCII, <tt>'A'</tt> is 41 (hex) and <tt>'!'</tt> is 21 (hex).
+
+
+<p><b>Huffman encoding and decoding.</b>
+<a href="http://algs4.cs.princeton.edu/code/javadoc/edu/princeton/cs/algs4/Huffman.html">Huffman</a>
+(Program 5.10 in <em>Algorithms, 4th edition</em>) 
+implements the classic Huffman compression and expansion algorithms.
+</p><blockquote><pre>% <b>java Huffman - &lt; abra.txt | java HexDump 16</b>
+50 4a 22 43 43 54 a8 40 00 00 01 8f 96 8f 94
+120 bits
+</pre></blockquote>
+
+<blockquote><pre>% <b>java Huffman - &lt; abra.txt | java Huffman +</b>
+ABRACADABRA!
+</pre></blockquote>
+
+You will not write any code for this step.
+
+<p>
+<b>Move-to-front encoding and decoding.</b>
+The main idea of <em>move-to-front</em> encoding is to maintain an ordered sequence
+of the characters in the alphabet,
+and repeatedly read in a character from the input message,
+print out the position in which that character appears, and move that character to
+the front of the sequence. As a simple example, if the initial ordering over a 6-character
+alphabet is <tt>A B C D E F</tt>, and we want to encode
+the input <tt>CAAABCCCACCF</tt>, then we would update the move-to-front
+sequences as follows:
+</p><blockquote><pre>move-to-front    in   out
+-------------    ---  ---
+ A B C D E F      C    2 
+ C A B D E F      A    1
+ A C B D E F      A    0
+ A C B D E F      A    0
+ A C B D E F      B    2
+ B A C D E F      C    2
+ C B A D E F      C    0
+ C B A D E F      C    0
+ C B A D E F      A    2
+ A C B D E F      C    1
+ C A B D E F      C    0
+ C A B D E F      F    5
+ F C A B D E  
+</pre></blockquote>
+If the same character occurs next to each other many times in the input,
+then many of the output values will be small integers, such as 0, 1, and 2.
+The extremely high frequency of certain characters makes an ideal scenario
+for Huffman coding.
+
+<ul>
+<p></p><li><em>Move-to-front encoding.</em>
+Your task is to maintain an ordered sequence
+of the 256 extended ASCII characters. Initialize
+the sequence by making the <em>i</em>th character in the sequence
+equal to the <em>i</em>th
+extended ASCII character.
+Now, read in each 8-bit character <tt>c</tt> from standard input
+one at a time, output the 8-bit index in the sequence where <tt>c</tt> appears,
+and move <tt>c</tt> to the front.
+
+<blockquote>
+<pre>% <b>java MoveToFront - &lt; abra.txt | java HexDump 16</b>
+41 42 52 02 44 01 45 01 04 04 02 26
+96 bits
+</pre>
+</blockquote>
+
+<p></p></li><li><em>Move-to-front decoding.</em>
+Initialize an ordered sequence of 256 characters, where extended ASCII character
+<em>i</em> appears <em>i</em>th in the sequence.
+Now, read in each 8-bit character <em>i</em>
+(but treat it as an integer between 0 and 255) from
+standard input one at a time, write the <em>i</em>th character in the sequence,
+and move that character to the front.
+Check that the decoder recovers any encoded message.
+
+<blockquote>
+<pre>% <b>java MoveToFront - &lt; abra.txt | java MoveToFront +</b>
+ABRACADABRA!
+</pre>
+</blockquote>
+
+</li></ul>
+
+Name your program <tt>MoveToFront.java</tt> and organize it using the following API:
+
+<blockquote>
+<pre><b>public class MoveToFront {</b>
+    <font color="gray">// apply move-to-front encoding, reading from standard input and writing to standard output</font>
+    <b>public static void encode()</b>
+
+    <font color="gray">// apply move-to-front decoding, reading from standard input and writing to standard output</font>
+    <b>public static void decode()</b>
+
+    <font color="gray">// if args[0] is '-', apply move-to-front encoding</font>
+    <font color="gray">// if args[0] is '+', apply move-to-front decoding</font>
+    <b>public static void main(String[] args)</b>
+<b>}</b>
+</pre>
+</blockquote>
+
+<em>Performance requirements.</em>
+The running time of move-to-front encoding and decoding should be
+proportional to <em>R N</em> (or better) in the worst case
+and proportional to <em>N</em> + <em>R</em> (or better)
+in practice on inputs that arise when compressing typical English text, where <em>N</em>
+is the number of characters in the input and <em>R</em> is the alphabet size.
+
+
+
+<p><b>Circular suffix array.</b>
+To efficiently implement the key component in the Burrows-Wheeler transform,
+you will use a fundamental
+data structure known as the <em>circular suffix array</em>, which describes
+the abstraction of a sorted array of the <em>N</em>
+circular suffixes of a string of length <em>N</em>.
+<!--
+(It is similar to the <em>sufix array</em> data structure described
+on pp. 875-885 of the textbook.)
+-->
+As an example, consider the string "<tt>ABRACADABRA!</tt>" of length 12.
+The table below shows its 12 circular suffixes and the result of sorting them.
+
+</p><blockquote>
+<pre> i       Original Suffixes           Sorted Suffixes         index[i]
+--    -----------------------     -----------------------    --------
+ 0    A B R A C A D A B R A !     ! A B R A C A D A B R A    <font color="blue">11</font>
+ 1    B R A C A D A B R A ! A     A ! A B R A C A D A B R    <font color="blue">10</font>
+ 2    R A C A D A B R A ! A B     A B R A ! A B R A C A D    <font color="blue">7</font>
+ 3    A C A D A B R A ! A B R     A B R A C A D A B R A !    <font color="blue">0</font>
+ 4    C A D A B R A ! A B R A     A C A D A B R A ! A B R    <font color="blue">3</font>
+ 5    A D A B R A ! A B R A C     A D A B R A ! A B R A C    <font color="blue">5</font>
+ 6    D A B R A ! A B R A C A     B R A ! A B R A C A D A    <font color="blue">8</font>
+ 7    A B R A ! A B R A C A D     B R A C A D A B R A ! A    <font color="blue">1</font>
+ 8    B R A ! A B R A C A D A     C A D A B R A ! A B R A    <font color="blue">4</font>
+ 9    R A ! A B R A C A D A B     D A B R A ! A B R A C A    <font color="blue">6</font>
+10    A ! A B R A C A D A B R     R A ! A B R A C A D A B    <font color="blue">9</font>
+11    ! A B R A C A D A B R A     R A C A D A B R A ! A B    <font color="blue">2</font>
+</pre>
+</blockquote>
+
+We define <tt>index[i]</tt> to be the index of the original suffix 
+that appears <em>ith</em> in the sorted array.
+For example, <tt>index[11]</tt> = <tt>2</tt> means that the 2<em>nd</em> original suffix
+appears 11<em>th</em> in the sorted order (i.e., last alphabetically).
+
+
+<p>
+Your job is to implement the following circular suffix array API, which provides
+the client access to the <tt>index[]</tt> values:
+
+</p><blockquote>
+<pre><b>public class CircularSuffixArray {</b>
+    <b>public CircularSuffixArray(String s)</b>  <font color="gray">// circular suffix array of s</font>
+    <b>public int length()</b>                   <font color="gray">// length of s</font>
+    <b>public int index(int i)</b>               <font color="gray">// returns index of ith sorted suffix</font>
+    <b>public static void main(String[] args)</b><font color="gray">// unit testing of the methods (optional)</font>
+<b>}</b>
+</pre>
+</blockquote>
+
+<em>Corner cases.</em>
+The constructor should throw a <tt>java.lang.NullPointerException</tt>
+if the argument is <tt>null</tt>; the method <tt>index()</tt> should throw a
+<tt>java.lang.IndexOutOfBoundsException</tt> if <tt>i</tt> is outside its prescribed range
+(between 0 and <em>N</em> − 1).
+
+<p><em>Performance requirements.</em>
+Your data type should use space proportional to <em>N</em>.
+The constructor should take time proportional to <em>N</em> log <em>N</em> (or better)
+on typical English text;
+the methods <tt>length()</tt> and <tt>index()</tt> should take constant time
+in the worst case.
+<em>Warning</em>: beginning  with
+<a href="http://java-performance.info/changes-to-string-java-1-7-0_06">Java 7, Update 6</a>,
+the <tt>substring()</tt> method takes time and space proportional to the 
+length of the substring—in other words, you cannot form the <em>N</em>
+circular suffixes explicitly because that would  take both quadratic time and space.
+
+
+</p><p>
+<b>Burrows-Wheeler transform.</b>
+The goal of the Burrows-Wheeler transform is not to compress a message, but rather
+to transform it into a form that is more amenable to compression.
+The transform rearranges the characters in the input so that
+there are lots of clusters with repeated characters, but in such a way that
+it is still possible to recover the original input.
+It relies on the following intuition: if you see the letters <tt>hen</tt>
+in English text, then most of the time the letter preceding it is 
+<tt>t</tt> or <tt>w</tt>. If you could somehow group all such
+preceding letters together (mostly <tt>t</tt>'s and some <tt>w</tt>'s),
+then you would have an easy opportunity for data compression.
+
+</p><ul>
+<p></p><li><em>Burrows-Wheeler encoding.</em>
+The Burrows-Wheeler transform of a string <em>s</em> of length <em>N</em>
+is defined as follows:
+Consider the result of sorting the <em>N</em> circular suffixes of <em>s</em>.
+The Burrows-Wheeler transform 
+is the last column in the sorted suffixes array <tt>t[]</tt>,
+preceded by the row number <tt>first</tt> in which the original string ends up.
+Continuing with the "<tt>ABRACADABRA!</tt>" example above,
+we highlight the two components of the Burrows-Wheeler transform in the table below.
+
+<blockquote>
+<pre> i     Original Suffixes          Sorted Suffixes       t    index[i]
+--    -----------------------     -----------------------    --------
+ 0    A B R A C A D A B R A !     ! A B R A C A D A B R <font color="blue">A</font>    11
+ 1    B R A C A D A B R A ! A     A ! A B R A C A D A B <font color="blue">R</font>    10
+ 2    R A C A D A B R A ! A B     A B R A ! A B R A C A <font color="blue">D</font>    7
+<font color="blue">*3</font>    A C A D A B R A ! A B R     A B R A C A D A B R A <font color="blue">!</font>   *0
+ 4    C A D A B R A ! A B R A     A C A D A B R A ! A B <font color="blue">R</font>    3
+ 5    A D A B R A ! A B R A C     A D A B R A ! A B R A <font color="blue">C</font>    5
+ 6    D A B R A ! A B R A C A     B R A ! A B R A C A D <font color="blue">A</font>    8
+ 7    A B R A ! A B R A C A D     B R A C A D A B R A ! <font color="blue">A</font>    1
+ 8    B R A ! A B R A C A D A     C A D A B R A ! A B R <font color="blue">A</font>    4
+ 9    R A ! A B R A C A D A B     D A B R A ! A B R A C <font color="blue">A</font>    6
+10    A ! A B R A C A D A B R     R A ! A B R A C A D A <font color="blue">B</font>    9
+11    ! A B R A C A D A B R A     R A C A D A B R A ! A <font color="blue">B</font>    2
+</pre>
+</blockquote>
+
+Since the original string <tt>ABRACADABRA!</tt> ends up in row 3,
+we have <tt>first</tt> = <tt>3</tt>. Thus, the Burrows-Wheeler transform is
+
+<blockquote>
+<pre>3
+ARD!RCAAAABB
+</pre>
+</blockquote>
+
+Notice how there are 4 consecutive <tt>A</tt>s and 2 consecutive 
+<tt>B</tt>s—these clusters make the message easier to compress.
+
+<blockquote>
+<pre>% <b>java BurrowsWheeler - &lt; abra.txt | java HexDump 16</b>
+00 00 00 03 41 52 44 21 52 43 41 41 41 41 42 42
+128 bits
+</pre>
+</blockquote>
+
+Also, note that the integer 3 is represented using 4 bytes (<tt>00 00 00 03</tt>).
+The character <tt>'A'</tt> is represented by hex <tt>41</tt>, the character
+<tt>'R'</tt> by <tt>52</tt>, and so forth.
+
+
+<p></p></li><li><em>Burrows-Wheeler decoder.</em>
+Now, we describe how to invert the Burrows-Wheeler transform and recover
+the original input string.
+If the <em>jth</em> original suffix (original string, shifted <em>j</em>
+characters to the left) is the <em>ith</em> row in the sorted order,
+we define <tt>next[i]</tt> to be the row in the sorted order 
+where the (<em>j</em> + 1)<em>st</em> original suffix appears. For example, if <tt>first</tt>
+is the row in which the original input string appears, then 
+<tt>next[first]</tt> is the row in the sorted
+order where the 1<em>st</em> original suffix (the original string left-shifted by 1) 
+appears; <tt>next[next[first]]</tt> is the row in the sorted
+order where the 2<em>nd</em> original suffix appears; <tt>next[next[next[first]]]</tt>
+is the row where the 3<em>rd</em> original suffix appears; and so forth.
+
+<ul>
+<p>
+</p><li> <em>Decoding the message given t[], first, and the next[] array.</em>
+The input to the Burrows-Wheeler decoder is the last column <tt>t[]</tt>
+of the sorted suffixes along with <tt>first</tt>.
+From <tt>t[]</tt>, we can deduce the first column
+of the sorted suffixes because it consists of precisely the same characters,
+but in sorted order.
+
+<blockquote>
+<pre> i      Sorted Suffixes     t      next
+--    -----------------------      ----
+ 0    ! ? ? ? ? ? ? ? ? ? ? A        <font color="blue">3</font>
+ 1    A ? ? ? ? ? ? ? ? ? ? R        <font color="blue">0</font>
+ 2    A ? ? ? ? ? ? ? ? ? ? D        <font color="blue">6</font>
+*3    A ? ? ? ? ? ? ? ? ? ? !        <font color="blue">7</font>
+ 4    A ? ? ? ? ? ? ? ? ? ? R        <font color="blue">8</font>
+ 5    A ? ? ? ? ? ? ? ? ? ? C        <font color="blue">9</font>
+ 6    B ? ? ? ? ? ? ? ? ? ? A       <font color="blue">10</font>
+ 7    B ? ? ? ? ? ? ? ? ? ? A       <font color="blue">11</font>
+ 8    C ? ? ? ? ? ? ? ? ? ? A        <font color="blue">5</font>
+ 9    D ? ? ? ? ? ? ? ? ? ? A        <font color="blue">2</font>
+10    R ? ? ? ? ? ? ? ? ? ? B        <font color="blue">1</font>
+11    R ? ? ? ? ? ? ? ? ? ? B        <font color="blue">4</font>
+</pre>
+</blockquote>
+
+Now, given the <tt>next[]</tt> array and <tt>first</tt>, we can reconstruct the
+original input string because the first character of the <em>i</em>th original suffix
+is the <em>i</em>th character in the input string.
+In the example above, since <tt>first</tt> = <tt>3</tt>, we know that
+the original input string appears in row 3; thus, the original input string
+starts with <tt>'A'</tt> (and ends with <tt>'!'</tt>).
+Since <tt>next[first]</tt> = <tt>7</tt>, the next original suffix appears
+in row 7; thus, the next character in the original input string is <tt>'B'</tt>.
+Since <tt>next[next[first]]</tt> = <tt>11</tt>, the next original suffix
+appears in row 11; thus, the next character in the original input
+string is <tt>'R'</tt>.
+
+
+<!--
+Since the <em>j</em><em>th</em>
+original suffix is the original string 
+left-shifted by <em>j</em> positions, its last character is the
+(<em>j</em> - 1)<em>th</em> character of the original string. Thus, we can determine
+(<em>j</em> - 1)<em>th</em> character of the original by examining the last 
+character in the row in the sorted order where the
+<em>j</em><em>th</em> original suffix appears. 
+-->
+<!--
+This is simple using <em>next[]</em> if we 
+take advantage of the observation that the <em>k</em>th original suffix appears on 
+row number next[next[...[first]...]], where the number of occurrences of next is equal 
+to <em>k</em>.
+-->
+<!--
+This leads to the simple Java implementation below:
+<blockquote>
+<pre>
+int[] next = { 3, 0, 6, 7, 8, 9, 10, 11, 5, 2, 1, 4 };
+int N = next.length;
+String t = "ARD!RCAAAABB";
+int i = 3;
+for (int count = 0; count < N; count++) {
+   i = next[i];
+   BinaryStdOut.write(t.charAt(i));
+}
+BinaryStdOut.close();
+</pre>
+</blockquote>
+-->
+
+<p></p></li><li> <em>Constructing the next[] array from t[] and first.</em>
+Amazingly, the information contained in the Burrows-Wheeler
+transform suffices to reconstruct the <tt>next[]</tt> array, and,
+hence, the original message! Here's how.
+It is easy to deduce a <tt>next[]</tt> value for a character that appears exactly once 
+in the input string.
+For example, consider the suffix that starts with <tt>'C'</tt>.
+By inspecting the first column, it appears 8<em>th</em> in the sorted order.
+The next original suffix after this one will have the character <tt>'C'</tt>
+as its last character.
+By inspecting the last column, the next original appears 5<em>th</em>
+in the sorted order.
+Thus, <tt>next[8]</tt> = <tt>5</tt>.
+Similarly, <tt>'D'</tt> and <tt>'!'</tt> each occur only once, so we can
+deduce that <tt>next[9]</tt> = <tt>2</tt> and <tt>next[0]</tt> = <tt>3</tt>.
+
+<blockquote>
+<pre> i      Sorted Suffixes     t      next
+--    -----------------------      ----
+ 0    ! ? ? ? ? ? ? ? ? ? ? A        3
+ 1    A ? ? ? ? ? ? ? ? ? ? R
+ 2    A ? ? ? ? ? ? ? ? ? ? D
+*3    A ? ? ? ? ? ? ? ? ? ? !
+ 4    A ? ? ? ? ? ? ? ? ? ? R 
+ 5    A ? ? ? ? ? ? ? ? ? ? C
+ 6    B ? ? ? ? ? ? ? ? ? ? A
+ 7    B ? ? ? ? ? ? ? ? ? ? A
+ 8    C ? ? ? ? ? ? ? ? ? ? A        5
+ 9    D ? ? ? ? ? ? ? ? ? ? A        2
+10    R ? ? ? ? ? ? ? ? ? ? B
+11    R ? ? ? ? ? ? ? ? ? ? B
+</pre>
+</blockquote>
+
+However, since <tt>'R'</tt> appears twice, it may seem ambiguous
+whether <tt>next[10]</tt> = <tt>1</tt>
+and <tt>next[11]</tt> = <tt>4</tt>,
+or whether <tt>next[10]</tt> = <tt>4</tt> and <tt>next[11]</tt> = <tt>1</tt>.
+Here's the key rule that resolves the apparent ambiguity:
+<blockquote>
+<em>If sorted row i and j both start with the same
+character and i &lt; j,
+then next[i] &lt; next[j].</em>
+</blockquote>
+
+<!-- provided there are at least 2 distinct characters in the input -->
+
+This rule implies <tt>next[10]</tt> = <tt>1</tt>
+and <tt>next[11]</tt> = <tt>4</tt>.
+Why is this rule valid?
+The rows are sorted so row 10 is lexicographically
+less than row 11. Thus the ten unknown characters in row 10
+must be less than the ten unknown characters in
+row 11 (since both start with <tt>'R'</tt>).
+We also know that between the two rows that end with
+<tt>'R'</tt>, row 1 is less than row 4.
+But, the ten unknown characters in row 10 and 11
+are precisely the first ten characters in rows 1 and 4.
+Thus, <tt>next[10]</tt> = <tt>1</tt>
+and <tt>next[11]</tt> = <tt>4</tt> or this would contradict the fact
+that the suffixes are sorted.
+
+</li></ul>
+
+<p>
+Check that the decoder recovers any encoded message.
+
+</p><blockquote>
+<pre>% <b>java BurrowsWheeler - &lt; abra.txt | java BurrowsWheeler +</b>
+ABRACADABRA!
+</pre>
+</blockquote>
+
+</li></ul>
+
+
+Name your program <tt>BurrowsWheeler.java</tt> and organize it using the following API:
+
+<blockquote>
+<pre><b>public class BurrowsWheeler {</b>
+    <font color="gray">// apply Burrows-Wheeler encoding, reading from standard input and writing to standard output</font>
+    <b>public static void encode()</b>
+
+    <font color="gray">// apply Burrows-Wheeler decoding, reading from standard input and writing to standard output</font>
+    <b>public static void decode()</b>
+
+    <font color="gray">// if args[0] is '-', apply Burrows-Wheeler encoding</font>
+    <font color="gray">// if args[0] is '+', apply Burrows-Wheeler decoding</font>
+    <b>public static void main(String[] args)</b>
+<b>}</b>
+</pre>
+</blockquote>
+
+<em>Performance requirements.</em>
+The running time of your Burrows-Wheeler encoder should be proportional to
+<em>N</em> + <em>R</em> (or better) in the worst case, excluding the time to construct the 
+circular suffix array.
+The running time of your Burrows-Wheeler decoder should be proportional to 
+<em>N</em> + <em>R</em> (or better) in the worst case.
+
+
+<p><b>Analysis (optional).</b>
+Once you have <tt>MoveToFront.java</tt> and <tt>BurrowsWheeler.java</tt> working,
+compress some of these
+<a href="http://coursera.cs.princeton.edu/algs4/testing/textfiles/">text files</a>;
+then, test it on some binary files.
+Calculate the compression ratio achieved for each file 
+and report the time to compress and expand each file.
+(Here, compression and expansion consists of applying <tt>BurrowsWheeler</tt>,
+<tt>MoveToFront</tt>, and <tt>Huffman</tt> in succession.)
+Finally, determine the order of growth of the running time 
+of each of your encoders and decoders, both in the worst case and on typical
+English text inputs.
+
+</p><p><b>Deliverables.</b>
+Submit <tt>MoveToFront.java</tt>, <tt>BurrowsWheeler.java</tt>,
+<tt>CircularSuffixArray.java</tt>, and any other supporting files
+(excluding <tt>algs4.jar</tt>).
+You may not call any library functions other those in
+<tt>java.lang</tt>, <tt>java.util</tt>, and <tt>algs4.jar</tt>.
+
+<br>
+<br>
+
+
+</p><address><small>
+This assignment was developed by Kevin Wayne.
+<br>Copyright © 2004.
+</small>
+</address>
+
+
+
+
+
+</body></html>

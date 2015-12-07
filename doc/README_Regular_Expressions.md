@@ -3,7 +3,9 @@
 ## Code
   * **Regular Expressions**
   * **REs (Regular Expression) and NFAs (Nondeterministic Finite Automaton)**
-  * **NFA Simulation**: [DirectedDFS.py](../py/AlgsSedgewickWayne/DepthFirstPaths.py)
+  * **NFA Simulation**: 
+    NFA.py, 
+    [DirectedDFS.py](../py/AlgsSedgewickWayne/DepthFirstPaths.py)
   * **NFA Construction**
   * **Regular Expression Applications**
 
