@@ -1,0 +1,11 @@
+cat
+cheetah
+dog
+wolf
+albatross
+horse
+zebra
+lemur
+orangutan
+chimpanzee
+

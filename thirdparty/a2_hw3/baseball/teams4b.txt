@@ -1,0 +1,5 @@
+4
+Gryffindor 11 6  1  0 0 1 0 
+Hufflepuff  7 9  2  0 0 0 2
+Ravenclaw   8 9  1  1 0 0 0
+Slytherin   7 9  2  0 2 0 0

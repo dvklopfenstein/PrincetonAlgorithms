@@ -1,0 +1,9 @@
+hair
+eyes
+arm
+mouth
+nose
+ear
+cheek
+brow
+chin

@@ -1,0 +1,500 @@
+0,ABO_antibodies,blood type antibodies  
+1,C-reactive_protein CRP,a byproduct of inflammation; a globulin that is found in the blood in some cases of acute inflammation  
+2,Christmas_factor factor_IX,coagulation factor whose absence is associated with hemophilia B  
+3,DNA_polymerase,the enzyme responsible for DNA replication  
+4,Ghedda_wax,wax from Indian and African bees  
+5,HMG-CoA_reductase 5-hydroxy-3-methylglutaryl-coenzyme_A_reductase,a liver enzyme that is responsible for producing cholesterol  
+6,Hageman_factor factor_XII,coagulation factor whose deficiency results in prolongation of clotting time of venous blood  
+7,Japan_wax Japan_tallow,a yellow wax obtained from sumac berries; used in polishes  
+8,Otaheite_arrowroot Otaheite_arrowroot_starch,a starch obtained from the root of the pia  
+9,Rh_antibody,rhesus factor antibody  
+10,acetyl acetyl_group acetyl_radical ethanoyl_group ethanoyl_radical,the organic group of acetic acid (CH3CO-)  
+11,actin,one of the proteins into which actomyosin can be split; can exist in either a globular or a fibrous form  
+12,actomyosin,a protein complex in muscle fibers; composed of myosin and actin; shortens when stimulated and causes muscle contractions  
+13,acyl acyl_group,any group or radical of the form RCO- where R is an organic group; "an example of the acyl group is the acetyl group"  
+14,adenosine_deaminase ADA,an enzyme found in mammals that can catalyze the deamination of adenosine into inosine and ammonia; "ADA deficiency can lead to one form of severe combined immunodeficiency disease"; "the gene encoding ADA was one of the earlier human genes to be isolated and cloned for study"  
+15,agglutinin,an antibody that causes agglutination of a specific antigen  
+16,albumin albumen,a simple water-soluble protein found in many animal tissues and liquids  
+17,alcohol_group alcohol_radical,the chemical group -OH  
+18,aldehyde_group aldehyde_radical,the chemical group -CHO  
+19,aldohexose,a monosaccharide sugar having six carbon atoms and an aldehyde group  
+20,aldose,a monosaccharide sugar that contains the aldehyde group or is hemiacetal  
+21,aleurone,granular protein in outermost layer of endosperm of many seeds or cereal grains  
+22,alkyl alkyl_group alkyl_radical,any of a series of univalent groups of the general formula CnH2n+1 derived from aliphatic hydrocarbons  
+23,allyl allyl_group allyl_radical,the univalent unsaturated organic radical C3H5; derived from propylene  
+24,almond_oil expressed_almond_oil sweet_almond_oil,pale yellow fatty oil expressed from sweet or bitter almonds  
+25,alpha_globulin,a globulin in blood plasma or serum that is alkaline and has great electrophoretic mobility  
+26,amino amino_group,the radical -NH2  
+27,aminomethane,a methyl with the hydrogen atom replaced by an amino radical  
+28,amyl,a hydrocarbon radical that occurs in many organic compounds  
+29,amylase,any of a group of proteins found in saliva and pancreatic juice and parts of plants; help convert starch to sugar  
+30,amyloid,a non-nitrogenous food substance consisting chiefly of starch; any substance resembling starch  
+31,amyloid,(pathology) a waxy translucent complex protein resembling starch that results from degeneration of tissue  
+32,angiotensin_converting_enzyme angiotensin-converting_enzyme ACE,proteolytic enzyme that converts angiotensin I into angiotensin II  
+33,animal_fat,any fat obtained from animals; "animal fat is high in saturated fatty acids"  
+34,animal_oil,any oil obtained from animal substances  
+35,animal_tissue,the tissue in the bodies of animals  
+36,antibody,any of a large variety of proteins normally present in the body or produced in response to an antigen which it neutralizes, thus producing an immune response  
+37,antihemophilic_factor antihaemophilic_factor antihemophilic_globulin antihaemophilic_globulin factor_VIII Hemofil,a coagulation factor (trade name Hemofil) whose absence is associated with hemophilia A  
+38,antitoxin,an antibody that can neutralize a specific toxin  
+39,antivenin antivenene,an antitoxin that counteracts the effects of venom from the bite of a snake or insect or other animal  
+40,apoenzyme,a protein that combines with a coenzyme to form an active enzyme  
+41,arrowroot,a nutritive starch obtained from the root of the arrowroot plant  
+42,arum,starch resembling sago that is obtained from cuckoopint root  
+43,attar atar athar ottar,essential oil or perfume obtained from flowers  
+44,attar_of_roses rose_oil,a volatile fragrant oil obtained from fresh roses by steam distillation  
+45,autoantibody,an antibody acting against tissues of the organism that produces it  
+46,axle_grease,a thick heavy grease used to lubricate axles  
+47,azido_group azido_radical,the univalent group N3- derived from hydrazoic acid  
+48,azo_group azo_radical,the bivalent group -N=N- united to two hydrocarbon groups  
+49,babassu_oil babacu_oil,fatty oil from kernels of babassu nuts similar to coconut oil  
+50,bagasse,the dry dusty pulp that remains after juice is extracted from sugar cane or similar plants  
+51,bayberry_wax bayberry_tallow,a fragrant green wax obtained from the wax myrtle and used in making candles  
+52,beef_tallow,tallow obtained from a bovine animal  
+53,beeswax,a yellow to brown wax secreted by honeybees to build honeycombs  
+54,beet_sugar,sugar made from sugar beets  
+55,belly,the underpart of the body of certain vertebrates such as snakes or fish  
+56,benzoyl_group benzoyl_radical,the univalent radical derived from benzoic acid  
+57,benzyl benzyl_group benzyl_radical,the univalent radical derived from toluene  
+58,bit chip flake fleck scrap,a small fragment of something broken off from the whole; "a bit of rock caught him in the eye"  
+59,bitter_almond_oil,pale yellow essential oil obtained from bitter almonds by distillation from almond cake or meal  
+60,blood_sugar blood_glucose,glucose in the bloodstream  
+61,blubber,an insulating layer of fat under the skin of whales and other large marine mammals; used as a source of oil  
+62,body_part,any part of an organism such as an organ or extremity  
+63,bone_fat,fatty matter in bones extracted with solvents or by boiling or steaming; used chiefly in candles and cheap soaps and in lubricating greases  
+64,bone_oil,the liquid portion of bone fat; used as a lubricant and in leather manufacture  
+65,bone_oil Dippel's_oil,dark-colored ill-smelling oil obtained by carbonizing bone; used especially in sheep dips and in denaturing alcohol  
+66,branched_chain,an open chain of atoms with one or more side chains attached to it  
+67,brickbat,a fragment of brick used as a weapon  
+68,butterfat,the fatty substance of milk from which butter is made  
+69,butyl,a hydrocarbon radical (C4H9)  
+70,cacodyl cacodyl_group cacodyl_radical arsenic_group,the univalent group derived from arsine  
+71,calamus_oil,carcinogenic oil from calamus root used as a perfume  
+72,calcium_ion factor_IV,ion of calcium; a factor in the clotting of blood  
+73,camphor_oil,oil distilled from camphor resin  
+74,candelilla_wax,a hard brown wax that occurs as a coating on candelilla shrubs  
+75,cane_sugar,sucrose obtained from sugar cane  
+76,canola_oil canola,vegetable oil made from rapeseed; it is high in monounsaturated fatty acids  
+77,capsid,the outer covering of protein surrounding the nucleic acid of a virus  
+78,carbohydrate saccharide sugar,an essential structural component of living cells and source of energy for animals; includes simple sugars with small molecules as well as macromolecular substances; are classified according to the number of monosaccharide groups they contain  
+79,carbonyl_group,the bivalent radical CO  
+80,carboxyl carboxyl_group,the univalent radical -COOH; present in and characteristic of organic acids  
+81,carboxymethyl_cellulose,an acid derivative of cellulose  
+82,carnauba_wax carnauba,hard yellowish to brownish wax from leaves of the carnauba palm used especially in floor waxes and polishes  
+83,casein,a milk protein used in making e.g. plastics and adhesives  
+84,caspase,any of a group of proteases that mediate apoptosis  
+85,cassava cassava_starch manioc manioca,a starch made by leaching and drying the root of the cassava plant; the source of tapioca; a staple food in the tropics  
+86,catalase,enzyme found in most plant and animal cells that functions as an oxidative catalyst; decomposes hydrogen peroxide into oxygen and water  
+87,cellulose,a polysaccharide that is the chief constituent of all plant tissues and fibers  
+88,ceresin,a white wax extracted from ozokerite  
+89,cerumen earwax,a soft yellow wax secreted by glands in the ear canal  
+90,chain chemical_chain,(chemistry) a series of linked atoms (generally in an organic molecule)  
+91,change,a thing that is different; "he inspected several changes before selecting one"  
+92,chaulmoogra_oil,an oil from chaulmoogra trees; used in treatment of skin diseases and leprosy  
+93,chitin,a tough semitransparent horny substance; the principal component of the exoskeletons of arthropods and the cell walls of certain fungi  
+94,cholinesterase,an enzyme that hydrolyses acetylcholine (into choline and acetic acid)  
+95,chondrin,a substance that resembles gelatin and is obtained by boiling cartilage in water  
+96,chromophore,the chemical group that gives color to a molecule  
+97,cinder clinker,a fragment of incombustible matter left after a wood or coal or charcoal fire  
+98,clast,(geology) a constituent fragment of a clastic rock  
+99,closed_chain ring,(chemistry) a chain of atoms in a molecule that forms a closed loop  
+100,clove_oil oil_of_cloves,essential oil obtained from cloves and used to flavor medicines  
+101,cluster_of_differentiation_4 CD4,a glycoprotein that is found primarily on the surface of helper T cells; "CD4 is a receptor for HIV in humans"  
+102,cluster_of_differentiation_8 CD8,a membrane glycoprotein that is found primarily on the surface of cytotoxic T cells  
+103,coagulase,an enzyme that induces coagulation  
+104,coagulation_factor clotting_factor,any of the factors in the blood whose actions are essential for blood coagulation  
+105,cocarboxylase thiamine_pyrophosphate,a coenzyme important in respiration in the Krebs cycle  
+106,cocoa_butter,a yellow-white fat from cocoa beans  
+107,coconut_oil copra_oil,oil from coconuts  
+108,cod-liver_oil cod_liver_oil,an oil obtained from the livers of cod and similar fishes; taken orally as a source of vitamins A and D  
+109,cod_oil,an inferior cod-liver oil that is used in leather manufacturing  
+110,coenzyme,a small molecule (not a protein but sometimes a vitamin) essential for the activity of some enzymes  
+111,coenzyme_A,a coenzyme present in all living cells; essential to metabolism of carbohydrates and fats and some amino acids  
+112,cohune-nut_oil cohune_oil cohune_fat,semisolid fat from nuts of the cohune palm; used in cooking and soap making  
+113,collagen,a fibrous scleroprotein in bone and cartilage and tendon and other connective tissue; yields gelatin on boiling  
+114,collagenase,any enzyme that catalyzes the hydrolysis of collagen and gelatin  
+115,complement,one of a series of enzymes in the blood serum that are part of the immune response  
+116,conjugated_protein compound_protein,a protein complex combining amino acids with other substances  
+117,cooking_oil,any of numerous vegetable oils used in cooking  
+118,corn_gluten,gluten prepared from corn  
+119,corn_oil,oil from the germs of corn grains  
+120,corn_sugar,dextrose made by hydrolysis of cornstarch  
+121,corner,a projecting part where two sides or edges meet; "he knocked off the corners"  
+122,cornstarch cornflour,starch prepared from the grains of corn; used in cooking as a thickener  
+123,corpus,the main part of an organ or other bodily structure  
+124,costus_oil,a yellow volatile essential oil obtained from costusroot; used in perfumes  
+125,cottonseed_oil,edible oil pressed from cottonseeds  
+126,couple,(physics) something joined by two equal and opposite forces that act along parallel lines  
+127,cracklings,the crisp residue left after lard has been rendered  
+128,craton,the part of a continent that is stable and forms the central mass of the continent; typically Precambrian  
+129,croton_oil,viscid acrid brownish-yellow oil from the seeds of Croton tiglium having a violent cathartic action  
+130,cutting,a piece cut off from the main part of something  
+131,cyano_group cyano_radical cyanide_group cyanide_radical,the monovalent group -CN in a chemical compound  
+132,cyclooxygenase Cox,either of two related enzymes that control the production of prostaglandins and are blocked by aspirin  
+133,cyclooxygenase-1 Cox-1,an enzyme that regulates prostaglandins that are important for the health of the stomach lining and kidneys; "an unfortunate side effect of NSAIDs is that they block Cox-1"  
+134,cyclooxygenase-2 Cox-2,an enzyme that makes prostaglandins that cause inflammation and pain and fever; "the beneficial effects of NSAIDs result from their ability to block Cox-2"  
+135,cytochrome,(biochemistry) a class of hemoprotein whose principal biological function is electron transfer (especially in cellular respiration)  
+136,cytochrome_c,the most abundant and stable cytochrome; involved in energy transfer  
+137,cytokine,any of various protein molecules secreted by cells of the immune system that serve to regulate the immune system  
+138,dander,small scales from animal skins or hair or bird feathers that can cause allergic reactions in some people  
+139,dandruff,loose scales shed from the scalp; "I could see the dandruff on her shoulders"  
+140,de-iodinase,an enzyme that removes the iodine radical  
+141,decarboxylase,any of the enzymes that hydrolize the carboxyl group  
+142,demerara,a light brown raw cane sugar from Guyana  
+143,deoxyribose,a sugar that is a constituent of nucleic acids  
+144,dextrin,any of various polysaccharides obtained by hydrolysis of starch; a tasteless and odorless gummy substance that is used as a thickening agent and in adhesives and in dietary supplements  
+145,dextrose dextroglucose grape_sugar,an isomer of glucose that is found in honey and sweet fruits  
+146,diethylaminoethyl_cellulose DEAE_cellulose,used for chromatography  
+147,dipole,a pair of equal and opposite electric charges or magnetic poles separated by a small distance  
+148,dipole_molecule,a molecule that is a permanent dipole  
+149,disaccharidase,an enzyme that catalyzes the hydrolysis of disaccharides into monosaccharides  
+150,disaccharide,any of a variety of carbohydrates that yield two monosaccharide molecules on complete hydrolysis  
+151,dolphin_oil,an unsaturated fatty oil obtained from dolphins and used as a fine lubricant  
+152,drippings,fat that exudes from meat and drips off while it is being roasted or fried  
+153,drying_oil,an oil that hardens in air due to oxidation and is often used as a paint or varnish base  
+154,dubbin,tallow mixed with oil; used to make leather soft and waterproof  
+155,edible_fat,oily or greasy matter making up the bulk of fatty tissue in animals and in seeds and other plant tissue  
+156,elastase,a pancreatic enzyme that catalyzes the hydrolysis of elastin  
+157,elastin,a fibrous scleroprotein found in elastic tissues such as the walls of arteries  
+158,electric_dipole electric_doublet,a dipole with equal and opposite electric charges  
+159,ember coal,a hot fragment of wood or coal that is left from a fire and is glowing or smoldering  
+160,endonuclease,a nuclease that cleaves nucleic acids at interior bonds and so produces fragments of various sizes  
+161,enterokinase,enzyme in the intestinal juice that converts inactive trypsinogen into active trypsin  
+162,entity,that which is perceived or known or inferred to have its own distinct existence (living or nonliving)  
+163,enzyme,any of several complex proteins that are produced by cells and act as catalysts in specific biochemical reactions  
+164,erythropoietin,a glycoprotein secreted by the kidneys that stimulates the production of red blood cells  
+165,essential_oil volatile_oil,an oil having the odor or flavor of the plant from which it comes; used in perfume and flavorings  
+166,ethyl ethyl_group ethyl_radical,the univalent hydrocarbon radical C2H5 derived from ethane by the removal of one hydrogen atom  
+167,ethylenediaminetetraacetic_acid EDTA,a complex molecule used medically to chelate metal ions in cases of lead or heavy metal poisoning  
+168,eucalyptus_oil,an essential oil obtained from the leaves of eucalypts  
+169,exonuclease,a nuclease that releases one nucleotide at a time (serially) beginning at one of a nucleic acid  
+170,fat,a soft greasy substance occurring in organic tissue and consisting of a mixture of lipids (mostly triglycerides); "pizza has too much fat"  
+171,ferritin,a protein containing 20% iron that is found in the intestines and liver and spleen; it is one of the chief forms in which iron is stored in the body  
+172,fibrin,a white insoluble fibrous protein formed by the action of thrombin on fibrinogen when blood clots; it forms a network that traps red cells and platelets  
+173,fibrinase factor_XIII,in the clotting of blood thrombin catalyzes factor XIII into its active form (fibrinase) which causes fibrin to form a stable clot  
+174,fibrinogen factor_I,a protein present in blood plasma; converts to fibrin when blood clots  
+175,filaggrin,the main protein of the keratohyalin granules; "the specific target of the immune response in rheumatoid arthritis is filaggrin"  
+176,filing,a fragment rubbed off by the use of a file  
+177,fish-liver_oil fish_oil,a fatty oil obtained from the livers of various fish  
+178,fixed_oil fatty_oil,nonvolatile animal or plant oil  
+179,floor_wax,a preparation containing wax and used to polish and preserve the finish of floors  
+180,foryml,(chemistry) the negative univalent acyl radical CHO that occurs in aldehydes  
+181,fragment,a piece broken off or cut off of something else; "a fragment of rock"  
+182,freshener,anything that freshens  
+183,fructose fruit_sugar levulose laevulose,a simple sugar found in honey and in many ripe fruits  
+184,fuel_oil heating_oil,a petroleum product used for fuel  
+185,fusel_oil,a mixture of amyl alcohols and propanol and butanol formed from distillation of fermented liquors  
+186,galactose brain_sugar,a simple sugar found in lactose  
+187,gamma_globulin human_gamma_globulin,a plasma protein containing the immunoglobulins that are responsible for immune responses  
+188,gas_oil,an oil formed through distillation of petroleum of intermediate boiling range and viscosity  
+189,gelatin gelatine,a colorless water-soluble glutinous protein obtained from animal tissues such as bone and skin  
+190,geode,(mineralogy) a hollow rock or nodule with the cavity usually lined with crystals  
+191,globin hematohiston haematohiston,a colorless protein obtained by removing heme from hemoglobin; the oxygen carrying compound in red blood cells  
+192,globulin,a family of proteins found in blood and milk and muscle and in plant seed  
+193,glucosamine,an amino derivative of glucose that is a component of many polysaccharides  
+194,glucose,a monosaccharide sugar that has several forms; an important source of physiological energy  
+195,glutamic_oxalacetic_transaminase glutamic_oxaloacetic_transaminase,an enzyme involved in transamination  
+196,glutathione_peroxidase,an enzyme in the body that is a powerful scavenger of free radicals  
+197,glutelin,a simple protein found in the seeds of cereals  
+198,gluten,a protein substance that remains when starch is removed from cereal grains; gives cohesiveness to dough  
+199,glyceride acylglycerol,an ester of glycerol and fatty acids that occurs naturally as fats and fatty oils; "fresh fats contain glycerides of fatty acids and very little free acid"  
+200,glyceryl,a trivalent radical derived from glycerol by removing the three hydroxyl radicals  
+201,glycogen animal_starch,one form in which body fuel is stored; stored primarily in the liver and broken down into glucose when needed by the body  
+202,glycoprotein,a conjugated protein having a carbohydrate component  
+203,gondang_wax fig_wax,a hard cream-colored wax obtained from a Javanese fig tree  
+204,goose_grease,grease derived from geese  
+205,grease lubricating_oil,a thick fatty oil (especially one used to lubricate machinery)  
+206,group radical chemical_group,(chemistry) two or more atoms bound together as a single unit and forming part of a molecule  
+207,growth_factor,a protein that is involved in cell differentiation and growth  
+208,halibut-liver_oil,a fatty oil from halibut livers that is used as a source of vitamin A  
+209,haptoglobin,a protein in plasma that binds free hemoglobin and removes it (as from wounds)  
+210,hemoglobin haemoglobin Hb,a hemoprotein composed of globin and heme that gives red blood cells their characteristic color; function primarily to transport oxygen from the lungs to the body tissues; "fish have simpler hemoglobin than mammals"  
+211,hemoprotein haemoprotein,a conjugated protein linked to a compound of iron and porphyrin  
+212,heparin Lipo-Hepin Liquaemin,a polysaccharide produced in basophils (especially in the lung and liver) and that inhibits the activity of thrombin in coagulation of the blood; it (trade names Lipo-Hepin and Liquaemin) is used as an anticoagulant in the treatment of thrombosis and in heart surgery  
+213,heterocyclic_ring heterocycle,a ring of atoms of more than one kind; especially a ring of carbon atoms containing at least one atom that is not carbon  
+214,heterophil_antibody heterophile_antibody Forssman_antibody,an antibody found in the blood of someone suffering from infectious mononucleosis  
+215,hexose,a monosaccharide that contains six carbon atoms per molecule  
+216,high-density_lipoprotein HDL alpha-lipoprotein,a lipoprotein that transports cholesterol in the blood; composed of a high proportion of protein and relatively little cholesterol; high levels are thought to be associated with decreased risk of coronary heart disease and atherosclerosis  
+217,histaminase,enzyme that acts as a catalyst in converting histidine to histamine  
+218,histone,a simple protein containing mainly basic amino acids; present in cell nuclei in association with nucleic acids  
+219,horror,something that inspires horror; something horrible; "the painting that others found so beautiful was a horror to him"  
+220,horseradish_peroxidase,an enzyme used in immunohistochemistry to label antigens and their antibodies  
+221,hunk lump,a large piece of something without definite shape; "a hunk of bread"; "a lump of coal"  
+222,hyaluronic_acid,a viscous mucopolysaccharide found in the connective tissue space and the synovial fluid of movable joints and the humors of the eye; a cementing and protective substance  
+223,hyaluronidase spreading_factor Hyazyme,an enzyme (trade name Hyazyme) that splits hyaluronic acid and so lowers its viscosity and increases the permeability of connective tissue and the absorption of fluids  
+224,hydnocarpus_oil,oil from seeds of trees of the genus Hydnocarpus especially Hydnocarpus wightiana (Hydnocarpus laurifolia)  
+225,hydrazo_group hydrazo_radical,the bivalent group -HNNH- derived from hydrazine  
+226,hydroxyl hydroxyl_group hydroxyl_radical,the monovalent group -OH in such compounds as bases and some acids and alcohols  
+227,hydroxymethyl,a methyl with hydroxide replacing the hydrogen atoms  
+228,hyssop_oil,used chiefly in liqueurs  
+229,ilang-ilang,oil distilled from flowers of the ilang-ilang tree; used in perfumery  
+230,immunoglobulin Ig immune_serum_globulin immune_gamma_globulin immune_globulin,a class of proteins produced in lymph tissue in vertebrates and that function as antibodies in the immune response  
+231,immunoglobulin_A IgA,one of the most common of the five major classes of immunoglobulins; the chief antibody in the membranes of the gastrointestinal and respiratory tracts  
+232,immunoglobulin_D IgD,one of the five major classes of immunoglobulins; present in blood serum in small amounts  
+233,immunoglobulin_E IgE,one of the five major classes of immunoglobulins; present primarily in the skin and mucous membranes  
+234,immunoglobulin_G IgG,one of the five major classes of immunoglobulins; the main antibody defense against bacteria  
+235,immunoglobulin_M IgM,one of the five major classes of immunoglobulins; involved in fighting blood infections and in triggering production of immunoglobulin G  
+236,infliximab Remicade,a monoclonal antibody (trade name Remicade) used to treat Crohn's disease and rheumatoid arthritis; administered by infusion; use and dosage must be determined by a physician  
+237,interleukin,any of several lymphokines that promote macrophages and killer T cells and B cells and other components of the immune system  
+238,internode,a segment of a stem between two nodes  
+239,inulin,used to manufacture fructose and in assessing kidney function  
+240,invert_sugar,a mixture of equal parts of glucose and fructose resulting from the hydrolysis of sucrose; found naturally in fruits; sweeter than glucose  
+241,invertase saccharase sucrase,an enzyme that catalyzes the hydrolysis of sucrose into glucose and fructose  
+242,iodoprotein iodinated_protein,a protein that contains iodine  
+243,iron_filing,a fragment of iron rubbed off by the use of a file  
+244,isoagglutinin,an antibody produced by one individual that causes agglutination of red blood cells in other individuals of the same species  
+245,isoantibody alloantibody,an antibody that occurs naturally against foreign tissues from a person of the same species  
+246,isomerase,an enzyme that catalyzes its substrate to an isomeric form  
+247,isthmus band,a cord-like tissue connecting two larger parts of an anatomical structure  
+248,jaggery jagghery jaggary,unrefined brown sugar made from palm sap  
+249,jimdandy jimhickey crackerjack,something excellent of its kind; "the bike was a jimdandy"  
+250,keratin ceratin,a fibrous scleroprotein that occurs in the outer layer of the skin and in horny tissues such as hair, feathers, nails, and hooves  
+251,ketohexose,a monosaccharide having six carbon atoms and a ketone group  
+252,ketone_group,a group having the characteristic properties of ketones  
+253,ketose,any monosaccharide sugar that contains a ketone group or its hemiacetal  
+254,kinase,an enzyme that catalyzes the conversion of a proenzyme to an active enzyme  
+255,lactalbumin,albumin occurring in milk  
+256,lactase Lactaid,any of a group of enzymes (trade name Lactaid) that hydrolyze lactose to glucose and galactose  
+257,lactose milk_sugar,a sugar comprising one glucose molecule linked to a galactose molecule; occurs only in milk; "cow's milk contains about 4.7% lactose"  
+258,lanolin wool_fat wool_grease,a yellow viscous animal oil extracted from wool; a mixture of fatty acids and esters; used in some ointments and cosmetics  
+259,lard,soft white semisolid fat obtained by rendering the fatty tissue of the hog  
+260,lard_oil,oil consisting chiefly of olein that is expressed from lard and used especially as a lubricant, cutting oil or illuminant  
+261,leaf_fat leaf_lard,fat lining the abdomen and kidneys in hogs which is used to make lard  
+262,lecithin,a yellow phospholipid essential for the metabolism of fats; found in egg yolk and in many plant and animal cells; used commercially as an emulsifier  
+263,lectin,any of several plant glycoproteins that act like specific antibodies but are not antibodies in that they are not evoked by an antigenic stimulus  
+264,lemongrass lemon_grass lemongrass_oil,an aromatic oil that smells like lemon and is widely used in Asian cooking and in perfumes and medicines  
+265,linalool,a colorless fragrant liquid found in many essential oils  
+266,linseed_oil flaxseed_oil,a drying oil extracted from flax seed and used in making such things as oil paints  
+267,lipase,an enzyme secreted in the digestive tract that catalyzes the breakdown of fats into individual fatty acids that can be absorbed into the bloodstream  
+268,lipid lipide lipoid,an oily organic compound insoluble in water but soluble in organic solvents; essential structural component of living cells (along with proteins and carbohydrates)  
+269,lipoprotein,a conjugated protein having a lipid component; the principal means for transporting lipids in the blood  
+270,long_chain long-chain_molecule,(chemistry) a relatively long chain of atoms in a molecule  
+271,low-density_lipoprotein LDL beta-lipoprotein,a lipoprotein that transports cholesterol in the blood; composed of moderate amount of protein and a large amount of cholesterol; high levels are thought to be associated with increased risk of coronary heart disease and atherosclerosis  
+272,lymphokine,a cytokine secreted by helper T cells in response to stimulation by antigens and that acts on other cells of the immune system (as by activating macrophages)  
+273,lysozyme muramidase,an enzyme found in saliva and sweat and tears that destroys the cell walls of certain bacteria  
+274,macromolecule supermolecule,any very large complex molecule; found only in plants and animals  
+275,madia_oil,used as a substitute for olive oil  
+276,magnetic_dipole,a dipole with opposing magnetic poles  
+277,maltose malt_sugar,a white crystalline sugar formed during the digestion of starches  
+278,maple_sugar,sugar made from the sap of the sugar maple tree  
+279,marbling,the intermixture of fat and lean in a cut of meat  
+280,matchwood,fragments of wood; "it was smashed into matchwood"  
+281,menhaden_oil,a fatty oil obtained from the menhaden fish and used in paint and ink and in treating leather  
+282,metal_filing,a fragment of metal rubbed off by the use of a file  
+283,metamere somite,one of a series of similar body segments into which some animals are divided longitudinally  
+284,methyl methyl_group methyl_radical,the univalent radical CH3- derived from methane  
+285,methylene_group methylene_radical methylene,the bivalent radical CH2 derived from methane  
+286,mineral_oil,a distillate of petroleum (especially one used medicinally as a laxative or stool softener)  
+287,molecule,(physics and chemistry) the simplest structural unit of an element or compound  
+288,monoamine_oxidase MAO,an enzyme that catalyzes the oxidation of many body compounds (e.g., epinephrine and norepinephrine and serotonin)  
+289,monoclonal_antibody monoclonal,any of a class of antibodies produced in the laboratory by a single clone of cells or a cell line and consisting of identical antibody molecules  
+290,monosaccharide monosaccharose simple_sugar,a sugar (like sucrose or fructose) that does not hydrolyse to give other sugars; the simplest group of carbohydrates  
+291,montan_wax,a hard wax obtained from lignite  
+292,motor_oil,oil used to lubricate the moving parts of a motor  
+293,mucin,a nitrogenous substance found in mucous secretions; a lubricant that protects body surfaces  
+294,mucoid,any of several glycoproteins similar to mucin  
+295,mucopolysaccharide,complex polysaccharides containing an amino group; occur chiefly as components of connective tissue  
+296,mustard_oil,oil obtained from mustard seeds and used in making soap  
+297,mutton_tallow,tallow from the body of a mature sheep  
+298,myelin myeline medulla,a white fatty substance that forms a medullary sheath around the axis cylinder of some nerve fibers  
+299,myoglobin,a hemoprotein that receives oxygen from hemoglobin and stores it in the tissues until needed  
+300,myosin,the commonest protein in muscle; a globulin that combines with actin to form actomyosin  
+301,neat's-foot_oil,a pale yellow oil made from the feet and legs of cattle; used as a dressing for leather  
+302,neroli_oil,an odoriferous yellow oil found in orange flowers and used in perfumery and as a flavoring  
+303,nerve_growth_factor NGF,a protein that is involved in the growth of peripheral nerve cells  
+304,nicotinamide_adenine_dinucleotide NAD,a coenzyme present in most living cells and derived from the B vitamin nicotinic acid; serves as a reductant in various metabolic processes  
+305,nicotinamide_adenine_dinucleotide_phosphate NADP,a coenzyme similar to NAD and present in most living cells but serves as a reductant in different metabolic processes  
+306,nitrite,the radical -NO2 or any compound containing it (such as a salt or ester of nitrous acid)  
+307,nitro_group,the group -NO3  
+308,nitrogenase,an enzyme of nitrogen-fixing microorganisms that catalyzes the conversion of nitrogen to ammonia  
+309,nodule,(mineralogy) a small rounded lump of mineral substance (usually harder than the surrounding rock or sediment)  
+310,nub stub,a small piece; "a nub of coal"; "a stub of a pencil"  
+311,nubbin,a small nub (especially an undeveloped fruit or ear of corn)  
+312,nuclease,general term for enzymes that catalyze the hydrolysis of nucleic acid by cleaving chains of nucleotides into smaller units  
+313,nucleic_acid,(biochemistry) any of various macromolecules composed of nucleotide chains that are vital constituents of all living cells  
+314,nucleoprotein,any of several substances found in the nuclei of all living cells; consists of a protein bound to a nucleic acid  
+315,nugget,a solid lump of a precious metal (especially gold) as found in the earth  
+316,oil,a slippery or viscous liquid or liquefiable substance not miscible with water  
+317,oleo_oil,obtained from beef fat; used in making margarine and soap and in lubrication  
+318,oligosaccharide,any of the carbohydrates that yield only a few monosaccharide molecules on complete hydrolysis  
+319,olive_oil,oil from olives  
+320,open_chain,a chain of atoms in a molecule whose ends are not joined to form a ring  
+321,opsin,retinal protein formed by the action of light on rhodopsin  
+322,opsonin,an antibody in blood serum that attaches to invading microorganisms and other antigens to make them more susceptible to the action of phagocytes  
+323,oxidase,any of the enzymes that catalyze biological oxidation  
+324,oxidoreductase,an enzyme that catalyzes oxidation-reduction  
+325,oxygenase,an oxidoreductase that catalyzes the incorporation of molecular oxygen  
+326,oxyhemoglobin oxyhaemoglobin,the bright red hemoglobin that is a combination of hemoglobin and oxygen from the lungs; "oxyhemoglobin transports oxygen to the cells of the body"  
+327,pacifier,anything that serves to pacify  
+328,palm_oil,oil from nuts of oil palms especially the African oil palm  
+329,papain,a proteolytic enzyme obtained from the unripe papaya; used as a meat tenderizer  
+330,paraffin paraffin_wax,from crude petroleum; used for candles and for preservative or waterproof coatings  
+331,paring sliver shaving,a thin fragment or slice (especially of wood) that has been shaved from something  
+332,part piece,a portion of a natural object; "they analyzed the river into three parts"; "he needed a piece of granite"  
+333,peanut_oil groundnut_oil,an oil from peanuts; used in cooking and making soap  
+334,pearl_sago,sago ground into small round grains  
+335,pectin,any of various water-soluble colloidal carbohydrates that occur in ripe fruit and vegetables; used in making fruit jellies and jams  
+336,penicillinase beta-lactamase,enzyme produced by certain bacteria that inactivates penicillin and results in resistance to that antibiotic  
+337,pennyroyal_oil,oil from European pennyroyal having an odor like mint; used chiefly in soaps  
+338,pennyroyal_oil hedeoma_oil,aromatic oil from American pennyroyal  
+339,pentose,any monosaccharide sugar containing five atoms of carbon per molecule  
+340,pepsin,an enzyme produced in the stomach that splits proteins into peptones  
+341,pepsinogen,precursor of pepsin; stored in the stomach walls and converted to pepsin by hydrochloric acid in the stomach  
+342,peroxidase,any of a group of enzymes (occurring especially in plant cells) that catalyze the oxidation of a compound by a peroxide  
+343,petroleum crude_oil crude rock_oil fossil_oil oil,a dark oil consisting mainly of hydrocarbons  
+344,phosphatase,any of a group of enzymes that act as a catalyst in the hydrolysis of organic phosphates  
+345,phospholipid,any of various compounds composed of fatty acids and phosphoric acid and a nitrogenous base; an important constituent of membranes  
+346,phosphoprotein,containing chemically bound phosphoric acid  
+347,physical_entity,an entity that has physical existence  
+348,pisang_wax,a wax obtained from the leaves of a plantain  
+349,plasma_protein,any of the proteins in blood plasma  
+350,plasma_thromboplastin_antecedent factor_XI,coagulation factor whose deficiency results in a hemorrhagic tendency  
+351,plasmin fibrinolysin,an enzyme that dissolves the fibrin of blood clots  
+352,plasminogen,an inactive form of plasmin that occurs in plasma and is converted to plasmin by organic solvents  
+353,plasminogen_activator urokinase,protease produced in the kidney that converts plasminogen to plasmin and so initiates fibrinolysis  
+354,polymerase,an enzyme that catalyzes the formation of new DNA and RNA from an existing strand of DNA or RNA  
+355,polysaccharide polyose,any of a class of carbohydrates whose molecules contain chains of monosaccharide molecules  
+356,polyunsaturated_fat,a class of fats having long carbon chains with many double bonds unsaturated with hydrogen atoms; used in some margarines; supposedly associated with low blood cholesterol  
+357,porpoise_oil,a yellow fatty oil obtained from porpoises and used as a fine lubricant  
+358,precipitin,an antibody that causes precipitation when it unites with its antigen  
+359,proaccelerin prothrombin_accelerator accelerator_factor factor_V,a coagulation factor  
+360,proconvertin cothromboplastin stable_factor factor_VII,a coagulation factor formed in the kidney under the influence of vitamin K  
+361,prolamine,a simple protein found in plants  
+362,propyl propyl_group propyl_radical,the monovalent organic group C3H7- obtained from propane  
+363,prostate_specific_antigen PSA,a protein manufactured exclusively by the prostate gland; PSA is produced for the ejaculate where it liquifies the semen and allows sperm cells to swim freely; elevated levels of PSA in blood serum are associated with benign prostatic hyperplasia and prostate cancer  
+364,protamine,a simple protein found in fish sperm; rich in arginine; simpler in composition than globulin or albumin; counteracts the anticoagulant effect of heparin  
+365,protease peptidase proteinase proteolytic_enzyme,any enzyme that catalyzes the splitting of proteins into smaller peptide fractions and amino acids by a process known as proteolysis  
+366,protein,any of a large group of nitrogenous organic compounds that are essential constituents of living cells; consist of polymers of amino acids; essential in the diet of animals for growth and for repair of tissues; can be obtained from meat and eggs and milk and legumes; "a diet high in protein"  
+367,protein_molecule,any large molecule containing chains of amino acids linked by peptide bonds  
+368,proteome,the full complement of proteins produced by a particular genome  
+369,prothrombin factor_II,a protein in blood plasma that is the inactive precursor of thrombin  
+370,prothrombinase factor_X,coagulation factor that is converted to an enzyme that converts prothrombin to thrombin in a reaction that depends on calcium ions and other coagulation factors  
+371,pruning,something that has been pruned off of a plant  
+372,ptyalin,an amylase secreted in saliva  
+373,pulp,a mixture of cellulose fibers  
+374,raffinose,a trisaccharide that occurs in sugar beets and cotton seeds and certain cereals  
+375,rape_oil rapeseed_oil colza_oil,edible light yellow to brown oil from rapeseed used also as a lubricant or illuminant  
+376,reagin,an immunoglobulin E that is formed as an antibody against allergens (such as pollen); attaches to cell membranes causing the release of histamine and other substances responsible for the local inflammation characteristic of an allergy  
+377,recombinant_protein,a protein derived from recombinant DNA  
+378,reductase,an enzyme that catalyses the biochemical reduction of some specified substance  
+379,renin,a proteolytic enzyme secreted by the kidneys; catalyzes the formation of angiotensin and thus affects blood pressure  
+380,rennin chymosin,an enzyme that occurs in gastric juice; causes milk to coagulate  
+381,reservoir source,anything (a person or animal or plant or substance) in which an infectious agent normally lives and multiplies; "an infectious agent depends on a reservoir for its survival"  
+382,residual_oil resid,oil products that remain after petroleum has been distilled  
+383,restriction_endonuclease restriction_nuclease restriction_enzyme,any of the enzymes that cut nucleic acid at specific restriction sites and produce restriction fragments; obtained from bacteria (where they cripple viral invaders); used in recombinant DNA technology  
+384,restriction_fragment,the fragment of DNA that is produced by cleaving DNA with a restriction enzyme  
+385,reverse_transcriptase,a polymerase that catalyzes the formation of DNA using RNA as a template; found especially in retroviruses  
+386,rheumatoid_factor,autoantibody that is usually present in the serum of people with rheumatoid arthritis  
+387,ribonuclease ribonucleinase RNase,a transferase that catalyzes the hydrolysis of ribonucleic acid  
+388,ribose,a pentose sugar important as a component of ribonucleic acid  
+389,ricin ricin_toxin,a toxic protein extracted from castor beans; used as a chemical reagent; can be used as a bioweapon; "one milligram of ricin can kill an adult"  
+390,row,a long continuous strip (usually running horizontally); "a mackerel sky filled with rows of clouds"; "rows of barbed wire protected the trenches"  
+391,safflower_oil,oil from safflower seeds used as food as well as in medicines and paints  
+392,safflower_oil,oil from seeds of the safflower plant  
+393,sago,powdery starch from certain sago palms; used in Asia as a food thickener and textile stiffener  
+394,salad_oil,any of several edible vegetable oils that can be used in salad dressings  
+395,salmon_oil,a fatty oil obtained from the wastes in canning salmon; used in making soap and dressing leather  
+396,sarcomere,one of the segments into which a myofibril is divided  
+397,sardine_oil,oil obtained from sardines and used chiefly as a lubricant and in soap  
+398,sassafras_oil,oil from root bark of sassafras trees; used in perfumery and as a disinfectant  
+399,scale scurf exfoliation,a thin flake of dead epidermis shed from the surface of the skin  
+400,scale_wax paraffin_scale,partly refined paraffin wax  
+401,scleroprotein albuminoid,a simple protein found in horny and cartilaginous tissues and in the lens of the eye  
+402,scraping,(usually plural) a fragment scraped off of something and collected; "they collected blood scrapings for analysis"  
+403,scurf,(botany) a covering that resembles scales or bran that covers some plant parts  
+404,seal_oil,a pale yellow to red-brown fatty oil obtained from seal blubber; used in making soap and dressing leather and as a lubricant  
+405,secretase,a set of enzymes believed to snip pieces off a longer protein producing fragments of amyloid protein that bunch up and create amyloid protein plaques in brain tissue (the pathological hallmark of Alzheimer's)  
+406,section,a very thin slice (of tissue or mineral or other substance) for examination under a microscope; "sections from the left ventricle showed diseased tissue"  
+407,section,a segment of a citrus fruit; "he ate a section of the orange"  
+408,security_blanket,anything that an adult person uses to reduce anxiety  
+409,segment,one of the parts into which something naturally divides; "a segment of an orange"  
+410,serum_albumin,albumin occurring in blood serum; serves to maintain the somatic pressure of the blood  
+411,serum_globulin,globulins occurring in blood serum and containing most of the antibodies of the blood  
+412,sesame_oil,oil obtained from sesame seeds  
+413,shale_oil,oil extracted from oil shale by heating  
+414,shark_oil shark-liver_oil,a fatty yellow to brown oil obtained from the livers of sharks; used for dressing leather and as a source of vitamin A  
+415,shellac_wax lac_wax,a hard wax separated from shellac by its insolubility in alcohol  
+416,shortening,fat such as butter or lard used in baked goods  
+417,simple_protein,a protein that yields only amino acids when hydrolyzed  
+418,ski_wax,wax used on the bottom of skis  
+419,slice,a thin flat piece cut off of some object  
+420,sodium_nitrite,nitrite used to preserve and color food especially in meat and fish products; implicated in the formation of suspected carcinogens  
+421,soybean_oil soyabean_oil,oil from soya beans  
+422,spall spawl,a fragment broken off from the edge or face of stone or ore and having at least one thin edge; "a truck bearing a mound of blue spalls"  
+423,spark,a small fragment of a burning substance thrown out by burning material or by friction  
+424,sperm_oil,an animal oil found in the blubber of the sperm whale  
+425,spermaceti,a white waxy substance from oil of the sperm whale  
+426,spike_lavender_oil spike_oil,pale yellow essential oil obtained from spike lavender used in scenting soaps and cosmetics  
+427,splint,a thin sliver of wood; "he lit the fire with a burning splint"  
+428,splinter sliver,a small thin sharp bit or wood or glass or metal; "he got a splinter in his finger"; "it broke into slivers"  
+429,stachyose,a tetrasaccharide found in the tubers of the Chinese artichoke  
+430,stand_oil,a thick oil comprised of linseed, tung, or soya oils which have been heated to over 300 C  
+431,starch amylum,a complex carbohydrate found chiefly in seeds, fruits, tubers, roots and stem pith of plants, notably in corn, potatoes, wheat, and rice; an important foodstuff and used otherwise especially in adhesives and as fillers and stiffeners for paper and textiles  
+432,stinker,anything that gives off an offensive odor (especially a cheap cigar)  
+433,straight_chain,an open chain of atoms with no side chains  
+434,streptodornase,an enzyme produced by some hemolytic strains of streptococcus that dissolves fibrinous secretions from infections; used medicinally (often in combination with streptokinase)  
+435,streptokinase,an enzyme produced by some strains of streptococcus that can liquefy blood clots by converting plasminogen to plasmin; used medicinally in some cases of myocardial infarction and pulmonary embolism  
+436,strip,a relatively long narrow piece of something; "he felt a flat strip of muscle"  
+437,stroma,the supporting tissue of an organ (as opposed to parenchyma)  
+438,subject content depicted_object,something (a person or object or scene) selected by an artist or photographer for graphic representation; "a moving picture of a train is more dramatic than a still picture of the same subject"  
+439,sucrose saccharose,a complex carbohydrate found in many plants and used as a sweetening agent  
+440,suet,hard fat around the kidneys and loins in beef and sheep  
+441,sunflower_oil sunflower-seed_oil,oil from sunflower seeds  
+442,superoxide_dismutase SOD,an enzyme that catalyzes the conversion of superoxide into hydrogen peroxide and oxygen; "oxygen free radicals are normally removed in our bodies by the superoxide dismutase enzymes"  
+443,sweet_oil,mild vegetable oil when used as food; especially olive or edible rape oil  
+444,tall_oil,an oil derived from wood pulp and used in making soaps or lubricants  
+445,tallow,obtained from suet and used in making soap, candles and lubricants  
+446,tallow_oil,an animal oil obtained by pressing tallow; used as a lubricant  
+447,telomerase,an enzyme in eukaryotic cells that can add telomeres to the ends of chromosomes after they divide  
+448,tetanus_antitoxin,antitoxin given for short-term immunization against tetanus in cases of possible exposure to the tetanus bacillus  
+449,tetanus_immunoglobulin tetanus_immune_globulin,sterile solution of globulins derived from the blood plasma of a person who has been immunized for tetanus; provides short-term immunization against tetanus in cases of possible exposure to the tetanus bacillus  
+450,tetrasaccharide,any of a variety of carbohydrates that yield four monosaccharide molecules on complete hydrolysis  
+451,tetrose,any monosaccharide sugar containing four atoms of carbon per molecule  
+452,thing,an entity that is not named specifically; "I couldn't tell what the thing was"  
+453,thing,a separate and self-contained entity  
+454,thrombin,an enzyme that acts on fibrinogen in blood causing it to clot  
+455,thromboplastin thrombokinase factor_III,an enzyme liberated from blood platelets that converts prothrombin into thrombin as blood starts to clot  
+456,thyroglobulin,an iodine containing protein that is obtained from the thyroid gland and exhibits the general properties of the globulins  
+457,thyroprotein,a preparation made from iodinated protein and having an action similar to thyroxine  
+458,tissue,part of an organism consisting of an aggregate of cells having a similar structure and function  
+459,toe,forepart of a hoof  
+460,torso trunk body,the body excluding the head and neck and limbs; "they moved their arms and legs and bodies"  
+461,transaminase aminotransferase aminopherase,a class of transferases that catalyze transamination (that transfer an amino group from an amino acid to another compound)  
+462,transcriptase RNA_polymerase,the enzyme that copies DNA into RNA  
+463,transferase,any of various enzymes that move a chemical group from one compound to another compound  
+464,transferrin beta_globulin siderophilin,a globulin in blood plasma that carries iron  
+465,triglyceride,glyceride occurring naturally in animal and vegetable tissues; it consists of three individual fatty acids bound together in a single large molecule; an important energy source forming much of the fat stored by the body  
+466,triose,any monosaccharide sugar containing three atoms of carbon per molecule  
+467,triphosphopyridine_nucleotide,a coenzyme of several enzymes  
+468,trisaccharide,any of a variety of carbohydrates that yield three monosaccharide molecules on complete hydrolysis  
+469,trypsin,an enzyme of pancreatic origin; catalyzes the hydrolysis of proteins to smaller polypeptide units  
+470,trypsinogen,inactive precursor of trypsin; a substance secreted by the pancreas and converted to active trypsin by enterokinase in the small intestine  
+471,tumor_necrosis_factor tumour_necrosis_factor TNF,a proinflammatory cytokine that is produced by white blood cells (monocytes and macrophages); has an antineoplastic effect but causes inflammation (as in rheumatoid arthritis)  
+472,tuna_oil,an oil obtained from tuna  
+473,tung_oil Chinese_wood_oil,a yellow oil obtained from the seeds of the tung tree  
+474,turning,a shaving created when something is produced by turning it on a lathe  
+475,turpentine oil_of_turpentine spirit_of_turpentine turps,volatile liquid distilled from turpentine oleoresin; used as paint thinner and solvent and medicinally  
+476,ubiquinone coenzyme_Q,any of several quinones found in living cells and that function as coenzymes that transfer electrons from one molecule to another in cell respiration  
+477,underpart,a part lying on the lower side or underneath an animal's body; "the warbler has a white throat and underparts"; "a woodland mouse with white underparts"  
+478,unit building_block,a single undivided natural thing occurring in the composition of something else; "units of nucleic acids"  
+479,unit_cell,the smallest group of atoms or molecules whose repetition at regular intervals in three dimensions produces the lattices of a crystal  
+480,uranyl uranyl_group uranyl_radical,the bivalent radical UO2 which forms salts with acids  
+481,urease,an enzyme that catalyzes the hydrolysis of urea into carbon dioxide and ammonia; is present in intestinal bacteria  
+482,variable,something that is likely to vary; something that is subject to variation; "the weather is one variable to be considered"  
+483,vegetable_oil oil,any of a group of liquid edible fats that are obtained from plants  
+484,vegetable_wax,a waxy substance obtained from plants (especially from the trunks of certain palms)  
+485,venter,a bulging body part (as the belly of a muscle)  
+486,very_low_density_lipoprotein VLDL,large lipoproteins rich in triglycerides; VLDLs circulate through the blood giving up their triglycerides to fat and muscle tissue until the VLDL remnants are modified and converted into LDL  
+487,vinyl vinyl_group vinyl_radical,a univalent chemical radical derived from ethylene  
+488,walnut_oil,oil from walnuts  
+489,wax,any of various substances of either mineral origin or plant or animal origin; they are solid at normal temperatures and insoluble in water  
+490,whacker whopper,something especially big or impressive of its kind  
+491,whale_oil train_oil,a white to brown oil obtained from whale blubber; formerly used as an illuminant  
+492,wheat_gluten,gluten prepared from wheat  
+493,withers,the highest part of the back at the base of the neck of various animals especially draft animals  
+494,wood_pulp,wood that has been ground to a pulp; used in making cellulose products (as rayon or paper)  
+495,wood_sugar xylose,a sugar extracted from wood or straw; used in foods for diabetics  
+496,wool_oil,any oil used to oil wool before spinning  
+497,world,a part of the earth that can be considered separately; "the outdoor world"; "the world of insects"  
+498,wormwood_oil absinthe_oil,a dark bitter oil obtained from wormwood leaves; flavors absinthe liqueurs  
+499,zymase,a complex of enzymes that cause glycolysis; originally found in yeast but also present in higher organisms  

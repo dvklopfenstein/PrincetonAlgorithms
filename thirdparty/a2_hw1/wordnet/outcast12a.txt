@@ -1,0 +1,12 @@
+competition
+cup
+event
+fielding
+football
+level
+practice
+prestige
+team
+tournament
+world
+mongoose

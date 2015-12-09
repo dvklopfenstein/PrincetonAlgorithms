@@ -1,0 +1,5 @@
+4 4
+R  D  C  E  
+S  E  O  S  
+I  P  R  T  
+T  I  A  R

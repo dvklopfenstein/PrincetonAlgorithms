@@ -1,0 +1,5 @@
+4 4
+N O O N
+O O O O
+O O O O
+N O O N

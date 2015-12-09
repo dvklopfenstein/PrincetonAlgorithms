@@ -1,0 +1,5 @@
+4 4
+S T N G
+E I A E
+D R L S
+S E P O
