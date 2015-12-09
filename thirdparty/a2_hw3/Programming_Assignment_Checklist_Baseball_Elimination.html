@@ -1,0 +1,237 @@
+
+<!-- saved from url=(0063)http://coursera.cs.princeton.edu/algs4/checklists/baseball.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>
+Programming Assignment Checklist: Baseball Elimination
+</title>
+</head>
+
+<body>
+<h3>
+Programming Assignment Checklist: Baseball Elimination
+</h3>
+
+
+
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center>Frequently Asked Questions</center>
+</font></td></tr></tbody></table>
+
+<p>
+<b>How do I read in the data?</b>
+We recommend using the <tt>readInt()</tt> and <tt>readString()</tt> methods
+from <a href="http://introcs.cs.princeton.edu/java/stdlib/In.java.html">In.java</a>.
+
+</p><p>
+<b>How efficient should my program be?
+</b>
+You should be able to handle all of the test input files provided (say, in
+less than a minute).
+Do not worry about over-optimizing your program because the data sets
+that arise in real applications are tiny.
+
+</p><p>
+<b>What should I return if there is more than one certificate of elimination?
+</b>
+Return any such subset.
+
+</p><p>
+<b>Must I output the teams in the same order as in the input file (as does the reference solution)?</b>
+
+No, any order is fine.
+
+</p><p>
+<b>Should <tt>certificateOfElimination()</tt> work even if 
+<tt>isEliminated()</tt> has not been called by the client first?
+</b>
+Absolutely. It is bad design (and a violation of the API)
+for the success of calling one method to depend
+on the client previously calling another method.
+
+</p><p>
+<b>How do I compute the mincut?
+</b>
+The <tt>inCut()</tt> method in
+<a href="http://algs4.cs.princeton.edu/64maxflow/FordFulkerson.java.html">
+FordFulkerson.java</a> takes a vertex as an argument and returns true if
+that vertex is on the <em>s</em>-side of the mincut.
+
+</p><p>
+<b>How do I specify an infinite capacity for an edge?
+</b>
+Use <tt>Double.POSITIVE_INFINITY</tt>.
+
+</p><p>
+<b>What would cause <tt>FordFulkerson.java</tt> to throw a runtime exception
+with the message
+<tt>"Edge does not satisfy capacity constraints: ..."</tt>?
+</b>
+Did you create an edge with negative capacity?
+
+
+</p><p><b>My program runs much faster in practice than my theoretical analysis
+guarantees. Should I be concerned?</b>
+No, there are a number of reasons why your program will perform better than
+your worst-case guarantee.
+
+</p><ul>
+
+<p></p><li>
+If a team is eliminated for a trivial reason, your code may run much faster
+because it avoids computing a maxflow.
+
+<p></p></li><li>
+If there are no games between most pairs of teams, then the flow network you
+construct may have many fewer edges than in the worst case.
+
+<p></p></li><li>
+The flow networks that arise in the baseball elimination problem have special
+structure, e.g., they are bipartite and the edge capacities are small integers.
+As a result, the Ford-Fulkerson algorithm performs significantly faster
+than its worst-case guarantee of <em>V</em> <em>E</em><sup>2</sup>.
+
+
+</li></ul>
+
+<!--
+For the input files <tt>teams[xx]-dense.txt</tt>, our reference solution
+has a running time of about N^4.5 to determine <em>all</em> teams
+that are mathematically eliminated.
+-->
+
+
+<p>
+
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center>Input</center>
+</font></td></tr></tbody></table>
+
+</p><p>
+<strong>Input and testing.</strong>
+
+The directory
+<a href="http://coursera.cs.princeton.edu/algs4/testing/baseball">baseball</a>
+contains some sample input files.
+For convenience, <a href="http://coursera.cs.princeton.edu/algs4/testing/baseball-testing.zip">baseball-testing.zip</a>
+contains all of these files bundled together.
+
+</p><p>
+<b>Testing.</b>
+&nbsp;
+For reference, the teams below are mathematically eliminated for <em>nontrivial</em> reasons.
+By nontrivial, we mean that the certificate of elimination requires two or more teams. If a team is trivially eliminated, it does not appear in the list below.
+
+</p><ul>
+
+<p></p><li> <a href="http://coursera.cs.princeton.edu/algs4/testing/baseball/teams4.txt">teams4.txt</a>: Philadelphia.
+
+<p></p></li><li> <a href="http://coursera.cs.princeton.edu/algs4/testing/baseball/teams4a.txt">teams4a.txt</a>: Ghaddafi.
+
+<p></p></li><li> <a href="http://coursera.cs.princeton.edu/algs4/testing/baseball/teams5.txt">teams5.txt</a>: Detroit.
+
+<p></p></li><li> <a href="http://coursera.cs.princeton.edu/algs4/testing/baseball/teams7.txt">teams7.txt</a>: Ireland.
+
+<p></p></li><li> <a href="http://coursera.cs.princeton.edu/algs4/testing/baseball/teams24.txt">teams24.txt</a>: Team13.
+
+<p></p></li><li> <a href="http://coursera.cs.princeton.edu/algs4/testing/baseball/teams32.txt">teams32.txt</a>: 
+Team25, Team29.
+
+<p></p></li><li> <a href="http://coursera.cs.princeton.edu/algs4/testing/baseball/teams36.txt">teams36.txt</a>: 
+Team21.
+
+<p></p></li><li> <a href="http://coursera.cs.princeton.edu/algs4/testing/baseball/teams42.txt">teams42.txt</a>: 
+Team6, Team15, Team25.
+
+<p></p></li><li> <a href="http://coursera.cs.princeton.edu/algs4/testing/baseball/teams48.txt">teams48.txt</a>: 
+Team6, Team23, Team47.
+
+<p></p></li><li> <a href="http://coursera.cs.princeton.edu/algs4/testing/baseball/teams54.txt">teams54.txt</a>: 
+Team3, Team29, Team37, Team50.
+
+</li></ul>
+
+To verify that you are returning a valid certificate of elimination <em>R</em>, compute
+<em>a</em>(<em>R</em>) = (<em>w</em>(<em>R</em>) + <em>g</em>(<em>R</em>)) / |<em>R</em>|,
+where <em>w</em>(<em>R</em>) is the total number of wins of teams in <em>R</em>,
+<em>g</em>(<em>R</em>) is the total number of remaining games
+between teams in <em>R</em>, and |<em>R</em>| is the number
+of teams in <em>R</em>. Check that <em>a</em>(<em>R</em>) is greater than the maximum number of games
+the eliminated team can win
+
+
+<p>
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center>Possible Progress Steps</center>
+</font></td></tr></tbody></table>
+
+</p><p>These are purely suggestions for how you might make progress. You do not have to follow these steps. 
+
+</p><ul>
+
+<!--
+<p><li> Download the zip file
+<a href = "http://coursera.cs.princeton.edu/algs4/testing/baseball-testing.zip">baseball-testing.zip</a>.
+It contains a number of sample input files.
+-->
+
+<p></p><li>
+Write code to read in the input file and store the data.
+
+<p></p></li><li>
+Draw by hand the <tt>FlowNetwork</tt> graph that you want to construct
+for a few small examples.
+Write the code to construct the <tt>FlowNetwork</tt>, print it out using
+the <tt>toString()</tt> method, and and make sure that it matches your
+intent.
+Do not continue until you have thoroughly tested this stage.
+
+
+<p></p></li><li>
+Compute the maxflow and mincut using the <tt>FordFulkerson</tt> data type.
+You can access the value of the flow with the <tt>value()</tt> method;
+you can identify which vertices are on the source side of the mincut
+with the <tt>inCut()</tt> method.
+
+<p></p></li><li> The <tt>BaseballElimination</tt> API contains the public methods
+that you will implement. For modularity, you will want to add some
+private helper methods of your own.
+
+</li></ul>
+ 
+<p>
+Your program shouldn't be too long—ours is less than 200 lines.
+If things get complicated, take a step back and re-think your approach.
+
+
+
+
+</p><p>
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center>Enrichment links</center>
+</font></td></tr></tbody></table>
+
+</p><p>
+
+</p><ul>
+
+<p></p><li> A group of researchers at Berkeley maintain a website
+where you can view the
+<a href="http://lyle.smu.edu/~olinick/riot/baseball_main.html">baseball elimination numbers</a> as the season unfolds.
+</li></ul>
+
+<p>
+
+
+</p></body></html>

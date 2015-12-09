@@ -1,0 +1,247 @@
+
+<!-- saved from url=(0061)http://coursera.cs.princeton.edu/algs4/checklists/boggle.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>
+Programming Assignment Checklist: Boggle
+</title>
+</head>
+
+<body>
+<h3>
+Programming Assignment Checklist: Boggle
+</h3>
+
+<p><br>
+<font color="green">UNDER CONSTRUCTION</font>
+
+</p><p><br>
+
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center>Frequently Asked Questions</center>
+</font></td></tr></tbody></table>
+
+</p><p><b>If a valid word can be formed in more than one way, how many times should I return it?</b>
+Only once. For example, you should return the word <tt>EQUATION</tt> only once in 
+<a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/board-q.txt">board-q.txt</a> even though there are two
+ways to form it.
+
+</p><p><b>Do In need to return the words in alphabetical order?</b>
+No, that is not required.
+
+</p><p><b>Which data structure(s) should I use to store the dictionary?</b>
+It is up to you to decide. A trie is a natural starting point.
+
+</p><p><b>My program isn't fast enough to get 100%. What can I do to improve performance?</b>
+See the <em>Possible Optimizations</em> section below for some ideas. It may be a challenge.
+
+
+</p><p>
+
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center>Input, Output, and Testing</center>
+</font></td></tr></tbody></table>
+
+</p><p>
+The directory
+<a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/">boggle</a>
+contains some sample dictionaries and boards for testing.
+For convenience,
+<a href="http://coursera.cs.princeton.edu/algs4/testing/boggle-testing.zip">boggle-testing.zip</a>
+contains all of these files bundled together.
+
+</p><p><b>Dictionaries.</b>
+Below are some dictionaries for testing. Each dictionary consists of a sequence
+of words containing only the uppercase letters <tt>A</tt> through <tt>Z</tt>,
+separated by whitespace, 
+and in alphabetical order.
+
+</p><blockquote>
+<table cellspacing="1" cellpadding="5" border="0" bgcolor="#FFFFFF">
+
+<tbody><tr bgcolor="#666666" align="center">
+<th><font color="white">file</font></th>
+<th><font color="white">words</font></th>
+<th><font color="white">description</font></th>
+</tr>
+
+<tr bgcolor="#ebebeb" align="center">
+<td><a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/dictionary-nursery.txt">dictionary-nursery.txt</a>
+</td><td>1,647</td>
+<td>words that appear in several popular nursery rhymes</td>
+</tr>
+
+
+<tr bgcolor="#ebebeb" align="center">
+<td><a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/dictionary-algs4.txt">dictionary-algs4.txt</a>
+</td><td>6,013</td>
+<td>words that appear in Algorithms 4/e</td>
+</tr>
+
+<tr bgcolor="#ebebeb" align="center">
+<td><a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/dictionary-common.txt">dictionary-common.txt</a>
+</td><td>20,068</td>
+<td>a list of common English words</td>
+</tr>
+
+<tr bgcolor="#ebebeb" align="center">
+<td><a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/dictionary-shakespeare.txt">dictionary-shakespeare.txt</a>
+</td><td>23,688</td>
+<td>&nbsp;&nbsp;words that appear in the complete works of William Shakespeare&nbsp;&nbsp;</td>
+</tr>
+
+<tr bgcolor="#ebebeb" align="center">
+<td><a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/dictionary-enable2k.txt">dictionary-enable2k.txt</a></td>
+<td>173,528</td>
+<td>Enhanced North American Benchmark Lexicon</td>
+</tr>
+
+<tr bgcolor="#ebebeb" align="center">
+<td><a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/dictionary-twl06.txt">dictionary-twl06.txt</a>
+</td><td>178,691</td>
+<td><a href="http://en.wikipedia.org/wiki/Official_Tournament_and_Club_Word_List">Tournament Word List</a></td>
+</tr>
+
+<tr bgcolor="#ebebeb" align="center">
+<td><a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/dictionary-yawl.txt">dictionary-yawl.txt</a>
+</td><td>264,061</td>
+<td><a href="http://www.cs.duke.edu/csed/data/yawl-0.3.2/">Yet Another Word List</a></td>
+</tr>
+
+<tr bgcolor="#ebebeb" align="center">
+<td><a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/dictionary-sowpods.txt">dictionary-sowpods.txt</a>
+</td><td>267,751</td>
+<td>the <a href="http://en.wikipedia.org/wiki/SOWPODS">SOWPODS</a> list of words</td>
+</tr>
+
+<tr bgcolor="#ebebeb" align="center">
+<td>&nbsp;&nbsp;<a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/dictionary-zingarelli2005.txt">dictionary-zingarelli2005.txt</a>&nbsp;&nbsp;
+</td><td>&nbsp;&nbsp;584,983&nbsp;&nbsp;</td>
+<td>Italian Scrabble Dictionary</td>
+</tr>
+
+</tbody></table>
+</blockquote>
+
+
+    
+
+<p><b>Boards.</b>
+We provide a number of boards for testing. The boards named <tt>boards-points[xxxx].txt</tt>
+are Boggle board that results in a maximum score of <tt>xxxx</tt> points using the dictionary
+<a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/dictionary-yawl.txt">dictionary-yawl.txt</a>. The other boards are designed
+to test various corner cases, including dealing with the two-letter sequence <tt>Qu</tt> and
+boards of dimensions other than 4-by-4.
+
+</p><ul>
+
+</ul>
+
+
+
+<p>
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center>Possible progress steps</center>
+</font></td></tr></tbody></table>
+
+</p><p>
+
+These are purely suggestions for how you might make progress. You do not have to follow these steps.
+
+
+</p><ul>
+
+<!--<p><li>
+Download the zip file
+<a href = "http://coursera.cs.princeton.edu/algs4/testing/boggle-testing.zip">boggle-testing.zip</a>.
+It contains sample dictionaries and boards for testing.
+-->
+
+<p></p><li>
+Familiarize yourself with the <a href="http://coursera.cs.princeton.edu/algs4/testing/boggle/BoggleBoard.java">BoggleBoard.java</a>
+data type.
+
+<p></p></li><li>
+Use a standard set data type to represent the dictionary, e.g.,
+a <tt>SET&lt;String&gt;</tt>, a
+<tt>TreeSet&lt;String&gt;</tt>, or a <tt>HashSet&lt;String&gt;</tt>.
+
+<p></p></li><li>
+Create the data type <tt>BoggleSolver</tt>.
+Write a method based on depth-first search to enumerate all strings that
+can be composed by following sequences of adjacent dice. That is, enumerate
+all simple paths in the Boggle graph (but there is no need to explicitly
+form the graph).
+For now, ignore the special two-letter sequence <tt>Qu</tt>.
+
+<p></p></li><li>
+Now, implement the following critical backtracking optimization:
+<em>when the current path corresponds to a string that is not a prefix
+of any word in the dictionary, there is no need to expand the
+path further</em>. To do this, you will need to create a data structure
+for the dictionary that supports the <em>prefix query</em> operation:
+given a prefix, is there any word in the dictionary that starts with that prefix?
+
+<p></p></li><li>
+Deal with the special two-letter sequence <tt>Qu</tt>.
+
+
+</li></ul>
+
+
+<p>
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr align="left">
+<td bgcolor="000000">
+<font size="+0" face="helvetica" color="ffffff">
+<center>Possible Optimizations</center>
+</font></td></tr></tbody></table>
+
+</p><p>
+You will likely need to optimize some aspects of your program
+to pass all of the performance points (which are, intentionally,
+more challenging on this assignment). Here are a few ideas:
+
+</p><ul>
+
+<p></p><li> Make sure that you have implemented the critical backtracking optimization
+described above. This is, by far, the most important step—several orders
+of magnitude!
+
+<p></p></li><li> Think about whether you can implement the dictionary in a more
+efficient manner. Recall that the alphabet consists of only the 26 letters
+<tt>A</tt> through <tt>Z</tt>.
+
+<p></p></li><li> Exploit that fact that when you perform a <em>prefix query</em> operation,
+it is usually almost identical to the previous <em>prefix query</em>,
+except that it is one letter longer.
+
+<p></p></li><li> Precompute the Boggle graph, i.e., the set of cubes adjacent to each cube.
+But don't necessarily use a heavyweight <tt>Graph</tt> object.
+
+<p></p></li><li> Consider a nonrecursive implementation of the <em>prefix query</em>
+operation.
+
+<p></p></li><li> Consider a nonrecursive implementing of depth-first search.
+
+</li></ul>
+
+
+<!--
+<p>
+<TABLE BORDER = 0 CELLPADDING = 2 CELLSPACING = 0 WIDTH = 100%>
+<tr align = left>
+<td bgcolor = "000000">
+<font size = +0 face = "helvetica" color = "ffffff">
+<center>Enrichment</center>
+</table>
+-->
+</body></html>
