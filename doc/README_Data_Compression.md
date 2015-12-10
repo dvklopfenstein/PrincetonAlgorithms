@@ -2,9 +2,9 @@
 
 ## Code
   * **Introduction to Data Compression**
-  * **Run-Length Coding**
-  * **Huffman Compression**
-  * **LZW Compression**
+  * **Run-Length Coding**: RunLength.py
+  * **Huffman Compression**: Huffman.py
+  * **LZW Compression**: LZW.py(uses TST.py)
 
 ## Table of Contents for Examples
   1. [Run Example](#ex1)
