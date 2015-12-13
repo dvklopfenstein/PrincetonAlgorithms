@@ -78,9 +78,9 @@ Note: There are no Programming Assignment Solutions on this site.
   and [**checklist**](http://htmlpreview.github.com/?https://github.com/dvklopfenstein/PrincetonAlgorithms/blob/master/thirdparty/a2_hw5/Programming_Assignment_Checklist_Burrows_Wheeler_Data_Compression.html)
 
 * **Week 7 Suggested Readings**: Section 6.5 (pp 903-910) and 6.6 (910-921) in [*Algorithms, 4th edition*](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1441459738&sr=1-1&keywords=sedgewick&refinements=p_n_feature_browse-bin%3A2656020011&pebp=1441459739425&perid=0C83SQQ1YFJ62VWHF9C0)
-  * Reductions
-  * Linear Programming
-  * Intractabillity
+  * [Reductions](README_Reductions.md)
+  * [Linear Programming](README_Linear_Programming.md)
+  * [Intractabillity](README_Intractabillity.md)
 
 
 
