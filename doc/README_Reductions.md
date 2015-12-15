@@ -1,4 +1,4 @@
-# Reductions
+# [Reductions](http://algs4.cs.princeton.edu/65reductions)
 
 ## Code
   * **Introduction to Reductions**
