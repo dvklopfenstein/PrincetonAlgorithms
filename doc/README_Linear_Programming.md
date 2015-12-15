@@ -3,7 +3,7 @@
 ## Code
   * **Brewer's Problem**
   * **Simplex Algorithm**
-  * **Simplex Implementations**
+  * **Simplex Implementations**: LinearProgramming.py
   * **Linear Programming Reductions**
 
 ## Table of Contents for Examples
