@@ -1,4 +1,4 @@
-# Intractabillity
+# Intractability
 
 ## Code
   * **Introduction to Intractability**
