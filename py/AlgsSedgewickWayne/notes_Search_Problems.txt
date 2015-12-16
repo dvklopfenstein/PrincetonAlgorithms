@@ -1,0 +1,128 @@
+#---------------------------------------------------------------------------------
+# Search Problems (10:56)
+
+# Satisfiability Problems:
+#   LSOLVE: Given a system of linear equations. find a solution.
+#   LP:     Given a system of linear inequalities, find a solution.
+#   ILP:    Given a system of linear inequalities, find a solution where x=0 or x=1.
+#   SAT:    Given a system of boolean equations, find a binary solution.
+#
+# Q: Whichof these problems have poly-time algorithms?
+#   LSOLVE: Yes. Gaussian elimination solves NxN system in N^3 time.
+#   LP:     Yes. Ellipsoid algorithm is poly-time. <- was open problem for decades.
+#   ILP,SAT: No poly-time algorithm known or believed to exist!
+
+# SEARCH PROBLEMS:
+# SEARCH PROBLEM: Given an instance I of a problem, find a solution S.
+# REQUIREMENT: Must be able to efficiently check that S is a solution.
+# Characterizes "Search Problem": It has a small solution that we can check whether it is a soln.
+
+# FACTOR: Given an n-bit integer x, find a nontrivial factor.
+#   input size = number of bits
+
+#---------------------------------------------------------------------------------
+# P vs. NP (16:29)
+# DEFINITION: NP: the class of all search problems.
+# SIGNIFICANCE: What scientists and engineers **aspire to compute** feasibly.
+
+# DEFINITION: P is the class of search problems solvable in poly-time.
+# NOTE: Classid definition limits P to yes/no problems.     
+#   LSOLVE -> Find a vector x that satisfies Ax = b          Gaussian elimination, Edmonds 1967
+#   LP     -> Find a vector x that satisfies Ax <= b         ellipsoid, Khachiyan 1979
+#   SORT   -> Find a permutation that puts array a in order  mergesort, von Neumann 1945
+#   STCONN -> Find a path in a graph G from s to t           depth-first search, Theseus
+# SIGNIFICANCE: What scientists and engineers **actually do compute** feasibly.
+
+# NONDETERMINISM:
+# Nondeterminisitc machine can **guess** the desired solution
+# (recall NFA implementation)
+#
+# EX: TURING MACHINE
+#   * Deterministic: state, input determines next state.
+#   * Nondeterministic: more than one possible next state.
+#
+# NP: Search problems sovable in poly time on a nondeterministic Turing machine (TM)
+
+# QUESTION: In the context of computational complexity, what does the acronym NP stand for?
+#     Not polynomial time
+#     Nope
+# ->  Nondeterminisitic polynomail time.
+#     No problem.
+# EXPLANATION: The complexity class NP contains all of the problems in P - it is
+# often incorrectyly ascribed to mean "not polynomial time."
+
+# EXTENDED CHURCH-TURING THESIS
+#
+# P = search problems solvable in poly-time **in the natural world.**
+#
+# EVIDENCE SUPPORTING THESIS: True for all physical computers.
+#
+# NATURAL COMPUTERS? No successful attempts (yet).
+#
+# Ex. computing Steiner trees with soap bubbles.
+#           O         O
+#            \_______/
+#            /       \
+#           O         O
+# STEINER: Find set of lines of minimal length connecting N given points.
+# It is a search problem.
+
+# P vs. NP
+#
+# DOES P = NP?
+
+# AUTOMATING CREATIVITY
+#
+# Q: Being creative vs. appreciateing creativity?
+#
+# Ex: Mozart composes a piece of music;    our neurons appreciate it.
+# Ex: Wiles proves a deep theorem;         a colleagur refrees it.
+# Ex: Boeing designs an efficient airfoil; a simulator verfies it.
+# Ex: Einstein proposes a theory;          a experimentalist validates it.
+#
+# But if P=NP, then there is really no difference:
+# It is like automating creativity
+#
+# That (can we automate creativity) is the COMPUTATIONAL ANALOG: Does P = NP?
+
+# THE CENTRAL QUESTION
+#
+# P:  Class of search problems sovable in poly-time.
+# NP: Class of all search problems
+#
+# Does P == NP? (Can you always avoid brute-force searching and do better)
+#
+# TWO WORLDS:
+#   1. P == NP: P is a subset of NP
+#   2. P == NP: P and NP are the same
+#
+# Does P == NP? (Can you always avoid brute-force searching and do better)
+#   IF YES... Poly-time algorithms for SAT, ILP, TSP, FACTOR, ... (just have not found them yet)
+#   IF NO ... Would learn something fundamental about our universe.
+#             If P == NP, says something profound about the power of nondeterminism.
+#             If P == NP, nondeterminism does not help
+#             If P != NP, nondeterminism DOES     help
+#             
+#
+# OVERWHELMING CONSENSUS: P != NP
+
+# QUESTION: Which of the following would imply that P != NP?
+#    Proving that there is no poly-time algorithm for FACTOR (factoring an integer)
+#    Proving that there is no poly-time algorithm for ILP (integer linear programming)
+#    Proving that there is no poly-time algorithm for SAT (satisfiability)
+# -> Any of the above
+# EXPLANATION: All of the given problems are in NP. So, if any one of them is not in P,
+# then we must have P != NP.
+
+
+
+
+
+
+
+
+
+
+
+
+
