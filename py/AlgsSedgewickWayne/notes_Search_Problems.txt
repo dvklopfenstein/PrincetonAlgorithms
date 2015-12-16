@@ -114,10 +114,85 @@
 # EXPLANATION: All of the given problems are in NP. So, if any one of them is not in P,
 # then we must have P != NP.
 
+#---------------------------------------------------------------------------------
+# CLASSIFYING PROBLEMS (13:43)
 
+# A KEY PROBLEM: SATISFIABILITY
+#
+# SAT: Given a system of boolean equations, find a solution.
+#
+#   a' or b  or c  = True
+#   a  or b' or c  = True
+#   a' or b' or c' = True
+#   a' or b' or c  = True
+#
+# KEY APPLICATIONS:
+#   * Automatic verification systems for software
+#   * Electronic design automation (EDA) for hardware
+#   * Mean field diluted spin glass model in physics.
 
+# EXHAUSTIVE SEARCH 4:15
+#
+# Q: How to solve an instance of SAT with n variables?
+# A: Exhastive search: try all 2^n truth assignments.
+#
+# Q: Can we do anything substantially more clever?
+# CONJECTURE: No poly-time algorithm for SAT. (intractable)
 
+# MORE POLY-TIME REDUCTIONS FROM BOOLEAN SATISFIABILITY 11:00
+# CONJECTURE: SAT in intractable.
+# IMPLICATION: All of these problems are intractable
+#
+#             SAT
+#              |
+#         +----+--------+
+#        /     |         \
+# 3-COLOR     IND-SET     VERTEX COVER
+#    |         |                 |
+#    |         |            +----+-------+
+#    |         |            |             \
+# EXACT COVER  |          CLIQUE           HAM-CYCLE
+#    |         |                              |
+#    |         |                           +--+-------+
+#    |         |                           |           \
+# SUBSET-SUM  ILP                          TSP          HAM-PATH
+#    |
+# PARTITION
+#    |
+#    +----+
+#    |     \
+# KNAPSACK  BIN-PACKAGING
 
+# STILL MORE REDUCTIONS FROM SAT 12:30
+#
+# AEROSPACE ENGINEERING: Optiman mesh partitioning for finite elements
+# BIOLOGY: Pylogeny reconstruction
+# CHEMICAL ENGINEERING: Heat exchanger netwoek synthesis.
+# CHEMISTRY: Protein folding
+# CIVIL ENGINEERING: Equilibrium of urban traffic flow
+# ECONOMICX: Computation of arbitrage in financial markets with friction.
+# ELECTRICAL ENGINEERING: VLSI layout.
+# ENVIRONMENTAL ENGINEERING. Optimal placement of contaminant sensors
+# FINANCIAL ENGINEERING. Minimum risk portfolio of given return.
+# GAME THEORY: Nash equilibrium that maximizes social welfare.
+# MATHEMATICS:....
+# MECHANICAL ENGINEERING: Structure of turbulence in sheared flows.
+# MEDICINE: Reconstructing 3d shapr from biplane angiocardiogram
+# OPERATIONS RESEARCH: Traveling salesperson problem
+# PHYSICS: Partition funciton of 4d lsing model
+# RECREATION: Versions of Sudoko, Checkers, Minesweeper, Tetris.
+# STATISTICS: Optimal experimnetal design.
+# plus over 6,000 scientific papers per year
+
+# QUESTION: If problem X polynomial-time reduces to problem Y, which of the 
+# following statements can we infer?
+#     If X can be solved in poly-time, the Y can be solved in poly-time
+# ->  If X cannot be solved in poly-time, then Y cannot be solved in poly-time.
+#     X can be solved in poly-time iff Y can be solver in poly-time.
+#     None of the above.
+# EXPLANATION: The polynomial-time reduction implies that if 
+# Y can be solved in polynomial time, then so can X. 
+# The converse of this statement is option B.
 
 
 
