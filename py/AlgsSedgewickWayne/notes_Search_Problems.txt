@@ -195,9 +195,58 @@
 # The converse of this statement is option B.
 
 
+#---------------------------------------------------------------------------------
+# NP-COMPLETENESS (12:38)
 
+# TWO WORLDS (MORE DETAIL) 9:16
+# ...
+# WHY WE BELIEVE P != NP:
+#
+#   We admire Wil's proof of Fermat's last theorem, the scientific theories of Newton.
+#   Einstein, Darwin, ..., the design of the Golden Gate bridge and the Pyramids, 
+#   precisely because they seem to require a leap which cannot be made by everyone,
+#   let alone by simple mechanical device. - Avi Wigderson
 
+# SUMMARY:
+#   P:            Class of search problems sovable in poly-time.
+#   NP:           Class of search problems, some of which seem wickedly hard.
+#   NP-Complete:  Hardest problems in NP.
+#   INTRACTANBLE: Problem with no poly-time algorithm.
+#
+# MANY FUNDAMENTAL PROBLEMS ARE NP-COMPLETE.
+#  * SAT, ILP, 3-COLOR, ...
+#  * 3D-ISING, ...
+#
+# USE THEORY AS A GUIDE: 10:00
+#  * A poly-time algorithm for an NP-complete problem would be a stunning
+#    breakthrough (a proof that P=NP)
+#  * You will confront NP-complete problems in your career.
+#  * Safe to assume that P != NP and that such problems are intractable.
+#  * Identify these situations and proceed accordingly
 
+# QUESTION: Suppose that problem X is NP-complete; problem Y is in NP;
+# and X poly-time reduces to Y. Which one or more of the following statements
+# can we infer?
+#     FACTOR polynomial-time reduces to Y
+#     Y is solvable in plynomial time iff P == NP
+#     Y is NP-complete
+# --> All of the above
 
+#---------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------
+# Week 6 Exercises
+#---------------------------------------------------------------------------------
+How element distinctness can be reduced to convex hull computation?
 
+The exercises do not give explanations, and sometimes it is not entirely obvious what is the correct reasoning. I am curious how you reason about the possibility to reduce the problem "given an array
+of N real numbers, are they all distinct"? to the problem "compute the convex hull".
+It is clear that both of them reduce to sorting. But can we really say that if two problems (A and B) reduce to C, then also A reduces to B, and vice versa? This does not really seem right. 
+In other words: assuming that I have a library function that computes the convex hull, how does it help me in determining if the numbers in my array are all distinct?
 
+Gen Shib:
+We learned in lecture that sorting linear-time reduces to convex hull (slide 23). Slide 23 also gives us rough sketch of how to sort numbers by solving convex hull problem. So, if you have a library
+function that computes the convex hull, you can use it to get numbers sorted. If you can get numbers sorted, you can solve distinctness problem by sorting all input numbers and then scan the sorted
+numbers to see if there are any adjacent numbers that are the same.
+
+In other words, you are supposed to use transitive nature of "linear-time reduce" relationship here. If A linear-time reduces to B and B linear-time reduces to C, then A linear-time reduces to C. In
+this case, A is distinctness problem, B is sorting problem, and C is convex hull problem.
