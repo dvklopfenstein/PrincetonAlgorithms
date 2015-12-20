@@ -233,6 +233,102 @@
 # --> All of the above
 
 #---------------------------------------------------------------------------------
+# COPING WITH INTRCTABILITY (14:01)
+
+# EXPLOITING INTRACTABILITY
+# 
+# MODERN CRYPTOGRAPHY
+#   * Ex. Send your credit card to Amazon
+#   * Ex. Digitally sign an e-document.
+#   * Enables freedom of privacy, speech, press, political association
+#
+# RSA CRYPTOSYSTEM
+#   * To use: multiply two n-bit integers. [poly-time]
+#   * To break: factor a 2 n-bit integer. [unlikely poly-time]
+#     Multiply -> EASY
+#     Factor   -> HARD
+
+# EXPLOITING INTRACTABILITY
+#
+# FACTOR: Given an n-bit integer x, find a nontrivial factor.
+#    Q: What is complecity of FACTOR?
+#    A: In NP, but not known (or believed) to be in P or NP-complete.
+#
+#    Q: What if P == NP?
+#    A: Poly-time algorithm for factoring; modern e-conomy collapses.
+#
+# PROPOSITION: [Shor 1994] Can factor an n-bit integer in n^3 steps on a "quantum computer"
+#
+#    Q: Do we still believe the extended Church-Turing thesis?
+
+# COPING WITH INTRACTABILITY 5:17
+#
+# RELAX ONE OF DESIRED FEATURES:
+#  * Solve arbitrary instances of the problem.
+#  * Solve the problem to optimality
+#  * Solve the problem in poly-time
+# 
+# SPECIAL CASES MAY BE TRACTABLE:
+#  * Ex: Linear time algorithm for 2-SAT.    <- at most two literals per equation
+#  * Ex: Linear time algorithm for Horn-SAT. <- at most one un-negated literal per equation
+# 
+# Maybe your problem is that you are trying to solve too hard a problem and 
+#
+# DEVELOP A HEURISTIC, AND HOPE IT PRODUCES A GOOD SOLUTION: 7:03
+#   * No guarantees on quality of solution
+#   * Ex. TSP assignment heuristics.
+#   * Ex. Metropolis algorithm, simulating annealing, genetic algorithms.
+#
+# APPROXIMATION ALGORITHM. FIND SOLUTION OF PROVABLY GOOD QUALITY.
+#   * Ex. MAX-3SAT: provably satisfy 87.5% as many clauses as possible.
+#     (But if you can guarantee to satisy 87.51% as many clauses as possible in
+#      poly time, the P == NP!)
+
+# THE LONGEST PATH (set to Billy Joel's 'For the Longest Time')
+# written by Dan Barrett in 1988 while a student at Johns Hopkins 
+# during a difficult algorithms take-home final
+#
+# Woh-oh-oh-oh, find the longest path!
+# Woh-oh-oh-oh, find the longest path!
+# 
+# If you said P is NP tonight,
+# There would still be papers left to write.
+# I have a weakness;
+# I'm addicted to completeness,
+# And I keep searching for the longest path.
+#
+# The algorithm I would like to see
+# Is of polynomial degree.
+# But it's elusive:
+# Nobody has found conclusive
+# Evidence that we can find a longest path.
+#
+# I have been hard working for so long.
+# I swear it's right, and he marks it wrong.
+# Some how I'll feel sorry when it's done: GPA 2.1
+# Is more than I hope for.
+# 
+# Garey, Johnson, Karp and other men (and women)
+# Tried to make it order N log N.
+# Am I a mad fool
+# If I spend my life in grad school,
+# Forecer following the longest path?
+#
+# Woh-oh-oh-oh, find the longest path!
+# Woh-oh-oh-oh, find the longest path!
+# Woh-oh-oh-oh, find the longest path!
+#
+
+# The world's longest path (Sendero de Chile): 9,700 km
+
+# THAT'S ALL, FOLKS: KEEP SEARCHING!
+
+
+
+
+
+
+#---------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------
 # Week 6 Exercises
 #---------------------------------------------------------------------------------
