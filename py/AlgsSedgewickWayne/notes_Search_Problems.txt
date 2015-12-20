@@ -208,10 +208,10 @@
 #   let alone by simple mechanical device. - Avi Wigderson
 
 # SUMMARY:
-#   P:            Class of search problems sovable in poly-time.
+#   P:            Class of search problems solvable in poly-time.
 #   NP:           Class of search problems, some of which seem wickedly hard.
 #   NP-Complete:  Hardest problems in NP.
-#   INTRACTANBLE: Problem with no poly-time algorithm.
+#   INTRACTABLE:  Problem with no poly-time algorithm.
 #
 # MANY FUNDAMENTAL PROBLEMS ARE NP-COMPLETE.
 #  * SAT, ILP, 3-COLOR, ...
@@ -330,7 +330,7 @@
 
 #---------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------
-# Week 6 Exercises
+# DISCUSSION: Week 6 Exercises
 #---------------------------------------------------------------------------------
 How element distinctness can be reduced to convex hull computation?
 
@@ -346,3 +346,34 @@ numbers to see if there are any adjacent numbers that are the same.
 
 In other words, you are supposed to use transitive nature of "linear-time reduce" relationship here. If A linear-time reduces to B and B linear-time reduces to C, then A linear-time reduces to C. In
 this case, A is distinctness problem, B is sorting problem, and C is convex hull problem.
+
+#---------------------------------------------------------------------------------
+LP quiz - do not understand why some answers are incorrect
+
+FROM: Anonymous
+Question 1 (seed = 495061)  
+Which of the following constraints can be modeled using linear programming?
+16 (x1)^2 = 20                               (feedback says YES)
+| x1 + 2x2 + 3x3 + 4x4 | >= 10     (feedback says NO)
+....
+
+I hate tacit assumptions... never mind.  -)  Please help me understand what is wrong with my reasoning.
+
+In my understanding, the question boils down to whether a constraint can be represented in the standard linear form.
+
+The first expression is equivalent to (x1 = a) OR (x1 = -a)  where a is sqrt(5/4).  This seems problematic, since all constraints are supposed to be in conjunction in the standard form.  (It is OK to
+have multiple constraints as long as they are all AND'd together.)  However, if we recall that all variables are expected to be non-negative, the second clause is a contradiction while the first one
+can be rewritten in the standard form as follows:  (x1<= a) AND (-x1<= - a)
+
+A similar reasoning applied to the second expression yields  x1 + 2x2 + 3x3 + 4x4 >= 10 , or in the standard form, 
+ -x1 - 2x2 - 3x3 - 4x4 <= -10;  the other branch of the absolute value cannot occur due to non-negativity of x's.  
+
+So I would expect both answers to be either YES or both NO, depending on whether we may assume that all x's are non-negative.  Am I missing something obvious?
+
+# - - - - - - - - - - - - - - 
+Kevin Wayne:
+Yes, that's an error. I think the first constraint was meant to be 16 x1^2 <= 20. I'll make a note to fix the question. Thanks for bringing to our attention!
+
+You should not make any assumptions about the other constraints, e.g., that the variables are nonnegative.
+
+
