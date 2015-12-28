@@ -26,21 +26,20 @@ class FordFulkerson(object):
   """Data type for computing maxflow and mincut in a flow network."""
 
   Inf = float('Inf')
-  private static final double FLOATING_POINT_EPSILON = 1E-11
+  FLOATING_POINT_EPSILON = 1E-11
 
-  private boolean[] marked;     # marked[v] = True iff s->v path in residual graph
-  private FlowEdge[] edgeTo;    # edgeTo[v] = last edge on shortest residual s->v path
-  private double value;         # current value of max flow
-  
-  def __init__(self, FlowNetwork G, s, t):
+  def __init__(self, G, s, t): # G is FlowNetwork
     self._validate(s, G.V())
     self._validate(t, G.V())
-    if s == t:                       raise Exception("Source equals sink")
-    if not self.isFeasible(G, s, t): raise Exception("Initial flow is infeasible")
+    self._marked # marked[v] = True iff s->v path in residual graph
+    self._edgeTo # edgeTo[v] = last FlowEdge on shortest residual s->v path
+    self._value  # current value(float) of max flow
+    if s == t:                        raise Exception("Source equals sink")
+    if not self._isFeasible(G, s, t): raise Exception("Initial flow is infeasible")
 
     # while there exists an augmenting path, use it
-    self._value = self.excess(G, t) # current value of max flow
-    while self.hasAugmentingPath(G, s, t):
+    self._value = self._excess(G, t) # current value of max flow
+    while self._hasAugmentingPath(G, s, t):
 
         # compute bottleneck capacity
         bottle = self.Inf
@@ -58,7 +57,7 @@ class FordFulkerson(object):
         self._value += bottle
 
     # check optimality conditions
-    assert _check(G, s, t)
+    assert self._check(G, s, t)
 
   # Returns the value of the maximum flow.
   def value(self): return self._value
@@ -78,14 +77,14 @@ class FordFulkerson(object):
   # self implementation finds a shortest augmenting path (fewest number of edges),
   # which performs well both in theory and in practice
   def _hasAugmentingPath(self, G, s, t): # G id FlowNetwork
-    edgeTo = [None for i in rante(G.V())] # Will contain FlowEdges
-    marked = [False for i in range(G.V())]
+    self._edgeTo = [None  for i in range(G.V())] # Will contain FlowEdges
+    self._marked = [False for i in range(G.V())]
 
     # breadth-first search (note: Can also use other search algorithms can also be adapted)
     queue = cx.deque() # Queue
     queue.append(s) # enqueue(s)
-    marked[s] = True
-    while queue and not marked[t]:
+    self._marked[s] = True
+    while queue and not self._marked[t]:
       v = queue.popleft() # dequeue()
 
       for e in G.adj(v): # Loop thru FLowEdges
@@ -94,12 +93,12 @@ class FordFulkerson(object):
         # if residual capacity from v to w
         if e.residualCapacityTo(w) > 0: # Have a way to get to w
           if not self._marked[w]: # Have not been there yet
-            edgeTo[w] = e
-            marked[w] = True
+            self._edgeTo[w] = e
+            self._marked[w] = True
             queue.append(w) # enqueue(w)
 
     # is there an augmenting path?
-    return marked[t] # Is t reachable from s in residual network?
+    return self._marked[t] # Is t reachable from s in residual network?
 
 
 
@@ -117,23 +116,23 @@ class FordFulkerson(object):
       # check that capacity constraints are satisfied
       for (int v = 0; v < G.V(); v += 1):
           for (FlowEdge e : G.adj(v)):
-              if e.flow() < -FLOATING_POINT_EPSILON or e.flow() > e.capacity() + FLOATING_POINT_EPSILON):
-                  System.err.println("Edge does not satisfy capacity constraints: " + e)
+              if e.flow() < -self.FLOATING_POINT_EPSILON or e.flow() > e.capacity() + self.FLOATING_POINT_EPSILON):
+                  sys.stderr.write("Edge does not satisfy capacity constraints: " + e)
                   return False
 
       # check that net flow into a vertex equals zero, except at source and sink
-      if abs(value + excess(G, s)) > FLOATING_POINT_EPSILON):
-        System.err.println("Excess at source = " + excess(G, s))
-        System.err.println("Max flow         = " + value)
+      if abs(value + self._excess(G, s)) > self.FLOATING_POINT_EPSILON):
+        sys.stderr.write("Excess at source = {}".format(self._excess(G, s)))
+        sys.stderr.write("Max flow         = {}".format(value))
         return False
-      if abs(value - excess(G, t)) > FLOATING_POINT_EPSILON):
-        System.err.println("Excess at sink   = " + excess(G, t))
-        System.err.println("Max flow         = " + value)
+      if abs(value - self._excess(G, t)) > self.FLOATING_POINT_EPSILON):
+        sys.stderr.write("Excess at sink   = {}".format(self._excess(G, t)))
+        sys.stderr.write("Max flow         = {}".format(value))
         return False
       for v in G.V():
         if v == s or v == t: continue
-        elif abs(excess(G, v)) > FLOATING_POINT_EPSILON):
-          System.err.println("Net flow out of " + v + " doesn't equal zero")
+        elif abs(self._excess(G, v)) > self.FLOATING_POINT_EPSILON):
+          sys.stderr.write("Net flow out of " + v + " doesn't equal zero")
           return False
       return True
 
@@ -143,27 +142,27 @@ class FordFulkerson(object):
   def _check(FlowNetwork G, s, t):
 
       # check that flow is feasible
-      if !isFeasible(G, s, t)):
-          System.err.println("Flow is infeasible")
+      if not self._isFeasible(G, s, t):
+          sys.stderr.write("Flow is infeasible")
           return False
 
       # check that s is on the source side of min cut and that t is not on source side
-      if !inCut(s)):
-          System.err.println("source " + s + " is not on source side of min cut")
+      if not self.inCut(s):
+          sys.stderr.write("source {} is not on source side of min cut".format(s))
           return False
-      if inCut(t)):
-          System.err.println("sink " + t + " is on source side of min cut")
+      if self.inCut(t):
+          sys.stderr.write("sink {} is on source side of min cut".format(t))
           return False
 
       # check that value of min cut = value of max flow
-      double mincutValue = 0.0
+      mincutValue = 0.0
       for (int v = 0; v < G.V(); v += 1):
-          for (FlowEdge e : G.adj(v)):
-              if (v == e.from()) and inCut(e.from()) and !inCut(e.to()))
+          for e in G.adj(v): # iterate thru FlowEdges
+              if (v == e.from()) and self.inCut(e.from()) and not self.inCut(e.to()))
                   mincutValue += e.capacity()
 
-      if Math.abs(mincutValue - value) > FLOATING_POINT_EPSILON):
-          System.err.println("Max flow value = " + value + ", min cut value = " + mincutValue)
+      if Math.abs(mincutValue - value) > self.FLOATING_POINT_EPSILON):
+          sys.stderr.write("Max flow value = " + value + ", min cut value = " + mincutValue)
           return False
 
       return True
