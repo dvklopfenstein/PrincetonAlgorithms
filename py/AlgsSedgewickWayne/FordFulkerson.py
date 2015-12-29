@@ -169,6 +169,67 @@ class FordFulkerson(object):
 
 
 #-----------------------------------------------------------------------
+# FORD-FULKERSON ALGORITHM (6:32)
+# (Dates back to the 1950s)
+
+# FORD-FULKERSON ALGORITHM 
+#
+# INITIALIZATION: Start with 0 flow. (But has capacity)
+
+# IDEA: INCREASE FLOW ALONG AUGMENTING PATHS 00:34
+#
+# AUGMENTING PATH: Find an undirected path from s to t such that:
+#   * Can increase flow on forward edges (not full).
+#   * Can decrease flow on backward edge (not empty).
+
+# IDEA: INCREASE FLOW ALONG AUGMENTING PATHS 4:29
+#
+# TERMINATION: All paths from s to t are blocked by either a
+#   * Full forward edge.  (ie Can't add    more flow to forward edge)
+#   * Empty backward edge.(ie Can't remove more flow from a backward edge)
+
+# FORD-FULKERSON ALGORITHM  5:06
+#
+# 1. Start with 0 flow.
+# 2. While there exists an augmenting path:
+#    * find an augmenting path
+#    * compute bottleneck capacity
+#    * increase flow on that path by bottleneck capcity
+#
+# QUESTIONS:
+#   * How to compute a mincut? EASY.
+#   * How to find an augmenting path? BFS WORKS WELL. (Many ways, though)
+#   * If FF terminates, does it always compute a maxflow? YES
+#   * Does DD always terminate?
+#     => yes, provided edge capacities are integers (or augmenting paths are chosen carefully)
+#     * If so, after how many augmentations?
+#       -> requires clever analysis
+
+# QUESTION: In the flow network below, how many distinct augmenting paths are there 
+# with respect to the given flow f?
+#
+#           (1)-0/4->(3)
+#          ^ | \      ^ \
+#         /  |  \     |  \
+#        /   |   \    |   \
+#   10/10   2/2  8/8 6/6  6/10
+#      /     |     \  |     \
+#     /      v      v |      v
+#   (s)6/10>(2)-8/9->(4)10/10>(t)
+#
+# ANSWER:
+#   0
+#   1
+#   2 <- answer
+#   3
+#
+# EXPLANATION: The two augmenting paths are:
+#   s -> 2 -> 1 -> 3 -> t         (with bottleneck capacity 2) and
+#   s -> 2 -> 4 -> 1 -> -> 3 -> t (with bottleneck capacity 1)
+
+
+
+#-----------------------------------------------------------------------
 # MAXFLOW PROBLEM
 # 
 # DEF: An **st-flow (flow)** is an assignment of values to the edges such that:

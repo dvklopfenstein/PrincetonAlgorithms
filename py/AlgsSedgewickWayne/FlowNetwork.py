@@ -39,7 +39,7 @@ class FlowNetwork(object):
       capacity = StdRandom.uniform(100)
       self.addEdge(FlowEdge(v, w, capacity))
 
-  def _init_arr(arr):
+  def _init_arr(self, arr):
     """Inits from an array structure representing a FlowNetwork."""
     self._init_V(arr[0])
     self._E = arr[1]
