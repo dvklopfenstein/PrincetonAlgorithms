@@ -1,0 +1,39 @@
+# --------------------------------------------------------------
+Kevin WayneINSTRUCTOR· 2015
+From the Q+A.
+
+Q. Does Dijkstra's algorithm work with negative weights?
+
+A. Yes and no. There are two shortest paths algorithms known
+as Dijkstra's algorithm, depending on whether a vertex can
+be enqueued on the priority queue more than once. When the
+weights are nonnegative, the two versions coincide (as no
+vertex will be enqueued more than once). The version
+implemented in DijkstraSP.java (which allows a vertex to be
+enqueued more than once) is correct in the presence of
+negative edge weights (but no negative cycles) but its
+running time is exponential in the worst case. (We note that
+DijkstraSP.java throws an exception if the edge-weighted
+digraph has an edge with a negative weight, so that a
+programmer is not surprised by this exponential behavior.)
+If we modify DijkstraSP.java so that a vertex cannot be
+enqueued more than once (e.g., using a marked[] array to
+mark those vertices that have been relaxed), then the
+algorithm is guaranteed to run in E log V time but it may
+yield incorrect results when there are edges with negative
+weights.
+
+5 votes received.· flag
+
+Lifan· a month ago 
+Excellent answer. And Is there a Q&A part in the forum? Or
+where is the Q+A part from? I search through the Q&A part in
+the textbook and the slides, but not found a question
+exactly like this one.
+0 votes received.· flag
+
+Kevin WayneINSTRUCTOR· a month ago 
+It both in the Q+A on the booksite and in recent printings
+of the textbook. You may have an old printing of the
+textbook.
+0 votes received.· flag

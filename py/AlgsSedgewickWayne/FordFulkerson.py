@@ -168,6 +168,73 @@ class FordFulkerson(object):
       return True
 
 
+# -----------------------------------------------------------------
+# INTRODUCTION TO MAXFLOW (10:33)
+
+# MINCUT PROBLEM 2:49
+#
+# DEF: A **st-cut (cut)** is a partition of the vertices into two disjoint sets,
+# with s in onset A and t in the other set B.
+#
+# DEF: Its **capacity** is the sum of the capacities of the edges from A to B.
+
+# 1) QUESTION: In the flow network below, what is the capacity of the cut with 
+# A = {s, 2, 4} and B = {1, 3, t}?
+#
+#           (1)--4-->(3)
+#          ^ | \      ^ \
+#         /  |  \     |  \
+#        /   |   \    |   \
+#      10    2    8   6    10
+#      /     |     \  |     \
+#     /      v      v |      v
+#   (s)-10->(2)--9-->(4)-10->(t)
+#
+# ANSWER #1 (Pick one):
+#   19
+#   20
+#   26 
+#   36
+
+# MAXFLOW PROBLEM 6:11
+#
+# DEF: An **st-flow (flow)** is an assignment of values to the edges such that:
+#   * Capacity constraint: 0 <= edge's flow <= edge's capacity.
+#   * Local equilibrium: inflow = outflow at every vertex (except s and t)
+#
+# DEF: The **value** of a flow is "the inflow at t" or the "outflow at s".
+#      (we assume no edge points to s or from t)
+#
+# MAXIMUM ST-FLOW (MAXFLOW) PROBLEM. Find a flow of maximum value.
+
+# 2) QUESTION: In the flow network below, what is the value of the flow f?
+#
+#           (1)-0/4->(3)
+#          ^ | \      ^ \
+#         /  |  \     |  \
+#        /   |   \    |   \
+#   10/10   2/2  8/8 6/6  6/10
+#      /     |     \  |     \
+#     /      v      v |      v
+#   (s)6/10>(2)-8/9->(4)10/10>(t)
+#
+# ANSWER #2 (Pick one):
+#   10
+#   16
+#   18 
+#   19
+#
+# EXPLANATION: By definition, it is the inflow at t, which is 10 + 6
+
+# SUMMARY:
+# 
+# INPUT: A weighted digraph, source vertex s, and target vertex t.
+# MINCUT PROBLEM: Find a cut of minimum capacity.
+# MAXFLOW PROBLEM: Find a flow of maximum value.
+#
+# REMARKABLE FACT: These two problems are dual!
+# If you solve one problem, you solve the other.
+
 #-----------------------------------------------------------------------
 # FORD-FULKERSON ALGORITHM (6:32)
 # (Dates back to the 1950s)
@@ -205,7 +272,7 @@ class FordFulkerson(object):
 #     * If so, after how many augmentations?
 #       -> requires clever analysis
 
-# QUESTION: In the flow network below, how many distinct augmenting paths are there 
+# 3) QUESTION: In the flow network below, how many distinct augmenting paths are there 
 # with respect to the given flow f?
 #
 #           (1)-0/4->(3)
@@ -217,38 +284,30 @@ class FordFulkerson(object):
 #     /      v      v |      v
 #   (s)6/10>(2)-8/9->(4)10/10>(t)
 #
-# ANSWER:
+# ANSWER #3 (pick one):
 #   0
 #   1
-#   2 <- answer
+#   2 
 #   3
 #
-# EXPLANATION: The two augmenting paths are:
-#   s -> 2 -> 1 -> 3 -> t         (with bottleneck capacity 2) and
-#   s -> 2 -> 4 -> 1 -> -> 3 -> t (with bottleneck capacity 1)
-
-
 
 #-----------------------------------------------------------------------
-# MAXFLOW PROBLEM
-# 
-# DEF: An **st-flow (flow)** is an assignment of values to the edges such that:
-#   * Capacity constaint: 0 <= edge's flow <= edge's capacity
-#   * Local equilibrium: inflow = outflow at every vertex (except s and t).
-#
-# DEF: The **value** of a flow is the inflow at t.
-#   (We assume no edge points to s or from t)
-#
-# MAXIMUM ST-FLOW (MAXFLOW) PROBLEM. Find a flow of maximum value.
+# MAXFLOW-MINCUT THEOREM (9:38)
 
-# SUMMARY
-# 
-# INPUT: Aweighted digraph, source vertex s, and target vertex t.
-# MINCUT PROBLEM: Find a cut of minimum capacity.
-# MAXFLOW PROBLEM: Find a flow of maximum value.
+# 4) QUESTION: Given a flow network, let f be any flow and let (A, B) be any cut.
+# Then, the net flow across (A, B) is ____ the value of f.
 #
-# REMARKABLE FACT: These two problems are dual!:
-# If you solve one problem, you solve the other
+#  * less than
+#  * greater than
+#  * not related to
+
+# 5) QUESTION: Given a maxflow f in a flow network, what is the order of growth 
+# of the running time to compute a mincut?
+#
+#  * V + E
+#  * V^2
+#  * V(E + V)
+#  * E^2
 
 #-----------------------------------------------------------------------
 # RUNNING TIME ANALYSIS (8:49)
@@ -277,23 +336,21 @@ class FordFulkerson(object):
 #   * important for some applications (stay tuned)
 # ...
 
-# QUESTION: If all the edge capacities are integers, the value of the maxflow is:
-# ANSWER: integer (not rational number, real number, imaginary number)
-# EXPLANATION: The integrality theorem asserts that there exists a maxflow in which 
-# the flow on each edge is an integer. This impolies that the value of the
-# maxflow is an integer.
+# 6) QUESTION: If all the edge capacities are integers, the value of the maxflow is:
+#    * integer 
+#    * rational number 
+#    * real number
+#    * imaginary number
 
 #-----------------------------------------------------------------------
 # JAVA IMPLEMENTATION (14:29)
 
-# QUESTION: Suppose that Edge e is an edge returned by G.adj(v), with w = e.other(v) and
+# 7) QUESTION: Suppose that Edge e is an edge returned by G.adj(v), with w = e.other(v) and
 # e.residualCapacityTo(w) > 0. Which of the following myst be true?
-#     e = v -> w is a forward edge that is not full
-#     e = v -> w is a backward edge that is not empty
-# YES e = v -> w is either a forward edge that is not full or a backward edge that is not empty.
-#     None of the above
-# EXPLANATION: e = v -> w is an edge in the residual graph, which means that either it is
-# a forward edge that is not full or a backward edge that is not empty.
+#   * e = v -> w is a forward edge that is not full
+#   * e = v -> w is a backward edge that is not empty
+#   * e = v -> w is either a forward edge that is not full or a backward edge that is not empty.
+#   * None of the above
 
 #-----------------------------------------------------------------------
 # MAXFLOW AND MINCUT APPLICATIONS (22:20)
@@ -311,6 +368,70 @@ class FordFulkerson(object):
 #  * Sensor placment for homeland security
 #  ...
 
+# 8) QUESTION: Suppose that you run the Ford-Fulkerson algorithm(using the 
+#    shortest augmenting path heuristic) to solve a bipartite matching problem
+#    with N students and N companies. How many augmenting paths are needed in the 
+#    worst case?
+#      *       N
+#      *       N^2
+#      * (1/2)*N^3
+#      *       N^3
+
+# 9) QUESTION: How many vertices and edges, respectively, are there in the flow
+#    network that is constructed to determine whether one team is mathematically
+#    eliminated from a baseball league containing N teams? Give the order of growth
+#    in the worst case (when there is a game remaining between every pair of teams
+#    in the league).
+#      * N   and N^2
+#      * N^2 and N^2
+#      * N^2 and N^3
+#      * N^2 and N^4
+
+#-----------------------------------------------------------------------
+# ANSWERS: WEEK 3 MAXIMUM FLOW (72:21)
+#
+# 1) ANSWER: 26 
+#
+# 2) ANSWER: 16 
+#
+# 3) ANSWER: 2
+#   EXPLANATION: The two augmenting paths are:
+#     s -> 2 -> 1 -> 3 -> t         (with bottleneck capacity 2) and
+#     s -> 2 -> 4 -> 1 -> -> 3 -> t (with bottleneck capacity 1)
+#
+# 4) ANSWER: equal to
+#
+# 5) ANSWER: V + E
+#   EXPLANATION: The algorithm is to find all of the vertices reachable from s
+#     using only forward edges that aren't full or backwards edges that aren't
+#     empty. This can be done in linear time using either breadth-first search
+#     or depth-first search.
+#
+# 6) ANSWER: integer (not rational number, real number, imaginary number)
+#   EXPLANATION: The integrality theorem asserts that there exists a maxflow in which 
+#   the flow on each edge is an integer. This impolies that the value of the
+#   maxflow is an integer.
+#
+# 7) ANSWER:e = v -> w is either a forward edge that is not full or a backward edge that is not empty.
+#   EXPLANATION: e = v -> w is an edge in the residual graph, which means that either it is
+#   a forward edge that is not full or a backward edge that is not empty.
+#
+# 8) ANSWER: N
+#   EXPLANATION: For general networks, the shortest augmenting path heuristic 
+#   requires (1/2)*EV augmenting paths to find a maxflow in a network with V
+#   vertices and E edges. However, in the bipartite matching reduction, all edge
+#   capacities are 1 and the value of the maximum flow is at most N. Thus, at
+#   most N augmenting paths are needed (since each augmenting path delivers 1 unit of flow to t).
+#
+#   We note that a more refined version of the shortest augmenting path heuristic 
+#   leads to an overall running time of E*sqrt(V) for the bipartite matching problem.
+#
+# 9) ANSWER: N^2 and N^2                      (N-1)
+#   EXPLANATION: There are N-1 team vertices, ( 2 ) (N-1 CHOOSE 2) game vertices, 1 source, and 1 sink.
+#   In the worst case, there are 2*(N-1 CHOOSE 2) edges from game vertices to team vertices
+#   (2 for each game vertex), (N-1 CHOOSE 2) edges pointing from the source, and N-1
+#   edges pointing to the sink.
 
 # Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python port
+
