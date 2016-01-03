@@ -2,6 +2,7 @@
 
 import sys
 from AlgsSedgewickWayne.FlowNetwork import FlowNetwork
+from AlgsSedgewickWayne.testcode.InputArgs import cli_get_array
 
 def main(prt=sys.stdout):
   """Unit tests the FlowNetwork data type."""
