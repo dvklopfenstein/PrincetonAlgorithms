@@ -14,7 +14,7 @@
 ## Table of Contents for Examples
   1. [Give the sequence of vertices in the final augmenting path discovered by the Ford-Fulkerson algorithm](#ex1)
   2. [Given a maxflow, what is the corresponding mincut?](#ex2)
-  3. [Which of the following statements about maxflow and mincut are guaranteed to be true in any flow network?](#ex3)
+  3. [Which of the following statements about maxflow and mincut are guaranteed to be true in any flow network?](#ex3)    
      [3.1](#ex3p1) If all edge capacities are integral, then any maxflow is an 
            integer-valued flow, i.e., f(e) is an integer for every edge e.
  
@@ -34,7 +34,7 @@
 
 ## Examples 
 ### [ex1](#table-of-contents-for-examples)
-Final Augmenting Path    
+Give the Final Augmenting Path...    
 ```
 Suppose that you are computing a max flow from the source vertex A to the
 sink vertex J in the flow network given below:
@@ -147,8 +147,8 @@ Here is a graphical representation of the final flow network:
       (F)------12/15----->(G)------39/39----->(H)-------8/9------>(I)-------8/10----->(J) 
 ```
 
-### [ex2](#table-of-contents-for-examples)
-Coressponging mincut
+### [ex2](#table-of-contents-for-examples)    
+Given a maxflow, provide the corresponding mincut...    
 ```
 Consider the flow network with 10 vertices and 17 edges:
 
@@ -216,15 +216,15 @@ capacity of cut: 29
 ### [ex3](#table-of-contents-for-examples)
 Maxflow/Mincut factoids    
 
-3.1 False: If all edge capacities are integral, then any maxflow is an 
+3.1 *False*: If all edge capacities are integral, then any maxflow is an 
      integer-valued flow, i.e., f(e) is an integer for every edge e.    
 *The integrality theorem implies that such a maxflow exists, but not every maxflow has this property.*    
 
-3.2 True: If all edge capacities are integral, then there exists 
+3.2 *True*: If all edge capacities are integral, then there exists 
      an integer-valued maxflow f, i.e., f(e) is an integer for every edge e.    
 *This is the integrality theorem.*    
 
-3.3 False: Let G be a network that contains two antiparallel 
+3.3 *False*: Let G be a network that contains two antiparallel 
     edges e = v->w and e' = w->v. 
     Then, in any maxflow f, either f(e) = 0 or f(e') = 0 (or both).    
 *There always exists a maxflow with that property, but not
@@ -234,8 +234,8 @@ Then, the flow f that sets f(e) = capacity for every edge is
 a maxflow but the antiparallel edges v->w and w->v each have
 positive flow.*    
 
-3.4 True: The Ford-Fulkerson algorithm can be used to find a maximum matching 
-    in a bipartite graph in time proportional to V (E + V).
+3.4 *True*: The Ford-Fulkerson algorithm can be used to find a maximum matching 
+    in a bipartite graph in time proportional to V (E + V).    
 *The matching problem can be formulated as a maxflow problem
 in a network with V + 2 vertices and E + 2V edges and for
 which the value of the maxflow is at most V. Thus, the
@@ -243,12 +243,12 @@ Ford-Fulkerson algorithm will terminate after at most V
 augmentations. We can find an augmenting path in time
 proportional to E + V via BFS or DFS.*    
 
-3.5 True: Let (A, B) be a mincut in G. Suppose that one 
+3.5 *True*: Let (A, B) be a mincut in G. Suppose that one 
       edge e from A to B of capacity x > 0 is deleted. Then, the 
-      capacity of the mincut in the modified network G' decrease by exactly x units.
+      capacity of the mincut in the modified network G' decrease by exactly x units.    
 *The capacity of the cut (A, B) decreases by exactly x units
 (and the capacity of every other cut decreases by at most
 x).*    
 
-Copyright (C) 2002-2015 Robert Sedgewick and Kevin Wayne.  All rights reserved.    
-Copyright (C) 2014-2015 DV Klopfenstein. All rights reserved. Python translation.
+Copyright (C) 2002-2016 Robert Sedgewick and Kevin Wayne.  All rights reserved.    
+Copyright (C) 2014-2016 DV Klopfenstein. All rights reserved. Python translation.
