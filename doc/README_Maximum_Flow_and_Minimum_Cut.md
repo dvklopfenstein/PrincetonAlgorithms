@@ -216,37 +216,37 @@ capacity of cut: 29
 ### [ex3](#table-of-contents-for-examples)
 **Maxflow/Mincut factoids**     
 
-3.1 *False*: If all edge capacities are integral, then any maxflow is an 
+3.1 If all edge capacities are integral, then any maxflow is an 
      integer-valued flow, i.e., f(e) is an integer for every edge e.    
-*The integrality theorem implies that such a maxflow exists, but not every maxflow has this property.*    
+*False: The integrality theorem implies that such a maxflow exists, but not every maxflow has this property.*    
 
-3.2 *True*: If all edge capacities are integral, then there exists 
+3.2 If all edge capacities are integral, then there exists 
      an integer-valued maxflow f, i.e., f(e) is an integer for every edge e.    
-*This is the integrality theorem.*    
+*True: This is the integrality theorem.*    
 
-3.3 *False*: Let G be a network that contains two antiparallel 
+3.3 Let G be a network that contains two antiparallel 
     edges e = v->w and e' = w->v. 
     Then, in any maxflow f, either f(e) = 0 or f(e') = 0 (or both).    
-*There always exists a maxflow with that property, but not
+*False: There always exists a maxflow with that property, but not
 every maxflow has it. Consider a network with these edges
 and capacities: s->v (2), v->w (2), w->v (1), w->t (1).
 Then, the flow f that sets f(e) = capacity for every edge is
 a maxflow but the antiparallel edges v->w and w->v each have
 positive flow.*    
 
-3.4 *True*: The Ford-Fulkerson algorithm can be used to find a maximum matching 
+3.4 The Ford-Fulkerson algorithm can be used to find a maximum matching 
     in a bipartite graph in time proportional to V (E + V).    
-*The matching problem can be formulated as a maxflow problem
+*True: The matching problem can be formulated as a maxflow problem
 in a network with V + 2 vertices and E + 2V edges and for
 which the value of the maxflow is at most V. Thus, the
 Ford-Fulkerson algorithm will terminate after at most V
 augmentations. We can find an augmenting path in time
 proportional to E + V via BFS or DFS.*    
 
-3.5 *True*: Let (A, B) be a mincut in G. Suppose that one 
+3.5 Let (A, B) be a mincut in G. Suppose that one 
       edge e from A to B of capacity x > 0 is deleted. Then, the 
       capacity of the mincut in the modified network G' decrease by exactly x units.    
-*The capacity of the cut (A, B) decreases by exactly x units
+*True: The capacity of the cut (A, B) decreases by exactly x units
 (and the capacity of every other cut decreases by at most
 x).*    
 
