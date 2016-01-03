@@ -34,7 +34,7 @@
 
 ## Examples 
 ### [ex1](#table-of-contents-for-examples)
-Give the Final Augmenting Path...    
+**Give the Final Augmenting Path...    **
 ```
 Suppose that you are computing a max flow from the source vertex A to the
 sink vertex J in the flow network given below:
@@ -148,7 +148,7 @@ Here is a graphical representation of the final flow network:
 ```
 
 ### [ex2](#table-of-contents-for-examples)    
-Given a maxflow, provide the corresponding mincut...    
+**Given a maxflow, provide the corresponding mincut...**    
 ```
 Consider the flow network with 10 vertices and 17 edges:
 
@@ -214,7 +214,7 @@ capacity of cut: 29
 ```
 
 ### [ex3](#table-of-contents-for-examples)
-Maxflow/Mincut factoids    
+**Maxflow/Mincut factoids**     
 
 3.1 *False*: If all edge capacities are integral, then any maxflow is an 
      integer-valued flow, i.e., f(e) is an integer for every edge e.    
