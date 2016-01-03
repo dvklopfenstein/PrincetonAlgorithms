@@ -15,20 +15,20 @@
   1. [Give the sequence of vertices in the final augmenting path discovered by the Ford-Fulkerson algorithm](#ex1)
   2. [Given a maxflow, what is the corresponding mincut?](#ex2)
   3. [Which of the following statements about maxflow and mincut are guaranteed to be true in any flow network?](#ex3)    
-     [3.1](#ex3p1) If all edge capacities are integral, then any maxflow is an 
+     3.1 If all edge capacities are integral, then any maxflow is an 
            integer-valued flow, i.e., f(e) is an integer for every edge e.
  
-     [3.2](#ex3p2) If all edge capacities are integral, then there exists 
+     3.2 If all edge capacities are integral, then there exists 
            an integer-valued maxflow f, i.e., f(e) is an integer for every edge e.
- 
-     [3.3](#ex3p3) Let G be a network that contains two antiparallel 
+
+     3.3 Let G be a network that contains two antiparallel 
           edges e = v->w and e' = w->v. 
           Then, in any maxflow f, either f(e) = 0 or f(e') = 0 (or both).
  
-     [3.4](#ex3p4) The Ford-Fulkerson algorithm can be used to find a maximum matching 
+     3.4 The Ford-Fulkerson algorithm can be used to find a maximum matching 
           in a bipartite graph in time proportional to V (E + V).
  
-     [3.5](#ex3p5) Let (A, B) be a mincut in G. Suppose that one 
+     3.5 Let (A, B) be a mincut in G. Suppose that one 
            edge e from A to B of capacity x > 0 is deleted. Then, the 
            capacity of the mincut in the modified network G' decrease by exactly x units.
 
