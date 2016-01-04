@@ -8,10 +8,10 @@
   * **Rabin-Karp**: RabinKarp.py
 
 ## Table of Contents for Examples
-  0. [test_KMP.py ababac aabdacaababacdaa](#ex0)    
-  1. [KMP DFA: What is sequence of values in the row of the DFA corresponding to the character 'B'?](#ex1)    
-  2. [Boyer-Moore: What is the sequence of characters in the text that is compared with the last character in the pattern?](#ex2)    
-  3. [Rabin-Karp](#ex3)    
+  q0. [test_KMP.py ababac aabdacaababacdaa](#ex0)    
+  q1. [KMP DFA: What is sequence of values in the row of the DFA corresponding to the character 'B'?](#ex1)    
+  q2. [Boyer-Moore: What is the sequence of characters in the text that is compared with the last character in the pattern?](#ex2)    
+  q3. [Rabin-Karp](#ex3)    
 
 ## Examples 
 ### [ex0](#table-of-contents-for-examples)
