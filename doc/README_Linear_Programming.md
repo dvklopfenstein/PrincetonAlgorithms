@@ -7,7 +7,7 @@
   * **Linear Programming Reductions**
 
 ## Table of Contents for Examples
-1. [A1](#A1)
+### QUESTION 1
 ```
 Which of the following constraints can be modeled by one or more linear inequalties?
   * (x1)^2 + (x2)^2 + (x3)^2 <= 10
@@ -16,7 +16,9 @@ Which of the following constraints can be modeled by one or more linear inequalt
   * 16 (x1)^2  = 20
   * x1, x2, x3, x4 are unconstrained
 ```
-2. [A2](#A2)
+[A1](#A1)
+
+### QUESTION 2
 ```
 Consider the following linear programming simplex tableaux with 3 equations and 8 variables:
 
@@ -39,7 +41,9 @@ Which variable could be the next to *enter* the basis? Check all that apply.
   * x6
   * x7
 ```
-3. [A3](#A2)
+[A2](#A2)
+
+### QUESTION 3
 ```
 Consider the following linear programming simplex tableaux with 5 equations and 9 variables:
 
@@ -66,6 +70,7 @@ Which variable or variables could be the next to *leave* the basis? Check all th
   * x7
   * x8
 ```
+[A3](#A2)
 
 
 
@@ -117,6 +122,13 @@ Which variable could be the next to *enter* the basis? Check all that apply.
 *False*    
 * x7
 *True*    
+```
+Question Explanation
+
+The basis is { x2, x4, x0 }.
+The nonbasic variables are { x1, x3, x5, x6, x7 }.
+The entering variables are those nonbasic variables with a positive objective function coefficient.
+```
 
 ### [A3](#table-of-contents-for-examples)
 ```
@@ -154,6 +166,16 @@ Which variable or variables could be the next to *leave* the basis? Check all th
 *False*    
 * x8
 *False*    
+```
+Question Explanation
+
+The basis is { x4, x6, x1, x7, x0 }.
+The nonbasic variables are { x2, x3, x5, x8 }.
+The entering variable is x3.
+The min ratio test determines the leaving variable: min ratio = { 2, 2, 180/7, 24, * } = 2.
+The minimum occurs in rows 0 and 1, which corresponds to basic variables x4 and x6.
+The leaving variables are { x4 x6 }.
+```
 
 Copyright (C) 2002-2015 Robert Sedgewick and Kevin Wayne.  All rights reserved.    
 Copyright (C) 2014-2015 DV Klopfenstein. All rights reserved. Python translation.
