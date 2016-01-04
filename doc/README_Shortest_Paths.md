@@ -84,14 +84,15 @@ Here is the distTo[] array before E is relaxed:
            v     A   B   C   D   E   F   G   H 
     ------------------------------------------
     distTo[v]    -   -   -   -   0   -   -   - 
-```
+```    
 
 ### [ex2](#table-of-contents-for-examples)    
 **Suppose that you run the acyclic shortest paths algorithm to compute the shortest
 paths from A to every other vertex using the following topological order A B F G H C D E 
 Give the sequence of 8 integers in the distTo array immediately after
 vertex H is relaxed.**
-```Consider the following edge-weighted DAG with 8 vertices and 13 edges.
+```
+Consider the following edge-weighted DAG with 8 vertices and 13 edges.
 
     v->w  weight
     ------------
@@ -145,7 +146,7 @@ Here is the distTo[] array before A is relaxed:
            v     A   B   C   D   E   F   G   H 
     ------------------------------------------
     distTo[v]    0   -   -   -   -   -   -   - 
-```
+```    
 
 ### [ex3](#table-of-contents-for-examples)    
 **Suppose that you run the Bellman-Ford algorithm to compute the shortest paths
