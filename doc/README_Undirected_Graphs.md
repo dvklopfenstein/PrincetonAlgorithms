@@ -7,11 +7,11 @@
   * [CC.py](../py/AlgsSedgewickWayne/CC.py) for Connected Components    
 
 ## Table of Contents for Examples
-  0.0. [Run Graph Example](#ex0p0) on [tinyG.txt](../thirdparty/tinyG.txt)
-  0.1. [Run BreadthFirstPaths](#ex0p1) on [tinyG.txt](../thirdparty/tinyG.txt)
+  0.0. [Run Graph Example](#ex0p0) on [tinyG.txt](../thirdparty/tinyG.txt)    
+  0.1. [Run BreadthFirstPaths](#ex0p1) on [tinyG.txt](../thirdparty/tinyG.txt)    
   1. [Give the sequence in which depth-first search discovers (marks) the vertices.](#ex1)    
   2. [Give the sequence in which the vertices are dequeued (BFS) from the FIFO queue.](#ex2)    
-  3. [Give the sequence of the 10 integers in the id[] array for the vertices.](#ex3)
+  3. [Give the sequence of the 10 integers in the id[] array for the vertices.](#ex3)    
 
 ## Examples 
 ### [ex0p0](#table-of-contents-for-examples)
