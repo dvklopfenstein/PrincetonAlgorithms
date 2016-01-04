@@ -76,7 +76,6 @@ decision tree model of computation. Check all that apply.
 *False*    
 * Given an array of N real numbers, find one that occurs most frequently.
 *True*    
-[A1](#A1)
 
 ### [A2](#table-of-contents-for-examples)
 **asymptotic complexity**    
@@ -95,7 +94,6 @@ apply.
 *True*    
 * Computing the quotient when dividing one N-bit integer into a 2N-bit integer.
 *True*    
-[A2](#A2)
 
 ### [A3](#table-of-contents-for-examples)
 **3-SUM linear-time reduces to 3-COLLINEAR**    
@@ -114,7 +112,6 @@ can you infer? Check all that apply.
 *True*    
 * If 3-SUM can be solved in N^(3/2) time, then so can 3-COLLINEAR.
 *False*    
-[A3](#A3)
 
 Copyright (C) 2002-2015 Robert Sedgewick and Kevin Wayne.  All rights reserved.    
 Copyright (C) 2014-2015 DV Klopfenstein. All rights reserved. Python translation.
