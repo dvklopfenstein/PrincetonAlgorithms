@@ -8,13 +8,13 @@
   * **Rabin-Karp**: RabinKarp.py
 
 ## Table of Contents for Examples
-  q0. [test_KMP.py ababac aabdacaababacdaa](#ex0)    
-  q1. [KMP DFA: What is sequence of values in the row of the DFA corresponding to the character 'B'?](#ex1)    
-  q2. [Boyer-Moore: What is the sequence of characters in the text that is compared with the last character in the pattern?](#ex2)    
-  q3. [Rabin-Karp](#ex3)    
+  Q0. [test_KMP.py ababac aabdacaababacdaa](#Q0)    
+  Q1. [KMP DFA: What is sequence of values in the row of the DFA corresponding to the character 'B'?](#Q1)    
+  Q2. [Boyer-Moore: What is the sequence of characters in the text that is compared with the last character in the pattern?](#Q2)    
+  Q3. [Rabin-Karp](#Q3)    
 
 ## Examples 
-### [ex0](#table-of-contents-for-examples)
+### [Q0](#table-of-contents-for-examples)
 1. Run KMP: 
 ```
 >>> test_KMP.py ababac aabdacaababacdaa
@@ -33,7 +33,7 @@ b -> 0 2 0 4 0 4
 c -> 0 0 0 0 0 6
 ```
 
-### [ex1](#table-of-contents-for-examples)
+### [Q1](#table-of-contents-for-examples)
 **KMP DFA: What is sequence of values in the row of the DFA corresponding to the character 'B'?**    
 ```
 Consider the Knuth-Morris-Pratt DFA for the following string of length 8:
@@ -50,7 +50,7 @@ the character 'B'? For reference, here is the partially-completed DFA:
     C  0  0  0  0  0  0  0  8 
 ```
 
-### [ex2](#table-of-contents-for-examples)
+### [Q2](#table-of-contents-for-examples)
 **Boyer-Moore: What is the sequence of characters in the text that is compared with the last character in the pattern?**    
 ```
 Suppose that you run the Boyer-Moore algorithm (using only the mismatched character heuristic)
@@ -66,7 +66,7 @@ What is the sequence of characters in the text that is compared with the
 last character in the pattern?
 ```
 
-### [ex3](#table-of-contents-for-examples)
+### [Q3](#table-of-contents-for-examples)
 **Rabin-Karp**    
 ```
 What is the Rabin-Karp hash function of text[4..10] over the decimal
