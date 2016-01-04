@@ -1,4 +1,4 @@
-# [Tries](http://algs4.cs.princeton.edu/52trie)
+# [Tries](http://algs4.cs.princeton.edu/52trie) from re**trie**val, but pronounced "try"    
 
 ## Code
   * **R-way Tries**: TrieSt.py    
