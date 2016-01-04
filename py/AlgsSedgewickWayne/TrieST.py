@@ -157,6 +157,12 @@ class TrieST(object):
 # ----------------------------------------------------------------------
 # R-WAY TRIES (32:19)
 
+# TRIES [from retrieval, but pronounced "try"] 7:25
+#
+#   * For now, store characters in nodes (not keys)
+#   * Eachnode has R children, one for each possible character.
+#   * Store values in nodes corresponding to last characters in keys.
+
 # TRIE PERFORMANCE
 #
 # SEARCH HIT: Need to examine all L charcters for equality
