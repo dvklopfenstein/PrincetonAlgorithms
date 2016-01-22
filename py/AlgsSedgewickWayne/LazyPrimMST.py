@@ -60,5 +60,5 @@ class LazyPrimMST(object):
 #   * WILL CONTAIN all of the edges that cross the cut
 #   * Possibly some edges with both endpoints in the tree.
 
-# Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
+# Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python port

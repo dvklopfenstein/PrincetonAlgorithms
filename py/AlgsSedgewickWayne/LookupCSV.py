@@ -29,5 +29,5 @@ def main():
 if __name__ == '__main__':
   main()
 
-# Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
+# Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015,      DV Klopfenstein, Python port

@@ -432,6 +432,6 @@ class FordFulkerson(object):
 #   (2 for each game vertex), (N-1 CHOOSE 2) edges pointing from the source, and N-1
 #   edges pointing to the sink.
 
-# Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
+# Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python port
 

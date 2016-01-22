@@ -458,3 +458,7 @@ class WeightedQuickUnionUF(BaseComp):
 #
 #    >>> print set([2,7,1,3,8,1,3,7,1,0]) set([0, 1, 2, 3, 7, 8])
 #    NO:  Height of forest = 4 > lg N = lg(10)
+
+
+#  Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
+#  Copyright 2015-2016, DV Klopfenstein, Python implementation

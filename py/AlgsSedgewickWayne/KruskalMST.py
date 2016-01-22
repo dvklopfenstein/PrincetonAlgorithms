@@ -52,5 +52,5 @@ class KruskalMST(object):
 #  * Approximation algorithms for NP-hard problems (eg, TSP, Steiner tree)
 #  * Network design (communication, electrical, hydraulic, computer, road)
   
-# Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
+# Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python port

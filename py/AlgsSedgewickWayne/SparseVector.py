@@ -60,5 +60,5 @@ def main(String[] args, prt=sys.stdout):
   prt.write("a + b   = " + a.plus(b))
 
 
-#  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
+#  Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
 #  Copyright 2015-2016, DV Klopfenstein, Python implementation

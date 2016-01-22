@@ -28,5 +28,5 @@ class Edge(object):
 
   def __str__(self): return "{}-{} {:.5f}".format(self._v, self._w, self._weight)
 
-# Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
-# Copyright 2002-2015, DV Klopfenstein, Pythom port
+# Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
+# Copyright 2002-2016, DV Klopfenstein, Pythom port

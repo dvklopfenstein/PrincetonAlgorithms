@@ -146,5 +146,5 @@ class Graph(object):
 # QUESTION: A cycle that uses eachedge of a graph exactly once is called
 # ANSWER: An Euler tour
 
-#  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
+#  Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
 #  Copyright 2015-2016, DV Klopfenstein, Python implementation

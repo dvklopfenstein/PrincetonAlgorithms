@@ -79,5 +79,5 @@ class AcyclicSP(object):
 # EXPLANATION: It process the V vertices in topological order;
 # It relaxes each of teh E edges exactly once.
 
-# Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
+# Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python port

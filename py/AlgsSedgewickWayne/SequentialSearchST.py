@@ -73,5 +73,5 @@ class SequentialSearchST(object):
       curr = curr._next
       yield key_val
 
-#  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
+#  Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
 #  Copyright 2015-201r6 Python Implementation, DV Klopfenstein

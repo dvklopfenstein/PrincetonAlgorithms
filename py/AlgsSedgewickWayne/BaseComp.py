@@ -1,6 +1,6 @@
 """Component Base which holds functions to aid in visulaization and understanding."""
 
-# Copyright (C) 2014-2015 DV Klopfenstein. All rights reserved.
+# Copyright (C) 2014-2016 DV Klopfenstein. All rights reserved.
 
 import collections as cx
 import sys

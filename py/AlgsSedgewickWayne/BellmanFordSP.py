@@ -161,5 +161,5 @@ class BellmanFordSP(object):
 #  * |V| or more edges in a path -> repeated vertex -> cycle
 
 
-# Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
+# Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python port

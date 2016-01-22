@@ -1,6 +1,6 @@
 """Python implentation of QuickFind."""
 
-from AlgsSedgewickWayne.BaseComp import BaseComp # Base class for visualization
+from AlgsSedgewickWayne.BaseComp import BaseComp # Base class is for visualization
 
 class QuickFindUF(BaseComp): # Eager Approach
   """ Quickly find if two components are connected."""
@@ -115,4 +115,7 @@ class QuickFindUF(BaseComp): # Eager Approach
 # ANSWER: N - 1
 # EXPLANATION: In the worst case, all of the entries except id[q] are
 # changed from id[p] to id[q]
+
+#  Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
+#  Copyright 2015-2016, DV Klopfenstein, Python implementation
 

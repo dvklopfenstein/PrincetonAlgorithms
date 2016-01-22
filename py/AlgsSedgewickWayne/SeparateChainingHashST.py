@@ -99,5 +99,5 @@ class SeparateChainingHashST(object):
 # the uniform hashing assumption and that there are M = N/8.
 # ANSWER: constant.
 
-#  Copyright 2002-2015, Robert Sedgewick and Kevin Wayne.
-#  Copyright 2014-2015, Python Implementation, DV Klopfenstein
+#  Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
+#  Copyright 2014-2016, Python Implementation, DV Klopfenstein

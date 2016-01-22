@@ -29,7 +29,7 @@ def _exch(pq, i, j):
   pq[i-1], pq[j-1] = pq[j-1], pq[i-1]
 
 
-# Copyright (C) 2002-2015, Robert Sedgewick and Kevin Wayne.
+# Copyright (C) 2002-2016, Robert Sedgewick and Kevin Wayne.
 # Copyright (C) 2015, DV Klopfenstein, Python Implementation
 
 ## Algorithms, Part 1 from Princeton University

@@ -219,5 +219,5 @@ class ResizingArrayStack: #<Item> implements Iterable<Item>:
     # EXPLANATION: Upon termination of the loop, x is a reference to the second to last node.
     # The final statement deletes the last node from the list.
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
-# Copyright (C) 2014-2015, DV Klopfenstein ported to Python
+# Copyright (C) 2014-2016, DV Klopfenstein ported to Python
 # Java last updated: Mon Oct 7 11:58:25 EDT 2013.

@@ -2,7 +2,6 @@
 
 from AlgsSedgewickWayne.BaseComp import BaseComp
 
-# Python implementation by DV Klopfenstein
 class QuickUnionUF(BaseComp):
   """Union command is Quick."""
 
@@ -250,3 +249,5 @@ class QuickUnionUF(BaseComp):
 # ANSWER: linear
 
 
+#  Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
+#  Copyright 2015-2016, DV Klopfenstein, Python implementation
