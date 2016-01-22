@@ -16,39 +16,39 @@ def test_1():
 def test_week1_quiz_Q1():
   """Test 2."""
   alg = QuickFindUF(10)
-  run_unions(alg, "6-3 6-5 9-5 7-0 3-1 9-4", "\ntest_week1_quiz_Q1 seed=686930")
+  run_unions(alg, "6-3 6-5 9-5 7-0 3-1 9-4", "\ntest_week1_quiz_Q1")
   chk_arrays(alg.ID, [0, 4, 2, 4, 4, 4, 4, 0, 8, 4])
 
 def test_week1_quiz_Q1b():
   """Test 3."""
   alg = QuickFindUF(10)
-  run_unions(alg, "4-7 7-8 9-7 6-5 8-6 2-0", "\ntest_week1_quiz_Q1b seed=686930")
+  run_unions(alg, "4-7 7-8 9-7 6-5 8-6 2-0", "\ntest_week1_quiz_Q1b")
   chk_arrays(alg.ID, [0, 1, 0, 3, 5, 5, 5, 5, 5, 5])
 
 def test_week1_quiz_Q1_567561():
   """Test 4."""
   alg = QuickFindUF(10)
-  run_unions(alg, "0-2 3-0 5-9 5-2 7-9 7-8", "\nWeek 1 Exercise Question 1 seed = 567561")
+  run_unions(alg, "0-2 3-0 5-9 5-2 7-9 7-8", "\nWeek 1 Exercise Question 1")
 
 def test_week1_quiz_Q1_838874():
   """Test 5."""
   alg = QuickFindUF(10)
-  run_unions(alg, "9-1 8-0 6-1 4-0 6-0 1-7", "\nWeek 1 Exercise Question 1 seed = 838874")
+  run_unions(alg, "9-1 8-0 6-1 4-0 6-0 1-7", "\nWeek 1 Exercise Question 1")
 
 def test_week1_quiz_Q1_533243():
   """Test 6."""
   alg = QuickFindUF(10)
-  run_unions(alg, "5-2 0-2 5-9 2-1 3-9 4-6", "\nWeek 1 Exercise Question 1 seed = 533243")
+  run_unions(alg, "5-2 0-2 5-9 2-1 3-9 4-6", "\nWeek 1 Exercise Question 1")
 
 def test_week1_quiz_Q1_489602():
   """Test 7."""
   alg = QuickFindUF(10)
-  run_unions(alg, "2-7 9-6 8-1 5-9 0-8 9-1", "\nWeek 1 Exercise Question 1 seed = 489602")
+  run_unions(alg, "2-7 9-6 8-1 5-9 0-8 9-1", "\nWeek 1 Exercise Question 1")
 
 def test_week1_quiz_Q1_126228():
   """Test 126228."""
   alg = QuickFindUF(10)
-  run_unions(alg, "8-9 4-0 8-5 2-6 1-7 0-3", "\nWeek 1 Exercise Question 1 seed = 126228")
+  run_unions(alg, "8-9 4-0 8-5 2-6 1-7 0-3", "\nWeek 1 Exercise Question 1")
 
 def test_all():
   """Test All."""

@@ -1,9 +1,7 @@
 """Python implentation of QuickFind."""
 
-# Derived from a class used for visualization to gain further understanding
-from AlgsSedgewickWayne.BaseComp import BaseComp
+from AlgsSedgewickWayne.BaseComp import BaseComp # Base class for visualization
 
-# Python adaptation by DV Klopfenstein
 class QuickFindUF(BaseComp): # Eager Approach
   """ Quickly find if two components are connected."""
 
@@ -13,16 +11,16 @@ class QuickFindUF(BaseComp): # Eager Approach
     self.ID = range(N) # N array accesses (wo/comprehension)
 
   def connected(self, p, q): # $ = 1
-    """ FIND whether p and q are in the same component. """
+    """ FIND whether p and q are in the same component."""
     return self.ID[p] == self.ID[q] # 2 array accesses
 
   def union(self, p, q): #     $ = N
     """ UNION by changing all entries with id[p] to id[q]."""
-    pID = self.ID[p]
-    qID = self.ID[q]
+    pID = self.ID[p] # Change all IDs having value, pID, to...
+    qID = self.ID[q] # to qID
     for i, curr_ID in enumerate(self.ID):
       # At most 2N + 2 array accesses; 2N: 1st in for-loop above, 2nd in assignment below
-      if curr_ID == pID: # Common mistake many make is to put ID[p] instead of pID:
+      if curr_ID == pID: # Common mistake many make is to put ID[p] instead of pID
         self.ID[i] = qID
 
   def _root(self, p):
