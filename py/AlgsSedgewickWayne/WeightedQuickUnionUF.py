@@ -18,7 +18,7 @@ class WeightedQuickUnionUF(BaseComp):
     while i != self.ID[i]: # depth of i array accesses
       i = self.ID[i]
       d += 1
-    return i, d
+    return BaseComp.NtRoot(root=i, depth=d)
 
   def connected(self, p, q): # $ = lg N
     """Return if p and q are in the same connected component (i.e. have the same root)."""

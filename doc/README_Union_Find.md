@@ -12,10 +12,12 @@
   3. [Recreate demo from **Quick-Union Improvements (13:02)** lecture](#ex3)
 
 ## Examples
+Run examples from <PrincetonAlgorithms repository>/tests    
+Must be in PYTHONPATH: <base_dir>/PrincetonAlgorithms/py
 ### [ex1](#table-of-contents-for-examples)
 1. Force the state of QuickUnion and visualize: From the cmdline...   
 ```
-> python -c 'import QuickUnionUF as Q; Q.QuickUnionUF(10).wr_png_tree_statestr("6 1 6 6 0 6 1 5 0 5")'
+> python -c 'import AlgsSedgewickWayne.QuickUnionUF as Q; Q.QuickUnionUF(10).wr_png_tree_statestr("6 1 6 6 0 6 1 5 0 5")'
 ```    
 This state would actually not be possible to create using **unions** because
 the size of the tree rooted at parent of 6 < twice the size of the tree
@@ -26,7 +28,7 @@ rooted at 6
 ### [ex2](#table-of-contents-for-examples)
 2. Recreate demo from **Quick Union (7:50)** lecture: From the cmdline...
 
-Runs these unions using QuickUnion with no speed improvements (Weighing, Path compression):
+Run these unions using QuickUnion with no speed improvements (Weighting, Path compression):
 ```
   union(7-3) 
   union(6-1) 

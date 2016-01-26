@@ -9,6 +9,8 @@ from AlgsSedgewickWayne.testcode.utils import get_png_label
 class BaseComp(object):
   """ Holds an index of Nodes which can be combined into components."""
 
+  NtRoot = cx.namedtuple("NtRoot", "root depth")
+
   def __init__(self, name):
     """Derived class will set the actual values."""
     self.name = name
