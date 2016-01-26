@@ -12,8 +12,8 @@
   3. [Recreate demo from **Quick-Union Improvements (13:02)** lecture](#ex3)
 
 ## Examples
-Run examples from <PrincetonAlgorithms repository>/tests    
-Must be in PYTHONPATH: <base_dir>/PrincetonAlgorithms/py
+Run examples from \<PrincetonAlgorithms repository\>/tests    
+Must be in PYTHONPATH: \<base_dir\>/PrincetonAlgorithms/py
 ### [ex1](#table-of-contents-for-examples)
 1. Force the state of QuickUnion and visualize: From the cmdline...   
 ```
