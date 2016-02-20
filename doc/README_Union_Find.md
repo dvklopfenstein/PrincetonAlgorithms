@@ -41,7 +41,7 @@ Run these unions using QuickUnion with no speed improvements (Weighting, Path co
   union(3-8) 
   union(4-3) 
 
-> python -c 'import test_QuickUnionUF as T; T.test_week1_lecture()
+> python -c 'import test_QuickUnionUF as T; T.test_week1_lecture()'
 
 IDX:  0  1  2  3  4  5  6  7  8  9    
 val:  0  1  2  3  4  5  6  7  8  9 Initial values    
