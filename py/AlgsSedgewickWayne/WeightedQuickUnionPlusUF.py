@@ -30,18 +30,18 @@ class WeightedQuickUnionUF(BaseComp):
       self.ID[i] = self.ID[self.ID[i]] # <- ONE NEW LINE: PATH COMPRESSION CODE
       i = self.ID[i]
       d += 1
-    return i, d
+    return BaseComp.NtRoot(rootnode=i, depth=d)
 
   def connected(self, p, q): # $ = lg N
     """Return if p and q are in the same connected component (i.e. have the same root)."""
-    return self._root(p)[0] == self._root(q)[0] # Runs depth of p & q array accesses
+    return self._root(p).rootnode == self._root(q).rootnode # Runs depth of p & q array accesses
 
   def union(self, p, q):     # $ = lg N
     """Add connection between p and q."""
     # Runs Depth of p and q array accesses...
-    i = self._root(p)[0]
-    j = self._root(q)[0]
-    if i == j:
+    p_root = self._root(p).rootnode
+    q_root = self._root(q).rootnode
+    if p_root == q_root:
       return
     # IMPROVEMENT #1: Modification to Quick-Union to make it weights: 4:03
     # Balance trees by linking root of smaller tree to root of larger tree
@@ -49,20 +49,20 @@ class WeightedQuickUnionUF(BaseComp):
     #     * Link root of smaller tree to root of larger tree.
     #     * Update the SZ[] array.
     #   Each union involves changing only one array entry
-    if   self.SZ[i] < self.SZ[j]: # Make ID[i] a child of j
-      self.ID[i] = j
-      self.SZ[j] += self.SZ[i]
-    else: # Make ID[j] a child of i
-      self.ID[j] = i
-      self.SZ[i] += self.SZ[j]
+    if   self.SZ[p_root] < self.SZ[q_root]: # Make ID[p_root] a child of q_root
+      self.ID[p_root] = q_root
+      self.SZ[q_root] += self.SZ[p_root]
+    else: # Make ID[q_root] a child of p_root
+      self.ID[q_root] = p_root
+      self.SZ[p_root] += self.SZ[q_root]
 
   def __str__(self):
     """>>> print obj."""
-    h = " ".join('%3s'%str(e) for e in range(len(self.ID)))+" header" # Header
-    s = " ".join('%3s'%str(e) for e in self.SZ)+" SZ[]"     # Size
-    rv = [self._root(e)[0] for e in self.ID]     # Root Values
+    h = " ".join('{:3}'.format(str(e)) for e in range(len(self.ID)))+" header" # Header
+    s = " ".join('{:3}'.format(str(e)) for e in self.SZ)+" SZ[]"     # Size
+    rv = [self._root(e).rootnode for e in self.ID]     # Root Values
     #roots = set(rv)
-    rv = " ".join(['%3s'%str(e) for e in rv])+" root values" # Root Values
+    rv = " ".join(['{:3}'.format(str(e)) for e in rv])+" root values" # Root Values
     return '\n'.join([h, rv, s])
 
 # Quick-Find                     M N        

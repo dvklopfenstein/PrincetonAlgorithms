@@ -1,4 +1,4 @@
-"""Weighted Quick Union Algorithm."""
+"""Weighted Quick Union Algorithm takes steps to avoid tall trees."""
 
 from AlgsSedgewickWayne.BaseComp import BaseComp
 
@@ -18,30 +18,30 @@ class WeightedQuickUnionUF(BaseComp):
     while i != self.ID[i]: # depth of i array accesses
       i = self.ID[i]
       d += 1
-    return BaseComp.NtRoot(root=i, depth=d)
+    return BaseComp.NtRoot(rootnode=i, depth=d)
 
   def connected(self, p, q): # $ = lg N
     """Return if p and q are in the same connected component (i.e. have the same root)."""
-    return self._root(p)[0] == self._root(q)[0] # Runs depth of p & q array accesses
+    return self._root(p).rootnode == self._root(q).rootnode # Runs depth of p & q array accesses
 
   def union(self, p, q):     # $ = lg N
     """Add connection between p and q."""
     # Runs Depth of p and q array accesses...
-    p_root = self._root(p)[0]
-    q_root = self._root(q)[0]
+    p_root = self._root(p).rootnode
+    q_root = self._root(q).rootnode
     if p_root == q_root:
       return
-    # IMPROVEMENT #1: Modification to Quick-Union to make it weights: 4:03
+    # IMPROVEMENT #1: Modification to Quick-Union to make it weighted: 4:03
     # Balance trees by linking root of smaller tree to root of larger tree
     #   Modified quick-union:
     #     * Link root of smaller tree to root of larger tree.
     #     * Update the SZ[] array.
     #   Each union involves changing only one array entry
     if self.SZ[p_root] < self.SZ[q_root]: # Make ID[p_root] a child of q_root
-      self.ID[p_root] = q_root
-      self.SZ[q_root] += self.SZ[p_root]
-    else: # Make ID[q_root] a child of p_root
-      self.ID[q_root] = p_root
+      self.ID[p_root] = q_root # link root of smaller tree(p_root) to root of larger tree(q_root)
+      self.SZ[q_root] += self.SZ[p_root] # Larger tree size increases
+    else: # Make ID[q_root] a child of p_root 
+      self.ID[q_root] = p_root # link root of smaller tree(q_root) to root of larger tree(p_root)
       self.SZ[p_root] += self.SZ[q_root]
 
   def __str__(self):
