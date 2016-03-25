@@ -1,4 +1,4 @@
-# TBD Finish Python port
+#!/usr/bin/env python
 
 import sys
 from AlgsSedgewickWayne.Interval1D import Interval1D
@@ -12,27 +12,20 @@ def test_0(prt=sys.stdout):
         Interval1D(46.0, 55.0),
     ]
 
-    prt.write("Unsorted: {INTVLS}\n".format(INTVLS=", ".join(str(I) for I in intervals)))
+    get_ivstr = lambda intvls: ", ".join(str(intvl) for intvl in intvls)
+
+    prt.write("Unsorted: {INTVLS}\n".format(INTVLS=get_ivstr(intervals)))
     
-    #prt.write("Sort by min endpoint\n")
-    #Arrays.sort(intervals, Interval1D.MIN_ENDPOINT_ORDER)
-    #for (int i = 0; i < len(intervals); i += 1)
-    #    prt.write(intervals[i])
-    #prt.write("\n")
+    prt.write("Sort by min endpoint: {INTVLS}\n".format(
+        INTVLS=get_ivstr(Interval1D.sortby_minendpoint(intervals))))
 
-    #prt.write("Sort by max endpoint\n")
-    #Arrays.sort(intervals, Interval1D.MAX_ENDPOINT_ORDER)
-    #for (int i = 0; i < len(intervals); i += 1)
-    #    prt.write(intervals[i])
-    #prt.write("\n")
+    prt.write("Sort by max endpoint: {INTVLS}\n".format(
+        INTVLS=get_ivstr(Interval1D.sortby_maxendpoint(intervals))))
 
-    #prt.write("Sort by length\n")
-    #Arrays.sort(intervals, Interval1D.LENGTH_ORDER)
-    #for (int i = 0; i < len(intervals); i += 1)
-    #    prt.write(intervals[i])
-    #prt.write("\n")
+    prt.write("Sort by length: {INTVLS}\n".format(
+        INTVLS=get_ivstr(Interval1D.sortby_length(intervals))))
 
-#****************************************************************************
+
 if __name__ == "__main__":
   test_0()
 

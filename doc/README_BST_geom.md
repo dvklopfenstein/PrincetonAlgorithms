@@ -9,7 +9,7 @@
   * **Line Segment Intersection** using *line-sweep*
   * **Kd-Trees**
   * **Interval Search Trees**
-    * Interval1D.py
+    * [Interval1D.py](../py/AlgsSedgewickWayne/Interval1D.py)
   * **Rectangle Intersection**
 
 ## Table of Contents for Examples
