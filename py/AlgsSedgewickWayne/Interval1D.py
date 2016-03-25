@@ -1,237 +1,80 @@
-#!/usr/bin/env python#*****************************************************************************
- #  Compilation:  javac Interval1D.java
- #  Execution:    java Interval1D
- #  Dependencies: StdOut.java
- #  
- #  1-dimensional interval data type.
- #
- #*****************************************************************************/
 
-package edu.princeton.cs.algs4
+"""The Interval1D class represents a one-dimensional interval.
 
-import java.util.Arrays
-import java.util.Comparator
+       The interval is closed - it contains both endpoints.
+       Intervals are immutable: their values cannot be changed after they are created.
+       The class Interval1D includes methods for checking whether
+       an interval contains a point and determin_valing whether two intervals intersect.
 
-#*
- #  The <tt>Interval1D</tt> class represents a one-dimensional interval.
- #  The interval is <em>closed</em>&mdash;it contains both endpoints.
- #  Intervals are immutable: their values cannot be changed after they are created.
- #  The class <code>Interval1D</code> includes methods for checking whether
- #  an interval contains a point and determining whether two intervals intersect.
- #  <p>
- #  For additional documentation, 
- #  see <a href="http://algs4.cs.princeton.edu/12oop">Section 1.2</a> of 
- #  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne. 
- #
- #  @author Robert Sedgewick
- #  @author Kevin Wayne
- #/
-public class Interval1D:
+       For additional documentation, 
+       see <a href="http://algs4.cs.princeton.edu/12oop/">Section 1.2</a> of 
+       Algorithms, 4th Edition by Robert Sedgewick and Kevin Wayne. 
 
-    #*
-     # Compares two intervals by left endpoint.
-     #/
-    def LeftComparator()
+       @author Robert Sedgewick
+       @author Kevin Wayne
+"""
+# TBD Finish Python port
+import numpy as np
 
-    #*
-     # Compares two intervals by right endpoint.
-     #/
-    def RightComparator()
+class Interval1D(object):
 
-    #*
-     # Compares two intervals by length.
-     #/
-    def LengthComparator()
+  def __init__(self, min_val, max_val):
+      """Initializes a closed interval [self.min_val, self.max_val]."""
+      assert np.isfinite(min_val) and np.isfinite(max_val), "Endpoints must be finite"
+      if min_val <= max_val:
+          self.min_val = min_val
+          self.max_val = max_val
+      else: raise Exception("Illegal interval")
 
-    private final double left
-    private final double right
+  def intersects(self, that):
+      """Returns True if self interval intersects the specified interval."""
+      if self.max_val < that.min_val: return False
+      if that.max_val < self.min_val: return False
+      return True
 
-    #*
-     # Initializes a closed interval [left, right].
-     #
-     # @param  left the left endpoint
-     # @param  right the right endpoint
-     # @throws IllegalArgumentException if the left endpoint is greater than the right endpoint
-     # @throws IllegalArgumentException if either <tt>left</tt> or <tt>right</tt>
-     #         is <tt>Double.NaN</tt>, <tt>Double.POSITIVE_INFINITY</tt> or
-     #         <tt>Double.NEGATIVE_INFINITY</tt>
+  # Returns True if self interval contains the specified value.
+  def contains(self, x): return self.min_val <= x and x <= self.max_val
 
-     #/
-    public Interval1D(double left, double right):
-        if Double.isInfinite(left) or Double.isInfinite(right))
-            raise new IllegalArgumentException("Endpoints must be finite")
-        if Double.isNaN(left) or Double.isNaN(right))
-            raise new IllegalArgumentException("Endpoints cannot be NaN")
+  # Returns the length of self interval.
+  def length(self): return self.max_val - self.min_val
 
-        # convert -0.0 to +0.0
-        if left == 0.0) left = 0.0
-        if right == 0.0) right = 0.0
+  # Returns a string representation of self interval.
+  def __str__(self): return "[{MIN}, {MAX}]".format(MIN=self.min_val, MAX=self.max_val)
 
-        if left <= right):
-            this.left  = left
-            this.right = right
-        else raise new IllegalArgumentException("Illegal interval")
+  def equals(self, other):
+      """True if self interval equals the other interval else False."""
+      if other == self: return True
+      if other is None: return False
+      if isinstance(other, Interval1D) != isinstance(self, Interval1D): return False
+      return self.min_val == other.min_val and self.max_val == other.max_val
 
-    #*
-     # Returns the left endpoint of this interval.
-     #
-     # @return the left endpoint of this interval
-     #/
-    def left(): 
-        return left
+  # ascending order of self.min_val endpoint, breaking ties by self.max_val endpoint
+  @staticmethod
+  def MinEndpointComparator(Interval1D_a, Interval1D_b):
+      """Compares two intervals by self.min_val endpoint."""
+      if   Interval1D_a.min_val < Interval1D_b.min_val: return -1
+      elif Interval1D_a.min_val > Interval1D_b.min_val: return +1
+      elif Interval1D_a.max_val < Interval1D_b.max_val: return -1
+      elif Interval1D_a.max_val > Interval1D_b.max_val: return +1
+      else:                                             return  0
 
-    #*
-     # Returns the right endpoint of this interval.
-     # @return the right endpoint of this interval
-     #/
-    def right(): 
-        return right
+  @staticmethod
+  def MaxEndpointComparator(Interval1D_a, Interval1D_b):
+      """Compares two intervals by self.max_val endpoint."""
+      if   Interval1D_a.min_val < Interval1D_b.max_val: return -1
+      elif Interval1D_a.min_val > Interval1D_b.max_val: return +1
+      elif Interval1D_a.min_val < Interval1D_b.min_val: return -1
+      elif Interval1D_a.min_val > Interval1D_b.min_val: return +1
+      else:                                             return  0
 
-    #*
-     # Returns true if this interval intersects the specified interval.
-     #
-     # @param  that the other interval
-     # @return <tt>true</tt> if this interval intersects the argument interval;
-     #         <tt>false</tt> otherwise
-     #/
-    def intersects(Interval1D that):
-        if this.right < that.left) return False
-        if that.right < this.left) return False
-        return True
+  @staticmethod
+  def LengthComparator(Interval1D_a, Interval1D_b):
+      """Compares two intervals by length."""
+      alen = Interval1D_a.length()
+      blen = Interval1D_b.length()
+      if    alen < blen: return -1
+      elif  alen > blen: return +1
+      else:              return  0
 
-    #*
-     # Returns true if this interval contains the specified value.
-     #
-     # @param x the value
-     # @return <tt>true</tt> if this interval contains the value <tt>x</tt>;
-     #         <tt>false</tt> otherwise
-     #/
-    def contains(double x):
-        return (left <= x) and (x <= right)
-
-    #*
-     # Returns the length of this interval.
-     #
-     # @return the length of this interval (right - left)
-     #/
-    def length():
-        return right - left
-
-    #*
-     # Returns a string representation of this interval.
-     #
-     # @return a string representation of this interval in the form [left, right]
-     #/
-    def toString():
-        return "[" + left + ", " + right + "]"
-
-    #*
-     # Compares this transaction to the specified object.
-     #
-     # @param  other the other interval
-     # @return <tt>true</tt> if this interval equals the other interval;
-     #         <tt>false</tt> otherwise
-     #/
-    def equals( other):
-        if other == this) return True
-        if other is None) return False
-        if other.getClass() != this.getClass()) return False
-        Interval1D that = (Interval1D) other
-        return this.left == that.left and this.right == that.right
-
-    #*
-     # Returns an integer hash code for this interval.
-     #
-     # @return an integer hash code for this interval
-     #/
-    def hashCode():
-        hash1 = ((Double) left).hashCode()
-        hash2 = ((Double) right).hashCode()
-        return 31*hash1 + hash2
-
-    # ascending order of left endpoint, breaking ties by right endpoint
-    private static class LeftComparator implements Comparator<Interval1D>:
-        def compare(Interval1D a, Interval1D b):
-            if      a.left  < b.left)  return -1
-            elif (a.left  > b.left)  return +1
-            elif (a.right < b.right) return -1
-            elif (a.right > b.right) return +1
-            else:                        return  0
-
-    # ascending order of right endpoint, breaking ties by left endpoint
-    private static class RightComparator implements Comparator<Interval1D>:
-        def compare(Interval1D a, Interval1D b):
-            if      a.right < b.right) return -1
-            elif (a.right > b.right) return +1
-            elif (a.left  < b.left)  return -1
-            elif (a.left  > b.left)  return +1
-            else:                        return  0
-
-    # ascending order of length
-    private static class LengthComparator implements Comparator<Interval1D>:
-        def compare(Interval1D a, Interval1D b):
-            double alen = len(a)()
-            double blen = len(b)()
-            if      alen < blen) return -1
-            elif (alen > blen) return +1
-            else:                  return  0
-
-
-
-
-    #*
-     # Unit tests the <tt>Interval1D</tt> data type.
-     #/
-    def main(String[] args):
-        Interval1D[] intervals = new Interval1D[4]
-        intervals[0] = new Interval1D(15.0, 33.0)
-        intervals[1] = new Interval1D(45.0, 60.0)
-        intervals[2] = new Interval1D(20.0, 70.0)
-        intervals[3] = new Interval1D(46.0, 55.0)
-
-        prt.write("Unsorted")
-        for (int i = 0; i < len(intervals); i += 1)
-            prt.write(intervals[i])
-        prt.write()
-        
-        prt.write("Sort by left endpoint")
-        Arrays.sort(intervals, Interval1D.LEFT_ENDPOINT_ORDER)
-        for (int i = 0; i < len(intervals); i += 1)
-            prt.write(intervals[i])
-        prt.write()
-
-        prt.write("Sort by right endpoint")
-        Arrays.sort(intervals, Interval1D.RIGHT_ENDPOINT_ORDER)
-        for (int i = 0; i < len(intervals); i += 1)
-            prt.write(intervals[i])
-        prt.write()
-
-        prt.write("Sort by length")
-        Arrays.sort(intervals, Interval1D.LENGTH_ORDER)
-        for (int i = 0; i < len(intervals); i += 1)
-            prt.write(intervals[i])
-        prt.write()
-
-#*****************************************************************************
- #  Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
- #
- #  This file is part of algs4.jar, which accompanies the textbook
- #
- #      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- #      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- #      http://algs4.cs.princeton.edu
- #
- #
- #  algs4.jar is free software: you can redistribute it and/or modify
- #  it under the terms of the GNU General Public License as published by
- #  the Free Software Foundation, either version 3 of the License, or
- #  (at your option) any later version.
- #
- #  algs4.jar is distributed in the hope that it will be useful,
- #  but WITHOUT ANY WARRANTY; without even the implied warranty of
- #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- #  GNU General Public License for more details.
- #
- #  You should have received a copy of the GNU General Public License
- #  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- #*****************************************************************************/
+# Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
+# Copyright 2015-2016, DV Klopfenstein, Python implementation.
