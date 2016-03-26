@@ -12,8 +12,8 @@
     A classic data structure that enables us to provide efficient 
     implementations of Symbol Table algorithms
     * [**BST.py**](../py/AlgsSedgewickWayne/BST.py)    
-    * **Ordered Operations in BSTs**    
-    * **Deletion in BSTs**    
+  * **Ordered Operations in BSTs**    
+  * **Deletion in BSTs**    
 
 ## Table of Contents for Examples
   1. [Run Example](#ex1)
