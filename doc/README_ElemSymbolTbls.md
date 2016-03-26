@@ -2,16 +2,16 @@
 
 ## Code
   * **Symbol Table API**     
-    * [Date.py](../py/AlgsSedgewickWayne/Date.py) is an immutable type example which can be used as a key    
-    * Client for ST.py: FrequencyCounter.py    
+    * [**Date.py**](../py/AlgsSedgewickWayne/Date.py) is an immutable type example which can be used as a key    
+    * Client for **ST.py**: **FrequencyCounter.py**    
   * **Elementary Symbol Table Implementations**    
-    * SequentialSearchST.py, an unordered linked-list    
-    * BinarySearchST.py, ordered with fast lookup (slow insert)    
-  * **Ordered Operations** => ST.py
+    * **SequentialSearchST.py**, an unordered linked-list    
+    * **BinarySearchST.py**, ordered with fast lookup (slow insert)    
+  * **Ordered Operations** => **ST.py**
   * [**Binary Search Trees**](http://algs4.cs.princeton.edu/32bst)    
     A classic data structure that enables us to provide efficient 
     implementations of Symbol Table algorithms
-    * [BST.py](../py/AlgsSedgewickWayne/BST.py)    
+    * [**BST.py**](../py/AlgsSedgewickWayne/BST.py)    
     * **Ordered Operations in BSTs**    
     * **Deletion in BSTs**    
 
