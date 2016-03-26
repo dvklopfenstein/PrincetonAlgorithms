@@ -10,7 +10,7 @@ Use immutable objects, like [Date.py](../py/AlgsSedgewickWayne/Date.py) as keys
     [BinarySearchST.java](../thirdparty/BinarySearchST.java),
     [BST.java](../thirdparty/BST.java)
   * **Ordered Operations** => [ST.java](./thirdparty/ST.java)
-  * **Binary Search Trees** => [BST.java](../thirdparty/BST.java)    
+  * [**Binary Search Trees**](http://algs4.cs.princeton.edu/32bst) => [BST.java](../thirdparty/BST.java)    
     A classic data structure that enables us to provide efficient 
     implementations of Symbol Table algorithms
     * **Ordered Operations in BSTs**    
