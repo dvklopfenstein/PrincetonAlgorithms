@@ -1,8 +1,8 @@
 # [Elementary Symbol Tables](http://algs4.cs.princeton.edu/31elementary/)
-Use immutable objects, such as [Date.py](../py/AlgsSedgewickWayne/Date.py) as keys
 
 ## Code
-  * **Symbol Table API** =>
+  * **Symbol Table API**     
+    * [Date.py](../py/AlgsSedgewickWayne/Date.py) is an immutable type which can be used as a key
     FrequencyCounter.py uses
     ST.py
   * **Elementary Implementations** =>
