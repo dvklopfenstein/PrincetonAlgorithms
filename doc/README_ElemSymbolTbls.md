@@ -10,7 +10,8 @@ Use immutable objects, such as [Date.py](../py/AlgsSedgewickWayne/Date.py) as ke
     BinarySearchST.py
     [BST.py](../py/AlgsSedgewickWayne/BST.py)
   * **Ordered Operations** => ST.py
-  * [**Binary Search Trees**](http://algs4.cs.princeton.edu/32bst) => [BST.py](../py/AlgsSedgewickWayne/BST.py)
+  * [**Binary Search Trees**](http://algs4.cs.princeton.edu/32bst) => 
+    [BST.py](../py/AlgsSedgewickWayne/BST.py)    
     A classic data structure that enables us to provide efficient 
     implementations of Symbol Table algorithms
     * **Ordered Operations in BSTs**    
