@@ -2,9 +2,8 @@
 
 ## Code
   * **Symbol Table API**     
-    * [Date.py](../py/AlgsSedgewickWayne/Date.py) is an immutable type which can be used as a key    
-    FrequencyCounter.py uses
-    ST.py
+    * [Date.py](../py/AlgsSedgewickWayne/Date.py) is an immutable type example which can be used as a key    
+    * Client for ST.py: FrequencyCounter.py    
   * **Elementary Implementations** =>
     SequentialSearchST.py
     BinarySearchST.py

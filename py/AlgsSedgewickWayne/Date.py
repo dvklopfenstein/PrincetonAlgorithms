@@ -1,4 +1,4 @@
-"""Date.java ported to Python."""
+"""An example of an immutable type which can be used as a key for a Symbol Table."""
 
 from datetime import date, timedelta
 import re
