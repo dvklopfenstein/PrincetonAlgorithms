@@ -7,7 +7,8 @@
   * **Elementary Symbol Table Implementations**    
     * **SequentialSearchST.py**, an unordered linked-list    
     * **BinarySearchST.py**, ordered with fast lookup (slow insert)    
-  * **Ordered Operations** => **ST.py**
+  * **Ordered Operations**: get, put, delete, size, min, max, floor, ceiling, rank, etc.    
+    * **ST.py**    
   * [**Binary Search Trees**](http://algs4.cs.princeton.edu/32bst)    
     A classic data structure that enables us to provide efficient 
     implementations of Symbol Table algorithms
