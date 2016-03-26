@@ -1,16 +1,16 @@
 # [Elementary Symbol Tables](http://algs4.cs.princeton.edu/31elementary/)
-Use immutable objects, like [Date.py](../py/AlgsSedgewickWayne/Date.py) as keys
+Use immutable objects, such as [Date.py](../py/AlgsSedgewickWayne/Date.py) as keys
 
 ## Code
   * **Symbol Table API** =>
-    [FrequencyCounter.java](../thirdparty/FrequencyCounter.java) uses
-    [ST.java](../thirdparty/ST.java)
+    FrequencyCounter.py uses
+    ST.py
   * **Elementary Implementations** =>
-    [SequentialSearchST.java](../thirdparty/SequentialSearchST.java),
-    [BinarySearchST.java](../thirdparty/BinarySearchST.java),
-    [BST.java](../thirdparty/BST.java)
-  * **Ordered Operations** => [ST.java](./thirdparty/ST.java)
-  * [**Binary Search Trees**](http://algs4.cs.princeton.edu/32bst) => [BST.java](../thirdparty/BST.java)    
+    SequentialSearchST.py
+    BinarySearchST.py
+    [BST.py](../py/AlgsSedgewickWayne/BST.py)
+  * **Ordered Operations** => ST.py
+  * [**Binary Search Trees**](http://algs4.cs.princeton.edu/32bst) => [BST.py](../py/AlgsSedgewickWayne/BST.py)
     A classic data structure that enables us to provide efficient 
     implementations of Symbol Table algorithms
     * **Ordered Operations in BSTs**    

@@ -1,269 +1,300 @@
-"""Binary Search Tree."""
-# TBD: FINISH PYTHON PORT
+"""A symbol table implemented with a binary search tree (BST)."""
+
+# It also provides a **keys** method for iterating over all of the keys.
+# A symbol table implements the **associative array** abstraction:
+# when associating a value with a key that is already in the symbol table,
+# the convention is to replace the old value with the new value.
+# Unlike:@link java.util.Map}, self class uses the convention that
+# values cannot be <tt>None</tt>&mdash;setting the
+# value associated with a key to <tt>None</tt> is equivalent to deleting the key
+# from the symbol table.
+# <p>
+# This implementation uses an (unbalanced) binary search tree. It requires that
+# the key type implements the <tt>Comparable</tt> interface and calls the
+# <tt>compareTo()</tt> and method to compare two keys. It does not call either
+# <tt>equals()</tt> or <tt>hashCode()</tt>.
+# The <em>put</em>, <em>contains</em>, <em>remove</em>, <em>minimum</em>,
+# <em>maximum</em>, <em>ceiling</em>, <em>floor</em>, <em>select</em>, and
+# <em>rank</em>  operations each take
+# linear time in the worst case, if the tree becomes unbalanced.
+
+# For other implementations, see 
+# {@link ST},:@link BinarySearchST},
+# {@link SequentialSearchST},:@link RedBlackBST},
+# {@link SeparateChainingHashST}, and:@link LinearProbingHashST},
+# <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+
+import collections as cx
+import sys
 
 class BST(object):
+    """Represents an ordered symbol table of generic key-value pairs.
 
-  def __init__(self):
-    self.root = None      # root of BST is a _Node
+       Supports: put, get, contains, delete, size, isEmpty
+           get_min, get_max, floor, select, ceiling
+    """
 
-  class _Node:
-    def __init__(self, key, val, N):
-      self.key   = key  # Key   sorted by key
-      self.val   = val  # Value associated data
-      self.left  = None # Node  left and right subtrees
-      self.right = None # Node  and right subtrees
-      self.N     = N    # number of nodes in subtree
+    class _Node(object):
 
-  def isEmpty(self): return self.Size() == 0
+        def __init__(self, key, val, N): 
+            self.key = key # Key:   sorted by key
+            self.val = val # Value: associated data
+            self.N = N     # int:   number of nodes in subtree
+            self.left = None  # left subtrees
+            self.right = None # right subtrees
 
-  # return number of key-value pairs in BST
-  def Size(self): return self._Size(self.root)
+    def __init__(self):
+        """Initializes an empty symbol table."""
+        self.log = sys.stdout
+        self._root = None       # root of BST
+     
 
-  def _Size(self, x): # Node
-    """return number of key-value pairs in BST rooted at x."""
-    if x is None: return 0
-    else: return x.N
+    # Return True if self symbol table is empty; False otherwise. $ = K
+    def isEmpty(self): return self.size() == 0
 
-  def contains(self, key):
-    """does there exist a key-value pair with given key?"""
-    return self.get(key) is not None
+    # Returns the number of key-value pairs in self symbol table. $ = K
+    def size(self): return self._size(self._root)
 
-  def get(self, key):
-    """return value associated with the given key, or None if no such key exists"""
-    return self._get(root, key)
+    # return number of key-value pairs in BST self._rooted at x. $ = K
+    def _size(self, node_x): return 0 if node_x is None else node_x.N
 
-  def _get(self, x, key):
-    """Search for key. Return assc. value if found, return None if not found"""
-    if x is None: return None
-    if   key < x.key: return self.get(x.left,  key)
-    elif key > x.key: return self.get(x.right, key)
-    else:             return x.val
+    def contains(self, key):
+        """Does self symbol table contain the given key?"""
+        if key is None: raise Exception("argument to contains() is None")
+        return self.get(key) is not None
 
-  def put(self, key, val):
-    """Insert key-value pair into BST. If key already exists, update with new value."""
-    if val is None: self.delete(key); return
-    self.root = self._put(self.root, key, val)
-    assert self._check()
+    def get(self, key):
+        """Returns the value associated with the given key or None."""
+        return self._get(self._root, key)
 
-  def _put(self, x, key, val):
-    """Recursive put which returns node."""
-    if x is None: return self._Node(key, val, 1)
-    if   key < x.key:  x.left  = self.put(x.left,  key, val)
-    elif key > x.key:  x.right = self.put(x.right, key, val)
-    else:              x.val   = val # Reset value of already existing node
-    x.N = 1 + self._Size(x.left) + self._Size(x.right)
-    return x
+    def _get(self, node_x, key):
+        if node_x is None: return None
+        if   key == node_x.key: return node_x.val
+        elif key  < node_x.key: return self._get(node_x.left,  key)
+        else:                   return self._get(node_x.right, key)
+    
+    # Inserts the specified key-value pair into the symbol table, overwriting the old 
+    # value with the new value if the symbol table already contains the specified key.
+    # Deletes the specified key (and its associated value) from self symbol table
+    # if the specified value is None.
+    def put(self, key, val):
+        if key is None: raise Exception("first argument to put() is None")
+        if val is None:
+            self.delete(key)
+            return
+        self._root = self._put(self._root, key, val)
+        assert self.check()
 
-  # Delete
-  def deleteMin(self):
-      if self.isEmpty(): raise Exception("deleteMin Symbol table underflow")
-      root = self.deleteMin(root)
-      assert self._check()
+    def _put(self, node_x, key, val):
+        if node_x is None: return self._Node(key, val, N=1)
+        if   key == node_x.key: node_x.val   = val
+        elif key  < node_x.key: node_x.left  = self._put(node_x.left,  key, val)
+        else:                   node_x.right = self._put(node_x.right, key, val)
+        node_x.N = 1 + self._size(node_x.left) + self._size(node_x.right)
+        return node_x
 
-  def _deleteMin(self, x):
-      if x.left is None: return x.right
-      x.left = self.deleteMin(x.left)
-      x.N = Size(x.left) + self.Size(x.right) + 1
-      return x
+    def deleteMin(self):
+        """Removes the smallest key and associated value from the symbol table."""
+        if self.isEmpty(): raise Exception("Symbol table underflow")
+        self._root = self._deleteMin(self._root)
+        assert self.check()
 
-  def deleteMax(self):
-      if self.isEmpty(): raise Exception("deleteMax Symbol table underflow")
-      self.root = self.deleteMax(self.root)
-      assert self._check()
+    def _deleteMin(self, node_x):
+        if node_x.left is None: return node_x.right
+        node_x.left = self._deleteMin(node_x.left)
+        node_x.N = self._size(node_x.left) + self._size(node_x.right) + 1
+        return node_x
 
-  def _deleteMax(self, x):
-      if x.right is None: return x.left
-      x.right = self.deleteMax(x.right)
-      x.N = Size(x.left) + Size(x.right) + 1
-      return x
+    def deleteMax(self):
+        """Removes the largest key and associated value from the symbol table."""
+        if self.isEmpty(): raise Exception("Symbol table underflow")
+        self._root = self._deleteMax(self._root)
+        assert self.check()
 
-  def delete(self, key):
-      self.root = self.delete(self.root, key)
-      assert self._check()
+    def _deleteMax(self, node_x):
+        if node_x.right is None: return node_x.left
+        node_x.right = self._deleteMax(node_x.right)
+        node_x.N = self._size(node_x.left) + self._size(node_x.right) + 1
+        return node_x
 
-  def _delete(self, x, key):
-      if x is None: return None
-      #cmp = key.compareTo(x.key)
-      if   key < x.key: x.left  = _delete(x.left,  key)
-      elif key > x.key: x.right = _delete(x.right, key)
-      else:
-          if x.right is None: return x.left
-          if x.left  is None: return x.right
-          t = x
-          x = self.Min(t.right)
-          x.right = self._deleteMin(t.right)
-          x.left = t.left
-      x.N = self._Size(x.left) + self._Size(x.right) + 1
-      return x
+    def delete(self, key):
+        """Removes the specified key and its associated value from self symbol table"""
+        if key is None: raise Exception("argument to delete() is None")
+        self._root = self._delete(self._root, key)
+        assert self.check()
 
+    def _delete(self, node_x, key):
+        if node_x is None: return None
+        if   key  < node_x.key: node_x.left = self._delete(node_x.left, key)
+        elif key == node_x.key:
+            if node_x.right is None: return node_x.left
+            if node_x.left  is None: return node_x.right
+            node_t = node_x
+            node_x = self._get_min(node_t.right)
+            node_x.right = self._deleteMin(node_t.right)
+            node_x.left = node_t.left
+        else: node_x.right = self._delete(node_x.right, key)
+        node_x.self.N = self._size(node_x.left) + self._size(node_x.right) + 1
+        return node_x
 
-  #**********************************************************************
-  #  Min, Max, floor, and ceiling
-  #**********************************************************************/
-  def Min(self):
-    if self.isEmpty(): return None
-    return self._Min(self.root).key
+    def get_min(self):
+        """Returns the smallest key in the symbol table."""
+        if self.isEmpty(): raise Exception("called min() with empty symbol table")
+        return self._get_min(self._root).key
 
-  def _Min(self, x):
-    if x.left is None: return x
-    else:              return self._Min(x.left)
+    def _get_min(self, node_x):
+        return node_x if node_x.left is None else self._get_min(node_x.left)
 
-  def Max(self):
-    if self.isEmpty(): return None
-    return self._Max(self.root).key
+    def get_max(self):
+        """Returns the largest key in the symbol table."""
+        if self.isEmpty(): raise Exception("called max() with empty symbol table")
+        return self._get_max(self._root).key
 
-  def _Max(self, x):
-    if x.right is None: return x
-    else:               return self._Max(x.right)
+    def _get_max(self, node_x):
+        return node_x if node_x.right is None else self._get_max(node_x.right)
 
-  def floor(self, key):
-    x = self._floor(self.root, key)
-    if x is None: return None
-    else: return x.key
+    def floor(self, key):
+        """Returns the largest key in the symbol table less than or equal to key."""
+        if key is None: raise Exception("argument to floor() is None")
+        if self.isEmpty(): raise Exception("called floor() with empty symbol table")
+        node_x = self._floor(self._root, key)
+        return node_x.key if node_x is not None else None
 
-  def _floor(self, x, key):
-    if x is None: return None
-    #cmp = key.compareTo(x.key)
-    if key == x.key: return x
-    if key <  x.key: return self._floor(x.left, key)
-    t = self._floor(x.right, key)
-    if t is not None: return t
-    else: return x
+    def _floor(self, node_x, key):
+        if node_x is None: return None
+        if key == node_x.key: return node_x
+        if key  < node_x.key: return self._floor(node_x.left, key)
+        node_t = self._floor(node_x.right, key)
+        return node_t if node_t is not None else node_x
 
-  def ceiling(self, key):
-    x = self._ceiling(self.root, key)
-    if x is None: return None
-    else: return x.key
+    def ceiling(self, key):
+        """Returns the smallest key in the symbol table greater than or equal to key."""
+        if key is None:    raise Exception("argument to ceiling() is None")
+        if self.isEmpty(): raise Exception("called ceiling() with empty symbol table")
+        node_x = self._ceiling(self._root, key)
+        return node_x.key if node_x is not None else None
 
-  def _ceiling(self, x, key):
-    if x is None: return None
-    if key == x.key: return x
-    if key <  x.key:
-      t = self._ceiling(x.left, key)
-      if t is not None: return t
-      else: return x
-    return self._ceiling(x.right, key)
+    def _ceiling(self, node_x, key):
+        if node_x is None: return None
+        if key == node_x.key: return node_x
+        if key  < node_x.key:
+            node_t = self._ceiling(node_x.left, key)
+            return node_t if node_t is not None else node_x
+        return self._ceiling(node_x.right, key)
 
-  # Rank and selection
-  def select(self, k):
-    if k < 0 or k >= self.Size(): return None
-    x = self._select(self.root, k)
-    return x.key
+    def select(self, rank_k):
+        """Return the kth smallest key in the symbol table."""
+        if rank_k < 0 or rank_k >= self.size(): raise Exception("OUT OF RANGE: 0 to N")
+        node_x = self._select(self._root, rank_k)
+        return node_x.key
 
-  def _select(self, x, k):
-    """Return key of rank k."""
-    if x is None: return None
-    t = self._Size(x.left)
-    if   t > k: return self._select(x.left,  k)
-    elif t < k: return self._select(x.right, k-t-1)
-    else:       return x
+    def _select(self, node_x, rank_k):
+        """Return key of rank k."""
+        if node_x is None: return None
+        sz_left = self._size(node_x.left)
+        if   sz_left == rank_k: return node_x
+        elif sz_left  < rank_k: return self._select(node_x.right, rank_k-sz_left-1)
+        else:                   return self._select(node_x.left,  rank_k)
 
-  def rank(self, key):
-    return self._rank(key, self.root)
+    def rank(self, key):
+        """Return the number of keys in the symbol table strictly less than key."""
+        if key is None: raise Exception("argument to rank() is None")
+        return self._rank(key, self._root)
 
-  def _rank(self, key, x):
-    """Number of keys in the subtree less than key."""
-    if x is None: return 0
-    if   key < x.key: return self._rank(key, x.left)
-    elif key > x.key: return 1 + self._Size(x.left) + self._rank(key, x.right)
-    else:             return self._Size(x.left)
+    def _rank(self, key, node_x):
+        """Number of keys in the subtree less than key."""
+        if node_x is None: return 0
+        if   key == node_x.key: return self._size(node_x.left)
+        elif key  < node_x.key: return self._rank(key, node_x.left)
+        else:                    return 1 + self._size(node_x.left) + self._rank(key, node_x.right)
 
-  # Range count and range search.
-  def keys(self):
-    return self.keys(self.Min(), self.Max())
+    # return all keys in the symbol table
+    def keys(self): return self.keys_lohi(self.get_min(), self.get_max())
 
-  #def keys(self, lo, hi):
-  #  import Queue
-  #  queue = Queue()
-  #  self.keys(root, queue, lo, hi)
-  #  return queue
+    def keys_lohi(self, lo, hi):
+        """return all keys in the symbol table between lo (inclusive) and hi (exclusive)"""
+        if lo is None: raise Exception("first argument to keys() is None")
+        if hi is None: raise Exception("second argument to keys() is None")
+        queue = cx.deque() # new Queue<>()
+        self._keys(self._root, queue, lo, hi)
+        return queue
 
-  def _keys(self, x, queue, lo, hi):
-    if x is None: return
-    cmplo = lo.compareTo(x.key)
-    cmphi = hi.compareTo(x.key)
-    if cmplo < 0: keys(x.left, queue, lo, hi)
-    if cmplo <= 0 and cmphi >= 0: queue.enqueue(x.key)
-    if cmphi > 0: keys(x.right, queue, lo, hi)
+    def _keys(self, node_x, queue, lo, hi): 
+        if node_x is None: return
+        #cmplo = lo.compareTo(node_x.key)
+        #cmphi = hi.compareTo(node_x.key)
+        #if cmplo < 0) keys(node_x.left, queue, lo, hi)
+        ndky = node_x.key
+        if lo  < ndky: self._keys(node_x.left, queue, lo, hi)
+        #if cmplo <= 0 and cmphi >= 0) queue.enqueue(node_x.key)
+        if lo <= ndky and hi >= ndky: queue.append(ndky) # queue.enqueue(ndky)
+        #if cmphi > 0) keys(node_x.right, queue, lo, hi)
+        if hi  > ndky: self._keys(node_x.right, queue, lo, hi)
 
-  #def Size(self, lo, hi):
-  #  if lo.compareTo(hi) > 0: return 0
-  #  if contains(hi):  return self.rank(self, hi) - self.rank(self, lo) + 1
-  #  else:             return self.rank(self, hi) - self.rank(self, lo)
+    def size_lohi(self, lo, hi):
+        """Returns the number of keys in the symbol table in the given range."""
+        if lo is None: raise Exception("first argument to size() is None")
+        if hi is None: raise Exception("second argument to size() is None")
+        if lo > hi: return 0
+        if self.contains(hi): return self.rank(hi) - self.rank(lo) + 1
+        else:                 return self.rank(hi) - self.rank(lo)
 
+    def height(self):
+        """return the height of the BST (a 1-node tree has height 0) (for debugging)."""
+        return self._height(self._root)
 
-  def height(self, root): return self.height(root)
-  def _height(self, x):
-    """height of this BST (one-node tree has height 0)"""
-    if x is None: return -1
-    return 1 + Math.Max(self.height(x.left), self.height(x.right))
+    def _height(self, node_x):
+        if node_x is None: return -1
+        return 1 + max(self._height(node_x.left), self._height(node_x.right))
 
-  def levelOrder():
-    """Property: Inorder transversal of BST yeilds keys in ascending order."""
-    import Queue
-    keys  = Queue() # new Queue<Key>()
-    queue = Queue() # new Queue<Node>()
-    queue.enqueue(root)
-    while not queue.self.isEmpty():
-        x = queue.dequeue()
-        if x is None: continue
-        keys.enqueue(x.key)
-        queue.enqueue(x.left)
-        queue.enqueue(x.right)
-    return keys
+    def levelOrder(self):
+        """Return the keys in the BST in level order (for debugging)."""
+        keys  = cx.deque() # new Queue<>()
+        queue = cx.deque() # new Queue<>()
+        queue.append(self._root) # queue.enqueue(self._root)
+        while queue:
+            node_x = queue.popleft() # queue.dequeue()
+            if node_x is None: continue
+            keys.append(node_x.key)    # keys.enqueue(node_x.key)
+            queue.append(node_x.left)  # queue.enqueue(node_x.left)
+            queue.append(node_x.right) # queue.enqueue(node_x.right)
+        return keys
 
-  #************************************************************************
-  #  Check integrity of BST data structure
-  #************************************************************************/
-  def _check(self):
-    if not self._isBST():            print "Not in symmetric order"
-    if not self._isSizeConsistent(): print "Subtree counts not consistent"
-    if not self._isRankConsistent(): print "Ranks not consistent"
-    return self._isBST() and self.isSizeConsistent() and self.isRankConsistent()
+    def check(self):
+        """Check integrity of BST data structure."""
+        if not self.isBST():            self.log.write("Not in symmetric order")
+        if not self.isSizeConsistent(): self.log.write("Subtree counts not consistent")
+        if not self.isRankConsistent(): self.log.write("Ranks not consistent")
+        return self.isBST() and self.isSizeConsistent() and self.isRankConsistent()
 
-  # does this binary tree satisfy symmetric order?
-  # Note: this test also ensures that data structure is a binary tree since order is strict
-  #def _isBST(self):
-  #    return isBST(root, None, None)
+    # does self binary tree satisfy symmetric order?
+    # Note: self test also ensures that data structure is a binary tree since order is strict
+    def isBST(self): return self._isBST(self._root, minval=None, maxval=None)
 
-  # is the tree rooted at x a BST with all keys strictly between Min and Max
-  # (if Min or Max is None, treat as empty constraint)
-  # Credit: Bob Dondero's elegant solution
-  def _isBST(self, x=None, Min=None, Max=None):
-    if x is None:
-      x = self.root
-    if x is None: return True
-    if Min is not None and x.key <= Min: return False
-    if Max is not None and x.key >= Max: return False
-    return self._isBST(x.left, Min, x.key) and self._isBST(x.right, x.key, Max)
+    # is the tree self._rooted at x a BST with all keys strictly between min and max
+    # (if min or max is None, treat as empty constraint)
+    # Credit: Bob Dondero's elegant solution
+    def _isBST(self, node_x, minval, maxval):
+        if node_x is None: return True
+        if minval is not None and node_x.key <= minval <= 0: return False
+        if maxval is not None and node_x.key >= maxval >= 0: return False
+        return self._isBST(node_x.left, minval, node_x.key) and \
+               self._isBST(node_x.right, node_x.key, maxval)
 
-  def _isSizeConsistent(self, x=None):
-    """Check that the Size fields are correct."""
-    if x is None:
-      x = self.root
-    if x is None: return True
-    if x.N != (self._Size(x.left) + self._Size(x.right) + 1): return False
-    #return self._isSizeConsistent(x.left) and self._isSizeConsistent(x.right)
+    def isSizeConsistent(self): return self._isSizeConsistent(self._root)
+    def _isSizeConsistent(self, node_x):
+        """are the size fields correct?"""
+        if node_x is None: return True
+        if node_x.N != self._size(node_x.left) + self._size(node_x.right) + 1: return False
+        return self._isSizeConsistent(node_x.left) and self._isSizeConsistent(node_x.right)
 
-  def _isRankConsistent(self, x=None):
-    """check that ranks are consistent."""
-    if x is None:
-      x = self.root
-    S = self.Size()
-    for i in range(S):
-        if i != self.rank(self.select(i)): return False
-
-    #for (Key key : keys())
-    #    if key.compareTo(select(rank(key))) != 0: return False
-    key_queue = self.keys()
-    for i in range(key_queue.size()):
-      key = key_queue[i]
-      if key != self.select( self.rank(key) ): return False
-
-    return True
-
-# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
-# Java Last updated: Tue Nov 19 01:56:07 EST 2013.
+    def isRankConsistent(self):
+        """check that ranks are consistent."""
+        for i in range(self.size()):
+            if i != self.rank(self.select(i)): return False
+        for key in self.keys():
+            if key != self.select(self.rank(key)): return False
+        return True
 
 
 # Algorithms, Part 1 from Princeton University
@@ -300,7 +331,12 @@ class BST(object):
 
 # From comments in the Discussion from a student who worked on the exercises for
 # level-order traversal of a BST:
-#   Each node has a key and every node’s key is:
+#   Each node has a key and every node's key is:
 #     * Larger than all keys in its left subtree.
 #     * Smaller than all keys in its right subtree.
 
+
+# https://github.com/kevin-wayne/algs4/commits/master/src/main/java/edu/princeton/cs/algs4/BST.java
+
+# Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
+# Copyright 2015-2016, DV Klopfenstein, Python implementation.
