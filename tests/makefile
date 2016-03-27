@@ -14,6 +14,6 @@ schst:
 lphst:
 	echo "M=5 S E A R C H E X A M P L E" | test_LinearProbingHashST.py
 
-clobber:
+clean:
 	rm -f ./work/*.png
 	rm -f *.png

@@ -284,9 +284,9 @@ class BST(object):
 
     # -- Write png --------------------------------------------------------------------
     def wr_png(self, fout_png):
-        import BST_plot as P
+        import BST_utils as U
         childnames = cx.OrderedDict([('left', 'red'), ('right', 'green')])
-        P.wr_png(fout_png, self.nodes(), childnames, self.log)
+        U.wr_png(fout_png, self.nodes(), childnames, self.log)
 
     # -- BST Checks -------------------------------------------------------------------
     def check(self):

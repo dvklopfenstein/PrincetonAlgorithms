@@ -2,6 +2,10 @@
 
 import pydot
 
+__copyright__ = "Copyright (C) 2016, DV Klopfenstein. All rights reserved."
+__author__ = "DV Klopfenstein"
+
+# -- Graphing of a Binary Search Tree (BST) ---------------------------------
 def wr_png(fout_png, nodes_bst, childnames, log):
     """Save tree figure to png file."""
     # 1. create/initialize graph
@@ -48,3 +52,22 @@ def _get_dotedges(nodes_bst, childnames):
 def _get_name_nullchild(src_node, lr):
     """Get a name for a Null child node."""
     return "{SRC}_{LR}".format(SRC=src_node.key, LR=lr)
+
+# -- Utilities --------------------------------------------------------------
+def sort_balbst(key_vals):
+    """Given a list of (key, value) tuples, return list sorted to build a balanced BST."""
+    list_sorted = sorted(key_vals)
+    list_balanced = []
+    _sort_balbst(list_balanced, list_sorted)
+    return list_balanced
+
+def _sort_balbst(blst, slst):
+    """Given a sorted list, return a list in an order to create a balanced BST."""
+    if not slst:
+        return
+    middle = len(slst)/2
+    blst.append(slst[middle])
+    _sort_balbst(blst, slst[:middle])   # Process left side
+    _sort_balbst(blst, slst[middle+1:]) # Process right side
+
+# Copyright (C) 2016, DV Klopfenstein. All rights reserved.
