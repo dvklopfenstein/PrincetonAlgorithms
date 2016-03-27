@@ -34,6 +34,8 @@ def test_0(prt=sys.stdout):
     st = BST()
     for i, key in enumerate(item_list):
         st.put(key, i)
+        png = "BST_{I}_{K}.png".format(I=i, K=key)
+        st.wr_png(png)
 
     prt.write("LEVEL ORDER:\n")
     for s in st.levelOrder():

@@ -77,6 +77,26 @@ class BST(object):
         elif key  < node_x.key: return self._get(node_x.left,  key)
         else:                   return self._get(node_x.right, key)
     
+    # public void put(Key key, Value val) {
+    #     if (key == null) throw new NullPointerException("first argument to put() is null");
+    #     if (val == null) {
+    #         delete(key);
+    #         return;
+    #     }
+    #     root = put(root, key, val);
+    #     assert check();
+    # }
+
+    # private Node put(Node x, Key key, Value val) {
+    #     if (x == null) return new Node(key, val, 1);
+    #     int cmp = key.compareTo(x.key);
+    #     if      (cmp < 0) x.left  = put(x.left,  key, val);
+    #     else if (cmp > 0) x.right = put(x.right, key, val);
+    #     else              x.val   = val;
+    #     x.N = 1 + size(x.left) + size(x.right);
+    #     return x;
+    # }
+
     # Inserts the specified key-value pair into the symbol table, overwriting the old 
     # value with the new value if the symbol table already contains the specified key.
     # Deletes the specified key (and its associated value) from self symbol table
@@ -277,37 +297,13 @@ class BST(object):
             queue.append(node_x.right) # queue.enqueue(node_x.right)
         return keys
 
+    # -- Write png --------------------------------------------------------------------
     def wr_png(self, fout_png):
-        """Save tree figure to png file."""
-        import pydot
-        # 1. create/initialize graph
-        g = pydot.Dot(graph_type='digraph') # directed graph
-        # 2. create nodes
-        nodes_bst = self.nodes()
-        print [(str(n)) for n in nodes_bst]
-        nodes_pydot = [pydot.Node(str(n)) for n in nodes_bst]
-        # 3. add nodes to graph
-        for node in nodes_pydot:
-            g.add_node(node)
-        # 4. add edges between nodes to graph
-        for v, w in self.get_edges(nodes_bst):
-            if v != w: # print only edges from one node to another (not to self)
-                g.add_edge(pydot.Edge(v, w))
-        # 5. write graph to png file
-        g.write_png(fout_png)
-        self.log.write("  wrote: {}\n".format(fout_png))
+        import BST_plot as P
+        childnames = cx.OrderedDict([('left', 'red'), ('right', 'green')])
+        P.wr_png(fout_png, self.nodes(), childnames, self.log)
 
-    def get_edges(self, nodes_bst=None):
-        if nodes_bst is None:
-            nodes_bst = self.nodes()
-        edges = set()
-        for src_node in nodes_bst:
-            for rl_node in [src_node.right, src_node.left]:
-                if rl_node is not None:
-                    print tuple(sorted([str(src_node), str(rl_node)]))
-                    edges.add(tuple(sorted([str(src_node), str(rl_node)]))) 
-        return edges
-
+    # -- BST Checks -------------------------------------------------------------------
     def check(self):
         """Check integrity of BST data structure."""
         if not self.isBST():            self.log.write("Not in symmetric order")
