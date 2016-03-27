@@ -47,11 +47,13 @@ class BST(object):
             return "{K}\nv={V} N={N}".format(
                 K=self.key, V=self.val, N=self.N)
 
-    def __init__(self):
+    def __init__(self, keyvals=None):
         """Initializes an empty symbol table."""
         self.log = sys.stdout
         self._root = None       # root of BST
-     
+        if keyvals is not None:
+            for key, val in keyvals:
+                self.put(key, val)
 
     # Return True if self symbol table is empty; False otherwise. $ = K
     def isEmpty(self): return self.size() == 0
@@ -67,41 +69,23 @@ class BST(object):
         if key is None: raise Exception("argument to contains() is None")
         return self.get(key) is not None
 
-    def get(self, key):
+    def get(self, key): # $ = 1 + depth
         """Returns the value associated with the given key or None."""
         return self._get(self._root, key)
 
     def _get(self, node_x, key):
+        """Recursive method returns the value associated with the given key or None."""
         if node_x is None: return None
         if   key == node_x.key: return node_x.val
         elif key  < node_x.key: return self._get(node_x.left,  key)
         else:                   return self._get(node_x.right, key)
     
-    # public void put(Key key, Value val) {
-    #     if (key == null) throw new NullPointerException("first argument to put() is null");
-    #     if (val == null) {
-    #         delete(key);
-    #         return;
-    #     }
-    #     root = put(root, key, val);
-    #     assert check();
-    # }
-
-    # private Node put(Node x, Key key, Value val) {
-    #     if (x == null) return new Node(key, val, 1);
-    #     int cmp = key.compareTo(x.key);
-    #     if      (cmp < 0) x.left  = put(x.left,  key, val);
-    #     else if (cmp > 0) x.right = put(x.right, key, val);
-    #     else              x.val   = val;
-    #     x.N = 1 + size(x.left) + size(x.right);
-    #     return x;
-    # }
-
     # Inserts the specified key-value pair into the symbol table, overwriting the old 
     # value with the new value if the symbol table already contains the specified key.
     # Deletes the specified key (and its associated value) from self symbol table
     # if the specified value is None.
     def put(self, key, val):
+        """Client method to add or update a key-value pair in a BST."""
         if key is None: raise Exception("first argument to put() is None")
         if val is None:
             self.delete(key)
@@ -110,6 +94,7 @@ class BST(object):
         assert self.check()
 
     def _put(self, node_x, key, val):
+        """Recursive method to add or update a key-value pair in a BST."""
         if node_x is None: return self._Node(key, val, N=1)
         if   key == node_x.key: node_x.val   = val
         elif key  < node_x.key: node_x.left  = self._put(node_x.left,  key, val)
