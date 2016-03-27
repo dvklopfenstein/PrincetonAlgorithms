@@ -43,6 +43,10 @@ class BST(object):
             self.left = None  # left subtrees
             self.right = None # right subtrees
 
+        def __str__(self):
+            return "{K}\nv={V} N={N}".format(
+                K=self.key, V=self.val, N=self.N)
+
     def __init__(self):
         """Initializes an empty symbol table."""
         self.log = sys.stdout
@@ -56,7 +60,7 @@ class BST(object):
     def size(self): return self._size(self._root)
 
     # return number of key-value pairs in BST self._rooted at x. $ = K
-    def _size(self, node_x): return 0 if node_x is None else node_x.N
+    def _size(self, node_x): return node_x.N if node_x is not None else 0
 
     def contains(self, key):
         """Does self symbol table contain the given key?"""
@@ -137,21 +141,29 @@ class BST(object):
         node_x.self.N = self._size(node_x.left) + self._size(node_x.right) + 1
         return node_x
 
-    def get_min(self):
-        """Returns the smallest key in the symbol table."""
+
+    # Returns the smallest key in the symbol table.
+    def get_min(self): return self.get_min_node().key
+
+    def _get_min_node(self, node_x):
+        return node_x if node_x.left is None else self._get_min_node(node_x.left)
+
+    # Returns the largest key in the symbol table.
+    def get_max(self): return self.get_max_node().key
+
+    def _get_max_node(self, node_x):
+        return node_x if node_x.right is None else self._get_max_node(node_x.right)
+
+    def get_min_node(self):
+        """Returns the node with the smallest key in the symbol table."""
         if self.isEmpty(): raise Exception("called min() with empty symbol table")
-        return self._get_min(self._root).key
+        return self._get_min_node(self._root)
 
-    def _get_min(self, node_x):
-        return node_x if node_x.left is None else self._get_min(node_x.left)
-
-    def get_max(self):
-        """Returns the largest key in the symbol table."""
+    def get_max_node(self):
+        """Returns the node with the largest key in the symbol table."""
         if self.isEmpty(): raise Exception("called max() with empty symbol table")
-        return self._get_max(self._root).key
+        return self._get_max_node(self._root)
 
-    def _get_max(self, node_x):
-        return node_x if node_x.right is None else self._get_max(node_x.right)
 
     def floor(self, key):
         """Returns the largest key in the symbol table less than or equal to key."""
@@ -164,8 +176,8 @@ class BST(object):
         if node_x is None: return None
         if key == node_x.key: return node_x
         if key  < node_x.key: return self._floor(node_x.left, key)
-        node_t = self._floor(node_x.right, key)
-        return node_t if node_t is not None else node_x
+        node_tree = self._floor(node_x.right, key)
+        return node_tree if node_tree is not None else node_x
 
     def ceiling(self, key):
         """Returns the smallest key in the symbol table greater than or equal to key."""
@@ -206,30 +218,35 @@ class BST(object):
         if node_x is None: return 0
         if   key == node_x.key: return self._size(node_x.left)
         elif key  < node_x.key: return self._rank(key, node_x.left)
-        else:                    return 1 + self._size(node_x.left) + self._rank(key, node_x.right)
+        else:                   return 1 + self._size(node_x.left) + self._rank(key, node_x.right)
 
-    # return all keys in the symbol table
-    def keys(self): return self.keys_lohi(self.get_min(), self.get_max())
 
-    def keys_lohi(self, lo, hi):
-        """return all keys in the symbol table between lo (inclusive) and hi (exclusive)"""
-        if lo is None: raise Exception("first argument to keys() is None")
-        if hi is None: raise Exception("second argument to keys() is None")
+    def keys(self): 
+        """return all keys in the symbol table."""
+        return [n.key for n in self.nodes()]
+
+    def nodes(self): return self._nodes_lohi(self.get_min(), self.get_max())
+
+    def _nodes_lohi(self, lo_key, hi_key):
+        """return all nodes in the symbol table between lo_key (inclusive) and hi_key (exclusive)"""
+        if lo_key is None: raise Exception("first argument to nodes() is None")
+        if hi_key is None: raise Exception("second argument to nodes() is None")
         queue = cx.deque() # new Queue<>()
-        self._keys(self._root, queue, lo, hi)
+        self._nodes(self._root, queue, lo_key, hi_key)
         return queue
 
-    def _keys(self, node_x, queue, lo, hi): 
+    def _nodes(self, node_x, queue, lo_key, hi_key):
         if node_x is None: return
-        #cmplo = lo.compareTo(node_x.key)
-        #cmphi = hi.compareTo(node_x.key)
-        #if cmplo < 0) keys(node_x.left, queue, lo, hi)
+        #cmplo_key = lo_key.compareTo(node_x.key)
+        #cmphi_key = hi_key.compareTo(node_x.key)
+        #if cmplo_key < 0) nodes(node_x.left, queue, lo_key, hi_key)
         ndky = node_x.key
-        if lo  < ndky: self._keys(node_x.left, queue, lo, hi)
-        #if cmplo <= 0 and cmphi >= 0) queue.enqueue(node_x.key)
-        if lo <= ndky and hi >= ndky: queue.append(ndky) # queue.enqueue(ndky)
-        #if cmphi > 0) keys(node_x.right, queue, lo, hi)
-        if hi  > ndky: self._keys(node_x.right, queue, lo, hi)
+        if lo_key  < ndky: self._nodes(node_x.left, queue, lo_key, hi_key)
+        #if cmplo_key <= 0 and cmphi_key >= 0) queue.enqueue(node_x.key)
+        if lo_key <= ndky and hi_key >= ndky: queue.append(node_x) # queue.enqueue(node_x)
+        #if cmphi_key > 0) nodes(node_x.right, queue, lo_key, hi_key)
+        if hi_key  > ndky: self._nodes(node_x.right, queue, lo_key, hi_key)
+
 
     def size_lohi(self, lo, hi):
         """Returns the number of keys in the symbol table in the given range."""
@@ -259,6 +276,37 @@ class BST(object):
             queue.append(node_x.left)  # queue.enqueue(node_x.left)
             queue.append(node_x.right) # queue.enqueue(node_x.right)
         return keys
+
+    def wr_png(self, fout_png):
+        """Save tree figure to png file."""
+        import pydot
+        # 1. create/initialize graph
+        g = pydot.Dot(graph_type='digraph') # directed graph
+        # 2. create nodes
+        nodes_bst = self.nodes()
+        print [(str(n)) for n in nodes_bst]
+        nodes_pydot = [pydot.Node(str(n)) for n in nodes_bst]
+        # 3. add nodes to graph
+        for node in nodes_pydot:
+            g.add_node(node)
+        # 4. add edges between nodes to graph
+        for v, w in self.get_edges(nodes_bst):
+            if v != w: # print only edges from one node to another (not to self)
+                g.add_edge(pydot.Edge(v, w))
+        # 5. write graph to png file
+        g.write_png(fout_png)
+        self.log.write("  wrote: {}\n".format(fout_png))
+
+    def get_edges(self, nodes_bst=None):
+        if nodes_bst is None:
+            nodes_bst = self.nodes()
+        edges = set()
+        for src_node in nodes_bst:
+            for rl_node in [src_node.right, src_node.left]:
+                if rl_node is not None:
+                    print tuple(sorted([str(src_node), str(rl_node)]))
+                    edges.add(tuple(sorted([str(src_node), str(rl_node)]))) 
+        return edges
 
     def check(self):
         """Check integrity of BST data structure."""
@@ -296,7 +344,6 @@ class BST(object):
             if key != self.select(self.rank(key)): return False
         return True
 
-
 # Algorithms, Part 1 from Princeton University
 # by Kevin Wayne, Robert Sedgewick
 # https://class.coursera.org/algs4partI-005/lecture/46
@@ -317,12 +364,14 @@ class BST(object):
 #   * Empty
 #   * Two disjoint trees (left and right).
 #
-# A BINARY SEARCH TREE is in SYMMETRIC ORDER: Each node has a key,
-# and every node's key is:
+# SYMMETRIC ORDER: Each node has a key and every node's key is:
 #   * Larger  than all keys in its left  subtree
 #   * Smaller than all keys in its right subtree
 
 # 01:45 Different from a heap.  HEAPs had every node larger than its children.
+
+# CORRESPONDENCE BETWEEN BSTs and QUICKSORT PARTITIONING 0:17
+# REMARK: Correspondence is 1-1 if array has no duplicate keys
 
 # QUESTION: Suppose that N distinct keys are inserted into a binary
 # search tree in random order. What is the expected number of 

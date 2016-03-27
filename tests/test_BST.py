@@ -28,7 +28,9 @@ from AlgsSedgewickWayne.testcode.InputArgs import cli_get_array
 # S 0
 # X 7
 #
-def test_0(item_list, prt=sys.stdout):
+def test_0(prt=sys.stdout):
+    item_list = cli_get_array("tinyST.txt")
+    print item_list
     st = BST()
     for i, key in enumerate(item_list):
         st.put(key, i)
@@ -43,9 +45,11 @@ def test_0(item_list, prt=sys.stdout):
     for s in st.keys():
         prt.write("{S} {ST}\n".format(S=s, ST=st.get(s)))
 
+    st.wr_png("tinyST.png")
+
 #****************************************************************************
 if __name__ == "__main__":
-    test_0(cli_get_array("tinyST.txt"))
+    test_0()
 
 # Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2016, DV Klopfenstein, Python implementation.

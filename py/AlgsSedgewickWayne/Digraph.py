@@ -91,7 +91,6 @@ class Digraph(object):
   def wr_png(self, fout_png="Digraph.png", prt=sys.stdout, **kwargs):
     """Make a png showing a diagram of the connected components."""
     import pydot
-    from AlgsSedgewickWayne.testcode.utils import get_png_label
     # 1. Create/initialize Graph
     G = pydot.Dot(graph_type='digraph') # Undirected Graph
     # 2. Create Nodes

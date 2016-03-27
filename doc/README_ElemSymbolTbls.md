@@ -9,7 +9,7 @@
     * **BinarySearchST.py**, ordered array. Fast lookup (slow insert)    
   3. **Ordered Operations**: get, put, delete, size, min, max, floor, ceiling, rank, etc.    
     * **ST.py**    
-  4. [**Binary Search Trees**](http://algs4.cs.princeton.edu/32bst)    
+  4. [**Binary Search Trees**](http://algs4.cs.princeton.edu/32bst) A binary tree in symmetric order    
     A classic data structure that enables us to provide efficient 
     implementations of Symbol Table algorithms
     * [**BST.py**](../py/AlgsSedgewickWayne/BST.py)    

@@ -77,21 +77,20 @@ class Graph(object):
   def wr_png(self, fout_png="Graph.png", prt=sys.stdout, **kwargs):
     """Make a png showing a diagram of the connected components."""
     import pydot
-    from AlgsSedgewickWayne.testcode.utils import get_png_label
-    # 1. Create/initialize Graph
-    G = pydot.Dot(graph_type='graph') # Undirected Graph
-    # 2. Create Nodes
+    # 1. create/initialize graph
+    g = pydot.Dot(graph_type='graph') # undirected graph
+    # 2. create nodes
     nodes = [pydot.Node(v) for v in self.keys]
-    # 3. Add nodes to Graph
+    # 3. add nodes to graph
     for node in nodes:
-      G.add_node(node)
-    # 4. Add Edges between Nodes to Graph
+      g.add_node(node)
+    # 4. add edges between nodes to graph
     for v, w in self.get_edges():
-      if v != w: # Print only edges from one node to another (not to self)
-        G.add_edge(pydot.Edge(v, w))
-    # 5. Write Graph to png file
-    G.write_png(fout_png)
-    prt.write("  WROTE: {}\n".format(fout_png))
+      if v != w: # print only edges from one node to another (not to self)
+        g.add_edge(pydot.Edge(v, w))
+    # 5. write graph to png file
+    g.write_png(fout_png)
+    prt.write("  wrote: {}\n".format(fout_png))
 
   def get_edges(self):
     edges = set()
