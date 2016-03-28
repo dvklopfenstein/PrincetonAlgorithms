@@ -284,7 +284,7 @@ class BST(object):
 
     # -- Write png --------------------------------------------------------------------
     def wr_png(self, fout_png):
-        import BST_utils as U
+        import AlgsSedgewickWayne.BST_utils as U
         childnames = cx.OrderedDict([('left', 'red'), ('right', 'green')])
         U.wr_png(fout_png, self.nodes(), childnames, self.log)
 
