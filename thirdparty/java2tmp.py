@@ -10,6 +10,7 @@ def main(prt=sys.stdout):
   FOUT = None if fout_py is None else open(fout_py, 'w')
   TEST = None if fout_test is None else open(fout_test, 'w')
   cwdvk = "# Copyright 2015-2016, DV Klopfenstein, Python implementation. All rights reserved."
+  cw = None
   #FOUT.write("#!/usr/bin/env python\n")
   with open(fin) as FIN:
     loc = "start"
@@ -79,7 +80,7 @@ def main(prt=sys.stdout):
         if TEST: TEST.write(line)
 
   if FOUT:
-    FOUT.write('\n\n{}\n\n'.format(cw))
+    FOUT.write('\n\n{}\n\n'.format(cw if cw is not None else cwdvk))
   if TEST:
     TEST.write('if __name__ == "__main__":\n  test_0()\n\n{}\n\n'.format(cw))
   prt.write('  READ: {}\n'.format(fin))
@@ -147,10 +148,11 @@ def chk_end(line):
 
 def get_foutnames(fin):
   fout_py = os.path.basename(fin).replace(".java", ".py")
+  odir = get_odir()
   return [
     os.path.splitext(fout_py)[0],
-    os.path.join("../py/AlgsSedgewickWayne/", fout_py),
-    os.path.join("../tests/", ''.join(["test_", fout_py]))]
+    os.path.join("../py/AlgsSedgewickWayne/" if odir is None else odir, fout_py),
+    os.path.join("../tests/" if odir is None else odir, ''.join(["test_", fout_py]))]
 
 def get_fouts(fin):
   module, fout_py, fout_test = get_foutnames(fin)
@@ -159,6 +161,13 @@ def get_fouts(fin):
     fout_py   if not os.path.isfile(fout_py) else None,
     fout_test if not os.path.isfile(fout_py) else None]
   
+def get_odir():
+  for arg in sys.argv[1:]:
+    mtch = re.search(r'odir=(\S+)', arg)
+    if mtch:
+      return mtch.group(1)
+  return None
+
 
 def get_fin():
   if len(sys.argv) >= 2 and os.path.isfile(sys.argv[1]) and 'java' in sys.argv[1]:
