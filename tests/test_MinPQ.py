@@ -6,7 +6,7 @@ from AlgsSedgewickWayne.MinPQ import MinPQ
 import fileinput
 
 def main(prt=sys.stdout):
-  """Unit tests the <tt>MinPQ</tt> data type."""
+  """Unit tests the MinPQ data type."""
   pq = MinPQ()
   """Read stdin until ctrl-D is seen."""
   for item in fileinput.input():
