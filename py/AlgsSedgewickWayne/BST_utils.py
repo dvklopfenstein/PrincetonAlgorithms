@@ -61,13 +61,13 @@ def sort_balbst(key_vals):
     _sort_balbst(list_balanced, list_sorted)
     return list_balanced
 
-def _sort_balbst(blst, slst):
+def _sort_balbst(balanced_bst, sorted_list):
     """Given a sorted list, return a list in an order to create a balanced BST."""
-    if not slst:
+    if not sorted_list: # sorted list
         return
-    middle = len(slst)/2
-    blst.append(slst[middle])
-    _sort_balbst(blst, slst[:middle])   # Process left side
-    _sort_balbst(blst, slst[middle+1:]) # Process right side
+    middle = len(sorted_list)/2
+    balanced_bst.append(sorted_list[middle])
+    _sort_balbst(balanced_bst, sorted_list[:middle])   # Process left side
+    _sort_balbst(balanced_bst, sorted_list[middle+1:]) # Process right side
 
 # Copyright (C) 2016, DV Klopfenstein. All rights reserved.
