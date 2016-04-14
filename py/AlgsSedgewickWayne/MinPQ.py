@@ -14,6 +14,7 @@ class MinPQ(object):
       self._init_w_keys(args[0])
     self.comparator = None if 'comparator' not in kwargs else kwargs['comparator']
 
+
   def _init_capacity(self, initCapacity):
     self.pq = [None for i in range(initCapacity+2)] # Pos 0 not used
     self.N = 0 # number of items on priority queue
@@ -79,6 +80,8 @@ class MinPQ(object):
         break
       self._exch(k, j)
       k = j
+
+  def __str__(self): return "MinPQ({N}): {PQ}".format(N=self.N, PQ=self.pq)
 
   #***************************************************************************
   #* Helper functions for compares and swaps.
