@@ -8,7 +8,6 @@ import re
 def cli_get_array(seqstr=None):
   """Command-line interface: reads data from arg, stdin, stream, or files."""
   L = len(sys.argv)
-  print seqstr
   if seqstr is not None and L == 1:
     if isinstance(seqstr, int):
       return seqstr
@@ -37,10 +36,11 @@ def cli_get_fin(fin):
     a = []
     for line in ifstrm:
       line = line.strip(" \n\r")
-      #flds = line.split(" ")
-      flds = re.findall(r'(\S+)', line)
-      l = arr_int_str(flds)
-      a.append(l[0] if len(l) == 1 else l)
+      if line:
+        #flds = line.split(" ")
+        flds = re.findall(r'(\S+)', line)
+        l = arr_int_str(flds)
+        a.append(l[0] if len(l) == 1 else l)
     # If all input is on one line...
     if len(a) == 1: # Ex: [['she', 'sells', 'sea', 'shells', ...]]
       return a[0] # Return ['she', 'sells', 'sea', 'shells', ...]
