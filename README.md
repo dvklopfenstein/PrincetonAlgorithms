@@ -1,4 +1,10 @@
 # [SAVE NET NEUTRALITY](https://github.com/save-net-neutrality)
+**Feb 21, 2018: The FEC overturned net neutrality.**    
+Call your state attorney general; Ask that they work to block the order from taking effect.
+
+**Apr 21, 2018: Is the deadline for Congress to vote to overturn the decision**    
+Call your representatives. Ask them to vote to overturn the demise of net neutrality.    
+
 
 # [Princeton University's "Algorithms and Clients"](doc/README.md)
 ## by Robert Sedgewick, Kevin Wayne
