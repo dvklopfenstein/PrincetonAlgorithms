@@ -4,7 +4,7 @@ https://techcrunch.com/2018/02/22/the-fccs-order-gutting-net-neutrality-is-now-o
 Call your state attorney general; Ask that they work to block the order from taking effect.
 
 **Apr 23, 2018: Is the deadline for Congress to vote to overturn the decision**    
-Call your US Congress Representative: Ask them to vote to overturn the demise of net neutrality.    
+Call your Senators and Rep: Ask them to vote to overturn the demise of net neutrality.    
 
 
 # [Princeton University's "Algorithms and Clients"](doc/README.md)
