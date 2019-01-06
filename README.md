@@ -245,7 +245,7 @@ Additional Java Files:
 * UnorderedMaxPQ.java
 * [FileSorter.java](./thirdparty/FileSorter.java)
 
-###License and Copyright
+### License and Copyright
 Java code is Copyright © 2002–2016 Robert Sedgewick and Kevin Wayne.  All rights reserved. 
 It has a GPLv3 license <http://algs4.cs.princeton.edu/faq/> 
 Translation of software from one language to another falls 
@@ -254,7 +254,7 @@ It adds a copyright for the translation which is subordinate to the original.
 
 Python translation Copyright © 2014-2016 DV Klopfenstein. All rights reserved.
 
-###Disclaimer of Warranties.
+### Disclaimer of Warranties.
 DV Klopfenstein disclaims to the fullest extent authorized by law 
 any and all other warranties, whether express or implied, including, 
 without limitation, any implied warranties of merchantability or
@@ -262,3 +262,5 @@ fitness for a particular purpose.
 
 [Web Page](http://dvklopfenstein.github.io/PrincetonAlgorithms)
 [github pages](https://help.github.com/pages)
+
+Copyright (C) 2014-2019, DV Klopfenstein. All rights reserved.
