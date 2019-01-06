@@ -222,5 +222,5 @@ class Point2D: # implements Comparable<Point2D> {
 
 
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
-# Copyright (C) 2015, DV Klopfenstein (Pyth9on port)
+# Copyright (C) 2019, DV Klopfenstein (Pyth9on port)
 # Java Last updated: Tue Mar 25 20:35:33 EDT 2014.

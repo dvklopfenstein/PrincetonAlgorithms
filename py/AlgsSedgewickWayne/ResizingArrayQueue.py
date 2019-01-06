@@ -210,4 +210,4 @@ class ResizingArrayQueue: # <Item> implements Iterable<Item>:
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
 # Java last updated: Mon Oct 7 11:58:25 EDT 2013.
 
-# Copyright (C) 2014-2016, DV Klopfenstein ported Sedgewick-Wayne to Python
+# Copyright (C) 2014-2019, DV Klopfenstein ported Sedgewick-Wayne to Python

@@ -30,7 +30,7 @@ def _exch(pq, i, j):
 
 
 # Copyright (C) 2002-2016, Robert Sedgewick and Kevin Wayne.
-# Copyright (C) 2015, DV Klopfenstein, Python Implementation
+# Copyright (C) 2019, DV Klopfenstein, Python Implementation
 
 ## Algorithms, Part 1 from Princeton University
 ## by Kevin Wayne, Robert Sedgewick

@@ -9,7 +9,7 @@ def main(prt=sys.stdout):
   module, fout_py, fout_test = get_fouts(fin)
   FOUT = None if fout_py is None else open(fout_py, 'w')
   TEST = None if fout_test is None else open(fout_test, 'w')
-  cwdvk = "# Copyright 2015-2016, DV Klopfenstein, Python implementation. All rights reserved."
+  cwdvk = "# Copyright 2015-2019, DV Klopfenstein, Python implementation. All rights reserved."
   cw = None
   #FOUT.write("#!/usr/bin/env python\n")
   with open(fin) as FIN:

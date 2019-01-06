@@ -29,5 +29,5 @@ if __name__ == '__main__':
   main()
 
 # Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
-# Copyright 2015. DV Klopfenstein. Python implementation.  All rights reserved.
+# Copyright 2019, DV Klopfenstein. Python implementation.  All rights reserved.
 # Java last updated: Thu Sep 24 14:16:15 EDT 2015.

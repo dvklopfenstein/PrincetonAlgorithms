@@ -9,7 +9,7 @@ import numpy as np
 from AlgsSedgewickWayne.BST import BST
 from AlgsSedgewickWayne.BST_utils import sort_balbst
 
-__copyright__ = "Copyright (C) 2016, DV Klopfenstein. All rights reserved."
+__copyright__ = "Copyright (C) 2019, DV Klopfenstein. All rights reserved."
 __author__ = "DV Klopfenstein"
 
 def get_kv(keys):
@@ -46,4 +46,4 @@ def test_all(log=sys.stdout):
 if __name__ == '__main__':
     test_all()
 
-# Copyright (C) 2016, DV Klopfenstein. All rights reserved.
+# Copyright (C) 2019, DV Klopfenstein. All rights reserved.

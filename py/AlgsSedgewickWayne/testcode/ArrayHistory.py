@@ -1,7 +1,7 @@
 #!/ust/bni/env python
 """A module for helping to visualize array sorting."""
 
-# Copyright (C) 2014-2015  DV Klopfenstein
+# Copyright (C) 2014-2019, DV Klopfenstein
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License

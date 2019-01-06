@@ -54,5 +54,5 @@ if __name__ == "__main__":
     test_0()
 
 # Copyright 2002-2016, Robert Sedgewick and Kevin Wayne. All rights reserved.
-# Copyright 2015-2016, DV Klopfenstein, Python implementation. All rights reserved.
+# Copyright 2015-2019, DV Klopfenstein, Python implementation. All rights reserved.
 

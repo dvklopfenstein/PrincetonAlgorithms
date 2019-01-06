@@ -19,4 +19,4 @@ class DirectedEdge(object):
     return "{v} -> {w} {wt:5.2f}".format(v=self._v, w=self._w, wt=self._weight)
 
 # Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
-# Copyright 2015-2016, DV Klopfenstein, Python port
+# Copyright 2015-2019, DV Klopfenstein, Python port

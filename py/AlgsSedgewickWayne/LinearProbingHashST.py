@@ -235,4 +235,4 @@ class LinearProbingHashST(object):
 
 
 #  Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
-#  Copyright 2014-2016, DV Klopfenstein, Python implementation.
+#  Copyright 2014-2019, DV Klopfenstein, Python implementation.

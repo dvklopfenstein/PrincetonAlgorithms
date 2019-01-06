@@ -433,5 +433,5 @@ class FordFulkerson(object):
 #   edges pointing to the sink.
 
 # Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
-# Copyright 2015-2016, DV Klopfenstein, Python port
+# Copyright 2015-2019, DV Klopfenstein, Python port
 

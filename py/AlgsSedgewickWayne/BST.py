@@ -369,4 +369,4 @@ class BST(object):
 # https://github.com/kevin-wayne/algs4/commits/master/src/main/java/edu/princeton/cs/algs4/BST.java
 
 # Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
-# Copyright 2015-2016, DV Klopfenstein, Python implementation.
+# Copyright 2015-2019, DV Klopfenstein, Python implementation.

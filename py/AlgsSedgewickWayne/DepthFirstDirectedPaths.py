@@ -72,4 +72,4 @@ class DepthFirstDirectedPaths(object):
 # is impossible since G is acylic.
 
 # Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
-# Copyright 2015-2016, DV Klopfenstein, Python implementation
+# Copyright 2015-2019, DV Klopfenstein, Python implementation

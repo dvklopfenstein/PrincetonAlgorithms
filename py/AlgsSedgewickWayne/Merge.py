@@ -450,5 +450,5 @@ def indexSort(a):
   return index
 
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
-# Copyright (C) 2015, DV Klopfenstein, Python implementation
+# Copyright (C) 2019, DV Klopfenstein, Python implementation
 # Based on java which was Last updated: Fri Feb 14 17:45:37 EST 2014

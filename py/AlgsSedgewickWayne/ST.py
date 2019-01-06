@@ -61,5 +61,5 @@ class ST:
     return k
 
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
-# Copyright (C) 2015, DV Klopfenstein, Python port
+# Copyright (C) 2019, DV Klopfenstein, Python port
 # Java Last updated: Tue Nov 19 11:23:29 EST 2013.

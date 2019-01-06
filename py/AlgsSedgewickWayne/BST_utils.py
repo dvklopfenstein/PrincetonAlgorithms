@@ -2,7 +2,7 @@
 
 import pydot
 
-__copyright__ = "Copyright (C) 2016, DV Klopfenstein. All rights reserved."
+__copyright__ = "Copyright (C) 2019, DV Klopfenstein. All rights reserved."
 __author__ = "DV Klopfenstein"
 
 # -- Graphing of a Binary Search Tree (BST) ---------------------------------
@@ -70,4 +70,4 @@ def _sort_balbst(balanced_bst, sorted_list):
     _sort_balbst(balanced_bst, sorted_list[:middle])   # Process left side
     _sort_balbst(balanced_bst, sorted_list[middle+1:]) # Process right side
 
-# Copyright (C) 2016, DV Klopfenstein. All rights reserved.
+# Copyright (C) 2019, DV Klopfenstein. All rights reserved.

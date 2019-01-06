@@ -47,4 +47,4 @@ class Topological(object):
       raise Exception("vertex {} is not between 0 and {}".format(v, (V-1))
 
 # Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
-# Copyright 2002-2016, DV Klopfenstein, Python port
+# Copyright 2002-2019, DV Klopfenstein, Python port

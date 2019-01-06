@@ -426,5 +426,5 @@ def _isSorted(a, lo=None, hi=None):
 # In fact, no compare-based algorithm can find a median using fewer than 2N compares.
 
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
-# Copyright (C) 2015, DV Klopfenstein, Python implementation and visualization
+# Copyright (C) 2019, DV Klopfenstein, Python implementation and visualization
 # Java Last updated: Thu Oct 10 11:43:17 EDT 2013
