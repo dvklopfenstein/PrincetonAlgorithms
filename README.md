@@ -1,7 +1,7 @@
 # [Princeton University's "Algorithms and Clients"](doc/README.md)
 ## by Robert Sedgewick, Kevin Wayne
   
-Implemented in Python 2.7.x by DV Klopfenstein is selected code from:
+Implemented in Python by DV Klopfenstein is selected code from:
 
   * http://algs4.cs.princeton.edu/code
   * [Java Code in Kevin Wayne's github repository](https://github.com/kevin-wayne/algs4/tree/master/src/main/java/edu/princeton/cs/algs4)
@@ -14,6 +14,7 @@ Implemented in Python 2.7.x by DV Klopfenstein is selected code from:
   * [**Kevin Wayne's github**](https://github.com/kevin-wayne/algs4)
   * [**booksite**](http://algs4.cs.princeton.edu/home/)    
   * [**coursera class**](https://www.coursera.org/course/algs4partI)    
+  * [**Sound of Sorting**](http://panthema.net/2013/sound-of-sorting/) by [Timo Bingmann](https://github.com/bingmann)
 
 [**TESTS**](doc/README.md): 
  * **Python** tests are run from: [./tests/](./tests)
