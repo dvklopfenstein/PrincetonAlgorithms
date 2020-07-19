@@ -253,7 +253,7 @@ Translation of software from one language to another falls
 under the copyright and license of the original authors. 
 It adds a copyright for the translation which is subordinate to the original.
 
-Python translation Copyright © 2014-2016 DV Klopfenstein. All rights reserved.
+Python translation Copyright © 2014-present DV Klopfenstein. All rights reserved.
 
 ### Disclaimer of Warranties.
 DV Klopfenstein disclaims to the fullest extent authorized by law 
@@ -264,4 +264,4 @@ fitness for a particular purpose.
 [Web Page](http://dvklopfenstein.github.io/PrincetonAlgorithms)
 [github pages](https://help.github.com/pages)
 
-Copyright (C) 2014-2019, DV Klopfenstein. All rights reserved.
+Copyright (C) 2014-present, DV Klopfenstein. All rights reserved.
