@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Test QuickFind."""
 
-# Writtein by DV Klopfenstein
+# Written by DV Klopfenstein
 
 from AlgsSedgewickWayne.QuickFindUF import QuickFindUF
 from AlgsSedgewickWayne.testcode.utils import chk_arrays

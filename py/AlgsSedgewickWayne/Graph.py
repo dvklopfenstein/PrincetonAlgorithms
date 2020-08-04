@@ -37,7 +37,9 @@ class Graph(object):
       self.addEdge(v, w)
 
   def V(self): return self._V # Returns the number of vertices in self graph.
+  def num_nodes(self): return self._V # Returns the number of vertices in self graph.
   def E(self): return self._E # Returns the number of edges in self graph.
+  def num_edges(self): return self._E # Returns the number of edges in self graph.
 
   def addEdge(self, v, w):
     """Adds the undirected edge v-w to self graph."""

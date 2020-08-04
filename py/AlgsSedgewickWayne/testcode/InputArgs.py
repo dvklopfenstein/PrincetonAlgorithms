@@ -1,4 +1,4 @@
-#!/usr/bin/python
+"""Get input from STDIN or from text"""
 
 import sys
 import os
@@ -7,6 +7,7 @@ import re
 
 def cli_get_array(seqstr=None):
   """Command-line interface: reads data from arg, stdin, stream, or files."""
+  # Example: print(cli_get_array("9 1 6 3 8 5 2"))
   L = len(sys.argv)
   if seqstr is not None and L == 1:
     if isinstance(seqstr, int):
@@ -78,14 +79,9 @@ def _prt_usage_msg(default_seq="a f b d g e c"):
   frm = inspect.stack()[2]
   mod = inspect.getmodule(frm[0])
   # Let the user know that they can provide a sequence at run-time.
-  print """
+  print("""
     You may provide a list of elements on the command line.  For example:
 
       {CMD} "{SEQ}"
 
-  """.format(CMD=mod.__file__, SEQ=default_seq)
-
-
-
-if __name__ == '__main__':
-  print cli_get_array("9 1 6 3 8 5 2")
+  """.format(CMD=mod.__file__, SEQ=default_seq))
