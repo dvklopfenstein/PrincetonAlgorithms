@@ -13,7 +13,7 @@ Implemented in Python by DV Klopfenstein is selected code from:
   * [**book with lectures**](https://www.informit.com/store/algorithms-fourth-edition-deluxe-book-and-24-part-lecture-9780134384689) 
   * [**Lectures only**](https://www.informit.com/store/algorithms-video-lectures-24-part-lecture-series-9780134384436)
   * [**Kevin Wayne's github**](https://github.com/kevin-wayne/algs4)
-  * [**booksite**](http://algs4.cs.princeton.edu/home/)    
+  * [**Princeton booksite**](http://algs4.cs.princeton.edu/home/)    
   * [**coursera class**](https://www.coursera.org/course/algs4partI)    
   * [**Sound of Sorting**](http://panthema.net/2013/sound-of-sorting/) by [Timo Bingmann](https://github.com/bingmann)
 
