@@ -13,7 +13,7 @@ TEST_DIR = dirname(abspath(__file__))
 
 def main(prt=sys.stdout):
     """Plot tiny graph"""
-    fin_graphs = ['tinyG.txt',]
+    fin_graphs = ['tinyG.txt', 'mediumG.txt']
     for fin_graph in fin_graphs:
         graph = Graph(cli_get_fin(join(TEST_DIR, fin_graph)))
         prt.write("{}\n".format(graph))
