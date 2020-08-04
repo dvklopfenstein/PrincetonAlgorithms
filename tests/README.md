@@ -17,4 +17,4 @@
 11: 9 12
 12: 9 11
 ```
-![tiny graph](tinyG.txt)
+![tiny graph](tinyG.png)
