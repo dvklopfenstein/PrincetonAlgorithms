@@ -64,7 +64,7 @@ def _sort(src, dst, lo, hi):
     if hi <= lo + CUTOFF:
         _insertionSort(dst, lo, hi)
         return
-    mid = int(round(lo + (hi - lo) / 2))
+    mid = lo + (hi - lo)//2
     _sort(dst, src, lo, mid)
     _sort(dst, src, mid+1, hi)
 
