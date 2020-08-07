@@ -24,7 +24,7 @@ def _check(MST, G):
 
   # check that it is a spanning forest
   for e in G.edges():
-    print v, w
+    print(v, w)
     if not uf.connected(v, w):
       sys.stderr.write("Not a spanning forest\n")
       return False

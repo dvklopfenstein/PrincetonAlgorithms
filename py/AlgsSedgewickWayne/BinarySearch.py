@@ -128,7 +128,7 @@ def run(a):
   idx = rank(key, a)
   if idx == -1:
     sys.stdout.write('Key({}) not found in array(L={})\n'.format(key, len(a)))
-    if len(a)<20: print a
+    if len(a)<20: print(a)
   else:
     sys.stdout.write('Key({}) found in array(L={}) at idx({})\n'.format(key, len(a), idx))
 

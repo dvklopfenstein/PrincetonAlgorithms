@@ -17,11 +17,11 @@ def test_week1_lecture_print():
   #  --2
   #  --4
   #  ---3
-  print "\ntest_week1_lecture quick-union print 00:51"
+  print("\ntest_week1_lecture quick-union print 00:51")
   alg = QuickUnionUF(10)
-  print alg
+  print(alg)
   alg.ID = [0, 1, 9, 4, 9, 6, 6, 7, 8, 9]
-  print alg.ID
+  print(alg.ID)
 
 def test_week1_lecture():
   """From Quick Union (7:50) Lecture Example."""

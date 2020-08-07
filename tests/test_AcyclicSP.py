@@ -22,25 +22,25 @@
  #*****************************************************************************/
 
 import sys
-from AlgsSedgewickWayne.AcyclicSP import AcyclicSP
-from AlgsSedgewickWayne.EdgeWeightedDigraph import EdgeWeightedDigraph
-from AlgsSedgewickWayne.testcode.InputArgs import cli_get_array
-
-def main(s=0, prt=sys.stdout):
-  a = cli_get_array()
-  G = EdgeWeightedGraph(a)
-  prt.write(str(G))
-
-  # find shortest path from s to each other vertex in DAG
-  sp = AcyclicSP(G, s)
-  for v in range(G.V()):
-    if sp.hasPathTo(v):
-      prt.write("{} to {} ({:.2f})  ".format(s, v, sp.distTo(v)))
-      for e in sp.pathTo(v):
-        prt.write("{}   ".format(e))
-      prt.write("\n")
-    else:
-      prt.write("{} to {}         no path\n".format(s, v))
-
-if __name__ == '__main__':
-  main()
+#from AlgsSedgewickWayne.AcyclicSP import AcyclicSP
+#from AlgsSedgewickWayne.EdgeWeightedDigraph import EdgeWeightedDigraph
+#from AlgsSedgewickWayne.testcode.InputArgs import cli_get_array
+#
+#def main(s=0, prt=sys.stdout):
+#  a = cli_get_array()
+#  G = EdgeWeightedGraph(a)
+#  prt.write(str(G))
+#
+#  # find shortest path from s to each other vertex in DAG
+#  sp = AcyclicSP(G, s)
+#  for v in range(G.V()):
+#    if sp.hasPathTo(v):
+#      prt.write("{} to {} ({:.2f})  ".format(s, v, sp.distTo(v)))
+#      for e in sp.pathTo(v):
+#        prt.write("{}   ".format(e))
+#      prt.write("\n")
+#    else:
+#      prt.write("{} to {}         no path\n".format(s, v))
+#
+#if __name__ == '__main__':
+#  main()

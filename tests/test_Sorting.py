@@ -55,9 +55,9 @@ def getData(blktxt):
 
 def prtData(D):
   for idx, sort_this in enumerate(D):
-    #print idx, 'SORT THIS:', ' '.join(sort_this)
-    print idx, 'SORT THIS:', sort_this
-  print
+    #print(idx, 'SORT THIS:', ' '.join(sort_this))
+    print(idx, 'SORT THIS:', sort_this)
+  print('')
 
 def get_sort_history(lst ):
   lst_Selection = copy.deepcopy( lst )
@@ -90,10 +90,10 @@ def determine_sort( list_orig, data ):
       res.append(3) # Shell sort
     else:
       raise Exception("UNKNOWN SORT")
-    print test_data
-    print i+1, res[-1], R[0]
-    print i+1, res[-1], R[1]
-    print i+1, res[-1], R[2]
+    print(test_data)
+    print(i+1, res[-1], R[0])
+    print(i+1, res[-1], R[1])
+    print(i+1, res[-1], R[2])
   # Append 4 for "Sorted"
   res.append(4)
   return res
@@ -146,7 +146,7 @@ class Sorting_Tests(unittest.TestCase):
     res = determine_sort( list_orig, data )
 
     # Print results
-    print ' '.join(map(str,res))
+    print(' '.join(map(str,res)))
 
 
   def test_week2_exercise_Q2a(self): # Lecture: Quick-Union Improvements 1:22
@@ -186,7 +186,7 @@ class Sorting_Tests(unittest.TestCase):
     res = determine_sort( list_orig, data )
 
     # Print results
-    print ' '.join(map(str,res))
+    print(' '.join(map(str,res)))
 
 
 def curr(): # Exercise
@@ -227,7 +227,7 @@ def curr(): # Exercise
   res = determine_sort( list_orig, data )
 
   # Print results
-  print ' '.join(map(str,res))
+  print(' '.join(map(str,res)))
 
   # Print str_data in a format that is easier to visualize word order
   prt_easy_viz(str_data)
@@ -248,10 +248,10 @@ def prt_easy_viz(str_data):
   for curr_lst in data:
     data2sym.append(d2s[elem] for elem in curr_lst)
 
-  print str_data
+  print(str_data)
   elems_by_lists = zip(*data2sym)
   for elem_per_list in elems_by_lists:
-    print ' '.join(elem_per_list)
+    print(' '.join(elem_per_list))
 
 
 if __name__ == '__main__':

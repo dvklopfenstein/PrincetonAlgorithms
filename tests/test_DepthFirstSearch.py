@@ -46,7 +46,7 @@ def _run(graph, src_node):
     """Run the depth first search"""
     nodes_connected = []
     dfsobj = DepthFirstSearch(graph, src_node)
-    for node_v in range(graph.num_nodes()):
+    for node_v in range(graph.num_nodes):
         if dfsobj.marked[node_v]:
             nodes_connected.append(node_v)
 
@@ -56,7 +56,7 @@ def _run(graph, src_node):
     print('Node {SRC} is connected to {N} nodes: {DSTs}'.format(
         SRC=src_node, N=num_connected,
         DSTs=' '.join(str(n) for n in sorted(nodes_connected))))
-    if dfsobj.count() != graph.num_nodes():
+    if dfsobj.count() != graph.num_nodes:
         print("NOT connected\n")
     else:
         print("connected\n")

@@ -16,11 +16,11 @@ class Merge_Tests(unittest.TestCase):
     a = map(int, "13 16 40 60 19 70 71 47 12 67".split() )
     ah = ArrayHistory()
     Sort(a, array_history=ah)
-    print desc, "RESULT", a
+    print(desc, "RESULT", a)
     # TBD: Implement array history visualization
     # prt_array_history(array_history)
     # show_array_history(desc, array_history)
-    print
+    print('')
 
 if __name__ == '__main__':
   unittest.main()

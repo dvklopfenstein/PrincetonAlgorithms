@@ -33,18 +33,17 @@
 #  ...
 #  647.66307
 
-    #*
-     # Unit tests the <tt>PrimMST</tt> data type.
-     #/
-  def main(String[] args):
-      In in = new In(args[0])
-      EdgeWeightedGraph G = new EdgeWeightedGraph(in)
-      PrimMST mst = new PrimMST(G)
-      for (Edge e : mst.edges()):
-          prt.write(e)
-      StdOut.printf("%.5f\n", mst.weight())
+#def main(String[] args):
+#    """Unit tests the <tt>PrimMST</tt> data type."""
+#    In in = new In(args[0])
+#    EdgeWeightedGraph G = new EdgeWeightedGraph(in)
+#    PrimMST mst = new PrimMST(G)
+#    for (Edge e : mst.edges()):
+#        prt.write(e)
+#    StdOut.printf("%.5f\n", mst.weight())
 
 
 if __name__ == '__main__':
-  main()
+    pass
+#    main()
 

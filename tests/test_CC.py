@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
 import sys
+from os.path import join
+from os.path import dirname
+from os.path import abspath
 from AlgsSedgewickWayne.CC import CC
 from AlgsSedgewickWayne.Graph import Graph
 import collections as cx
@@ -8,10 +11,12 @@ from AlgsSedgewickWayne.testcode.InputArgs import cli_get_fin
 import inspect
 import collections as cx
 
+TEST_DIR = dirname(abspath(__file__))
+
 
 def test_0(prt=sys.stdout):
   L = len(sys.argv[1:])
-  g = cli_get_fin(sys.argv[1] if L != 0 else "../thirdparty/tinyG.txt")
+  g = cli_get_fin(sys.argv[1] if L != 0 else join(TEST_DIR, "tinyG.txt"))
   G = Graph(g)
   cc = CC(G)
 

@@ -34,7 +34,7 @@ def cli(prt=sys.stdout):
     digraph_txt = cli_get_fin(sys.argv[1])
     # read in sources from command-line arguments
     sources = [int(s) for s in sys.argv[2:]]
-    print "SSSS", sources
+    print("SSSS", sources)
     # print out vertices reachable from sources
     reachable = test_main(digraph_txt, *sources)
     prt.write("{}\n".format(' '.join(str(r) for r in reachable)))

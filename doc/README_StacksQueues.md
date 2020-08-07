@@ -15,7 +15,7 @@
 ### [ex1](#example-table-of-contents)
 1. Run Stack lecture Quiz, **Stacks (16:24)**, at 05:17 
 ```
-> python -c 'import test_Stack as T; T.test_Stack_lec_quiz()'
+> python -c 'import test_Stack as T; T.test_stack_lec_quiz()'
 
    Pass GIVEN(1 2 3 4 5 - - - - -) -> ACTUAL(5 4 3 2 1)
    Pass GIVEN(1 2 5 - 3 4 - - - -) -> ACTUAL(5 4 3 2 1)

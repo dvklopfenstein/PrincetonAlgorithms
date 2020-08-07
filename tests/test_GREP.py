@@ -2,7 +2,7 @@
 # TBD Finish Python port
 
 import sys
-from AlgsSedgewickWayne.GREP import GREP
+#from AlgsSedgewickWayne.GREP import GREP
 
 #****************************************************************************
 # Compilation:  javac GREP.java
@@ -30,12 +30,14 @@ from AlgsSedgewickWayne.GREP import GREP
 # ABCCBD
 #
 def test_0(prt=sys.stdout):
-      String regexp = "(.*" + args[0] + ".*)"
-      NFA nfa = new NFA(regexp)
-      while (StdIn.hasNextLine()): 
-          String line = StdIn.readLine()
-          if nfa.recognizes(line)):
-              prt.write(line)
+    pass
+    # TBD
+    #String regexp = "(.*" + args[0] + ".*)"
+    #NFA nfa = new NFA(regexp)
+    #while (StdIn.hasNextLine()): 
+    #    String line = StdIn.readLine()
+    #    if nfa.recognizes(line)):
+    #        prt.write(line)
 
 #****************************************************************************
 if __name__ == "__main__":

@@ -218,9 +218,9 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
 
 ##import math
 ##
-##  def insert_array(self, ARR):
-##    for A in ARR:
-##      self.insert(A)
+  def insert_array(self, ARR):
+    for A in ARR:
+      self.insert(A)
 ##
 ##  # From Lecture 8 - 3 Heapsort (14-29)
 ##  # First sorting algorithm that is BOTH in-place AND N log N worst-case
@@ -267,26 +267,27 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
 ##  # TBD: change less and exch functions to start at index 0 instead of index 1
 ##  # In this course, we use the term compare to mean a comparison between two keys,
 ##  # i.e., one call to compareTo().
-##  def less(self, i, j): return self.pq[i] < self.pq[j]
-##
-##  def exch(self, i, j):
-##    t = self.pq[i]
-##    self.pq[i] = self.pq[j]
-##    self.pq[j] = t
-##
-##  # Print functions
-##  def __str__(self):
-##    return "".join(["N=%-2d pq[%d]="%(self.N,len(self.pq)),  " ".join(map(str,self.pq))])
-##  def __repr__(self): return __str__(self)
-##  def __len__(self):  return len(self.pq)
-##  def draw(self): # TBD: Finish this
-##    # 0 1   2 3   4 5 6 7   8 9 ...
-##    #   S   P R   N H O A   E I ...
-##    #   1   2 2   3 3 3 3   4 4 ...
-##    for i,E in enumerate(self.pq):
-##      if i==0 or E is None: continue
-##      level = int(math.log(i,2))
-##      print ''.join(['-']*(level+1)), E
+  def less(self, i, j): return self.pq[i] < self.pq[j]
+
+  def exch(self, i, j):
+    t = self.pq[i]
+    self.pq[i] = self.pq[j]
+    self.pq[j] = t
+
+  # Print functions
+  def __str__(self):
+    return "".join(["N=%-2d pq[%d]="%(self.N,len(self.pq)),  " ".join(map(str,self.pq))])
+
+  def __repr__(self): return self.__str__()
+  def __len__(self):  return len(self.pq)
+  def draw(self): # TBD: Finish this
+    # 0 1   2 3   4 5 6 7   8 9 ...
+    #   S   P R   N H O A   E I ...
+    #   1   2 2   3 3 3 3   4 4 ...
+    for i,E in enumerate(self.pq):
+      if i==0 or E is None: continue
+      level = int(math.log(i,2))
+      print(''.join(['-']*(level+1)), E)
 
 
 # Which of the following statements about priority queues are

@@ -47,7 +47,7 @@ def main(fin, prt=sys.stdout):
 
   # build symbol table from standard input
   arr = cli_get_array(fin)
-  print arr
+  print(arr)
   st = TST()
   for i, key in enumerate(arr):
     st.put(key, i)

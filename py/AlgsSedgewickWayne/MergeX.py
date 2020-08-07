@@ -64,7 +64,7 @@ def _sort(src, dst, lo, hi):
     if hi <= lo + CUTOFF:
         _insertionSort(dst, lo, hi)
         return
-    mid = lo + (hi - lo) / 2
+    mid = int(round(lo + (hi - lo) / 2))
     _sort(dst, src, lo, mid)
     _sort(dst, src, mid+1, hi)
 
@@ -80,10 +80,8 @@ def _sort(src, dst, lo, hi):
 
     _merge(src, dst, lo, mid, hi)
 
-#*
- # Rearranges the array in ascending order, using the natural order.
- # @param a the array to be _sorted
- #/
+# Rearranges the array in ascending order, using the natural order.
+# @param a the array to be _sorted
 def Sort(a, array_history=None):
     aux = copy.deepcopy(a)
     _sort(aux, a, 0, len(a)-1)
@@ -92,6 +90,8 @@ def Sort(a, array_history=None):
 
 # _sort from a[lo] to a[hi] using insertion sort
 def _insertionSort(a, lo, hi):
+    print(lo)
+    print(hi)
     for i in range(lo, hi+1):
         j = i
         while j > lo and _less(a[j], a[j-1]):

@@ -16,7 +16,7 @@ def test_193860(prt=sys.stdout):
   """ seed = 193860 """
   # Give the array that results immediately after the 7th call (and return)
   # from merge() when bottom-up mergesorting the following array:
-  a = map(int, "25 94 79 41 19 84 66 67 90 37".split())
+  a = [int(s) for s in  "25 94 79 41 19 84 66 67 90 37".split()]
   run(a, 'BOTTOM-UP MERGESORT')
 
 
@@ -24,7 +24,7 @@ def test_1(prt=sys.stdout):
   """(seed = 183182)."""
   # Give the array that results after the first 4 exchanges when
   # selection sorting the following array:
-  a = map(int, "13 16 40 60 19 70 71 47 12 67".split() )
+  a = [int(s) for s in "13 16 40 60 19 70 71 47 12 67".split()]
   run(a, 'BOTTOM-UP MERGESORT')
 
 def run_all(prt=sys.stdout):

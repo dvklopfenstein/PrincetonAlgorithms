@@ -128,7 +128,7 @@ class LinkedStack: # <Item> implements Iterable<Item>:
 # Unit tests the <tt>LinkedStack</tt> data type.
 def main(String[] args):
   s = LinkedStack()
-  print s
+  print(s)
   #while not StdIn.isEmpty():
   #  String item = StdIn.readString()
   #  if !item.equals("-")) s.push(item)

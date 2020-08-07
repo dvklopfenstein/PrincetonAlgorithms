@@ -30,34 +30,35 @@
  #
  #*****************************************************************************/
 
-from AlgsSedgewickWayne.EdgeWeightedDigraph import EdgeWeightedDigraph
-from AlgsSedgewickWayne.BellmanFordSP import BellmanFordSP
+#from AlgsSedgewickWayne.EdgeWeightedDigraph import EdgeWeightedDigraph
+#from AlgsSedgewickWayne.BellmanFordSP import BellmanFordSP
 
 import sys
 
-def main(prt=sys.stdout):
-  """Unit tests the BellmanFordSP data type."""
-  In in = new In(args[0])
-  s = Integer.parseInt(args[1])
-  EdgeWeightedDigraph G = new EdgeWeightedDigraph(in)
-
-  BellmanFordSP sp = new BellmanFordSP(G, s)
-
-  # print negative cycle
-  if sp.hasNegativeCycle()):
-    for (DirectedEdge e : sp.negativeCycle())
-      prt.write(e)
-
-  # print shortest paths
-  else:
-    for (int v = 0; v < G.V(); v += 1):
-      if sp.hasPathTo(v)):
-        prt.write("{} to {} ({:5.2f})  ".format(s, v, sp.distTo(v)))
-        for e in sp.pathTo(v):
-          prt.write("{}   ".format(e))
-        prt.write("\n")
-      else:
-        prt.write("{} to {}           no path\n".format(s, v))
-
-if __name__ == '__main__':
-  main()
+# TBD
+##def main(prt=sys.stdout):
+##  """Unit tests the BellmanFordSP data type."""
+##  In in = new In(args[0])
+##  s = Integer.parseInt(args[1])
+##  EdgeWeightedDigraph G = new EdgeWeightedDigraph(in)
+##
+##  BellmanFordSP sp = new BellmanFordSP(G, s)
+##
+##  # print negative cycle
+##  if sp.hasNegativeCycle()):
+##    for (DirectedEdge e : sp.negativeCycle())
+##      prt.write(e)
+##
+##  # print shortest paths
+##  else:
+##    for (int v = 0; v < G.V(); v += 1):
+##      if sp.hasPathTo(v)):
+##        prt.write("{} to {} ({:5.2f})  ".format(s, v, sp.distTo(v)))
+##        for e in sp.pathTo(v):
+##          prt.write("{}   ".format(e))
+##        prt.write("\n")
+##      else:
+##        prt.write("{} to {}           no path\n".format(s, v))
+##
+##if __name__ == '__main__':
+##  main()

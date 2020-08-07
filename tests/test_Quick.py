@@ -10,7 +10,7 @@ def run(a):
   Sort(a, array_history=ah)
   ah.prt()
   ah.show(desc)
-  print desc, "RESULT:", a
+  print(desc, "RESULT:", a)
 
 
 if __name__ == '__main__':

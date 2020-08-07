@@ -2,7 +2,7 @@
 # TBD Finish Python port
 
 import sys
-from AlgsSedgewickWayne.RabinKarp import RabinKarp
+#from AlgsSedgewickWayne.RabinKarp import RabinKarp
 
 #****************************************************************************
 # Compilation:  javac RabinKarp.java
@@ -36,24 +36,25 @@ from AlgsSedgewickWayne.RabinKarp import RabinKarp
 # pattern: abacad
 #
 def test_0(prt=sys.stdout):
-      String pat = args[0]
-      String txt = args[1]
+    pass
+    #String pat = args[0]
+    #String txt = args[1]
 
-      RabinKarp searcher = new RabinKarp(pat)
-      offset = searcher.search(txt)
+    #RabinKarp searcher = new RabinKarp(pat)
+    #offset = searcher.search(txt)
 
-      # print results
-      prt.write("text:    " + txt)
+    ## print results
+    #prt.write("text:    " + txt)
 
-      # from brute force search method 1
-      StdOut.print("pattern: ")
-      for (int i = 0; i < offset; i += 1)
-          StdOut.print(" ")
-      prt.write(pat)
+    ## from brute force search method 1
+    #StdOut.print("pattern: ")
+    #for (int i = 0; i < offset; i += 1)
+    #    StdOut.print(" ")
+    #prt.write(pat)
 
 #****************************************************************************
 if __name__ == "__main__":
-  test_0()
+    test_0()
 
 # Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2019, DV Klopfenstein, Python implementation.

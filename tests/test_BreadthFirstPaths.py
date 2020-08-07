@@ -1,16 +1,21 @@
 #!/usr/bin/env python
 
 import sys
+from os.path import join
+from os.path import dirname
+from os.path import abspath
 from AlgsSedgewickWayne.Graph import Graph
 from AlgsSedgewickWayne.BreadthFirstPaths import BreadthFirstPaths
 from AlgsSedgewickWayne.testcode.InputArgs import cli_get_fin
+
+TEST_DIR = dirname(abspath(__file__))
 
 
 def test_0(prt=sys.stdout):
   """Test BFS using Graph from file represented with ints."""
   prt.write("\ntest_0: BFS using Graph with ints\n")
   L = len(sys.argv[1:])
-  g = cli_get_fin(sys.argv[1] if L != 0 else "../thirdparty/tinyCG.txt")
+  g = cli_get_fin(sys.argv[1] if L != 0 else join(TEST_DIR, "tinyCG.txt"))
   G = Graph(g)
   prt.write(str(G))
 

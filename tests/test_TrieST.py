@@ -23,38 +23,39 @@
 import sys
 from AlgsSedgewickWayne.TrieST import TrieSt
 
+# TBD
 def main(prt=sys.stdout):
-  """Unit tests the TrieST data type."""
-
-  # build symbol table from standard input
-  st = TrieST()
-  for (int i = 0; !StdIn.isEmpty(); i += 1):
-    String key = StdIn.readString()
-    st.put(key, i)
-
-  # print results
-  if st.size() < 100:
-    prt.write('keys(""):')
-    for key in st.keys():
-      prt.write("{} {}".format(key, st.get(key)))
-    prt.write("\n")
-
-  prt.write('longestPrefixOf("shellsort"):')
-  prt.write(st.longestPrefixOf("shellsort"))
-  prt.write("\n")
-
-  prt.write('longestPrefixOf("quicksort"):')
-  prt.write(st.longestPrefixOf("quicksort"))
-  prt.write("\n")
-
-  prt.write('keysWithPrefix("shor"):')
-  for s in st.keysWithPrefix("shor"):
-    prt.write(s)
-  prt.write("\n")
-
-  prt.write('keysThatMatch(".he.l."):')
-  for s in st.keysThatMatch(".he.l."):
-    prt.write(s)
+    """Unit tests the TrieST data type."""
+#
+#  # build symbol table from standard input
+#  st = TrieST()
+#  for (int i = 0; !StdIn.isEmpty(); i += 1):
+#    String key = StdIn.readString()
+#    st.put(key, i)
+#
+#  # print results
+#  if st.size() < 100:
+#    prt.write('keys(""):')
+#    for key in st.keys():
+#      prt.write("{} {}".format(key, st.get(key)))
+#    prt.write("\n")
+#
+#  prt.write('longestPrefixOf("shellsort"):')
+#  prt.write(st.longestPrefixOf("shellsort"))
+#  prt.write("\n")
+#
+#  prt.write('longestPrefixOf("quicksort"):')
+#  prt.write(st.longestPrefixOf("quicksort"))
+#  prt.write("\n")
+#
+#  prt.write('keysWithPrefix("shor"):')
+#  for s in st.keysWithPrefix("shor"):
+#    prt.write(s)
+#  prt.write("\n")
+#
+#  prt.write('keysThatMatch(".he.l."):')
+#  for s in st.keysThatMatch(".he.l."):
+#    prt.write(s)
 
 if __name__ == '__main__':
-  main()
+    main()

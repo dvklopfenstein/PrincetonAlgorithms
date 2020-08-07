@@ -31,25 +31,26 @@
  #
  #*****************************************************************************/
 
- 
-def main(String[] args):
-    In in = new In(args[0])
-    EdgeWeightedDigraph G = new EdgeWeightedDigraph(in)
-    s = Integer.parseInt(args[1])
 
-    # compute shortest paths
-    DijkstraSP sp = new DijkstraSP(G, s)
+#TBD
+#def main(args):
+    #In in = new In(args[0])
+    #EdgeWeightedDigraph G = new EdgeWeightedDigraph(in)
+    #s = Integer.parseInt(args[1])
+
+    ## compute shortest paths
+    #DijkstraSP sp = new DijkstraSP(G, s)
 
 
-    # print shortest path
-    for (int t = 0; t < G.V(); t += 1):
-        if sp.hasPathTo(t)):
-            StdOut.printf("%d to %d (%.2f)  ", s, t, sp.distTo(t))
-            for (DirectedEdge e : sp.pathTo(t)):
-                StdOut.print(e + "   ")
-            prt.write()
-        else:
-            StdOut.printf("%d to %d         no path\n", s, t)
+    ## print shortest path
+    #for (int t = 0; t < G.V(); t += 1):
+    #    if sp.hasPathTo(t)):
+    #        StdOut.printf("%d to %d (%.2f)  ", s, t, sp.distTo(t))
+    #        for (DirectedEdge e : sp.pathTo(t)):
+    #            StdOut.print(e + "   ")
+    #        prt.write()
+    #    else:
+    #        StdOut.printf("%d to %d         no path\n", s, t)
 
 if __name__ == '__main__':
-  main()
+    main()

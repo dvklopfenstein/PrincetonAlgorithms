@@ -123,7 +123,7 @@ Key   4 GRAPHS                    Description                         DATA
  - ---: :------------------------ :---------------------------------- :---------------------
  P    – Graph                     undirected graph                    tinyG.txt mediumG.txt
  .    – GraphGenerator            generate random graphs              –
- .    – DepthFirstSearch          depth-first search in a graph       tinyG.txt mediumG.txt
+ P  4.1 DepthFirstSearch          depth-first search in a graph       tinyG.txt mediumG.txt
  P  4.1 DepthFirstPaths           paths in a graph (DFS)              tinyCG.txt mediumG.txt largeG.txt
  P  4.2 BreadthFirstPaths         paths in a graph (BFS)              tinyCG.txt mediumG.txt largeG.txt
  .  4.3 CC                        connected components of a graph     tinyG.txt mediumG.txt largeG.txt

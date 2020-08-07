@@ -69,12 +69,12 @@ class TST(object):
   # If the value is <tt>null</tt>, this effectively deletes the key from the symbol table.
   def put(self, key, val):
     if not self.contains(key): self._N += 1
-    print "{} KEY({})".format(val, key)
+    print("{} KEY({})".format(val, key))
     self._root = self._put(self._root, key, val, 0)
 
   def _put(self, x, key, val, d):
     c = key[d]
-    print "{} {} {} key({})".format(val, key, d, c)
+    print("{} {} {} key({})".format(val, key, d, c))
     if x is None:
       x = self._Node(c)
     if   c < x._c:         x._left  = self._put(x._left,  key, val, d)
@@ -112,11 +112,11 @@ class TST(object):
 
   def collect(self, name, x, prefix, queue):
     """all keys in subtrie rooted at x with given prefix"""
-    print "\nVVVV", name, x, prefix, queue
+    print("\nVVVV", name, x, prefix, queue)
     if x is None: return
-    print "WWWW", name, x, prefix, queue
+    print("WWWW", name, x, prefix, queue)
     self.collect("L", x._left,  prefix, queue)
-    print "XXXX", name, x, prefix, queue
+    print("XXXX", name, x, prefix, queue)
     if x._val is not None: queue.append(''.join([str(prefix), x._c])) # enqueue(str(prefix) + x.c)
     self.collect("M", x._mid,   prefix.append(x._c), queue)
     prefix.pop()

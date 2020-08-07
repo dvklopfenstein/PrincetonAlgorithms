@@ -12,7 +12,7 @@ from AlgsSedgewickWayne.BST_utils import sort_balbst
 __copyright__ = "Copyright (C) 2019, DV Klopfenstein. All rights reserved."
 __author__ = "DV Klopfenstein"
 
-def get_kv(keys):
+def _get_kv(keys):
     """Given a list of keys, assign a value. Return a list of key-vals."""
     return [(k, i) for i, k in enumerate(keys)]
 
@@ -22,7 +22,7 @@ def test_0(log):
     L = len(lst)
     for i in range(10):
         shuffle(lst)
-        bst = BST(sort_balbst(get_kv(lst)))
+        bst = BST(sort_balbst(_get_kv(lst)))
         bst.wr_png("BST_a{I}.png".format(I=i))
         log.write("{LST}\n".format(LST=lst))
         assert bst.height() == int(np.floor(np.log2(L))), "HEIGHT VIOLATION"
@@ -33,17 +33,17 @@ def test_1(log):
         L = random.randint(1, 100)
         lst = range(L)
         shuffle(lst)
-        bst = BST(sort_balbst(get_kv(lst)))
+        bst = BST(sort_balbst(_get_kv(lst)))
         bst.wr_png("BST_i{I}.png".format(I=i))
         log.write("{LST}\n".format(LST=lst))
         assert bst.height() == int(np.floor(np.log2(L))), "HEIGHT VIOLATION"
 
-def test_all(log=sys.stdout):
+def run_all(log=sys.stdout):
     test_0(log)
     test_1(log)
 
 
 if __name__ == '__main__':
-    test_all()
+    run_all()
 
 # Copyright (C) 2019, DV Klopfenstein. All rights reserved.

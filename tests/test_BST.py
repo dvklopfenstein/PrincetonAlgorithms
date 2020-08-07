@@ -30,7 +30,7 @@ from AlgsSedgewickWayne.testcode.InputArgs import cli_get_array
 #
 def test_0(prt=sys.stdout):
     item_list = cli_get_array("tinyST.txt")
-    print item_list
+    print(item_list)
     st = BST()
     for i, key in enumerate(item_list):
         st.put(key, i)

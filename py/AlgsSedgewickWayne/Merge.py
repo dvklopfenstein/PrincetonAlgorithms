@@ -1,7 +1,9 @@
 """Merge Sort (Top Down) from Week 3 lecture."""
 
-from AlgsSedgewickWayne.utils import __lt__, _exch, _isSorted
+import sys
 import collections as cx
+from AlgsSedgewickWayne.utils import __lt__, _exch, _isSorted
+
 
 def Sort(a, array_history=None): # 09:30
   """Rearranges the array in ascending order, using the natural order."""
@@ -13,9 +15,15 @@ def Sort(a, array_history=None): # 09:30
 
 def _sort(a, aux, lo, hi, array_history):
   """Recursive sort."""
-  if hi <= lo: return
-  mid = lo + (hi - lo) / 2;
-  #print "{:>2} to {:>2} => sort({:>2} {:>2}), sort({:>2} {:>2})".format(lo, hi, lo, mid, mid+1, hi)
+  ## print('lo({LO}) hi({HI}) {A}'.format(HI=hi, LO=lo, A=a))
+  if lo >= hi:
+    # _vis_merge(a, aux, lo, -1, hi)
+    return
+  # Divide in half. If N.5 round down to N
+  mid = lo + (hi - lo)//2
+  # _vis_merge(a, aux, lo, mid, hi)
+  ## print("AAA lo({:>2}) to hi({:>2}) => sort(lo({:>2}) mid({:>2})), sort(mid+1({:>2}) hi({:>2}))".format(
+  ##     lo, hi, lo, mid, mid+1, hi))
   _sort(a, aux, lo,     mid, array_history)
   _sort(a, aux, mid + 1, hi, array_history)
   merge(a, aux, lo, mid, hi)
@@ -29,12 +37,23 @@ def merge(a, aux, lo, mid, hi): # 05:00-06:00
   # merge back to a[] in sorted order
   i = lo     # index of sorted a[lo .. mid]   ( left-half)
   j = mid+1  # index of sorted a[mid+1 .. hi] (right-half)
+  ## print('RRRRRRRRRRRRRRRRR', range(lo, hi+1), aux[j], aux[i])
   for k in range(lo, hi+1): # k is current entry in the sorted result
-    if   i > mid:                a[k] = aux[j]; j += 1 # this copying is unnecessary
-    elif j > hi:                 a[k] = aux[i]; i += 1 # j ptr is exhausted
-    elif __lt__(aux[j], aux[i]): a[k] = aux[j]; j += 1
-    else:                        a[k] = aux[i]; i += 1
-  #_vis_merge(a, aux, lo, mid, hi)
+    # i ptr is exhausted  - this copying is unnecessary
+    if   i > mid:
+      a[k] = aux[j]
+      j += 1
+    # j ptr is exhausted
+    elif j > hi:
+      a[k] = aux[i]
+      i += 1
+    elif __lt__(aux[j], aux[i]):
+      a[k] = aux[j]
+      j += 1
+    else:
+      a[k] = aux[i]
+      i += 1
+  # _vis_merge(a, aux, lo, mid, hi)
   assert _isSorted(a, lo, hi) # postcondition: a[lo .. hi] is sorted
 
 
@@ -49,17 +68,16 @@ def _add_history(array_history, a, aux, anno=None):
     array_history.add_history(a,   anno_a, name="arr")
     array_history.add_history(aux, None, name="aux")
 
-# TBD: Delete
-#def _vis_merge(a, aux, lo, mid, hi, prt=sys.stdout):
-#  """For visualizing Merge results."""
-#  txt = "MERGE({:>2} {:>2} {:>2})   ".format(lo, mid, hi)
-#  #print txt, ' '.join(["{:>2}".format(e) for e in a])
-#  fno = lambda e: '__' if e is None else e
-#  dsy = {lo:'> ', mid:'|', hi:' <'}
-#  prt.write("{} {}\n".format(txt, ' '.join(["{:>2}".format(dsy.get(i, '..')) for i in range(len(a))])))
-#  prt.write("{} {}\n".format(txt, ' '.join(["{:>2}".format(e) for e in a])))
-#  prt.write("{} {}\n".format(txt, ' '.join(["{:>2}".format(fno(e)) for e in aux])))
-#  prt.write("MERGE\n")
+def _vis_merge(a, aux, lo, mid, hi, prt=sys.stdout):
+  """For visualizing Merge results."""
+  txt = "MERGE({:>2} {:>2} {:>2})   ".format(lo, mid, hi)
+  #print txt, ' '.join(["{:>2}".format(e) for e in a])
+  fno = lambda e: '__' if e is None else e
+  dsy = {lo:'> ', mid:'|', hi:' <'}
+  prt.write("{} {}\n".format(txt, ' '.join(["{:>2}".format(dsy.get(i, '..')) for i in range(len(a))])))
+  prt.write("{} {}\n".format(txt, ' '.join(["{:>2}".format(e) for e in a])))
+  prt.write("{} {}\n".format(txt, ' '.join(["{:>2}".format(fno(e)) for e in aux])))
+  prt.write("MERGE\n")
 
 #************************************************************************
 # Top-Down Mergesort

@@ -10,7 +10,7 @@ def Sort(ARR, array_history=None, sort_seq=None):
 
   # 3x+1 increment sequence:  [1, 4, 13, 40, 121, 364, 1093, ...
   ha = get_sort_seq(N, sort_seq)
-  print ha
+  print(ha)
 
   for h in reversed(ha):
     # h-sort the array (insertion sort)

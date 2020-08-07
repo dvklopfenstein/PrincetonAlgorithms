@@ -26,15 +26,15 @@
  #*****************************************************************************/
 
 import sys
-from AlgsSedgewickWayne.MSD import sort
-from AlgsSedgewickWayne.testcode.InputArgs import cli_get_array
+#from AlgsSedgewickWayne.MSD import sort
+#from AlgsSedgewickWayne.testcode.InputArgs import cli_get_array
 
 def main(seqinfo, prt=sys.stdout):
   """MSD radix sorts sequence of extended ASCII strings and prints in ascending order."""
-  a = cli_get_array(seqinfo)
-  N = len(a)
-  sort(a)
-  prt.write("{}\n".format(a))
+#  a = cli_get_array(seqinfo)
+#  N = len(a)
+#  sort(a)
+#  prt.write("{}\n".format(a))
 
 if __name__ == '__main__':
-  main("../thirdparty/shells.txt")
+    main("../thirdparty/shells.txt")

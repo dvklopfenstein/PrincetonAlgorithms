@@ -435,7 +435,7 @@ import datetime
 # http://stackoverflow.com/questions/25712596/why-is-the-map-version-of-threesum-so-slow/25717916#25717916
 def count_slow(a, prt=False): # initial translate of Java (super slow)
   """ThreeSum: Given N distinct integers, how many triples sum to exactly zero?"""
-  print "RUNNING count_slow..."
+  print("RUNNING count_slow...")
   N = len(a)
   cnt = 0
   for i in range(N):
@@ -450,17 +450,17 @@ def count_slow(a, prt=False): # initial translate of Java (super slow)
 
 def count_itertools(a): # written by Ashwini Chaudhary
   """ThreeSum using itertools"""
-  print "RUNNING count_itertools, written by Ashwini Chaudhary..."
+  print("RUNNING count_itertools, written by Ashwini Chaudhary...")
   return sum((1 for x in itertools.combinations(a, r=3) if not sum(x)))
 
 
 def count_itertools_faster(a): # written by Veedrak/modified (fastest)
-  print "RUNNING count_itertools (faster), written by Veedrak(modified)..."
+  print("RUNNING count_itertools (faster), written by Veedrak(modified)...")
   return sum(1 for x, y, z in itertools.combinations(a, r=3) if x+y==-z)
 
 
 def count_fixed(a): # written by roippi
-  print "RUNNING count_fixed, written by roippi..."
+  print("RUNNING count_fixed, written by roippi...")
   N = len(a)
   cnt = 0
   for i in range(N):
@@ -472,7 +472,7 @@ def count_fixed(a): # written by roippi
 
 
 def count_enumerate(a): # written by roippi
-  print "RUNNING count_enumerate, written by roippi..."
+  print("RUNNING count_enumerate, written by roippi...")
   cnt = 0
   for i, x in enumerate(a):
     for j, y in enumerate(a[i+1:], i+1):

@@ -9,7 +9,7 @@ class DepthFirstSearch:
         """Gets vertices in graph connected to the source vertex (src_node) O(E + V)"""
         # marked[v] = is there an s-v path?
         # THETA(V) extra space (not including the graph)
-        self.marked = [False for _ in range(graph_undirected.num_nodes())]
+        self.marked = [False for _ in range(graph_undirected.num_nodes)]
         # number of vertices connected to s
         self.cnt = 0
         self._validate_vertex(src_node)

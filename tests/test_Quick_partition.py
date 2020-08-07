@@ -11,7 +11,7 @@ def run(a, prt=sys.stdout):
   j = _partition(a, lo=0, hi=len(a)-1, array_history=ah)
   ah.prt()
   ah.show(desc)
-  print desc, "RESULT:", ' '.join(str(e) for e in a)
+  print(desc, "RESULT:", ' '.join(str(e) for e in a))
 
 
 if __name__ == '__main__':

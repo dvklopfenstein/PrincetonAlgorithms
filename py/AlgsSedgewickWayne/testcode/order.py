@@ -14,7 +14,7 @@ def run_277853(N):
   i = 1
   while i*i <= N:
     cnt += 1
-    print N, i, cnt
+    print(N, i, cnt)
     i = i*4
   #print "{:>5}=N {:>5}=cnt".format(N, cnt)
 
@@ -38,7 +38,7 @@ def run_605062(N):
       #print i, j, cnt
     #print i
     i = i*2
-  print "{:>5}=N {:>5}=cnt".format(N, cnt)
+  print("{:>5}=N {:>5}=cnt".format(N, cnt))
 
 if __name__ == '__main__':
   run_277853s()
