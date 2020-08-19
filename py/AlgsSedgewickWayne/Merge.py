@@ -2,82 +2,86 @@
 
 import sys
 import collections as cx
-from AlgsSedgewickWayne.utils import __lt__, _exch, _isSorted
+from AlgsSedgewickWayne.utils import __lt__, _isSorted
+
+# pylint: disable=invalid-name
+
+def Sort(arr, array_history=None): # 09:30
+    """Rearranges the array in ascending order, using the natural order."""
+    # At most N lg N compares and 6 N lg N array accesses to sort any array of size N
+    aux = [None]*len(arr)  # Create aux outside _sort to avoid extensive costs.
+    _add_history(array_history, arr, aux) # Record initial state of arrays
+    _sort(arr, aux, low=0, high=len(arr)-1, array_history=array_history)
+    assert _isSorted(arr)
+
+def _sort(arr, aux, low, high, array_history):
+    """Recursive sort."""
+    ## print('low({LO}) high({HI}) {A}'.format(HI=high, LO=low, A=arr))
+    if low >= high:
+        # _vis_merge(arr, aux, low, -1, high)
+        return
+    # Divide in half. If N.5 round down to N
+    mid = low + (high - low)//2
+    # _vis_merge(arr, aux, low, mid, high)
+    # pylint: disable=line-too-long
+    ## print("AAA low({:>2}) to high({:>2}) => sort(low({:>2}) mid({:>2})), sort(mid+1({:>2}) high({:>2}))".format(
+    ##     low, high, low, mid, mid+1, high))
+    # pylint: disable=bad-whitespace
+    _sort(arr, aux, low,     mid,  array_history)
+    _sort(arr, aux, mid + 1, high, array_history)
+    merge(arr, aux, low, mid, high)
+    _add_history(array_history, arr, aux, (low, high, mid))
+
+def merge(arr, aux, low, mid, high): # 05:00-06:00
+    """Merge 2 sorted arrays into 1 sorted array."""
+    assert _isSorted(arr, low, mid)    # precondition: arr[low .. mid]   are sorted subarrays
+    assert _isSorted(arr, mid+1, high)  # precondition: arr[mid+1 .. high] are sorted subarrays
+    aux[low:high+1] = arr[low:high+1] # copy to aux[]
+    # merge back to arr[] in sorted order
+    i = low     # index of sorted arr[low .. mid]   ( left-half)
+    j = mid+1  # index of sorted arr[mid+1 .. high] (right-half)
+    ## print('RRRRRRRRRRRRRRRRR', range(low, high+1), aux[j], aux[i])
+    for k in range(low, high+1): # k is current entry in the sorted result
+        # i ptr is exhausted  - this copying is unnecessary
+        if   i > mid:
+            arr[k] = aux[j]
+            j += 1
+        # j ptr is exhausted
+        elif j > high:
+            arr[k] = aux[i]
+            i += 1
+        elif __lt__(aux[j], aux[i]):
+            arr[k] = aux[j]
+            j += 1
+        else:
+            arr[k] = aux[i]
+            i += 1
+    # _vis_merge(arr, aux, low, mid, high)
+    assert _isSorted(arr, low, high) # postcondition: arr[low .. high] is sorted
 
 
-def Sort(a, array_history=None): # 09:30
-  """Rearranges the array in ascending order, using the natural order."""
-  # At most N lg N compares and 6 N lg N array accesses to sort any array of size N
-  aux = [None for i in range(len(a))] # Create aux outside _sort to avoid extensive costs.
-  _add_history(array_history, a, aux) # Record initial state of arrays
-  _sort(a, aux, lo=0, hi=len(a)-1, array_history=array_history)
-  assert _isSorted(a)
 
-def _sort(a, aux, lo, hi, array_history):
-  """Recursive sort."""
-  ## print('lo({LO}) hi({HI}) {A}'.format(HI=hi, LO=lo, A=a))
-  if lo >= hi:
-    # _vis_merge(a, aux, lo, -1, hi)
-    return
-  # Divide in half. If N.5 round down to N
-  mid = lo + (hi - lo)//2
-  # _vis_merge(a, aux, lo, mid, hi)
-  ## print("AAA lo({:>2}) to hi({:>2}) => sort(lo({:>2}) mid({:>2})), sort(mid+1({:>2}) hi({:>2}))".format(
-  ##     lo, hi, lo, mid, mid+1, hi))
-  _sort(a, aux, lo,     mid, array_history)
-  _sort(a, aux, mid + 1, hi, array_history)
-  merge(a, aux, lo, mid, hi)
-  _add_history(array_history, a, aux, (lo, hi, mid))
+def _add_history(array_history, arr, aux, anno=None):
+    """For visualizing array history."""
+    if array_history is not None:
+        anno_a = None
+        if anno is not None:
+            low, high, mid = anno
+            anno_a = cx.OrderedDict([(low, '-'), (high, '+'), (mid, '*')])
+        array_history.add_history(arr, anno_a, name="arr")
+        array_history.add_history(aux, None, name="aux")
 
-def merge(a, aux, lo, mid, hi): # 05:00-06:00
-  """Merge 2 sorted arrays into 1 sorted array."""
-  assert _isSorted(a, lo, mid)    # precondition: a[lo .. mid]   are sorted subarrays
-  assert _isSorted(a, mid+1, hi)  # precondition: a[mid+1 .. hi] are sorted subarrays
-  aux[lo:hi+1] = a[lo:hi+1] # copy to aux[]
-  # merge back to a[] in sorted order
-  i = lo     # index of sorted a[lo .. mid]   ( left-half)
-  j = mid+1  # index of sorted a[mid+1 .. hi] (right-half)
-  ## print('RRRRRRRRRRRRRRRRR', range(lo, hi+1), aux[j], aux[i])
-  for k in range(lo, hi+1): # k is current entry in the sorted result
-    # i ptr is exhausted  - this copying is unnecessary
-    if   i > mid:
-      a[k] = aux[j]
-      j += 1
-    # j ptr is exhausted
-    elif j > hi:
-      a[k] = aux[i]
-      i += 1
-    elif __lt__(aux[j], aux[i]):
-      a[k] = aux[j]
-      j += 1
-    else:
-      a[k] = aux[i]
-      i += 1
-  # _vis_merge(a, aux, lo, mid, hi)
-  assert _isSorted(a, lo, hi) # postcondition: a[lo .. hi] is sorted
-
-
-
-def _add_history(array_history, a, aux, anno=None):
-  """For visualizing array history."""
-  if array_history is not None: 
-    anno_a = None
-    if anno is not None:
-      lo, hi, mid = anno
-      anno_a = cx.OrderedDict([(lo, '-'), (hi, '+'), (mid,'*')])
-    array_history.add_history(a,   anno_a, name="arr")
-    array_history.add_history(aux, None, name="aux")
-
-def _vis_merge(a, aux, lo, mid, hi, prt=sys.stdout):
-  """For visualizing Merge results."""
-  txt = "MERGE({:>2} {:>2} {:>2})   ".format(lo, mid, hi)
-  #print txt, ' '.join(["{:>2}".format(e) for e in a])
-  fno = lambda e: '__' if e is None else e
-  dsy = {lo:'> ', mid:'|', hi:' <'}
-  prt.write("{} {}\n".format(txt, ' '.join(["{:>2}".format(dsy.get(i, '..')) for i in range(len(a))])))
-  prt.write("{} {}\n".format(txt, ' '.join(["{:>2}".format(e) for e in a])))
-  prt.write("{} {}\n".format(txt, ' '.join(["{:>2}".format(fno(e)) for e in aux])))
-  prt.write("MERGE\n")
+def _vis_merge(arr, aux, low, mid, high, prt=sys.stdout):
+    """For visualizing Merge results."""
+    txt = "MERGE({:>2} {:>2} {:>2})   ".format(low, mid, high)
+    #print txt, ' '.join(["{:>2}".format(e) for e in arr])
+    fno = lambda e: '__' if e is None else e
+    dsy = {low:'> ', mid:'|', high:' <'}
+    prt.write("{} {}\n".format(txt, ' '.join(["{:>2}".format(
+        dsy.get(i, '..')) for i in range(len(arr))])))
+    prt.write("{} {}\n".format(txt, ' '.join(["{:>2}".format(e) for e in arr])))
+    prt.write("{} {}\n".format(txt, ' '.join(["{:>2}".format(fno(e)) for e in aux])))
+    prt.write("MERGE\n")
 
 #************************************************************************
 # Top-Down Mergesort
@@ -302,8 +306,8 @@ def _vis_merge(a, aux, lo, mid, hi, prt=sys.stdout):
 #              +-----+-----+
 #       +------T           F----+
 #      b<c                     a<c
-#   +---+-------+           +---+-------+       
-#   T           F           T           F 
+#   +---+-------+           +---+-------+
+#   T           F           T           F
 #   |          a<c          |          b<c
 #             T   F                   T   F
 # a b c   a c b   c a b   b a c   b c a   c b a
@@ -317,7 +321,7 @@ def _vis_merge(a, aux, lo, mid, hi, prt=sys.stdout):
 #  * Worst case dictated by height h of decision tree.
 #  * Binary tree of height h has at most e^k leaves.
 #  * N! different orderings => at least N! leaves.
-# 
+#
 #      2^h >=  # leaves >= N!
 #   =>   h >=   lg(N!)   ~ N lg N
 
@@ -330,14 +334,14 @@ def _vis_merge(a, aux, lo, mid, hi, prt=sys.stdout):
 #  ** Don't try to design sorting algorithm guaranteeing 1/2 N lg N compares
 #   * Design sorting algorithm that is both time/space optimal?
 #
-# Lower bound may not hold if the algorithm has information about 
+# Lower bound may not hold if the algorithm has information about
 # (ie. other than compares):
-#  * The initial order of the input. e.g. partially sorted, sorted, 
+#  * The initial order of the input. e.g. partially sorted, sorted,
 #  * The distribution of key values. e.g. A lot of equal keys (sort faster)
 #  * The representation of the keys. i.e. digit/chr compares instead of key cmp
 
 # QUESTION: Under which of the following scenarios does the N lg N
-# lower bound for sorting apply? Assume the keys are accessed only through 
+# lower bound for sorting apply? Assume the keys are accessed only through
 # the compareTo() method unless otherwise specified.
 # ANSWER: no two keys are equal
 
@@ -386,7 +390,7 @@ def _vis_merge(a, aux, lo, mid, hi, prt=sys.stdout):
 
 # F: Mergesort is faster than quicksort in practice because it uses
 #    fewer compares than quicksort.
-#    EXPLANATION: Mergesort is typically slower tha quicksort in 
+#    EXPLANATION: Mergesort is typically slower tha quicksort in
 #    practice even though it makes fewer compares. Other factors
 #    (including array accesses and cache) outweigh the advantage
 #    in the number of compares.
@@ -404,69 +408,78 @@ def _vis_merge(a, aux, lo, mid, hi, prt=sys.stdout):
 
 # F: Mergesort is faster in practice than insertion sort regardless
 #    of the number of items N in the array.
-#    EXPLANATION: Insertion sort is faster for small values of N; 
-#    this explains why we can imporive mergesort by cutting off 
+#    EXPLANATION: Insertion sort is faster for small values of N;
+#    this explains why we can imporive mergesort by cutting off
 #    to insertion sort for small values of N.
 
 # F: For any array of N distinct keys, top-down mergesort and bottom-up
-#    mergesort compare exactly the same pairs of keys (but possibly in a 
+#    mergesort compare exactly the same pairs of keys (but possibly in a
 #    different order)
 #    EXPLANATION: The compares can be different if N is not a power of 2.
 #    for example, consider the array 0 1 2 3 4. Top-down mergesort makes the compares:
-#      {0-1, 0-2, 1-2, 3-4, 0-3, 1-3, 2-3} 
-#    while bottom-up mergesort makes the compares 
+#      {0-1, 0-2, 1-2, 3-4, 0-3, 1-3, 2-3}
+#    while bottom-up mergesort makes the compares
 #      {0-1, 2-3, 0-2, 1-2, 0-4, 1-4, 2-4, 3-4}
 
 
 #**********************************************************************
 #  Index mergesort
 #**********************************************************************/
-# stably merge a[lo .. mid] with a[mid+1 .. hi] using aux[lo .. hi]
-def _merge_index(a, index, aux, lo, mid, hi):
+# stably merge arr[low .. mid] with arr[mid+1 .. high] using aux[low .. high]
+def _merge_index(arr, index, aux, low, mid, high):
 
-  # copy to aux[]
-  for k in range(lo, hi+1):
-    aux[k] = index[k]
+    # copy to aux[]
+    for k in range(low, high+1):
+        aux[k] = index[k]
 
-  # Maintain 3 variables:
-  #   i: Current entry on left-half
-  #   j: Current entry on left-half
-  #   k: Current entry in the sorted result
+    # Maintain 3 variables:
+    #   i: Current entry on left-half
+    #   j: Current entry on left-half
+    #   k: Current entry in the sorted result
 
-  # merge back to a[]
-  i = lo     # Start LEFT-HAND-POINTER  at left-most side of Left-sided  list
-  j = mid+1  # Start RIGHT-HAND-POINTER at left-most side of Right-sided list
-  for k in range(lo, hi+1):
-    # If left-half list has been completely examined
-    if   i > mid:                     index[k] = aux[j]; j += 1
-    # If right-half list has been completely examined
-    elif j > hi:                      index[k] = aux[i]; i += 1
-    # If current value at right-half < current value at right-half, copy smaller val.
-    elif __lt__(a[aux[j]], a[aux[i]]): index[k] = aux[j]; j += 1
-    else:                             index[k] = aux[i]; i += 1
+    # merge back to arr[]
+    i = low     # Start LEFT-HAND-POINTER  at left-most side of Left-sided  list
+    j = mid+1  # Start RIGHT-HAND-POINTER at left-most side of Right-sided list
+    for k in range(low, high+1):
+        # If left-half list has been completely examined
+        if i > mid:
+            index[k] = aux[j]
+            j += 1
+        # If right-half list has been completely examined
+        elif j > high:
+            index[k] = aux[i]
+            i += 1
+        # If current value at right-half < current value at right-half, copy smaller val.
+        elif __lt__(arr[aux[j]], arr[aux[i]]):
+            index[k] = aux[j]
+            j += 1
+        else:
+            index[k] = aux[i]
+            i += 1
 
-def _sort_index(a, index, aux, lo, hi):
-  """Recursive sort."""
-  if hi <= lo: return
-  mid = lo + (hi - lo) / 2;
-  _sort_index(a, index, aux, lo, mid)
-  _sort_index(a, index, aux, mid + 1, hi)
-  _merge_index(a, index, aux, lo, mid, hi)
+def _sort_index(arr, index, aux, low, high):
+    """Recursive sort."""
+    if high <= low:
+        return
+    mid = low + (high - low) // 2
+    _sort_index(arr, index, aux, low, mid)
+    _sort_index(arr, index, aux, mid + 1, high)
+    _merge_index(arr, index, aux, low, mid, high)
 
-# Returns a permutation that gives the elements in the array in ascending order.
-# @param a the array
-# @return a permutation <tt>p[]</tt> such that <tt>a[p[0]]</tt>, <tt>a[p[1]]</tt>,
-#    ..., <tt>a[p[N-1]]</tt> are in ascending order
-def indexSort(a):
-  N = len(a)
-  index = [None for i in range(N)]
-  for i in range(N):
-      index[i] = i
+# @param arr the array
+# @return arr permutation <tt>p[]</tt> such that <tt>arr[p[0]]</tt>, <tt>arr[p[1]]</tt>,
+#    ..., <tt>arr[p[N-1]]</tt> are in ascending order
+def indexSort(arr):
+    """Get a permutation that gives the elements in the array in ascending order"""
+    array_len = len(arr)
+    index = [None]*array_len
+    for i in range(array_len):
+        index[i] = i
 
-  aux = [None for i in range(N)]
-  _sort_index(a, index, aux, 0, N-1)
-  return index
+    aux = [None]*array_len
+    _sort_index(arr, index, aux, 0, array_len-1)
+    return index
 
-# Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.
-# Copyright (C) 2019, DV Klopfenstein, Python implementation
+# Copyright (C) 2002-present, Robert Sedgewick and Kevin Wayne.
+# Copyright (C) 2019-present, DV Klopfenstein, Python implementation
 # Based on java which was Last updated: Fri Feb 14 17:45:37 EST 2014
