@@ -1,52 +1,55 @@
 """Priority Queue (unordered array implementation), return maximum value."""
 # TBD: FINISH PYTHON PORT
+import math
 
 class MaxPQ: # <Key extends Comparable<Key>> # 15:01
-  """ Priority Queue implemented with a heap-ordered binary tree."""
+    """ Priority Queue implemented with a heap-ordered binary tree."""
 
-  def __init__(self, capacity):
-    self.pq = [None]*(capacity+1)
-    self.N = 0
+    def __init__(self, capacity):
+        self.pri_q = [None]*(capacity+1)
+        self.num_items = 0
 
-  def isEmpty(self): return self.N == 0
+    def isEmpty(self):
+        """True if the queue is empty"""
+        return self.num_items == 0
 
-  def insert(self, x): # 06:27
-    """insert a key into the priority queue."""
-    self.N += 1
-    self.pq[self.N] = x # Insert at end
-    self._swim(self.N)   # swim up to proper position
+    def insert(self, val): # 06:27
+        """insert a key into the priority queue."""
+        self.num_items += 1
+        self.pri_q[self.num_items] = val # Insert at end
+        self._swim(self.num_items)       # swim up to proper position
 
-  def delMax(self): # 10:03
-    """Return and remove the largest key."""
-    maxKey = self.pq[1]
-    # Exchange root(maxKey) with node at end,
-    self.exch(1, self.N)
-    self.N -= 1
-    # then sink new root down to where it belongs.
-    self._sink(1)
-    # Prevent loitering by nulling out maxKey position
-    self.pq[self.N+1] = None
-    return maxKey
+    def delMax(self): # 10:03
+        """Return and remove the largest key."""
+        max_key = self.pri_q[1]
+        # Exchange root(max_key) with node at end,
+        self.exch(1, self.num_items)
+        self.num_items -= 1
+        # then sink new root down to where it belongs.
+        self._sink(1)
+        # Prevent loitering by nulling out max_key position
+        self.pri_q[self.num_items+1] = None
+        return max_key
 
-  def _swim(self,k): # 05:15
-    """Exchange smaller child w/larger parent up through the hierarchy."""
-    while k>1 and k/2 < k:
-      self.exch(k, k/2)
-      k = k/2
+    def _swim(self, k): # 05:15
+        """Exchange smaller child w/larger parent up through the hierarchy."""
+        while k > 1 and k//2 < k:
+            self.exch(k, k//2)
+            k = k//2
 
-  def _sink(self, k): # 8:52
-    """Push node down one level at a time to order array."""
-    while 2*k <= self.N:
-      j = 2*k
-      # Check if we are going off the end of the heap and which child is larger
-      if j < self.N and self.less(j, j+1):
-        j += 1
-      # If k is not less than either child, then we are done
-      if not self.less(k,j):
-        break
-      # If k is larger than a child, exchange
-      self.exch(k,j)
-      k = j
+    def _sink(self, k): # 8:52
+        """Push node down one level at a time to order array."""
+        while 2*k <= self.num_items:
+            j = 2*k
+            # Check if we are going off the end of the heap and which child is larger
+            if j < self.num_items and self.less(j, j+1):
+                j += 1
+            # If k is not less than either child, then we are done
+            if not self.less(k, j):
+                break
+            # If k is larger than a child, exchange
+            self.exch(k, j)
+            k = j
 
 # APIS AND ELEMENTARY IMPLEMENTATIONS (12:52)
 #
@@ -218,9 +221,9 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
 
 ##import math
 ##
-  def insert_array(self, ARR):
-    for A in ARR:
-      self.insert(A)
+    def insert_array(self, arr):
+        for item in arr:
+            self.insert(item)
 ##
 ##  # From Lecture 8 - 3 Heapsort (14-29)
 ##  # First sorting algorithm that is BOTH in-place AND N log N worst-case
@@ -235,7 +238,7 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
 ##  #   each other (when sinking 2). In the sortdown phase, the keys
 ##  #   0 and 1 are compared with each other when deleting 2.
 ##  def sort(self):
-##    L = len(self.pq)
+##    L = len(self.pri_q)
 ##    # HEAPSORT: HEAP CONSTRUCTION
 ##    # First pass. Build using bottom-up method
 ##    # Go backwards through the heap starting at L/2 because
@@ -267,27 +270,33 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
 ##  # TBD: change less and exch functions to start at index 0 instead of index 1
 ##  # In this course, we use the term compare to mean a comparison between two keys,
 ##  # i.e., one call to compareTo().
-  def less(self, i, j): return self.pq[i] < self.pq[j]
+    def less(self, i, j):
+        return self.pri_q[i] < self.pri_q[j]
 
-  def exch(self, i, j):
-    t = self.pq[i]
-    self.pq[i] = self.pq[j]
-    self.pq[j] = t
+    def exch(self, i, j):
+        tmp = self.pri_q[i]
+        self.pri_q[i] = self.pri_q[j]
+        self.pri_q[j] = tmp
 
-  # Print functions
-  def __str__(self):
-    return "".join(["N=%-2d pq[%d]="%(self.N,len(self.pq)),  " ".join(map(str,self.pq))])
+    # Print functions
+    def __str__(self):
+        return "".join(["N=%-2d pq[%d]="%(self.num_items, len(self.pri_q)), " ".join(map(str, self.pri_q))])
 
-  def __repr__(self): return self.__str__()
-  def __len__(self):  return len(self.pq)
-  def draw(self): # TBD: Finish this
-    # 0 1   2 3   4 5 6 7   8 9 ...
-    #   S   P R   N H O A   E I ...
-    #   1   2 2   3 3 3 3   4 4 ...
-    for i,E in enumerate(self.pq):
-      if i==0 or E is None: continue
-      level = int(math.log(i,2))
-      print(''.join(['-']*(level+1)), E)
+    def __repr__(self):
+        return self.__str__()
+
+    def __len__(self):
+        return len(self.pri_q)
+
+    def draw(self): # TBD: Finish this
+        # 0 1   2 3   4 5 6 7   8 9 ...
+        #   S   P R   N H O A   E I ...
+        #   1   2 2   3 3 3 3   4 4 ...
+        for i, elem in enumerate(self.pri_q):
+            if i == 0 or elem is None:
+                continue
+            level = int(math.log(i, 2))
+            print(''.join(['-']*(level+1)), elem)
 
 
 # Which of the following statements about priority queues are
@@ -299,7 +308,7 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
 # binary heap implementation so that insert() takes ~ lg (lg
 # N) compares per operation (in the worst case), where N is
 # the number of keys in the data structure.
-# Inorrect	
+# Inorrect
 # EXP: Note that the keys on the path from a leaf to the root
 # are in nondecreasing order. Thus, we can binary search to
 # find how far up in the tree the inserted key will end up.
@@ -345,21 +354,21 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
 
 # PROPERTY: Height of complete tree with N nodes is [lg N]
 # PROOF: Height only increases whe N is a pwer of 2
-# 
+#
 # BINARY HEAP: Array representation of a heap-ordered complete binary tree.
-# 
+#
 # HEAP-ORDERED BINARY TREE: (01:44)
 # * Keys in nodes (associate information with each node)
 # * Parent's key is no smaller than children's keys
-# 
+#
 # ARRAY REPRESENTATION: (02:06)
 # * Indices start at 1
 # * Take nodes in **level** order
 # * No explicit links needed!
-# 
-# 
+#
+#
 # # COMPLETE TREE WITH N=16 NODES (HEIGHT = 4) 00:54
-# 
+#
 #             ______T______
 #            /             \
 #         __S__           __R__
@@ -367,53 +376,53 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
 #       P       N       O       A
 #      / \     / \     / \     / \
 #     E   I   H   G   *   *   *   *
-#    / \ / \ / \ / \ / \ / \ / \ / \ 
+#    / \ / \ / \ / \ / \ / \ / \ / \
 #   *
 #  / \
-# 
+#
 # i     0  1  2  3  4  5  6  7  8  9 10 11
-# a[i]  -  T  S  R  P  N  O  A  E  I  H  G 
-# a[i]  -  T                              
-#             S  R                        
+# a[i]  -  T  S  R  P  N  O  A  E  I  H  G
+# a[i]  -  T
+#             S  R
 #             |  +---------+
 #             +--------    --
 #                   /  \  /  \
-#                   P  N  O  A            
+#                   P  N  O  A
 #                   |  +---------------+
 #                   +--------------    --
 #                               /  \  /  \
 #                               E  I  H  G
-# 
+#
 # PROPOSITION: Largest key is a[1], which is root of binary tree
-# 
+#
 # PROPOSITION: Can use array indices to move through tree. (03:19)
 # * Parent of node at k is at k/2
 # * Children of node at k are at 2k and 2k+1
-# 
+#
 # PROMOTION IN A HEAP: (05:15)
 # Scenario: Child's key becomes larger key than its parents key.
 # To eliminate the violation:
 # * Exchange key in child with key in parent
 # * Repeat until heap order restored.
 # Peter principle: Node promoted to level of incompetence.
-# 
+#
 # INSERTION IN A HEAP:
 # Insert: Add node at end, then swim it up.
 # Cost: At most 1+lg(N) compares
-# 
-# 
+#
+#
 # DEMOTION IN A HEAP (07:47):
 # Scenario: Parent's key becomes smaller than one (or both of its children)
 # To eliminate the violation:
 # * Exchange key in parent with key in **larger** child.
 # * Repeat until heap order restored.
 # Power struggle: Better subordinate promoted
-# 
+#
 # DELETE THE MAXIMUM IN A HEAP (10:03)
 # Delete max: Exchange root(max) with node at end, then sink it down.
 # Cost: At most 2*lg(N) compares
-# 
-# 
+#
+#
 # # Binary Heap Implementation
 # # * Very Simple
 # # * Optimal representation of data
@@ -422,10 +431,10 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
 # {
 #   private Key[] pq;
 #   private int N;
-# 
+#
 #   public MaxPQ(int capacity)
 #   { pq = (Key[]) new Comparable[capacity+1]; }
-# 
+#
 #   /// PQ ops
 #   public boolean isEmpty()
 #   { return N == 0; }
@@ -437,7 +446,7 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
 #   public Key delMax() // 10:03
 #   {
 #     Key max = pq[1];
-#     # Exchange root(max) with node at end, 
+#     # Exchange root(max) with node at end,
 #     exch(1, N--);
 #     # then sink new root down to where it belongs.
 #     sink(1);
@@ -445,8 +454,8 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
 #     pq[N+1] = null;
 #     return max;
 #   }
-#   
-#   /// heap helper functions 
+#
+#   /// heap helper functions
 #   private void swim(int k) // 05:15
 #   {
 #     while(k>1 && less(k/2, k))
@@ -469,14 +478,14 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
 #       k = j;
 #     }
 #   }
-#   
-#   /// array helper functions 
+#
+#   /// array helper functions
 #   private boolean less(int i, int j)
 #   { return pq[i].compareTo(pq[j]) < 0; }
 #   private void exch(int i, int j)
 #   { Key t = pq[i]; pq[i] = pq[j]; pq[j] = t; }
 # }
-# 
+#
 # PRIORITY QUEUES IMPLEMENTATION COST SUMMARY
 # order-of-growth of running time for priority queue with N items
 # implementation | insert | del max  | max
@@ -487,11 +496,11 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
 # d'ary heap     |log_d(N)|d*log_d(N)|   1
 # Fibonacci      |    1   |  log N(*)|   1 *amortized
 # impossible     |    1   |     1    |   1
-# 
+#
 # Possible improvements(slight possible):
 # 1. d'way might work out better depending on freq on certain del max operations
 # 2. Fibonacci (adv structure).  Too complicated to use in practice
-# 
+#
 # BINARY HEAP CONSIDERATIONS: (18:11)
 # Immutabililty of keys.
 # * Assumption: client does not change keys while they're on the PQ.
@@ -508,15 +517,15 @@ class MaxPQ: # <Key extends Comparable<Key>> # 15:01
 # Can implement with sink() and swim() [stay tuned]
 # * Aff the abillity to Remove an arbitrary item.
 # * Give the Client the ability to Change the priority of an item.
-# 
+#
 # Immutable: String, Integer, Double, Color, Vector, Transaction, Point2D
 # Mutable: StringBuilder, Stack, Counter, Java array
-# 
+#
 # Immutable Advantages: (22:03)
 # * Simplfies debugging
 # * Safer in presence of hostile code
 # * Simplifies concurren programming
 # * Safe to use as key in priority queue or symbol table +++++!!!!
-# 
-# 
-# 
+#
+#
+#
