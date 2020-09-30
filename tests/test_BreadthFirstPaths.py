@@ -23,7 +23,7 @@ def test_0(prt=sys.stdout):
   bfs = BreadthFirstPaths(G, s)
 
   for v in range(G.V()):
-    if bfs.hasPathTo(v):
+    if bfs.has_path_to(v):
       prt.write("{} to {} ({}):  ".format(s, v, bfs.distTo(v)))
       for x in reversed(bfs.pathTo(v)):
         if x == s: prt.write(str(x))
