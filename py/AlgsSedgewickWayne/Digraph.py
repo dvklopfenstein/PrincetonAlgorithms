@@ -1,135 +1,148 @@
-"""A graph, implemented using an array of lists. Parallel edges and self-loops are permitted."""
+"""A directed graph, implemented using an array of lists. Parallel edges & self-loops permitted."""
+# pylint: disable=invalid-name
+# ../algs4/src/main/java/edu/princeton/cs/algs4/Digraph.java
 
 import sys
 from AlgsSedgewickWayne.testcode.utils import adjtxtblk2OrderedDict
 
-class Digraph(object):
+class Digraph:
+    """A directed graph, implemented w/array of lists. Parallel edges & self-loops permitted."""
 
-  def __init__(self, a=None, **kwargs):
-    if a is not None:
-      if isinstance(a, int):
-        self._init_empty(a)
-      elif len(a) == 1:
-        self._init_empty(a[0])
-      else:
-        self._init(a)
-      self.keys = range(self._V)
-    elif 'adjtxt' in kwargs:
-      self._adj = adjtxtblk2OrderedDict(kwargs['adjtxt'])
-      self._V = len(self._adj)
-      self._E = len(set([tuple(sorted([v, w])) for v, ws in self._adj.items() for w in ws]))
-      self.keys = self._adj.keys()
+    def __init__(self, arr=None, **kwargs):
+        if arr is not None:
+            if isinstance(arr, int):
+                self._init_empty(arr)
+            elif len(arr) == 1:
+                self._init_empty(arr[0])
+            else:
+                self._init(arr)
+            self.keys = range(self.num_vertices)
+        elif 'adjtxt' in kwargs:
+            self._adj = adjtxtblk2OrderedDict(kwargs['adjtxt'])
+            self.num_vertices = len(self._adj)
+            self.num_edges = len(set(tuple(sorted([v, w])) for v, ws in self._adj.items() for w in ws))
+            self.keys = self._adj.keys()
 
-  def _init_empty(self, V):
-    if V < 0: raise Exception("Number of vertices must be nonnegative")
-    self._V = V # number of vertices 
-    self._E = 0 # number of edges
-    self._adj = [set() for v in range(V)]
-    self._indegree = [0]*V # indegree[v] = indegree of vertex v
+    def _init_empty(self, num_vertices):
+        if num_vertices < 0:
+            raise Exception("Number of vertices must be nonnegative")
+        self.num_vertices = num_vertices # number of vertices
+        self.num_edges = 0 # number of edges
+        self._adj = [set() for v in range(num_vertices)]
+        self._indegree = [0]*num_vertices # indegree[v] = indegree of vertex v
 
-  def _init(self, a):
-    """Initializes a graph from an input stream."""
-    # The format is the number of vertices V, followed by the number of edges E,
-    # followed by E pairs of vertices, with each entry separated by whitespace.
-    self._init_empty(a[0]) # init V, and the empty adj list
-    E = a[1]
-    if E < 0: raise Exception("Number of edges must be nonnegative")
-    for v, w in a[2:]:
-      self.addEdge(v, w)
+    def _init(self, arr):
+        """Initializes arr graph from an input stream."""
+        # The format is the number of vertices V, followed by the number of edges E,
+        # followed by E pairs of vertices, with each entry separated by whitespace.
+        self._init_empty(arr[0]) # init V, and the empty adj list
+        num_edges = arr[1]
+        if num_edges < 0:
+            raise Exception("Number of edges must be nonnegative")
+        for src_v, dst_w in arr[2:]:
+            self.addEdge(src_v, dst_w)
 
-  def V(self): return self._V # Returns the number of vertices in self graph.
-  def E(self): return self._E # Returns the number of edges in self graph.
+    def V(self):
+        """Returns the number of vertices in self graph"""
+        return self.num_vertices
 
-  def addEdge(self, v, w):
-    """Adds the undirected edge v-w to self graph."""
-    #self._validateVertex(v)
-    #self._validateVertex(w)
-    self._E += 1
-    self._adj[v].add(w)
-    self._indegree[w] += 1
+    def E(self):
+        """Returns the number of edges in self graph"""
+        return self.num_edges
 
-  def adj(self, v):
-    """Returns the vertices adjacent to vertex v."""
-    #self._validateVertex(v)
-    return self._adj[v]
+    def addEdge(self, src_v, dst_w):
+        """Adds the undirected edge src_v-dst_w to self graph."""
+        #self._validateVertex(src_v)
+        #self._validateVertex(dst_w)
+        self.num_edges += 1
+        self._adj[src_v].add(dst_w)
+        self._indegree[dst_w] += 1
 
-  def outdegree(self, v):
-    """Returns the number of directed edges incident from vertex v."""
-    #self._validateVertex(v)
-    return self._adj[v].size()
+    def adj(self, src_v):
+        """Returns the vertices adjacent to vertex src_v."""
+        #self._validateVertex(src_v)
+        return self._adj[src_v]
 
-  def indegree(self, v):
-    """Returns the number of directed edges incident to vertex v."""
-    #self._validateVertex(v)
-    return self.indegree[v]
+    def outdegree(self, src_v):
+        """Returns the number of directed edges incident from vertex src_v."""
+        #self._validateVertex(src_v)
+        return self._adj[src_v].size()
 
-  def reverse(self):
-    """Returns the reverse of the digraph."""
-    R = Digraph(self._V)
-    for v in range(self._V):
-      for w in self._adj(v):
-        R.addEdge(w, v)
-    return R
+    def indegree(self, src_v):
+        """Returns the number of directed edges incident to vertex src_v."""
+        #self._validateVertex(src_v)
+        return self._indegree[src_v]
 
-  #def _validateVertex(self, v):
-  #  """raise an IndexOutOfBoundsException unless 0 <= v < V."""
-  #  if v < 0 or v >= self._V or v not in self._adj:
-  #    raise Exception("vertex {} is not between 0 and {} or in {}".format(v, self._V-1, self._adj))
+    def reverse(self):
+        """Get the reverse of the digraph."""
+        rev_digraph = Digraph(self.num_vertices)
+        for src_v in range(self.num_vertices):
+            for dst_w in self._adj(src_v):
+                rev_digraph.addEdge(dst_w, src_v)
+        return rev_digraph
 
-  def __str__(self):
-    s = [(("{V} vertices, {E} edges\n").format(V=self._V, E=self._E))]
-    for v in self.keys:
-      s.append("{v}: ".format(v=v))
-      for w in self._adj[v]:
-        s.append("{w} ".format(w=w))
-      s.append("\n")
-    return ''.join(s)
+    #def _validateVertex(self, src_v):
+    #    """raise an IndexOutOfBoundsException unless 0 <= src_v < V."""
+    #    if src_v < 0 or src_v >= self.num_vertices or src_v not in self._adj:
+    #        raise Exception("vertex {} not between 0 and {} or in {}".format(
+    #    src_v, self.num_vertices-1, self._adj))
 
-  def __iter__(self): # Makes Graph an iterable.
-    return iter(self._adj) # returns an iterator.
+    def __str__(self):
+        txt = [(("{V} vertices, {E} edges\n").format(V=self.num_vertices, E=self.num_edges))]
+        for src_v in self.keys:
+            txt.append("{src_v}: ".format(src_v=src_v))
+            for dst_w in self._adj[src_v]:
+                txt.append("{dst_w} ".format(dst_w=dst_w))
+            txt.append("\n")
+        return ''.join(txt)
 
-  def wr_png(self, fout_png="Digraph.png", prt=sys.stdout, **kwargs):
-    """Make a png showing a diagram of the connected components."""
-    import pydot
-    # 1. Create/initialize Graph
-    G = pydot.Dot(graph_type='digraph') # Undirected Graph
-    # 2. Create Nodes
-    nodes = [pydot.Node(v) for v in self.keys]
-    # 3. Add nodes to Graph
-    for node in nodes:
-      G.add_node(node)
-    # 4. Add Edges between Nodes to Graph
-    for v, w in self.get_edges():
-      if v != w: # Print only edges from one node to another (not to self)
-        G.add_edge(pydot.Edge(v, w))
-    # 5. Write Graph to png file
-    G.write_png(fout_png)
-    prt.write("  WROTE: {}\n".format(fout_png))
+    def __iter__(self): # Makes Graph an iterable.
+        return iter(self._adj) # returns an iterator.
 
-  def get_edges(self):
-    edges = set()
-    for v in self.keys:
-      for w in self._adj[v]:
-        edges.add(tuple(sorted([v, w]))) 
-    return edges
+    def wr_png(self, fout_png="Digraph.png", prt=sys.stdout, **kwargs):
+        """Make a png showing a diagram of the connected components."""
+        import pydot
+        # 1. Create/initialize Graph
+        digraph = pydot.Dot(graph_type='digraph') # Undirected Graph
+        # 2. Create Nodes
+        nodes = [pydot.Node(src_v) for src_v in self.keys]
+        # 3. Add nodes to Graph
+        for node in nodes:
+            digraph.add_node(node)
+        # 4. Add Edges between Nodes to Graph
+        for src_v, dst_w in self.get_edges():
+            if src_v != dst_w: # Print only edges from one node to another (not to self)
+                digraph.add_edge(pydot.Edge(src_v, dst_w))
+        # 5. Write Graph to png file
+        # pylint: disable=no-member
+        digraph.write_png(fout_png)
+        prt.write("  WROTE: {}\n".format(fout_png))
+
+    def get_edges(self):
+        """Get all the edges of this directed graph"""
+        edges = set()
+        for src_v in self.keys:
+            for dst_w in self._adj[src_v]:
+                edges.add(tuple(sorted([src_v, dst_w])))
+        return edges
 
  #*****************************************************************************/
  #  % Graph.py ../thirdparty/tinyG.txt
- #  13 vertices, 13 edges 
- #  0: 6 2 1 5 
- #  1: 0 
- #  2: 0 
- #  3: 5 4 
- #  4: 5 6 3 
- #  5: 3 4 0 
- #  6: 0 4 
- #  7: 8 
- #  8: 7 
- #  9: 11 10 12 
- #  10: 9 
- #  11: 9 12 
- #  12: 11 9 
- #  
+ #  13 vertices, 13 edges
+ #  0: 6 2 1 5
+ #  1: 0
+ #  2: 0
+ #  3: 5 4
+ #  4: 5 6 3
+ #  5: 3 4 0
+ #  6: 0 4
+ #  7: 8
+ #  8: 7
+ #  9: 11 10 12
+ #  10: 9
+ #  11: 9 12
+ #  12: 11 9
+ #
  #*****************************************************************************/
 
 # -----------------------------------------------------------------------------
@@ -151,7 +164,7 @@ class Digraph(object):
 #
 # PLANARITY: Can you draw the graph in the plane with no crossing edges?
 # GRAPH ISOMORPHISM: Do two adjacency lists represent the same graph?
-# 
+#
 # CHALLENGE: Whinc of these problems are easy? difficult? intractable?
 
 
@@ -159,5 +172,5 @@ class Digraph(object):
 # QUESTION: A cycle that uses eachedge of a graph exactly once is called
 # ANSWER: An Euler tour
 
-#  Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
-#  Copyright 2015-2019, DV Klopfenstein, Python implementation
+#  Copyright 2002-present, Robert Sedgewick and Kevin Wayne.
+#  Copyright 2015-present, DV Klopfenstein, Python implementation
