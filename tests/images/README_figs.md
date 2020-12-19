@@ -1,6 +1,8 @@
 # Plots
 * [Graphs](#graphs)
+  * [tinyG.txt](#tinyg-txt)
 * [Digraphs](#digraphs)
+  * [tinyDG.txt](#tinydg-txt)
 
 ## Graphs
 ### tinyG.txt
