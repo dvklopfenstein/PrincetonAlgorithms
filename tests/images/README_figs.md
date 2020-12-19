@@ -1,8 +1,8 @@
 # Plots
 * [Graphs](#graphs)
-  * [tinyG.txt](#tinyg-txt)
+  * [tinyG.txt](#tinygtxt)
 * [Digraphs](#digraphs)
-  * [tinyDG.txt](#tinydg-txt)
+  * [tinyDG.txt](#tinydgtxt)
 
 ## Graphs
 ### tinyG.txt
@@ -25,8 +25,8 @@
 ![tiny graph](tinyG.png)
 
 ## Digraphs
-```
 ### tinyDG.txt
+```
 13 vertices, 22 edges
 0: 1 5
 1:
