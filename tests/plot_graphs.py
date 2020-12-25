@@ -20,6 +20,8 @@ def main(prt=sys.stdout):
         ('tinyG.txt', Graph),
         ('mediumG.txt', Graph),
         ('tinyDG.txt', Digraph),
+        ('tinyDG2.txt', Digraph),
+        ('tinyDAG.txt', Digraph),
     ])
 
     for fin_graph, cls in fin_graphs.items():

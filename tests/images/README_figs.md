@@ -3,6 +3,8 @@
   * [tinyG.txt](#tinygtxt)
 * [Digraphs](#digraphs)
   * [tinyDG.txt](#tinydgtxt)
+  * [tinyDG2.txt](#tinydg2txt)
+  * [tinyDAG.txt](#tinydag2txt)
 
 ## Graphs
 ### tinyG.txt
@@ -43,3 +45,42 @@
 12: 9
 ```
 ![tinyDG](tinyDG.png)
+
+### tinyDG2.txt
+```
+6 vertices, 8 edges
+0: 1 2
+1: 2
+2: 4
+3: 2 5
+4: 3
+5: 0
+```
+![tinyDG2](tinyDG2.png)
+
+
+### tinyDAG.txt
+```
+13 vertices, 15 edges
+13
+15
+2 3 
+0 6 
+0 1 
+2 0 
+11 12  
+9 12  
+9 10  
+9 11 
+3 5 
+8 7 
+5 4 
+0 5 
+6 4 
+6 9 
+7 6
+```
+![tinyDAG](tinyDAG.png)
+
+
+Copyright (C) 2020-present, DV Klopfenstein. All rights reserved.
