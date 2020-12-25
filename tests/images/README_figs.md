@@ -59,7 +59,7 @@
 ![tinyDG2](tinyDG2.png)
 
 
-### tinyDAG.txt
+### [tinyDAG.txt](https://algs4.cs.princeton.edu/42digraph/tinyDAG.txt)
 ```
 13 vertices, 15 edges
 13
