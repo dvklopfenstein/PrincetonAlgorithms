@@ -1,4 +1,4 @@
-# Programming Assignment 1.1
+
 thirdparty/percolation.zip
 thirdparty/PercolationStats.java
 thirdparty/Percolation.java
@@ -70,6 +70,8 @@ py/AlgsSedgewickWayne/MoveToFront.py
 py/AlgsSedgewickWayne/BurrowsWheeler.py
 py/AlgsSedgewickWayne/CircularSuffixArrag.py
 
+# Temporary files
+tmp*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
