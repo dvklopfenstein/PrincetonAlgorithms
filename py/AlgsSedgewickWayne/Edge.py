@@ -1,32 +1,49 @@
 """Immutable weighted edge."""
+# pylint: disable=invalid-name
 
-class Edge(object):
 
-  def __init__(self, v, w, weight):
-    if v < 0: raise Exception("Vertex name must be a nonnegative integer")
-    if w < 0: raise Exception("Vertex name must be a nonnegative integer")
-    if not isinstance(weight, float): raise Exception("Weight is NaN")
-    self._v = v
-    self._w = w
-    self._weight = weight
+class Edge:
+    """Edge between two vertices"""
 
-  def weight(self): return self._weight # Returns the weight of self edge.
-  def either(self): return self._v # Returns either endpoint of self edge.
-  def get_vw(self): return [self._v, self._w]
+    def __init__(self, v, w, weight):
+        if v < 0:
+            raise Exception("Vertex name must be a nonnegative integer")
+        if w < 0:
+            raise Exception("Vertex name must be a nonnegative integer")
+        if not isinstance(weight, float):
+            raise Exception("Weight is NaN")
+        self.v_src = v
+        self.w_dst = w
+        self.weight = weight
 
-  def other(self, vertex):
-    """Returns the endpoint of self edge that is different from the given vertex."""
-    if   vertex == self._v: return self._w
-    elif vertex == self._w: return self._v
-    else: raise Exception("Illegal endpoint")
+    def either(self):
+        """Returns either endpoint of self edge"""
+        return self.v_src
 
-  def compareTo(self, that):
-    """Compares two edges by weight."""
-    if   self.weight() < that.weight(): return -1
-    elif self.weight() > that.weight(): return +1
-    else:                               return  0
+    def get_vw(self):
+        """Get both vertices attached to this edge"""
+        return [self.v_src, self.w_dst]
 
-  def __str__(self): return "{}-{} {:.5f}".format(self._v, self._w, self._weight)
+    def other(self, vertex):
+        """Returns the endpoint of self edge that is different from the given vertex."""
+        if vertex == self.v_src:
+            return self.w_dst
+        if vertex == self.w_dst:
+            return self.v_src
+        raise Exception("Illegal endpoint")
 
-# Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
-# Copyright 2002-2019, DV Klopfenstein, Pythom port
+    def compare_to(self, that):
+        """Compares two edges by weight."""
+        if self.weight < that.weight:
+            return -1
+        if self.weight > that.weight:
+            return +1
+        return  0
+
+    def __str__(self):
+        return "{}-{} {:.5f}".format(
+            self.v_src, self.w_dst, self.weight)
+
+
+# Copyright 2002-present Robert Sedgewick and Kevin Wayne.
+# Copyright 2002-present DV Klopfenstein, Pythom port
