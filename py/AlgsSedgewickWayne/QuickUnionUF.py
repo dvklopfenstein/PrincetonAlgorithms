@@ -8,7 +8,7 @@ class QuickUnionUF(BaseComp):
   def __init__(self, N):     # $ = N
     """Set if of each object to itself."""
     super(QuickUnionUF, self).__init__("QuickUnionUF")
-    self.ID = range(N) # Runs N array accesses
+    self.ID = list(range(N)) # Runs N array accesses
 
   def _root(self, i):
     """Chase parent pointers until reach root."""
