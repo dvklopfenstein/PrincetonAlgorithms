@@ -1,107 +1,112 @@
 """An edge-weighted undirected graph, implemented using adjacency lists."""
+# pylint: disable=invalid-name
 
-from AlgsSedgewickWayne.Edge import Edge
 import random
-                                                  
-class EdgeWeightedGraph(object):
-  """Undirected weighter graph. Parallel edges and self-loops are permitted."""
-                                                  
-  def __init__(self, V, E=None):                  
-    if isinstance(V, int):
-      self._init_int(V, E)
-    else:
-      self._init_arr(V)
+from AlgsSedgewickWayne.Edge import Edge
 
-  def _init_V(self, V):
-    """Graph with V vertices and no Edges."""
-    if V < 0: raise Exception("Number of vertices must be nonnegative")
-    self._V = V
-    self._E = 0
-    self._adj = [set() for v in range(V)]
 
-  def _init_int(self, V, E):
-    """Graph with V vertices, randomly connected w/random weights."""
-    self._init_V(V)
-    if E < 0: raise Exception("Number of edges must be nonnegative")
-    for i in range(E):
-      v = random.randint(0, V) # get random int in [0, V)
-      w = random.randint(0, V)
-      weight = round(100 * random.uniform()) / 100.0
-      e = Edge(v, w, weight)
-      self.addEdge(e)
+class EdgeWeightedGraph:
+    """Undirected weighter graph. Parallel edges and self-loops are permitted."""
 
-  def _init_arr(self, arr):
-    self._init_V(arr[0])
-    self._E = arr[1]
-    if self._E < 0: raise Exception("Number of edges must be nonnegative")
-    for E in arr[2:]:
-      v = E[0]
-      w = E[1]
-      weight = E[2]
-      e = Edge(v, w, weight)
-      self.addEdge(e)
+    def __init__(self, V, E=None):
+        if isinstance(V, int):
+            self._init_int(V, E)
+        else:
+            self._init_arr(V)
 
-  def __copy__(self, G):
-    self._init_V(G.V())
-    self._E in G.E()
-    for v in range(G.V()):
-      # reverse so that adjacency list is in same order as original
-      reverse = [] # Stack<Edge>()
-      for e in G._adj[v]:
-        reverse.append(e) # push(e)
-      for e in reverse:
-        self._adj[v].add(e)
+    def _init_num_vertices(self, num_vertices):
+        """Graph with num_vertices vertices and no Edges."""
+        if num_vertices < 0:
+            raise Exception("Number of vertices must be nonnegative")
+        self.num_vertices = num_vertices  # Use instead of Java's V()
+        self.num_edges = 0                # Use instead of Java's E()
+        self._adj = [set() for v_src in range(num_vertices)]
 
-  def V(self): return self._V #number of vertices in this edge-weighted graph.
-  def E(self): return self._E # number of edges in this edge-weighted graph.
+    def _init_int(self, num_vertices, num_edges):
+        """Graph with num_vertices vertices, randomly connected w_dst/random weights."""
+        self._init_num_vertices(num_vertices)
+        if num_edges < 0:
+            raise Exception("Number of edges must be nonnegative")
+        for _ in range(num_edges):
+            v_src = random.randint(0, num_vertices) # get random int in [0, num_vertices)
+            w_dst = random.randint(0, num_vertices)
+            weight = random.uniform()
+            edge = Edge(v_src, w_dst, weight)
+            self.add_edge(edge)
 
-  def _validateVertex(self, v):
-    """raise an IndexOutOfBoundsException unless 0 <= v < V"""
-    if v < 0 or v >= self._V:
-      raise Exception("vertex {} is not between 0 and {}".format(v, (self._V-1)))
+    def _init_arr(self, arr):
+        self._init_num_vertices(arr[0])
+        self.num_edges = arr[1]
+        if self.num_edges < 0:
+            raise Exception("Number of edges must be nonnegative")
+        for num_edges in arr[2:]:
+            v_src = num_edges[0]
+            w_dst = num_edges[1]
+            weight = num_edges[2]
+            edge = Edge(v_src, w_dst, weight)
+            self.add_edge(edge)
 
-  def addEdge(self, e):
-    """Adds the undirected edge <tt>e</tt> to this edge-weighted graph."""
-    v = e.either()
-    w = e.other(v)
-    self._validateVertex(v)
-    self._validateVertex(w)
-    self._adj[v].add(e)
-    self._adj[w].add(e)
-    self._E += 1
+    def __copy__(self):
+        self._init_num_vertices(self.num_vertices)
+        self.num_edges in self.num_edges
+        for v_src in range(self.num_vertices):
+            # reverse so that adjacency list is in same order as original
+            reverse = [] # Stack<Edge>()
+            for edge in self._adj[v_src]:
+                reverse.append(edge) # push(edge)
+            for edge in reverse:
+                self._adj[v_src].add(edge)
 
-  def adj(self, v):
-    """Returns the edges incident on vertex v."""
-    self._validateVertex(v)
-    return self._adj[v]
+    def _validate_vertex(self, v_src):
+        """raise an IndexOutOfBoundsException unless 0 <= v_src < num_vertices"""
+        if v_src < 0 or v_src >= self.num_vertices:
+            raise Exception("vertex {} is not between 0 and {}".format(
+                v_src, (self.num_vertices-1)))
 
-  def degree(self, v):
-    """Returns the degree of vertex v."""
-    self._validateVertex(v)
-    return self._adj[v].size()
+    def add_edge(self, edge):
+        """Adds the undirected edge <tt>edge</tt> to this edge-weighted graph."""
+        v_src = edge.either()
+        w_dst = edge.other(v_src)
+        self._validate_vertex(v_src)
+        self._validate_vertex(w_dst)
+        self._adj[v_src].add(edge)
+        self._adj[w_dst].add(edge)
+        self.num_edges += 1
 
-  def edges(self):
-    """Returns all edges in this edge-weighted graph."""
-    bag = set()
-    for v in range(self._V):
-      selfLoops = 0
-      for e in self._adj[v]:
-        if e.other(v) > v:
-          bag.add(e)
-        # only add one copy of each self loop (self loops will be consecutive)
-        elif e.other(v) == v:
-          if selfLoops % 2 == 0: bag.add(e)
-          selfLoops += 1
-    return bag
+    def adj(self, v_src):
+        """Returns the edges incident on vertex v_src."""
+        self._validate_vertex(v_src)
+        return self._adj[v_src]
 
-  def __str__(self):
-    s = ["{} {}\n".format(self._V, self._E)]
-    for v in range(self._V):
-      s.append("{}: ".format(v))
-      for e in self._adj[v]:
-        s.append("{}  ".format(e))
-      s.append("\n")
-    return ''.join(s)
+    def degree(self, v_src):
+        """Returns the degree of vertex v_src."""
+        self._validate_vertex(v_src)
+        return self._adj[v_src].size()
 
-# Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
-# Copyright 2015-2019, DV Klopfenstein, Python port
+    def edges(self):
+        """Returns all edges in this edge-weighted graph."""
+        bag = set()
+        for v_src in range(self.num_vertices):
+            self_loops = 0
+            for edge in self._adj[v_src]:
+                if edge.other(v_src) > v_src:
+                    bag.add(edge)
+                # only add one copy of each self loop (self loops will be consecutive)
+                elif edge.other(v_src) == v_src:
+                    if self_loops % 2 == 0:
+                        bag.add(edge)
+                    self_loops += 1
+        return bag
+
+    def __str__(self):
+        txt = ["{} {}\n".format(self.num_vertices, self.num_edges)]
+        for v_src in range(self.num_vertices):
+            txt.append("{}: ".format(v_src))
+            for edge in self._adj[v_src]:
+                txt.append("{}  ".format(edge))
+            txt.append("\n")
+        return ''.join(txt)
+
+
+# Copyright 2002-present, Robert Sedgewick and Kevin Wayne.
+# Copyright 2015-present, DV Klopfenstein, Python port
