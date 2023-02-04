@@ -1,19 +1,20 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+"""Test Quick sort"""
+# pylint: disable=invalid-name
 
 from AlgsSedgewickWayne.Quick import Sort
 from AlgsSedgewickWayne.testcode.ArrayHistory import ArrayHistory
 from AlgsSedgewickWayne.testcode.InputArgs import cli_get_array
 
-def run(a):
-  desc = 'QUICKSORT'
-  ah = ArrayHistory()
-  Sort(a, array_history=ah)
-  ah.prt()
-  ah.show(desc)
-  print(desc, "RESULT:", a)
+def run(arr):
+    """Test Quick sort"""
+    desc = 'QUICKSORT'
+    ahist = ArrayHistory()
+    Sort(arr, array_history=ahist)
+    ahist.prt()
+    ahist.show(desc)
+    print(desc, "RESULT:", arr)
 
 
 if __name__ == '__main__':
-  run(cli_get_array("13 16 40 60 19 70 71 47 12 67"))
-
-
+    run(cli_get_array("13 16 40 60 19 70 71 47 12 67"))

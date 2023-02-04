@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """Small test utilities"""
 
-__copyright__ = "Copyright (C) 2020-present, DV Klopfenstein. All rights reserved."
-__author__ = "DV Klopfenstein"
+__copyright__ = "Copyright (C) 2020-present, DV Klopfenstein, PhD. All rights reserved."
+__author__ = "DV Klopfenstein, PhD"
 
 from os.path import join
 from os.path import dirname
 from os.path import abspath
 import sys
-import timeit
+from timeit import default_timer
 from datetime import timedelta
 
 
@@ -17,7 +17,7 @@ REPO = join(DIR_TEST, "..")
 
 def prt_hms(tic, msg, prt=sys.stdout):
     """Print elapsed time and return current time"""
-    toc = timeit.default_timer()
+    toc = default_timer()
     prt.write('{HMS} {MSG}\n'.format(HMS=str(timedelta(seconds=toc-tic)), MSG=msg))
     return toc
 
@@ -26,4 +26,4 @@ def repo_fn(fin):
     return join(REPO, fin)
 
 
-# Copyright (C) 2020-present, DV Klopfenstein. All rights reserved.
+# Copyright (C) 2020-present, DV Klopfenstein, PhD. All rights reserved.

@@ -6,3 +6,7 @@ pylint:
 
 clean:
 	rm -f tmp_pylint
+
+.PHONY: py
+py:
+	find . -name \*.py
