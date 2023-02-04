@@ -18,6 +18,7 @@ def test_substrsrc_bruteforce():
     #      01234567890
     txt = 'ABACADABRAC'
     pat =       'ABRA'
+    _chk_all(txt, 'BBBBBB', -1)
     _chk_all(txt, pat, 6)
     _timeit_all(txt, pat, num_runs)
 
