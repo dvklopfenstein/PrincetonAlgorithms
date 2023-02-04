@@ -17,16 +17,18 @@ class KMP: # O ~ txtlen + patlen * alphabet-size (wc)
         """Preprocesses the pat string."""
         self._pat = list(pat)
         self._len_pat = len(self._pat)
+        self._dfa = self._init_dfa()
 
-        # build DFA (Deterministic finite state automatom) from pat
-        self._dfa = defaultdict(lambda: [0 for i in range(self._len_pat)])
-        self._dfa[self._pat[0]][0] = 1
+    def _init_dfa(self):
+        """Build DFA (Deterministic finite state automatom) from pat"""
+        dfa = defaultdict(lambda: [0 for i in range(self._len_pat)])
+        dfa[self._pat[0]][0] = 1
         state_id = 0
         for pat_j, letter in enumerate(self._pat[1:], 1):
-            for key in self._dfa.keys():
-                self._dfa[key][pat_j] = self._dfa[key][state_id]  # Copy mismatch cases.
-            self._dfa[letter][pat_j] = pat_j+1  # Set match case.
-            state_id = self._dfa[letter][state_id]  # Update restart state.
+            for key in dfa.keys():
+                dfa[key][pat_j] = dfa[key][state_id]  # Copy mismatch cases.
+            dfa[letter][pat_j] = pat_j+1  # Set match case.
+            state_id = dfa[letter][state_id]  # Update restart state.
 
     def search(self, txt):
         """Returns the idx of the 1st occurrrence of the pattern string in the text string."""
