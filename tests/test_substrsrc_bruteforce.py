@@ -44,7 +44,7 @@ def test_substrsrc_bruteforce():
 # -----------------------------------------------------------------------
 def _timeit_all(txt, pat, num_runs):
     """Time all string searches for pattern in text"""
-    #return
+    return
     _timeit(txt, pat, num_runs, search_bf)
     _timeit(txt, pat, num_runs, search_bf_alt)
     _timekmp(txt, pat, num_runs)

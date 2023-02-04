@@ -35,7 +35,7 @@ class KMP: # O ~ txtlen + patlen * alphabet-size (wc)
         len_txt = len(txt)
         txt_i = 0
         pat_j = 0
-        while txt_i < len_txt & pat_j < len_pat:
+        while txt_i < len_txt && pat_j < len_pat:
             pat_j = self._dfa.get(txt[txt_i], self._miss)[pat_j]  # <----------------- no backup
             txt_i += 1
         if pat_j == len_pat:
