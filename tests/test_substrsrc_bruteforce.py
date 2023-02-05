@@ -41,6 +41,20 @@ def test_substrsrc_bruteforce():
     _chk_all(txt, pat, 6)
     _timeit_all(txt, pat, num_runs)
 
+    # Boyer-Moore: mismatched character heuristic
+    #      000000000011111111112222
+    #      012345678901234567890123
+    txt = 'FINDINAHAYSTACKNEEDLEINA'
+    pat =                'NEEDLE'
+    _chk_all(txt, pat, 15)
+    _timeit_all(txt, pat, num_runs)
+
+    # Rabin-Karp fingerprint search
+    #      0123456789012345
+    txt = '3141592653589793'
+    pat =       '26535'
+    _chk_all(txt, pat, 6)
+    _timeit_all(txt, pat, num_runs)
 
 # -----------------------------------------------------------------------
 def _timeit_all(txt, pat, num_runs):

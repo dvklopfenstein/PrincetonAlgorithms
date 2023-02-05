@@ -29,6 +29,7 @@ class KMP: # O ~ txtlen + patlen * alphabet-size (wc)
                 dfa[key][pat_j] = dfa[key][state_id]  # Copy mismatch cases.
             dfa[letter][pat_j] = pat_j+1  # Set match case.
             state_id = dfa[letter][state_id]  # Update restart state.
+        return dfa
 
     def search(self, txt):
         """Returns the idx of the 1st occurrrence of the pattern string in the text string."""
