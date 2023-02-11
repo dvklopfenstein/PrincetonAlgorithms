@@ -36,17 +36,16 @@ class KMP: # O ~ txtlen + patlen * alphabet-size (wc)
         # simulate operation of DFA on text
         dfa = self._dfa
         len_pat = self._len_pat
-        txt_i = 0
         pat_j = 0
 
         # Using a for-loop in Python is faster and emphasizes that there is no backup
         for txt_i, txt_chr in enumerate(txt):
-            ##pat_j = self._dfa.get(txt_chr, self._miss)[pat_j]  # <----------------- no backup
             pat_j = dfa[txt_chr][pat_j] if txt_chr in dfa else 0 # <----- no backup
+            # Found the pattern: leave text loop
             if pat_j == len_pat:
                 break
         if pat_j == len_pat:
-            return txt_i - len_pat + 1 # found
+            return txt_i - len_pat + 1 # found substring
 
         return -1                   # not found, originally return text size(len_txt)
 
