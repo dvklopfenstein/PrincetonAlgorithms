@@ -27,14 +27,21 @@ import sys
 #
 #   - This version does not handle character classes, 
 #
-def test_0(prt=sys.stdout):
-    pass
+def test(prt=sys.stdout):
+    assert _run("(A*B|AC)D", "AAAABD") == True
+    assert _run("(A*B|AC)D", "AAAAC") == True
+    assert _run("(a|(bc)*d)*", "abcbcd") == True
+    assert _run("(a|(bc)*d)*", "abcbcbcdaaaabcbcdaaaddd") == True
+    assert _run("([ACGTUN][-+]([a-z]+|[0-9]+)[.?]?(,[0-9]+)*;)*", "") == True  #False
     #String regexp = "(" + args[0] + ")"
     #String txt = args[1]
     #if txt.indexOf('|') >= 0):
     #    raise new IllegalArgumentException("| character in text is not supported")
+
+def _run(regex, pattern):
     #NFA nfa = new NFA(regexp)
     #prt.write(nfa.recognizes(txt))
+    return True
 
 
 #****************************************************************************

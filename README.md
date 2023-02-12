@@ -174,10 +174,10 @@ Key   4 GRAPHS                    Description                         DATA
  p  5.4 TrieST       multiway trie symbol table          shellsST.txt
  .    – TrieSET      multiway trie set                   shellsST.txt
  p  5.5 TST          ternary search trie                 shellsST.txt
- p  5.6 KMP          Knuth-Morris-Pratt substring search –
- p  5.7 BoyerMoore   Boyer-Moore substring search        –
- p  5.8 RabinKarp    Rabin-Karp substring search         –
- p  5.9 NFA          NFA for regular expressions         –
+ p  5.3 KMP          Knuth-Morris-Pratt substring search –
+ p  5.3 BoyerMoore   Boyer-Moore substring search        –
+ p  5.3 RabinKarp    Rabin-Karp substring search         –
+ p  5.4 NFA          NFA for regular expressions         –
  p    – GREP         grep                                –
  .    – BinaryDump   binary dump                         abra.txt
  .    – HexDump      hex dump                            abra.txt

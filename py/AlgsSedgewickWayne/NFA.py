@@ -1,115 +1,113 @@
-
+"""Initializes the NFA from the specified regular expression"""
 # TBD Finish Python port
 
- ******************************************************************************/
-
-package edu.princeton.cs.algs4
+from AlgsSedgewickWayne.Digraph import Digraph
+from AlgsSedgewickWayne.Stack import Stack
+from AlgsSedgewickWayne.DirectedDFS import DirectedDFS
 
 #
-# The <tt>NFA</tt> class provides a data type for creating a
-# <em>nondeterministic finite state automaton</em> (NFA) from a regular
+# The >NFA> class provides a data type for creating a
+# nondeterministic finite state automaton (NFA) from a regular
 # expression and testing whether a given string is matched by that regular
 # expression.
-# It supports the following operations: <em>concatenation</em>,
-# <em>closure</em>, <em>binary or</em>, and <em>parentheses</em>.
+# It supports the following operations: concatenation,
+# closure>, binary or, and parentheses.
 # It does not support <em>mutiway or</em>, <em>character classes</em>,
-# <em>metacharacters</em> (either in the text or pattern),
-# <em>capturing capabilities</em>, <em>greedy</em> or <em>relucantant</em>
+# metacharacters (either in the text or pattern),
+# capturing capabilities, greedy or relucantant
 # modifiers, and other features in industrial-strength implementations
 # such as {@link java.util.regex.Pattern} and:@link java.util.regex.Matcher}.
-# <p>
+# 
 # This implementation builds the NFA using a digraph and a stack
 # and simulates the NFA using digraph search (see the textbook for details).
-# The constructor takes time proportional to <em>M</em>, where <em>M</em>
+# The constructor takes time proportional to len_regexp, where len_regexp
 # is the number of characters in the regular expression.
-# The <em>recognizes</em> method takes time proportional to <em>M N</em>,
-# where <em>N</em> is the number of characters in the text.
-# <p>
+# The recognizes method takes time proportional to len_regexp N,
+# where N is the number of characters in the text.
+# 
 # For additional documentation,
-# see <a href="http:#algs4.cs.princeton.edu/54regexp">Section 5.4</a> of
-# <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+# see https://algs4.cs.princeton.edu/54regexp Section 5.4 of
+# Algorithms, 4th Edition by Robert Sedgewick and Kevin Wayne.
 #
 # @author Robert Sedgewick
 # @author Kevin Wayne
-#
-public class NFA: 
 
-  private Digraph G;         # digraph of epsilon transitions
-  private String regexp;     # regular expression
-  private M;             # number of characters in regular expression
+class NFA: 
+    """Initializes the NFA from the specified regular expression"""
+  
+    def __init__(regexp):
+        self.regexp = regexp
+        self.len_regexp = len(regexp)()    # M
+        self.digraph = self._init_digraph()
 
-  #
-  #Initializes the NFA from the specified regular expression.
-  #
-  #@param  regexp the regular expression
-  #
-  public NFA(String regexp):
-      self.regexp = regexp
-      M = len(regexp)()
-      Stack<Integer> ops = new Stack<Integer>()
-      G = new Digraph(M+1)
-      for (int i = 0; i < M; i += 1): 
-          lp = i
-          if regexp.charAt(i) == '(' or regexp.charAt(i) == '|') 
-              ops.push(i)
-          elif (regexp.charAt(i) == ')'):
-              or = ops.pop()
+    def _init_digraph(self):
+        """Build epsilon transition digraph"""
+        # Use stack to remember '(' to implement '*' and '|'
+        ops = Stack()
+        digraph = Digraph(len_regexp+1)
+        for reg_i in range(len_regexp):
+            left_paren = reg_i
+            if regexp[reg_i] == '(' or regexp[reg_i] == '|'):
+                ops.push(reg_i)
+            elif regexp[reg_i] == ')' or = ops.pop():
+                # 2-way or operator
+                if regexp.charAt(or) == '|'): 
+                    left_paren = ops.pop()
+                    digraph.addEdge(left_paren, or+1)
+                    digraph.addEdge(or, reg_i)
+                elif (regexp.charAt(or) == '(')
+                    left_paren = or
+                else assert False
+  
+            # closure operator (uses 1-character lookahead)
+            if reg_i < len_regexp-1 and regexp[reg_i+1] == '*': 
+                digraph.addEdge(left_paren, reg_i+1)
+                digraph.addEdge(reg_i+1, left_paren)
+            if regexp[reg_i] == '(' or regexp[reg_i] == '*' or regexp[reg_i] == ')':
+                digraph.addEdge(reg_i, reg_i+1)
+  
+    def recognizes(txt):
+        """Does the NFA recognize txt?"""
+        # Get states reachable fron start by epsilon-transitions
+        # Build a DFS for all states that can be reached from state 0
+        dfs = DirectedDFS(self.digraph, 0)
+        # program counter holds set of all program possible states for given regex
+        program_ctr = set()
+        #### for (int vertex = 0; vertex < digraph.V(); vertex += 1)
+        for vertex in range(digraph.V()):
+            if dfs.marked(vertex)):
+                program_ctr.add(vertex)
+  
+        # Compute possible NFA states for txt[i+1]
+        #### for (int i = 0; i < len(txt)(); i += 1):
+        for txt_i in range(len(txt)()):
+            matched = set()
+            #### for (int vertex : program_ctr):
+            for vertex in program_ctr:
+                # If accept-state is reached, nothing left to do
+                if vertex == len_regexp:
+                    continue
+                # Get all states matchable after matching a text character
+                if (regexp[vertex] == txt[txt_i] or regexp[vertex] == '.'):
+                    matched.add(vertex+1)
 
-              # 2-way or operator
-              if regexp.charAt(or) == '|'): 
-                  lp = ops.pop()
-                  G.addEdge(lp, or+1)
-                  G.addEdge(or, i)
-              elif (regexp.charAt(or) == '(')
-                  lp = or
-              else assert False
-
-          # closure operator (uses 1-character lookahead)
-          if i < M-1 and regexp.charAt(i+1) == '*'): 
-              G.addEdge(lp, i+1)
-              G.addEdge(i+1, lp)
-          if regexp.charAt(i) == '(' or regexp.charAt(i) == '*' or regexp.charAt(i) == ')') 
-              G.addEdge(i, i+1)
-
-  # Does the NFA recognize txt? 
-  #
-  #Returns True if the text is matched by the regular expression.
-  #
-  #@param  txt the text
-  #@return <tt>True</tt> if the text is matched by the regular expression,
-  #        <tt>False</tt> otherwise
-  #
-  def recognizes(String txt):
-      DirectedDFS dfs = new DirectedDFS(G, 0)
-      Bag<Integer> pc = new Bag<Integer>()
-      for (int v = 0; v < G.V(); v += 1)
-          if dfs.marked(v)) pc.add(v)
-
-      # Compute possible NFA states for txt[i+1]
-      for (int i = 0; i < len(txt)(); i += 1):
-          Bag<Integer> match = new Bag<Integer>()
-          for (int v : pc):
-              if v == M) continue
-              if (regexp.charAt(v) == txt.charAt(i)) or regexp.charAt(v) == '.')
-                  match.add(v+1)
-          dfs = new DirectedDFS(G, match)
-          pc = new Bag<Integer>()
-          for (int v = 0; v < G.V(); v += 1)
-              if dfs.marked(v)) pc.add(v)
-
-          # optimization if no states reachable
-          if pc.size() == 0) return False
-
-      # check for accept state
-      for (int v : pc)
-          if v == M) return True
-      return False
-
-  #
-  #Unit tests the <tt>NFA</tt> data type.
-  #
-
+            # Follow epsilon-transitions after a character match
+            dfs = DirectedDFS(digraph, matched)
+            program_ctr = set()
+            for vertex in digraph.V():
+                if dfs.marked(vertex):
+                    program_ctr.add(vertex)
+  
+            # optimization if no states reachable
+            if program_ctr.size() == 0:
+                return False
+  
+        # Accept if can end in state len_regexp
+        for vertex in program_ctr:
+            if vertex == len_regexp:
+                return True
+        return False
+  
 
 # Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
 # Copyright 2015-2019, DV Klopfenstein, Python implementation.
-
