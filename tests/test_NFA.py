@@ -1,8 +1,7 @@
 #!/usr/bin/env python
-# TBD Finish Python port
 
-import sys
-#from AlgsSedgewickWayne.NFA import NFA
+from sys import stdout
+from AlgsSedgewickWayne.NFA import NFA
 
 #****************************************************************************
 # Compilation:  javac NFA.java
@@ -27,9 +26,9 @@ import sys
 #
 #   - This version does not handle character classes, 
 #
-def test(prt=sys.stdout):
+def test_NFA(prt=stdout):
     assert _run("(A*B|AC)D", "AAAABD") == True
-    assert _run("(A*B|AC)D", "AAAAC") == True
+    assert _run("(A*B|AC)D", "AAAAC") == False
     assert _run("(a|(bc)*d)*", "abcbcd") == True
     assert _run("(a|(bc)*d)*", "abcbcbcdaaaabcbcdaaaddd") == True
     assert _run("([ACGTUN][-+]([a-z]+|[0-9]+)[.?]?(,[0-9]+)*;)*", "") == True  #False
@@ -38,16 +37,14 @@ def test(prt=sys.stdout):
     #if txt.indexOf('|') >= 0):
     #    raise new IllegalArgumentException("| character in text is not supported")
 
-def _run(regex, pattern):
-    #NFA nfa = new NFA(regexp)
-    #prt.write(nfa.recognizes(txt))
-    return True
+def _run(regexp, txt):
+    nfa = NFA(regexp)
+    return nfa.recognizes(txt)
 
 
 #****************************************************************************
 if __name__ == "__main__":
-    test_0()
+    test_NFA()
 
 # Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
-# Copyright 2015-2019, DV Klopfenstein, Python implementation.
-
+# Copyright 2015-present, DV Klopfenstein, PhD, Python implementation.
