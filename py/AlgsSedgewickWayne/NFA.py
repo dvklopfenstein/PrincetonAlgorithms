@@ -2,7 +2,6 @@
 # pylint: disable=invalid-name
 
 from AlgsSedgewickWayne.Digraph import Digraph
-from AlgsSedgewickWayne.Stack import Stack
 from AlgsSedgewickWayne.DirectedDFS import DirectedDFS
 
 #
@@ -38,20 +37,21 @@ class NFA:
     def __init__(self, regexp):
         self.regexp = regexp
         self.len_regexp = len(regexp)    # M
-        self.digraph = self._init_digraph()
+        self.digraph = self._init_digraph(regexp)
 
-    def _init_digraph(self):
+    def _init_digraph(self, regexp):
         """Build epsilon transition digraph"""
         # Use stack to remember '(' to implement '*' and '|'
-        ops = Stack()
+        ops = []
         len_regexp = self.len_regexp
         digraph = Digraph(len_regexp+1)
-        regexp = self.regexp
-        for reg_i in range(len_regexp):
+        exp_operations = {'(', '|'}
+        exp_edgechr = {'(', '*', ')'}
+        for reg_i, reg_chr in enumerate(self.regexp):
             left_paren = reg_i
-            if regexp[reg_i] == '(' or regexp[reg_i] == '|':
-                ops.push(reg_i)
-            elif regexp[reg_i] == ')':
+            if reg_chr in exp_operations:
+                ops.append(reg_i)
+            elif reg_chr == ')':
                 tmpor = ops.pop()
                 # 2-way or operator
                 if regexp[tmpor] == '|':
@@ -64,11 +64,12 @@ class NFA:
                     assert False
 
             # closure operator (uses 1-character lookahead)
-            if reg_i < len_regexp-1 and regexp[reg_i+1] == '*':
-                digraph.addEdge(left_paren, reg_i+1)
-                digraph.addEdge(reg_i+1, left_paren)
-            if regexp[reg_i] == '(' or regexp[reg_i] == '*' or regexp[reg_i] == ')':
-                digraph.addEdge(reg_i, reg_i+1)
+            reg_ip1 = reg_i + 1
+            if reg_i < len_regexp-1 and regexp[reg_ip1] == '*':
+                digraph.addEdge(left_paren, reg_ip1)
+                digraph.addEdge(reg_ip1, left_paren)
+            if reg_chr in exp_edgechr:
+                digraph.addEdge(reg_i, reg_ip1)
         return digraph
 
     def recognizes(self, txt):
