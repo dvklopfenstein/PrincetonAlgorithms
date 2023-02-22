@@ -15,3 +15,4 @@ pylint:
 
 clean:
 	rm -f tmp_pylint
+	rm -f *.png
