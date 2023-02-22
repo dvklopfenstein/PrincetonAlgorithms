@@ -19,38 +19,28 @@ def test_regex_is_exponential():
         "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac",
     ]
 
-    # -----------------------------------------------------------------
-    # Testing the speed of an NFA for regular expression pattern matching
-    #
-    # pylint: disable=line-too-long
-    #
-    # H:Min:Seconds  Description
-    # -:--:--------- -------------------------------------------------------------------------------
-    # 0:00:00.000399 Python NFA: FOUND(False) REGEX((a|aa)*b) TXT(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaac)
-    # 0:00:00.000360 Python NFA: FOUND(False) REGEX((a|aa)*b) TXT(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac)
-    # 0:00:00.000410 Python NFA: FOUND(False) REGEX((a|aa)*b) TXT(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac)
-    # 0:00:00.000392 Python NFA: FOUND(False) REGEX((a|aa)*b) TXT(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac)
-    # 0:00:00.000407 Python NFA: FOUND(False) REGEX((a|aa)*b) TXT(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac)
-    # 0:00:00.000446 Python NFA: FOUND(False) REGEX((a|aa)*b) TXT(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac)
+    # H MM SECONDS  Result Searching method                  Text on which to test for regex pattern
+    # - -- -------- ------ --------------------------------  ----------------------------------------
+    # 0:00:00.000436 False Python NFA("(a|aa)*b")            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaac
+    # 0:00:00.000374 False Python NFA("(a|aa)*b")            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac
+    # 0:00:00.000388 False Python NFA("(a|aa)*b")            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac
+    # 0:00:00.000489 False Python NFA("(a|aa)*b")            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac
+    # 0:00:00.000469 False Python NFA("(a|aa)*b")            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac
+    # 0:00:00.001158 False Python NFA("(a|aa)*b")            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac
+    # 
     regexp = "(a|aa)*b"
     _prt_hdr()
     for txt in txts:
         _run_nfa(regexp, txt)
 
-    # -----------------------------------------------------------------
-    # Testing the speed of Python re for regular expression pattern matching
-    #
-    # Pythonn's regex (so is grep's regex) is exponential, not len_txt*len_regex:
-    # (Exponential time if add just one thing to txt and running time doubles)
-    #
-    # H:Min:Seconds  Description
-    # -:--:--------- -------------------------------------------------------------------------------
-    #   0:00:02.013926 FOUND(False REGEX(re.compile('(a|aa)*b')) TXT(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaac)
-    #   0:00:05.301577 FOUND(False REGEX(re.compile('(a|aa)*b')) TXT(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac)
-    #   0:00:13.865646 FOUND(False REGEX(re.compile('(a|aa)*b')) TXT(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac)
-    #   0:00:37.574015 FOUND(False REGEX(re.compile('(a|aa)*b')) TXT(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac)
-    #   0:01:35.558015 FOUND(False REGEX(re.compile('(a|aa)*b')) TXT(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac)
-    #   0:04:13.938403 FOUND(False REGEX(re.compile('(a|aa)*b')) TXT(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac)
+    # H MM SECONDS  Result Searching method                  Text on which to test for regex pattern
+    # - -- -------- ------ --------------------------------  ----------------------------------------
+    # 0:00:02.130942 False Python re(re.compile('(a|aa)*b')) aaaaaaaaaaaaaaaaaaaaaaaaaaaaaac
+    # 0:00:05.454958 False Python re(re.compile('(a|aa)*b')) aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac
+    # 0:00:15.768528 False Python re(re.compile('(a|aa)*b')) aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac
+    # 0:00:38.932166 False Python re(re.compile('(a|aa)*b')) aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac
+    # 0:01:45.282705 False Python re(re.compile('(a|aa)*b')) aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac
+    # 0:05:02.419219 False Python re(re.compile('(a|aa)*b')) aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac
     regex = re.compile(r"(a|aa)*b")
     for txt in txts:
         _run_re(regex, txt)
