@@ -20,9 +20,12 @@ def test_regex_is_exponential():
     ]
 
     # -----------------------------------------------------------------
-    print("\nTesting the speed of an NFA for regular expression pattern matching:")
+    # Testing the speed of an NFA for regular expression pattern matching
     #
     # pylint: disable=line-too-long
+    #
+    # H:Min:Seconds  Description
+    # -:--:--------- -------------------------------------------------------------------------------
     # 0:00:00.000399 Python NFA: FOUND(False) REGEX((a|aa)*b) TXT(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaac)
     # 0:00:00.000360 Python NFA: FOUND(False) REGEX((a|aa)*b) TXT(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac)
     # 0:00:00.000410 Python NFA: FOUND(False) REGEX((a|aa)*b) TXT(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac)
@@ -30,15 +33,18 @@ def test_regex_is_exponential():
     # 0:00:00.000407 Python NFA: FOUND(False) REGEX((a|aa)*b) TXT(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac)
     # 0:00:00.000446 Python NFA: FOUND(False) REGEX((a|aa)*b) TXT(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac)
     regexp = "(a|aa)*b"
+    _prt_hdr()
     for txt in txts:
         _run_nfa(regexp, txt)
 
     # -----------------------------------------------------------------
-    print("\nTesting the speed of Python re for regular expression pattern matching:")
+    # Testing the speed of Python re for regular expression pattern matching
     #
     # Pythonn's regex (so is grep's regex) is exponential, not len_txt*len_regex:
     # (Exponential time if add just one thing to txt and running time doubles)
-    # pylint: disable=line-too-long
+    #
+    # H:Min:Seconds  Description
+    # -:--:--------- -------------------------------------------------------------------------------
     #   0:00:02.013926 FOUND(False REGEX(re.compile('(a|aa)*b')) TXT(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaac)
     #   0:00:05.301577 FOUND(False REGEX(re.compile('(a|aa)*b')) TXT(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac)
     #   0:00:13.865646 FOUND(False REGEX(re.compile('(a|aa)*b')) TXT(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac)
@@ -53,15 +59,21 @@ def _run_nfa(regexp, txt):
     tic = default_timer()
     nfa = NFA(regexp)
     matched = nfa.recognizes(txt)
-    prt_hms(tic, f'Python NFA: FOUND({matched}) REGEX({regexp}) TXT({txt})')
+
+    prt_hms(tic, f'{str(matched):5} Python NFA("{regexp}")            {txt}')
     return matched
 
 def _run_re(regexp, txt):
+    """Speed test Python's regex package (re)"""
     tic = default_timer()
     result = regexp.search(txt)
     matched = result is not None
-    prt_hms(tic, f'Python re: FOUND({matched}) REGEX({regexp}) TXT({txt})')
+    prt_hms(tic, f'{str(matched):5} Python re({regexp}) {txt}')
     return matched
+
+def _prt_hdr():
+    print('H MM SECONDS  Result Searching method                  Text on which to test for regex pattern')
+    print('- -- -------- ------ --------------------------------  ----------------------------------------')
 
 
 #****************************************************************************
