@@ -1,28 +1,25 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+"""Test sort using Bentley-McIlroy 3-way partitioning scheme choosing w/Tukey's #"""
+# pylint: disable=invalid-name
 
-import unittest
-from AlgsSedgewickWayne.QuickX import *
-from AlgsSedgewickWayne.testcode.ArrayHistory import *
+from AlgsSedgewickWayne.QuickX import Sort
+from AlgsSedgewickWayne.testcode.ArrayHistory import ArrayHistory
 
-import random
 
-class Merge_Tests(unittest.TestCase):
-
-  def test_1(self):
+def test_quickx():
+    """Test sort using Bentley-McIlroy 3-way partitioning scheme choosing w/Tukey's #"""
     # (seed = 183182)
     # Give the array that results after the first 4 exchanges when
     # selection sorting the following array:
     desc = 'QUICKX'
-    a = map(int, "13 16 40 60 19 70 71 47 12 67".split() )
-    ah = ArrayHistory()
-    Sort(a, array_history=ah)
-    print(desc, "RESULT", a)
+    arr = [int(i) for i in "13 16 40 60 19 70 71 47 12 67".split()]
+    arrhist = ArrayHistory()
+    Sort(arr, array_history=arrhist)
+    print(desc, "RESULT", arr)
     # TBD: Implement array history visualization
     # prt_array_history(array_history)
     # show_array_history(desc, array_history)
     print('')
 
 if __name__ == '__main__':
-  unittest.main()
-
-
+    test_quickx()
