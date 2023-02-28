@@ -20,6 +20,7 @@ class Digraph:
         elif 'adjtxt' in kwargs:
             self._adj = adjtxtblk2OrderedDict(kwargs['adjtxt'])
             self.num_vertices = len(self._adj)
+            # pylint: disable=line-too-long
             self.num_edges = len(set(tuple(sorted([v, w])) for v, ws in self._adj.items() for w in ws))
             self.keys = self._adj.keys()
 
@@ -101,6 +102,13 @@ class Digraph:
 
     def wr_png(self, fout_png="Digraph.png", prt=sys.stdout, **kwargs):
         """Make a png showing a diagram of the connected components."""
+        dot_digraph = self.get_pydot_digraph()
+        # pylint: disable=no-member
+        dot_digraph.write_png(fout_png)
+        prt.write("  WROTE: {}\n".format(fout_png))
+
+    def get_pydot_digraph(self):
+        """Make a pydot graph showing a diagram of the connected components."""
         import pydot
         # 1. Create/initialize Graph
         digraph = pydot.Dot(graph_type='digraph') # Undirected Graph
@@ -113,17 +121,15 @@ class Digraph:
         for src_v, dst_w in self.get_edges():
             if src_v != dst_w: # Print only edges from one node to another (not to self)
                 digraph.add_edge(pydot.Edge(src_v, dst_w))
-        # 5. Write Graph to png file
-        # pylint: disable=no-member
-        digraph.write_png(fout_png)
-        prt.write("  WROTE: {}\n".format(fout_png))
+        return digraph
 
     def get_edges(self):
         """Get all the edges of this directed graph"""
         edges = set()
         for src_v in self.keys:
             for dst_w in self._adj[src_v]:
-                edges.add(tuple(sorted([src_v, dst_w])))
+                ###edges.add(tuple(sorted([src_v, dst_w])))
+                edges.add(tuple([src_v, dst_w]))
         return edges
 
  #*****************************************************************************/
@@ -173,4 +179,4 @@ class Digraph:
 # ANSWER: An Euler tour
 
 #  Copyright 2002-present, Robert Sedgewick and Kevin Wayne.
-#  Copyright 2015-present, DV Klopfenstein, Python implementation
+#  Copyright 2015-present, DV Klopfenstein, PhD, Python implementation
