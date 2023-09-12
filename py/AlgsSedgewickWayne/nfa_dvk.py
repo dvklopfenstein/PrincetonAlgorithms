@@ -5,6 +5,7 @@ from AlgsSedgewickWayne.digraph_dvk import Digraph
 from AlgsSedgewickWayne.directed_dfs import DirectedDFS
 
 
+# pylint: disable=too-few-public-methods
 class ReferenceItNFA:
     """Initializes the NFA from the specified regular expression"""
 
@@ -24,41 +25,47 @@ class ReferenceItNFA:
         exp_operations = {'(', '|'}
         exp_edgechr = {'(', '*', ')'}
         for reg_i, reg_chr in enumerate(regexp):
-            # self._prt_color_regex(reg_i, reg_chr)
-            left_paren = reg_i
+            # idx_lparen_or_chr holds the index of '(' or the index of a character that is NOT ')'
+            idx_lparen_or_chr = reg_i
+            # Save current index if current chr is an operator Ex: ( |
             if reg_chr in exp_operations:
                 ops.append(reg_i)
+            # If it is the end of an operation
             elif reg_chr == ')':
-                tmpor = ops.pop()
+                idx_operbegin = ops.pop()
                 # 2-way or operator
-                if regexp[tmpor] == '|':
-                    left_paren = ops.pop()
-                    digraph.add_edge(left_paren, tmpor+1)
-                    digraph.add_edge(tmpor, reg_i)
-                elif regexp[tmpor] == '(':
-                    left_paren = tmpor
+                if regexp[idx_operbegin] == '|':
+                    idx_lparen_or_chr = ops.pop()
+                    digraph.add_edge(idx_lparen_or_chr, idx_operbegin+1)
+                    digraph.add_edge(idx_operbegin, reg_i)
+                elif regexp[idx_operbegin] == '(':
+                    idx_lparen_or_chr = idx_operbegin
                 else:
                     assert False
+            self._prt_color_regex(reg_i, reg_chr, idx_lparen_or_chr)
 
             # closure operator (uses 1-character lookahead)
             reg_i_plus1 = reg_i + 1
             if reg_i < len_regexp-1 and regexp[reg_i_plus1] == '*':
-                # print(f'************ {left_paren} {reg_i_plus1}')
-                # print(f'************ {reg_i_plus1} {left_paren}')
-                digraph.add_edge(left_paren, reg_i_plus1)
-                digraph.add_edge(reg_i_plus1, left_paren)
+                print(f'************ {idx_lparen_or_chr} {reg_i_plus1}')
+                print(f'************ {reg_i_plus1} {idx_lparen_or_chr}')
+                digraph.add_edge(idx_lparen_or_chr, reg_i_plus1)
+                digraph.add_edge(reg_i_plus1, idx_lparen_or_chr)
+            # Add an edge to next chr in regex pattern if current chr is an edge. Ex: ( * )
             if reg_chr in exp_edgechr:
                 digraph.add_edge(reg_i, reg_i_plus1)
         return digraph
 
-    def _prt_color_regex(self, reg_i, reg_chr):
+    def _prt_color_regex(self, reg_i, reg_chr, idx_lparen_or_chr):
         regex = list(self.regexp)
+        # pylint: disable=consider-using-f-string
         regex[reg_i] = '\x1b[48;5;0;{FGBG};5;{COLOR};1;3;4m{ABC}\x1b[0m'.format(
             FGBG=38, COLOR=13, ABC=regex[reg_i])
-        print(f'REGEX {reg_i:2}) {reg_chr} {"".join(regex)}')
+        print(f'{" "*30} REGEX {reg_i:2}:     {reg_chr}     {"".join(regex)}   '
+              f'{idx_lparen_or_chr}({regex[idx_lparen_or_chr]})')
 
     def recognizes(self, txt):
-        """Does the NFA recognize txt?"""
+        """Answer this: Does the NFA recognize txt?"""
         # Get states reachable from start by epsilon-transitions
         # program counter holds set of all program possible states for given regex
         # Build a DFS for all states that can be reached from state 0 by epsilon edges
@@ -70,7 +77,7 @@ class ReferenceItNFA:
         len_regexp = self.len_regexp
         digraph = self.digraph
         for idx, txt_chr in enumerate(txt):
-            print(f'{txt_chr}')
+            print(f'\nTEXT CHR: {txt_chr}')
             matched = set()
             for vertex in reachable_states:
                 # If accept-state is reached, nothing left to do

@@ -12,11 +12,23 @@ def test_reference_it_nfa():
     regex = "((MI*)*)"
     nfa = ReferenceItNFA(regex)
 
+    pat = r"(\d+)([MIDNSHP=XB])"
+    print(f'\n{pat}')
+    print('\nMMII')
     print(nfa.recognizes("MMII"))
+    print('\nMII')
     print(nfa.recognizes("MII"))
+    print('\nMI')
     print(nfa.recognizes("MMI"))
+
+def test_reference_it_nfa2():
+    """Test non-deterministic finate state automata (machine)"""
+    regex = "((d+)(M))"
+    regex = "((22*)(M))"
+    nfa = ReferenceItNFA(regex)
+    print(nfa.recognizes("2M"))
 
 
 #****************************************************************************
 if __name__ == "__main__":
-    test_reference_it_nfa()
+    test_reference_it_nfa2()
