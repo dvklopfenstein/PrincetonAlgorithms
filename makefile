@@ -1,9 +1,9 @@
 .PHONY: py
 py:
-	fine tests py -name \*.py
+	find tests AlgsSedgewickWayne -name \*.py
 
 p:
-	find py -name \*.py
+	find AlgsSedgewickWayne -name \*.py
 
 t:
 	find tests -name \*.py
