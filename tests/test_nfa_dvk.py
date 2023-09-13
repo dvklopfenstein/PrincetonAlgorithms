@@ -26,7 +26,7 @@ def test_reference_it_nfa2():
     regex = "((d+)(M))"
     regex = "((AA*)(M))"
     nfa = ReferenceItNFA(regex)
-    print(nfa.recognizes("AAAM"))
+    print(nfa.recognizes("AAAMBBBBM"))
 
 
 #****************************************************************************
