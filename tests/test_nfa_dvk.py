@@ -24,9 +24,9 @@ def test_reference_it_nfa():
 def test_reference_it_nfa2():
     """Test non-deterministic finate state automata (machine)"""
     regex = "((d+)(M))"
-    regex = "((22*)(M))"
+    regex = "((AA*)(M))"
     nfa = ReferenceItNFA(regex)
-    print(nfa.recognizes("2M"))
+    print(nfa.recognizes("AAAM"))
 
 
 #****************************************************************************

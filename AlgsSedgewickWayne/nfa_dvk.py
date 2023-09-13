@@ -66,33 +66,39 @@ class ReferenceItNFA:
 
     def recognizes(self, txt):
         """Answer this: Does the NFA recognize txt?"""
+        regexp = self.regexp + 'Z'
+        self._prt_regex(regexp)
+
         # Get states reachable from start by epsilon-transitions
         # program counter holds set of all program possible states for given regex
         # Build a DFS for all states that can be reached from state 0 by epsilon edges
         reachable_states = DirectedDFS.from_state0(self.digraph).get_reachable_states()
-        print(f'\n{len(reachable_states)} REACHABLE INIT STATES: {reachable_states}')
+        self._prt_state_names0(reachable_states, regexp)
 
         # Compute possible NFA states for txt[i+1]
-        regexp = self.regexp + 'Z'
         len_regexp = self.len_regexp
         digraph = self.digraph
         for idx, txt_chr in enumerate(txt):
             print(f'\nTEXT CHR: {txt_chr}')
             matched = set()
             for vertex in reachable_states:
+                state_name = regexp[vertex]
                 # If accept-state is reached, nothing left to do
                 if vertex == len_regexp:
-                    print(f'continue vertex({vertex})')
+                    print(f'STATE_CHECK: continue vertex({vertex})')
                     #continue
                 # Get all states matchable after matching a text character
-                elif (regexp[vertex] == txt_chr or regexp[vertex] == '.'):
-                    print(f'matched.add({vertex+1})')
+                elif (state_name == txt_chr or state_name == '.'):
+                    print(f'STATE_CHECK: MTCH {vertex}:{regexp[vertex]} matched.add {vertex+1}:{regexp[vertex+1]} ')
                     matched.add(vertex+1)
+                elif state_name == '(':
+                    print(f'STATE_CHECK: SAVE {vertex}:{regexp[vertex]} ')
+                else:
+                    print(f'STATE_CHECK: None {vertex}:{regexp[vertex]} ')
 
             # Follow epsilon-transitions after a character match
             reachable_states = DirectedDFS.from_sources(digraph, matched).get_reachable_states()
-            states = [regexp[i] for i in sorted(reachable_states)]
-            print(f'txt[{idx}]({txt_chr}): reachable_states({states})')
+            self._prt_state_names(idx, txt_chr, reachable_states, regexp)
 
             # optimization if no states reachable
             if not reachable_states:
@@ -102,3 +108,22 @@ class ReferenceItNFA:
         # Accept if can end in state len_regexp
         print(f'ACCEPT({len_regexp in reachable_states})')
         return len_regexp in reachable_states
+
+    @staticmethod
+    def _prt_regex(regexp):
+        """Print REGEXP plus ruler"""
+        ruler = ''.join(f'{i%10}' for i, _ in enumerate(regexp))
+        print(f'RULER:  {ruler}')
+        print(f'REGEXP: {regexp}')
+
+    @staticmethod
+    def _prt_state_names(idx, txt_chr, reachable_states, regexp):
+        """Print reachable states"""
+        states = [f'{i}:{regexp[i]}' for i in sorted(reachable_states)]
+        print(f'txt[{idx}]({txt_chr}): reachable_states({states})')
+
+    @staticmethod
+    def _prt_state_names0(reachable_states, regexp):
+        """Print reachable states"""
+        states = [f'{i}:{regexp[i]}' for i in sorted(reachable_states)]
+        print(f'INIT reachable_states({states})')
