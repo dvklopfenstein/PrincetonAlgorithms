@@ -3,58 +3,61 @@
 from AlgsSedgewickWayne.BaseComp import BaseComp
 
 class WeightedQuickUnionUF(BaseComp):
-  """ UNION FIND: Weighted Quick-union [lazy approach] to avoid tall trees."""
+    """ UNION FIND: Weighted Quick-union [lazy approach] to avoid tall trees."""
 
-  def __init__(self, N):     # $ = N
-    """Initialize union-find data structure w/N objects (0 to N-1)."""
-    super(WeightedQuickUnionUF, self).__init__("WeightedQuickUnionUF")
-    self.ID = list(range(N)) # Set if of each object to itself.
-    # Keep track of SIZE(# objects in tree) of each tree rooted at i
-    self.SZ = [1]*N # Needed to determine which tree is smaller/bigger
+    def __init__(self, N):     # $ = N
+        """Initialize union-find data structure w/N objects (0 to N-1)."""
+        super(WeightedQuickUnionUF, self).__init__("WeightedQuickUnionUF")
+        self.idvals = list(range(N)) # Set if of each object to itself.
+        # Keep track of SIZE(# objects in tree) of each tree rooted at i
+        self.size = [1]*N # Needed to determine which tree is smaller/bigger
 
-  def _root(self, i):
-    """Chase parent pointers until reach root."""
-    d = 0 # Used for informative prints for educational purposes
-    while i != self.ID[i]: # depth of i array accesses
-      i = self.ID[i]
-      d += 1
-    return BaseComp.NtRoot(rootnode=i, depth=d)
+    def connected(self, p_id, q_id): # $ = lg N
+        """Return if p and q are in the same connected component (i.e. have the same root)."""
+        return self._root(p_id).rootnode == self._root(q_id).rootnode
+        # Runs depth of p & q array accesses
 
-  def connected(self, p, q): # $ = lg N
-    """Return if p and q are in the same connected component (i.e. have the same root)."""
-    return self._root(p).rootnode == self._root(q).rootnode # Runs depth of p & q array accesses
+    def union(self, p_id, q_id):     # $ = lg N
+        """Add connection between p_id and q_id."""
+        # Runs Depth of p_id and q_id array accesses...
+        p_root = self._root(p_id).rootnode
+        q_root = self._root(q_id).rootnode
+        if p_root == q_root:
+            return
+        # IMPROVEMENT #1: Modification to Quick-Union to make it weighted: 4:03
+        # Balance trees by linking root of smaller tree to root of larger tree
+        #   Modified quick-union:
+        #     * Link root of smaller tree to root of larger tree.
+        #     * Update the SZ[] array.
+        #   Each union involves changing only one array entry
+        if self.size[p_root] < self.size[q_root]: # Make ID[p_root] a child of q_root
+            # link root of smaller tree(p_root) to root of larger tree(q_root)
+            self.idvals[p_root] = q_root
+            self.size[q_root] += self.size[p_root] # Larger tree size increases
+        else: # Make ID[q_root] a child of p_root
+            # link root of smaller tree(q_root) to root of larger tree(p_root)
+            self.idvals[q_root] = p_root
+            self.size[p_root] += self.size[q_root]
 
-  def union(self, p, q):     # $ = lg N
-    """Add connection between p and q."""
-    # Runs Depth of p and q array accesses...
-    p_root = self._root(p).rootnode
-    q_root = self._root(q).rootnode
-    if p_root == q_root:
-      return
-    # IMPROVEMENT #1: Modification to Quick-Union to make it weighted: 4:03
-    # Balance trees by linking root of smaller tree to root of larger tree
-    #   Modified quick-union:
-    #     * Link root of smaller tree to root of larger tree.
-    #     * Update the SZ[] array.
-    #   Each union involves changing only one array entry
-    if self.SZ[p_root] < self.SZ[q_root]: # Make ID[p_root] a child of q_root
-      self.ID[p_root] = q_root # link root of smaller tree(p_root) to root of larger tree(q_root)
-      self.SZ[q_root] += self.SZ[p_root] # Larger tree size increases
-    else: # Make ID[q_root] a child of p_root 
-      self.ID[q_root] = p_root # link root of smaller tree(q_root) to root of larger tree(p_root)
-      self.SZ[p_root] += self.SZ[q_root]
+    def _root(self, val):
+        """Chase parent pointers until reach root."""
+        depth = 0 # Used for informative prints for educational purposes
+        while val != self.idvals[val]: # depth of val array accesses
+            val = self.idvals[val]
+            depth += 1
+        return BaseComp.NtRoot(rootnode=val, depth=depth)
 
-  def __str__(self):
-    """Print the size vector as well as the ID vector."""
-    return '\n'.join([
-        super(WeightedQuickUnionUF, self).__str__(),
-        "siz: " + ' '.join('{SZ:>2}'.format(SZ=e) for e in self.SZ)])
+    def __str__(self):
+        """Print the size vector as well as the ID vector."""
+        return '\n'.join([
+            super(WeightedQuickUnionUF, self).__str__(),
+            "siz: " + ' '.join(f'{e:>2}' for e in self.size)])
 
 # algorithm   init  union  find
 # ----------- ----  -----  ----
 # quick-find    N     N     1
 # quick-union   N     N*    N <- worst case, if tree is tall
-# weighted QU   N  lg N  lg N 
+# weighted QU   N  lg N  lg N
 
 #--------------------------------------------------------------------------
 # Lecture Week 1 Union-Find: Dynamic Connectivity (10:22)

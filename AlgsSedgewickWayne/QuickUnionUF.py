@@ -3,32 +3,35 @@
 from AlgsSedgewickWayne.BaseComp import BaseComp
 
 class QuickUnionUF(BaseComp):
-  """Union command is Quick."""
+    """Union command is Quick."""
 
-  def __init__(self, N):     # $ = N
-    """Set if of each object to itself."""
-    super(QuickUnionUF, self).__init__("QuickUnionUF")
-    self.ID = range(N) # Runs N array accesses
+    def __init__(self, N):           # $ = N
+        """Set if of each object to itself."""
+        super().__init__("QuickUnionUF")
+        self.idvals = list(range(N)) # Runs N array accesses
 
-  def _root(self, i):
-    """Chase parent pointers until reach root."""
-    while i != self.ID[i]: # Runs the depth of i array accesses
-      i = self.ID[i] # Move i up one level of the tree
-    return i # Found root: ID[i] == i
+    def connected(self, p_id, q_id): # $ = N
+        """Check if p and q have the same root."""
+        return self._root(p_id) == self._root(q_id) # Runs the depth of p & q array accesses
 
-  def connected(self, p, q): # $ = N
-    """Check if p and q have the same root."""
-    return self._root(p) == self._root(q) # Runs the depth of p & q array accesses
+    def union(self, p_id, q_id):     # $ = N
+        """Change root of p to point to root of q: Changes only 1 array entry."""
+        p_root = self._root(p_id)
+        q_root = self._root(q_id)
+        self.idvals[p_root] = q_root
 
-  def union(self, p, q): #     $ = N
-    """Change root of p to point to root of q: Changes only 1 array entry."""
-    p_root = self._root(p)
-    q_root = self._root(q)
-    self.ID[p_root] = q_root
+    def _root(self, val):
+        """Chase parent pointers until reach root."""
+        while val != (parent := self.idvals[val]): # Runs the depth of val array accesses
+            ## val = self.idvals[val]     # Move val up one level of the tree
+            ## print(f'VAL({val}) PARENT: {parent}')
+            val = parent     # Move val up one level of the tree
+        ## print(f'PARENT: {val}')
+        return val # Found root: ID[val] == val
 
 # 06:58 QUICK-UNION IS ALSO TOO SLOW
 #
-# COST MODEL. Number of array accesses (fro read or write).
+# COST MODEL. Number of array accesses (for read or write).
 # algorithm   init union find
 # quick-find    N    N    1
 # quick-union   N    N*   N <- worst case, if tree is tall
@@ -47,7 +50,7 @@ class QuickUnionUF(BaseComp):
 #  """ Quick-union [lazy approach].
 #
 #      Uses a rooted tree.  Each element is in a rooted tree.
-#      Each item can be assoiciated with a root.
+#      Each item can be associated with a root.
 #  """
 # --------------------------------------------------------------
 # Lecture Week 1 "Quick Union"(7:50)
@@ -250,4 +253,4 @@ class QuickUnionUF(BaseComp):
 
 
 #  Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
-#  Copyright 2015-2019, DV Klopfenstein, Python implementation
+#  Copyright 2015-2019, DV Klopfenstein, PhD, Python implementation

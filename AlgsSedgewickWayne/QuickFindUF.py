@@ -3,29 +3,30 @@
 from AlgsSedgewickWayne.BaseComp import BaseComp # Base class is for visualization
 
 class QuickFindUF(BaseComp): # Eager Approach
-  """ Quickly find if two components are connected."""
+    """ Quickly find if two components are connected."""
 
-  def __init__(self, N): #     $ = N               i        0 1 2 3 4 5 6 7 8 9
-    """Init ID value of each index i, to i: i.e. ID[0:9] = [0 1 2 3 4 5 6 7 8 9]."""
-    super(QuickFindUF, self).__init__("QuickFindUF")
-    self.ID = range(N) # N array accesses (wo/comprehension)
+    def __init__(self, N): #     $ = N                 i        0 1 2 3 4 5 6 7 8 9
+        """Init ID value of each index i, to i: i.e. ID[0:9] = [0 1 2 3 4 5 6 7 8 9]."""
+        super(QuickFindUF, self).__init__("QuickFindUF")
+        self.idvals = list(range(N)) # N array accesses (wo/comprehension)
 
-  def connected(self, p, q): # $ = 1
-    """ FIND whether p and q are in the same component."""
-    return self.ID[p] == self.ID[q] # 2 array accesses
+    def connected(self, p_id, q_id): # $ = 1
+        """ FIND whether p_id and q_id are in the same component."""
+        return self.idvals[p_id] == self.idvals[q_id] # 2 array accesses
 
-  def union(self, p, q): #     $ = N
-    """ UNION by changing all entries with id[p] to id[q]."""
-    pID = self.ID[p] # Change all IDs having value, pID, to...
-    qID = self.ID[q] # to qID
-    for i, curr_ID in enumerate(self.ID):
-      # At most 2N + 2 array accesses; 2N: 1st in for-loop above, 2nd in assignment below
-      if curr_ID == pID: # Common mistake many make is to put ID[p] instead of pID
-        self.ID[i] = qID
+    def union(self, p_id, q_id): #         $ = N
+        """ UNION by changing all entries with id[p_id] to id[q_id]."""
+        p_root = self.idvals[p_id] # Change all IDs having value, p_root, to...
+        q_root = self.idvals[q_id] # to q_root
+        for curr_id, curr_root in enumerate(self.idvals):
+            # At most 2N + 2 array accesses; 2N: 1st in for-loop above, 2nd in assignment below
+            if curr_root == p_root: # Common mistake many make is to put idvals[p_id] instead of p_root
+            ## if curr_root == self.idvals[p_id]: # Common mistake many make is to put idvals[p_id] instead of p_root
+                self.idvals[curr_id] = q_root
 
-  def _root(self, p):
-    """Return root of node p."""
-    return self.ID[p]
+    def _root(self, val):
+        """Return root of node p_id."""
+        return self.idvals[val]
 
 
 # Algorithm   init union find
@@ -54,10 +55,10 @@ class QuickFindUF(BaseComp): # Eager Approach
 #   5--6  7  8  9
 #
 # 01:51
-# FIND: Check if p and q have the same id.
+# FIND: Check if p and qval have the same id.
 #
-# UNION: To merge components containing p and q, change all
-#        entries whose id equals id[p] to id[q]
+# UNION: To merge components containing p and qval, change all
+#        entries whose id equals id[p] to id[qval]
 #
 # union(6, 1):
 #           0  1  2  3  4  5  6  7  8  9
@@ -113,9 +114,8 @@ class QuickFindUF(BaseComp): # Eager Approach
 # integer to a # different integer) during one call to union when using the
 # quick-find data structure on N elements?
 # ANSWER: N - 1
-# EXPLANATION: In the worst case, all of the entries except id[q] are
-# changed from id[p] to id[q]
+# EXPLANATION: In the worst case, all of the entries except id[qval] are
+# changed from id[p] to id[qval]
 
 #  Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
-#  Copyright 2015-2019, DV Klopfenstein, Python implementation
-
+#  Copyright 2015-2019, DV Klopfenstein, PhD, Python implementation
