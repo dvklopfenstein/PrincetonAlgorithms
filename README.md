@@ -16,6 +16,7 @@ Implemented in Python by DV Klopfenstein is selected code from:
   * [**Princeton booksite**](http://algs4.cs.princeton.edu/home/)    
   * [**coursera class**](https://www.coursera.org/course/algs4partI)    
   * [**Sound of Sorting**](http://panthema.net/2013/sound-of-sorting/) by [Timo Bingmann](https://github.com/bingmann)
+  * [**Book Exercise solutions**](https://github.com/reneargento/algorithms-sedgewick-wayne)
 
 [**TESTS**](doc/README.md): 
  * **Python** tests are run from: [./tests/](./tests)
