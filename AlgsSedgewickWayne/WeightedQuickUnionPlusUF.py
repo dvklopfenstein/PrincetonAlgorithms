@@ -2,12 +2,12 @@
 
 from AlgsSedgewickWayne.BaseComp import BaseComp
 
-class WeightedQuickUnionUF(BaseComp):
+class WeightedQuickUnionPlusUF(BaseComp):
     """ Weighted Quick-union [lazy approach] to avoid tall trees."""
 
     def __init__(self, N):     # $ = N
         """Initialize union-find data structure w/N objects (0 to N-1)."""
-        super(WeightedQuickUnionUF, self).__init__("WeightedQuickUnionUF")
+        super(WeightedQuickUnionPlusUF, self).__init__("WeightedQuickUnionUF")
         # Set if of each object to itself.
         self.idvals = list(range(N))
         # Keep track of size of each tree (number of objects)
