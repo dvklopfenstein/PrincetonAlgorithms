@@ -27,7 +27,9 @@ def _str_ccomps(alg):
         return [f"{r}{sorted(s)}" for r, s in sorted(ccomps.items(), key=lambda t: t[0])]
     # <class 'AlgsSedgewickWayne.BaseComp.NtRoot'>
     #   assert r.depth == 0
-    return [f"A{r.rootnode}{sorted(s)}" for r, s in sorted(ccomps.items(), key=lambda t: t[0])]
+    ## for ntd, members in sorted(ccomps.items(), key=lambda t: t[0]):
+    ##     assert 
+    return [f"R{r.rootnode}{sorted(s)}" for r, s in sorted(ccomps.items(), key=lambda t: t[0])]
 
 def get_unions(union_txt):
     """Given str('4-5 6-7 3-4'), return unions."""
@@ -35,6 +37,15 @@ def get_unions(union_txt):
     for idx, u_str in enumerate(union_txt.split()):
       I = [int(intstr) for intstr in u_str.split('-')]
       unions.append(I)
+
+def chk_roots(alg, expected):
+    """Test to see if QuickFind passed."""
+    actual = [alg._root(i) for i in alg.idvals]
+    if actual == expected:
+        return
+    print(f"EXPECTED: {expected}")
+    print(f"ACTUAL:   {actual}")
+    raise Exception("TEST FAILED.")
 
 def chk_arrays(actual, expected):
     """Test to see if QuickFind passed."""

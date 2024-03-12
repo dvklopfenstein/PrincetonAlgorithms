@@ -16,7 +16,7 @@ class WeightedQuickUnionPlusUF(BaseComp):
 
     def _root(self, val):
         """Chase parent pointers until reach root."""
-        depth = 0 # Used for informative prints for educational purposes
+        ### depth = 0 # Used for informative prints for educational purposes
         while val != self.idvals[val]: # depth of val array accesses
             # IMPROVEMENT #2: Path compression. Keeps tree almost completely flat. 8:08..10:21
             # Make every path on that path point to the root.         N  lg*N
@@ -30,19 +30,23 @@ class WeightedQuickUnionPlusUF(BaseComp):
             #   * ONE NEW LINE: PATH COMPRESSION CODE
             self.idvals[val] = self.idvals[self.idvals[val]]
             val = self.idvals[val]
-            depth += 1
-        return BaseComp.NtRoot(rootnode=val, depth=depth)
+            ### depth += 1
+        ### return BaseComp.NtRoot(rootnode=val, depth=depth)
+        return val
 
     def connected(self, p_id, q_id): # $ = lg N
         """Return if p_id and q_id are in the same connected component (i.e. same root)."""
         # Runs depth of p_id & q_id array accesses
-        return self._root(p_id).rootnode == self._root(q_id).rootnode
+        ### return self._root(p_id).rootnode == self._root(q_id).rootnode
+        return self._root(p_id) == self._root(q_id)
 
     def union(self, p_id, q_id):     # $ = lg N
         """Add connection between p_id and q_id."""
         # Runs Depth of p_id and q_id array accesses...
-        p_root = self._root(p_id).rootnode
-        q_root = self._root(q_id).rootnode
+        ### p_root = self._root(p_id).rootnode
+        ### q_root = self._root(q_id).rootnode
+        p_root = self._root(p_id)
+        q_root = self._root(q_id)
         if p_root == q_root:
             return
         # IMPROVEMENT #1: Modification to Quick-Union to make it weights: 4:03
@@ -62,7 +66,8 @@ class WeightedQuickUnionPlusUF(BaseComp):
         """>>> print obj."""
         hdr = " ".join(f'{e:3}' for e in range(len(self.idvals)))+" header" # Header
         siz = " ".join(f'{e:3}' for e in self.size)+" SZ[]"     # Size
-        rootvals = [self._root(e).rootnode for e in self.idvals]     # Root Values
+        ### rootvals = [self._root(e).rootnode for e in self.idvals]     # Root Values
+        rootvals = [self._root(e) for e in self.idvals]     # Root Values
         #roots = set(rootvals)
         rootvals = " ".join([f'{str(e):3}' for e in rootvals])+" root values" # Root Values
         return '\n'.join([hdr, rootvals, siz])

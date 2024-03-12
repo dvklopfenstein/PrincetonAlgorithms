@@ -14,14 +14,17 @@ class WeightedQuickUnionUF(BaseComp):
 
     def connected(self, p_id, q_id): # $ = lg N
         """Return if p and q are in the same connected component (i.e. have the same root)."""
-        return self._root(p_id).rootnode == self._root(q_id).rootnode
+        ### return self._root(p_id).rootnode == self._root(q_id).rootnode
+        return self._root(p_id) == self._root(q_id)
         # Runs depth of p & q array accesses
 
     def union(self, p_id, q_id):     # $ = lg N
         """Add connection between p_id and q_id."""
         # Runs Depth of p_id and q_id array accesses...
-        p_root = self._root(p_id).rootnode
-        q_root = self._root(q_id).rootnode
+        ### p_root = self._root(p_id).rootnode
+        ### q_root = self._root(q_id).rootnode
+        p_root = self._root(p_id)
+        q_root = self._root(q_id)
         if p_root == q_root:
             return
         # IMPROVEMENT #1: Modification to Quick-Union to make it weighted: 4:03
@@ -41,11 +44,12 @@ class WeightedQuickUnionUF(BaseComp):
 
     def _root(self, val):
         """Chase parent pointers until reach root."""
-        depth = 0 # Used for informative prints for educational purposes
+        ### depth = 0 # Used for informative prints for educational purposes
         while val != self.idvals[val]: # depth of val array accesses
             val = self.idvals[val]
-            depth += 1
-        return BaseComp.NtRoot(rootnode=val, depth=depth)
+            ### depth += 1
+        ### return BaseComp.NtRoot(rootnode=val, depth=depth)
+        return val
 
     def __str__(self):
         """Print the size vector as well as the ID vector."""

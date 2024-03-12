@@ -12,7 +12,7 @@ from AlgsSedgewickWayne.testcode.utils import get_png_label
 class BaseComp(object):
     """ Holds an index of Nodes which can be combined into components."""
 
-    NtRoot = namedtuple("NtRoot", "rootnode depth")
+    ### NtRoot = namedtuple("NtRoot", "rootnode depth")
 
     def __init__(self, name):
         """Derived class will set the actual values."""
@@ -35,7 +35,10 @@ class BaseComp(object):
         """Return the root and a list of the contents of each component."""
         root2members = defaultdict(set)
         for id_val, parent in enumerate(self.idvals):
-            root2members[self._root(parent)].add(id_val)
+            root_parent = self._root(parent)
+            ## print(f'ROOT({root_parent}): {id_val}')
+            root2members[root_parent].add(id_val)
+        ## print(f'ROOTS: {sorted(root2members)}')
         return root2members
 
     def wr_png(self, fout_png="components.png", prt=sys.stdout, **kwargs):
