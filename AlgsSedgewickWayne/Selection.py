@@ -2,23 +2,26 @@
 
 from AlgsSedgewickWayne.utils import _isSorted, __lt__, _exch
 
-def Sort(ARR, array_history=None):
-  """Rearranges the array, ARR, in ascending order, using the natural order."""
-  # param array_history; For visualization. When true prints ASCII Art demonstrating the sort
-  N = len(ARR)
-  # Items from i to j-1 are Sorted
-  # IN the ith iteration, find the smallest remaining Item above i
-  for i in range(N): # MOVE pointer to the right
-    min_elem_idx = i # Index of smallest element to the right of pointer i
-    # Identify index of min Item right of j
-    for j in range(i+1,N):
-      if __lt__(ARR[j], ARR[min_elem_idx]):  # COMPARE is counted toward cost
-        min_elem_idx = j
-    if array_history is not None: array_history.add_history(ARR, {i:'*', min_elem_idx:'*'})
-    _exch(ARR, i, min_elem_idx)           # EXCHANGE is counted toward cost
-    assert _isSorted(ARR, 0, i)
-  assert _isSorted(ARR)
-  if array_history is not None: array_history.add_history(ARR, None)
+def Sort(items, array_history=None):
+    """Rearranges the array, items, in ascending order, using the natural order."""
+    # param array_history; For visualization. When true prints ASCII Art demonstrating the sort
+    print('IIIIIIIIIIIIIIIIIIIIIII', items)
+    len_array = len(items)
+    # Items from i to j-1 are Sorted
+    # IN the ith iteration, find the smallest remaining Item above i
+    for i in range(len_array): # MOVE pointer to the right
+        min_elem_idx = i # Index of smallest element to the right of pointer i
+        # Identify index of min Item right of j
+        for j in range(i+1,len_array):
+            if __lt__(items[j], items[min_elem_idx]):  # COMPARE is counted toward cost
+                min_elem_idx = j
+        if array_history is not None:
+            array_history.add_history(items, {i:'*', min_elem_idx:'*'})
+        _exch(items, i, min_elem_idx)           # EXCHANGE is counted toward cost
+        assert _isSorted(items, 0, i)
+    assert _isSorted(items)
+    if array_history is not None:
+        array_history.add_history(items, None)
 
 
 # Alg1 Week 2 Lecture Selection Sort
@@ -48,7 +51,8 @@ def Sort(ARR, array_history=None):
 #  The <tt>Selection</tt> class provides static methods for Sorting an
 #  array using selection Sort.
 #  <p>
-#  For additional documentation, see <a href="http:#algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
+#  For additional documentation, see
+#  <a href="http:#algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
 #  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
 #
 #  @author Robert Sedgewick
@@ -79,7 +83,7 @@ def Sort(ARR, array_history=None):
 # array is **already sorted**?
 # ANSWER: quadratic
 
-# Q: The number of compares to selection sort a reverse-sorted array of N distinct keys is ~ 1/2 N^2.
+# Q: The number of compares to selection sort a reverse-sorted array of N distinct keys is ~1/2 N^2
 # A: True. Selection sort uses N(N-1)/2 compares to sort any array of N keys.
 
 
@@ -178,13 +182,13 @@ def Sort(ARR, array_history=None):
 # FLOATING_POINT NUMBERS IF YOU WANT TO IMPLEMENT THE Comparable INTERFACE.
 
 # QUESTION: An exchange in selection sort can decrease the nubmer of
-# inversions by two (or more) 
+# inversions by two (or more)
 # ANSWER: True. Consider the array {3, 2, 1}, which has 3 inversions.
 # The first exchange results in the array {1, 2, 3}, which has 0 inversions.
 
-# QUESTION: Let a[] be an array containing N distinct keys with N >= 4. 
+# QUESTION: Let a[] be an array containing N distinct keys with N >= 4.
 # Then, exchanging two items can decrease the number of inversions by strictly more than N.
-# Answer: True. Consider the array { N, 2, 3, 4, ..., 1 }, which has 2N-3 inversions. 
+# Answer: True. Consider the array { N, 2, 3, 4, ..., 1 }, which has 2N-3 inversions.
 # Exchanging N and 1 results in the array { 1, 2, 3, ..., N }, which has zero inversions.
 
 
@@ -228,4 +232,3 @@ def Sort(ARR, array_history=None):
 #    _exch(a, i, Min)
 #    assert isSorted(a, c, 0, i)
 #  assert isSorted(a, c)
-
