@@ -21,3 +21,7 @@ def _isSorted(a, lo=None, hi=None):
       if __lt__(a[i], a[i-1]): return False
   return True
 
+def add_array_history(ahistobj, arr, info):
+    """Add array history"""
+    if ahistobj is not None:
+        ahistobj.add_history(arr, info)

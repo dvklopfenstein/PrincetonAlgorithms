@@ -1,25 +1,28 @@
-"""Alg1 Week2 Lecture Insertion Sort"""
+"""Alg1 Week2 Lecture Insertion Sort.
+
+AVG:  ~1/4 N**2 compares and 1/4 N**2 exchanges on avg: Randomly-ordered array w/distinct keys
+BEST:       N-1 compares and        0 exchanges: Ascending  order array
+WORST: 1/2 N**2 compares and 1/2 N**2 exchanges: Descending order array
+"""
 
 from AlgsSedgewickWayne.utils import _isSorted, __lt__, _exch
+from AlgsSedgewickWayne.utils import add_array_history
 
 
 def Sort(arr, array_history=None):
     """Rearranges the array in ascending order, using the natural order."""
-    num_elems = len(arr)
     # 00:57 Everything to the left is in acending order
     #       Everything to the right, we have not seen at all
-    for i in range(num_elems):
+    for i in range(len(arr)):
         j = i
         # Exchange the curr Elem with every element to the left that is > 01:21
         while j > 0 and __lt__(arr[j], arr[j-1]): # Iterate from i back towards 0
-            if array_history is not None:
-                array_history.add_history(arr, {j:'*', j-1:'*'})
+            add_array_history(array_history, arr, {j:'*', j-1:'*'})
             _exch(arr, j, j-1)
             j -= 1
         assert _isSorted(arr, 0, i)
     assert _isSorted(arr)
-    if array_history is not None:
-        array_history.add_history(arr, None)
+    add_array_history(array_history, arr, None)
 
 
 #************************************************************************
