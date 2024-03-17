@@ -1,49 +1,49 @@
-"""Shell Sort"""
+"""Shell Sort.
 
-import sys
-from AlgsSedgewickWayne.utils import _isSorted, __lt__, _exch
+"""
 
-def Sort(ARR, array_history=None, sort_seq=None):
-  """Rearranges the array, ARR, in ascending order, using the natural order."""
-  # array_history; Used in tests. When true prints ASCII Art demonstrating the sort
-  N = len(ARR)
+from AlgsSedgewickWayne.utils import _isSorted, _exch
+from AlgsSedgewickWayne.utils import add_array_history
 
-  # 3x+1 increment sequence:  [1, 4, 13, 40, 121, 364, 1093, ...
-  ha = get_sort_seq(N, sort_seq)
-  print(ha)
+def Sort(arr, array_history=None, sort_seq=None):
+    """Shell Sort: Rearranges the array in ascending order"""
+    # array_history; Used in tests. When true prints ASCII Art demonstrating the sort
+    len_array = len(arr)
 
-  for h in reversed(ha):
-    # h-sort the array (insertion sort)
-    for i in range(h,N):
-      j = i
-      while j >= h and __lt__(ARR[j], ARR[j-h]):
-        if array_history is not None:
-          array_history.add_history(ARR, {j:'*', j-h:'*'} )
-        _exch(ARR, j, j-h)
-        j -= h
-    assert _isHsorted(ARR, h)
-  assert _isSorted(ARR)
-  if array_history is not None:
-    array_history.add_history(ARR, None)
+    # 3x+1 increment sequence:  [1, 4, 13, 40, 121, 364, 1093, ...
+    h_incs = _get_sort_seq(len_array, sort_seq)
+    print('H-SORTS:', h_incs)
+
+    for h in reversed(h_incs):
+        # h-sort the array (insertion sort)
+        for i in range(h,len_array):
+            j = i
+            while j >= h and arr[j] < arr[j-h]:
+                add_array_history(array_history, arr, {j:'*', j-h:'*'})
+                _exch(arr, j, j-h)
+                j -= h
+        assert _is_h_sorted(arr, h)
+    assert _isSorted(arr)
+    add_array_history(array_history, arr, None)
 
 
 
-def _isHsorted(a, h):
-  """is the array h-sorted?"""
-  for i in range(h,len(a)):
-    if __lt__(a[i], a[i-h]): 
-      return False
-  return True
+def _is_h_sorted(arr, h):
+    """is the array h-sorted?"""
+    for i in range(h,len(arr)):
+        if arr[i] < arr[i-h]:
+            return False
+    return True
 
-def get_sort_seq(N, sort_seq=None):
-  """Get sort sequence."""
-  if sort_seq is None:
-    # Use 3x+1 increment sequence
-    ha = [1]
-    while (ha[-1] < N/3):
-      ha.append(3*ha[-1] + 1)
-    return ha
-  return sort_seq # Use user-provided sequence
+def _get_sort_seq(len_array, sort_seq=None):
+    """Get sort sequence."""
+    if sort_seq is None:
+        # Use 3x+1 increment sequence
+        h_incs = [1]
+        while h_incs[-1] < len_array//3:
+            h_incs.append(3*h_incs[-1] + 1)
+        return h_incs
+    return sort_seq # Use user-provided sequence
 
 ##########################################################################
 # Alg1 Week 2 Lecture Shellsort
@@ -124,15 +124,15 @@ def get_sort_seq(N, sort_seq=None):
 # There are ~ log_3 N passes because the increments go up by
 # (roughly) a factor of 3
 
-# QUESTION: The number of compares to Shellsort (with Knuth's 3x+1 increments) 
+# QUESTION: The number of compares to Shellsort (with Knuth's 3x+1 increments)
 # an array of length N depends only on N (and not on the items in the array).
-# ANSWER: False. The number of compares to Shellsort the array { 1, 2, 3 } is 2; 
+# ANSWER: False. The number of compares to Shellsort the array { 1, 2, 3 } is 2;
 # the number of compares to Shellsort the array { 3, 2, 1 } is three.
 
-# QUESTION: An array of N distinct keys that is both 2-sorted and 3-sorted 
+# QUESTION: An array of N distinct keys that is both 2-sorted and 3-sorted
 # can be 1-sorted in one insertion-sort pass, using only N compares.
-# ANSWER: True. Since the array is 2- and 3-sorted, it is also k-sorted 
-# for every k >= 2. Thus, while an item can be larger than the item to 
+# ANSWER: True. Since the array is 2- and 3-sorted, it is also k-sorted
+# for every k >= 2. Thus, while an item can be larger than the item to
 # its immediate right, it cannot be larger than the item k to
 # its right for any k >= 2.
 
@@ -204,4 +204,3 @@ def get_sort_seq(N, sort_seq=None):
 #  @author Robert Sedgewick
 #  @author Kevin Wayne
 #/
-

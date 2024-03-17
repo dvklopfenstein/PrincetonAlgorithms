@@ -1,27 +1,30 @@
-"""Selection Sort."""
+"""Selection Sort.
 
-from AlgsSedgewickWayne.utils import _isSorted, __lt__, _exch
+Selection Sort uses ~ N^2/2 (Quadratic) compares and N (linear) exchanges
 
-def Sort(items, array_history=None):
-    """Rearranges the array, items, in ascending order, using the natural order."""
-    # param array_history; For visualization. When true prints ASCII Art demonstrating the sort
-    print('IIIIIIIIIIIIIIIIIIIIIII', items)
-    len_array = len(items)
+"""
+
+from AlgsSedgewickWayne.utils import _isSorted, _exch
+from AlgsSedgewickWayne.utils import add_array_history
+
+
+def Sort(arr, array_history=None):
+    """Selection sort: Rearranges the array in ascending order, using the natural order"""
+    # Selection Sort; For visualization. When true prints ASCII Art demonstrating the sort
+    len_array = len(arr)
     # Items from i to j-1 are Sorted
     # IN the ith iteration, find the smallest remaining Item above i
     for i in range(len_array): # MOVE pointer to the right
         min_elem_idx = i # Index of smallest element to the right of pointer i
         # Identify index of min Item right of j
-        for j in range(i+1,len_array):
-            if __lt__(items[j], items[min_elem_idx]):  # COMPARE is counted toward cost
+        for j in range(i+1, len_array):
+            if arr[j] < arr[min_elem_idx]:  # COMPARE is counted toward cost
                 min_elem_idx = j
-        if array_history is not None:
-            array_history.add_history(items, {i:'*', min_elem_idx:'*'})
-        _exch(items, i, min_elem_idx)           # EXCHANGE is counted toward cost
-        assert _isSorted(items, 0, i)
-    assert _isSorted(items)
-    if array_history is not None:
-        array_history.add_history(items, None)
+        add_array_history(array_history, arr, {i:'*', min_elem_idx:'*'})
+        _exch(arr, i, min_elem_idx)           # EXCHANGE is counted toward cost
+        assert _isSorted(arr, 0, i)
+    assert _isSorted(arr)
+    add_array_history(array_history, arr, None) 
 
 
 # Alg1 Week 2 Lecture Selection Sort
@@ -102,10 +105,10 @@ def Sort(items, array_history=None):
 #   * The "sort()" function calls back object's "compareTo()" method as needed.
 #
 # IMPLEMENTING CALLBACKS.
-#   * java: interfaces
-#   * C: function pointers.
-#   * C++: class-type functors.
-#   * C#: delegates.
+#   * java : interfaces
+#   * C    : function pointers.
+#   * C++  : class-type functors.
+#   * C#   : delegates.
 #   * Python, Perl, ML, Javascript: first-class functions.
 #
 # 05:57 COMPARABLE INTERFACE
@@ -136,7 +139,7 @@ def Sort(items, array_history=None):
 #
 #GOAL. Test if an array is sorted.
 #
-#Q. If the sorting algorithm passes the test, did it correctly sor the array?
+#Q. If the sorting algorithm passes the test, did it correctly sort the array?
 #A. YES. If you used the __lt__ and exchange method.
 
 # 14:36 QUESTION: Consider the data type "Temp" defined below. Which
