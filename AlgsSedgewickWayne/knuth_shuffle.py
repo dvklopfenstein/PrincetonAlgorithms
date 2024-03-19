@@ -1,18 +1,21 @@
 """Shuffling using Knuth shuffle"""
 
-import random
+from random import randint
 
-def shuffle(a):
-  """Rearranges an array, a, of objects in uniformly random order"""
-  for i in range(1, len(a)):
-    # Knuth shuffle (03:00) Linear-time shuffling algorithm
-    #   * In iteration i, pick integer r between 0 and i uniformly at random.
-    #   * Swap a[i] and a[r]
-    # COMMON BUG:      Choosing r between 0 and N-1 => Not Uniformly Random
-    # CORRECT VARIANT: Choosing r between i and N-1
-    r = random.randint(0, i-1) # random # between 0 and i
-    a[i], a[r] = a[r], a[i]
+def shuffle(arr):
+    """Rearranges an array, a, of objects in uniformly random order"""
+    for i in range(1, len(arr)):
+        # Knuth shuffle (03:00) Linear-time shuffling algorithm
+        #   * In iteration i, pick integer r between 0 and i uniformly at random.
+        #   * Swap a[i] and a[r]
+        # COMMON BUG:      Choosing r between 0 and N-1 => Not Uniformly Random
+        # CORRECT VARIANT: Choosing r between i and N-1
+        rval = randint(0, i-1) # random # between 0 and i
+        arr[i], arr[rval] = arr[rval], arr[i]
 
+# Note on Python random: https://docs.python.org/3/library/random.html
+#   * random.randint(a, b) Return a random integer N such that a <= N <= b.
+#   * Alias for randrange(a, b+1).
 
 # Alg1 Week 2 Lecture Shuffling
 
@@ -118,10 +121,10 @@ def shuffle(a):
  #  the assumption that Math.random() generates independent and
  #  uniformly distributed numbers between 0 and 1.
  #  <p>
- #  For additional documentation, see <a href="http:#algs4.cs.princeton.edu/11model">Section 1.1</a> of
- #  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ #  For additional documentation, see
+ #      <a href="http:#algs4.cs.princeton.edu/11model">Section 1.1</a>
+ #  of <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  #
  #  @author Robert Sedgewick
  #  @author Kevin Wayne
  #/
-

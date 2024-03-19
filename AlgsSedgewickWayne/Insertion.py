@@ -16,7 +16,7 @@ def Sort(arr, array_history=None):
     for i in range(len(arr)):
         j = i
         # Exchange the curr Elem with every element to the left that is > 01:21
-        while j > 0 and arr[j] < arr[j-1]: # Iterate from i back towards 0
+        while j > 0 and arr[j-1] > arr[j]: # Iterate from i back towards 0
             add_array_history(array_history, arr, {j:'*', j-1:'*'})
             _exch(arr, j, j-1)
             j -= 1

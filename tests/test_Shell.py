@@ -68,10 +68,12 @@ def test_q3b():
 
 def run(arr, desc=None, sort_seq=None, prt=sys.stdout):
     ahobj = ArrayHistory()
+    prt.write(f"{desc} START:\n    {' '.join(str(e) for e in arr)}\n")
     Sort(arr, array_history=ahobj, sort_seq=sort_seq)
     if desc is None:
         desc = "SHELL SORT"
-    prt.write(f"{desc} RESULT {' '.join(str(e) for e in arr)}\n")
+    prt.write(f"{desc} RESULT:\n    {' '.join(str(e) for e in arr)}\n")
+    prt.write(f"{desc} START:\n    {' '.join(str(e) for e in arr)}\n")
     ahobj.prt()
     ahobj.show(desc)
 

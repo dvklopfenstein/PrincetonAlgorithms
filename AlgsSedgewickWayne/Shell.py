@@ -11,27 +11,31 @@ def Sort(arr, array_history=None, sort_seq=None):
     len_array = len(arr)
 
     # 3x+1 increment sequence:  [1, 4, 13, 40, 121, 364, 1093, ...
-    h_incs = _get_sort_seq(len_array, sort_seq)
-    print('H-SORTS:', h_incs)
+    h_incs = list(reversed(_get_sort_seq(len_array, sort_seq)))
+    #print(f'LEN={len_array}; H-SORTS: {h_incs}')
 
-    for h in reversed(h_incs):
-        # h-sort the array (insertion sort)
-        for i in range(h,len_array):
+    for hval in h_incs:
+        # hval-sort the array (insertion sort)
+        for i in range(hval, len_array):
             j = i
-            while j >= h and arr[j] < arr[j-h]:
-                add_array_history(array_history, arr, {j:'*', j-h:'*'})
-                _exch(arr, j, j-h)
-                j -= h
-        assert _is_h_sorted(arr, h)
+            #print(f'H({hval}) I({i}); j-hval={j-hval} j={j}; {arr[j-hval]} > {arr[j]}?')
+            while j >= hval and arr[j-hval] > arr[j]:
+                #print(f'           j-hval={j-hval} j={j}; {arr[j-hval]} > {arr[j]}  '
+                #      f"ARRAY BEFORE EXCHANGE {' '.join(str(e) for e in arr)}")
+                add_array_history(array_history, arr, {j:'*', j-hval:'*'})
+                _exch(arr, j, j-hval)
+                #print(f"{' '*33} ARRAY AFTER  EXCHANGE {' '.join(str(e) for e in arr)}")
+                j -= hval
+        assert _is_h_sorted(arr, hval)
     assert _isSorted(arr)
     add_array_history(array_history, arr, None)
 
 
 
-def _is_h_sorted(arr, h):
-    """is the array h-sorted?"""
-    for i in range(h,len(arr)):
-        if arr[i] < arr[i-h]:
+def _is_h_sorted(arr, hval):
+    """is the array hval-sorted?"""
+    for i in range(hval,len(arr)):
+        if arr[i] < arr[i-hval]:
             return False
     return True
 
@@ -50,6 +54,8 @@ def _get_sort_seq(len_array, sort_seq=None):
 ##########################################################################
 #
 # SHELLSORT OVERVIEW
+# SHELLSORT [Shell 1959] h-sort for decreasing sequence of values of h.
+#
 # 00:21 Insertion sort is inefficient because elements only move one
 # element at a time, even though we know that they have a long way to go.
 #
@@ -57,7 +63,6 @@ def _get_sort_seq(len_array, sort_seq=None):
 # at a time using an h-sorted array.
 #   An h-sorted array is h interleaved sorted subsequences.
 #
-# SHELLSORT [Shell 1959] h-sort for decreasing sequence of values of h.
 #
 # 01:44 H-SORTING 01:44-02:22
 # How to h-sort an array? Insertion sort, with stride length h.
@@ -198,7 +203,8 @@ def _get_sort_seq(len_array, sort_seq=None):
 #  The <tt>Shell</tt> class provides static methods for sorting an
 #  array using Shellsort with Knuth's increment sequence (1, 4, 13, 40, ...).
 #  <p>
-#  For additional documentation, see <a href="http:#algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
+#  For additional documentation, see
+#     <a href="http:#algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
 #  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
 #
 #  @author Robert Sedgewick

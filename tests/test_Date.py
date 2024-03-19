@@ -1,27 +1,28 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+"""Test Date class implementation"""
 
 import sys
 from AlgsSedgewickWayne.Date import Date
 
-def main(prt=sys.stdout):
-  """unit test for Date, ported to Python from Java."""
-  today = Date(2, 25, 2004)
-  prt.write("{}\n".format(today))
-  for i in range(10):
-      today = today.next()
-      prt.write("{} {}\n".format(i, today))
+def test_date(prt=sys.stdout):
+    """unit test for Date, ported to Python from Java."""
+    start_date = Date(2, 25, 2004)
+    prt.write(f"START DATE: {start_date}\n")
+    for i in range(10):
+        start_date = start_date.next()
+        prt.write(f"{i} {start_date}\n")
 
-  assert not today > today.next()
-  assert not today > today
-  assert today.next() > today
-  assert today == today
+    assert start_date <= start_date.next()
+    assert start_date <= start_date
+    assert start_date.next() > start_date
+    assert start_date == start_date
 
-  birthday = Date(10, 16, 1971)
-  prt.write("{}\n".format(birthday))
-  for i in range(10):
-    birthday = birthday.next()
-    prt.write("{}\n".format(birthday))
+    birthday = Date(10, 16, 1971)
+    prt.write(f"{birthday}\n")
+    for i in range(10):
+        birthday = birthday.next()
+        prt.write(f"{birthday}\n")
 
 
 if __name__ == '__main__':
-  main()
+    test_date()
