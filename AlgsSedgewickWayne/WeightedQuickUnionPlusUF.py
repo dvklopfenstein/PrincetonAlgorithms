@@ -109,13 +109,13 @@ class WeightedQuickUnionPlusUF(BaseComp):
 # connected(0, 7) Yes
 
 # DYNAMIC CONNECTIVITY APPLICATIONS: (04:50) Week 1 Lecture "Dynamic Connectivity(1:22)
-# * Pixels in a digitial photo
-# * Computers in a network.
-# * Friends in a social network.
-# * Transistors in a computer chip.
-# * Elements in a mathematical set.
-# * Variable names in Fortran progam.
-# * Metallic sites in a composit system.
+# * APPS Pixels in a digitial photo
+# * APPS Computers in a network.
+# * APPS Friends in a social network.
+# * APPS Transistors in a computer chip.
+# * APPS Elements in a mathematical set.
+# * APPS Variable names in Fortran progam.
+# * APPS Metallic sites in a composit system.
 
 # 04:51 WHEN PROGRAMMING, CONVENIENT TO NAME OBJECTS 0 TO N-1:
 # * Use integers as array index.
@@ -166,17 +166,18 @@ class WeightedQuickUnionPlusUF(BaseComp):
 
 
 # UNION-FIND APPLICATIONS: (00:27) Week 1 Lecture "Union-Find Applications" (1:22)
-# * Percolation
-# * Games (Go, Hex)
-# * Dynamic connectivity
-# * Least common ancestor
-# * Equivalence of finite state automata
-# * Hoshen-Kopelman algorithm in physics.
-# * Hinley-Milner polymorphic type inference.
-# * Kruskal's minimum spanning tree algorithm.
-# * Compiling equivalence statements in Fortran.
-# * Morphological attribute openings and closings.
-# * Matlab's bwlabel() function in image processing.
+# * APPS Percolation
+# * APPS Games (Go, Hex)
+# * APPS Dynamic connectivity
+# * APPS Least common ancestor
+# * APPS Equivalence of finite state automata
+# * APPS Hoshen-Kopelman algorithm in physics.
+# * APPS Hinley-Milner polymorphic type inference.
+# * APPS Kruskal's minimum spanning tree algorithm.
+# * APPS Compiling equivalence statements in Fortran.
+# * APPS Morphological attribute openings and closings.
+# * APPS Matlab's bwlabel() function in image processing.
+# * APPS How to label area in images
 
 
 

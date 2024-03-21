@@ -3,17 +3,17 @@ Table of Contents
 
 # PART 1
 ## INTRODUCTION
-### 01_01_01 Algorithms: Introduction
+### 01_01_01 Algorithms: Introduction (9:22)
 ### 01_01_02 Lecture 1: Union-Find
-### 01_01_03 Dynamic Connectivity
-### 01_01_04 Quick Find
+### 01_01_03 Dynamic Connectivity (10:22)
+### 01_01_04 Quick Find (10:19)
 * AlgsSedgewickWayne/QuickFindUF.py tests/test_QuickFindUF.py
-### 01_01_05 Quick Union
+### 01_01_05 Quick Union (7:50)
 * AlgsSedgewickWayne/QuickUnionUF.py tests/test_QuickUnionUF.py
-### 01_01_06 Quick-Union Improvements
+### 01_01_06 Quick-Union Improvements (13:03)
 * AlgsSedgewickWayne/WeightedQuickUnionUF.py tests/test_WeightedQuickUnionUF.py
 * AlgsSedgewickWayne/WeightedQuickUnionPlusUF.py tests/test_WeightedQuickUnionPlusUF.py
-### 01_01_07 Union-Find Applications
+### 01_01_07 Union-Find Applications (9:22)
 ## Lecture 2: Analysis of Algorithms
 ### 01_02_01 Introduction to Analysis of Algorithms
 ### 01_02_02 Observations
