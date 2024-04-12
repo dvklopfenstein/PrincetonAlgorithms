@@ -3,87 +3,116 @@
 import random
 import collections as cx
 
-def Sort(a, array_history=None):
-  _add_history(array_history, a) # Record initial state of array
-  random.shuffle(a)  # Needed to ensure performance will be good. 05:56
-  _sort(a, 0, len(a) - 1, array_history)
+def Sort(arr, array_history=None):
+    """QuickSort"""
+    random.shuffle(arr)  # Needed to ensure performance will be good. 05:56
+    _add_history(array_history, arr) # Record initial state of array
+    _sort(arr, 0, len(arr) - 1, array_history)
 
-def _sort(a, lo, hi, array_history):
-  """quicksort the subarray from a[lo] to a[hi]."""
-  if hi <= lo: return;
-  j = _partition(a, lo, hi)
-  _add_history(array_history, a, (lo, hi))
-  _sort(a, lo, j-1, array_history)
-  _sort(a, j+1, hi, array_history)
-  assert _isSorted(a, lo, hi)
+def _sort(arr, lo_idx, hi_idx, array_history):
+    """quicksort the subarray from arr[lo_idx] to arr[hi_idx]."""
+    if hi_idx <= lo_idx:
+        return
+    j_idx = _partition(arr, lo_idx, hi_idx)
+    _add_history(array_history, arr, (lo_idx, hi_idx))
+    _sort(arr, lo_idx, j_idx-1, array_history)
+    _sort(arr, j_idx+1, hi_idx, array_history)
+    assert _is_sorted(arr, lo_idx, hi_idx)
 
-def _partition(a, lo, hi, array_history=None):
-  """partition the subarray a[lo..hi] so that a[lo..j-1] <= a[j] <= a[j+1..hi]"""
-  # and return the index j.
-  i = lo
-  j = hi + 1
-  v = a[lo]
-  while True:
+def _partition(arr, lo_idx, hi_idx, array_history=None):
+    """Partition subarray arr[lo_idx..hi_idx] so arr[lo_idx..j_idx-1] <= arr[j_idx] <= arr[j_idx+1..hi_idx]"""
+    # return index j_idx.
+    # C_N = N + 1    # The average number of compares
+    i_idx = lo_idx
+    j_idx = hi_idx + 1
+    partition_val = arr[lo_idx]
+    while True:
 
-      # find item on lo to swap
-      i += 1
-      while _less(a[i], v):
-          if i == hi: break
-          i += 1 # Increment i as long it is pointing to val < v
+        # find item on lo_idx to swap
+        i_idx += 1
+        ## print(f'I {partition_val} > arr[{i_idx}]={arr[i_idx]}?')
+        while partition_val > arr[i_idx]:
+            ## print(f'I {partition_val} > arr[{i_idx}]={arr[i_idx]}')
+            if i_idx == hi_idx:
+                break
+            i_idx += 1 # Increment i_idx as long it is pointing to val < partition_val
 
-      # find item on hi to swap
-      j -= 1
-      while _less(v, a[j]):
-          if j == lo: break   # redundant since a[lo] acts as sentinel
-          j -= 1 # Decrement j as long as it is pointing to va > v
+        # find item on hi_idx to swap
+        j_idx -= 1
+        ## print(f'J {partition_val} < arr[{j_idx}]={arr[j_idx]}?')
+        while partition_val < arr[j_idx]:
+            ## print(f'J {partition_val} < arr[{j_idx}]={arr[j_idx]}')
+            ## if j_idx == lo_idx:
+            ##     break   # redundant since arr[lo_idx] acts as sentinel
+            j_idx -= 1 # Decrement j_idx as long as it is pointing to va > partition_val
 
-      # check if pointers cross
-      if i >= j: break;
-      if array_history is not None: _add_history(array_history, a, (i, j))
-      _exch(a, i, j)
+        # check if pointers cross
+        if i_idx >= j_idx:
+            break
+        if array_history is not None:
+            _add_history(array_history, arr, (i_idx, j_idx))
+        arr[j_idx], arr[i_idx] = arr[i_idx], arr[j_idx]
 
-  # put partitioning item v at a[j]
-  if array_history is not None: _add_history(array_history, a, (i, j))
-  _exch(a, lo, j)
-  if array_history is not None: _add_history(array_history, a, (i, j))
+    # put partitioning item partition_val at arr[j_idx]
+    if array_history is not None:
+        _add_history(array_history, arr, (i_idx, j_idx))
+    arr[j_idx], arr[lo_idx] = arr[lo_idx], arr[j_idx]
+    if array_history is not None:
+        _add_history(array_history, arr, (i_idx, j_idx))
 
-  # now, a[lo .. j-1] <= a[j] <= a[j+1 .. hi]
-  # j now points to partitioning element, after it has moved to its new spot
-  return j
-
-#*
-# Rearranges the array so that a[k] contains the kth smallest key;
-# a[0] through a[k-1] are less than (or equal to) a[k]; and
-# a[k+1] through a[N-1] are greater than (or equal to) a[k].
-# @param a the array
-# @param k find the kth smallest
-#/
-def Select(a, k):
-  import random
-  if k < 0 and k >= len(a):
-      raise Exception("Selected element out of bounds")
-  random.shuffle(a)
-  lo = 0,
-  hi = len(a) - 1
-  while hi > lo:
-      i = _partition(a, lo, hi)
-      if   i > k: hi = i - 1
-      elif i < k: lo = i + 1
-      else: return a[i]
-  return a[lo]
+    # now, arr[lo_idx .. j_idx-1] <= arr[j_idx] <= arr[j_idx+1 .. hi_idx]
+    # j_idx now points to partitioning element, after it has moved to its new spot
+    return j_idx
 
 
+#   Rearranges the array so that arr[k] contains the kth smallest key;
+#   arr[0] through arr[k-1] are less than (or equal to) arr[k]; and
+#   arr[k+1] through arr[N-1] are greater than (or equal to) arr[k].
+#   @param arr the array
+#   @param k find the kth smallest
+def Select(arr, k):
+    """Rearranges the array so that arr[k] contains the kth smallest key"""
+    if k < 0 or k >= len(arr):
+        raise RuntimeError("Selected element out of bounds")
+    random.shuffle(arr)
+    lo_idx = 0
+    hi_idx = len(arr) - 1
+    while hi_idx > lo_idx:
+        i_idx = _partition(arr, lo_idx, hi_idx)
+        if   i_idx > k:
+            hi_idx = i_idx - 1
+        elif i_idx < k:
+            lo_idx = i_idx + 1
+        else:
+            return arr[i_idx]
+    return arr[lo_idx]
 
+def _exch(arr, i_idx, j_idx):
+    """exchange arr[i_idx] and arr[j_idx]"""
+    swap = arr[i_idx]
+    arr[i_idx] = arr[j_idx]
+    arr[j_idx] = swap
 
-def _add_history(array_history, a, anno=None):
-  """For visualizing array history."""
-  if array_history is not None: 
-    anno_a = None
-    if anno is not None:
-      lo, hi = anno
-      anno_a = cx.OrderedDict([(lo, '-'), (hi, '+')])
-    array_history.add_history(a,   anno_a, name="arr")
+def _is_sorted(arr, lo_idx=None, hi_idx=None):
+    """Check if array is sorted - useful for debugging"""
+    if lo_idx is None and hi_idx is None:
+        lo_idx = 0
+        hi_idx = len(arr)
+    for i_idx in range(lo_idx + 1, hi_idx+1):
+        if arr[i_idx] < arr[i_idx-1]:
+            return False
+    return True
 
+def _add_history(array_history, arr, anno=None):
+    """For visualizing array history."""
+    if array_history is not None:
+        anno_a = None
+        if anno is not None:
+            lo_idx, hi_idx = anno
+            anno_a = cx.OrderedDict([(lo_idx, '-'), (hi_idx, '+')])
+        array_history.add_history(arr,   anno_a, name="arr")
+
+# pylint: disable=line-too-long
 # 00:11
 # MERGESORT: ONE OF TWO CLASSIC SORTING ALGORITHMS
 # CRITICAL COMPONENTS IN THE WORLD'S COMPUTATIONAL INFRASTRUCTURE.A
@@ -126,8 +155,8 @@ def _add_history(array_history, a, anno=None):
 #   Sir Charles Antony Richard Hoare, 1980 Turing Award
 #
 #-------------------------------------------------------
-# INVARIANT: Nothing to the left  of i is greater than a[lo] (partitioning element)
-# INVARIANT: Nothing to the right of j is greater than a[lo] (partitioning element)
+# INVARIANT: Nothing to the left  of i is greater than a[lo_idx] (partitioning element)
+# INVARIANT: Nothing to the right of j is greater than a[lo_idx] (partitioning element)
 #-------------------------------------------------------
 # QUICKSORT:
 # A recursive method, like Mergesort.
@@ -159,7 +188,7 @@ def _add_history(array_history, a, anno=None):
 #-------------------------------------------------------
 # 06:24-7:00 QUICKSORT TRACE
 #                                             1 1 1 1 1 1
-#             lo  j   hi  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
+#             lo_idx  j   hi_idx  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
 #             ----------  -------------------------------
 # INITIAL VALUES          Q U I C K S O R T E X A M P L E
 # RANDOM SHUFFLE          K R A T E L E P U I M Q C X O S
@@ -196,9 +225,9 @@ def _add_history(array_history, a, anno=None):
 # TERMINATING THE LOOP: Testing whether the pointers cross is
 # a bit trickier that it might seem, particularly w/duplicate keys.
 #
-# STAYING IN BOUNDS: The (j == lo) test is redundant:
+# STAYING IN BOUNDS: The (j == lo_idx) test is redundant:
 #   partitioning element will stop the loop.
-# The (i == hi) test is not redundant.
+# The (i == hi_idx) test is not redundant.
 #
 # PRESERVING RANDOMNESS: Shuffling is needed for performance guarantee.
 # The two sub-arrays will remain random;y sorted.
@@ -338,7 +367,7 @@ def _add_history(array_history, a, anno=None):
 #   when the input is already sorted?
 # ANSWER: linearithmic
 # EXPLANATIN: Without the shuffle, quicksorting an array of N distict
-# keys is quadratic.  That's one reason why it's important to 
+# keys is quadratic.  That's one reason why it's important to
 # shuffle the array.
 
 
@@ -371,27 +400,6 @@ def _add_history(array_history, a, anno=None):
 #  Helper sorting functions
 #**********************************************************************/
 
-# is v < w ?
-def _less(v, w): return v < w
-
-# exchange a[i] and a[j]
-def _exch(a, i, j):
-  swap = a[i]
-  a[i] = a[j]
-  a[j] = swap
-
-
-#**********************************************************************
-#  Check if array is sorted - useful for debugging
-#**********************************************************************/
-def _isSorted(a, lo=None, hi=None):
-  if lo is None and hi is None:
-    lo = 0
-    hi = len(a)
-  for i in range(lo + 1, hi+1):
-      if _less(a[i], a[i-1]): return False
-  return True
-
 # Reads in a sequence of strings from standard input; quicksorts them;
 # and prints them to standard output in ascending order.
 # Shuffles the array and then prints the strings again to
@@ -410,7 +418,7 @@ def _isSorted(a, lo=None, hi=None):
 #  print
 #  print ' '.join(ARR)
 
-# TRUE: The maximum number of times that any one item is involved in a 
+# TRUE: The maximum number of times that any one item is involved in a
 # compare when quicksorting an array of N items is linear.
 # EXPLANATION: When an item is the partitioning item, it is
 # involved in no more than N+1 compares, at which point it
@@ -420,9 +428,9 @@ def _isSorted(a, lo=None, hi=None):
 # which point the partitioning item is fixed (and never
 # compared against the item again).
 
-# FALSE: The expected number of compares to find a median of an array 
+# FALSE: The expected number of compares to find a median of an array
 # of N distinct keys using quickselect is ~ 2N.
-# EXPLANATION: The expected number of compares is ~ (2 + 2 ln 2) N. 
+# EXPLANATION: The expected number of compares is ~ (2 + 2 ln 2) N.
 # In fact, no compare-based algorithm can find a median using fewer than 2N compares.
 
 # Copyright (C) 2002-2010, Robert Sedgewick and Kevin Wayne.

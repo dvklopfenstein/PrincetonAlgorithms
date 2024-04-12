@@ -7,12 +7,12 @@ Table of Contents
 ### 01_01_02 Lecture 1: Union-Find
 ### 01_01_03 Dynamic Connectivity (10:22)
 ### 01_01_04 Quick Find (10:19)
-* AlgsSedgewickWayne/QuickFindUF.py tests/test_QuickFindUF.py
+* [QuickFindUF](/AlgsSedgewickWayne/QuickFindUF.py) [test_QuickFindUF](tests/test_QuickFindUF.py)
 ### 01_01_05 Quick Union (7:50)
-* AlgsSedgewickWayne/QuickUnionUF.py tests/test_QuickUnionUF.py
+* /AlgsSedgewickWayne/QuickUnionUF.py tests/test_QuickUnionUF.py
 ### 01_01_06 Quick-Union Improvements (13:03)
-* AlgsSedgewickWayne/WeightedQuickUnionUF.py tests/test_WeightedQuickUnionUF.py
-* AlgsSedgewickWayne/WeightedQuickUnionPlusUF.py tests/test_WeightedQuickUnionPlusUF.py
+* /AlgsSedgewickWayne/WeightedQuickUnionUF.py tests/test_WeightedQuickUnionUF.py
+* /AlgsSedgewickWayne/WeightedQuickUnionPlusUF.py tests/test_WeightedQuickUnionPlusUF.py
 ### 01_01_07 Union-Find Applications (9:22)
 ## Lecture 2: Analysis of Algorithms
 ### 01_02_01 Introduction to Analysis of Algorithms
@@ -31,21 +31,24 @@ Table of Contents
 ## Lecture 4: Elementary Sorts
 ### 01_04_01 Introduction to Sorting
 ### 01_04_02 Selection Sort
-* AlgsSedgewickWayne/Selection.py tests/test_Selection.py
+* /AlgsSedgewickWayne/Selection.py tests/test_Selection.py
 ### 01_04_03 Insertion Sort
-* AlgsSedgewickWayne/Insertion.py tests/test_Insertion.py
+* /AlgsSedgewickWayne/Insertion.py tests/test_Insertion.py
 ### 01_04_04 Shellsort
-* AlgsSedgewickWayne/Shell.py tests/test_Shell.py
+* /AlgsSedgewickWayne/Shell.py tests/test_Shell.py
 ### 01_04_05 Shuffling
-* AlgsSedgewickWayne/knuth_shuffle.py tests/test_knuth_shuffle.py
+* /AlgsSedgewickWayne/knuth_shuffle.py tests/test_knuth_shuffle.py
 ### 01_04_06 Convex Hull
+
 ## Lecture 5: Mergesort
 ### 01_05_01 Mergesort
 ### 01_05_02 Bottom-up Mergesort
 ### 01_05_03 Sorting Complexity
 ### 01_05_04 Comparators
 ### 01_05_05 Stability
+
 ## Lecture 6: Quicksort
+* [Quick](/AlgsSedgewickWayne/Quick.py)
 ### 01_06_01 Quicksort
 ### 01_06_02 Selection
 ### 01_06_03 Duplicate Keys
