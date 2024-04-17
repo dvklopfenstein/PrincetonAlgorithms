@@ -109,7 +109,7 @@ class WeightedQuickUnionPlusUF(BaseComp):
 # connected(0, 7) Yes
 
 # DYNAMIC CONNECTIVITY APPLICATIONS: (04:50) Week 1 Lecture "Dynamic Connectivity(1:22)
-# * APPS Pixels in a digitial photo
+# * APPS Pixels in a digital photo
 # * APPS Computers in a network.
 # * APPS Friends in a social network.
 # * APPS Transistors in a computer chip.

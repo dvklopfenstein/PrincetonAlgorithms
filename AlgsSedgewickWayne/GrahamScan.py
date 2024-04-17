@@ -1,4 +1,86 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+"""GrahamScan class"""
+
+from copy import deepcopy
+from AlgsSedgewickWayne.Stack import Stack
+from AlgsSedgewickWayne.Point2D import Point2D
+
+class GrahamScan:
+    #### private Stack<Point2D> hull = new Stack<Point2D>();
+
+    def __init__(self, pts): # Point2D[] pts) {
+        self.hull = self._init_convex_hull(pts) if pts else None
+
+    def _init_convex_hull(pts):
+
+        hull = Stack()
+        # defensive copy
+        points = [Point2D(*t) for t in pts]
+        print(f'1. COPY:   {points}')
+
+        # preprocess so that points[0] has lowest y-coordinate; break ties by x-coordinate
+        # points[0] is an extreme point of the convex hull
+        # (alternatively, could do easily in linear time)
+        points.sort(key=lambda p: [p.get_y(), p.get_x()])
+        pt0 = points[0]
+        print(f'2. Y-SORT: {points}')
+
+        # sort by polar angle with respect to base point points[0],
+        # breaking ties by distance to points[0]
+        points[1:].sort(pt0.POLAR_ORDER)
+
+        self.hull.push(points[0])       # p[0] is first extreme point
+
+        # find index k1 of first point not equal to points[0]
+        k1 = None
+        for k1 in range(1, N):
+            if not points[0].equals(points[k1]): break
+        if k1 == N: return        # all points equal
+
+        # find index k2 of first point not collinear with points[0] and points[k1]
+        k2 = None
+        for k2 in range(k1 + 1, N):
+            if Point2D.ccw(points[0], points[k1], points[k2]) != 0:
+                break
+        self.hull.push(points[k2-1])    # points[k2-1] is second extreme point
+
+        # Graham scan; note that points[N-1] is extreme point different from points[0]
+        for k2 in range(k2, N):
+            top = self.hull.pop()
+            while Point2D.ccw(self.hull.peek(), top, points[i]) <= 0:
+                top = self.hull.pop()
+            self.hull.push(top)
+            self.hull.push(points[i])
+
+        ## assert self._is_convex()
+
+    ## # return extreme points on convex hull in counterclockwise order as an Iterable
+    ## #### public Iterable<Point2D> hull() {
+    ## def __iter__(self):
+    ##     ## Stack<Point2D> stck = new Stack<Point2D>();
+    ##     ## stck = Stack()
+    ##     for pt2d in self.hull:
+    ##         yield pt2d
+    ##         ## stck.push(pt2d)
+    ##     ## return stck
+
+    ## def _is_convex(self):  # _isConvex():
+    ##     """Check that boundary of hull is strictly convex"""
+    ##     hull_size = hull.size()
+    ##     if hull_size <= 2:
+    ##         return True
+
+    ##     points = [pt2d for pt2d in hull()]
+    ##     #### points = new Point2D[hull_size];
+    ##     #### int n = 0
+    ##     #### for pt2d in hull()):
+    ##     ####     points[n++] = pt2d;
+
+    ##     for i in range(hull_size):
+    ##         if Point2D.ccw(points[i], points[(i+1) % hull_size], points[(i+2) % hull_size]) <= 0:
+    ##             return False;
+    ##     return True;
+
 
 ##########################################
 # Alg1, Week 2 Lecture "Convex Hull
@@ -159,83 +241,5 @@
  #************************************************************************/
 
 
-class GrahamScan:
-    private Stack<Point2D> hull = new Stack<Point2D>();
-
-    def __init__(pts): # Point2D[] pts) {
-
-        # defensive copy
-        N = len(pts)
-        Point2D[] points = new Point2D[N];
-        for i in range(N):
-            points[i] = pts[i]
-
-        # preprocess so that points[0] has lowest y-coordinate; break ties by x-coordinate
-        # points[0] is an extreme point of the convex hull
-        # (alternatively, could do easily in linear time)
-        Arrays.sort(points);
-
-        # sort by polar angle with respect to base point points[0],
-        # breaking ties by distance to points[0]
-        Arrays.sort(points, 1, N, points[0].POLAR_ORDER);
-
-        hull.push(points[0]);       # p[0] is first extreme point
-
-        # find index k1 of first point not equal to points[0]
-        k1 = None
-        for k1 in range(1, N):
-            if not points[0].equals(points[k1]): break
-        if k1 == N: return        # all points equal
-
-        # find index k2 of first point not collinear with points[0] and points[k1]
-        k2 = None
-        for k2 in range(k1 + 1, N):
-            if Point2D.ccw(points[0], points[k1], points[k2]) != 0! break
-        hull.push(points[k2-1])    # points[k2-1] is second extreme point
-
-        # Graham scan; note that points[N-1] is extreme point different from points[0]
-        for k2 in range(k2, N):
-            top = hull.pop()
-            while Point2D.ccw(hull.peek(), top, points[i]) <= 0:
-                top = hull.pop()
-            hull.push(top)
-            hull.push(points[i])
-
-        assert isConvex()
-
-    # return extreme points on convex hull in counterclockwise order as an Iterable
-    public Iterable<Point2D> hull() {
-        Stack<Point2D> s = new Stack<Point2D>();
-        for (Point2D p : hull) s.push(p);
-        return s;
-
-    # check that boundary of hull is strictly convex
-    def _isConvex():
-        int N = hull.size();
-        if N <= 2: return True;
-
-        Point2D[] points = new Point2D[N];
-        int n = 0
-        for (Point2D p : hull()) :
-            points[n++] = p;
-
-        for i in range(N):
-            if Point2D.ccw(points[i], points[(i+1) % N], points[(i+2) % N]) <= 0:
-                return False;
-        return True;
-
-# test client
-def main():
-    int N = StdIn.readInt();
-    Point2D[] points = new Point2D[N];
-    for i in range(N):
-        int x = StdIn.readInt();
-        int y = StdIn.readInt();
-        points[i] = new Point2D(x, y);
-    GrahamScan graham = new GrahamScan(points);
-    for (Point2D p : graham.hull())
-        StdOut.println(p);
-
 
 # Copyright © 2002–2010, Robert Sedgewick and Kevin Wayne.
-# Last updated: Sat Aug 6 09:11:10 EDT 2011.

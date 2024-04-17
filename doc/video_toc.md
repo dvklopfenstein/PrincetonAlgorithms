@@ -3,17 +3,19 @@ Table of Contents
 
 # PART 1
 ## INTRODUCTION
-### 01_01_01 Algorithms: Introduction (9:22)
-### 01_01_02 Lecture 1: Union-Find
-### 01_01_03 Dynamic Connectivity (10:22)
-### 01_01_04 Quick Find (10:19)
+### 01_00_00 Algorithms: Introduction (9:22)
+
+## Lecture 1: Union-Find
+### 01_01_01 01_01_03 Dynamic Connectivity (10:22)
+### 01_01_02 Quick Find (10:19)
 * [QuickFindUF](/AlgsSedgewickWayne/QuickFindUF.py) [test_QuickFindUF](tests/test_QuickFindUF.py)
-### 01_01_05 Quick Union (7:50)
+### 01_01_03 Quick Union (7:50)
 * /AlgsSedgewickWayne/QuickUnionUF.py tests/test_QuickUnionUF.py
-### 01_01_06 Quick-Union Improvements (13:03)
+### 01_01_04 Quick-Union Improvements (13:03)
 * /AlgsSedgewickWayne/WeightedQuickUnionUF.py tests/test_WeightedQuickUnionUF.py
 * /AlgsSedgewickWayne/WeightedQuickUnionPlusUF.py tests/test_WeightedQuickUnionPlusUF.py
-### 01_01_07 Union-Find Applications (9:22)
+### 01_01_05 Union-Find Applications (9:22)
+
 ## Lecture 2: Analysis of Algorithms
 ### 01_02_01 Introduction to Analysis of Algorithms
 ### 01_02_02 Observations
@@ -21,6 +23,7 @@ Table of Contents
 ### 01_02_04 Order-of-Growth Classifications
 ### 01_02_05 Theory of Algorithms
 ### 01_02_06 Memory
+
 ## Lecture 3: Stacks and Queues
 ### 01_03_01 Stacks
 ### 01_03_02 Resizing Arrays
@@ -28,6 +31,7 @@ Table of Contents
 ### 01_03_04 Generics
 ### 01_03_05 Iterators
 ### 01_03_06 Stack and Queue Applications
+
 ## Lecture 4: Elementary Sorts
 ### 01_04_01 Introduction to Sorting
 ### 01_04_02 Selection Sort
@@ -53,28 +57,34 @@ Table of Contents
 ### 01_06_02 Selection
 ### 01_06_03 Duplicate Keys
 ### 01_06_04 System Sorts
+
 ## Lecture 7: Priority Queues
 ### 01_07_01 APIs and Elementary Implementations
 ### 01_07_02 Binary Heaps
 ### 01_07_03 Heapsort
 ### 01_07_04 Event-Driven Simulation
+
 ## Lecture 8: Elementary Symbol Tables
 ### 01_08_01 Symbol Table APIs
+* [ST](/AlgsSedgewickWayne/ST.py) [test_ST](/tests/test_ST.py)
 ### 01_08_02 Elementary Implementations
 ### 01_08_03 Ordered Operations
 ### 01_08_04 Binary Search Trees
 ### 01_08_05 Ordered Operations in BSTs
 ### 01_08_06 Deletion in BSTs
+
 # Lecture 9: Balanced Search Trees
 ### 01_09_01 Search Trees
 ### 01_09_02 Red-Black BSTs
 ### 01_09_03 B-Trees
+
 ## Lecture 10: Geometric Applications of BSTs
 ### 01_10_09 Range Search
 ### 01_10_10 Line Segment Intersection
 ### 01_10_11 Kd-Trees
 ### 01_10_12 Interval Search Trees
 ### 01_10_13 Rectangle Intersection
+
 ## Lecture 11: Hash Tables
 ### 01_11_01 Hash Functions
 ### 01_11_02 Separate Chaining

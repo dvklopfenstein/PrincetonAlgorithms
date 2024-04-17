@@ -4,7 +4,9 @@ import random
 import collections as cx
 
 def Sort(arr, array_history=None):
-    """QuickSort"""
+    """QuickSort.
+    Avg num compares on N distinct keys ~2N ln N (and number od exchanges is ~1/3 N ln N
+    """
     random.shuffle(arr)  # Needed to ensure performance will be good. 05:56
     _add_history(array_history, arr) # Record initial state of array
     _sort(arr, 0, len(arr) - 1, array_history)
