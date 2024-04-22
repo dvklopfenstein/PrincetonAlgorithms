@@ -90,25 +90,19 @@ class NFA:
         regexp = self.regexp
         graph = self.digraph
         reachable_states = set(vertix for vertix in range(num_vertices) if dfs.marked(vertix))
-        # print(f'\nREGEXP({regexp})')
-        # print(f'TEXT({txt})')
-        # print(f'REACHABLE STATES START: {reachable_states}')
 
         # Compute possible NFA states for txt[i+1]
         #for (int i = 0 i < txt.length(); i++) {
         for txt_chr in txt:
-            # print(f'TEXT CHAR: {txt_chr}', end=' ')
             if txt_chr in {'*', '|', '(', ')'}:
                 raise RuntimeError(f"text contains the metacharacter '{txt_chr}'")
 
             match = set()
             for vertix in reachable_states:
                 if vertix == len_regexp:
-                    # print(f'IT IS A MATCH!')
                     continue
                 if regexp[vertix] in {txt_chr, '.'}:
                     match.add(vertix+1)
-            # print(f'MATCHES VERTICES: {match}')
             if not match:
                 continue
 
@@ -120,7 +114,6 @@ class NFA:
                 return False
 
         # check for accept state
-        # print('REACHABLE STATES END:  ', reachable_states)
         return len_regexp in reachable_states
 
 
