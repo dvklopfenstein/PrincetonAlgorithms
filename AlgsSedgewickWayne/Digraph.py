@@ -11,6 +11,7 @@ class Digraph:
     def __init__(self, arr=None, **kwargs):
         if arr is not None:
             if isinstance(arr, int):
+                ## print('DIGRAPH ARRAY INPUT:', arr)
                 self._init_empty(arr)
             elif len(arr) == 1:
                 self._init_empty(arr[0])
@@ -25,8 +26,9 @@ class Digraph:
             self.keys = self._adj.keys()
 
     def _init_empty(self, num_vertices):
+        ## print(f'DIGRAPH INIT {num_vertices} VERTICES')
         if num_vertices < 0:
-            raise Exception("Number of vertices must be nonnegative")
+            raise RuntimeError("Number of vertices must be nonnegative")
         self.num_vertices = num_vertices # number of vertices
         self.num_edges = 0 # number of edges
         self._adj = [set() for v in range(num_vertices)]
@@ -39,7 +41,7 @@ class Digraph:
         self._init_empty(arr[0]) # init V, and the empty adj list
         num_edges = arr[1]
         if num_edges < 0:
-            raise Exception("Number of edges must be nonnegative")
+            raise RuntimeError("Number of edges must be nonnegative")
         for src_v, dst_w in arr[2:]:
             self.addEdge(src_v, dst_w)
 
@@ -89,23 +91,23 @@ class Digraph:
     #    src_v, self.num_vertices-1, self._adj))
 
     def __str__(self):
-        txt = [(("{V} vertices, {E} edges\n").format(V=self.num_vertices, E=self.num_edges))]
+        txt = [(f"{self.num_vertices} vertices, {self.num_edges} edges\n")]
         for src_v in self.keys:
-            txt.append("{src_v}: ".format(src_v=src_v))
+            txt.append(f"{src_v}: ")
             for dst_w in self._adj[src_v]:
-                txt.append("{dst_w} ".format(dst_w=dst_w))
+                txt.append(f"{dst_w} ")
             txt.append("\n")
         return ''.join(txt)
 
     def __iter__(self): # Makes Graph an iterable.
         return iter(self._adj) # returns an iterator.
 
-    def wr_png(self, fout_png="Digraph.png", prt=sys.stdout, **kwargs):
+    def wr_png(self, fout_png="Digraph.png", prt=sys.stdout):
         """Make a png showing a diagram of the connected components."""
         dot_digraph = self.get_pydot_digraph()
         # pylint: disable=no-member
         dot_digraph.write_png(fout_png)
-        prt.write("  WROTE: {}\n".format(fout_png))
+        prt.write(f"  WROTE: {fout_png}\n")
 
     def get_pydot_digraph(self):
         """Make a pydot graph showing a diagram of the connected components."""
