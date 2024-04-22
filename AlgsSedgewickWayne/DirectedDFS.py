@@ -13,7 +13,8 @@ class DirectedDFS:
 
     def _init(self, graph, sources):
         """Computes vertices in digraph graph that are connected to any src vertices, sources"""
-        self._marked = [False for _ in range(graph.V())] # True if v is reachable from src (or srcs)
+        ## print(f'DirectedDFS ON GRAPH({graph})')
+        self._marked = [False for _ in range(graph.num_vertices)] # True if v is reachable from src (or srcs)
         self._count = 0 # number of vertexertices reachable from s
         for vertex in sources:
             if not self._marked[vertex]:
