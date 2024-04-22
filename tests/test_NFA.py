@@ -3,6 +3,7 @@
 # pylint: disable=invalid-name
 
 from AlgsSedgewickWayne.NFA import NFA
+from AlgsSedgewickWayne.plt_regex_graph import plt_nfa
 
 #****************************************************************************
 # Compilation:  javac NFA.java
@@ -33,8 +34,8 @@ def test_nfa():
     assert not _run(2, "((A*B|AC)D)", "AAAAC")
     assert     _run(3, "((a|(bc)*d)*)", "abcbcd")
     assert     _run(4, "((a|(bc)*d)*)", "abcbcbcdaaaabcbcdaaaddd")
-    assert not _run(5, "((a|(bc)*d)*)", "ZZZZZZZZZZZZZZZZZZZZZZZ")
-    assert not _run(5, "(a|(bc)*d)", "")
+    assert     _run(5, "((a|(bc)*d)*)", "ZZZZZZZZZZZZZZZZZZZZZZZ")
+    assert not _run(6, "(a|(bc)*d)", "")
     #String regexp = "(" + args[0] + ")"
     #String txt = args[1]
     #if txt.indexOf('|') >= 0):
@@ -42,8 +43,8 @@ def test_nfa():
 
 def _run(num, regexp, txt):
     nfa = NFA(regexp)
+    plt_nfa(f'test_NFA_{num}.png', nfa)
     matched = nfa.recognizes(txt)
-    nfa.wr_png(f'test_NFA_{num}.png')
     return matched
 
 

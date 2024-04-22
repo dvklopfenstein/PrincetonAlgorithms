@@ -36,148 +36,93 @@ from AlgsSedgewickWayne.DirectedDFS import DirectedDFS
 # @author Robert Sedgewick
 # @author Kevin Wayne
 
+
+# pylint: disable=too-few-public-methods
 class NFA:
     """Initializes the NFA from the specified regular expression"""
 
     def __init__(self, regexp):
-        self.regexp = regexp
-        self.len_regexp = len(regexp)    # M
+        self.regexp = regexp           # regular expression
+        self.len_regexp = len(regexp)  # M: number of characters in regular expression
         # Epsilon transition digraph (does not include
-        self.digraph = self._init_digraph(regexp)
+        self.digraph = self._init_digraph(regexp)  # digraph of epsilon transitions
         # print(self.digraph)
 
     def _init_digraph(self, regexp):
-        """Build epsilon transition digraph"""
-        # Use stack to remember '(' to implement '*' and '|'
-        ops = []
+        """Initializes the NFA from the specified regular expression"""
+        ops = []  # Operations Stack
+        graph = Digraph(self.len_regexp+1)
         len_regexp = self.len_regexp
-        digraph = Digraph(len_regexp+1)
-        exp_operations = {'(', '|'}
-        exp_edgechr = {'(', '*', ')'}
+        ## for (int i = 0 i < m; i++):
         for reg_i, reg_chr in enumerate(regexp):
-            # self._prt_color_regex(reg_i, reg_chr)
             left_paren = reg_i
-            if reg_chr in exp_operations:
+            if reg_chr in {'(', '|'}:
                 ops.append(reg_i)
             elif reg_chr == ')':
-                tmpor = ops.pop()
-                # 2-way or operator
-                if regexp[tmpor] == '|':
+                tmp_or = ops.pop()
+
+                # 2-way tmp_or operator
+                if regexp[tmp_or] == '|':
                     left_paren = ops.pop()
-                    digraph.addEdge(left_paren, tmpor+1)
-                    digraph.addEdge(tmpor, reg_i)
-                elif regexp[tmpor] == '(':
-                    left_paren = tmpor
+                    # Add two edges to skip OR(|)
+                    graph.addEdge(left_paren, tmp_or+1)
+                    graph.addEdge(tmp_or, reg_i)
+                elif regexp[tmp_or] == '(':
+                    left_paren = tmp_or
                 else:
                     assert False
 
             # closure operator (uses 1-character lookahead)
-            reg_i_plus1 = reg_i + 1
-            if reg_i < len_regexp-1 and regexp[reg_i_plus1] == '*':
-                # print(f'************ {left_paren} {reg_i_plus1}')
-                # print(f'************ {reg_i_plus1} {left_paren}')
-                digraph.addEdge(left_paren, reg_i_plus1)
-                digraph.addEdge(reg_i_plus1, left_paren)
-            if reg_chr in exp_edgechr:
-                digraph.addEdge(reg_i, reg_i_plus1)
-        return digraph
-
-    def _prt_color_regex(self, reg_i, reg_chr):
-        regex = list(self.regexp)
-        regex[reg_i] = '\x1b[48;5;0;{FGBG};5;{COLOR};1;3;4m{ABC}\x1b[0m'.format(
-            FGBG=38, COLOR=13, ABC=regex[reg_i])
-        print(f'REGEX {reg_i:2}) {reg_chr} {"".join(regex)}')
+            if reg_i < len_regexp - 1 and regexp[reg_i + 1] == '*':
+                graph.addEdge(left_paren, reg_i+1)
+                graph.addEdge(reg_i+1, left_paren)
+            if reg_chr in {'(', '*', ')'}:
+                graph.addEdge(reg_i, reg_i+1)
+        if ops:
+            raise RuntimeError("Invalid regular expression")
+        return graph
 
     def recognizes(self, txt):
-        """Does the NFA recognize txt?"""
-        # Get states reachable from start by epsilon-transitions
-        reachable_states = set()
-        # program counter holds set of all program possible states for given regex
-        # Build a DFS for all states that can be reached from state 0 by epsilon edges
-        dfs_state0 = DirectedDFS(self.digraph, 0)
-        for vertex in range(self.digraph.V()):
-            if dfs_state0.marked(vertex):
-                reachable_states.add(vertex)
-        print(f'{self.len_regexp} REACHABLE STATES: {reachable_states}')
+        """Returns true if the text is matched by the regular expression"""
+        dfs = DirectedDFS(self.digraph, 0)
+        len_regexp = self.len_regexp
+        num_vertices = self.digraph.num_vertices
+        regexp = self.regexp
+        graph = self.digraph
+        reachable_states = set(vertix for vertix in range(num_vertices) if dfs.marked(vertix))
+        # print(f'\nREGEXP({regexp})')
+        # print(f'TEXT({txt})')
+        # print(f'REACHABLE STATES START: {reachable_states}')
 
         # Compute possible NFA states for txt[i+1]
-        regexp = self.regexp
-        len_regexp = self.len_regexp
+        #for (int i = 0 i < txt.length(); i++) {
         for txt_chr in txt:
-            matched = set()
-            for vertex in reachable_states:
-                # If accept-state is reached, nothing left to do
-                if vertex == len_regexp:
-                    continue
-                # Get all states matchable after matching a text character
-                if (regexp[vertex] == txt_chr or regexp[vertex] == '.'):
-                    matched.add(vertex+1)
+            # print(f'TEXT CHAR: {txt_chr}', end=' ')
+            if txt_chr in {'*', '|', '(', ')'}:
+                raise RuntimeError(f"text contains the metacharacter '{txt_chr}'")
 
-            # Follow epsilon-transitions after a character match
-            dfs = DirectedDFS(self.digraph, matched)
-            reachable_states = set()
-            for vertex in range(self.digraph.V()):
-                if dfs.marked(vertex):
-                    reachable_states.add(vertex)
+            match = set()
+            for vertix in reachable_states:
+                if vertix == len_regexp:
+                    # print(f'IT IS A MATCH!')
+                    continue
+                if regexp[vertix] in {txt_chr, '.'}:
+                    match.add(vertix+1)
+            # print(f'MATCHES VERTICES: {match}')
+            if not match:
+                continue
+
+            dfs = DirectedDFS(graph, match)
+            reachable_states = set(vertix for vertix in range(num_vertices) if dfs.marked(vertix))
 
             # optimization if no states reachable
             if not reachable_states:
                 return False
 
-        # Accept if can end in state len_regexp
+        # check for accept state
+        # print('REACHABLE STATES END:  ', reachable_states)
         return len_regexp in reachable_states
-        ## for vertex in reachable_states:
-        ##     if vertex == len_regexp:
-        ##         return True
-        ## return False
-
-    def _get_reachable_states(self, matched):
-        """From source states, find all reachable states"""
-        reachable_states = set()
-        dfs = DirectedDFS(self.digraph, matched)
-        for vertex in range(self.digraph.V()):
-            if dfs.marked(vertex):
-                reachable_states.add(vertex)
-        return reachable_states
-
-    def wr_png(self, fout_png):
-        """Create plot of state machine and save into a png file"""
-        import pydot
-        # 1. Create/initialize Graph
-        digraph = pydot.Dot(graph_type='digraph',
-                            label=f'{self.regexp} [{len(self.regexp)}]',
-                            rankdir='LR')
-        # 2. Create Nodes
-        regchrs = list(self.regexp) + ['MATCH',]
-        assert len(regchrs) == len(self.digraph.keys)
-        nodes = [pydot.Node(src_v, label=f'{src_v}\n{a}') for a, src_v in zip(regchrs, self.digraph.keys)]
-        #nodes = [pydot.Node(src_v, label=f'{src_v} ??') for src_v in self.digraph.keys]
-        # 3. Add nodes to Graph
-        prev_i = -1
-        prev_chr = -1
-        rngs = [('a', 'z'), ('A', 'Z'), ('0', '9')]
-        az09 = set(chr(i) for a, z in rngs for i in range(ord(a), ord(z) + 1))
-        ## print('ALPHANUMERIC CHRS:', sorted(az09)) 
-        for reg_i, reg_chr in enumerate(self.regexp):
-            node = pydot.Node(reg_i, label=f'{reg_i}\n{reg_chr}')
-            digraph.add_node(node)
-            if prev_chr in az09:
-                digraph.add_edge(pydot.Edge(prev_i, reg_i, color='black'))
-            prev_i = reg_i
-            prev_chr = reg_chr
-        #for node in nodes:
-        #    digraph.add_node(node)
-        # 4. Add Edges between Nodes to Graph
-        for src_v, dst_w in self.digraph.get_edges():
-            if src_v != dst_w: # Print only edges from one node to another (not to self)
-                #print(f'{src_v} {dst_w}')
-                digraph.add_edge(pydot.Edge(src_v, dst_w, color='red'))
-        # Add invisible edge to line up states in order in plot
-        for src_v, src_vp1 in zip(self.digraph.keys[:-1], self.digraph.keys[1:-2]):
-            digraph.add_edge(pydot.Edge(src_v, src_vp1, color='blue', style='invis'))#'dotted'))
-        digraph.write_png(fout_png)
-        print(f"  WROTE: {fout_png}")
 
 
 # Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
-# Copyright 2015-present, DV Klopfenstein, PhD, Python implementation.
+# Copyright 2015-present, DV Klopfenstein, PhD, Python implementation.graph
