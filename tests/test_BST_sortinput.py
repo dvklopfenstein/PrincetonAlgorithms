@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Test sorting of a list such that the sorted list will build a balanced BST."""
 
-import sys
+from sys import stdout
 import random
 from random import shuffle
 import numpy as np
@@ -16,7 +16,7 @@ def _get_kv(keys):
     """Given a list of keys, assign a value. Return a list of key-vals."""
     return [(k, i) for i, k in enumerate(keys)]
 
-def test_0(log):
+def test_0(log=stdout):
     """Test using various random shuffles of a list of letters."""
     lst = ['K', 'B', 'C', 'I', 'E', 'G', 'F', 'H', 'J', 'D', 'A']
     L = len(lst)
@@ -27,18 +27,18 @@ def test_0(log):
         log.write("{LST}\n".format(LST=lst))
         assert bst.height() == int(np.floor(np.log2(L))), "HEIGHT VIOLATION"
 
-def test_1(log):
+def test_1(log=stdout):
     """Test using various random lists of integers."""
     for i in range(10): # Run 10 tests
         L = random.randint(1, 100)
-        lst = range(L)
+        lst = list(range(L))
         shuffle(lst)
         bst = BST(sort_balbst(_get_kv(lst)))
         bst.wr_png("BST_i{I}.png".format(I=i))
         log.write("{LST}\n".format(LST=lst))
         assert bst.height() == int(np.floor(np.log2(L))), "HEIGHT VIOLATION"
 
-def run_all(log=sys.stdout):
+def run_all(log=stdout):
     test_0(log)
     test_1(log)
 
