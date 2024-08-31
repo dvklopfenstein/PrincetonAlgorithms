@@ -10,22 +10,23 @@ class QuickFindUF(BaseComp): # Eager Approach
         super(QuickFindUF, self).__init__("QuickFindUF")
         self.idvals = list(range(N)) # N array accesses (wo/comprehension)
 
-    def connected(self, p_id, q_id): # $ = 1
-        """ FIND whether p_id and q_id are in the same component."""
-        return self.idvals[p_id] == self.idvals[q_id] # 2 array accesses
+    def connected(self, pval, qval): # $ = 1
+        """ FIND whether pval and qval are in the same component."""
+        return self.idvals[pval] == self.idvals[qval] # 2 array accesses
 
-    def union(self, p_id, q_id): #         $ = N
-        """ UNION by changing all entries with id[p_id] to id[q_id]."""
-        p_root = self.idvals[p_id] # Change all IDs having value, p_root, to...
-        q_root = self.idvals[q_id] # to q_root
+    def union(self, pval, qval): #         $ = N
+        """ UNION by changing all entries with id[pval] to id[qval]."""
+        p_root = self.idvals[pval] # Change all IDs having value, p_root, to...
+        q_root = self.idvals[qval] # to q_root
         for curr_id, curr_root in enumerate(self.idvals):
             # At most 2N + 2 array accesses; 2N: 1st in for-loop above, 2nd in assignment below
-            if curr_root == p_root: # Common mistake many make is to put idvals[p_id] instead of p_root
-            ## if curr_root == self.idvals[p_id]: # Common mistake many make is to put idvals[p_id] instead of p_root
+            if curr_root == p_root:
+            # Common mistake many make is to put idvals[pval] instead of p_root:
+            ## if curr_root == self.idvals[pval]:
                 self.idvals[curr_id] = q_root
 
     def _root(self, val):
-        """Return root of node p_id."""
+        """Return root of node pval."""
         return self.idvals[val]
 
 

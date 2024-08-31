@@ -12,9 +12,9 @@ def run_unions(alg, union_txt, msg, pngbase=None, prt=sys.stdout):
     prt.write(f"{msg}\n")
     prt.write(f"{alg} Initial values: root[member, ...]\n")
     for idx, u_str in enumerate(union_txt.split()):
-        I = [int(intstr) for intstr in u_str.split('-')]
+        i_arr = [int(intstr) for intstr in u_str.split('-')]
         fout_png = None if pngbase is None else f"{pngbase}_step{idx:03}.png"
-        alg.union_png(I[0], I[1], fout_png)
+        alg.union_png(i_arr[0], i_arr[1], fout_png)
         set_str = _str_ccomps(alg)
         prt.write(f"{alg} union({u_str}) {' '.join(set_str)}\n\n")
     return alg
@@ -28,15 +28,15 @@ def _str_ccomps(alg):
     # <class 'AlgsSedgewickWayne.BaseComp.NtRoot'>
     #   assert r.depth == 0
     ## for ntd, members in sorted(ccomps.items(), key=lambda t: t[0]):
-    ##     assert 
+    ##     assert
     return [f"R{r.rootnode}{sorted(s)}" for r, s in sorted(ccomps.items(), key=lambda t: t[0])]
 
 def get_unions(union_txt):
     """Given str('4-5 6-7 3-4'), return unions."""
     unions = []
-    for idx, u_str in enumerate(union_txt.split()):
-      I = [int(intstr) for intstr in u_str.split('-')]
-      unions.append(I)
+    for u_str in union_txt.split():
+        i_arr = [int(intstr) for intstr in u_str.split('-')]
+        unions.append(i_arr)
 
 def chk_roots(alg, expected):
     """Test to see if QuickFind passed."""
@@ -45,7 +45,7 @@ def chk_roots(alg, expected):
         return
     print(f"EXPECTED: {expected}")
     print(f"ACTUAL:   {actual}")
-    raise Exception("TEST FAILED.")
+    raise RuntimeError("TEST FAILED.")
 
 def chk_arrays(actual, expected):
     """Test to see if QuickFind passed."""
@@ -53,7 +53,7 @@ def chk_arrays(actual, expected):
         return
     print(f"EXPECTED: {expected}")
     print(f"ACTUAL:   {actual}")
-    raise Exception("TEST FAILED.")
+    raise RuntimeError("TEST FAILED.")
 
 def blk_visualizer(blkstr, prt=sys.stdout):
     """Used to help visualize arrays in columns for Algs 1, Week 2 Sort Q2."""
@@ -63,7 +63,7 @@ def blk_visualizer(blkstr, prt=sys.stdout):
     arrays = zip(*blk)
     # Iterate through each array
     for array_id, arr in enumerate(arrays):
-      arr_vis(arr, array_id, 0, prt)
+        arr_vis(arr, array_id, 0, prt)
 
 def arr_vis(arr, array_id=0, i0=0, prt=sys.stdout):
     # Get a number, starting with 1, based on the element's order in the sort
@@ -80,10 +80,10 @@ def str_vis(str_arr, array_id=0, prt=sys.stdout):
 def get_png_label(arr, kwargs):
     """Return label to be used in image."""
     if 'label' in kwargs:
-      return kwargs['label']
+        return kwargs['label']
     pat = "{STATE}"
     if 'label_pat' in kwargs:
-      pat = kwargs['label_pat']
+        pat = kwargs['label_pat']
     state_str = " ".join([str(e) for e in arr])
     return pat.format(STATE=state_str)
 
@@ -98,26 +98,55 @@ def adjtxtblk2OrderedDict(txtblk):
     """Convert a text-block representing an adjacency list into an array."""
     lst = []
     for line in txtblk.splitlines():
-      line = line.strip()
-      if line:
-        lst.append(_adjstr2arr(line))
+        line = line.strip()
+        if line:
+            lst.append(_adjstr2arr(line))
     return OrderedDict(lst)
 
 def adjOrderedDict2VEpairs_ud(od):
     """For Undirected Graph: Convert an adj list into an array of fmt: [V, E, pairs] & names."""
     # Note: the format, "V E pairs" is seen in tinyG.txt
-    V = len(od)
+    num_vertices = len(od)
     v2i = {v:i for i, v in enumerate(od.keys())} # Vertex name to index
     i2v = {i:v for v, i in v2i.items()}
-    edges = set([tuple(sorted([v2i[a], v2i[b]])) for a, bs in od.items() for b in bs])
-    a = [V, len(edges)] + list(edges)
+    edges = set(tuple(sorted([v2i[a], v2i[b]])) for a, bs in od.items() for b in bs)
+    a = [num_vertices, len(edges)] + list(edges)
     return a, i2v
 
 def _adjstr2arr(adjstr):
     """Convert "A:  F B E" to ('A', ('F', 'B', 'E'))."""
-    M = re.search(r'^(\S+)\s*:\s*(\S.*)$', adjstr)
-    if M:
-      return (M.group(1), M.group(2).split())
-    raise Exception("NO ADJACENCY LIST FOUND IN({})".format(adjstr))
+    mtch = re.search(r'^(\S+)\s*:\s*(\S.*)$', adjstr)
+    if mtch:
+        return (mtch.group(1), mtch.group(2).split())
+    raise RuntimeError(f"NO ADJACENCY LIST FOUND IN({adjstr})")
+
+
+def hl_idnum(idnum, array, bgcolor=0, fgcolor=15):
+    """Highlight one idnum in an array"""
+    txt = []
+    bg = f'48;5;{bgcolor}'
+    fg = f'38;5;{fgcolor};1'
+    for id_cur in range(len(array)):
+        if id_cur != idnum:
+            txt.append(f'{id_cur:2}')
+        else:
+            #txt.append(f"\x1b[48;5;0;{fg_bg};5;{color};1m{id_cur:2}\x1b[0m")
+            txt.append(f"\x1b[{bg};{fg}m{id_cur:2}\x1b[0m")
+    return ' '.join(txt)
+
+def hl_idroot(idnum, rootvals, bgcolor=0, fgcolor=15):
+    """Highlight one idnum in an array"""
+    txt = []
+    bg = f'48;5;{bgcolor}'
+    fg = f'38;5;{fgcolor};1'
+    id_root = rootvals[idnum]
+    for root_cur in rootvals:
+        if root_cur != id_root:
+            txt.append(f'{root_cur:2}')
+        else:
+            #txt.append(f"\x1b[48;5;0;{fg_bg};5;{color};1m{root_cur:2}\x1b[0m")
+            txt.append(f"\x1b[{bg};{fg}m{root_cur:2}\x1b[0m")
+    return ' '.join(txt)
+
 
 # Copyright (C) 2016-present, DV Klopfenstein, PhD. All rights reserved.

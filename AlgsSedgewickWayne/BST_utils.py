@@ -65,7 +65,7 @@ def _sort_balbst(balanced_bst, sorted_list):
     """Given a sorted list, return a list in an order to create a balanced BST."""
     if not sorted_list: # sorted list
         return
-    middle = len(sorted_list)/2
+    middle = len(sorted_list)//2
     balanced_bst.append(sorted_list[middle])
     _sort_balbst(balanced_bst, sorted_list[:middle])   # Process left side
     _sort_balbst(balanced_bst, sorted_list[middle+1:]) # Process right side
