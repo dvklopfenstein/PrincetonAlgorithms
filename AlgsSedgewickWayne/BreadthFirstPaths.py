@@ -46,7 +46,7 @@ class BreadthFirstPaths:
     #### def distTo(self, vertex):
     ####     return self.dist_to[vertex]
 
-    def dist_to(self, vertex):
+    def get_dist_to(self, vertex):
         """Get distance in 'hops' to vertex"""
         return self.dist_to[vertex]
 
@@ -66,7 +66,7 @@ class BreadthFirstPaths:
         """Deque and print dequed value if user requests."""
         vertex = queue.popleft() # dequeue()
         if prt is not None:
-            prt.write("{} ".format(vertex))
+            prt.write(f"{vertex} ")
         return vertex
 
     def _check(self, graph, src, prt=sys.stdout):
@@ -74,7 +74,7 @@ class BreadthFirstPaths:
 
         # check that the distance of src = 0
         if self.dist_to[src] != 0:
-            prt.write("distance of source {} to itself = {}\n".format(src, self.dist_to[src]))
+            prt.write(f"distance of source {src} to itself = {self.dist_to[src]}\n")
             return False
 
         # check that for each edge vertex-w dist[w] <= dist[vertex] + 1
@@ -82,25 +82,26 @@ class BreadthFirstPaths:
         for vertex in graph.keys:
             for w in graph.adj(vertex):
                 if self.has_path_to(vertex) != self.has_path_to(w):
-                    prt.write("edge {}-{}".format(vertex, w))
-                    prt.write("has_path_to({}) = {}".format(vertex, self.has_path_to(vertex)))
-                    prt.write("has_path_to({}) = {}".format(w, self.has_path_to(w)))
+                    prt.write(f"edge {vertex}-{w}")
+                    prt.write(f"has_path_to({vertex}) = {self.has_path_to(vertex)}")
+                    prt.write(f"has_path_to({w}) = {self.has_path_to(w)}")
                     return False
                 if self.has_path_to(vertex) and (self.dist_to[w] > self.dist_to[vertex] + 1):
-                    prt.write("edge {}-{}".format(vertex, w))
-                    prt.write("dist_to[{}] = {}".format(vertex, self.dist_to[vertex]))
-                    prt.write("dist_to[{}] = {}".format(w, self.dist_to[w]))
+                    prt.write(f"edge {vertex}-{w}")
+                    prt.write(f"dist_to[{vertex}] = {self.dist_to[vertex]}")
+                    prt.write(f"dist_to[{w}] = {self.dist_to[w]}")
                     return False
 
         # check that vertex = edgeTo[w] satisfies dist_to[w] + dist_to[vertex] + 1
         # provided vertex is reachable from src
         for w in graph.keys:
-            if not self.has_path_to(w) or w == src: continue
+            if not self.has_path_to(w) or w == src:
+                continue
             vertex = self.edge_to[w]
             if self.dist_to[w] != self.dist_to[vertex] + 1:
-                prt.write("shortest path edge {}-{}".format(vertex, w))
-                prt.write("dist_to[{}] = ".format(vertex, self.dist_to[vertex]))
-                prt.write("dist_to[{}] = ".format(w, self.dist_to[w]))
+                prt.write(f"shortest path edge {vertex}-{w}")
+                prt.write(f"dist_to[{vertex}] = {self.dist_to[vertex]}")
+                prt.write(f"dist_to[{w}] = {self.dist_to[w]}")
                 return False
 
         return True
