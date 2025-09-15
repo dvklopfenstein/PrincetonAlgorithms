@@ -16,6 +16,12 @@ class Edge:
         self.w_dst = w
         self.weight = weight
 
+    def get_from(self):
+        return self.v_src
+
+    def get_to(self):
+        return self.w_dst
+
     def either(self):
         """Returns either endpoint of self edge"""
         return self.v_src

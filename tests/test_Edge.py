@@ -13,6 +13,8 @@ def main():
     assert edge.either() == 12
     assert edge.other(12) == 34
     assert edge.other(34) == 12
+    assert edge.get_from() == 12
+    assert edge.get_to() == 34
 
     edge_smaller = Edge(v=1, w=2, weight=1.0)
     edge_larger = Edge(v=1, w=2, weight=10.0)
