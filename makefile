@@ -13,6 +13,11 @@ pylint:
 	chmod 755 tmp_pylint
 	tmp_pylint
 
+clean_build:
+	rm -rf build
+	rm -rf AlgsSedgewickWayne.egg-info
+
 clean:
+	make clean_build
 	rm -f tmp_pylint
 	rm -f *.png
