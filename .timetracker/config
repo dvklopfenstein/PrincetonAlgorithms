@@ -1,0 +1,6 @@
+# TimeTracker project configuration file
+
+project = "PrincetonAlgorithms"
+
+[csv]
+filename = "../timetrackers/doc/timetracker_PrincetonAlgorithms_$USER$.csv"
