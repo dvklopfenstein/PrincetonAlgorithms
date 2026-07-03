@@ -7,19 +7,21 @@ class Edge:
 
     def __init__(self, v, w, weight):
         if v < 0:
-            raise Exception("Vertex name must be a nonnegative integer")
+            raise RuntimeError("Vertex name must be a nonnegative integer")
         if w < 0:
-            raise Exception("Vertex name must be a nonnegative integer")
+            raise RuntimeError("Vertex name must be a nonnegative integer")
         if not isinstance(weight, float):
-            raise Exception("Weight is NaN")
+            raise RuntimeError("Weight is NaN")
         self.v_src = v
         self.w_dst = w
         self.weight = weight
 
     def get_from(self):
+        """Get the vertex at the beginning of this edge (the source)"""
         return self.v_src
 
     def get_to(self):
+        """Get the vertex at the end of this edge (the destination)"""
         return self.w_dst
 
     def either(self):
@@ -36,7 +38,7 @@ class Edge:
             return self.w_dst
         if vertex == self.w_dst:
             return self.v_src
-        raise Exception("Illegal endpoint")
+        raise RuntimeError("Illegal endpoint")
 
     def compare_to(self, that):
         """Compares two edges by weight."""
@@ -47,8 +49,7 @@ class Edge:
         return  0
 
     def __str__(self):
-        return "{}-{} {:.5f}".format(
-            self.v_src, self.w_dst, self.weight)
+        return f"{self.v_src}-{self.w_dst} {self.weight:.5f}"
 
 
 # Copyright 2002-present Robert Sedgewick and Kevin Wayne.

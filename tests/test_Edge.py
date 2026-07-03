@@ -6,7 +6,7 @@ from sys import stdout
 from AlgsSedgewickWayne.Edge import Edge
 
 
-def main():
+def test_edge():
     """Unit tests the Edge data type"""
     edge = Edge(v=12, w=34, weight=5.67)
     stdout.write(str(edge))
@@ -30,4 +30,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    test_edge()
