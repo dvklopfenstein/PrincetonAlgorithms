@@ -1,11 +1,16 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+"""Test directed edge"""
 
 from AlgsSedgewickWayne.DirectedEdge import DirectedEdge
-import sys
 
-def main(prt=sys.stdout):
-  e = DirectedEdge(12, 34, 5.67)
-  prt.write("{}\n".format(str(e)))
+
+def test_directed_edge():
+    """Test directed edge"""
+    edge = DirectedEdge(12, 34, 5.67)
+    txt = str(edge)
+    assert txt == "12 -> 34  5.67"
+    print(txt)
+
 
 if __name__ == '__main__':
-  main()
+    test_directed_edge()
