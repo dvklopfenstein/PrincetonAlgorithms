@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools >= 46.3.0"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "princeonalgorithms"
+description="Python implementations of selected Princeton Java Algorithms and Clients by Robert Sedgewick and Kevin Wayne"
+version = '0.0.1',
+license = "AGPL-3.0-or-later"
+authors = [
+  {name = 'DV Klopfenstein, PhD', email = 'dvklopfenstein@protonmail.com'},
+]
+maintainers = [
+  {name = 'DV Klopfenstein, PhD', email = 'dvklopfenstein@protonmail.com'},
+]
+readme = {file="README.md", content-type="text/markdown"}
+
+keywords = [
+  "algorithms",
+]
+
+dependencies = [
+]
+
+# https://pypi.org/classifiers
+classifiers=[
+  'Development Status :: 5 - Production/Stable',
+  'License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)',
+  'Programming Language :: Python :: 3',
+  'Topic :: Scientific/Engineering :: Information Analysis',
+  'Intended Audience :: Science/Research',
+  'Intended Audience :: Developers',
+  'Environment :: Console',
+  'Operating System :: POSIX :: Linux',
+  'Operating System :: POSIX',
+  'Operating System :: Unix',
+  'Operating System :: MacOS',
+]
+
+# Needed for assignment expressions & the walrus operator
+requires-python = '>=3.9'
+
+[project.urls]
+"Homepage" = "https://github.com/dvklopfenstein/PrincetonAlgorithms"
+"Code" = "https://github.com/dvklopfenstein/PrincetonAlgorithms"
+"Issue tracker" = "https://github.com/dvklopfenstein/PrincetonAlgorithms/issues"
+
+#[project.scripts]
+
+[tool.setuptools]
+packages = [
+  'AlgsSedgewickWayne',
+  'AlgsSedgewickWayne.testcode',
+  'AlgsSedgewickWayne.plot',
+]
