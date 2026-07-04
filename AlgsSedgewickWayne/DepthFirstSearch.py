@@ -36,8 +36,7 @@ class DepthFirstSearch:
         """throw an IllegalArgumentException unless {@code 0 <= node_v < V}"""
         num_nodes = len(self.marked)
         if node_v < 0 or node_v >= num_nodes:
-            raise RuntimeError("vertex {V} is not between 0 and {Z}".format(
-                V=node_v, Z=num_nodes-1))
+            raise RuntimeError(f"vertex {node_v} is not between 0 and {num_nodes-1}")
 
 
 # Copyright 2002-present, Robert Sedgewick and Kevin Wayne.
