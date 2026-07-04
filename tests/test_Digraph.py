@@ -1,32 +1,44 @@
 #!/usr/bin/env python
+"""Test Digraph from lecture or provided by user"""
 
 import sys
-from os.path import join
-from os.path import dirname
-from os.path import abspath
+import os.path as op
 from AlgsSedgewickWayne.Digraph import Digraph
+from AlgsSedgewickWayne.plot.Digraph import PlotDigraph
 from AlgsSedgewickWayne.testcode.InputArgs import cli_get_fin
 
-TEST_DIR = dirname(abspath(__file__))
+TEST_DIR = op.dirname(op.abspath(__file__))
 
 
-def test_main(prt=sys.stdout):
-  g = cli_get_fin(sys.argv[1] if len(sys.argv) != 1 else join(TEST_DIR, "tinyDG.txt"))
-  G = Digraph(g)
-  prt.write("{}\n".format(G))
+def test_digraph():
+    """Test Digraph"""
+    #g = cli_get_fin(sys.argv[1] if len(sys.argv) != 1 else op.join(TEST_DIR, "tinyDG.txt"))
+    g = cli_get_fin(op.join(TEST_DIR, "tinyDG.txt"))
+    digrph = Digraph(g)
+    print(digrph)
+    exp_outdegree = [2, 0, 2, 2, 2, 1, 4, 2, 1, 2, 1, 2, 1]
+    exp_indegree  = [2, 1, 2, 2, 3, 2, 2, 0, 1, 3, 1, 1, 2]
+    for vint in range(digrph.num_vertices):
+        assert digrph.outdegree(vint) == exp_outdegree[vint]
+        assert digrph.indegree(vint) == exp_indegree[vint]
+        #print(f'{digrph.indegree(vint)}, ', end="")
+    PlotDigraph(digrph).wr_png("Digraph_tinyDG.png")
 
-def test_lecture(prt=sys.stdout):
-  """Plot tinyDG2.txt from 'Diagraph Search' Coursera Algs2 lecture."""
-  g = cli_get_fin(join(TEST_DIR, "tinyDG2.txt"))
-  G = Digraph(g)
-  prt.write("{}\n".format(G))
-  G.wr_png("Digraph_lecture.png", prt)
+def test_lecture_digraph():
+    """Plot tinyDG2.txt from 'Diagraph Search' Coursera Algs2 lecture."""
+    g = cli_get_fin(op.join(TEST_DIR, "tinyDG2.txt"))
+    digrph = Digraph(g)
+    print(digrph)
+    PlotDigraph(digrph).wr_png("Digraph_tinyDG2.png")
+    assert digrph.num_vertices == 6
+    assert digrph.num_edges == 8
 
-def run_all(prt=sys.stdout):
-  test_main(prt)
-  test_lecture(prt)
+def run_all():
+    """Run all tests"""
+    test_digraph()
+    test_lecture_digraph()
 
 
 if __name__ == '__main__':
-  #run_all()
-  test_lecture()
+    run_all()
+    #test_lecture_digraph()
