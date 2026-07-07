@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "princeonalgorithms"
 description="Python implementations of selected Princeton Java Algorithms and Clients by Robert Sedgewick and Kevin Wayne"
-version = '0.0.1',
+version = '0.0.1'
 license = "AGPL-3.0-or-later"
 authors = [
   {name = 'DV Klopfenstein, PhD', email = 'dvklopfenstein@protonmail.com'},
