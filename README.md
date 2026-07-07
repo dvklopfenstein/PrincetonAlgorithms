@@ -1,12 +1,18 @@
 # [Princeton University's "Algorithms and Clients"](doc/README.md)
-## by Robert Sedgewick, Kevin Wayne
+## by Robert Sedgewick and Kevin Wayne
+Sedgewick and Wayne's pedagogy of algorithms is a pleasure to experience.
+
+## HOW TO LEARN?
+Learn by doing both:
+* reading the book and
+* watching the [videos on Informit](https://www.informit.com/store/algorithms-video-lectures-24-part-lecture-series-9780134384436)
   
 Implemented in Python by DV Klopfenstein is selected code from:
 
   * http://algs4.cs.princeton.edu/code
   * [Java Code in Kevin Wayne's github repository](https://github.com/kevin-wayne/algs4/tree/master/src/main/java/edu/princeton/cs/algs4)
 
-[**Python implementations**](./py/AlgsSedgewickWayne/) contain:
+[**Python implementations**](AlgsSedgewickWayne) contain:
 * Additional code used for visualization to help absorb the material
 * Additional comments in the code that are based on material from the:    
   * [**book**](http://smile.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_1?s=books&ie=UTF8&qid=1410217876&sr=1-1)    
