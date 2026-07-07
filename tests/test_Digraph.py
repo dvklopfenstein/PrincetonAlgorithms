@@ -6,6 +6,7 @@ import os.path as op
 from AlgsSedgewickWayne.Digraph import Digraph
 from AlgsSedgewickWayne.plot.Digraph import PlotDigraph
 from AlgsSedgewickWayne.testcode.InputArgs import cli_get_fin
+from tests.pkgtest.utils import get_array
 
 TEST_DIR = op.dirname(op.abspath(__file__))
 
@@ -33,6 +34,11 @@ def test_lecture_digraph():
     assert digrph.num_vertices == 6
     assert digrph.num_edges == 8
 
+def test_digraph_search():
+    """Test Depth-first search in Digraph from lecture, 'Digraph Search'"""
+    digrph = Digraph(get_array('tests/tinyDG.txt'))
+    print(digrph)
+
 def run_all():
     """Run all tests"""
     test_digraph()
@@ -40,5 +46,6 @@ def run_all():
 
 
 if __name__ == '__main__':
-    run_all()
+    #run_all()
+    test_digraph_search()
     #test_lecture_digraph()
