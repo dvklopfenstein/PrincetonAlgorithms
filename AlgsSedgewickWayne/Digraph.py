@@ -25,9 +25,8 @@ class Digraph:
             self.keys = self.adjs.keys()
 
     def _init_empty(self, num_vertices):
-        ## print(f'DIGRAPH INIT {num_vertices} VERTICES')
-        if num_vertices < 0:
-            raise RuntimeError("Number of vertices must be nonnegative")
+        if not isinstance(num_vertices, int) or num_vertices < 0:
+            raise RuntimeError("Number of vertices must be nonnegative", num_vertices)
         self.num_vertices = num_vertices # number of vertices
         self.num_edges = 0 # number of edges
         self.adjs = [set() for v in range(num_vertices)]
