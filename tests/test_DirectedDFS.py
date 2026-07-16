@@ -33,7 +33,9 @@ def _run_file(fin_grph, *sources):
     print('SOURCES:', sources)
     digraph_arr = get_array(fin_grph)
     #print('DIGRAPH ARRAY:', digraph_arr)
-    return _run_arr(digraph_arr, *sources)
+    act = _run_arr(digraph_arr, *sources)
+    print(f'ACCESS: {act}\n')
+    return act
 
 def _run_arr(digraph_arr, *sources):
     grph = Digraph(digraph_arr)
