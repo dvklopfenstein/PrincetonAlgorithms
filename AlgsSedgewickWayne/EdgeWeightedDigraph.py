@@ -1,111 +1,117 @@
 """An edge-weighted digraph, implemented using adjacency lists."""
-# TBD: Finish Python port
 
-from AlgsSedgewickWayne.DirectedEdge import DirectedEdge
 import random
+from AlgsSedgewickWayne.DirectedEdge import DirectedEdge
 
-class EdgeWeightedDigraph(object):
-  
-  def __init__(self, V, E=None):
-    if isinstance(V, int):
-      self._init_VE(V, E)
-    else:
-      self._init_arr(V)
+class EdgeWeightedDigraph:
+    """An edge-weighted digraph, implemented using adjacency lists."""
 
-  def _init_V(self, V):
-    if V < 0: raise Exception("Number of vertices in a Digraph must be nonnegative")
-    self._V = V # number of vertices in self digraph
-    self._E = 0 # number of edges in self digraph
-    self._indegree = new int[V] # adj[v] = adjacency list for vertex v
-    self._adj = [set() for for v in range(V)] # indegree[v] = indegree of vertex v
+    def __init__(self, v_or_arr, num_edges=None):
+        self.num_vertices = None
+        self.num_edges    = None
+        self._indegree    = [] # adj[v] = adjacency list for vertex v
+        self._adj         = None
+        if isinstance(v_or_arr, int):
+            self._init_ve(v_or_arr, num_edges)
+        else:
+            self._init_arr(v_or_arr)
 
-  def _init_VE(self, V, E):
-    """Initializes a random edge-weighted digraph with V vertices and E edges."""
-    self._init_V(V)
-    if E is not None:
-      if E < 0: raise Exception("Number of edges in a Digraph must be nonnegative")
-      for i in E:
-        v = random.randint(0, V) # get random int in [0, V)
-        w = random.randint(0, V)
-        weight = .01 * random.uniform(100)
-        e = DirectedEdge(v, w, weight)
-        self.addEdge(e)
+    ##def __copy__(self):
+    ##    """Initializes a new edge-weighted digraph that is a deep copy of digrph."""
+    ##    cls = self.__class__
+    ##    result = cls.__new__(cls)
+    ##    memo[id(self)] = result
+    ##    self._init_v(digrph.self.num_vertices)
+    ##    self.num_edges = digrph.E()
+    ##    for v in range(digrph.num_vertices):
+    ##        self._indegree[v] = digrph.indegree(v)
+    ##    for v in range(digrph.num_vertices):
+    ##        # reverse so that adjacency list is in same order as original
+    ##        reverse = [] # new Stack<DirectedEdge>()
+    ##        for e in digrph._adj[v]:
+    ##            reverse.append(e)
+    ##        for e in reverse:
+    ##            self._adj[v].add(e)
+    ##    return result
 
-  def _init_arr(arr):
-    """Initializes a random edge-weighted digraph with V vertices and E edges."""
-    self._init_V(arr[0])
-    self._E = arr[1]
-    if E < 0: raise Exception("Number of edges must be nonnegative")
-    for v, w, weight in a[2:]:
-      if v < 0 or v >= self._V: raise Exception("vertex {} is not between 0 and {}".format(v, (V-1)))
-      if w < 0 or w >= self._V: raise Exception("vertex {} is not between 0 and {}".format(w, (V-1)))
-      self.addEdge(DirectedEdge(v, w, weight))
+    # raise an IndexOutOfBoundsRuntimeError unless 0 <= v < V
+    def _validate_vertex(self, v):
+        if v < 0 or v >= self.num_vertices:
+            raise RuntimeError(f"vertex {v} is not between 0 and {self.num_vertices-1}")
 
-  def __copy__(self, G):
-    """Initializes a new edge-weighted digraph that is a deep copy of G."""
-    self._init_V(G.V())
-    self._E = G.E()
-    for v in range(G.V()):
-      self._indegree[v] = G.indegree(v)
-    for v in range(G.V()):
-      # reverse so that adjacency list is in same order as original
-      reverse = [] # new Stack<DirectedEdge>()
-      for e in G._adj[v]:
-        reverse.push(e)
-      for e in reverse:
+    def add_edge(self, e):
+        """Adds the directed edge <tt>e</tt> to this edge-weighted digraph."""
+        v = e.get_from()
+        w = e.get_to()
+        self._validate_vertex(v)
+        self._validate_vertex(w)
         self._adj[v].add(e)
+        self.num_edges += 1
 
-  # number of vertices in this edge-weighted digraph.
-  def V(self): return self._V
+    def adj(self, v):
+        """Returns the directed edges incident from vertex v."""
+        self._validate_vertex(v)
+        return self._adj[v]
 
-  # number of edges in this edge-weighted digraph.
-  def E(self): return self._E
+    def outdegree(self, v):
+        """Returns the number of directed edges incident from vertex v."""
+        self._validate_vertex(v)
+        return self._adj[v].size()
 
-  # raise an IndexOutOfBoundsException unless 0 <= v < V
-  def _validateVertex(self, v):
-    if v < 0 or v >= self._V:
-      raise Exception("vertex {} is not between 0 and {}".format(v, V-1))
+    def indegree(self, v):
+        """Returns the number of directed edges incident to vertex v."""
+        self._validate_vertex(v)
+        return self._indegree[v]
 
-  def addEdge(self, e):
-    """Adds the directed edge <tt>e</tt> to this edge-weighted digraph."""
-    v = e.get_from()
-    w = e.get_to()
-    self._validateVertex(v)
-    self._validateVertex(w)
-    self._adj[v].add(e)
-    self._E += 1
+    def edges(self):
+        """Returns all directed edges in this edge-weighted digraph."""
+        lst = set()
+        for v in range(self.num_vertices):
+            for e in self._adj(v):
+                lst.add(e)
+        return lst
 
-  def adj(self, v):
-    """Returns the directed edges incident from vertex v."""
-    self._validateVertex(v)
-    return self._adj[v]
+    def __str__(self):
+        txt = [f"{self.num_vertices} vertices; {self.num_edges} edges\n"]
+        for v in range(self.num_vertices):
+            edges = "; ".join(str(e) for e in self._adj[v])
+            txt.append(f"{v}: {edges}")
+        return "\n".join(txt)
 
-  def outdegree(self, v):
-    """Returns the number of directed edges incident from vertex v."""
-    self._validateVertex(v)
-    return self._adj[v].size()
+    # -- init ----------------------------------------------------------
+    def _init_v(self, num_vertices):
+        if num_vertices < 0:
+            raise RuntimeError("Number of vertices in a Digraph must be nonnegative")
+        self.num_vertices = num_vertices # number of vertices in self digraph
+        self.num_edges = 0 # number of edges in self digraph
+        self._adj = [set() for v in range(num_vertices)] # indegree[v] = indegree of vertex v
 
-  def indegree(self, v):
-    """Returns the number of directed edges incident to vertex v."""
-    self._validateVertex(v)
-    return self._indegree[v]
+    def _init_ve(self, num_vertices, num_edges):
+        """Initializes a random edge-weighted digraph with V vertices and E edges."""
+        self._init_v(num_vertices)
+        if num_edges is not None:
+            if num_edges < 0:
+                raise RuntimeError("Number of edges in a Digraph must be nonnegative")
+            for _ in num_edges:
+                v = random.randint(0, num_vertices-1) # get random int in [0, num_vertices)
+                w = random.randint(0, num_vertices-1)
+                weight = .01 * random.uniform(0, 100)
+                e = DirectedEdge(v, w, weight)
+                self.add_edge(e)
 
-  def edges(self):
-    """Returns all directed edges in this edge-weighted digraph."""
-    lst = set()
-    for v in range(V):
-      for e in self._adj(v):
-        lst.add(e)
-    return lst
+    def _init_arr(self, arr):
+        """Initializes a random edge-weighted digraph with V vertices and E edges."""
+        self._init_v(arr[0])
+        self.num_edges = arr[1]
+        if self.num_edges < 0:
+            raise RuntimeError("Number of edges must be nonnegative")
+        for v, w, weight in arr[2:]:
+            if v < 0 or v >= self.num_vertices:
+                raise RuntimeError(f"vertex {v} is not between 0 and {self.num_vertices-1}")
+            if w < 0 or w >= self.num_vertices:
+                raise RuntimeError(f"vertex {v} is not between 0 and {self.num_vertices-1}")
+            self.add_edge(DirectedEdge(v, w, weight))
 
-  def __str__(self):
-    s = ["{V} {E}\n".format(V=self._V, E=self._E)]
-    for v in range(V):
-      s.append("{v}: ".format(v=v))
-      for e in self._adj[v]:
-        s.append("{e} ".format(e=e))
-      s.append("\n")
-    return "".join(s)
 
-# Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
-# Copyright 2015-2019, DV Klopfenstein, Python port
+# Copyright 2002, Robert Sedgewick and Kevin Wayne.
+# Copyright 2015, DV Klopfenstein, Python port
