@@ -1,3 +1,5 @@
+# Described in the lecture, "Topological Sort," in "Lecture 13: Directed Graphs"
+#
 # /******************************************************************************
 #  *  Compilation:  javac DepthFirstOrder.java
 #  *  Execution:    java DepthFirstOrder digraph.txt
@@ -199,44 +201,7 @@ class DepthFirstOrder:
             throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V-1))
     }
 
-    /**
-     * Unit tests the {@code DepthFirstOrder} data type.
-     *
-     * @param args the command-line arguments
-     */
-    public static void main(String[] args) {
-        In in = new In(args[0])
-        Digraph dag = new Digraph(in)
-
-        DepthFirstOrder dfs = new DepthFirstOrder(dag)
-        StdOut.println("   v  pre post")
-        StdOut.println("--------------")
-        for (int v = 0; v < dag.V(); v++) {
-            StdOut.printf("%4d %4d %4d\n", v, dfs.pre(v), dfs.post(v))
-        }
-
-        StdOut.print("Preorder:  ")
-        for (int v : dfs.pre()) {
-            StdOut.print(v + " ")
-        }
-        StdOut.println()
-
-        StdOut.print("Postorder: ")
-        for (int v : dfs.post()) {
-            StdOut.print(v + " ")
-        }
-        StdOut.println()
-
-        StdOut.print("Reverse postorder: ")
-        for (int v : dfs.reversePost()) {
-            StdOut.print(v + " ")
-        }
-        StdOut.println()
-
-
-    }
-
 }
 
-# Copyright 2002-present, Robert Sedgewick and Kevin Wayne.
-# Copyright 2002-present, DV Klopfenstein, Python port
+# Copyright 2002, Robert Sedgewick and Kevin Wayne.
+# Copyright 2026, DV Klopfenstein, Python port
