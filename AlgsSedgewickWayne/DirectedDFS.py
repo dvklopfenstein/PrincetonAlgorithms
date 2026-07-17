@@ -9,7 +9,7 @@ class DirectedDFS:
 
     def __init__(self, digraph, sources): # O ~ V + E (wc)
         self._marked = [False for _ in range(digraph.num_vertices)]
-        self._count = 0 # number of vertexertices reachable from s
+        self._count = 0 # number of vertex(s) reachable from sources
         self._init(digraph, [sources] if isinstance(sources, int) else sources)
 
     def _init(self, digraph, sources):
