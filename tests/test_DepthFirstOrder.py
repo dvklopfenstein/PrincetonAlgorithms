@@ -1,20 +1,26 @@
 #!/usr/bin/env python3
+"""Test DepthFirstOrder"""
 
+import os.path as op
 from AlgsSedgewickWayne.Digraph import Digraph
-#from AlgsSedgewickWayne.DepthFirstOrder import DepthFirstOrder
+from AlgsSedgewickWayne.plot.Digraph import PlotDigraph
+from AlgsSedgewickWayne.DepthFirstOrder import DepthFirstOrder
 from tests.pkgtest.utils import get_array
 
-def test_depth_first_order():
-    _run('tests/tinyDAG.txt')
-    _run('tests/tinyDG.txt')
+def test_depth_first_order(plot=True):
+    """Test DepthFirstOrder"""
+    _run('tests/tinyDAG.txt', plot)
+    #_run('tests/tinyDG.txt', plot)
 
-def _run(fin_dag):
+def _run(fin_dag, plot):
     arr = get_array(fin_dag)
     dag = Digraph(arr)
+    if plot:
+        PlotDigraph(dag).wr_png(f'Digraph_{op.splitext(op.basename(fin_dag))[0]}.png')
     print(f'DAG: {fin_dag}')
     print(dag)
 
-    #dfs = DepthFirstOrder(dag)
+    dfs = DepthFirstOrder(dag, sort_adj=True)
     #print("   v  pre post")
     #print("--------------")
     #for v in range(dag.num_vertices):
@@ -32,11 +38,7 @@ def _run(fin_dag):
     #}
     #print("")
 
-    #print("Reverse postorder: ", end="")
-    #for (int v : dfs.reversePost()) {
-    #    print(v + " ", end="")
-    #}
-    #print("")
+    print("Reverse postorder (topological order): ", dfs.get_reverse_post())  # dfs.reversePost()
 
 
 if __name__ == '__main__':
@@ -44,4 +46,4 @@ if __name__ == '__main__':
 
 
 # Copyright 2002, Robert Sedgewick and Kevin Wayne.
-# Copyright 2026, DV Klopfenstein, Python port
+# Copyright 2026, DV Klopfenstein, PhD Python port
